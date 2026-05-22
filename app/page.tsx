@@ -386,7 +386,7 @@ export default function HomePage() {
               <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-800 relative">
                 <Image
                   src="/images/modern-storage-free-moving-truck.jpg"
-                  alt="Modern Storage free moving truck available with new self-storage rentals"
+                  alt="Modern Storage® Riverdale free moving truck available with new self-storage rentals at participating Arkansas locations"
                   fill
                   loading="lazy"
                   sizes="(max-width: 1024px) 100vw, 50vw"
