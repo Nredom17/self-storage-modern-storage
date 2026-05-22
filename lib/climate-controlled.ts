@@ -116,12 +116,12 @@ export const CLIMATE_CONCEPTS = [
   {
     title: 'Security and monitoring',
     body:
-      'Modern Storage facilities are gated, surveilled, and use individually locked unit doors. Specific access hours, code or app entry, and on-site coverage details vary by facility — confirm with your local Modern Storage team.',
+      'Modern Storage® facilities are gated, surveilled, and use individually locked unit doors. Specific access hours, code or app entry, and on-site coverage details vary by facility — confirm with your local Modern Storage® team.',
   },
   {
     title: 'Ground-floor access',
     body:
-      'Many Modern Storage climate-controlled units offer ground-floor access with no stairs between you and your unit. Ground-floor availability and sizes vary by facility.',
+      'Many Modern Storage® climate-controlled units offer ground-floor access with no stairs between you and your unit. Ground-floor availability and sizes vary by facility.',
   },
   {
     title: 'Indoor humidity',
@@ -131,7 +131,7 @@ export const CLIMATE_CONCEPTS = [
   {
     title: 'Temperature range',
     body:
-      'Climate-controlled units are kept within a managed indoor temperature range [CONFIRM TEMPERATURE RANGE]. The exact range varies by building and HVAC system — ask your local Modern Storage team for details.',
+      'Climate-controlled units are kept within a managed indoor temperature range [CONFIRM TEMPERATURE RANGE]. The exact range varies by building and HVAC system — ask your local Modern Storage® team for details.',
   },
 ] as const
 
@@ -181,43 +181,43 @@ export const WHAT_TO_STORE = [
 export const CLIMATE_FAQS = [
   {
     q: 'What is climate-controlled storage?',
-    a: 'Climate-controlled storage means your unit is inside an insulated indoor building where temperature is managed and indoor humidity is limited. It protects items sensitive to heat, cold, and moisture — wood, leather, electronics, photos, documents, instruments, art, and more.',
+    a: `Climate-controlled storage means your unit is located inside an enclosed indoor building designed to provide a more stable storage environment than a standard outdoor drive-up unit. These units are commonly used for furniture, electronics, documents, photos, books, instruments, collectibles, art, and other temperature-sensitive items. At Modern Storage®, climate-controlled storage units help customers protect belongings from Arkansas heat, cold, and seasonal humidity swings. Availability and specific building features may vary by location.`,
   },
   {
     q: 'What temperature are climate-controlled storage units kept at?',
-    a: 'Modern Storage climate-controlled units are kept within a managed indoor temperature range [CONFIRM TEMPERATURE RANGE]. The exact range varies by building and HVAC system — your local Modern Storage team can share specifics for the facility you are considering.',
+    a: `Climate-controlled storage units are designed to reduce extreme temperature swings compared to outdoor storage units. Final temperature range details should be confirmed by Modern Storage® operations before publishing a specific number. If a specific range is approved, place it here: [CONFIRM TEMPERATURE RANGE]. For customers storing furniture, electronics, documents, photos, or inventory, the main benefit is a more stable indoor environment.`,
   },
   {
     q: 'Is climate-controlled storage worth it in Arkansas?',
-    a: 'For most household and business items, yes. Arkansas summers are hot and humid and winters can swing cold — exactly the conditions that damage wood furniture, electronics, paper, leather, art, and instruments. Climate-controlled storage keeps those items in a more stable indoor environment.',
+    a: `Yes, climate-controlled storage is often worth it in Arkansas because the weather can shift from hot, humid summers to cold winter conditions. Items like wood furniture, leather, electronics, photos, documents, books, musical instruments, and collectibles can be affected by long-term exposure to heat, cold, and moisture. Climate-controlled storage at Modern Storage® gives customers an indoor option for belongings that need extra protection. If you are storing anything valuable, sentimental, or sensitive, climate control is usually the smarter choice.`,
   },
   {
     q: 'What should I put in climate-controlled storage?',
-    a: 'Climate-controlled storage is the right call for wood and leather furniture, electronics, documents and photos, books, art and framed prints, musical instruments, vinyl records, collectibles, and any business inventory or records that need stable indoor conditions.',
+    a: `Climate-controlled storage is best for items that can be damaged by heat, cold, moisture, or major temperature swings. Common items include furniture, electronics, mattresses, photos, documents, books, art, antiques, musical instruments, vinyl records, collectibles, business inventory, and important records. Many Modern Storage® customers choose climate-controlled storage units during moves, renovations, downsizing, business expansion, or long-term storage. If you would not leave it in a hot attic or damp garage, climate-controlled storage is probably the better option.`,
   },
   {
     q: 'Do I need climate-controlled storage for furniture?',
-    a: 'For wood, leather, and upholstered furniture, climate-controlled storage is strongly recommended. Wood warps and cracks with humidity swings, leather dries and mildews in extremes, and fabric upholstery is sensitive to humidity. If you plan to keep the furniture, climate control is usually worth it.',
+    a: `Climate-controlled storage is strongly recommended for wood furniture, leather furniture, upholstered furniture, antiques, and high-value pieces. Arkansas heat and humidity can contribute to warping, cracking, swelling, mildew, and fabric damage over time. A climate-controlled storage unit at Modern Storage® gives furniture a more stable indoor environment than a garage, shed, or outdoor storage space. For short-term storage, it may depend on the item, but for valuable or long-term furniture storage, climate control is usually worth it.`,
   },
   {
     q: 'Should electronics go in climate-controlled storage?',
-    a: 'Yes. TVs, computers, audio gear, gaming systems, and other electronics hold up better in stable indoor conditions. Condensation and large temperature swings can damage internals and shorten useful life.',
+    a: `Yes, electronics should usually be stored in climate-controlled storage. TVs, computers, monitors, speakers, gaming systems, office equipment, and appliances can be sensitive to heat, cold, dust, and moisture. Climate-controlled storage units at Modern Storage® help reduce exposure to extreme conditions that may affect screens, wiring, batteries, and internal components. For best results, electronics should be packed in sturdy boxes, kept off the floor when possible, and stored in an indoor unit.`,
   },
   {
     q: 'Are climate-controlled units more expensive?',
-    a: 'Climate-controlled units typically rent for slightly more than standard drive-up units because of the HVAC, insulation, and indoor construction that supports them. For most customers protecting furniture, electronics, or business inventory, the value far outweighs the difference.',
+    a: `Climate-controlled storage units usually cost more than standard drive-up storage units because they are located inside enclosed buildings and offer a more stable storage environment. The extra cost can be worth it when storing furniture, electronics, documents, photos, collectibles, instruments, business inventory, or anything with sentimental or financial value. Modern Storage® offers multiple unit sizes, so customers can choose the amount of space they need without overpaying for a larger unit. Pricing and availability vary by location, so the best next step is to check available units online.`,
   },
   {
     q: 'Which Modern Storage® locations offer climate-controlled storage?',
-    a: 'Most Modern Storage locations across Arkansas offer climate-controlled units, including West Little Rock, Shackleford, Riverdale, North Little Rock, Maumelle, Bryant, Hot Springs, Bentonville, Springdale, and Lowell. Use the location finder above to confirm climate-controlled availability and unit sizes at the facility closest to you.',
+    a: `Most Modern Storage® locations offer climate-controlled storage options, but unit availability and sizes may vary by facility. Customers can use the location finder on this page to compare nearby Modern Storage® locations in Arkansas and see which facilities offer climate-controlled storage units. Featured areas include Little Rock, North Little Rock, Bentonville, Springdale, Lowell, Bryant, Maumelle, Hot Springs, and Riverdale. Use the "See Available Units" button for each location to view current rental options.`,
   },
   {
     q: 'Can I reserve a climate-controlled unit online?',
-    a: 'Yes. You can reserve a climate-controlled unit online in minutes from any Modern Storage location page. Pick your location, pick a unit size, and complete the reservation from your phone or computer.',
+    a: `Yes, customers can reserve climate-controlled storage units online through Modern Storage® location pages. Choose the location nearest you, review available unit sizes, and click "See Available Units" to continue to the rental page. Online reservations make it easier to compare options before calling or visiting the facility. If you are unsure what size you need, use the size guide on this page or call Modern Storage® for help.`,
   },
   {
     q: 'What size climate-controlled storage unit do I need?',
-    a: 'A 5x5 holds closet-sized items, a 10x10 fits a one-bedroom apartment, and a 10x20 typically holds a 3-bedroom home. Use the size guide above for a quick visual reference, and your local Modern Storage team can help you pick if you are between two sizes.',
+    a: `The right climate-controlled storage unit size depends on what you are storing. A 5x5 unit works well for boxes, documents, photos, and small valuables, while a 5x10 can fit bedroom furniture, electronics, and college storage items. A 10x10 is popular for apartment storage, and larger sizes like 10x15, 10x20, or 10x30 are better for household moves, renovations, business inventory, or estate storage. Modern Storage® provides multiple climate-controlled storage unit sizes, and availability may vary by location.`,
   },
 ] as const
 

@@ -586,7 +586,7 @@ export default function ClimateControlledPage() {
               Climate-Controlled Storage FAQ
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed mt-4 max-w-2xl mx-auto">
-              The questions Arkansas customers ask us most about climate-controlled storage at Modern Storage.
+              Find answers to the most common questions about climate-controlled storage units in Arkansas, including what to store, which items need indoor protection, how to choose a unit size, and how to reserve a Modern Storage® unit online.
             </p>
           </div>
           <FaqAccordion items={CLIMATE_FAQS} />
