@@ -261,7 +261,7 @@ export default function LocationFinder({
                 >
                   <Image
                     src={loc.image}
-                    alt={`${loc.name} self-storage facility`}
+                    alt={loc.alt}
                     fill
                     loading="lazy"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
