@@ -11,3 +11,39 @@
     scrollbar-width: none;
   }
 }
+
+/* Leaflet overrides — keep the map under the sticky header and tighten popup styling. */
+.leaflet-container {
+  font-family: inherit;
+}
+.leaflet-pane,
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 1;
+}
+.leaflet-popup-pane {
+  z-index: 2;
+}
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+.leaflet-popup-content {
+  margin: 16px;
+  width: auto !important;
+  line-height: 1.45;
+}
+.leaflet-popup-tip {
+  background: white;
+}
+.leaflet-control-attribution {
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.8);
+}
+/* Hide focus outline on the marker img and use the icon's own focus state. */
+.leaflet-marker-icon:focus {
+  outline: 2px solid #f60001;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
