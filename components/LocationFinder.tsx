@@ -4,13 +4,23 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { LOCATIONS, LOCATION_FILTERS } from '@/lib/site'
 
-export default function LocationFinder() {
+export default function LocationFinder({
+  highlightBadge,
+  requireBadge,
+}: {
+  highlightBadge?: string
+  requireBadge?: string
+} = {}) {
   const [activeFilter, setActiveFilter] = useState<string>('All Arkansas')
+
+  const base = requireBadge
+    ? LOCATIONS.filter((l) => (l.badges as readonly string[]).includes(requireBadge))
+    : LOCATIONS
 
   const filtered =
     activeFilter === 'All Arkansas'
-      ? LOCATIONS
-      : LOCATIONS.filter((l) => l.region === activeFilter)
+      ? base
+      : base.filter((l) => l.region === activeFilter)
 
   return (
     <div>
@@ -98,14 +108,21 @@ export default function LocationFinder() {
                 <h3 className="font-black text-charcoal text-lg leading-tight mb-2">{loc.name}</h3>
                 <p className="text-sm text-gray-500 mb-4">{loc.address}</p>
                 <div className="flex flex-wrap gap-1.5 mb-5">
-                  {loc.badges.map((badge) => (
-                    <span
-                      key={badge}
-                      className="text-[10px] font-bold uppercase tracking-wide bg-gray-100 text-gray-700 px-2.5 py-1 rounded-full"
-                    >
-                      {badge}
-                    </span>
-                  ))}
+                  {loc.badges.map((badge) => {
+                    const isHighlighted = highlightBadge && badge === highlightBadge
+                    return (
+                      <span
+                        key={badge}
+                        className={`text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full ${
+                          isHighlighted
+                            ? 'bg-modern-red text-white'
+                            : 'bg-gray-100 text-gray-700'
+                        }`}
+                      >
+                        {badge}
+                      </span>
+                    )
+                  })}
                 </div>
                 <a
                   href="#reserve"
