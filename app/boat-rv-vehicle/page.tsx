@@ -5,7 +5,7 @@ import { SITE_URL } from '@/lib/site'
 export const metadata: Metadata = {
   title: 'Boat, RV & Vehicle Storage in Arkansas',
   description:
-    'Boat, RV, trailer, motorcycle, and vehicle storage at select Modern Storage locations across Arkansas. Convenient access and secure parking options.',
+    'Boat, RV, trailer, motorcycle, and vehicle storage at select Modern Storage® locations across Arkansas. Convenient access and secure parking options.',
   alternates: { canonical: SITE_URL + '/boat-rv-vehicle' },
 }
 
@@ -21,7 +21,7 @@ export default function BoatRvVehiclePage() {
       <p className="text-gray-600 text-lg leading-relaxed">
         Page content coming soon. In the meantime, return to the{' '}
         <Link href="/" className="text-modern-red font-bold hover:underline">
-          Modern Storage hub
+          Modern Storage® hub
         </Link>{' '}
         to find a location near you.
       </p>

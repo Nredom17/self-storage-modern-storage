@@ -15,19 +15,19 @@ import FaqAccordion from '@/components/FaqAccordion'
 import LocationFinder from '@/components/LocationFinder'
 
 const HERO_IMAGE = '/images/modern-storage-self-storage-units-arkansas.jpg'
-const HERO_ALT = 'Modern Storage self-storage facility in Arkansas with clean units and moving truck'
+const HERO_ALT = 'Modern Storage® self-storage facility in Arkansas with clean units and moving truck'
 
 export const metadata: Metadata = {
-  title: 'Self Storage Units in Arkansas | Modern Storage',
+  title: 'Self Storage Units in Arkansas | Modern Storage®',
   description:
-    'Find self-storage units across Arkansas with Modern Storage. Climate-controlled storage, household storage, boat and RV parking, business storage, and free moving truck options available.',
+    'Find self-storage units across Arkansas with Modern Storage®. Climate-controlled storage, household storage, boat and RV parking, business storage, and free moving truck options available.',
   alternates: {
     canonical: SITE_URL + '/',
   },
   openGraph: {
-    title: 'Self Storage Units in Arkansas | Modern Storage',
+    title: 'Self Storage Units in Arkansas | Modern Storage®',
     description:
-      'Find clean, convenient storage units across Arkansas at Modern Storage, including climate-controlled, household, business, boat, RV, and vehicle storage.',
+      'Find clean, convenient storage units across Arkansas at Modern Storage®, including climate-controlled, household, business, boat, RV, and vehicle storage.',
     url: SITE_URL + '/',
     siteName: 'Modern Storage® Self Storage',
     type: 'website',
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Self Storage Units in Arkansas | Modern Storage',
+    title: 'Self Storage Units in Arkansas | Modern Storage®',
     description:
       'Clean, convenient self-storage units across Arkansas — climate-controlled, household, business, boat, RV, and vehicle storage.',
     images: [HERO_IMAGE],
@@ -62,7 +62,7 @@ function buildJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'SelfStorage',
     '@id': SITE_URL + '/#selfstorage',
-    name: 'Modern Storage',
+    name: 'Modern Storage®',
     url: SITE_URL + '/',
     image: SITE_URL + HERO_IMAGE,
     telephone: PHONE_NUMBER_DISPLAY,
@@ -73,7 +73,7 @@ function buildJsonLd() {
       addressCountry: 'US',
     },
     description:
-      'Modern Storage operates 10 self-storage facilities across Arkansas with climate-controlled, household, business, boat, RV, and vehicle storage.',
+      'Modern Storage® operates 10 self-storage facilities across Arkansas with climate-controlled, household, business, boat, RV, and vehicle storage.',
     sameAs: [
       'https://www.modernstorage.com',
       'https://www.instagram.com/modern.storage',
@@ -85,7 +85,7 @@ function buildJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     '@id': SITE_URL + '/#localbusiness',
-    name: 'Modern Storage',
+    name: 'Modern Storage®',
     url: SITE_URL + '/',
     telephone: PHONE_NUMBER_DISPLAY,
     image: SITE_URL + HERO_IMAGE,
@@ -273,10 +273,10 @@ export default function HomePage() {
           <div className="max-w-3xl mb-10">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Locations</p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
-              Find a Modern Storage Location Near You
+              Find a Modern Storage® Location Near You
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              10 Modern Storage facilities serving central Arkansas and Northwest Arkansas. Filter by region to find the closest location.
+              10 Modern Storage® facilities serving central Arkansas and Northwest Arkansas. Filter by region to find the closest location.
             </p>
           </div>
           <LocationFinder />
@@ -293,7 +293,7 @@ export default function HomePage() {
                 What Size Storage Unit Do I Need?
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed">
-                A quick visual reference for the most popular Modern Storage unit sizes. Climate-controlled and drive-up units available in most sizes.
+                A quick visual reference for the most popular Modern Storage® unit sizes. Climate-controlled and drive-up units available in most sizes.
               </p>
             </div>
             <Link
@@ -356,7 +356,7 @@ export default function HomePage() {
           <div className="max-w-3xl mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Why Us</p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight">
-              Why People Choose Modern Storage
+              Why People Choose Modern Storage®
             </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -400,7 +400,7 @@ export default function HomePage() {
                 Move In Easier with a Free Moving Truck
               </h2>
               <p className="text-gray-400 text-lg leading-relaxed mb-6">
-                Modern Storage offers a free moving truck with new rentals at participating locations, making move-in simpler and saving customers another truck rental.
+                Modern Storage® offers a free moving truck with new rentals at participating locations, making move-in simpler and saving customers another truck rental.
               </p>
               <p className="text-sm text-gray-500 italic mb-8">
                 Availability, requirements, and location participation may vary.
@@ -425,7 +425,7 @@ export default function HomePage() {
           <div className="max-w-3xl mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Reviews</p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight">
-              What Customers Say About Modern Storage
+              What Customers Say About Modern Storage®
             </h2>
           </div>
           {/* Replace these with real Google reviews before launch. */}
@@ -465,7 +465,7 @@ export default function HomePage() {
               Self Storage FAQ
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed mt-4 max-w-2xl mx-auto">
-              Answers to the questions Arkansas customers ask us most about self storage at Modern Storage.
+              Answers to the questions Arkansas customers ask us most about self storage at Modern Storage®.
             </p>
           </div>
           <FaqAccordion items={FAQS} />
@@ -476,7 +476,7 @@ export default function HomePage() {
       <section id="reserve" className="bg-modern-red py-20">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl lg:text-4xl font-black text-white mb-5 tracking-tight">
-            Find Your Modern Storage Unit Today
+            Find Your Modern Storage® Unit Today
           </h2>
           <p className="text-red-100 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
             Choose a nearby location, compare available unit sizes, and reserve online in minutes.
@@ -498,7 +498,7 @@ export default function HomePage() {
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
               </svg>
-              Call Modern Storage
+              Call Modern Storage®
             </a>
           </div>
         </div>

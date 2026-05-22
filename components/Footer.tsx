@@ -166,7 +166,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-gray-600">
-            &copy; {new Date().getFullYear()} Modern Storage<sup>®</sup>. All rights reserved.
+            &copy; {new Date().getFullYear()} Modern Storage®. All rights reserved.
           </p>
           <p className="text-xs text-gray-700">
             Self-storage facilities serving Arkansas.

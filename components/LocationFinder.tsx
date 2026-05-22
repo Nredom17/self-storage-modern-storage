@@ -84,7 +84,7 @@ export default function LocationFinder({
       <div
         className="relative rounded-2xl overflow-hidden border border-gray-200 mb-10"
         role="region"
-        aria-label="Interactive map of Modern Storage locations in Arkansas"
+        aria-label="Interactive map of Modern Storage® locations in Arkansas"
       >
         <MapClient
           locations={filtered}

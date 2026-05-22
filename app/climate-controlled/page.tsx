@@ -20,10 +20,10 @@ import LocationFinder from '@/components/LocationFinder'
 const PAGE_PATH = '/climate-controlled'
 const HERO_IMAGE = '/images/modern-storage-climate-controlled-hallway-arkansas.jpg'
 const HERO_ALT =
-  'Modern Storage climate-controlled storage hallway in Arkansas with clean indoor units'
+  'Modern Storage® climate-controlled storage hallway in Arkansas with clean indoor units'
 const INTERIOR_IMAGE = '/images/modern-storage-climate-controlled-interior-corridor.jpg'
 const INTERIOR_ALT =
-  'Climate-controlled indoor corridor at a Modern Storage Arkansas location'
+  'Climate-controlled indoor corridor at a Modern Storage® Arkansas location'
 
 export const metadata: Metadata = {
   title: {
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Climate-Controlled Storage Units in Arkansas | Modern Storage®',
     description:
-      'Indoor climate-controlled self-storage units at Modern Storage locations across Arkansas. Protection for furniture, electronics, documents, photos, instruments, and business inventory.',
+      'Indoor climate-controlled self-storage units at Modern Storage® locations across Arkansas. Protection for furniture, electronics, documents, photos, instruments, and business inventory.',
     url: SITE_URL + PAGE_PATH,
     siteName: 'Modern Storage® Self Storage',
     type: 'website',
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Climate-Controlled Storage Units in Arkansas | Modern Storage®',
     description:
-      'Indoor, climate-controlled storage at Modern Storage locations across Arkansas.',
+      'Indoor, climate-controlled storage at Modern Storage® locations across Arkansas.',
     images: [HERO_IMAGE],
   },
 }
@@ -73,13 +73,13 @@ function buildJsonLd() {
     serviceType: 'Climate-Controlled Self Storage',
     name: 'Climate-Controlled Storage Units in Arkansas',
     description:
-      'Indoor climate-controlled self-storage units at Modern Storage locations across Arkansas. Helps protect furniture, electronics, documents, photos, instruments, antiques, and business inventory from outdoor temperature and humidity extremes.',
+      'Indoor climate-controlled self-storage units at Modern Storage® locations across Arkansas. Helps protect furniture, electronics, documents, photos, instruments, antiques, and business inventory from outdoor temperature and humidity extremes.',
     url: SITE_URL + PAGE_PATH,
     image: SITE_URL + HERO_IMAGE,
     areaServed: { '@type': 'State', name: 'Arkansas' },
     provider: {
       '@type': 'SelfStorage',
-      name: 'Modern Storage',
+      name: 'Modern Storage®',
       url: SITE_URL + '/',
       telephone: PHONE_NUMBER_DISPLAY,
     },
@@ -284,12 +284,12 @@ export default function ClimateControlledPage() {
                 Climate-Controlled Storage Units in <span className="text-modern-red">Arkansas</span>
               </h1>
               <p className="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg">
-                Indoor, climate-controlled storage at Modern Storage locations across Arkansas. Built for furniture, electronics, documents, photos, instruments, and business inventory that deserve real protection.
+                Indoor, climate-controlled storage at Modern Storage® locations across Arkansas. Built for furniture, electronics, documents, photos, instruments, and business inventory that deserve real protection.
               </p>
               <div className="flex flex-wrap gap-4 mb-10">
                 <a
                   href={RESERVATION_URL}
-                  aria-label="Reserve a climate-controlled storage unit at Modern Storage"
+                  aria-label="Reserve a climate-controlled storage unit at Modern Storage®"
                   className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-7 py-3.5 rounded-full transition-colors text-sm"
                 >
                   Reserve a Climate-Controlled Unit
@@ -299,7 +299,7 @@ export default function ClimateControlledPage() {
                 </a>
                 <a
                   href={PHONE_NUMBER_HREF}
-                  aria-label={`Call Modern Storage at ${PHONE_NUMBER_DISPLAY}`}
+                  aria-label={`Call Modern Storage® at ${PHONE_NUMBER_DISPLAY}`}
                   className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-7 py-3.5 rounded-full transition-colors border border-white/20 text-sm"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -336,7 +336,7 @@ export default function ClimateControlledPage() {
                   />
                 </div>
                 <figcaption className="text-xs text-gray-500 mt-3 italic">
-                  Indoor climate-controlled hallway at a Modern Storage Arkansas facility.
+                  Indoor climate-controlled hallway at a Modern Storage® Arkansas facility.
                 </figcaption>
               </figure>
               {/* Floating award badge */}
@@ -358,7 +358,7 @@ export default function ClimateControlledPage() {
               Find Climate-Controlled Storage Near You
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Most Modern Storage locations offer climate-controlled units. Filter by region, click a pin to see details, and reserve online — availability and unit sizes vary by facility.
+              Most Modern Storage® locations offer climate-controlled units. Filter by region, click a pin to see details, and reserve online — availability and unit sizes vary by facility.
             </p>
           </div>
           <LocationFinder highlightBadge="Climate-Controlled" requireBadge="Climate-Controlled" />
@@ -377,7 +377,7 @@ export default function ClimateControlledPage() {
                 Indoor protection for the things that matter most
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                Climate-controlled storage at Modern Storage means an indoor unit inside an enclosed, insulated building — accessed from interior hallways rather than from outside. The building is designed to provide a more stable indoor environment than a standard outdoor drive-up unit, with specifics that vary by facility.
+                Climate-controlled storage at Modern Storage® means an indoor unit inside an enclosed, insulated building — accessed from interior hallways rather than from outside. The building is designed to provide a more stable indoor environment than a standard outdoor drive-up unit, with specifics that vary by facility.
               </p>
             </div>
             <div className="lg:col-span-6">
@@ -602,7 +602,7 @@ export default function ClimateControlledPage() {
                 Reserve Your Climate-Controlled Storage Unit
               </h2>
               <p className="text-red-100 text-lg leading-relaxed mb-6">
-                Choose your location, pick a size, and reserve online in minutes. Participating Modern Storage locations offer a free moving truck with new rentals to make move-in easier.
+                Choose your location, pick a size, and reserve online in minutes. Participating Modern Storage® locations offer a free moving truck with new rentals to make move-in easier.
               </p>
               <p className="text-red-100/80 text-xs italic mb-8 lg:mb-0">
                 Availability, requirements, and free moving truck participation vary by location.

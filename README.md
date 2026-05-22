@@ -1,4 +1,4 @@
-# Modern Storage — Self Storage Hub
+# Modern Storage® — Self Storage Hub
 
 Consumer-facing self-storage hub for Modern Storage® at https://self-storage.modernstorage.com/.
 
@@ -26,7 +26,7 @@ npm run dev
 
 ## Placeholders to replace before launch
 
-- `[CENTRALIZED PHONE NUMBER]` — centralized Modern Storage phone number
+- `[CENTRALIZED PHONE NUMBER]` — centralized Modern Storage® phone number
 - Hero photo: `public/images/modern-storage-self-storage-units-arkansas.jpg`
 - Storage Options card photos in `public/images/`
 - Location cards: real addresses + photos

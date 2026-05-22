@@ -14,11 +14,11 @@ const bebasNeue = Bebas_Neue({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Self Storage Units in Arkansas | Modern Storage',
-    template: '%s | Modern Storage',
+    default: 'Self Storage Units in Arkansas | Modern Storage®',
+    template: '%s | Modern Storage®',
   },
   description:
-    'Find self-storage units across Arkansas with Modern Storage. Climate-controlled storage, household storage, boat and RV parking, business storage, and free moving truck options available.',
+    'Find self-storage units across Arkansas with Modern Storage®. Climate-controlled storage, household storage, boat and RV parking, business storage, and free moving truck options available.',
   metadataBase: new URL(SITE_URL),
   openGraph: {
     siteName: 'Modern Storage® Self Storage',

@@ -5,7 +5,7 @@ import { SITE_URL } from '@/lib/site'
 export const metadata: Metadata = {
   title: 'Business & Mini-Warehouse Storage in Arkansas',
   description:
-    'Business storage and mini-warehouse units at Modern Storage. Flexible storage for contractors, e-commerce sellers, inventory, records, and equipment.',
+    'Business storage and mini-warehouse units at Modern Storage®. Flexible storage for contractors, e-commerce sellers, inventory, records, and equipment.',
   alternates: { canonical: SITE_URL + '/business' },
 }
 
@@ -21,7 +21,7 @@ export default function BusinessPage() {
       <p className="text-gray-600 text-lg leading-relaxed">
         Page content coming soon. In the meantime, return to the{' '}
         <Link href="/" className="text-modern-red font-bold hover:underline">
-          Modern Storage hub
+          Modern Storage® hub
         </Link>{' '}
         to find a location near you.
       </p>

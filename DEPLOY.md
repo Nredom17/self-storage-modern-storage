@@ -87,7 +87,7 @@ These are placeholders in the codebase that should be swapped for real values. E
 | `[RESERVATION LINK]` | `lib/site.ts` — `RESERVATION_URL` | Set the real reservation URL (Storable/SiteLink/etc.). All Reserve buttons across the site point to this single constant |
 | `[CONFIRM TEMPERATURE RANGE]` | `lib/climate-controlled.ts` — `CLIMATE_CONCEPTS` and `CLIMATE_FAQS` | Confirm the actual temperature range maintained in climate-controlled units (varies by facility) and either insert specifics or remove the marker |
 | `[CONFIRM HUMIDITY DETAILS]` | `lib/climate-controlled.ts` — `CLIMATE_CONCEPTS` and `CLIMATE_FAQS` | Confirm whether and how humidity is actively managed at each facility, then update the copy |
-| 25 placeholder JPEGs | `public/images/` | Replace each with the real Modern Storage photo at the listed filename (filenames are SEO-optimized — keep them) |
+| 25 placeholder JPEGs | `public/images/` | Replace each with the real Modern Storage® photo at the listed filename (filenames are SEO-optimized — keep them) |
 | 3 homepage review placeholders | `lib/site.ts` — `REVIEWS` array | Replace with real Google reviews |
 | 3 climate-controlled review placeholders | `lib/climate-controlled.ts` — `CLIMATE_REVIEWS` array | Replace with real Google reviews |
 | Location addresses | `lib/site.ts` — `LOCATIONS` array | Replace `[Street address placeholder]` with the real street address for each of the 10 facilities |
