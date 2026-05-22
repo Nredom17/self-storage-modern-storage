@@ -3,9 +3,8 @@
 import { useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import { LOCATIONS, LOCATION_FILTERS } from '@/lib/site'
-
-type Location = (typeof LOCATIONS)[number]
+import { LOCATION_FILTERS } from '@/lib/site'
+import type { Location } from '@/lib/data'
 
 // Leaflet uses DOM globals; load only on the client.
 const MapClient = dynamic(() => import('./MapClient'), {
@@ -18,19 +17,21 @@ const MapClient = dynamic(() => import('./MapClient'), {
 })
 
 export default function LocationFinder({
+  locations,
   highlightBadge,
   requireBadge,
 }: {
+  locations: Location[]
   highlightBadge?: string
   requireBadge?: string
-} = {}) {
+}) {
   const [activeFilter, setActiveFilter] = useState<string>('All Arkansas')
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null)
   const cardRefs = useRef<Record<string, HTMLElement | null>>({})
 
   const base = requireBadge
-    ? LOCATIONS.filter((l) => (l.badges as readonly string[]).includes(requireBadge))
-    : LOCATIONS
+    ? locations.filter((l) => l.badges.includes(requireBadge))
+    : locations
 
   const filtered: Location[] =
     activeFilter === 'All Arkansas' ? [...base] : base.filter((l) => l.region === activeFilter)

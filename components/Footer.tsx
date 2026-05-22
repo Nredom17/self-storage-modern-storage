@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { PHONE_NUMBER_DISPLAY, PHONE_NUMBER_HREF } from '@/lib/site'
 
 const STORAGE_OPTIONS = [
   { label: 'Climate-Controlled Storage', href: '/climate-controlled' },
@@ -32,7 +31,15 @@ const SOCIAL_LINKS = [
   { label: 'Facebook', href: 'https://www.facebook.com/modernstorage' },
 ]
 
-export default function Footer() {
+export default function Footer({
+  phoneDisplay,
+  phoneHref,
+}: {
+  phoneDisplay: string
+  phoneHref: string
+}) {
+  const PHONE_NUMBER_DISPLAY = phoneDisplay
+  const PHONE_NUMBER_HREF = phoneHref
   return (
     <footer className="bg-charcoal text-white border-t border-white/10 mt-20">
       {/* Top CTA strip */}

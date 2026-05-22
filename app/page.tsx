@@ -3,16 +3,18 @@ import Link from 'next/link'
 import Image from 'next/image'
 import {
   SITE_URL,
-  PHONE_NUMBER_DISPLAY,
-  PHONE_NUMBER_HREF,
   THEME_PAGES,
   UNIT_SIZES,
   WHY_US,
   FAQS,
   REVIEWS,
 } from '@/lib/site'
+import { getLocations, getSiteSettings } from '@/lib/data'
 import FaqAccordion from '@/components/FaqAccordion'
 import LocationFinder from '@/components/LocationFinder'
+
+// Re-render every 60s to pick up Supabase edits.
+export const revalidate = 60
 
 const HERO_IMAGE = '/images/modern-storage-self-storage-units-arkansas.jpg'
 const HERO_ALT = 'Modern Storage® self-storage facility in Arkansas with clean units and moving truck'
@@ -57,7 +59,7 @@ const TRUST_STRIP = [
   'Best of the Best Self Storage 2023, 2024, 2025 — Arkansas Democrat Gazette & Best of Northwest Arkansas',
 ]
 
-function buildJsonLd() {
+function buildJsonLd(phoneDisplay: string) {
   const selfStorage = {
     '@context': 'https://schema.org',
     '@type': 'SelfStorage',
@@ -65,7 +67,7 @@ function buildJsonLd() {
     name: 'Modern Storage®',
     url: SITE_URL + '/',
     image: SITE_URL + HERO_IMAGE,
-    telephone: PHONE_NUMBER_DISPLAY,
+    telephone: phoneDisplay,
     areaServed: { '@type': 'State', name: 'Arkansas' },
     address: {
       '@type': 'PostalAddress',
@@ -87,7 +89,7 @@ function buildJsonLd() {
     '@id': SITE_URL + '/#localbusiness',
     name: 'Modern Storage®',
     url: SITE_URL + '/',
-    telephone: PHONE_NUMBER_DISPLAY,
+    telephone: phoneDisplay,
     image: SITE_URL + HERO_IMAGE,
     priceRange: '$$',
     address: {
@@ -136,8 +138,9 @@ function buildJsonLd() {
   return [selfStorage, localBusiness, service, breadcrumb, faqPage]
 }
 
-export default function HomePage() {
-  const jsonLd = buildJsonLd()
+export default async function HomePage() {
+  const [locations, settings] = await Promise.all([getLocations(), getSiteSettings()])
+  const jsonLd = buildJsonLd(settings.phoneDisplay)
 
   return (
     <>
@@ -290,7 +293,7 @@ export default function HomePage() {
               10 Modern Storage® facilities serving central Arkansas and Northwest Arkansas. Filter by region to find the closest location.
             </p>
           </div>
-          <LocationFinder />
+          <LocationFinder locations={locations} />
         </div>
       </section>
 
@@ -505,7 +508,7 @@ export default function HomePage() {
               </svg>
             </Link>
             <a
-              href={PHONE_NUMBER_HREF}
+              href={settings.phoneHref}
               className="bg-charcoal text-white font-black px-8 py-3.5 rounded-full hover:bg-gray-800 transition-colors text-sm shadow-md inline-flex items-center gap-2"
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

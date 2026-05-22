@@ -4,9 +4,7 @@ import 'leaflet/dist/leaflet.css'
 import { useEffect, useRef } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import L from 'leaflet'
-import type { LOCATIONS } from '@/lib/site'
-
-type Location = (typeof LOCATIONS)[number]
+import type { Location } from '@/lib/data'
 
 // Brand-red teardrop pin as an HTML/SVG divIcon (no asset path issues with Next.js bundler).
 function createPinIcon(isSelected: boolean): L.DivIcon {

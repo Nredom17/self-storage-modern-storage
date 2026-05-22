@@ -1,12 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import {
-  SITE_URL,
-  PHONE_NUMBER_DISPLAY,
-  PHONE_NUMBER_HREF,
-  RESERVATION_URL,
-} from '@/lib/site'
+import { SITE_URL } from '@/lib/site'
+import { getLocations, getSiteSettings } from '@/lib/data'
+
+// Re-render every 60s to pick up Supabase edits.
+export const revalidate = 60
 import {
   CLIMATE_UNIT_SIZES,
   CLIMATE_CONCEPTS,
@@ -65,7 +64,7 @@ const TRUST_BULLETS = [
   'Best of the Best Self Storage 2023, 2024, 2025 — Arkansas Democrat Gazette & Best of Northwest Arkansas',
 ]
 
-function buildJsonLd() {
+function buildJsonLd(phoneDisplay: string) {
   const service = {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -81,7 +80,7 @@ function buildJsonLd() {
       '@type': 'SelfStorage',
       name: 'Modern Storage®',
       url: SITE_URL + '/',
-      telephone: PHONE_NUMBER_DISPLAY,
+      telephone: phoneDisplay,
     },
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
@@ -243,8 +242,12 @@ function ConceptIcon({ title }: { title: string }) {
   }
 }
 
-export default function ClimateControlledPage() {
-  const jsonLd = buildJsonLd()
+export default async function ClimateControlledPage() {
+  const [locations, settings] = await Promise.all([getLocations(), getSiteSettings()])
+  const jsonLd = buildJsonLd(settings.phoneDisplay)
+  const PHONE_NUMBER_DISPLAY = settings.phoneDisplay
+  const PHONE_NUMBER_HREF = settings.phoneHref
+  const RESERVATION_URL = settings.reservationUrl
 
   return (
     <>
@@ -372,7 +375,7 @@ export default function ClimateControlledPage() {
               Most Modern Storage® locations offer climate-controlled units. Filter by region, click a pin to see details, and reserve online — availability and unit sizes vary by facility.
             </p>
           </div>
-          <LocationFinder highlightBadge="Climate-Controlled" requireBadge="Climate-Controlled" />
+          <LocationFinder locations={locations} highlightBadge="Climate-Controlled" requireBadge="Climate-Controlled" />
         </div>
       </section>
 

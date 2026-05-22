@@ -2,10 +2,18 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { NAV_LINKS, PHONE_NUMBER_DISPLAY, PHONE_NUMBER_HREF } from '@/lib/site'
+import { NAV_LINKS } from '@/lib/site'
 
-export default function Header() {
+export default function Header({
+  phoneDisplay,
+  phoneHref,
+}: {
+  phoneDisplay: string
+  phoneHref: string
+}) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const PHONE_NUMBER_DISPLAY = phoneDisplay
+  const PHONE_NUMBER_HREF = phoneHref
 
   return (
     <header className="sticky top-0 z-50 bg-charcoal border-b border-white/10">
