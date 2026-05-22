@@ -323,28 +323,33 @@ export default function ClimateControlledPage() {
             </div>
 
             {/* Right — hero image */}
-            <div className="relative">
-              <figure>
-                <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-800 relative">
-                  <Image
-                    src={HERO_IMAGE}
-                    alt={HERO_ALT}
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover"
-                  />
+            <figure>
+              <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-800 relative">
+                <Image
+                  src={HERO_IMAGE}
+                  alt={HERO_ALT}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+                {/* Award badge — top-right of the image, inside the rounded container */}
+                <div
+                  className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-modern-red text-white rounded-xl px-3.5 py-2 shadow-lg backdrop-blur-sm"
+                  aria-label="Voted Best of the Best 2023, 2024, and 2025"
+                >
+                  <p className="text-[9px] font-black uppercase tracking-widest text-red-100 leading-none">
+                    Best of the Best
+                  </p>
+                  <p className="text-sm sm:text-base font-black leading-none mt-1">
+                    2023 · 2024 · 2025
+                  </p>
                 </div>
-                <figcaption className="text-xs text-gray-500 mt-3 italic">
-                  Indoor climate-controlled hallway at a Modern Storage® Arkansas facility.
-                </figcaption>
-              </figure>
-              {/* Floating award badge */}
-              <div className="absolute -bottom-2 -left-5 sm:-bottom-5 bg-modern-red text-white rounded-2xl px-5 py-3 shadow-xl hidden sm:block">
-                <p className="text-[10px] font-black uppercase tracking-widest text-red-100">Best of the Best</p>
-                <p className="text-lg font-black leading-none mt-0.5">2023 · 2024 · 2025</p>
               </div>
-            </div>
+              <figcaption className="text-xs text-gray-500 mt-3 italic">
+                Indoor climate-controlled hallway at a Modern Storage® Arkansas facility.
+              </figcaption>
+            </figure>
           </div>
         </div>
       </section>
