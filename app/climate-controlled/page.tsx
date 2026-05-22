@@ -129,25 +129,32 @@ function buildJsonLd() {
 function StoreIcon({ name }: { name: string }) {
   const common = 'w-6 h-6'
   switch (name) {
-    case 'Wood, leather & upholstered furniture':
+    case 'Wood furniture':
+    case 'Leather furniture':
       return (
         <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4 12V8a2 2 0 012-2h12a2 2 0 012 2v4M4 12h16M4 12v4a2 2 0 002 2h12a2 2 0 002-2v-4M6 18v2M18 18v2" />
         </svg>
       )
-    case 'Electronics & screens':
+    case 'Electronics':
       return (
         <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3 6.75A1.75 1.75 0 014.75 5h14.5A1.75 1.75 0 0121 6.75v8.5A1.75 1.75 0 0119.25 17H4.75A1.75 1.75 0 013 15.25v-8.5zM9 21h6M12 17v4" />
         </svg>
       )
-    case 'Documents & business records':
+    case 'Photos and documents':
       return (
         <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M7 4h7l4 4v12a1 1 0 01-1 1H7a1 1 0 01-1-1V5a1 1 0 011-1zM14 4v4h4M9 13h6M9 17h4" />
         </svg>
       )
-    case 'Photos, albums & art':
+    case 'Books':
+      return (
+        <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4 5a2 2 0 012-2h12a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V5zM8 7h8M8 11h8M8 15h5" />
+        </svg>
+      )
+    case 'Art and framed prints':
       return (
         <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4 5h16v14H4zM4 16l4-4 3 3 5-5 4 4" />
@@ -160,16 +167,18 @@ function StoreIcon({ name }: { name: string }) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 18a3 3 0 100-6 3 3 0 000 6zM12 15V4l8 2v3" />
         </svg>
       )
-    case 'Antiques & collectibles':
+    case 'Vinyl records':
+      return (
+        <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" strokeWidth={1.8} />
+          <circle cx="12" cy="12" r="4" strokeWidth={1.8} />
+          <circle cx="12" cy="12" r="1.2" fill="currentColor" />
+        </svg>
+      )
+    case 'Collectibles':
       return (
         <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 21h8M9 21v-3a3 3 0 016 0v3M7 4h10v3a5 5 0 01-10 0V4zM5 5v2a2 2 0 002 2M19 5v2a2 2 0 01-2 2" />
-        </svg>
-      )
-    case 'Clothing & textiles':
-      return (
-        <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 4l-4 4v3l3-1v9h10v-9l3 1V8l-4-4-2 2a2 2 0 11-4 0L8 4z" />
         </svg>
       )
     case 'Business inventory':
@@ -186,28 +195,47 @@ function StoreIcon({ name }: { name: string }) {
 function ConceptIcon({ title }: { title: string }) {
   const common = 'w-6 h-6'
   switch (title) {
-    case 'Controlled temperature range':
+    case 'Indoor access':
+      return (
+        <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M6 21V5a2 2 0 012-2h8a2 2 0 012 2v16M3 21h18M14 12h.01" />
+        </svg>
+      )
+    case 'A more stable storage environment':
+      return (
+        <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 12l2 2 4-4" />
+        </svg>
+      )
+    case 'Buffer against Arkansas heat and cold swings':
       return (
         <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M10 13V5a2 2 0 114 0v8a4 4 0 11-4 0z" />
         </svg>
       )
-    case 'Active humidity management':
+    case 'Security and monitoring':
+      return (
+        <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" />
+        </svg>
+      )
+    case 'Ground-floor access':
+      return (
+        <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6M9 11h2M13 11h2" />
+        </svg>
+      )
+    case 'Indoor humidity':
       return (
         <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 3s5 6 5 10a5 5 0 11-10 0c0-4 5-10 5-10z" />
         </svg>
       )
-    case 'Fully enclosed indoor space':
+    case 'Temperature range':
       return (
         <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1v-9z" />
-        </svg>
-      )
-    case 'Secured access':
-      return (
-        <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M14 14.76V5a2 2 0 10-4 0v9.76a4 4 0 104 0zM12 8v6" />
         </svg>
       )
     default:
@@ -261,6 +289,7 @@ export default function ClimateControlledPage() {
               <div className="flex flex-wrap gap-4 mb-10">
                 <a
                   href={RESERVATION_URL}
+                  aria-label="Reserve a climate-controlled storage unit at Modern Storage"
                   className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-7 py-3.5 rounded-full transition-colors text-sm"
                 >
                   Reserve a Climate-Controlled Unit
@@ -268,20 +297,15 @@ export default function ClimateControlledPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                   </svg>
                 </a>
-                <Link
-                  href="#sizes"
-                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-7 py-3.5 rounded-full transition-colors border border-white/20 text-sm"
-                >
-                  See Available Sizes
-                </Link>
                 <a
                   href={PHONE_NUMBER_HREF}
-                  className="inline-flex items-center gap-2 text-white/80 hover:text-white font-semibold px-3 py-3.5 transition-colors text-sm"
+                  aria-label={`Call Modern Storage at ${PHONE_NUMBER_DISPLAY}`}
+                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-7 py-3.5 rounded-full transition-colors border border-white/20 text-sm"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
                   </svg>
-                  Call {PHONE_NUMBER_DISPLAY}
+                  Call Modern Storage®
                 </a>
               </div>
 
@@ -331,58 +355,58 @@ export default function ClimateControlledPage() {
           <div className="max-w-3xl mb-10">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Locations</p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
-              Climate-Controlled Storage Across Arkansas
+              Find Climate-Controlled Storage Near You
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Most Modern Storage locations offer climate-controlled units. Filter by region to find the closest one — climate-controlled availability and unit sizes vary by facility.
+              Most Modern Storage locations offer climate-controlled units. Filter by region, click a pin to see details, and reserve online — availability and unit sizes vary by facility.
             </p>
           </div>
           <LocationFinder highlightBadge="Climate-Controlled" requireBadge="Climate-Controlled" />
         </div>
       </section>
 
-      {/* ── WHAT CLIMATE CONTROL MEANS ───────────────────────── */}
+      {/* ── WHAT CLIMATE-CONTROLLED STORAGE MEANS ────────────── */}
       <section className="bg-white py-20 border-y border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            <div className="lg:col-span-5">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-12">
+            <div className="lg:col-span-6">
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
-                What climate control actually means
+                What climate-controlled storage means
               </p>
               <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-5">
-                Indoor protection that actually does something
+                Indoor protection for the things that matter most
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                &ldquo;Climate-controlled&rdquo; gets used loosely in the storage industry. At Modern Storage it means something concrete: indoor units inside a sealed, insulated building with the temperature and humidity considerations a finished interior space typically provides.
+              <p className="text-gray-600 leading-relaxed">
+                Climate-controlled storage at Modern Storage means an indoor unit inside an enclosed, insulated building — accessed from interior hallways rather than from outside. The building is designed to provide a more stable indoor environment than a standard outdoor drive-up unit, with specifics that vary by facility.
               </p>
+            </div>
+            <div className="lg:col-span-6">
               <div className="rounded-2xl overflow-hidden shadow-lg aspect-[4/3] bg-gray-100 relative">
                 <Image
                   src={INTERIOR_IMAGE}
                   alt={INTERIOR_ALT}
                   fill
                   loading="lazy"
-                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
                 />
               </div>
             </div>
+          </div>
 
-            <div className="lg:col-span-7">
-              <div className="grid sm:grid-cols-2 gap-5">
-                {CLIMATE_CONCEPTS.map((c) => (
-                  <div
-                    key={c.title}
-                    className="bg-gray-50 rounded-2xl p-6 border border-gray-100 hover:border-modern-red transition-colors"
-                  >
-                    <div className="w-11 h-11 rounded-full bg-modern-red/10 text-modern-red flex items-center justify-center mb-4">
-                      <ConceptIcon title={c.title} />
-                    </div>
-                    <h3 className="font-black text-charcoal mb-2 leading-tight">{c.title}</h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">{c.body}</p>
-                  </div>
-                ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {CLIMATE_CONCEPTS.map((c) => (
+              <div
+                key={c.title}
+                className="bg-gray-50 rounded-2xl p-6 border border-gray-100 hover:border-modern-red transition-colors"
+              >
+                <div className="w-11 h-11 rounded-full bg-modern-red/10 text-modern-red flex items-center justify-center mb-4">
+                  <ConceptIcon title={c.title} />
+                </div>
+                <h3 className="font-black text-charcoal mb-2 leading-tight">{c.title}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">{c.body}</p>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -429,12 +453,13 @@ export default function ClimateControlledPage() {
                   </span>
                 </div>
                 <div className="p-6 flex flex-col flex-1">
-                  <div className="flex items-baseline justify-between mb-3">
+                  <h3 className="flex items-baseline gap-3 mb-5 flex-wrap">
                     <span className="font-bebas text-5xl text-charcoal leading-none">{u.size}</span>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">
-                      Unit size
+                    <span className="text-sm font-bold text-charcoal/80 leading-tight">
+                      Climate-Controlled Storage Unit
                     </span>
-                  </div>
+                  </h3>
+
                   <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">Best for</p>
                   <p className="text-base font-bold text-charcoal mb-5">{u.bestFor}</p>
 
@@ -455,6 +480,7 @@ export default function ClimateControlledPage() {
                   <div className="mt-auto flex flex-col gap-3">
                     <a
                       href={RESERVATION_URL}
+                      aria-label={`Reserve a ${u.size} climate-controlled storage unit`}
                       className="inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-black px-5 py-3 rounded-full transition-colors"
                     >
                       Reserve a {u.size} Unit
@@ -573,10 +599,10 @@ export default function ClimateControlledPage() {
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7 text-center lg:text-left">
               <h2 className="text-3xl lg:text-4xl font-black text-white mb-5 tracking-tight">
-                Reserve a Climate-Controlled Unit Today
+                Reserve Your Climate-Controlled Storage Unit
               </h2>
               <p className="text-red-100 text-lg leading-relaxed mb-6">
-                Choose your location, pick a size, and reserve online in minutes. New rentals at participating locations include a free moving truck to make move-in easier.
+                Choose your location, pick a size, and reserve online in minutes. Participating Modern Storage locations offer a free moving truck with new rentals to make move-in easier.
               </p>
               <p className="text-red-100/80 text-xs italic mb-8 lg:mb-0">
                 Availability, requirements, and free moving truck participation vary by location.
