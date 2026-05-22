@@ -25,8 +25,8 @@ export const THEME_PAGES = [
       'Protect furniture, electronics, documents, photos, instruments, collectibles, and business inventory from Arkansas heat, cold, and humidity swings.',
     cta: 'Explore Climate-Controlled Storage',
     href: '/climate-controlled',
-    image: '/images/modern-storage-climate-controlled-storage-hallway.jpg',
-    alt: 'Climate-controlled storage hallway at Modern Storage with clean indoor units',
+    image: '/images/modern-storage-bentonville-climate-controlled-hallway.jpg',
+    alt: 'Climate-controlled storage hallway at Modern Storage Bentonville with clean indoor units.',
   },
   {
     slug: 'boat-rv-vehicle',
@@ -35,8 +35,8 @@ export const THEME_PAGES = [
       'Store boats, RVs, trailers, motorcycles, cars, and work vehicles at select Modern Storage locations with convenient access and secure parking options.',
     cta: 'Explore Boat and RV Storage',
     href: '/boat-rv-vehicle',
-    image: '/images/modern-storage-boat-rv-vehicle-storage.jpg',
-    alt: 'Boat and RV storage parking area at Modern Storage in Arkansas',
+    image: '/images/modern-storage-shackleford-rv-storage-unit.jpg',
+    alt: 'RV stored inside a Modern Storage Shackleford unit with red roll-up doors.',
   },
   {
     slug: 'business',
@@ -45,18 +45,18 @@ export const THEME_PAGES = [
       'Flexible storage for contractors, e-commerce sellers, inventory overflow, records, equipment, and small business operations.',
     cta: 'Explore Business Storage',
     href: '/business',
-    image: '/images/modern-storage-business-mini-warehouse-storage.jpg',
-    alt: 'Business storage and mini-warehouse space at Modern Storage with loading access',
+    image: '/images/modern-storage-riverdale-business-conference.jpg',
+    alt: 'Business-friendly office and conference space at Modern Storage Riverdale.',
   },
   {
     slug: 'household-moving',
     title: 'Household Storage & Moving',
     description:
-      'Storage for moving, downsizing, renovating, seasonal items, growing families, and life transitions.',
+      'Modern Storage offers clean, modern storage facilities across Arkansas for moving, household storage, and life transitions.',
     cta: 'Explore Household Storage',
     href: '/household-moving',
-    image: '/images/modern-storage-household-moving-storage.jpg',
-    alt: 'Family loading boxes into a Modern Storage unit during a move',
+    image: '/images/modern-storage-springdale-facility-exterior.jpg',
+    alt: 'Modern Storage Springdale self storage facility exterior in Arkansas with premium modern design.',
   },
 ] as const
 

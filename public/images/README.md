@@ -7,12 +7,12 @@ The homepage and storage option cards reference these filenames. Replace each pl
 - `modern-storage-self-storage-units-arkansas.jpg` — Hero (recommended 1600×1200 or larger, 4:3)
 - `modern-storage-free-moving-truck.jpg` — Free moving truck section (4:3)
 
-## Storage option cards
+## Storage option cards (real photos — done)
 
-- `modern-storage-climate-controlled-storage-hallway.jpg` (16:9)
-- `modern-storage-boat-rv-vehicle-storage.jpg` (16:9)
-- `modern-storage-business-mini-warehouse-storage.jpg` (16:9)
-- `modern-storage-household-moving-storage.jpg` (16:9)
+- `modern-storage-bentonville-climate-controlled-hallway.jpg` (Bentonville climate-controlled hallway)
+- `modern-storage-shackleford-rv-storage-unit.jpg` (Shackleford RV inside unit)
+- `modern-storage-riverdale-business-conference.jpg` (Riverdale conference room)
+- `modern-storage-springdale-facility-exterior.jpg` (Springdale building exterior)
 
 ## Location cards (16:10)
 
