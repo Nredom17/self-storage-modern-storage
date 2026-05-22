@@ -287,16 +287,16 @@ export default function ClimateControlledPage() {
                 Indoor, climate-controlled storage at Modern Storage® locations across Arkansas. Built for furniture, electronics, documents, photos, instruments, and business inventory that deserve real protection.
               </p>
               <div className="flex flex-wrap gap-4 mb-10">
-                <a
-                  href={RESERVATION_URL}
-                  aria-label="Reserve a climate-controlled storage unit at Modern Storage®"
+                <Link
+                  href="#locations"
+                  aria-label="Reserve a climate-controlled storage unit at Modern Storage® — choose your location"
                   className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-7 py-3.5 rounded-full transition-colors text-sm"
                 >
                   Reserve a Climate-Controlled Unit
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                   </svg>
-                </a>
+                </Link>
                 <a
                   href={PHONE_NUMBER_HREF}
                   aria-label={`Call Modern Storage® at ${PHONE_NUMBER_DISPLAY}`}
