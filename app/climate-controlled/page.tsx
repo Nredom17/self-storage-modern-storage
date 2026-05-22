@@ -18,12 +18,12 @@ import FaqAccordion from '@/components/FaqAccordion'
 import LocationFinder from '@/components/LocationFinder'
 
 const PAGE_PATH = '/climate-controlled'
-const HERO_IMAGE = '/images/modern-storage-climate-controlled-hallway-arkansas.jpg'
+const HERO_IMAGE = '/images/modern-storage-bentonville-climate-controlled-hallway.jpg'
 const HERO_ALT =
-  'Modern Storage® climate-controlled storage hallway in Arkansas with clean indoor units'
-const INTERIOR_IMAGE = '/images/modern-storage-climate-controlled-interior-corridor.jpg'
+  'Climate-controlled storage hallway at Modern Storage® Bentonville with clean indoor units in Arkansas'
+const INTERIOR_IMAGE = '/images/modern-storage-bentonville-climate-controlled-hallway.jpg'
 const INTERIOR_ALT =
-  'Climate-controlled indoor corridor at a Modern Storage® Arkansas location'
+  'Indoor climate-controlled corridor at Modern Storage® Bentonville with numbered storage unit doors'
 
 export const metadata: Metadata = {
   title: {
