@@ -5,6 +5,7 @@ import {
   SITE_URL,
   PHONE_NUMBER_DISPLAY,
   PHONE_NUMBER_HREF,
+  RESERVATION_URL,
 } from '@/lib/site'
 import {
   CLIMATE_UNIT_SIZES,
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Climate-Controlled Storage Units in Arkansas | Modern Storage®',
     description:
-      'Climate-controlled self-storage units at Modern Storage locations across Arkansas. Indoor, temperature- and humidity-managed protection for furniture, electronics, documents, photos, and business inventory.',
+      'Indoor climate-controlled self-storage units at Modern Storage locations across Arkansas. Protection for furniture, electronics, documents, photos, instruments, and business inventory.',
     url: SITE_URL + PAGE_PATH,
     siteName: 'Modern Storage® Self Storage',
     type: 'website',
@@ -72,7 +73,7 @@ function buildJsonLd() {
     serviceType: 'Climate-Controlled Self Storage',
     name: 'Climate-Controlled Storage Units in Arkansas',
     description:
-      'Indoor, temperature- and humidity-managed storage units at Modern Storage locations across Arkansas. Protects furniture, electronics, documents, photos, instruments, antiques, and business inventory.',
+      'Indoor climate-controlled self-storage units at Modern Storage locations across Arkansas. Helps protect furniture, electronics, documents, photos, instruments, antiques, and business inventory from outdoor temperature and humidity extremes.',
     url: SITE_URL + PAGE_PATH,
     image: SITE_URL + HERO_IMAGE,
     areaServed: { '@type': 'State', name: 'Arkansas' },
@@ -255,18 +256,18 @@ export default function ClimateControlledPage() {
                 Climate-Controlled Storage Units in <span className="text-modern-red">Arkansas</span>
               </h1>
               <p className="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg">
-                Indoor, temperature- and humidity-managed storage at Modern Storage locations across Arkansas. Built for furniture, electronics, documents, photos, instruments, and business inventory that deserve real protection.
+                Indoor, climate-controlled storage at Modern Storage locations across Arkansas. Built for furniture, electronics, documents, photos, instruments, and business inventory that deserve real protection.
               </p>
               <div className="flex flex-wrap gap-4 mb-10">
-                <Link
-                  href="#locations"
+                <a
+                  href={RESERVATION_URL}
                   className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-7 py-3.5 rounded-full transition-colors text-sm"
                 >
                   Reserve a Climate-Controlled Unit
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                   </svg>
-                </Link>
+                </a>
                 <Link
                   href="#sizes"
                   className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-7 py-3.5 rounded-full transition-colors border border-white/20 text-sm"
@@ -352,7 +353,7 @@ export default function ClimateControlledPage() {
                 Indoor protection that actually does something
               </h2>
               <p className="text-gray-600 leading-relaxed mb-6">
-                &ldquo;Climate-controlled&rdquo; gets used loosely in the storage industry. At Modern Storage it means a specific thing: indoor units inside a sealed, insulated building, with HVAC equipment actively managing temperature and humidity.
+                &ldquo;Climate-controlled&rdquo; gets used loosely in the storage industry. At Modern Storage it means something concrete: indoor units inside a sealed, insulated building with the temperature and humidity considerations a finished interior space typically provides.
               </p>
               <div className="rounded-2xl overflow-hidden shadow-lg aspect-[4/3] bg-gray-100 relative">
                 <Image
@@ -452,15 +453,15 @@ export default function ClimateControlledPage() {
                   </p>
 
                   <div className="mt-auto flex flex-col gap-3">
-                    <Link
-                      href="#locations"
+                    <a
+                      href={RESERVATION_URL}
                       className="inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-black px-5 py-3 rounded-full transition-colors"
                     >
                       Reserve a {u.size} Unit
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                       </svg>
-                    </Link>
+                    </a>
                     <Link
                       href="#locations"
                       className="text-xs font-bold text-charcoal/70 hover:text-modern-red transition-colors text-center"
@@ -582,18 +583,24 @@ export default function ClimateControlledPage() {
               </p>
             </div>
             <div className="lg:col-span-5 flex flex-col gap-3">
-              <Link
-                href="#locations"
+              <a
+                href={RESERVATION_URL}
                 className="bg-white text-modern-red font-black px-6 py-3.5 rounded-full hover:bg-red-50 transition-colors text-sm shadow-md inline-flex items-center justify-center gap-2"
               >
-                Find a Climate-Controlled Unit
+                Reserve Online Now
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                 </svg>
+              </a>
+              <Link
+                href="#locations"
+                className="bg-charcoal text-white font-black px-6 py-3.5 rounded-full hover:bg-gray-800 transition-colors text-sm shadow-md inline-flex items-center justify-center gap-2"
+              >
+                Find a Climate-Controlled Location
               </Link>
               <a
                 href={PHONE_NUMBER_HREF}
-                className="bg-charcoal text-white font-black px-6 py-3.5 rounded-full hover:bg-gray-800 transition-colors text-sm shadow-md inline-flex items-center justify-center gap-2"
+                className="bg-white/10 text-white font-bold px-6 py-3.5 rounded-full hover:bg-white/20 transition-colors text-sm border border-white/30 inline-flex items-center justify-center gap-2"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />

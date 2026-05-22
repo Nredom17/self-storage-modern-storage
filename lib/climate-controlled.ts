@@ -93,14 +93,14 @@ export const CLIMATE_UNIT_SIZES = [
 
 export const CLIMATE_CONCEPTS = [
   {
-    title: 'Controlled temperature range',
+    title: 'Managed temperature range',
     body:
-      'Units are climate-controlled to a stable temperature range year-round, even through Arkansas summer humidity and winter cold snaps. Wood, leather, and electronics last longer in stable conditions.',
+      'Climate-controlled units are kept within a managed indoor temperature range [CONFIRM TEMPERATURE RANGE] designed to stay clear of Arkansas heat and cold extremes. Wood, leather, and electronics hold up better in stable conditions.',
   },
   {
-    title: 'Active humidity management',
+    title: 'Indoor humidity considerations',
     body:
-      'HVAC equipment manages moisture in the air, limiting the conditions that cause mold, mildew, swelling, warping, and corrosion on metal and finishes.',
+      'Climate-controlled units are designed to limit the indoor humidity conditions that cause mold, mildew, swelling, warping, and corrosion [CONFIRM HUMIDITY DETAILS]. Specifics vary by facility — confirm with your local Modern Storage team.',
   },
   {
     title: 'Fully enclosed indoor space',
@@ -110,7 +110,7 @@ export const CLIMATE_CONCEPTS = [
   {
     title: 'Secured access',
     body:
-      'Gated property entry, surveillance, and individual locked unit doors. Tenant access is typically by code or app — specifics vary by location.',
+      'Gated property entry, surveillance, and individual locked unit doors. Tenant access details vary by location.',
   },
 ] as const
 
@@ -160,11 +160,11 @@ export const CLIMATE_FAQS = [
   },
   {
     q: 'What temperature do you maintain in climate-controlled units?',
-    a: 'Modern Storage maintains a controlled temperature range that stays well clear of the extremes seen outdoors in Arkansas. The exact range is calibrated per building and HVAC system — your local Modern Storage team can share specifics for the facility you are considering.',
+    a: 'Modern Storage climate-controlled units are kept within a managed indoor temperature range [CONFIRM TEMPERATURE RANGE]. The exact range varies by building and HVAC system — your local Modern Storage team can share specifics for the facility you are considering.',
   },
   {
     q: 'Do climate-controlled units control humidity too?',
-    a: 'Yes. Our climate-controlled units are managed for both temperature and humidity using HVAC equipment, which is what protects wood from warping, paper from molding, and electronics from corrosion.',
+    a: 'Climate-controlled units are designed to limit indoor humidity in addition to managing temperature [CONFIRM HUMIDITY DETAILS]. The specifics vary by facility and equipment — ask your local Modern Storage team about the building you are considering.',
   },
   {
     q: 'What should I store in a climate-controlled unit?',

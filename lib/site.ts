@@ -3,6 +3,11 @@ export const SITE_URL = 'https://self-storage.modernstorage.com'
 export const PHONE_NUMBER_DISPLAY = '[CENTRALIZED PHONE NUMBER]'
 export const PHONE_NUMBER_HREF = 'tel:[CENTRALIZED PHONE NUMBER]'
 
+// Reserve buttons point here. Replace with the live reservation URL
+// (e.g., Storable/SiteLink/etc.) before launch. Find-a-unit buttons should
+// continue to point at #locations (the location finder).
+export const RESERVATION_URL = '[RESERVATION LINK]'
+
 export const NAV_LINKS = [
   { label: 'Storage Options', href: '/#storage-options' },
   { label: 'Unit Sizes', href: '/#size-guide' },
