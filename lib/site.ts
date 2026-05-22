@@ -327,43 +327,43 @@ export const WHY_US = [
 export const FAQS = [
   {
     q: 'What size storage unit do I need?',
-    a: 'A 5×5 holds closet-sized items, a 10×10 fits a one-bedroom apartment, and a 10×20 typically holds a 3-bedroom home. Use the Modern Storage® size guide above for a quick visual reference, or call us and we will help you choose.',
+    a: `The right storage unit size depends on what you plan to store. A 5x5 storage unit is great for boxes, seasonal items, and closet overflow. A 10x10 storage unit can usually hold the contents of a one-bedroom apartment. A 10x20 storage unit is often used for the contents of a three-bedroom home, large furniture, or business inventory. Modern Storage® offers a storage unit size guide to help Arkansas customers choose the best fit before renting.`,
   },
   {
     q: 'Do you offer climate-controlled storage?',
-    a: 'Yes. Most Modern Storage® locations across Arkansas offer climate-controlled units that keep temperature and humidity within a controlled range — ideal for furniture, electronics, documents, photos, and business inventory.',
+    a: `Yes. Many Modern Storage® locations in Arkansas offer climate-controlled storage units designed to help protect furniture, electronics, documents, photos, clothing, antiques, and business inventory from extreme temperature changes and humidity. Climate-controlled storage is a smart option if you are storing items long term or storing anything sensitive to heat, cold, or moisture.`,
   },
   {
     q: 'Which locations offer boat and RV storage?',
-    a: 'Select Modern Storage® locations including Maumelle, Bryant, and Lowell offer outdoor and covered boat, RV, trailer, and vehicle parking. Visit our Boat, RV & Vehicle Storage page to see availability.',
+    a: `Select Modern Storage® locations offer boat storage, RV storage, trailer parking, and vehicle storage. Availability varies by location, but options may include outdoor parking, covered parking, and oversized spaces for larger vehicles. Customers looking for boat and RV storage in Arkansas can check availability at Modern Storage® locations including Maumelle, Bentonville, West Little Rock, and Lowell.`,
   },
   {
     q: 'Can I reserve a storage unit online?',
-    a: 'Yes — you can reserve a storage unit online in just a few minutes. Pick your location, pick a unit size, and complete the reservation from your phone or computer.',
+    a: `Yes. You can reserve a storage unit online through the Modern Storage® website in just a few minutes. Choose your Arkansas storage location, select the unit size that works best for you, and complete your reservation from your phone, tablet, or computer. Online reservations make it easy to compare storage options before visiting the facility.`,
   },
   {
     q: 'Do you offer a free moving truck?',
-    a: 'Modern Storage® offers a free moving truck with new rentals at participating locations. Availability, requirements, and location participation may vary, so check with your local Modern Storage® for details.',
+    a: `Modern Storage® offers a free moving truck with new rentals at participating locations. Truck availability, rental requirements, mileage limits, and location participation may vary, so customers should contact their local Modern Storage® facility before move-in. It is a helpful option for moving furniture, boxes, apartment contents, or business inventory into storage.`,
   },
   {
     q: 'Are storage rentals month-to-month?',
-    a: 'Yes. All Modern Storage® rentals are month-to-month, so you only pay for the storage you need without a long-term commitment.',
+    a: `Yes. Modern Storage® storage rentals are month-to-month, giving customers flexibility without a long-term contract. Month-to-month storage is ideal for moving, remodeling, downsizing, business storage, seasonal storage, college storage, or short-term overflow needs.`,
   },
   {
-    q: 'Which Modern Storage® location is closest to me?',
-    a: 'Modern Storage® operates 10 locations across Arkansas including West Little Rock, Shackleford, Riverdale, North Little Rock, Maumelle, Bryant, Hot Springs, Bentonville, Springdale, and Lowell. Use the location finder above to choose the one nearest you.',
+    q: 'How do I find the closest Modern Storage® location?',
+    a: `Modern Storage® has convenient self-storage locations across Arkansas, including Little Rock, West Little Rock, North Little Rock, Bentonville, Bryant, Hot Springs, Maumelle, Springdale, and Lowell. Customers can visit the Modern Storage® locations page to find the nearest facility, compare amenities, and view available storage units.`,
   },
   {
     q: 'Do you offer business storage?',
-    a: 'Yes. Modern Storage® offers mini-warehouse and business-friendly units for contractors, e-commerce sellers, inventory overflow, records, and small-business equipment. Visit our Business Storage page to learn more.',
+    a: `Yes. Modern Storage® offers business storage and mini-warehouse storage for contractors, e-commerce sellers, sales reps, medical offices, real estate professionals, and small businesses. Business storage units can be used for inventory, tools, equipment, records, supplies, furniture, and overflow materials.`,
   },
   {
     q: 'Do you have drive-up storage units?',
-    a: 'Yes — many Modern Storage® locations offer drive-up storage units that let you load and unload directly from your vehicle. Look for the Drive-Up Access badge on each location card.',
+    a: `Yes. Many Modern Storage® locations offer drive-up storage units, allowing customers to load and unload directly from their vehicle. Drive-up access is especially helpful for heavy furniture, tools, equipment, business inventory, and frequent trips to your storage unit.`,
   },
   {
     q: 'Do you have storage units in Little Rock, Bentonville, Springdale, Hot Springs, Bryant, Maumelle, and North Little Rock?',
-    a: 'Yes. Modern Storage® operates self-storage facilities in all of those Arkansas markets, plus Lowell in Northwest Arkansas. Each location offers a mix of climate-controlled, drive-up, boat/RV, and business storage options.',
+    a: `Yes. Modern Storage® offers self-storage units in Little Rock, West Little Rock, North Little Rock, Bentonville, Bryant, Hot Springs, Maumelle, Springdale, and Lowell. Depending on the location, customers can find climate-controlled storage, drive-up storage, boat and RV storage, vehicle parking, business storage, and mini-warehouse options.`,
   },
 ] as const
 

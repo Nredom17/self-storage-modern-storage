@@ -460,12 +460,14 @@ export default function HomePage() {
       <section id="faq" className="bg-white py-20 border-y border-gray-200">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
-            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">FAQ</p>
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+              Frequently Asked Questions
+            </p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight">
-              Self Storage FAQ
+              Self Storage Frequently Asked Questions
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed mt-4 max-w-2xl mx-auto">
-              Answers to the questions Arkansas customers ask us most about self storage at Modern Storage®.
+              Find answers to the most common self storage FAQs — unit sizes, climate-controlled storage, boat and RV storage, business storage, free moving truck, online reservations, and finding the nearest Modern Storage® location in Arkansas.
             </p>
           </div>
           <FaqAccordion items={FAQS} />
