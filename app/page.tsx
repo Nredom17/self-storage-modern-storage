@@ -54,7 +54,7 @@ const TRUST_STRIP = [
   'Climate-controlled units available',
   'Boat, RV, and vehicle storage',
   'Free moving truck with new rentals',
-  'Best of the Best 2023, 2024, 2025',
+  'Best of the Best Self Storage 2023, 2024, 2025 — Arkansas Democrat Gazette & Best of Northwest Arkansas',
 ]
 
 function buildJsonLd() {
@@ -198,21 +198,32 @@ export default function HomePage() {
             </div>
 
             {/* Right — hero image */}
-            <div className="relative">
-              <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-800 relative">
-                <Image
-                  src={HERO_IMAGE}
-                  alt={HERO_ALT}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              </div>
-              {/* Floating award badge */}
-              <div className="absolute -bottom-5 -left-5 bg-modern-red text-white rounded-2xl px-5 py-3 shadow-xl hidden sm:block">
-                <p className="text-[10px] font-black uppercase tracking-widest text-red-100">Best of the Best</p>
-                <p className="text-lg font-black leading-none mt-0.5">2023 · 2024 · 2025</p>
+            <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-800 relative">
+              <Image
+                src={HERO_IMAGE}
+                alt={HERO_ALT}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+              {/* Award badge — top-right of image, inside the rounded container */}
+              <div
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-modern-red text-white rounded-xl px-3.5 py-2.5 shadow-lg w-44 sm:w-52"
+                aria-label="Voted Best of the Best Self Storage 2023, 2024, and 2025 by the Arkansas Democrat Gazette and The Best of Northwest Arkansas"
+              >
+                <p className="text-[9px] font-black uppercase tracking-wider text-red-100 leading-tight">
+                  Best of the Best Self Storage
+                </p>
+                <p className="text-base sm:text-lg font-black leading-none my-1.5">
+                  2023 · 2024 · 2025
+                </p>
+                <p className="text-[9px] font-bold uppercase tracking-tight text-red-100/90 leading-tight">
+                  Arkansas Democrat Gazette
+                </p>
+                <p className="text-[9px] font-bold uppercase tracking-tight text-red-100/90 leading-tight">
+                  & Best of Northwest Arkansas
+                </p>
               </div>
             </div>
           </div>

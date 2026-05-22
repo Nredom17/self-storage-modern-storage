@@ -62,7 +62,7 @@ const TRUST_BULLETS = [
   'Indoor, gated, surveilled access',
   'Free moving truck with new rentals',
   'Month-to-month rentals',
-  'Best of the Best 2023, 2024, 2025',
+  'Best of the Best Self Storage 2023, 2024, 2025 — Arkansas Democrat Gazette & Best of Northwest Arkansas',
 ]
 
 function buildJsonLd() {
@@ -335,14 +335,20 @@ export default function ClimateControlledPage() {
                 />
                 {/* Award badge — top-right of the image, inside the rounded container */}
                 <div
-                  className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-modern-red text-white rounded-xl px-3.5 py-2 shadow-lg backdrop-blur-sm"
-                  aria-label="Voted Best of the Best 2023, 2024, and 2025"
+                  className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-modern-red text-white rounded-xl px-3.5 py-2.5 shadow-lg w-44 sm:w-52"
+                  aria-label="Voted Best of the Best Self Storage 2023, 2024, and 2025 by the Arkansas Democrat Gazette and The Best of Northwest Arkansas"
                 >
-                  <p className="text-[9px] font-black uppercase tracking-widest text-red-100 leading-none">
-                    Best of the Best
+                  <p className="text-[9px] font-black uppercase tracking-wider text-red-100 leading-tight">
+                    Best of the Best Self Storage
                   </p>
-                  <p className="text-sm sm:text-base font-black leading-none mt-1">
+                  <p className="text-base sm:text-lg font-black leading-none my-1.5">
                     2023 · 2024 · 2025
+                  </p>
+                  <p className="text-[9px] font-bold uppercase tracking-tight text-red-100/90 leading-tight">
+                    Arkansas Democrat Gazette
+                  </p>
+                  <p className="text-[9px] font-bold uppercase tracking-tight text-red-100/90 leading-tight">
+                    & Best of Northwest Arkansas
                   </p>
                 </div>
               </div>
