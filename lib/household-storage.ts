@@ -32,7 +32,7 @@ export const HOUSEHOLD_UNIT_SIZES = [
   {
     size: '10x10',
     sizeSlug: '10x10',
-    image: '/images/modern-storage-10x10-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-10x10-climate-controlled-unit.png',
     alt: 'Modern Storage® 10x10 storage unit in Arkansas holding a one-bedroom apartment',
     bestFor: 'One-bedroom apartment',
     fits: [
@@ -47,7 +47,7 @@ export const HOUSEHOLD_UNIT_SIZES = [
   {
     size: '10x15',
     sizeSlug: '10x15',
-    image: '/images/modern-storage-10x15-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-10x15-climate-controlled-unit.png',
     alt: 'Modern Storage® 10x15 storage unit in Arkansas sized for a two-bedroom home',
     bestFor: 'Two-bedroom home',
     fits: [
@@ -62,7 +62,7 @@ export const HOUSEHOLD_UNIT_SIZES = [
   {
     size: '10x20',
     sizeSlug: '10x20',
-    image: '/images/modern-storage-10x20-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-10x20-climate-controlled-unit.png',
     alt: 'Modern Storage® 10x20 storage unit in Arkansas sized for a three-bedroom home',
     bestFor: 'Three-bedroom home',
     fits: [
