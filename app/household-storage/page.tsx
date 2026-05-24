@@ -353,23 +353,17 @@ export default async function HouseholdStoragePage() {
                     {u.moveNote}
                   </p>
 
-                  <div className="mt-auto flex flex-col gap-3">
+                  <div className="mt-auto">
                     <Link
                       href="#locations"
                       aria-label={`Find a ${u.size} household storage unit at a Modern Storage® Arkansas location`}
-                      className="inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-black px-5 py-3 rounded-full transition-colors"
+                      className="inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-black px-5 py-3 rounded-full transition-colors w-full"
                     >
                       Find a {u.size} Unit Near You
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                       </svg>
                     </Link>
-                    <a
-                      href={PHONE_NUMBER_HREF}
-                      className="text-xs font-bold text-charcoal/70 hover:text-modern-red transition-colors text-center"
-                    >
-                      Or call {PHONE_NUMBER_DISPLAY} for help →
-                    </a>
                   </div>
                 </div>
               </article>

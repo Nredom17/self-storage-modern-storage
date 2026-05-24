@@ -40,6 +40,8 @@ const SOCIAL_LINKS = [
   { label: 'Instagram', href: 'https://www.instagram.com/modern.storage' },
   { label: 'TikTok', href: 'https://www.tiktok.com/@modernstorage' },
   { label: 'Facebook', href: 'https://www.facebook.com/modernstorage' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/modern-storage' },
+  { label: 'YouTube', href: 'https://www.youtube.com/@modernstorage' },
 ]
 
 export default function Footer({
@@ -171,7 +173,7 @@ export default function Footer({
                 Reserve online
               </Link>
               <a
-                href="https://www.modernstorage.com/pay"
+                href="https://www.modernstorage.com/payonline"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-gray-400 hover:text-white transition-colors"
