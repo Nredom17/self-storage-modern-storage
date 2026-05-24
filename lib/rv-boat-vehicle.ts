@@ -1,4 +1,4 @@
-// Featured locations are rendered in this exact order on /boat-rv-storage.
+// Featured locations are rendered in this exact order on /rv-boat-vehicle.
 // Slugs must match entries in lib/site.ts LOCATIONS (and the Supabase mirror).
 export const BOAT_RV_FEATURED_SLUGS = [
   'lowell',

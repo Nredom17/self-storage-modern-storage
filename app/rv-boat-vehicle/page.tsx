@@ -13,12 +13,12 @@ import {
   LONG_TERM_RV_LOCATIONS,
   CLASSIC_CAR_LOCATIONS,
   BY_THE_NUMBERS,
-} from '@/lib/boat-rv-storage'
+} from '@/lib/rv-boat-vehicle'
 import FaqAccordion from '@/components/FaqAccordion'
 
 export const revalidate = 60
 
-const PAGE_PATH = '/boat-rv-storage'
+const PAGE_PATH = '/rv-boat-vehicle'
 const HERO_IMAGE = '/images/modern-storage-shackleford-rv-storage-unit.jpg'
 const HERO_ALT =
   'RV stored in a Modern Storage® Shackleford indoor RV storage unit with red roll-up doors in Little Rock'

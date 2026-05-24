@@ -478,7 +478,7 @@ export default async function HouseholdStoragePage() {
               </span>
             </Link>
             <Link
-              href="/boat-rv-storage"
+              href="/rv-boat-vehicle"
               className="group bg-gray-50 hover:bg-white rounded-2xl p-7 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all"
             >
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Boat & RV</p>

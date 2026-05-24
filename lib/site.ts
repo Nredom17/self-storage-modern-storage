@@ -18,7 +18,7 @@ export const RESERVATION_URL = '[RESERVATION LINK]'
 export const STORAGE_OPTION_LINKS = [
   { label: 'Climate-Controlled Storage', href: '/climate-controlled' },
   { label: 'Household Storage', href: '/household-storage' },
-  { label: 'Boat and RV Storage', href: '/boat-rv-storage' },
+  { label: 'Boat and RV Storage', href: '/rv-boat-vehicle' },
   { label: 'Business Storage', href: '/business-storage' },
 ] as const
 
@@ -52,12 +52,12 @@ export const THEME_PAGES = [
     alt: 'Modern Storage® Springdale self storage facility exterior in Arkansas with clean grounds.',
   },
   {
-    slug: 'boat-rv-storage',
+    slug: 'rv-boat-vehicle',
     title: 'Boat and RV Storage',
     description:
       'Boat, RV, trailer, motorcycle, and vehicle storage at select Modern Storage® locations near Beaver Lake, Lake Maumelle, Lake Ouachita, and Greers Ferry.',
     cta: 'Explore Boat and RV Storage',
-    href: '/boat-rv-storage',
+    href: '/rv-boat-vehicle',
     image: '/images/modern-storage-shackleford-rv-storage-unit.jpg',
     alt: 'RV stored inside a Modern Storage® Shackleford unit with red roll-up doors.',
   },
