@@ -56,7 +56,25 @@ If you want to force the apex `modernstorage.com` and `www.modernstorage.com` to
 
 ## Environment variables
 
-**None required.** This project has no API keys, no Supabase, no third-party SDKs. If you add a reservation form or analytics later, set keys in **Settings → Environment Variables**.
+| Var | Required for | Notes |
+|---|---|---|
+| `RESEND_API_KEY` | Business inquiry form on `/business-storage` | Get from https://resend.com → API Keys. Without it, `/api/business-inquiry` falls back to logging the submission to the server console and returning `{ ok: true, dev: true }` — useful for local dev, but on Vercel production this means inquiries are silently dropped to logs. **Required for production.** |
+| `BUSINESS_INQUIRY_TO` | Optional | Override recipient (default `info@modernstorage.com`) without a code deploy. |
+| `BUSINESS_INQUIRY_FROM` | Optional | Override sender (default `Modern Storage® Website <forms@modernstorage.com>`). Until the `modernstorage.com` domain is verified in Resend, you can temporarily set this to `onboarding@resend.dev` to send while DNS propagates. |
+| `NEXT_PUBLIC_SUPABASE_URL` | Optional | Only if you want runtime-editable locations/settings from Supabase. Without it, the static fallback in `lib/site.ts` is used. |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Optional | Pair with the URL above. |
+
+### Resend setup (one-time)
+
+1. **Sign up** at https://resend.com (free tier: 100/day, 3,000/month).
+2. **Create API key** in the dashboard → copy it into Vercel as `RESEND_API_KEY`.
+3. **Verify the sending domain**:
+   - Add `modernstorage.com` (or a subdomain like `mail.modernstorage.com`) in Resend → Domains.
+   - Resend will show you DKIM and SPF DNS records (TXT + CNAME). Add those at whoever hosts DNS for `modernstorage.com`.
+   - Wait for the green checkmark (usually <30 min).
+4. **Confirm the from-address** in `BUSINESS_INQUIRY_FROM` matches the verified domain. The default `forms@modernstorage.com` works as soon as `modernstorage.com` is verified.
+
+Once those steps are done, inquiries submitted from `/business-storage` arrive at `info@modernstorage.com` with the user's email set as the `Reply-To`, so the team can reply directly from their inbox.
 
 ## After-deploy checklist
 

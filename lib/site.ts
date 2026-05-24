@@ -3,10 +3,10 @@ export const SITE_URL = 'https://self-storage.modernstorage.com'
 export const PHONE_NUMBER_DISPLAY = '501-910-0096'
 export const PHONE_NUMBER_HREF = 'tel:+15019100096'
 
-// Business storage inquiries route to a separate inbox so the operations team
-// can triage commercial leads from consumer reservations. Replace with the real
-// inbox before launch.
-export const BUSINESS_CONTACT_EMAIL = 'business@modernstorage.com'
+// Inbox shown in the contact form success/error messages and used by the
+// /api/business-inquiry route as the default recipient. Override the recipient
+// without a code deploy by setting BUSINESS_INQUIRY_TO in Vercel env.
+export const BUSINESS_CONTACT_EMAIL = 'info@modernstorage.com'
 
 // Reserve buttons point here. Replace with the live reservation URL
 // (e.g., Storable/SiteLink/etc.) before launch. Find-a-unit buttons should
