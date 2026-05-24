@@ -3,7 +3,7 @@ export const CLIMATE_UNIT_SIZES = [
     size: '5x5',
     sizeSlug: '5x5',
     title: '5x5 Climate-Controlled Storage Unit',
-    image: '/images/modern-storage-5x5-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-5x5-climate-controlled-unit.png',
     alt: 'Modern Storage® 5x5 climate-controlled storage unit in Arkansas',
     bestFor: 'Closet-sized indoor storage',
     fits: [
@@ -19,7 +19,7 @@ export const CLIMATE_UNIT_SIZES = [
     size: '5x10',
     sizeSlug: '5x10',
     title: '5x10 Climate-Controlled Storage Unit',
-    image: '/images/modern-storage-5x10-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-5x10-climate-controlled-unit.png',
     alt: 'Modern Storage® 5x10 climate-controlled storage unit in Arkansas',
     bestFor: 'Studio apartment or single room',
     fits: [

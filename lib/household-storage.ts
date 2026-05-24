@@ -2,7 +2,7 @@ export const HOUSEHOLD_UNIT_SIZES = [
   {
     size: '5x5',
     sizeSlug: '5x5',
-    image: '/images/modern-storage-5x5-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-5x5-climate-controlled-unit.png',
     alt: 'Modern Storage® 5x5 storage unit in Arkansas for household boxes and seasonal items',
     bestFor: 'Closet overflow & seasonal',
     fits: [
@@ -17,7 +17,7 @@ export const HOUSEHOLD_UNIT_SIZES = [
   {
     size: '5x10',
     sizeSlug: '5x10',
-    image: '/images/modern-storage-5x10-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-5x10-climate-controlled-unit.png',
     alt: 'Modern Storage® 5x10 storage unit in Arkansas sized for a studio apartment move',
     bestFor: 'Studio or single bedroom',
     fits: [
