@@ -9,6 +9,13 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
+  async redirects() {
+    return [
+      // Old slug → new slug. statusCode 301 (not Next's default `permanent: true` 308)
+      // so search engines update bookmarks the way the SEO brief asked for.
+      { source: '/boat-rv-storage', destination: '/rv-boat-vehicle', statusCode: 301 },
+    ]
+  },
   async headers() {
     return [
       {

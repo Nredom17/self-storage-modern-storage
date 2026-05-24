@@ -1,11 +1,7 @@
 import Link from 'next/link'
+import { STORAGE_OPTION_LINKS } from '@/lib/site'
 
-const STORAGE_OPTIONS = [
-  { label: 'Climate-Controlled Storage', href: '/climate-controlled' },
-  { label: 'Household Storage', href: '/household-moving' },
-  { label: 'Boat and RV Storage', href: '/boat-rv-vehicle' },
-  { label: 'Business Storage', href: '/business' },
-]
+const STORAGE_OPTIONS = STORAGE_OPTION_LINKS
 
 const LOCATIONS = [
   { label: 'Little Rock', href: '/#locations' },
@@ -14,7 +10,6 @@ const LOCATIONS = [
   { label: 'Springdale', href: '/#locations' },
   { label: 'Hot Springs', href: '/#locations' },
   { label: 'Bryant', href: '/#locations' },
-  { label: 'Maumelle', href: '/#locations' },
   { label: 'Lowell', href: '/#locations' },
 ]
 
