@@ -15,9 +15,9 @@ import { buildLocationSchemaList } from '@/lib/schema'
 export const revalidate = 60
 
 const PAGE_PATH = '/household-storage'
-const HERO_IMAGE = '/images/modern-storage-self-storage-units-arkansas.jpg'
+const HERO_IMAGE = '/images/modern-storage-springdale-best-of-the-best-awards.png'
 const HERO_ALT =
-  'Modern Storage® self-storage facility in Arkansas with clean drive-up units and a moving truck'
+  'Modern Storage® Springdale facility with Best of the Best 2023-2025 and Best of Northwest Arkansas award seals'
 const TRUCK_IMAGE = '/images/modern-storage-free-moving-truck.jpg'
 const TRUCK_ALT =
   'Modern Storage® free moving truck for new household storage rentals at participating Arkansas locations'

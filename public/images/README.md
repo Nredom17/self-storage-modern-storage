@@ -4,7 +4,7 @@ The site references these filenames. Files marked **placeholder** are ~1 KB char
 
 ## Hub (homepage)
 
-- `modern-storage-self-storage-units-arkansas.jpg` — Hero (placeholder)
+- `modern-storage-springdale-best-of-the-best-awards.png` — Hero (real photo, Springdale facility with award seals visible)
 - `modern-storage-free-moving-truck.jpg` — Free moving truck section (placeholder)
 
 ## Storage option cards (real photos)
