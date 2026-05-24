@@ -10,6 +10,7 @@ import {
 } from '@/lib/household-storage'
 import FaqAccordion from '@/components/FaqAccordion'
 import LocationFinder from '@/components/LocationFinder'
+import { buildLocationSchemaList } from '@/lib/schema'
 
 export const revalidate = 60
 
@@ -174,10 +175,12 @@ function LifeIcon({ name }: { name: string }) {
 
 export default async function HouseholdStoragePage() {
   const [locations, settings] = await Promise.all([getLocations(), getSiteSettings()])
-  const jsonLd = buildJsonLd(settings.phoneDisplay)
+  const jsonLd = [
+    ...buildJsonLd(settings.phoneDisplay),
+    ...buildLocationSchemaList(locations, settings.phoneDisplay),
+  ]
   const PHONE_NUMBER_DISPLAY = settings.phoneDisplay
   const PHONE_NUMBER_HREF = settings.phoneHref
-  const RESERVATION_URL = settings.reservationUrl
 
   return (
     <>
@@ -362,10 +365,10 @@ export default async function HouseholdStoragePage() {
                       </svg>
                     </Link>
                     <a
-                      href={RESERVATION_URL}
+                      href={PHONE_NUMBER_HREF}
                       className="text-xs font-bold text-charcoal/70 hover:text-modern-red transition-colors text-center"
                     >
-                      Reserve a {u.size} unit online →
+                      Or call {PHONE_NUMBER_DISPLAY} for help →
                     </a>
                   </div>
                 </div>
@@ -552,12 +555,6 @@ export default async function HouseholdStoragePage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
-              <a
-                href={RESERVATION_URL}
-                className="bg-charcoal text-white font-black px-6 py-3.5 rounded-full hover:bg-gray-800 transition-colors text-sm shadow-md inline-flex items-center justify-center gap-2"
-              >
-                Reserve Online Now
-              </a>
               <a
                 href={PHONE_NUMBER_HREF}
                 className="bg-white/10 text-white font-bold px-6 py-3.5 rounded-full hover:bg-white/20 transition-colors text-sm border border-white/30 inline-flex items-center justify-center gap-2"

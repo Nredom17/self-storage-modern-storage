@@ -124,14 +124,9 @@ export const CLIMATE_CONCEPTS = [
       'Many Modern Storage® climate-controlled units offer ground-floor access with no stairs between you and your unit. Ground-floor availability and sizes vary by facility.',
   },
   {
-    title: 'Indoor humidity',
-    body:
-      'Climate-controlled units are designed to limit the indoor humidity that causes mold, mildew, swelling, warping, and corrosion [CONFIRM HUMIDITY DETAILS]. Specifics vary by facility.',
-  },
-  {
     title: 'Temperature range',
     body:
-      'Climate-controlled units are kept within a managed indoor temperature range [CONFIRM TEMPERATURE RANGE]. The exact range varies by building and HVAC system — ask your local Modern Storage® team for details.',
+      'Climate-controlled units at Modern Storage® are kept within a managed indoor temperature range of approximately 59°F to 79°F. Exact temperatures vary by building, season, and HVAC cycle — but the day-to-day swing your belongings experience is far smaller than a non-climate-controlled garage, attic, or outdoor unit in Arkansas.',
   },
 ] as const
 
@@ -185,7 +180,7 @@ export const CLIMATE_FAQS = [
   },
   {
     q: 'What temperature are climate-controlled storage units kept at?',
-    a: `Climate-controlled storage units are designed to reduce extreme temperature swings compared to outdoor storage units. Final temperature range details should be confirmed by Modern Storage® operations before publishing a specific number. If a specific range is approved, place it here: [CONFIRM TEMPERATURE RANGE]. For customers storing furniture, electronics, documents, photos, or inventory, the main benefit is a more stable indoor environment.`,
+    a: `Climate-controlled storage units at Modern Storage® are kept within a managed indoor temperature range of approximately 59°F to 79°F. The exact temperature varies by building, season, and HVAC cycle, but the range is designed to keep furniture, electronics, documents, photos, and other temperature-sensitive items in a far more stable environment than a garage, attic, or outdoor unit in Arkansas. For specific details about a facility, customers can call Modern Storage® at 501-910-0096.`,
   },
   {
     q: 'Is climate-controlled storage worth it in Arkansas?',

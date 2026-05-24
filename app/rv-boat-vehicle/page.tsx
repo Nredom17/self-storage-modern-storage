@@ -15,6 +15,7 @@ import {
   BY_THE_NUMBERS,
 } from '@/lib/rv-boat-vehicle'
 import FaqAccordion from '@/components/FaqAccordion'
+import { buildLocationSchemaList } from '@/lib/schema'
 
 export const revalidate = 60
 
@@ -152,7 +153,6 @@ function VehicleIcon({ name }: { name: string }) {
 
 export default async function BoatRvStoragePage() {
   const [locations, settings] = await Promise.all([getLocations(), getSiteSettings()])
-  const jsonLd = buildJsonLd(settings.phoneDisplay)
   const PHONE_NUMBER_DISPLAY = settings.phoneDisplay
   const PHONE_NUMBER_HREF = settings.phoneHref
 
@@ -165,6 +165,13 @@ export default async function BoatRvStoragePage() {
       return { ...loc, ...BOAT_RV_LOCATION_COPY[slug] }
     })
     .filter((x): x is NonNullable<typeof x> => Boolean(x))
+
+  // Only emit SelfStorage schema for the 6 visible featured cards, not all 10.
+  const featuredLocations = featured.map((f) => locations.find((l) => l.slug === f.slug)!)
+  const jsonLd = [
+    ...buildJsonLd(settings.phoneDisplay),
+    ...buildLocationSchemaList(featuredLocations, settings.phoneDisplay),
+  ]
 
   return (
     <>

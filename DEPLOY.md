@@ -102,9 +102,9 @@ These are placeholders in the codebase that should be swapped for real values. E
 | Placeholder | Where | What to do |
 |---|---|---|
 | ~~`[CENTRALIZED PHONE NUMBER]`~~ ✅ Done | `lib/site.ts` — `PHONE_NUMBER_DISPLAY` and `PHONE_NUMBER_HREF` | Live number `501-910-0096` is wired through `lib/site.ts` and `supabase/seed.sql` |
-| `[RESERVATION LINK]` | `lib/site.ts` — `RESERVATION_URL` | Set the real reservation URL (Storable/SiteLink/etc.). All Reserve buttons across the site point to this single constant |
-| `[CONFIRM TEMPERATURE RANGE]` | `lib/climate-controlled.ts` — `CLIMATE_CONCEPTS` and `CLIMATE_FAQS` | Confirm the actual temperature range maintained in climate-controlled units (varies by facility) and either insert specifics or remove the marker |
-| `[CONFIRM HUMIDITY DETAILS]` | `lib/climate-controlled.ts` — `CLIMATE_CONCEPTS` and `CLIMATE_FAQS` | Confirm whether and how humidity is actively managed at each facility, then update the copy |
+| ~~`[RESERVATION LINK]`~~ ✅ Done | `lib/site.ts` — `RESERVATION_URL` | Generic "Reserve" buttons now steer to `/#locations` so the customer picks a facility first; per-location "See Available Units" buttons use each facility's individual `reservationUrl`. If you ever get a single master Storable URL, swap `RESERVATION_URL` (and the matching `reservation_url` row in `supabase/seed.sql`) back to it. |
+| ~~`[CONFIRM TEMPERATURE RANGE]`~~ ✅ Done | `lib/climate-controlled.ts` — `CLIMATE_CONCEPTS` and `CLIMATE_FAQS` | Filled in as ~59°F-79°F. If operations approves a tighter spec, update the two copy spots in `lib/climate-controlled.ts`. |
+| ~~`[CONFIRM HUMIDITY DETAILS]`~~ ✅ Resolved | `lib/climate-controlled.ts` | Humidity concept card removed; the page no longer claims a specific managed humidity range. WHAT_TO_STORE copy still references humidity as a risk to items (accurate, no commitment). |
 | 25 placeholder JPEGs | `public/images/` | Replace each with the real Modern Storage® photo at the listed filename (filenames are SEO-optimized — keep them) |
 | 3 homepage review placeholders | `lib/site.ts` — `REVIEWS` array | Replace with real Google reviews |
 | 3 climate-controlled review placeholders | `lib/climate-controlled.ts` — `CLIMATE_REVIEWS` array | Replace with real Google reviews |

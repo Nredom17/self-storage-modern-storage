@@ -8,10 +8,11 @@ export const PHONE_NUMBER_HREF = 'tel:+15019100096'
 // without a code deploy by setting BUSINESS_INQUIRY_TO in Vercel env.
 export const BUSINESS_CONTACT_EMAIL = 'info@modernstorage.com'
 
-// Reserve buttons point here. Replace with the live reservation URL
-// (e.g., Storable/SiteLink/etc.) before launch. Find-a-unit buttons should
-// continue to point at #locations (the location finder).
-export const RESERVATION_URL = '[RESERVATION LINK]'
+// Generic "Reserve" buttons (before the user has picked a facility) steer to
+// the on-page location finder so the customer chooses a Modern Storage® location
+// first. Per-location "See Available Units" buttons use the individual
+// facility's reservationUrl instead (see LOCATIONS below).
+export const RESERVATION_URL = '/#locations'
 
 // Storage Options dropdown — exposed both in the desktop header dropdown and
 // the mobile menu, and reused by the footer.
