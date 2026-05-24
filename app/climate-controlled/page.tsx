@@ -15,7 +15,7 @@ import {
 } from '@/lib/climate-controlled'
 import FaqAccordion from '@/components/FaqAccordion'
 import LocationFinder from '@/components/LocationFinder'
-import { buildLocationSchemaList } from '@/lib/schema'
+import { buildLocationSchemaList, buildReviewsSchemaList } from '@/lib/schema'
 
 const PAGE_PATH = '/climate-controlled'
 const HERO_IMAGE = '/images/modern-storage-bentonville-climate-controlled-hallway.jpg'
@@ -255,6 +255,7 @@ export default async function ClimateControlledPage() {
   const jsonLd = [
     ...buildJsonLd(settings.phoneDisplay),
     ...buildLocationSchemaList(locations, settings.phoneDisplay),
+    ...buildReviewsSchemaList(CLIMATE_REVIEWS),
   ]
   const PHONE_NUMBER_DISPLAY = settings.phoneDisplay
   const PHONE_NUMBER_HREF = settings.phoneHref

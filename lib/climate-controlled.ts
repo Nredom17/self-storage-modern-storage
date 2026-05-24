@@ -218,27 +218,27 @@ export const CLIMATE_FAQS = [
 
 export const CLIMATE_REVIEWS = [
   {
-    quote:
-      'Placeholder review highlighting clean indoor hallways and the difference climate control made compared to a previous non-climate unit. Replace with a real Google review before launch.',
-    initials: 'A',
-    author: 'Verified customer',
-    location: 'Little Rock, AR',
-    theme: 'Clean indoor hallways',
+    quote: `Just rented a unit at Modern Storage® Riverdale and I'm seriously impressed. Hunter helped me get set up and showed me my temperature-controlled 10x20 unit, which was exactly what I needed. Easy process, clean facility, and great service overall.`,
+    initials: 'J',
+    author: 'Jeffrey B.',
+    location: 'Modern Storage® Riverdale',
+    facilitySlug: 'riverdale',
+    theme: 'Climate-controlled fit',
   },
   {
-    quote:
-      'Placeholder review covering how easy reservation and move-in was for a climate-controlled unit, and that staff helped pick the right size. Replace with a real Google review before launch.',
-    initials: 'B',
-    author: 'Verified customer',
-    location: 'Bentonville, AR',
-    theme: 'Easy reservation and move-in',
+    quote: `Modern Storage® West Little Rock has professional, knowledgeable, and friendly staff, a clean and secure environment, and an easy move-in process. Great location, competitive pricing, gated access, and personal access codes. Very happy to be here!`,
+    initials: 'S',
+    author: 'Sholanda G.',
+    location: 'Modern Storage® West Little Rock',
+    facilitySlug: 'west-little-rock',
+    theme: 'Easy move-in',
   },
   {
-    quote:
-      'Placeholder review describing furniture and electronics stored long-term in a climate-controlled unit, with no damp, smell, or damage on retrieval. Replace with a real Google review before launch.',
-    initials: 'C',
-    author: 'Verified customer',
-    location: 'Maumelle, AR',
-    theme: 'Furniture stayed protected',
+    quote: `From the moment we walked into Modern Storage® Bentonville, the team made us feel taken care of. Friendly guidance, expert knowledge, and a smooth experience from start to finish. We'll absolutely recommend Modern Storage® Bentonville to others.`,
+    initials: 'H',
+    author: 'Holly G.',
+    location: 'Modern Storage® Bentonville',
+    facilitySlug: 'bentonville',
+    theme: 'Helpful team',
   },
 ] as const

@@ -56,3 +56,46 @@ export function buildLocationSchemaList(
 ) {
   return locations.map((loc) => buildLocationSchema(loc, phoneDisplay))
 }
+
+/**
+ * Build a schema.org Review block for a real customer review. Defaults to a
+ * 5-star rating (all current reviews are 5-star Google reviews); pass `rating`
+ * if that ever changes.
+ *
+ * Linking each Review to a SelfStorage block via itemReviewed's @id keeps the
+ * review attached to the correct facility instead of orphaned at page level.
+ */
+export type ReviewLike = {
+  quote: string
+  author: string
+  location: string
+  facilitySlug?: string
+  rating?: number
+}
+
+export function buildReviewSchema(review: ReviewLike) {
+  const rating = review.rating ?? 5
+  const block: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'Review',
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: rating,
+      bestRating: 5,
+    },
+    author: { '@type': 'Person', name: review.author },
+    reviewBody: review.quote,
+  }
+  if (review.facilitySlug) {
+    block.itemReviewed = {
+      '@type': 'SelfStorage',
+      '@id': SITE_URL + '/#location-' + review.facilitySlug,
+      name: review.location,
+    }
+  }
+  return block
+}
+
+export function buildReviewsSchemaList(reviews: readonly ReviewLike[]) {
+  return reviews.map(buildReviewSchema)
+}
