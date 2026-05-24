@@ -83,7 +83,7 @@ export const CLIMATE_UNIT_SIZES = [
     size: '10x30',
     sizeSlug: '10x30',
     title: '10x30 Climate-Controlled Storage Unit',
-    image: '/images/modern-storage-10x30-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-10x30-climate-controlled-unit.png',
     alt: 'Modern Storage® 10x30 climate-controlled storage unit in Arkansas',
     bestFor: 'Large home or business volume',
     fits: [

@@ -77,7 +77,7 @@ export const HOUSEHOLD_UNIT_SIZES = [
   {
     size: '10x30',
     sizeSlug: '10x30',
-    image: '/images/modern-storage-10x30-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-10x30-climate-controlled-unit.png',
     alt: 'Modern Storage® 10x30 storage unit in Arkansas sized for a four to five bedroom home',
     bestFor: 'Four to five bedrooms',
     fits: [
