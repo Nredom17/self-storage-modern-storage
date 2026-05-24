@@ -300,7 +300,11 @@ export default async function HouseholdStoragePage() {
                 Household Storage Unit Sizes
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed">
-                Six sizes covering closet overflow through whole-home moves. Availability varies by Modern Storage® location — reserve online and the team will match you to the right unit at the right facility.
+                Six sizes covering closet overflow through whole-home moves. Availability varies by Modern Storage® location — reserve online and the team will match you to the right unit at the right facility. Not sure which size? Try the{' '}
+                <Link href="/ai-storage-size-finder" className="text-modern-red font-bold hover:underline">
+                  AI Storage Size Finder
+                </Link>
+                {' '}for a personalized recommendation in under 30 seconds.
               </p>
             </div>
             <Link

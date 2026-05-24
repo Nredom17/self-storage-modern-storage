@@ -25,6 +25,7 @@ export const STORAGE_OPTION_LINKS = [
 
 export const NAV_LINKS = [
   { label: 'Unit Sizes', href: '/#size-guide' },
+  { label: 'Size Finder', href: '/ai-storage-size-finder' },
   { label: 'Locations', href: '/#locations' },
   { label: 'Moving Truck', href: '/#moving-truck' },
   { label: 'FAQ', href: '/#faq' },

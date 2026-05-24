@@ -446,7 +446,11 @@ export default async function ClimateControlledPage() {
                 Climate-Controlled Unit Sizes
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed">
-                Six sizes designed for everything from a closet of paperwork to a whole-home move. Availability varies by location — reserve online and we&apos;ll match you to the right size and facility.
+                Six sizes designed for everything from a closet of paperwork to a whole-home move. Availability varies by location — reserve online and we&apos;ll match you to the right size and facility. Not sure which size? Try the{' '}
+                <Link href="/ai-storage-size-finder" className="text-modern-red font-bold hover:underline">
+                  AI Storage Size Finder
+                </Link>
+                {' '}for a personalized recommendation in under 30 seconds.
               </p>
             </div>
             <Link

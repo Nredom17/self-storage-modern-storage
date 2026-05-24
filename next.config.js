@@ -14,6 +14,8 @@ const nextConfig = {
       // Old slug → new slug. statusCode 301 (not Next's default `permanent: true` 308)
       // so search engines update bookmarks the way the SEO brief asked for.
       { source: '/boat-rv-storage', destination: '/rv-boat-vehicle', statusCode: 301 },
+      // Camel-case route renamed to SEO-friendly kebab-case.
+      { source: '/AIStorageSizeFinder', destination: '/ai-storage-size-finder', statusCode: 301 },
     ]
   },
   async headers() {
