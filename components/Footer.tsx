@@ -84,7 +84,7 @@ export default function Footer({
           <div className="md:col-span-4">
             <Link href="/" className="inline-block mb-5 leading-none">
               <span className="font-bebas text-modern-red text-2xl tracking-wide leading-none">
-                MODERN STORAGE® Self Storage
+                MODERN STORAGE<sup className="text-[0.55em] font-bold -top-[0.6em] relative ml-0.5">®</sup>
               </span>
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed max-w-sm">

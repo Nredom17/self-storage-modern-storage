@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       'Find secure boat, RV, and vehicle storage across Arkansas. Covered and uncovered options near Bentonville, Lowell, Little Rock, and Hot Springs.',
     url: SITE_URL + PAGE_PATH,
-    siteName: 'Modern Storage® Self Storage',
+    siteName: 'Modern Storage®',
     type: 'website',
     images: [{ url: HERO_IMAGE, width: 1600, height: 1066, alt: HERO_ALT }],
   },

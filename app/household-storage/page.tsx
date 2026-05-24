@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     description:
       'Find household storage units across Arkansas at 10 Modern Storage® locations. Climate-controlled and drive-up options, month-to-month rentals, and free moving truck with new rentals.',
     url: SITE_URL + PAGE_PATH,
-    siteName: 'Modern Storage® Self Storage',
+    siteName: 'Modern Storage®',
     type: 'website',
     images: [{ url: HERO_IMAGE, width: 1600, height: 1066, alt: HERO_ALT }],
   },

@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     description:
       'Mini-warehouse and business storage at Modern Storage® in Arkansas — loading docks, package acceptance, electricity in select units, and 24/7 access where available.',
     url: SITE_URL + PAGE_PATH,
-    siteName: 'Modern Storage® Self Storage',
+    siteName: 'Modern Storage®',
     type: 'website',
     images: [{ url: HERO_IMAGE, width: 1600, height: 1066, alt: HERO_ALT }],
   },

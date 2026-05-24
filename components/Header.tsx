@@ -46,7 +46,7 @@ export default function Header({
           className="shrink-0 leading-none"
         >
           <span className="font-bebas text-modern-red text-2xl tracking-wide leading-none">
-            MODERN STORAGE® Self Storage
+            MODERN STORAGE<sup className="text-[0.55em] font-bold -top-[0.6em] relative ml-0.5">®</sup>
           </span>
         </Link>
 

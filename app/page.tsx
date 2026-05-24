@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     description:
       'Find clean, convenient storage units across Arkansas at Modern Storage®, including climate-controlled, household, business, boat, RV, and vehicle storage.',
     url: SITE_URL + '/',
-    siteName: 'Modern Storage® Self Storage',
+    siteName: 'Modern Storage®',
     type: 'website',
     images: [
       {

@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     description:
       'Indoor climate-controlled self-storage units at Modern Storage® locations across Arkansas. Protection for furniture, electronics, documents, photos, instruments, and business inventory.',
     url: SITE_URL + PAGE_PATH,
-    siteName: 'Modern Storage® Self Storage',
+    siteName: 'Modern Storage®',
     type: 'website',
     images: [
       {
