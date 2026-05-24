@@ -218,11 +218,11 @@ export const CLIMATE_FAQS = [
 
 export const CLIMATE_REVIEWS = [
   {
-    quote: `Just rented a unit at Modern Storage® Riverdale and I'm seriously impressed. Hunter helped me get set up and showed me my temperature-controlled 10x20 unit, which was exactly what I needed. Easy process, clean facility, and great service overall.`,
+    quote: `Just rented a unit at Modern Storage® Springdale and I'm seriously impressed. Hunter helped me get set up and showed me my temperature-controlled 10x20 unit, which was exactly what I needed. Easy process, clean facility, and great service overall.`,
     initials: 'J',
     author: 'Jeffrey B.',
-    location: 'Modern Storage® Riverdale',
-    facilitySlug: 'riverdale',
+    location: 'Modern Storage® Springdale',
+    facilitySlug: 'springdale',
     theme: 'Climate-controlled fit',
   },
   {

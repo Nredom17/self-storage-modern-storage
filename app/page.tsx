@@ -12,6 +12,7 @@ import {
 import { getLocations, getSiteSettings } from '@/lib/data'
 import FaqAccordion from '@/components/FaqAccordion'
 import LocationFinder from '@/components/LocationFinder'
+import { buildLocationSchemaList, buildReviewsSchemaList } from '@/lib/schema'
 
 // Re-render every 60s to pick up Supabase edits.
 export const revalidate = 60
@@ -140,7 +141,11 @@ function buildJsonLd(phoneDisplay: string) {
 
 export default async function HomePage() {
   const [locations, settings] = await Promise.all([getLocations(), getSiteSettings()])
-  const jsonLd = buildJsonLd(settings.phoneDisplay)
+  const jsonLd = [
+    ...buildJsonLd(settings.phoneDisplay),
+    ...buildLocationSchemaList(locations, settings.phoneDisplay),
+    ...buildReviewsSchemaList(REVIEWS),
+  ]
 
   return (
     <>

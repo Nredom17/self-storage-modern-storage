@@ -106,7 +106,7 @@ These are placeholders in the codebase that should be swapped for real values. E
 | ~~`[CONFIRM TEMPERATURE RANGE]`~~ ✅ Done | `lib/climate-controlled.ts` — `CLIMATE_CONCEPTS` and `CLIMATE_FAQS` | Filled in as ~59°F-79°F. If operations approves a tighter spec, update the two copy spots in `lib/climate-controlled.ts`. |
 | ~~`[CONFIRM HUMIDITY DETAILS]`~~ ✅ Resolved | `lib/climate-controlled.ts` | Humidity concept card removed; the page no longer claims a specific managed humidity range. WHAT_TO_STORE copy still references humidity as a risk to items (accurate, no commitment). |
 | 25 placeholder JPEGs | `public/images/` | Replace each with the real Modern Storage® photo at the listed filename (filenames are SEO-optimized — keep them) |
-| 3 homepage review placeholders | `lib/site.ts` — `REVIEWS` array | Replace with real Google reviews |
+| ~~3 homepage review placeholders~~ ✅ Done | `lib/site.ts` — `REVIEWS` array | Replaced with the same 3 real Google reviews used on /climate-controlled. Homepage also now emits per-location SelfStorage schema (10 facilities) + Review schema linked via `itemReviewed` `@id`. |
 | ~~3 climate-controlled review placeholders~~ ✅ Done | `lib/climate-controlled.ts` — `CLIMATE_REVIEWS` array | Replaced with 3 real Google reviews (Jeffrey B. — Riverdale; Sholanda G. — West Little Rock; Holly G. — Bentonville). Each carries a `facilitySlug` and is emitted as schema.org Review JSON-LD linked via `itemReviewed` to the SelfStorage `@id` of the right facility. |
 | ~~Location addresses~~ ✅ Done | `lib/site.ts` — `LOCATIONS` array and `supabase/seed.sql` | All 10 facility addresses + ZIPs filled in; `maumelle` slug renamed to `Modern Storage® Maumelle Blvd` at 9100 Maumelle Blvd, North Little Rock, AR 72113 |
 
