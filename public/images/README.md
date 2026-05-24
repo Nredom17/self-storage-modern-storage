@@ -4,7 +4,7 @@ The site references these filenames. Files marked **placeholder** are ~1 KB char
 
 ## Hub (homepage)
 
-- `modern-storage-self-storage-units-arkansas.jpg` — Hero (placeholder)
+- `modern-storage-springdale-best-of-the-best-awards.png` — Hero (real photo, Springdale facility with award seals visible)
 - `modern-storage-free-moving-truck.jpg` — Free moving truck section (placeholder)
 
 ## Storage option cards (real photos)
@@ -32,9 +32,9 @@ The site references these filenames. Files marked **placeholder** are ~1 KB char
 - `modern-storage-climate-controlled-hallway-arkansas.jpg` — Hero
 - `modern-storage-climate-controlled-interior-corridor.jpg` — "What climate control means" section
 - `modern-storage-climate-controlled-moving-truck.jpg` — Free moving truck callout
-- `modern-storage-5x5-climate-controlled-unit.jpg`
-- `modern-storage-5x10-climate-controlled-unit.jpg`
-- `modern-storage-10x10-climate-controlled-unit.jpg`
-- `modern-storage-10x15-climate-controlled-unit.jpg`
-- `modern-storage-10x20-climate-controlled-unit.jpg`
-- `modern-storage-10x30-climate-controlled-unit.jpg`
+- `modern-storage-5x5-climate-controlled-unit.png`
+- `modern-storage-5x10-climate-controlled-unit.png`
+- `modern-storage-10x10-climate-controlled-unit.png`
+- `modern-storage-10x15-climate-controlled-unit.png`
+- `modern-storage-10x20-climate-controlled-unit.png`
+- `modern-storage-10x30-climate-controlled-unit.png`

@@ -12,12 +12,14 @@ import {
 import { getLocations, getSiteSettings } from '@/lib/data'
 import FaqAccordion from '@/components/FaqAccordion'
 import LocationFinder from '@/components/LocationFinder'
+import { buildLocationSchemaList, buildReviewsSchemaList } from '@/lib/schema'
 
 // Re-render every 60s to pick up Supabase edits.
 export const revalidate = 60
 
-const HERO_IMAGE = '/images/modern-storage-self-storage-units-arkansas.jpg'
-const HERO_ALT = 'Modern Storage® self-storage facility in Arkansas with clean units and moving truck'
+const HERO_IMAGE = '/images/modern-storage-springdale-best-of-the-best-awards.png'
+const HERO_ALT =
+  'Modern Storage® Springdale facility with Best of the Best 2023-2025 and Best of Northwest Arkansas award seals'
 
 export const metadata: Metadata = {
   title: 'Self Storage Units in Arkansas | Modern Storage®',
@@ -31,7 +33,7 @@ export const metadata: Metadata = {
     description:
       'Find clean, convenient storage units across Arkansas at Modern Storage®, including climate-controlled, household, business, boat, RV, and vehicle storage.',
     url: SITE_URL + '/',
-    siteName: 'Modern Storage® Self Storage',
+    siteName: 'Modern Storage®',
     type: 'website',
     images: [
       {
@@ -140,7 +142,11 @@ function buildJsonLd(phoneDisplay: string) {
 
 export default async function HomePage() {
   const [locations, settings] = await Promise.all([getLocations(), getSiteSettings()])
-  const jsonLd = buildJsonLd(settings.phoneDisplay)
+  const jsonLd = [
+    ...buildJsonLd(settings.phoneDisplay),
+    ...buildLocationSchemaList(locations, settings.phoneDisplay),
+    ...buildReviewsSchemaList(REVIEWS),
+  ]
 
   return (
     <>
@@ -200,7 +206,7 @@ export default async function HomePage() {
               </ul>
             </div>
 
-            {/* Right — hero image */}
+            {/* Right — hero image (awards are baked into the photo) */}
             <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-800 relative">
               <Image
                 src={HERO_IMAGE}
@@ -210,24 +216,6 @@ export default async function HomePage() {
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
-              {/* Award badge — top-right of image, inside the rounded container */}
-              <div
-                className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-modern-red text-white rounded-xl px-3.5 py-2.5 shadow-lg w-44 sm:w-52"
-                aria-label="Voted Best of the Best Self Storage 2023, 2024, and 2025 by the Arkansas Democrat Gazette and The Best of Northwest Arkansas"
-              >
-                <p className="text-[9px] font-black uppercase tracking-wider text-red-100 leading-tight">
-                  Best of the Best Self Storage
-                </p>
-                <p className="text-base sm:text-lg font-black leading-none my-1.5">
-                  2023 · 2024 · 2025
-                </p>
-                <p className="text-[9px] font-bold uppercase tracking-tight text-red-100/90 leading-tight">
-                  Arkansas Democrat Gazette
-                </p>
-                <p className="text-[9px] font-bold uppercase tracking-tight text-red-100/90 leading-tight">
-                  & Best of Northwest Arkansas
-                </p>
-              </div>
             </div>
           </div>
         </div>

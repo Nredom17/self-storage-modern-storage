@@ -3,7 +3,7 @@ export const CLIMATE_UNIT_SIZES = [
     size: '5x5',
     sizeSlug: '5x5',
     title: '5x5 Climate-Controlled Storage Unit',
-    image: '/images/modern-storage-5x5-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-5x5-climate-controlled-unit.png',
     alt: 'Modern Storage® 5x5 climate-controlled storage unit in Arkansas',
     bestFor: 'Closet-sized indoor storage',
     fits: [
@@ -19,7 +19,7 @@ export const CLIMATE_UNIT_SIZES = [
     size: '5x10',
     sizeSlug: '5x10',
     title: '5x10 Climate-Controlled Storage Unit',
-    image: '/images/modern-storage-5x10-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-5x10-climate-controlled-unit.png',
     alt: 'Modern Storage® 5x10 climate-controlled storage unit in Arkansas',
     bestFor: 'Studio apartment or single room',
     fits: [
@@ -35,7 +35,7 @@ export const CLIMATE_UNIT_SIZES = [
     size: '10x10',
     sizeSlug: '10x10',
     title: '10x10 Climate-Controlled Storage Unit',
-    image: '/images/modern-storage-10x10-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-10x10-climate-controlled-unit.png',
     alt: 'Modern Storage® 10x10 climate-controlled storage unit in Arkansas',
     bestFor: 'One-bedroom apartment',
     fits: [
@@ -51,7 +51,7 @@ export const CLIMATE_UNIT_SIZES = [
     size: '10x15',
     sizeSlug: '10x15',
     title: '10x15 Climate-Controlled Storage Unit',
-    image: '/images/modern-storage-10x15-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-10x15-climate-controlled-unit.png',
     alt: 'Modern Storage® 10x15 climate-controlled storage unit in Arkansas',
     bestFor: 'Two-bedroom home or condo',
     fits: [
@@ -67,7 +67,7 @@ export const CLIMATE_UNIT_SIZES = [
     size: '10x20',
     sizeSlug: '10x20',
     title: '10x20 Climate-Controlled Storage Unit',
-    image: '/images/modern-storage-10x20-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-10x20-climate-controlled-unit.png',
     alt: 'Modern Storage® 10x20 climate-controlled storage unit in Arkansas',
     bestFor: 'Three-bedroom home',
     fits: [
@@ -83,7 +83,7 @@ export const CLIMATE_UNIT_SIZES = [
     size: '10x30',
     sizeSlug: '10x30',
     title: '10x30 Climate-Controlled Storage Unit',
-    image: '/images/modern-storage-10x30-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-10x30-climate-controlled-unit.png',
     alt: 'Modern Storage® 10x30 climate-controlled storage unit in Arkansas',
     bestFor: 'Large home or business volume',
     fits: [
@@ -124,14 +124,9 @@ export const CLIMATE_CONCEPTS = [
       'Many Modern Storage® climate-controlled units offer ground-floor access with no stairs between you and your unit. Ground-floor availability and sizes vary by facility.',
   },
   {
-    title: 'Indoor humidity',
-    body:
-      'Climate-controlled units are designed to limit the indoor humidity that causes mold, mildew, swelling, warping, and corrosion [CONFIRM HUMIDITY DETAILS]. Specifics vary by facility.',
-  },
-  {
     title: 'Temperature range',
     body:
-      'Climate-controlled units are kept within a managed indoor temperature range [CONFIRM TEMPERATURE RANGE]. The exact range varies by building and HVAC system — ask your local Modern Storage® team for details.',
+      'Climate-controlled units at Modern Storage® are kept within a managed indoor temperature range of approximately 59°F to 79°F. Exact temperatures vary by building, season, and HVAC cycle — but the day-to-day swing your belongings experience is far smaller than a non-climate-controlled garage, attic, or outdoor unit in Arkansas.',
   },
 ] as const
 
@@ -185,7 +180,7 @@ export const CLIMATE_FAQS = [
   },
   {
     q: 'What temperature are climate-controlled storage units kept at?',
-    a: `Climate-controlled storage units are designed to reduce extreme temperature swings compared to outdoor storage units. Final temperature range details should be confirmed by Modern Storage® operations before publishing a specific number. If a specific range is approved, place it here: [CONFIRM TEMPERATURE RANGE]. For customers storing furniture, electronics, documents, photos, or inventory, the main benefit is a more stable indoor environment.`,
+    a: `Climate-controlled storage units at Modern Storage® are kept within a managed indoor temperature range of approximately 59°F to 79°F. The exact temperature varies by building, season, and HVAC cycle, but the range is designed to keep furniture, electronics, documents, photos, and other temperature-sensitive items in a far more stable environment than a garage, attic, or outdoor unit in Arkansas. For specific details about a facility, customers can call Modern Storage® at 501-910-0096.`,
   },
   {
     q: 'Is climate-controlled storage worth it in Arkansas?',
@@ -223,27 +218,27 @@ export const CLIMATE_FAQS = [
 
 export const CLIMATE_REVIEWS = [
   {
-    quote:
-      'Placeholder review highlighting clean indoor hallways and the difference climate control made compared to a previous non-climate unit. Replace with a real Google review before launch.',
-    initials: 'A',
-    author: 'Verified customer',
-    location: 'Little Rock, AR',
-    theme: 'Clean indoor hallways',
+    quote: `Just rented a unit at Modern Storage® Springdale and I'm seriously impressed. Hunter helped me get set up and showed me my temperature-controlled 10x20 unit, which was exactly what I needed. Easy process, clean facility, and great service overall.`,
+    initials: 'J',
+    author: 'Jeffrey B.',
+    location: 'Modern Storage® Springdale',
+    facilitySlug: 'springdale',
+    theme: 'Climate-controlled fit',
   },
   {
-    quote:
-      'Placeholder review covering how easy reservation and move-in was for a climate-controlled unit, and that staff helped pick the right size. Replace with a real Google review before launch.',
-    initials: 'B',
-    author: 'Verified customer',
-    location: 'Bentonville, AR',
-    theme: 'Easy reservation and move-in',
+    quote: `Modern Storage® West Little Rock has professional, knowledgeable, and friendly staff, a clean and secure environment, and an easy move-in process. Great location, competitive pricing, gated access, and personal access codes. Very happy to be here!`,
+    initials: 'S',
+    author: 'Sholanda G.',
+    location: 'Modern Storage® West Little Rock',
+    facilitySlug: 'west-little-rock',
+    theme: 'Easy move-in',
   },
   {
-    quote:
-      'Placeholder review describing furniture and electronics stored long-term in a climate-controlled unit, with no damp, smell, or damage on retrieval. Replace with a real Google review before launch.',
-    initials: 'C',
-    author: 'Verified customer',
-    location: 'Maumelle, AR',
-    theme: 'Furniture stayed protected',
+    quote: `From the moment we walked into Modern Storage® Bentonville, the team made us feel taken care of. Friendly guidance, expert knowledge, and a smooth experience from start to finish. We'll absolutely recommend Modern Storage® Bentonville to others.`,
+    initials: 'H',
+    author: 'Holly G.',
+    location: 'Modern Storage® Bentonville',
+    facilitySlug: 'bentonville',
+    theme: 'Helpful team',
   },
 ] as const

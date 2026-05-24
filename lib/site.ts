@@ -8,10 +8,11 @@ export const PHONE_NUMBER_HREF = 'tel:+15019100096'
 // without a code deploy by setting BUSINESS_INQUIRY_TO in Vercel env.
 export const BUSINESS_CONTACT_EMAIL = 'info@modernstorage.com'
 
-// Reserve buttons point here. Replace with the live reservation URL
-// (e.g., Storable/SiteLink/etc.) before launch. Find-a-unit buttons should
-// continue to point at #locations (the location finder).
-export const RESERVATION_URL = '[RESERVATION LINK]'
+// Generic "Reserve" buttons (before the user has picked a facility) steer to
+// the on-page location finder so the customer chooses a Modern Storage® location
+// first. Per-location "See Available Units" buttons use the individual
+// facility's reservationUrl instead (see LOCATIONS below).
+export const RESERVATION_URL = '/#locations'
 
 // Storage Options dropdown — exposed both in the desktop header dropdown and
 // the mobile menu, and reused by the footer.
@@ -380,24 +381,24 @@ export const FAQS = [
 
 export const REVIEWS = [
   {
-    quote:
-      'The facility was spotless and well lit. It made picking a unit and moving in feel easy — exactly what I wanted from a storage company.',
-    author: 'Verified customer',
-    location: 'Little Rock, AR',
-    theme: 'Clean facility',
+    quote: `Just rented a unit at Modern Storage® Springdale and I'm seriously impressed. Hunter helped me get set up and showed me my temperature-controlled 10x20 unit, which was exactly what I needed. Easy process, clean facility, and great service overall.`,
+    author: 'Jeffrey B.',
+    location: 'Modern Storage® Springdale',
+    facilitySlug: 'springdale',
+    theme: 'Climate-controlled fit',
   },
   {
-    quote:
-      'The team helped me figure out the right size and even walked me through the climate-controlled hallway before I signed. Super helpful from start to finish.',
-    author: 'Verified customer',
-    location: 'Bentonville, AR',
-    theme: 'Helpful team',
-  },
-  {
-    quote:
-      'Reserved online in a couple of minutes and used the free moving truck. Move-in was the smoothest part of my whole move.',
-    author: 'Verified customer',
-    location: 'Maumelle, AR',
+    quote: `Modern Storage® West Little Rock has professional, knowledgeable, and friendly staff, a clean and secure environment, and an easy move-in process. Great location, competitive pricing, gated access, and personal access codes. Very happy to be here!`,
+    author: 'Sholanda G.',
+    location: 'Modern Storage® West Little Rock',
+    facilitySlug: 'west-little-rock',
     theme: 'Easy move-in',
+  },
+  {
+    quote: `From the moment we walked into Modern Storage® Bentonville, the team made us feel taken care of. Friendly guidance, expert knowledge, and a smooth experience from start to finish. We'll absolutely recommend Modern Storage® Bentonville to others.`,
+    author: 'Holly G.',
+    location: 'Modern Storage® Bentonville',
+    facilitySlug: 'bentonville',
+    theme: 'Helpful team',
   },
 ] as const

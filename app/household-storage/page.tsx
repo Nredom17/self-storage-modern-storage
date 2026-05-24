@@ -10,13 +10,14 @@ import {
 } from '@/lib/household-storage'
 import FaqAccordion from '@/components/FaqAccordion'
 import LocationFinder from '@/components/LocationFinder'
+import { buildLocationSchemaList } from '@/lib/schema'
 
 export const revalidate = 60
 
 const PAGE_PATH = '/household-storage'
-const HERO_IMAGE = '/images/modern-storage-self-storage-units-arkansas.jpg'
+const HERO_IMAGE = '/images/modern-storage-springdale-best-of-the-best-awards.png'
 const HERO_ALT =
-  'Modern Storage® self-storage facility in Arkansas with clean drive-up units and a moving truck'
+  'Modern Storage® Springdale facility with Best of the Best 2023-2025 and Best of Northwest Arkansas award seals'
 const TRUCK_IMAGE = '/images/modern-storage-free-moving-truck.jpg'
 const TRUCK_ALT =
   'Modern Storage® free moving truck for new household storage rentals at participating Arkansas locations'
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     description:
       'Find household storage units across Arkansas at 10 Modern Storage® locations. Climate-controlled and drive-up options, month-to-month rentals, and free moving truck with new rentals.',
     url: SITE_URL + PAGE_PATH,
-    siteName: 'Modern Storage® Self Storage',
+    siteName: 'Modern Storage®',
     type: 'website',
     images: [{ url: HERO_IMAGE, width: 1600, height: 1066, alt: HERO_ALT }],
   },
@@ -174,10 +175,12 @@ function LifeIcon({ name }: { name: string }) {
 
 export default async function HouseholdStoragePage() {
   const [locations, settings] = await Promise.all([getLocations(), getSiteSettings()])
-  const jsonLd = buildJsonLd(settings.phoneDisplay)
+  const jsonLd = [
+    ...buildJsonLd(settings.phoneDisplay),
+    ...buildLocationSchemaList(locations, settings.phoneDisplay),
+  ]
   const PHONE_NUMBER_DISPLAY = settings.phoneDisplay
   const PHONE_NUMBER_HREF = settings.phoneHref
-  const RESERVATION_URL = settings.reservationUrl
 
   return (
     <>
@@ -350,23 +353,17 @@ export default async function HouseholdStoragePage() {
                     {u.moveNote}
                   </p>
 
-                  <div className="mt-auto flex flex-col gap-3">
+                  <div className="mt-auto">
                     <Link
                       href="#locations"
                       aria-label={`Find a ${u.size} household storage unit at a Modern Storage® Arkansas location`}
-                      className="inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-black px-5 py-3 rounded-full transition-colors"
+                      className="inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-black px-5 py-3 rounded-full transition-colors w-full"
                     >
                       Find a {u.size} Unit Near You
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                       </svg>
                     </Link>
-                    <a
-                      href={RESERVATION_URL}
-                      className="text-xs font-bold text-charcoal/70 hover:text-modern-red transition-colors text-center"
-                    >
-                      Reserve a {u.size} unit online →
-                    </a>
                   </div>
                 </div>
               </article>
@@ -552,12 +549,6 @@ export default async function HouseholdStoragePage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
-              <a
-                href={RESERVATION_URL}
-                className="bg-charcoal text-white font-black px-6 py-3.5 rounded-full hover:bg-gray-800 transition-colors text-sm shadow-md inline-flex items-center justify-center gap-2"
-              >
-                Reserve Online Now
-              </a>
               <a
                 href={PHONE_NUMBER_HREF}
                 className="bg-white/10 text-white font-bold px-6 py-3.5 rounded-full hover:bg-white/20 transition-colors text-sm border border-white/30 inline-flex items-center justify-center gap-2"

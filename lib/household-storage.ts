@@ -2,7 +2,7 @@ export const HOUSEHOLD_UNIT_SIZES = [
   {
     size: '5x5',
     sizeSlug: '5x5',
-    image: '/images/modern-storage-5x5-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-5x5-climate-controlled-unit.png',
     alt: 'Modern Storage® 5x5 storage unit in Arkansas for household boxes and seasonal items',
     bestFor: 'Closet overflow & seasonal',
     fits: [
@@ -17,7 +17,7 @@ export const HOUSEHOLD_UNIT_SIZES = [
   {
     size: '5x10',
     sizeSlug: '5x10',
-    image: '/images/modern-storage-5x10-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-5x10-climate-controlled-unit.png',
     alt: 'Modern Storage® 5x10 storage unit in Arkansas sized for a studio apartment move',
     bestFor: 'Studio or single bedroom',
     fits: [
@@ -32,7 +32,7 @@ export const HOUSEHOLD_UNIT_SIZES = [
   {
     size: '10x10',
     sizeSlug: '10x10',
-    image: '/images/modern-storage-10x10-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-10x10-climate-controlled-unit.png',
     alt: 'Modern Storage® 10x10 storage unit in Arkansas holding a one-bedroom apartment',
     bestFor: 'One-bedroom apartment',
     fits: [
@@ -47,7 +47,7 @@ export const HOUSEHOLD_UNIT_SIZES = [
   {
     size: '10x15',
     sizeSlug: '10x15',
-    image: '/images/modern-storage-10x15-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-10x15-climate-controlled-unit.png',
     alt: 'Modern Storage® 10x15 storage unit in Arkansas sized for a two-bedroom home',
     bestFor: 'Two-bedroom home',
     fits: [
@@ -62,7 +62,7 @@ export const HOUSEHOLD_UNIT_SIZES = [
   {
     size: '10x20',
     sizeSlug: '10x20',
-    image: '/images/modern-storage-10x20-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-10x20-climate-controlled-unit.png',
     alt: 'Modern Storage® 10x20 storage unit in Arkansas sized for a three-bedroom home',
     bestFor: 'Three-bedroom home',
     fits: [
@@ -77,7 +77,7 @@ export const HOUSEHOLD_UNIT_SIZES = [
   {
     size: '10x30',
     sizeSlug: '10x30',
-    image: '/images/modern-storage-10x30-climate-controlled-unit.jpg',
+    image: '/images/modern-storage-10x30-climate-controlled-unit.png',
     alt: 'Modern Storage® 10x30 storage unit in Arkansas sized for a four to five bedroom home',
     bestFor: 'Four to five bedrooms',
     fits: [

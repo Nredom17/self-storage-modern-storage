@@ -15,6 +15,7 @@ import {
 } from '@/lib/climate-controlled'
 import FaqAccordion from '@/components/FaqAccordion'
 import LocationFinder from '@/components/LocationFinder'
+import { buildLocationSchemaList, buildReviewsSchemaList } from '@/lib/schema'
 
 const PAGE_PATH = '/climate-controlled'
 const HERO_IMAGE = '/images/modern-storage-bentonville-climate-controlled-hallway.jpg'
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     description:
       'Indoor climate-controlled self-storage units at Modern Storage® locations across Arkansas. Protection for furniture, electronics, documents, photos, instruments, and business inventory.',
     url: SITE_URL + PAGE_PATH,
-    siteName: 'Modern Storage® Self Storage',
+    siteName: 'Modern Storage®',
     type: 'website',
     images: [
       {
@@ -238,12 +239,6 @@ function ConceptIcon({ title }: { title: string }) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6M9 11h2M13 11h2" />
         </svg>
       )
-    case 'Indoor humidity':
-      return (
-        <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 3s5 6 5 10a5 5 0 11-10 0c0-4 5-10 5-10z" />
-        </svg>
-      )
     case 'Temperature range':
       return (
         <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -257,10 +252,13 @@ function ConceptIcon({ title }: { title: string }) {
 
 export default async function ClimateControlledPage() {
   const [locations, settings] = await Promise.all([getLocations(), getSiteSettings()])
-  const jsonLd = buildJsonLd(settings.phoneDisplay)
+  const jsonLd = [
+    ...buildJsonLd(settings.phoneDisplay),
+    ...buildLocationSchemaList(locations, settings.phoneDisplay),
+    ...buildReviewsSchemaList(CLIMATE_REVIEWS),
+  ]
   const PHONE_NUMBER_DISPLAY = settings.phoneDisplay
   const PHONE_NUMBER_HREF = settings.phoneHref
-  const RESERVATION_URL = settings.reservationUrl
 
   return (
     <>
@@ -504,22 +502,16 @@ export default async function ClimateControlledPage() {
                     {u.climateNote}
                   </p>
 
-                  <div className="mt-auto flex flex-col gap-3">
-                    <a
-                      href={RESERVATION_URL}
-                      aria-label={`Reserve a ${u.size} climate-controlled storage unit`}
-                      className="inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-black px-5 py-3 rounded-full transition-colors"
+                  <div className="mt-auto">
+                    <Link
+                      href="#locations"
+                      aria-label={`Find a Modern Storage® location with a ${u.size} climate-controlled storage unit`}
+                      className="inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-black px-5 py-3 rounded-full transition-colors w-full"
                     >
-                      Reserve a {u.size} Unit
+                      Find a {u.size} Near You
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                       </svg>
-                    </a>
-                    <Link
-                      href="#locations"
-                      className="text-xs font-bold text-charcoal/70 hover:text-modern-red transition-colors text-center"
-                    >
-                      See locations with this size →
                     </Link>
                   </div>
                 </div>
@@ -636,20 +628,14 @@ export default async function ClimateControlledPage() {
               </p>
             </div>
             <div className="lg:col-span-5 flex flex-col gap-3">
-              <a
-                href={RESERVATION_URL}
+              <Link
+                href="#locations"
                 className="bg-white text-modern-red font-black px-6 py-3.5 rounded-full hover:bg-red-50 transition-colors text-sm shadow-md inline-flex items-center justify-center gap-2"
               >
-                Reserve Online Now
+                Find a Climate-Controlled Location
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                 </svg>
-              </a>
-              <Link
-                href="#locations"
-                className="bg-charcoal text-white font-black px-6 py-3.5 rounded-full hover:bg-gray-800 transition-colors text-sm shadow-md inline-flex items-center justify-center gap-2"
-              >
-                Find a Climate-Controlled Location
               </Link>
               <a
                 href={PHONE_NUMBER_HREF}

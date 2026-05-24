@@ -11,7 +11,7 @@ values (
   1,
   '501-910-0096',
   'tel:+15019100096',
-  '[RESERVATION LINK]'
+  '/#locations'
 )
 on conflict (id) do update set
   phone_display   = excluded.phone_display,

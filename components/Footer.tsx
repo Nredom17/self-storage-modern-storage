@@ -1,17 +1,33 @@
 import Link from 'next/link'
-import { STORAGE_OPTION_LINKS } from '@/lib/site'
+import { LOCATIONS as ALL_LOCATIONS, STORAGE_OPTION_LINKS } from '@/lib/site'
 
 const STORAGE_OPTIONS = STORAGE_OPTION_LINKS
 
-const LOCATIONS = [
-  { label: 'Little Rock', href: '/#locations' },
-  { label: 'North Little Rock', href: '/#locations' },
-  { label: 'Bentonville', href: '/#locations' },
-  { label: 'Springdale', href: '/#locations' },
-  { label: 'Hot Springs', href: '/#locations' },
-  { label: 'Bryant', href: '/#locations' },
-  { label: 'Lowell', href: '/#locations' },
+// Footer "Locations" column. Each entry links directly to the facility's own
+// reservation URL on modernstorage.com — no more generic /#locations anchor.
+// The display order and labels here are footer-specific (e.g., the
+// Shackleford facility shows as just "Little Rock" because that's how
+// customers in central AR search for it). Hrefs come from each LOCATIONS
+// entry's reservationUrl so we keep a single source of truth.
+const FOOTER_LOCATION_SPEC: Array<{ slug: string; label: string }> = [
+  { slug: 'west-little-rock', label: 'West Little Rock' },
+  { slug: 'shackleford', label: 'Little Rock' },
+  { slug: 'north-little-rock', label: 'North Little Rock' },
+  { slug: 'riverdale', label: 'Riverdale' },
+  { slug: 'bentonville', label: 'Bentonville' },
+  { slug: 'maumelle', label: 'Maumelle' },
+  { slug: 'springdale', label: 'Springdale' },
+  { slug: 'hot-springs', label: 'Hot Springs' },
+  { slug: 'bryant', label: 'Bryant' },
+  { slug: 'lowell', label: 'Lowell' },
 ]
+
+const LOCATIONS: Array<{ label: string; href: string }> = FOOTER_LOCATION_SPEC.flatMap(
+  (entry) => {
+    const loc = ALL_LOCATIONS.find((l) => l.slug === entry.slug)
+    return loc ? [{ label: entry.label, href: loc.reservationUrl }] : []
+  },
+)
 
 const RESOURCES = [
   { label: 'Size Guide', href: '/#size-guide' },
@@ -24,6 +40,8 @@ const SOCIAL_LINKS = [
   { label: 'Instagram', href: 'https://www.instagram.com/modern.storage' },
   { label: 'TikTok', href: 'https://www.tiktok.com/@modernstorage' },
   { label: 'Facebook', href: 'https://www.facebook.com/modernstorage' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/modern-storage' },
+  { label: 'YouTube', href: 'https://www.youtube.com/@modernstorage' },
 ]
 
 export default function Footer({
@@ -68,7 +86,7 @@ export default function Footer({
           <div className="md:col-span-4">
             <Link href="/" className="inline-block mb-5 leading-none">
               <span className="font-bebas text-modern-red text-2xl tracking-wide leading-none">
-                MODERN STORAGE® Self Storage
+                MODERN STORAGE<sup className="text-[0.55em] font-bold -top-[0.6em] relative ml-0.5">®</sup>
               </span>
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed max-w-sm">
@@ -105,18 +123,19 @@ export default function Footer({
             </nav>
           </div>
 
-          {/* Locations */}
+          {/* Locations — each links directly to the facility's reservation page */}
           <div className="md:col-span-2">
             <h2 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-5">Locations</h2>
             <nav className="flex flex-col gap-3">
               {LOCATIONS.map(({ label, href }) => (
-                <Link
+                <a
                   key={label}
                   href={href}
                   className="text-sm text-gray-400 hover:text-white transition-colors"
+                  aria-label={`Reserve at Modern Storage® ${label}`}
                 >
                   {label}
-                </Link>
+                </a>
               ))}
             </nav>
           </div>
@@ -154,7 +173,7 @@ export default function Footer({
                 Reserve online
               </Link>
               <a
-                href="https://www.modernstorage.com/pay"
+                href="https://www.modernstorage.com/payonline"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-gray-400 hover:text-white transition-colors"
