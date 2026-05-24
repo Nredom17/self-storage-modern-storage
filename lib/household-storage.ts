@@ -149,7 +149,7 @@ export const HOUSEHOLD_FAQS = [
   },
   {
     q: 'How do I find a household storage unit near me in Arkansas?',
-    a: `Modern Storage® operates 10 self-storage locations across Arkansas, including Little Rock, West Little Rock, North Little Rock, Riverdale, Maumelle, Bryant, Hot Springs, Bentonville, Springdale, and Lowell. Use the location finder on this page to filter by region, click any pin to see facility details, and reserve online in minutes.`,
+    a: `Modern Storage® operates 10 self-storage locations across Arkansas, including West Little Rock, Shackleford, Riverdale (all Little Rock), North Hills Blvd and Maumelle Blvd (both North Little Rock), Bryant, Hot Springs, Bentonville, Springdale, and Lowell. Use the location finder on this page to filter by region, click any pin to see facility details, and reserve online in minutes.`,
   },
   {
     q: 'Can I reserve a household storage unit online?',

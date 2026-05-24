@@ -67,14 +67,14 @@ export const BOAT_RV_LOCATION_COPY: Record<
   maumelle: {
     tagline: 'Lake Maumelle · budget-conscious boat storage',
     body:
-      'Modern Storage® Maumelle is the closest Modern Storage® location to Lake Maumelle, so customers can launch in the morning and have the boat back in storage the same afternoon. Outdoor parking and a Boat/RV Storage program make Maumelle a practical choice for central Arkansas customers looking for budget-conscious boat and RV storage without driving across the metro. Free moving truck participation makes household add-ons easier when you need both.',
+      'Modern Storage® Maumelle Blvd at 9100 Maumelle Blvd in North Little Rock is the closest Modern Storage® location to Lake Maumelle, so customers can launch in the morning and have the boat back in storage the same afternoon. Outdoor parking and a Boat/RV Storage program make Maumelle Blvd a practical choice for central Arkansas customers looking for budget-conscious boat and RV storage without driving across the metro. Free moving truck participation makes household add-ons easier when you need both.',
     bestFor: [
       'Weekend Lake Maumelle boaters',
       'Budget-conscious outdoor boat and RV parking',
       'Customers combining household and boat storage',
     ],
     caption:
-      'Modern Storage® Maumelle aerial view — Boat/RV storage close to Lake Maumelle.',
+      'Modern Storage® Maumelle Blvd aerial view — Boat/RV storage close to Lake Maumelle.',
   },
   'hot-springs': {
     tagline: 'Lake Ouachita · weekend boating base',
@@ -164,7 +164,7 @@ export const BOAT_RV_SIZING = [
 ] as const
 
 export const LAKE_WEEKEND_LOCATIONS = [
-  { name: 'Modern Storage® Maumelle', detail: 'closest to Lake Maumelle for same-day launches' },
+  { name: 'Modern Storage® Maumelle Blvd', detail: 'closest to Lake Maumelle for same-day launches' },
   { name: 'Modern Storage® Hot Springs', detail: 'doorstep of Lake Ouachita' },
   { name: 'Modern Storage® Lowell', detail: 'short run to Beaver Lake from NWA' },
   { name: 'Modern Storage® Bentonville', detail: 'Beaver Lake plus Ozarks recreation' },
@@ -174,7 +174,7 @@ export const LONG_TERM_RV_LOCATIONS = [
   { name: 'Modern Storage® Shackleford', detail: 'indoor RV storage in Little Rock' },
   { name: 'Modern Storage® Lowell', detail: 'oversized outdoor parking in NWA' },
   { name: 'Modern Storage® Bentonville', detail: 'NWA outdoor parking with climate-controlled household add-ons' },
-  { name: 'Modern Storage® Maumelle', detail: 'central Arkansas Boat/RV program' },
+  { name: 'Modern Storage® Maumelle Blvd', detail: 'central Arkansas Boat/RV program' },
 ] as const
 
 export const CLASSIC_CAR_LOCATIONS = [
@@ -214,7 +214,7 @@ export const BOAT_RV_FAQS = [
   },
   {
     q: 'Which Modern Storage® locations offer boat and RV storage?',
-    a: `Modern Storage® offers boat, RV, and vehicle storage at Modern Storage® Lowell, Shackleford, Bentonville, Springdale, Maumelle, and Hot Springs. Customers near Beaver Lake favor Lowell, Bentonville, and Springdale. Central Arkansas customers favor Shackleford and Maumelle. Hot Springs customers and Little Rock weekenders headed to Lake Ouachita store at Modern Storage® Hot Springs.`,
+    a: `Modern Storage® offers boat, RV, and vehicle storage at Modern Storage® Lowell, Shackleford, Bentonville, Springdale, Maumelle Blvd, and Hot Springs. Customers near Beaver Lake favor Lowell, Bentonville, and Springdale. Central Arkansas customers favor Shackleford and Maumelle Blvd. Hot Springs customers and Little Rock weekenders headed to Lake Ouachita store at Modern Storage® Hot Springs.`,
   },
   {
     q: 'Can I access my boat or RV on weekends?',

@@ -209,7 +209,7 @@ export const CLIMATE_FAQS = [
   },
   {
     q: 'Which Modern Storage® locations offer climate-controlled storage?',
-    a: `Most Modern Storage® locations offer climate-controlled storage options, but unit availability and sizes may vary by facility. Customers can use the location finder on this page to compare nearby Modern Storage® locations in Arkansas and see which facilities offer climate-controlled storage units. Featured areas include Little Rock, North Little Rock, Bentonville, Springdale, Lowell, Bryant, Maumelle, Hot Springs, and Riverdale. Use the "See Available Units" button for each location to view current rental options.`,
+    a: `Most Modern Storage® locations offer climate-controlled storage options, but unit availability and sizes may vary by facility. Customers can use the location finder on this page to compare nearby Modern Storage® locations in Arkansas and see which facilities offer climate-controlled storage units. Featured areas include Little Rock, North Little Rock (including the Maumelle Blvd facility), Bentonville, Springdale, Lowell, Bryant, Hot Springs, and Riverdale. Use the "See Available Units" button for each location to view current rental options.`,
   },
   {
     q: 'Can I reserve a climate-controlled unit online?',

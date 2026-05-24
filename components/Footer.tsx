@@ -10,7 +10,6 @@ const LOCATIONS = [
   { label: 'Springdale', href: '/#locations' },
   { label: 'Hot Springs', href: '/#locations' },
   { label: 'Bryant', href: '/#locations' },
-  { label: 'Maumelle', href: '/#locations' },
   { label: 'Lowell', href: '/#locations' },
 ]
 

@@ -37,7 +37,7 @@ const LOCATIONS = [
   'Modern Storage® Shackleford',
   'Modern Storage® West Little Rock',
   'Modern Storage® North Little Rock',
-  'Modern Storage® Maumelle',
+  'Modern Storage® Maumelle Blvd',
   'Modern Storage® Bryant',
   'Modern Storage® Hot Springs',
   'Modern Storage® Bentonville',
