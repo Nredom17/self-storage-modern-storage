@@ -97,6 +97,19 @@ function buildJsonLd(phoneDisplay: string) {
     },
   }
 
+  const localBusiness = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': SITE_URL + PAGE_PATH + '#localbusiness',
+    name: 'Modern Storage®',
+    url: SITE_URL + '/',
+    telephone: phoneDisplay,
+    image: SITE_URL + HERO_IMAGE,
+    priceRange: '$$',
+    address: { '@type': 'PostalAddress', addressRegion: 'AR', addressCountry: 'US' },
+    areaServed: { '@type': 'State', name: 'Arkansas' },
+  }
+
   const breadcrumb = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -121,7 +134,7 @@ function buildJsonLd(phoneDisplay: string) {
     })),
   }
 
-  return [service, breadcrumb, faqPage]
+  return [service, localBusiness, breadcrumb, faqPage]
 }
 
 // Inline icon set — keeps the page self-contained and matches existing stroke-icon style.

@@ -311,7 +311,7 @@ export default async function HomePage() {
               </p>
             </div>
             <Link
-              href="/household-moving"
+              href="/household-storage"
               className="inline-flex items-center gap-2 text-sm font-bold text-modern-red hover:text-modern-red-hover transition-colors"
             >
               See household storage guide →
@@ -335,7 +335,7 @@ export default async function HomePage() {
                 <p className="text-xs font-black uppercase tracking-widest text-gray-400 mb-1">What fits</p>
                 <p className="text-sm text-gray-600 leading-relaxed mb-6 flex-1">{unit.fits}</p>
                 <Link
-                  href="/household-moving"
+                  href="/household-storage"
                   className="inline-flex items-center gap-2 text-sm font-bold text-charcoal hover:text-modern-red transition-colors"
                 >
                   Compare Unit Sizes

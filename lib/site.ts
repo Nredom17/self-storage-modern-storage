@@ -1,15 +1,28 @@
 export const SITE_URL = 'https://self-storage.modernstorage.com'
 
-export const PHONE_NUMBER_DISPLAY = '[CENTRALIZED PHONE NUMBER]'
-export const PHONE_NUMBER_HREF = 'tel:[CENTRALIZED PHONE NUMBER]'
+export const PHONE_NUMBER_DISPLAY = '501-910-0096'
+export const PHONE_NUMBER_HREF = 'tel:+15019100096'
+
+// Business storage inquiries route to a separate inbox so the operations team
+// can triage commercial leads from consumer reservations. Replace with the real
+// inbox before launch.
+export const BUSINESS_CONTACT_EMAIL = 'business@modernstorage.com'
 
 // Reserve buttons point here. Replace with the live reservation URL
 // (e.g., Storable/SiteLink/etc.) before launch. Find-a-unit buttons should
 // continue to point at #locations (the location finder).
 export const RESERVATION_URL = '[RESERVATION LINK]'
 
+// Storage Options dropdown — exposed both in the desktop header dropdown and
+// the mobile menu, and reused by the footer.
+export const STORAGE_OPTION_LINKS = [
+  { label: 'Climate-Controlled Storage', href: '/climate-controlled' },
+  { label: 'Household Storage', href: '/household-storage' },
+  { label: 'Boat and RV Storage', href: '/boat-rv-storage' },
+  { label: 'Business Storage', href: '/business-storage' },
+] as const
+
 export const NAV_LINKS = [
-  { label: 'Storage Options', href: '/#storage-options' },
   { label: 'Unit Sizes', href: '/#size-guide' },
   { label: 'Locations', href: '/#locations' },
   { label: 'Moving Truck', href: '/#moving-truck' },
@@ -29,34 +42,34 @@ export const THEME_PAGES = [
     alt: 'Climate-controlled storage hallway at Modern Storage® Bentonville with clean indoor units.',
   },
   {
-    slug: 'boat-rv-vehicle',
-    title: 'Boat, RV & Vehicle Storage',
+    slug: 'household-storage',
+    title: 'Household Storage',
     description:
-      'Store boats, RVs, trailers, motorcycles, cars, and work vehicles at select Modern Storage® locations with convenient access and secure parking options.',
+      'Storage for moving, downsizing, renovating, growing families, life transitions, and seasonal items at 10 Modern Storage® locations across Arkansas.',
+    cta: 'Explore Household Storage',
+    href: '/household-storage',
+    image: '/images/modern-storage-springdale-facility-exterior.jpg',
+    alt: 'Modern Storage® Springdale self storage facility exterior in Arkansas with clean grounds.',
+  },
+  {
+    slug: 'boat-rv-storage',
+    title: 'Boat and RV Storage',
+    description:
+      'Boat, RV, trailer, motorcycle, and vehicle storage at select Modern Storage® locations near Beaver Lake, Lake Maumelle, Lake Ouachita, and Greers Ferry.',
     cta: 'Explore Boat and RV Storage',
-    href: '/boat-rv-vehicle',
+    href: '/boat-rv-storage',
     image: '/images/modern-storage-shackleford-rv-storage-unit.jpg',
     alt: 'RV stored inside a Modern Storage® Shackleford unit with red roll-up doors.',
   },
   {
-    slug: 'business',
-    title: 'Business & Mini-Warehouse Storage',
+    slug: 'business-storage',
+    title: 'Business Storage',
     description:
-      'Flexible storage for contractors, e-commerce sellers, inventory overflow, records, equipment, and small business operations.',
+      'Mini-warehouse and business storage for e-commerce, contractors, restoration crews, stagers, movers, and document archives — led by Modern Storage® Riverdale.',
     cta: 'Explore Business Storage',
-    href: '/business',
+    href: '/business-storage',
     image: '/images/modern-storage-riverdale-business-conference.jpg',
-    alt: 'Business-friendly office and conference space at Modern Storage® Riverdale.',
-  },
-  {
-    slug: 'household-moving',
-    title: 'Household Storage & Moving',
-    description:
-      'Modern Storage® offers clean, modern storage facilities across Arkansas for moving, household storage, and life transitions.',
-    cta: 'Explore Household Storage',
-    href: '/household-moving',
-    image: '/images/modern-storage-springdale-facility-exterior.jpg',
-    alt: 'Modern Storage® Springdale self storage facility exterior in Arkansas with premium modern design.',
+    alt: 'Business-friendly office and conference space at Modern Storage® Riverdale in Little Rock.',
   },
 ] as const
 
@@ -71,7 +84,7 @@ export const LOCATIONS = [
     zip: '[ZIP]',
     region: 'Little Rock Area',
     streetAddress: '[Street address placeholder]',
-    phone: '[CENTRALIZED PHONE NUMBER]',
+    phone: '501-910-0096',
     lat: 34.748,
     lon: -92.376,
     image: '/images/modern-storage-west-little-rock-facility-exterior.jpg',
@@ -87,7 +100,7 @@ export const LOCATIONS = [
     zip: '72205',
     region: 'Little Rock Area',
     streetAddress: '3400 S Shackleford Rd',
-    phone: '[CENTRALIZED PHONE NUMBER]',
+    phone: '501-910-0096',
     lat: 34.7466,
     lon: -92.4007,
     image: '/images/modern-storage-shackleford-facility-exterior.jpg',
@@ -103,7 +116,7 @@ export const LOCATIONS = [
     zip: '72202',
     region: 'Little Rock Area',
     streetAddress: '2510 Cantrell Rd',
-    phone: '[CENTRALIZED PHONE NUMBER]',
+    phone: '501-910-0096',
     lat: 34.7506,
     lon: -92.2796,
     image: '/images/modern-storage-riverdale-facility-exterior.jpg',
@@ -119,7 +132,7 @@ export const LOCATIONS = [
     zip: '[ZIP]',
     region: 'North Little Rock',
     streetAddress: '[Street address placeholder]',
-    phone: '[CENTRALIZED PHONE NUMBER]',
+    phone: '501-910-0096',
     lat: 34.769,
     lon: -92.267,
     image: '/images/modern-storage-north-little-rock-facility-night.jpg',
@@ -135,7 +148,7 @@ export const LOCATIONS = [
     zip: '[ZIP]',
     region: 'Maumelle',
     streetAddress: '[Street address placeholder]',
-    phone: '[CENTRALIZED PHONE NUMBER]',
+    phone: '501-910-0096',
     lat: 34.866,
     lon: -92.404,
     image: '/images/modern-storage-maumelle-facility-aerial.jpg',
@@ -151,7 +164,7 @@ export const LOCATIONS = [
     zip: '[ZIP]',
     region: 'Bryant',
     streetAddress: '[Street address placeholder]',
-    phone: '[CENTRALIZED PHONE NUMBER]',
+    phone: '501-910-0096',
     lat: 34.596,
     lon: -92.489,
     image: '/images/modern-storage-bryant-facility-sunset.jpg',
@@ -167,7 +180,7 @@ export const LOCATIONS = [
     zip: '[ZIP]',
     region: 'Hot Springs',
     streetAddress: '[Street address placeholder]',
-    phone: '[CENTRALIZED PHONE NUMBER]',
+    phone: '501-910-0096',
     lat: 34.504,
     lon: -93.055,
     image: '/images/modern-storage-hot-springs-facility-exterior.jpg',
@@ -183,7 +196,7 @@ export const LOCATIONS = [
     zip: '[ZIP]',
     region: 'Northwest Arkansas',
     streetAddress: '[Street address placeholder]',
-    phone: '[CENTRALIZED PHONE NUMBER]',
+    phone: '501-910-0096',
     lat: 36.372,
     lon: -94.208,
     image: '/images/modern-storage-bentonville-facility-exterior.jpg',
@@ -199,7 +212,7 @@ export const LOCATIONS = [
     zip: '[ZIP]',
     region: 'Northwest Arkansas',
     streetAddress: '[Street address placeholder]',
-    phone: '[CENTRALIZED PHONE NUMBER]',
+    phone: '501-910-0096',
     lat: 36.187,
     lon: -94.129,
     image: '/images/modern-storage-springdale-facility-with-sculpture.jpg',
@@ -215,7 +228,7 @@ export const LOCATIONS = [
     zip: '72745',
     region: 'Northwest Arkansas',
     streetAddress: '1407 W Monroe Ave',
-    phone: '[CENTRALIZED PHONE NUMBER]',
+    phone: '501-910-0096',
     lat: 36.255,
     lon: -94.140,
     image: '/images/modern-storage-lowell-facility-night.jpg',
