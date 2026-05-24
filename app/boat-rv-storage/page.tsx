@@ -5,9 +5,14 @@ import { SITE_URL } from '@/lib/site'
 import { getLocations, getSiteSettings } from '@/lib/data'
 import {
   BOAT_RV_FEATURED_SLUGS,
+  BOAT_RV_LOCATION_COPY,
   VEHICLE_TYPE_CARDS,
   BOAT_RV_SIZING,
   BOAT_RV_FAQS,
+  LAKE_WEEKEND_LOCATIONS,
+  LONG_TERM_RV_LOCATIONS,
+  CLASSIC_CAR_LOCATIONS,
+  BY_THE_NUMBERS,
 } from '@/lib/boat-rv-storage'
 import FaqAccordion from '@/components/FaqAccordion'
 
@@ -17,16 +22,18 @@ const PAGE_PATH = '/boat-rv-storage'
 const HERO_IMAGE = '/images/modern-storage-shackleford-rv-storage-unit.jpg'
 const HERO_ALT =
   'RV stored in a Modern Storage® Shackleford indoor RV storage unit with red roll-up doors in Little Rock'
+const HERO_CAPTION =
+  'Indoor RV storage at Modern Storage® Shackleford in Little Rock.'
 
 export const metadata: Metadata = {
   title: { absolute: 'Boat, RV & Vehicle Storage in Arkansas | Modern Storage®' },
   description:
-    'Boat, RV, trailer, and vehicle storage at Modern Storage® locations across Arkansas — including Lowell, Shackleford, Bentonville, Springdale, Maumelle, and Hot Springs. Near Beaver Lake, Lake Ouachita, Lake Maumelle, and Greers Ferry.',
+    'Find secure boat, RV, and vehicle storage across Arkansas. Covered and uncovered options near Bentonville, Lowell, Little Rock, and Hot Springs.',
   alternates: { canonical: SITE_URL + PAGE_PATH },
   openGraph: {
     title: 'Boat, RV & Vehicle Storage in Arkansas | Modern Storage®',
     description:
-      'Park boats, RVs, trailers, motorcycles, and vehicles at Modern Storage® locations across Arkansas — outdoor, covered, and indoor options near Beaver Lake, Lake Maumelle, Lake Ouachita, and Greers Ferry.',
+      'Find secure boat, RV, and vehicle storage across Arkansas. Covered and uncovered options near Bentonville, Lowell, Little Rock, and Hot Springs.',
     url: SITE_URL + PAGE_PATH,
     siteName: 'Modern Storage® Self Storage',
     type: 'website',
@@ -35,13 +42,14 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Boat, RV & Vehicle Storage in Arkansas | Modern Storage®',
-    description: 'Boat, RV, trailer, and vehicle storage at Modern Storage® locations across Arkansas.',
+    description:
+      'Find secure boat, RV, and vehicle storage across Arkansas. Covered and uncovered options near Bentonville, Lowell, Little Rock, and Hot Springs.',
     images: [HERO_IMAGE],
   },
 }
 
 const TRUST_BULLETS = [
-  'Outdoor, covered, and indoor options',
+  'Outdoor, covered, and indoor options at select locations',
   'Near Beaver Lake, Lake Ouachita, Lake Maumelle, Greers Ferry',
   'Class A through travel-trailer sizes',
   'Gated, surveilled facilities',
@@ -56,7 +64,7 @@ function buildJsonLd(phoneDisplay: string) {
     serviceType: 'Boat, RV, and Vehicle Storage',
     name: 'Boat, RV & Vehicle Storage in Arkansas',
     description:
-      'Boat, RV, trailer, and vehicle storage at Modern Storage® locations across Arkansas. Outdoor, covered, and indoor options sized for bass boats, pontoons, Class A motorhomes, fifth wheels, travel trailers, work vans, and cars. Convenient to Beaver Lake, Lake Maumelle, Lake Ouachita, and Greers Ferry.',
+      'Boat, RV, trailer, and vehicle storage at Modern Storage® locations across Arkansas. Outdoor, covered, and indoor options sized for bass boats, pontoons, Class A motorhomes, fifth wheels, travel trailers, work vans, classic cars, and motorcycles. Convenient to Beaver Lake, Lake Maumelle, Lake Ouachita, and Greers Ferry.',
     url: SITE_URL + PAGE_PATH,
     image: SITE_URL + HERO_IMAGE,
     areaServed: { '@type': 'State', name: 'Arkansas' },
@@ -147,12 +155,16 @@ export default async function BoatRvStoragePage() {
   const jsonLd = buildJsonLd(settings.phoneDisplay)
   const PHONE_NUMBER_DISPLAY = settings.phoneDisplay
   const PHONE_NUMBER_HREF = settings.phoneHref
-  const RESERVATION_URL = settings.reservationUrl
 
-  // Featured locations in the explicit order specified for this page.
+  // Featured locations in the explicit order specified for this page,
+  // joined with the per-location copy block.
   const featured = BOAT_RV_FEATURED_SLUGS
-    .map((slug) => locations.find((l) => l.slug === slug))
-    .filter((l): l is NonNullable<typeof l> => Boolean(l))
+    .map((slug) => {
+      const loc = locations.find((l) => l.slug === slug)
+      if (!loc) return null
+      return { ...loc, ...BOAT_RV_LOCATION_COPY[slug] }
+    })
+    .filter((x): x is NonNullable<typeof x> => Boolean(x))
 
   return (
     <>
@@ -184,7 +196,7 @@ export default async function BoatRvStoragePage() {
             <div>
               <span className="inline-flex items-center gap-2 bg-modern-red/20 border border-modern-red/40 text-modern-red text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-6">
                 <span className="w-1.5 h-1.5 rounded-full bg-modern-red animate-pulse" aria-hidden="true" />
-                Boat, RV & Vehicle Storage
+                Boat, RV &amp; Vehicle Storage
               </span>
               <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
                 Boat, RV &amp; Vehicle Storage in <span className="text-modern-red">Arkansas</span>
@@ -192,21 +204,25 @@ export default async function BoatRvStoragePage() {
               <p className="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg">
                 Park boats, RVs, travel trailers, motorcycles, and vehicles at Modern Storage® locations across Arkansas — including outdoor, covered, and select indoor options near Beaver Lake, Lake Maumelle, Lake Ouachita, and Greers Ferry.
               </p>
-              <div className="flex flex-wrap gap-4 mb-10">
+              <div className="flex flex-wrap gap-3 mb-10">
                 <Link
                   href="#featured-locations"
-                  aria-label="Reserve boat or RV storage at a Modern Storage® Arkansas location"
-                  className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-7 py-3.5 rounded-full transition-colors text-sm"
+                  aria-label="Reserve boat storage at a Modern Storage® Arkansas location"
+                  className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-6 py-3 rounded-full transition-colors text-sm"
                 >
-                  Reserve Boat or RV Storage
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                  </svg>
+                  Reserve Boat Storage
+                </Link>
+                <Link
+                  href="#featured-locations"
+                  aria-label="Reserve RV storage at a Modern Storage® Arkansas location"
+                  className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-6 py-3 rounded-full transition-colors text-sm"
+                >
+                  Reserve RV Storage
                 </Link>
                 <a
                   href={PHONE_NUMBER_HREF}
                   aria-label={`Call Modern Storage® at ${PHONE_NUMBER_DISPLAY}`}
-                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-7 py-3.5 rounded-full transition-colors border border-white/20 text-sm"
+                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-full transition-colors border border-white/20 text-sm"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
@@ -238,11 +254,42 @@ export default async function BoatRvStoragePage() {
                   className="object-cover"
                 />
               </div>
-              <figcaption className="text-xs text-gray-500 mt-3 italic">
-                Indoor RV storage at Modern Storage® Shackleford in Little Rock.
-              </figcaption>
+              <figcaption className="text-xs text-gray-500 mt-3 italic">{HERO_CAPTION}</figcaption>
             </figure>
           </div>
+        </div>
+      </section>
+
+      {/* ── HERO SEO COPY ────────────────────────────────────── */}
+      <section className="bg-white py-16 border-b border-gray-200">
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+            Boat, RV &amp; vehicle storage across Arkansas
+          </p>
+          <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-5">
+            Where Arkansas Boaters, RV Owners, and Drivers Park Between Trips
+          </h2>
+          <p className="text-gray-700 text-base lg:text-lg leading-relaxed mb-4">
+            Customers searching for boat storage near me, RV storage near me, or vehicle storage in Arkansas usually have one of two needs: a place to park between weekends on the lake, or a long-term home for an RV, classic car, or work trailer that doesn&apos;t fit in the driveway. Modern Storage® has both covered, with 10 self-storage locations across Arkansas and a focused boat, RV, and vehicle storage footprint in Little Rock, Bentonville, Lowell, Springdale, Maumelle, and Hot Springs.
+          </p>
+          <p className="text-gray-700 text-base lg:text-lg leading-relaxed mb-4">
+            Northwest Arkansas customers near Bentonville, Lowell, and Springdale store boats and RVs within easy reach of Beaver Lake, then keep them moving the rest of the year for tournaments, family trips, and weekends away. Central Arkansas customers near Little Rock, Maumelle, and Shackleford store closer to Lake Maumelle and the Arkansas River. Hot Springs customers store within minutes of Lake Ouachita, and customers north of central Arkansas regularly use Modern Storage® on the way to and from Greers Ferry.
+          </p>
+          <p className="text-gray-700 text-base lg:text-lg leading-relaxed">
+            Indoor RV storage, covered parking, oversized outdoor spaces, and pull-through bays are available at select Modern Storage® locations. Month-to-month rentals mean you can store seasonally during the off-months and pause when the lake season starts again. If you also need household, business, or climate-controlled storage, see the{' '}
+            <Link href="/climate-controlled" className="text-modern-red font-bold hover:underline">
+              climate-controlled storage page
+            </Link>
+            ,{' '}
+            <Link href="/household-storage" className="text-modern-red font-bold hover:underline">
+              household storage page
+            </Link>
+            , or{' '}
+            <Link href="/business-storage" className="text-modern-red font-bold hover:underline">
+              business storage page
+            </Link>{' '}
+            for related options.
+          </p>
         </div>
       </section>
 
@@ -284,7 +331,7 @@ export default async function BoatRvStoragePage() {
                   href="#featured-locations"
                   className="mt-auto inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-black px-5 py-3 rounded-full transition-colors"
                 >
-                  See {c.type} Locations
+                  {c.ctaLabel}
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                   </svg>
@@ -295,7 +342,7 @@ export default async function BoatRvStoragePage() {
         </div>
       </section>
 
-      {/* ── ARKANSAS LAKES ──────────────────────────────────── */}
+      {/* ── ARKANSAS LAKES STRIP ────────────────────────────── */}
       <section className="bg-white py-16 border-y border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-10 items-center">
@@ -333,7 +380,193 @@ export default async function BoatRvStoragePage() {
         </div>
       </section>
 
-      {/* ── FEATURED LOCATIONS (specific order) ─────────────── */}
+      {/* ── BY THE NUMBERS ──────────────────────────────────── */}
+      <section className="bg-charcoal text-white py-16">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-10">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+              Modern Storage® by the numbers
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-black text-white tracking-tight">
+              An Arkansas Self Storage Network
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+            {BY_THE_NUMBERS.map((n) => (
+              <div
+                key={n.label}
+                className="bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-5 transition-colors"
+              >
+                <p className="font-bebas text-4xl text-modern-red leading-none mb-2">{n.stat}</p>
+                <p className="text-xs text-gray-300 leading-snug">{n.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── TOPIC: LAKE WEEKENDS ────────────────────────────── */}
+      <section id="lake-weekends" className="bg-white py-20 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-12 gap-10 items-start">
+            <div className="lg:col-span-7">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+                Topic · lake weekends
+              </p>
+              <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+                Storage for Arkansas Lake Weekends
+              </h2>
+              <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                Weekend boaters, fishing families, ski-and-wake crews, and pontoon owners are the heart of Modern Storage®&apos;s boat program. The goal is simple: keep the boat close to the ramp, ready to roll on Friday afternoon, and back behind the gate Sunday night.
+              </p>
+              <p className="text-gray-700 leading-relaxed mb-4">
+                Most lake-weekend customers store a bass boat, pontoon, ski boat, or jet ski on a trailer at one of the Modern Storage® lake-adjacent facilities. Fishing rods, life vests, skis, coolers, and tow gear typically live in a small adjacent household unit so you don&apos;t have to load and unload the truck every trip — see the{' '}
+                <Link href="/household-storage" className="text-modern-red font-bold hover:underline">
+                  household storage page
+                </Link>{' '}
+                for that side of the rental, or the{' '}
+                <Link href="/climate-controlled" className="text-modern-red font-bold hover:underline">
+                  climate-controlled storage page
+                </Link>{' '}
+                if any of the gear is heat-sensitive.
+              </p>
+            </div>
+            <div className="lg:col-span-5">
+              <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+                <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-4">
+                  Best Modern Storage® locations
+                </p>
+                <ul className="space-y-3">
+                  {LAKE_WEEKEND_LOCATIONS.map((l) => (
+                    <li key={l.name} className="flex gap-3">
+                      <svg className="w-4 h-4 text-modern-red shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-sm text-charcoal">
+                        <strong className="font-black">{l.name}</strong> — {l.detail}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href="#featured-locations"
+                  className="mt-5 inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-black px-5 py-2.5 rounded-full transition-colors"
+                >
+                  Reserve Boat Storage →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TOPIC: LONG-TERM RV ─────────────────────────────── */}
+      <section id="long-term-rv" className="bg-gray-50 py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-12 gap-10 items-start">
+            <div className="lg:col-span-7">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+                Topic · long-term RV
+              </p>
+              <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+                Long-Term RV Storage
+              </h2>
+              <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                Long-term RV storage at Modern Storage® serves full-time and seasonal RV owners between trips, snowbirds returning to Arkansas, and families parking a motorhome for the off-season. Class A motorhomes, Class C motorhomes, fifth wheels, travel trailers, and pop-up campers all fit somewhere across the Modern Storage® network — the right size depends on the rig and the location depends on where you keep it.
+              </p>
+              <p className="text-gray-700 leading-relaxed">
+                Indoor RV storage is available at Modern Storage® Shackleford in Little Rock for owners who want their rig out of the sun and weather. Oversized outdoor spaces at the Northwest Arkansas and central Arkansas locations cover Class A and fifth-wheel sizes that won&apos;t fit in a typical residential driveway. Month-to-month rentals make multi-season storage straightforward — check the centralized{' '}
+                <Link href="/#size-guide" className="text-modern-red font-bold hover:underline">
+                  Modern Storage® unit size guide
+                </Link>{' '}
+                if you&apos;re also planning to store household items alongside the RV.
+              </p>
+            </div>
+            <div className="lg:col-span-5">
+              <div className="bg-white rounded-2xl p-6 border border-gray-200">
+                <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-4">
+                  Best Modern Storage® locations
+                </p>
+                <ul className="space-y-3">
+                  {LONG_TERM_RV_LOCATIONS.map((l) => (
+                    <li key={l.name} className="flex gap-3">
+                      <svg className="w-4 h-4 text-modern-red shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-sm text-charcoal">
+                        <strong className="font-black">{l.name}</strong> — {l.detail}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href="#featured-locations"
+                  className="mt-5 inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-black px-5 py-2.5 rounded-full transition-colors"
+                >
+                  Reserve RV Storage →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TOPIC: CLASSIC CARS ─────────────────────────────── */}
+      <section id="classic-vehicles" className="bg-white py-20 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-12 gap-10 items-start">
+            <div className="lg:col-span-7">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+                Topic · classic and collector
+              </p>
+              <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+                Classic Car &amp; Collector Vehicle Storage
+              </h2>
+              <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                Classic car and collector vehicle storage at Modern Storage® is for collectors, restoration projects, snowbird drivers with seasonal vehicles, and customers without a garage at home. Classic cars, motorcycles, project cars, convertibles, and weekend show vehicles all park here — and the right option depends on how much weather protection the vehicle needs.
+              </p>
+              <p className="text-gray-700 leading-relaxed">
+                Indoor RV bays at Modern Storage® Shackleford are the closest equivalent for vehicles that benefit from being out of the sun. For parts, tools, and accessories that need a stable indoor environment, a climate-controlled household unit is usually the right call — see the{' '}
+                <Link href="/climate-controlled" className="text-modern-red font-bold hover:underline">
+                  climate-controlled storage page
+                </Link>{' '}
+                for the full guide. Restorers running a full project may also want a{' '}
+                <Link href="/business-storage" className="text-modern-red font-bold hover:underline">
+                  mini-warehouse business storage unit
+                </Link>{' '}
+                at Modern Storage® Riverdale.
+              </p>
+            </div>
+            <div className="lg:col-span-5">
+              <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+                <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-4">
+                  Best Modern Storage® locations
+                </p>
+                <ul className="space-y-3">
+                  {CLASSIC_CAR_LOCATIONS.map((l) => (
+                    <li key={l.name} className="flex gap-3">
+                      <svg className="w-4 h-4 text-modern-red shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-sm text-charcoal">
+                        <strong className="font-black">{l.name}</strong> — {l.detail}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href="#featured-locations"
+                  className="mt-5 inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-black px-5 py-2.5 rounded-full transition-colors"
+                >
+                  Check Vehicle Storage Availability →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FEATURED LOCATIONS (specific order, rich copy) ─── */}
       <section id="featured-locations" className="bg-gray-50 py-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-3xl mb-10">
@@ -344,37 +577,57 @@ export default async function BoatRvStoragePage() {
               Modern Storage® Boat, RV &amp; Vehicle Locations
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              These six Modern Storage® facilities are the ones boaters, RV owners, and contractors ask about most. Click any card to see currently available units and reserve online.
+              These six Modern Storage® facilities are the ones boaters, RV owners, and contractors ask about most. Each card below covers what the location is best for, the rigs it commonly stores, and the local lake or recreation area it serves.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {featured.map((loc, idx) => (
               <article
                 key={loc.slug}
                 className="bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all flex flex-col"
               >
-                <div className="relative aspect-[16/10] bg-gray-100">
-                  <Image
-                    src={loc.image}
-                    alt={loc.alt}
-                    fill
-                    loading="lazy"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover"
-                  />
-                  <span className="absolute top-3 left-3 text-[10px] font-black uppercase tracking-widest bg-modern-red text-white px-2.5 py-1 rounded-full">
-                    #{idx + 1} Featured
-                  </span>
-                  <span className="absolute top-3 right-3 text-[10px] font-black uppercase tracking-widest bg-charcoal text-white px-2.5 py-1 rounded-full">
-                    {loc.region}
-                  </span>
-                </div>
+                <figure className="m-0">
+                  <div className="relative aspect-[16/9] bg-gray-100">
+                    <Image
+                      src={loc.image}
+                      alt={loc.alt}
+                      fill
+                      loading="lazy"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover"
+                    />
+                    <span className="absolute top-3 left-3 text-[10px] font-black uppercase tracking-widest bg-modern-red text-white px-2.5 py-1 rounded-full">
+                      #{idx + 1} Featured
+                    </span>
+                    <span className="absolute top-3 right-3 text-[10px] font-black uppercase tracking-widest bg-charcoal text-white px-2.5 py-1 rounded-full">
+                      {loc.region}
+                    </span>
+                  </div>
+                  <figcaption className="text-xs text-gray-500 italic px-6 pt-3">
+                    {loc.caption}
+                  </figcaption>
+                </figure>
                 <div className="p-6 flex flex-col flex-1">
-                  <h3 className="font-black text-charcoal text-lg leading-tight mb-2">{loc.name}</h3>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-modern-red mb-1.5">
+                    {loc.tagline}
+                  </p>
+                  <h3 className="font-black text-charcoal text-xl leading-tight mb-2">{loc.name}</h3>
                   <p className="text-sm text-gray-500 mb-1">{loc.streetAddress}</p>
                   <p className="text-sm text-gray-500 mb-4">
                     {loc.city}, {loc.state} {loc.zip}
                   </p>
+                  <p className="text-sm text-gray-700 leading-relaxed mb-4">{loc.body}</p>
+
+                  <p className="text-[11px] font-black uppercase tracking-widest text-gray-400 mb-2">Best for</p>
+                  <ul className="space-y-1.5 mb-5">
+                    {loc.bestFor.map((b) => (
+                      <li key={b} className="flex gap-2 text-sm text-gray-700">
+                        <span className="text-modern-red font-black shrink-0">·</span>
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+
                   <div className="flex flex-wrap gap-1.5 mb-5">
                     {loc.badges.map((badge) => (
                       <span
@@ -385,16 +638,25 @@ export default async function BoatRvStoragePage() {
                       </span>
                     ))}
                   </div>
-                  <a
-                    href={loc.reservationUrl}
-                    aria-label={`Reserve boat, RV, or vehicle storage at ${loc.name}`}
-                    className="mt-auto inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors"
-                  >
-                    See Available Spaces
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </a>
+
+                  <div className="mt-auto flex flex-col sm:flex-row gap-2">
+                    <a
+                      href={loc.reservationUrl}
+                      aria-label={`Reserve boat, RV, or vehicle storage at ${loc.name}`}
+                      className="inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors flex-1"
+                    >
+                      Reserve at {loc.city}
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                    <a
+                      href={PHONE_NUMBER_HREF}
+                      className="inline-flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-charcoal text-sm font-bold px-5 py-2.5 rounded-full transition-colors"
+                    >
+                      Call {PHONE_NUMBER_DISPLAY}
+                    </a>
+                  </div>
                 </div>
               </article>
             ))}
@@ -413,7 +675,11 @@ export default async function BoatRvStoragePage() {
               Match Your Rig to the Right Space
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              A starting point for choosing a boat, RV, or vehicle storage space at Modern Storage®. Measure your rig (including any rear ladder, hitch, and tongue extension) before reserving, and the team will confirm the right space at the right facility.
+              A starting point for choosing a boat, RV, or vehicle storage space at Modern Storage®. Measure your rig (including any rear ladder, hitch, and tongue extension) before reserving, and the team will confirm the right space at the right facility. For full household-storage sizes see the{' '}
+              <Link href="/#size-guide" className="text-modern-red font-bold hover:underline">
+                Modern Storage® unit size guide
+              </Link>
+              .
             </p>
           </div>
           <div className="overflow-x-auto rounded-2xl border border-gray-200">
@@ -439,13 +705,71 @@ export default async function BoatRvStoragePage() {
             </table>
           </div>
           <p className="text-xs text-gray-500 mt-4 italic">
-            Availability of each space size varies by Modern Storage® location. Indoor and covered options are limited — call ahead to confirm.
+            Availability of each space size varies by Modern Storage® location. Indoor and covered options are limited and available at select locations only — call ahead to confirm.
           </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              href="#featured-locations"
+              className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-6 py-3 rounded-full transition-colors text-sm"
+            >
+              Check Vehicle Storage Availability
+            </Link>
+            <a
+              href={PHONE_NUMBER_HREF}
+              className="inline-flex items-center gap-2 bg-charcoal hover:bg-gray-800 text-white font-bold px-6 py-3 rounded-full transition-colors text-sm"
+            >
+              Call {PHONE_NUMBER_DISPLAY}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── RELATED PAGES ──────────────────────────────────── */}
+      <section className="bg-gray-50 py-16">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-10">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+              Related storage options
+            </p>
+            <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight">
+              More from Modern Storage®
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Link
+              href="/climate-controlled"
+              className="group bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all"
+            >
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Climate-Controlled</p>
+              <p className="font-black text-charcoal group-hover:text-modern-red transition-colors text-sm">Climate-controlled storage in Arkansas →</p>
+            </Link>
+            <Link
+              href="/household-storage"
+              className="group bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all"
+            >
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Household</p>
+              <p className="font-black text-charcoal group-hover:text-modern-red transition-colors text-sm">Household storage at 10 locations →</p>
+            </Link>
+            <Link
+              href="/business-storage"
+              className="group bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all"
+            >
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Business</p>
+              <p className="font-black text-charcoal group-hover:text-modern-red transition-colors text-sm">Business and mini-warehouse storage →</p>
+            </Link>
+            <Link
+              href="/#moving-truck"
+              className="group bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all"
+            >
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Moving Truck</p>
+              <p className="font-black text-charcoal group-hover:text-modern-red transition-colors text-sm">Free moving truck details →</p>
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* ── FAQ ────────────────────────────────────────────── */}
-      <section id="faq" className="bg-gray-50 py-20">
+      <section id="faq" className="bg-white py-20 border-y border-gray-200">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">FAQ</p>
@@ -453,7 +777,7 @@ export default async function BoatRvStoragePage() {
               Boat, RV &amp; Vehicle Storage FAQ
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed mt-4 max-w-2xl mx-auto">
-              Common questions about boat storage, RV storage, vehicle parking, indoor versus outdoor options, sizing, security, and access hours at Modern Storage® locations across Arkansas.
+              Common questions about boat storage, RV storage, vehicle parking, sizing, climate-controlled vehicle storage, access hours, and reserving boat or RV storage at Modern Storage® locations across Arkansas.
             </p>
           </div>
           <FaqAccordion items={BOAT_RV_FAQS} />
@@ -466,13 +790,13 @@ export default async function BoatRvStoragePage() {
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7 text-center lg:text-left">
               <h2 className="text-3xl lg:text-4xl font-black text-white mb-5 tracking-tight">
-                Reserve Boat or RV Storage in Arkansas
+                Reserve Boat, RV &amp; Vehicle Storage in Arkansas
               </h2>
               <p className="text-red-100 text-lg leading-relaxed mb-6">
-                Choose a Modern Storage® location, pick the space that fits your rig, and reserve online — month-to-month, so you can store seasonally or year-round.
+                Pick a Modern Storage® location near your lake or route, choose the space that fits your rig, and reserve online — month-to-month, so you can store seasonally or year-round.
               </p>
               <p className="text-red-100/80 text-xs italic mb-8 lg:mb-0">
-                Indoor, covered, and outdoor availability varies by location.
+                Indoor, covered, and outdoor availability varies by Modern Storage® location.
               </p>
             </div>
             <div className="lg:col-span-5 flex flex-col gap-3">
@@ -480,17 +804,26 @@ export default async function BoatRvStoragePage() {
                 href="#featured-locations"
                 className="bg-white text-modern-red font-black px-6 py-3.5 rounded-full hover:bg-red-50 transition-colors text-sm shadow-md inline-flex items-center justify-center gap-2"
               >
-                Reserve Boat or RV Storage
+                Reserve Boat Storage
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
-              <a
-                href={RESERVATION_URL}
+              <Link
+                href="#featured-locations"
+                className="bg-white text-modern-red font-black px-6 py-3.5 rounded-full hover:bg-red-50 transition-colors text-sm shadow-md inline-flex items-center justify-center gap-2"
+              >
+                Reserve RV Storage
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link
+                href="#featured-locations"
                 className="bg-charcoal text-white font-black px-6 py-3.5 rounded-full hover:bg-gray-800 transition-colors text-sm shadow-md inline-flex items-center justify-center gap-2"
               >
-                Reserve Online Now
-              </a>
+                Check Vehicle Storage Availability
+              </Link>
               <a
                 href={PHONE_NUMBER_HREF}
                 className="bg-white/10 text-white font-bold px-6 py-3.5 rounded-full hover:bg-white/20 transition-colors text-sm border border-white/30 inline-flex items-center justify-center gap-2"
