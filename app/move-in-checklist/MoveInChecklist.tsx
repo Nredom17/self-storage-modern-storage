@@ -1,12 +1,33 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   CHECKLIST_DATA,
   STORAGE_TYPES,
   UNIT_SIZES,
 } from '@/lib/move-in-checklist'
+
+// Lead-gate persistence key — once a customer has submitted their info, we
+// don't ask again on this browser. They can clear localStorage to re-test.
+const LEAD_STORAGE_KEY = 'modernstorage_checklist_lead_submitted_v1'
+
+// Same set of Modern Storage® locations used elsewhere on the site, surfaced
+// as an optional preferred-facility dropdown on the lead form. Kept inline
+// here so we don't have to import the full LOCATIONS object client-side.
+const FACILITY_OPTIONS = [
+  'Not sure yet',
+  'Modern Storage® Riverdale (Little Rock)',
+  'Modern Storage® Shackleford (Little Rock)',
+  'Modern Storage® West Little Rock',
+  'Modern Storage® North Little Rock',
+  'Modern Storage® Maumelle Blvd',
+  'Modern Storage® Bryant',
+  'Modern Storage® Hot Springs',
+  'Modern Storage® Bentonville',
+  'Modern Storage® Springdale',
+  'Modern Storage® Lowell',
+]
 
 // ─── ANALYTICS ───────────────────────────────────────────────────────────────
 // Fires window.gtag if GA4 is installed; no-op otherwise. Centralized so the
@@ -111,6 +132,310 @@ function BackNext({
   )
 }
 
+// ─── LEAD GATE FORM ──────────────────────────────────────────────────────────
+function ChecklistLeadGate({
+  context,
+  onSubmitted,
+  onCancel,
+}: {
+  context: { checklistType: string; unitSize: string; moveDate: string }
+  onSubmitted: () => void
+  onCancel: () => void
+}) {
+  const [firstName, setFirstName] = useState('')
+  const [email, setEmail] = useState('')
+  const [zip, setZip] = useState('')
+  const [phone, setPhone] = useState('')
+  const [facility, setFacility] = useState('')
+  const [consent, setConsent] = useState(false)
+  const [website, setWebsite] = useState('') // honeypot
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'error'>('idle')
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
+
+  const submitting = status === 'submitting'
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setStatus('submitting')
+    setErrorMsg(null)
+    try {
+      const res = await fetch('/api/checklist-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName,
+          email,
+          zip,
+          phone,
+          facility,
+          consent,
+          website,
+          checklistType: context.checklistType,
+          unitSize: context.unitSize,
+          moveDate: context.moveDate,
+          source:
+            typeof window !== 'undefined'
+              ? window.location.pathname + window.location.search
+              : '/move-in-checklist',
+        }),
+      })
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string }
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || 'Could not save your info. Please try again.')
+      }
+      track('checklist_lead_submit', {
+        checklistType: context.checklistType,
+        unitSize: context.unitSize,
+        hasPhone: Boolean(phone),
+        hasFacility: Boolean(facility),
+      })
+      onSubmitted()
+    } catch (err) {
+      setStatus('error')
+      setErrorMsg(err instanceof Error ? err.message : 'Could not save your info.')
+      track('checklist_lead_submit_error')
+    }
+  }
+
+  const inputStyle: React.CSSProperties = {
+    width: '100%',
+    boxSizing: 'border-box',
+    border: '2px solid #E8E8E8',
+    borderRadius: 10,
+    padding: '11px 12px',
+    fontSize: 14,
+    fontFamily: "'DM Sans', sans-serif",
+    color: '#1A1A1A',
+    background: '#fff',
+    outline: 'none',
+  }
+
+  const labelStyle: React.CSSProperties = {
+    display: 'block',
+    fontSize: 11,
+    fontWeight: 700,
+    color: '#1A1A1A',
+    fontFamily: "'DM Sans', sans-serif",
+    letterSpacing: '0.06em',
+    textTransform: 'uppercase',
+    marginBottom: 5,
+  }
+
+  return (
+    <form
+      onSubmit={onSubmit}
+      noValidate
+      aria-label="Save and print my Modern Storage® move-in checklist"
+      style={{
+        background: '#fff',
+        border: '2px solid #1A1A1A',
+        borderRadius: 16,
+        padding: '18px',
+        marginBottom: 16,
+        fontFamily: "'DM Sans', sans-serif",
+      }}
+    >
+      {/* Honeypot — visually hidden, real users never see or tab into this. */}
+      <div
+        style={{ position: 'absolute', left: -9999, top: 'auto', width: 1, height: 1, overflow: 'hidden' }}
+        aria-hidden="true"
+      >
+        <label>
+          Website (leave empty)
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+          />
+        </label>
+      </div>
+
+      <div
+        style={{
+          fontFamily: "'Bebas Neue', cursive",
+          fontSize: 11,
+          letterSpacing: '0.18em',
+          color: '#F60001',
+          marginBottom: 4,
+        }}
+      >
+        ALMOST THERE
+      </div>
+      <div
+        style={{
+          fontFamily: "'Bebas Neue', cursive",
+          fontSize: 22,
+          color: '#1A1A1A',
+          lineHeight: 1.1,
+          marginBottom: 6,
+        }}
+      >
+        Save and print your checklist
+      </div>
+      <p style={{ fontSize: 12, color: '#666', lineHeight: 1.5, marginBottom: 16 }}>
+        We&apos;ll email you a copy of your personalized checklist and unlock the
+        print / save-as-PDF version below.
+      </p>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 10 }}>
+        <label>
+          <span style={labelStyle}>First name *</span>
+          <input
+            type="text"
+            required
+            disabled={submitting}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            autoComplete="given-name"
+            style={inputStyle}
+          />
+        </label>
+        <label>
+          <span style={labelStyle}>ZIP code *</span>
+          <input
+            type="text"
+            required
+            disabled={submitting}
+            inputMode="numeric"
+            maxLength={10}
+            value={zip}
+            onChange={(e) => setZip(e.target.value)}
+            autoComplete="postal-code"
+            style={inputStyle}
+          />
+        </label>
+      </div>
+      <label style={{ display: 'block', marginBottom: 10 }}>
+        <span style={labelStyle}>Email *</span>
+        <input
+          type="email"
+          required
+          disabled={submitting}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
+          style={inputStyle}
+        />
+      </label>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 10 }}>
+        <label>
+          <span style={labelStyle}>Phone (optional)</span>
+          <input
+            type="tel"
+            disabled={submitting}
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            autoComplete="tel"
+            style={inputStyle}
+          />
+        </label>
+        <label>
+          <span style={labelStyle}>Preferred facility (optional)</span>
+          <select
+            disabled={submitting}
+            value={facility}
+            onChange={(e) => setFacility(e.target.value)}
+            style={{ ...inputStyle, background: '#fff' }}
+          >
+            <option value="">Select…</option>
+            {FACILITY_OPTIONS.map((f) => (
+              <option key={f} value={f}>
+                {f}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <label
+        style={{
+          display: 'flex',
+          alignItems: 'flex-start',
+          gap: 10,
+          padding: '10px 12px',
+          background: '#F7F7F7',
+          borderRadius: 10,
+          marginBottom: 14,
+          cursor: 'pointer',
+        }}
+      >
+        <input
+          type="checkbox"
+          required
+          disabled={submitting}
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
+          style={{ marginTop: 3, width: 16, height: 16, accentColor: '#F60001' }}
+        />
+        <span style={{ fontSize: 12, lineHeight: 1.4, color: '#1A1A1A' }}>
+          I agree to receive storage tips, offers, and follow-up messages from Modern Storage®.
+        </span>
+      </label>
+
+      {status === 'error' && errorMsg && (
+        <div
+          role="alert"
+          style={{
+            background: '#FEF2F2',
+            border: '1px solid #F60001',
+            borderRadius: 10,
+            padding: '10px 12px',
+            marginBottom: 12,
+            fontSize: 12,
+            color: '#1A1A1A',
+          }}
+        >
+          <strong style={{ color: '#F60001' }}>Hmm — </strong>
+          {errorMsg}
+        </div>
+      )}
+
+      <div style={{ display: 'flex', gap: 10 }}>
+        <button
+          type="button"
+          onClick={onCancel}
+          disabled={submitting}
+          style={{
+            flex: 1,
+            background: 'transparent',
+            border: '2px solid #E0E0E0',
+            borderRadius: 12,
+            padding: '13px',
+            cursor: submitting ? 'wait' : 'pointer',
+            fontSize: 13,
+            fontWeight: 600,
+            color: '#888',
+            fontFamily: "'DM Sans', sans-serif",
+          }}
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          disabled={submitting}
+          style={{
+            flex: 2,
+            background: submitting ? '#F60001AA' : '#F60001',
+            border: 'none',
+            borderRadius: 12,
+            padding: '13px',
+            color: '#fff',
+            fontFamily: "'Bebas Neue', cursive",
+            fontSize: 18,
+            letterSpacing: '0.08em',
+            cursor: submitting ? 'wait' : 'pointer',
+          }}
+        >
+          {submitting ? 'Sending…' : 'Email me my printable checklist →'}
+        </button>
+      </div>
+    </form>
+  )
+}
+
 // ─── CHECKLIST VIEW ──────────────────────────────────────────────────────────
 function ChecklistView({
   type,
@@ -129,6 +454,23 @@ function ChecklistView({
   const unitLabel = UNIT_SIZES.find((u) => u.id === unitSize)?.label || unitSize
   const formattedDate = formatDate(moveDate)
 
+  // Lead gate: only unlock window.print() once the user has submitted name +
+  // email + zip + consent. Persisted in localStorage so a returning visitor
+  // doesn't have to refill the form.
+  const [leadSubmitted, setLeadSubmitted] = useState(false)
+  const [showLeadForm, setShowLeadForm] = useState(false)
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    try {
+      if (window.localStorage.getItem(LEAD_STORAGE_KEY) === 'true') {
+        setLeadSubmitted(true)
+      }
+    } catch {
+      /* localStorage blocked or unavailable — fall through, user will refill */
+    }
+  }, [])
+
   const allItems = Object.values(checklist).flat()
   const doneCount = Object.values(checked).filter(Boolean).length
   // Guard against divide-by-zero if a checklist ends up empty for any reason.
@@ -146,11 +488,19 @@ function ChecklistView({
     })
   }
 
-  // Browser-native print. The @media print CSS in globals.css hides the rest
-  // of the page and keeps only .checklist-print-area visible. Users can pick
-  // "Save as PDF" in the print dialog to download a paper-friendly copy for
-  // move-in day.
+  // Browser-native print, gated on the lead form. window.print() is the only
+  // path to PDF here and we hard-block it server-of-truth: if the lead hasn't
+  // been captured yet, the call is a no-op regardless of how the UI is
+  // manipulated, so the gate can't be bypassed by enabling the hidden button
+  // via devtools.
   const handlePrint = () => {
+    if (!leadSubmitted) {
+      // Open the form instead of firing print. Belt-and-suspenders — the
+      // button shouldn't even be visible when leadSubmitted=false, but if
+      // someone manipulates state, print still won't fire.
+      setShowLeadForm(true)
+      return
+    }
     track('checklist_print', {
       type,
       unitSize,
@@ -160,6 +510,35 @@ function ChecklistView({
     })
     if (typeof window !== 'undefined') {
       window.print()
+    }
+  }
+
+  // Called when the lead form POSTs to /api/checklist-lead successfully.
+  // Persists the unlock flag and immediately triggers the browser print
+  // dialog so the customer doesn't have to click again.
+  const handleLeadSubmitted = () => {
+    setLeadSubmitted(true)
+    setShowLeadForm(false)
+    try {
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem(LEAD_STORAGE_KEY, 'true')
+      }
+    } catch {
+      /* localStorage blocked — that's fine, the in-memory unlock still works
+       * for this session. */
+    }
+    track('checklist_print', {
+      type,
+      unitSize,
+      hasMoveDate: Boolean(moveDate),
+      doneCount,
+      totalItems: allItems.length,
+      autoTriggered: true,
+    })
+    // Tiny delay so React paints the unlocked state before the print dialog
+    // takes over (avoids printing a half-rendered state on slow devices).
+    if (typeof window !== 'undefined') {
+      setTimeout(() => window.print(), 250)
     }
   }
 
@@ -206,46 +585,110 @@ function ChecklistView({
         </div>
       </div>
 
-      {/* Screen-visible Print button — `print-hide` so the button itself
-       * doesn't print, only the checklist it triggers. */}
-      <button
-        type="button"
-        onClick={handlePrint}
-        className="print-hide"
-        style={{
-          width: '100%',
-          background: '#fff',
-          border: '2px solid #1A1A1A',
-          borderRadius: 14,
-          padding: '14px',
-          cursor: 'pointer',
-          fontSize: 14,
-          fontWeight: 700,
-          color: '#1A1A1A',
-          fontFamily: "'DM Sans', sans-serif",
-          marginBottom: 16,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 8,
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.background = '#1A1A1A'
-          e.currentTarget.style.color = '#fff'
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.background = '#fff'
-          e.currentTarget.style.color = '#1A1A1A'
-        }}
-        aria-label="Print or save the checklist as a PDF"
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-          <path d="M6 9V2h12v7" />
-          <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2" />
-          <rect x="6" y="14" width="12" height="8" rx="1" />
-        </svg>
-        Print or Save as PDF
-      </button>
+      {/* Print / lead-gate UI — three states:
+       *   1. Lead NOT submitted, form NOT open: "Save and Print" button
+       *      that opens the inline lead form.
+       *   2. Lead NOT submitted, form IS open: the inline lead form.
+       *   3. Lead submitted: unlocked Print/PDF button + "saved" confirmation.
+       * All wrapped in .print-hide so none of this UI appears in the
+       * printout itself. */}
+      <div className="print-hide" style={{ marginBottom: 16 }}>
+        {!leadSubmitted && !showLeadForm && (
+          <button
+            type="button"
+            onClick={() => {
+              setShowLeadForm(true)
+              track('checklist_lead_form_shown', { type, unitSize })
+            }}
+            style={{
+              width: '100%',
+              background: '#1A1A1A',
+              border: '2px solid #1A1A1A',
+              borderRadius: 14,
+              padding: '14px',
+              cursor: 'pointer',
+              fontSize: 14,
+              fontWeight: 700,
+              color: '#fff',
+              fontFamily: "'DM Sans', sans-serif",
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 8,
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = '#333')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = '#1A1A1A')}
+            aria-label="Save your information and print the checklist"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <path d="M6 9V2h12v7" />
+              <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2" />
+              <rect x="6" y="14" width="12" height="8" rx="1" />
+            </svg>
+            Save and print my checklist
+          </button>
+        )}
+
+        {!leadSubmitted && showLeadForm && (
+          <ChecklistLeadGate
+            context={{ checklistType: type, unitSize, moveDate }}
+            onSubmitted={handleLeadSubmitted}
+            onCancel={() => setShowLeadForm(false)}
+          />
+        )}
+
+        {leadSubmitted && (
+          <div>
+            <button
+              type="button"
+              onClick={handlePrint}
+              style={{
+                width: '100%',
+                background: '#fff',
+                border: '2px solid #1A1A1A',
+                borderRadius: 14,
+                padding: '14px',
+                cursor: 'pointer',
+                fontSize: 14,
+                fontWeight: 700,
+                color: '#1A1A1A',
+                fontFamily: "'DM Sans', sans-serif",
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 8,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#1A1A1A'
+                e.currentTarget.style.color = '#fff'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = '#fff'
+                e.currentTarget.style.color = '#1A1A1A'
+              }}
+              aria-label="Print or save the checklist as a PDF"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <path d="M6 9V2h12v7" />
+                <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2" />
+                <rect x="6" y="14" width="12" height="8" rx="1" />
+              </svg>
+              Print or Save as PDF
+            </button>
+            <p
+              style={{
+                fontSize: 11,
+                color: '#22c55e',
+                marginTop: 6,
+                fontFamily: "'DM Sans', sans-serif",
+                textAlign: 'center',
+              }}
+            >
+              ✓ Your info is saved — print as many times as you need.
+            </p>
+          </div>
+        )}
+      </div>
 
       {/* Summary card (screen). Print version is restyled by globals.css. */}
       <div
