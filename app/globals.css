@@ -62,13 +62,16 @@
 }
 
 @media print {
+  /* Letter, tight margin. The whole printout aims for 1 page (rarely 2). */
   @page {
-    margin: 0.5in;
+    size: letter;
+    margin: 0.35in;
   }
 
   body {
     background: white !important;
     color: black !important;
+    margin: 0 !important;
   }
 
   /* Hide everything by default, then opt the printable subtree back in. */
@@ -93,69 +96,119 @@
     padding: 0 !important;
     background: white !important;
     box-shadow: none !important;
+    font-size: 11px !important;
+    line-height: 1.35 !important;
   }
 
-  /* Show the print-only header (brand + unit/type/date stamp). */
+  /* Print-only branded header — tightened from 28px to 18px and squeezed
+   * vertically so it doesn't eat 1/3 of page 1. */
   .print-only {
     display: block !important;
+    margin-bottom: 10px !important;
+    padding-bottom: 6px !important;
+    border-bottom: 1.5px solid #F60001 !important;
+  }
+  .print-only > div {
+    margin: 0 !important;
+  }
+  .print-only > div:nth-child(1) {
+    /* MODERN STORAGE eyebrow */
+    font-size: 10px !important;
+    letter-spacing: 0.18em !important;
+  }
+  .print-only > div:nth-child(2) {
+    /* Move-In Checklist title */
+    font-size: 18px !important;
+    margin: 2px 0 !important;
+  }
+  .print-only > div:nth-child(3),
+  .print-only > div:nth-child(4) {
+    /* unit/type/date + URL footer */
+    font-size: 9px !important;
+    margin-top: 2px !important;
   }
 
-  /* Anything explicitly excluded from the printout — the Reset and Reserve
-   * buttons inside the result screen are nav, not part of the checklist. */
-  .print-hide {
+  /* Anything explicitly excluded from the printout — print button itself,
+   * Reset, Reserve CTA block, AND the dark progress summary (taking too
+   * much vertical space for a paper artifact). */
+  .print-hide,
+  .checklist-print-summary {
     display: none !important;
   }
 
-  /* Tone down the dark summary card so it prints cleanly without burning ink
-   * on a giant black background. Keep the red accent border for branding. */
-  .checklist-print-summary {
-    background: white !important;
-    border: 2px solid #F60001 !important;
-    color: black !important;
+  /* Each section. NO page-break-inside on the section — that was forcing
+   * whole 8-item sections to the next page when only 6 fit, leaving the
+   * giant blank gap. Let document flow split sections naturally. We keep
+   * page-break-inside on individual items so a single line never splits.
+   */
+  .checklist-print-section {
+    margin-top: 12px !important;
+    margin-bottom: 0 !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
   }
-  .checklist-print-summary * {
-    color: black !important;
-    background: transparent !important;
-  }
-  .checklist-print-summary .checklist-print-eyebrow {
-    color: #F60001 !important;
-  }
-  .checklist-print-summary .checklist-print-progress-track {
-    background: #EEE !important;
-    border: 1px solid #CCC !important;
-  }
-  .checklist-print-summary .checklist-print-progress-fill {
-    background: #1A1A1A !important;
+  .checklist-print-section:first-of-type {
+    margin-top: 4px !important;
   }
 
-  /* Item rows: white background, thin gray border. Completed items keep their
-   * check + strikethrough so the printed sheet reflects the user's progress. */
+  /* Compact section title — smaller font, tighter spacing. */
+  .checklist-print-section-title {
+    font-size: 12px !important;
+    margin-bottom: 6px !important;
+    padding-bottom: 3px !important;
+    border-bottom: 1.5px solid #F60001 !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  /* Two-column grid for items — fits twice as much per page. */
+  .checklist-print-items {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 5px 12px !important;
+  }
+
+  /* Compact item box — was ~50px tall, now ~28px. Thin border, small font. */
   .checklist-print-item {
     background: white !important;
-    border: 1px solid #999 !important;
+    border: 1px solid #BBB !important;
     color: black !important;
+    border-radius: 6px !important;
+    min-height: 28px !important;
+    padding: 5px 8px !important;
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+    gap: 7px !important;
     page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
   .checklist-print-item-text {
     color: black !important;
+    font-size: 11px !important;
+    line-height: 1.3 !important;
   }
+
+  /* Smaller checkbox to match the smaller box. */
   .checklist-print-checkbox {
     background: white !important;
     border: 1.5px solid #1A1A1A !important;
+    width: 14px !important;
+    height: 14px !important;
+    border-radius: 3px !important;
+    margin-top: 1px !important;
   }
   .checklist-print-checkbox--done {
     background: #1A1A1A !important;
     color: white !important;
   }
-
-  /* Keep section headers from splitting across pages. */
-  .checklist-print-section {
-    page-break-inside: avoid !important;
+  .checklist-print-checkbox span {
+    font-size: 10px !important;
   }
 
-  /* Strip residual shadows site-wide for cleaner ink output. */
+  /* Strip shadows for cleaner ink output. */
   .checklist-print-area *,
   .checklist-print-area {
     box-shadow: none !important;
+    text-shadow: none !important;
   }
 }

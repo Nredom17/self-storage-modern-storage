@@ -337,6 +337,7 @@ function ChecklistView({
       {Object.entries(checklist).map(([section, items]) => (
         <div key={section} className="checklist-print-section" style={{ marginBottom: 20 }}>
           <div
+            className="checklist-print-section-title"
             style={{
               fontFamily: "'Bebas Neue', cursive",
               fontSize: 16,
@@ -349,7 +350,7 @@ function ChecklistView({
           >
             {section}
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div className="checklist-print-items" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {items.map((item, i) => {
               const key = `${section}-${i}`
               const done = checked[key]
