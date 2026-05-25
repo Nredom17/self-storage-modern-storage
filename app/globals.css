@@ -47,3 +47,115 @@
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Print styles — used by /move-in-checklist so users can print or save-as-PDF
+ * a paper copy to carry on move-in day. Standard "visibility-only" pattern:
+ * hide everything, then re-show only the .checklist-print-area subtree and
+ * position it at the top of the page. Inline styles win over CSS unless we use
+ * !important here, since the checklist component uses heavy inline styling.
+ * ──────────────────────────────────────────────────────────────────────────── */
+
+/* Print-only header is hidden on screen; only visible during print. */
+.print-only {
+  display: none;
+}
+
+@media print {
+  @page {
+    margin: 0.5in;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Hide everything by default, then opt the printable subtree back in. */
+  body * {
+    visibility: hidden !important;
+  }
+  .checklist-print-area,
+  .checklist-print-area * {
+    visibility: visible !important;
+  }
+
+  /* Pull the printable area to the top of the page so the hidden chrome
+   * doesn't push it down with blank space. */
+  .checklist-print-area {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    box-shadow: none !important;
+  }
+
+  /* Show the print-only header (brand + unit/type/date stamp). */
+  .print-only {
+    display: block !important;
+  }
+
+  /* Anything explicitly excluded from the printout — the Reset and Reserve
+   * buttons inside the result screen are nav, not part of the checklist. */
+  .print-hide {
+    display: none !important;
+  }
+
+  /* Tone down the dark summary card so it prints cleanly without burning ink
+   * on a giant black background. Keep the red accent border for branding. */
+  .checklist-print-summary {
+    background: white !important;
+    border: 2px solid #F60001 !important;
+    color: black !important;
+  }
+  .checklist-print-summary * {
+    color: black !important;
+    background: transparent !important;
+  }
+  .checklist-print-summary .checklist-print-eyebrow {
+    color: #F60001 !important;
+  }
+  .checklist-print-summary .checklist-print-progress-track {
+    background: #EEE !important;
+    border: 1px solid #CCC !important;
+  }
+  .checklist-print-summary .checklist-print-progress-fill {
+    background: #1A1A1A !important;
+  }
+
+  /* Item rows: white background, thin gray border. Completed items keep their
+   * check + strikethrough so the printed sheet reflects the user's progress. */
+  .checklist-print-item {
+    background: white !important;
+    border: 1px solid #999 !important;
+    color: black !important;
+    page-break-inside: avoid !important;
+  }
+  .checklist-print-item-text {
+    color: black !important;
+  }
+  .checklist-print-checkbox {
+    background: white !important;
+    border: 1.5px solid #1A1A1A !important;
+  }
+  .checklist-print-checkbox--done {
+    background: #1A1A1A !important;
+    color: white !important;
+  }
+
+  /* Keep section headers from splitting across pages. */
+  .checklist-print-section {
+    page-break-inside: avoid !important;
+  }
+
+  /* Strip residual shadows site-wide for cleaner ink output. */
+  .checklist-print-area *,
+  .checklist-print-area {
+    box-shadow: none !important;
+  }
+}

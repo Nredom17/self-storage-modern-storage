@@ -146,10 +146,110 @@ function ChecklistView({
     })
   }
 
+  // Browser-native print. The @media print CSS in globals.css hides the rest
+  // of the page and keeps only .checklist-print-area visible. Users can pick
+  // "Save as PDF" in the print dialog to download a paper-friendly copy for
+  // move-in day.
+  const handlePrint = () => {
+    track('checklist_print', {
+      type,
+      unitSize,
+      hasMoveDate: Boolean(moveDate),
+      doneCount,
+      totalItems: allItems.length,
+    })
+    if (typeof window !== 'undefined') {
+      window.print()
+    }
+  }
+
   return (
-    <div>
-      {/* Summary card */}
+    <div className="checklist-print-area">
+      {/* Print-only header — hidden on screen, only renders in the printout.
+       * Gives the printed sheet a clear Modern Storage® brand line plus the
+       * customer's unit/type/date so it's a useful artifact on its own. */}
       <div
+        className="print-only"
+        style={{
+          marginBottom: 16,
+          paddingBottom: 12,
+          borderBottom: '2px solid #F60001',
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "'Bebas Neue', cursive",
+            fontSize: 14,
+            letterSpacing: '0.18em',
+            color: '#F60001',
+          }}
+        >
+          MODERN STORAGE®
+        </div>
+        <div
+          style={{
+            fontFamily: "'Bebas Neue', cursive",
+            fontSize: 28,
+            color: '#1A1A1A',
+            lineHeight: 1,
+            margin: '4px 0',
+          }}
+        >
+          Move-In Checklist
+        </div>
+        <div style={{ fontSize: 12, color: '#555' }}>
+          {unitLabel} unit · {typeLabel}
+          {formattedDate ? ` · Move-in: ${formattedDate}` : ''}
+        </div>
+        <div style={{ fontSize: 10, color: '#999', marginTop: 4 }}>
+          Generated at self-storage.modernstorage.com/move-in-checklist
+        </div>
+      </div>
+
+      {/* Screen-visible Print button — `print-hide` so the button itself
+       * doesn't print, only the checklist it triggers. */}
+      <button
+        type="button"
+        onClick={handlePrint}
+        className="print-hide"
+        style={{
+          width: '100%',
+          background: '#fff',
+          border: '2px solid #1A1A1A',
+          borderRadius: 14,
+          padding: '14px',
+          cursor: 'pointer',
+          fontSize: 14,
+          fontWeight: 700,
+          color: '#1A1A1A',
+          fontFamily: "'DM Sans', sans-serif",
+          marginBottom: 16,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 8,
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = '#1A1A1A'
+          e.currentTarget.style.color = '#fff'
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = '#fff'
+          e.currentTarget.style.color = '#1A1A1A'
+        }}
+        aria-label="Print or save the checklist as a PDF"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+          <path d="M6 9V2h12v7" />
+          <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2" />
+          <rect x="6" y="14" width="12" height="8" rx="1" />
+        </svg>
+        Print or Save as PDF
+      </button>
+
+      {/* Summary card (screen). Print version is restyled by globals.css. */}
+      <div
+        className="checklist-print-summary"
         style={{
           background: '#1A1A1A',
           borderRadius: 20,
@@ -159,6 +259,7 @@ function ChecklistView({
         }}
       >
         <div
+          className="checklist-print-eyebrow"
           style={{
             fontFamily: "'Bebas Neue', cursive",
             fontSize: 11,
@@ -194,6 +295,7 @@ function ChecklistView({
         )}
 
         <div
+          className="checklist-print-progress-track"
           style={{
             background: '#333',
             borderRadius: 99,
@@ -204,6 +306,7 @@ function ChecklistView({
           }}
         >
           <div
+            className="checklist-print-progress-fill"
             style={{
               width: `${pct}%`,
               height: '100%',
@@ -232,7 +335,7 @@ function ChecklistView({
 
       {/* Sections */}
       {Object.entries(checklist).map(([section, items]) => (
-        <div key={section} style={{ marginBottom: 20 }}>
+        <div key={section} className="checklist-print-section" style={{ marginBottom: 20 }}>
           <div
             style={{
               fontFamily: "'Bebas Neue', cursive",
@@ -254,6 +357,7 @@ function ChecklistView({
                 <button
                   key={key}
                   onClick={() => toggleItem(key)}
+                  className="checklist-print-item"
                   style={{
                     background: done ? '#F0FDF4' : '#fff',
                     border: done ? '2px solid #22c55e' : '2px solid #E8E8E8',
@@ -269,6 +373,9 @@ function ChecklistView({
                   }}
                 >
                   <div
+                    className={
+                      'checklist-print-checkbox' + (done ? ' checklist-print-checkbox--done' : '')
+                    }
                     style={{
                       width: 22,
                       height: 22,
@@ -288,6 +395,7 @@ function ChecklistView({
                     )}
                   </div>
                   <span
+                    className="checklist-print-item-text"
                     style={{
                       fontSize: 14,
                       lineHeight: 1.45,
@@ -305,8 +413,9 @@ function ChecklistView({
         </div>
       ))}
 
-      {/* CTA block */}
+      {/* CTA block — hidden in print */}
       <div
+        className="print-hide"
         style={{
           background: '#1A1A1A',
           borderRadius: 20,
@@ -364,8 +473,11 @@ function ChecklistView({
         </a>
       </div>
 
+      {/* Start over — hidden in print */}
       <button
+        type="button"
         onClick={onReset}
+        className="print-hide"
         style={{
           width: '100%',
           background: 'transparent',
