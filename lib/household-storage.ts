@@ -137,38 +137,38 @@ export const HOUSEHOLD_FAQS = [
   },
   {
     q: 'Do you offer climate-controlled household storage?',
-    a: `Yes. Most Modern Storage® locations across Arkansas offer climate-controlled household storage units designed to help protect furniture, electronics, photos, documents, instruments, and other temperature-sensitive belongings from Arkansas heat, cold, and humidity swings. Customers can read more on the Climate-Controlled Storage page or filter the location finder by climate-controlled availability.`,
+    a: `Yes. Climate-controlled household storage units are available at Modern Storage® locations across Arkansas. Climate-controlled units are inside enclosed, insulated buildings and provide a more stable environment for furniture, electronics, photos, documents, mattresses, and other items sensitive to Arkansas heat and humidity. If you are storing anything you would not leave in a hot car or a damp garage, climate-controlled is the right call. Use the location finder above to check availability near you.`,
   },
   {
     q: 'Is there a free moving truck with household storage?',
-    a: `Modern Storage® offers a free moving truck with new rentals at participating Arkansas locations. The truck makes it easier to move furniture, appliances, and boxes from your home to your storage unit without booking a separate rental. Mileage limits, requirements, and location participation may vary — confirm details with the Modern Storage® location nearest you before move-in.`,
+    a: `Yes. Modern Storage® offers a free moving truck with new household storage rentals at participating Arkansas locations. The truck makes move-in easier and eliminates a separate rental. Availability, mileage limits, requirements, and participating locations may vary — confirm when you reserve.`,
   },
   {
     q: 'Are storage rentals month-to-month?',
-    a: `Yes. Household storage at Modern Storage® is month-to-month, so families and renters only pay for the time they actually need the unit. Month-to-month rentals are ideal for moves, renovations, downsizing, growing families, deployments, estate handling, and seasonal storage when timelines can shift unexpectedly.`,
+    a: `Yes. All Modern Storage® household storage rentals are month-to-month. No long-term contracts. You pay for the storage you need, for as long as you need it, and can close out your unit when your situation changes.`,
   },
   {
     q: 'How do I find a household storage unit near me in Arkansas?',
-    a: `Modern Storage® operates 10 self-storage locations across Arkansas, including West Little Rock, Shackleford, Riverdale (all Little Rock), North Hills Blvd and Maumelle Blvd (both North Little Rock), Bryant, Hot Springs, Bentonville, Springdale, and Lowell. Use the location finder on this page to filter by region, click any pin to see facility details, and reserve online in minutes.`,
+    a: `Use the location finder on this page to filter by region — Little Rock, North Little Rock, Northwest Arkansas, Hot Springs, or Bryant. All 10 Modern Storage® locations are listed with addresses, available unit types, and direct links to reserve online. You can also call 501-910-0096 and the team will help you find the closest facility with the right unit size.`,
   },
   {
     q: 'Can I reserve a household storage unit online?',
-    a: `Yes. Modern Storage® lets customers reserve household storage units online in just a few minutes. Choose your Arkansas location, select the unit size that fits your move, and complete the reservation from a phone, tablet, or computer. Customers who prefer to talk through their options can also call Modern Storage® at the number listed on every page of this site.`,
+    a: `Yes. You can reserve a household storage unit online at any Modern Storage® Arkansas location in minutes. Choose your location, pick your unit size, and complete your reservation without waiting or phone calls. Online reservations are available 24/7.`,
   },
   {
     q: 'What should I put in a climate-controlled unit versus a drive-up unit?',
-    a: `Climate-controlled units are best for items that are sensitive to heat, cold, or humidity — wood and leather furniture, electronics, photos, documents, instruments, art, and collectibles. Drive-up units work well for outdoor gear, yard tools, durable plastic bins, and items that are easy to load and unload from a vehicle. The Climate-Controlled Storage page covers what belongs indoors in more detail.`,
+    a: `Climate-controlled units are best for anything sensitive to heat, cold, or humidity — wood furniture, leather, electronics, photos, documents, books, art, instruments, and collectibles. Drive-up units work well for items less sensitive to temperature swings — lawn equipment, plastic bins, tools, sporting goods, patio furniture, and seasonal gear. If you are storing a mix, a climate-controlled unit covers everything. If your items are durable and you want easier outdoor access, drive-up is the practical and often more affordable choice.`,
   },
   {
     q: 'Do you offer storage during a home renovation?',
-    a: `Yes. Modern Storage® is widely used for home renovations across Arkansas. Customers store furniture, appliances, rugs, and household contents in either drive-up or climate-controlled units while contractors work on kitchens, baths, flooring, or whole-home remodels. Month-to-month rentals make it easy to extend the unit if a project runs longer than planned.`,
+    a: `Yes. Renovation storage is one of the most common reasons Arkansas households rent a Modern Storage® unit. Parking furniture, appliances, rugs, and decor in storage while contractors work protects your belongings and gives crews the space to work safely. Month-to-month rentals mean you only pay through the renovation — close out the unit when the project wraps.`,
   },
   {
     q: 'Can college students store between semesters?',
-    a: `Yes. Many Modern Storage® locations host college student storage between semesters. A 5x5 or 5x10 unit typically holds the contents of a dorm room or shared apartment bedroom, including a mattress, dresser, mini-fridge, desk, and several boxes. Reserve online, move in with the free moving truck where available, and continue month-to-month for as long as you need.`,
+    a: `Yes. Modern Storage® is a practical solution for college students storing furniture, clothes, and gear between semesters rather than hauling everything home. A 5x5 or 5x10 unit typically covers a dorm room or single bedroom. Month-to-month rentals mean you are not locked into a long lease. Modern Storage® has locations across central Arkansas and Northwest Arkansas, including locations convenient to the University of Arkansas and Northwest Arkansas campuses.`,
   },
   {
     q: 'Do you have boat, RV, or business storage as well?',
-    a: `Yes. In addition to household storage, Modern Storage® offers boat, RV, and vehicle parking at select Arkansas locations and business storage and mini-warehouse units led by Modern Storage® Riverdale. Visit the Boat and RV Storage page or the Business Storage page for details and to see which facilities offer which options.`,
+    a: `Yes. Modern Storage® offers boat, RV, and vehicle storage at select Arkansas locations near Beaver Lake, Lake Maumelle, Lake Ouachita, and Greers Ferry. Business storage and mini-warehouse space for contractors, inventory, tools, and commercial equipment is available at locations across Arkansas. See the Boat and RV Storage page and Business Storage page for details on both.`,
   },
 ] as const

@@ -765,7 +765,7 @@ export default async function BoatRvStoragePage() {
               <p className="font-black text-charcoal group-hover:text-modern-red transition-colors text-sm">Business and mini-warehouse storage →</p>
             </Link>
             <Link
-              href="/#moving-truck"
+              href="/free-moving-truck"
               className="group bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all"
             >
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Moving Truck</p>

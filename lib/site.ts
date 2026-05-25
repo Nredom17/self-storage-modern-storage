@@ -27,7 +27,7 @@ export const NAV_LINKS = [
   { label: 'Unit Sizes', href: '/#size-guide' },
   { label: 'Size Finder', href: '/ai-storage-size-finder' },
   { label: 'Locations', href: '/#locations' },
-  { label: 'Moving Truck', href: '/#moving-truck' },
+  { label: 'Moving Truck', href: '/free-moving-truck' },
   { label: 'FAQ', href: '/#faq' },
   { label: 'Reserve Now', href: '/#reserve' },
 ] as const

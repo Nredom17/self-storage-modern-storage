@@ -198,30 +198,30 @@ export const BOAT_RV_FAQS = [
   },
   {
     q: 'What size storage do I need for a pontoon boat?',
-    a: `Most pontoon boats fit comfortably in a 10x30 outdoor space at Modern Storage®, including the trailer tongue. Larger 24-foot-plus pontoons or tritoons can need a 10x40, especially with a tow vehicle parked alongside. Measure your trailer from the ball coupler to the rear of the motor, then add a few feet of buffer when you reserve.`,
+    a: `Most pontoon boats between 20 and 24 feet fit in a 10x30 space, including the trailer. Pontoons wider than 8.5 feet may need a wider pull-through or oversized space depending on the facility. Measure your boat including the full trailer length with tongue, any rear-mounted motor, and any bimini top hardware before reserving. Call 501-910-0096 and the team will confirm the right space at your nearest location.`,
   },
   {
     q: 'Do you offer covered RV parking near Bentonville?',
-    a: `Covered and indoor RV options vary by Modern Storage® location and are limited where available. For Northwest Arkansas customers, Modern Storage® Bentonville and Modern Storage® Lowell both support boat and RV storage, and indoor RV storage is available at Modern Storage® Shackleford in Little Rock for customers willing to drive further. Call ahead to confirm covered availability before reserving.`,
+    a: `Covered and indoor RV parking availability varies by location and changes with demand. Modern Storage® Lowell and Modern Storage® Bentonville are the closest Northwest Arkansas facilities for RV storage. Call 501-910-0096 or check availability online to confirm current covered options — spaces fill quickly heading into lake and travel season.`,
   },
   {
     q: 'Is climate-controlled vehicle storage worth it in Arkansas heat?',
-    a: `For daily drivers, no — outdoor parking is usually fine. For classic cars, convertibles, restoration projects, and collector vehicles you plan to keep long term, an indoor or climate-stable environment helps protect paint, interiors, rubber seals, and electronics from Arkansas summer heat and humidity. Indoor RV bays at Modern Storage® Shackleford are the closest equivalent for vehicles, and climate-controlled household units can hold parts, accessories, and racing gear.`,
+    a: `For daily drivers and work vehicles, standard outdoor parking is usually fine. For classic cars, collector vehicles, motorcycles, and anything with paint, leather interiors, rubber seals, or electronics you want to protect, a climate-controlled or indoor space is worth it in Arkansas. Summer temperatures regularly exceed 95 degrees and humidity is high — both accelerate rubber degradation, paint oxidation, and interior damage in an unconditioned space. Indoor RV bays at Modern Storage® Shackleford are the best option in central Arkansas for vehicles that need to stay out of the sun. For parts, tools, and accessories, a climate-controlled household unit alongside your parking space is the practical solution.`,
   },
   {
     q: 'Can I store a trailer, motorcycle, or classic car?',
-    a: `Yes. Modern Storage® supports utility trailers, dual-axle trailers, motorcycles, cars, trucks, work vans, and classic vehicles at participating locations. Motorcycles can be stored indoors at locations with appropriate unit sizes; trailers and full-size vehicles typically use outdoor parking. The right Modern Storage® location depends on your rig size and how often you need to pull it out.`,
+    a: `Yes. Modern Storage® stores utility trailers, dual-axle equipment trailers, motorcycles, classic cars, project vehicles, and work vans at select locations. Motorcycles can be stored indoors or outdoors depending on the facility. Classic cars and project vehicles do best in the indoor RV bays at Modern Storage® Shackleford in Little Rock. Utility and equipment trailers fit at most locations with outdoor parking — confirm space size and drive aisle width when you reserve.`,
   },
   {
     q: 'Which Modern Storage® locations offer boat and RV storage?',
-    a: `Modern Storage® offers boat, RV, and vehicle storage at Modern Storage® Lowell, Shackleford, Bentonville, Springdale, Maumelle Blvd, and Hot Springs. Customers near Beaver Lake favor Lowell, Bentonville, and Springdale. Central Arkansas customers favor Shackleford and Maumelle Blvd. Hot Springs customers and Little Rock weekenders headed to Lake Ouachita store at Modern Storage® Hot Springs.`,
+    a: `Boat, RV, and vehicle storage is available at Modern Storage® locations across central Arkansas (Shackleford, Maumelle Blvd, Bryant), Northwest Arkansas (Lowell, Bentonville, Springdale), and Hot Springs. Indoor RV storage is available at Modern Storage® Shackleford in Little Rock. Availability, space sizes, and covered options vary by location — use the location finder above or call 501-910-0096 to confirm what is currently available near you.`,
   },
   {
     q: 'Can I access my boat or RV on weekends?',
-    a: `Yes. Access hours vary by Modern Storage® location, but every featured boat and RV location supports weekend access during posted hours, and several offer extended hours for early-morning launches and late-night returns from the lake. Confirm specific access hours with the Modern Storage® location you plan to reserve with.`,
+    a: `Yes. Most Modern Storage® facilities offer 7-day gated access with personal access codes. Specific access hours vary by location — some facilities offer extended hours or 24-hour access. Confirm access hours for your specific facility when you reserve, especially if you plan early Saturday morning launches or late Sunday returns from the lake.`,
   },
   {
     q: 'How do I reserve boat or RV storage?',
-    a: `Reserve online from any Modern Storage® location page in just a few minutes — choose the location nearest your lake or route, select the space size that fits your rig, and confirm. Customers who would rather talk through options can call the centralized Modern Storage® line at 501-910-0096 and the team will recommend the right facility based on your boat, RV, or vehicle.`,
+    a: `Choose your location from the options above, select the space that fits your rig, and reserve online in minutes. You can also call 501-910-0096 and the team will help you find the right space and confirm current availability. Month-to-month rentals mean no long-term commitment — store seasonally or year-round based on your schedule.`,
   },
 ] as const

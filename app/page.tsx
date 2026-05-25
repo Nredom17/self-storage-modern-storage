@@ -407,15 +407,23 @@ export default async function HomePage() {
               <p className="text-sm text-gray-500 italic mb-8">
                 Availability, requirements, and location participation may vary.
               </p>
-              <Link
-                href="#locations"
-                className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-7 py-3.5 rounded-full transition-colors text-sm"
-              >
-                Find a Storage Unit
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/free-moving-truck"
+                  className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-7 py-3.5 rounded-full transition-colors text-sm"
+                >
+                  See Moving Truck Details
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+                <Link
+                  href="#locations"
+                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-7 py-3.5 rounded-full transition-colors border border-white/20 text-sm"
+                >
+                  Find a Storage Unit
+                </Link>
+              </div>
             </div>
           </div>
         </div>

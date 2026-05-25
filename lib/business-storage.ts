@@ -88,38 +88,38 @@ export const BUSINESS_FAQS = [
   },
   {
     q: 'Which Modern Storage® location is best for business storage?',
-    a: `Modern Storage® Riverdale is the lead business storage location in central Arkansas, with mini-warehouse units, loading dock access, and a setup designed for commercial customers. Modern Storage® Shackleford, West Little Rock, North Little Rock, Bentonville, and Lowell also support business storage for contractors, e-commerce sellers, and document archive customers. The business inquiry form on this page asks for a preferred location and our team will recommend the right facility based on size, access, and amenities.`,
+    a: `All Modern Storage® locations across Arkansas offer business storage units. The right location depends on where your business operates — Modern Storage® has facilities in Little Rock, North Little Rock, Bentonville, Springdale, Lowell, Maumelle, Bryant, and Hot Springs. Use the inquiry form above or call 501-910-0096 and the team will match you to the right facility and unit size for your business.`,
   },
   {
     q: 'Do you have loading docks?',
-    a: `Yes. Modern Storage® Riverdale offers dock-height loading for pallets, freight, and box trucks — useful for e-commerce inbound shipments, contractor material drops, and moving company stage-and-ship workflows. Loading dock availability varies by location; mention dock requirements in your business inquiry and we&apos;ll match you to the right Modern Storage® mini-warehouse.`,
+    a: `Loading docks are available at select Modern Storage® locations for pallets, freight, and box trucks. Availability varies by facility — confirm when you submit a business inquiry or call 501-910-0096.`,
   },
   {
     q: 'Can Modern Storage® accept packages for my business?',
-    a: `Yes — package acceptance is available at participating Modern Storage® locations, including Riverdale. Receiving for FedEx, UPS, USPS, and freight is useful for e-commerce sellers, contractors who can&apos;t take deliveries on a jobsite, and remote teams that need an Arkansas delivery address. Specific receiving hours and freight-size limits vary by location.`,
+    a: `Package and freight receiving for FedEx, UPS, USPS, and freight carriers is available at participating Modern Storage® locations. This is useful for e-commerce sellers and contractors who need a reliable receiving address. Confirm availability at your preferred location when you submit a business inquiry.`,
   },
   {
     q: 'Do business storage units have electricity?',
-    a: `Select mini-warehouse units at Modern Storage® include in-unit electricity for charging tools, running a small workstation, lighting, or low-draw equipment. Electrified units are limited and assigned during the inquiry process — note your power needs in the business storage inquiry form and our team will confirm availability.`,
+    a: `Select mini-warehouse units at Modern Storage® include in-unit electricity for charging tools, powering tools and equipment, or running lighting. Availability varies by location and unit. Note electricity as a requirement in your business inquiry and the team will confirm which units can accommodate it.`,
   },
   {
     q: 'Is there 24/7 access for business storage?',
-    a: `24/7 gated access is available at a subset of business storage units across Modern Storage® Arkansas locations, including extended-hours options at Modern Storage® Riverdale. After-hours access depends on the specific unit, security setup, and location policy. Mention required access hours in your inquiry and the team will confirm which Modern Storage® location and unit fits.`,
+    a: `Extended and 24/7 gated access is available at select Modern Storage® locations. Access hours vary by facility, so confirm availability before reserving.`,
   },
   {
     q: 'Do you offer climate-controlled business storage?',
-    a: `Yes. Climate-controlled mini-warehouse units are available at most Modern Storage® locations for businesses storing electronics, documents, samples, soft goods, restoration contents, and staging inventory. See the Climate-Controlled Storage page for more on what belongs indoors, then mention climate control in your business inquiry to match the right unit.`,
+    a: `Yes. Climate-controlled business storage units are available at Modern Storage® locations across Arkansas. Climate control is recommended for e-commerce inventory, product samples, documents, staging furniture, electronics, and any commercial stock sensitive to Arkansas heat and humidity.`,
   },
   {
     q: 'Can my moving company or restoration crew use Modern Storage® for staging?',
-    a: `Yes. Modern Storage® supports moving companies, restoration and disaster-response crews, contractors, and stagers with mini-warehouse units sized for active use. Partner programs are available for organizations that need recurring staging space across multiple Modern Storage® Arkansas locations — request details through the business storage inquiry form.`,
+    a: `Yes. Modern Storage® works with moving companies, restoration crews, and disaster-response teams across Arkansas. Moving companies use Modern Storage® for overflow, between-move staging, and short-term customer holds. Restoration companies use it for content packouts, equipment storage, and dehumidifier rotation. Contact the business storage team to discuss volume, access, and partner program options.`,
   },
   {
     q: 'Do you offer multi-unit or multi-location pricing for businesses?',
-    a: `Yes. The Modern Storage® volume rate program structures pricing for organizations renting multiple mini-warehouse units or rentals across more than one Arkansas location. Submit a business storage inquiry with the number of units, locations, and approximate timeline, and our team will follow up with a structured quote.`,
+    a: `Yes. Modern Storage® offers volume pricing for organizations that need multiple units or storage across more than one Arkansas location. Multi-unit accounts include a single point of contact and consolidated invoicing. Submit a business inquiry above or call 501-910-0096 to discuss your needs and get a structured quote.`,
   },
   {
     q: 'How do I get a business storage quote?',
-    a: `Submit the business storage inquiry form on this page with your use case, preferred Modern Storage® location, and a quick note on what you need to store. Our team responds with available mini-warehouse units, pricing, and any partner program options that fit. Businesses that prefer to talk can also call the centralized Modern Storage® number listed on every page.`,
+    a: `Fill out the business inquiry form on this page with your name, company, preferred location, use case, and a brief description of what you need to store. The Modern Storage® team will respond with available options based on your needs. You can also call 501-910-0096 directly to speak with the business storage team.`,
   },
 ] as const
