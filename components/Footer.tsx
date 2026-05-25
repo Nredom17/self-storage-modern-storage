@@ -31,6 +31,7 @@ const LOCATIONS: Array<{ label: string; href: string }> = FOOTER_LOCATION_SPEC.f
 
 const RESOURCES = [
   { label: 'AI Storage Size Finder', href: '/ai-storage-size-finder' },
+  { label: 'Move-In Checklist', href: '/move-in-checklist' },
   { label: 'Free Moving Truck', href: '/free-moving-truck' },
   { label: 'Size Guide', href: '/#size-guide' },
   { label: 'FAQ', href: '/#faq' },

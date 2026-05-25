@@ -328,6 +328,10 @@ export default async function FreeMovingTruckPage() {
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Size Finder</p>
               <p className="font-black text-charcoal group-hover:text-modern-red transition-colors text-sm">AI Storage Size Finder →</p>
             </Link>
+            <Link href="/move-in-checklist" className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Checklist</p>
+              <p className="font-black text-charcoal group-hover:text-modern-red transition-colors text-sm">Move-In Checklist →</p>
+            </Link>
           </div>
         </div>
       </section>

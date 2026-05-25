@@ -248,7 +248,11 @@ export default async function AIStorageSizeFinderPage() {
           <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-8">
             Keep Browsing
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+            <Link href="/move-in-checklist" className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Checklist</p>
+              <p className="font-black text-charcoal group-hover:text-modern-red transition-colors text-sm">Move-In Checklist →</p>
+            </Link>
             <Link href="/#locations" className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all">
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Locations</p>
               <p className="font-black text-charcoal group-hover:text-modern-red transition-colors text-sm">Storage locations across Arkansas →</p>
