@@ -97,7 +97,6 @@ export const NAV_TREE: readonly NavTreeItem[] = [
     items: [
       { label: 'Size Guide', href: '/#size-guide' },
       { label: 'AI Size Finder', href: '/ai-storage-size-finder' },
-      { label: '5x5 to 10x30 Sizes', href: '/#size-guide' },
     ],
   },
   { type: 'link', label: 'Moving Truck', href: '/free-moving-truck' },
