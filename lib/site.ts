@@ -32,6 +32,70 @@ export const NAV_LINKS = [
   { label: 'Reserve Now', href: '/#reserve' },
 ] as const
 
+// Header nav tree. Mix of `link` (single anchor) and `dropdown` (menu).
+// Order is left-to-right on desktop, top-to-bottom on mobile.
+export type NavTreeItem =
+  | { type: 'link'; label: string; href: string; external?: boolean }
+  | {
+      type: 'dropdown'
+      label: string
+      items: {
+        label: string
+        href: string
+        external?: boolean
+      }[]
+    }
+
+export const NAV_TREE: readonly NavTreeItem[] = [
+  {
+    type: 'dropdown',
+    label: 'Locations',
+    items: [
+      { label: 'Find Storage Near You', href: '/locations' },
+      { label: 'Little Rock Area', href: '/locations#little-rock-area' },
+      { label: 'Northwest Arkansas', href: '/locations#northwest-arkansas' },
+      { label: 'View All Locations', href: '/locations' },
+    ],
+  },
+  {
+    type: 'dropdown',
+    label: 'Storage Types',
+    items: [
+      { label: 'Climate-Controlled Storage', href: '/climate-controlled' },
+      { label: 'Boat & RV Storage', href: '/rv-boat-vehicle' },
+      { label: 'Business Storage', href: '/business-storage' },
+      { label: 'Household Storage', href: '/household-storage' },
+    ],
+  },
+  {
+    type: 'dropdown',
+    label: 'Unit Sizes',
+    items: [
+      { label: 'Size Guide', href: '/#size-guide' },
+      { label: 'AI Size Finder', href: '/ai-storage-size-finder' },
+      { label: '5x5 to 10x30 Sizes', href: '/#size-guide' },
+    ],
+  },
+  { type: 'link', label: 'Moving Truck', href: '/free-moving-truck' },
+  {
+    type: 'dropdown',
+    label: 'Resources',
+    items: [
+      { label: 'Blog', href: 'https://www.modernstorage.com/blog', external: true },
+      {
+        label: 'Modern Storage® Unpacked',
+        href: 'https://podcast.modernstorage.com',
+        external: true,
+      },
+      { label: 'Video Library', href: 'https://www.youtube.com/@modernstorage', external: true },
+      { label: 'Free Moving Checklist', href: '/move-in-checklist' },
+      { label: 'Storage Tips', href: 'https://www.modernstorage.com/blog', external: true },
+    ],
+  },
+  { type: 'link', label: 'FAQ', href: '/#faq' },
+  { type: 'link', label: 'Reserve Now', href: '/#reserve' },
+] as const
+
 export const THEME_PAGES = [
   {
     slug: 'climate-controlled',

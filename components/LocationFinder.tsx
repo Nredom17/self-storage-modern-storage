@@ -29,6 +29,24 @@ export default function LocationFinder({
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null)
   const cardRefs = useRef<Record<string, HTMLElement | null>>({})
 
+  // Deep-link the filter via URL hash. Header nav uses /locations#little-rock-area
+  // and /locations#northwest-arkansas — match those to the chip on mount and on
+  // hashchange (so browser back/forward also activates the right chip).
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const applyHash = () => {
+      const raw = window.location.hash.replace(/^#/, '').toLowerCase()
+      if (!raw) return
+      const matched = LOCATION_FILTERS.find(
+        (r) => r.toLowerCase().replace(/\s+/g, '-') === raw,
+      )
+      if (matched) setActiveFilter(matched)
+    }
+    applyHash()
+    window.addEventListener('hashchange', applyHash)
+    return () => window.removeEventListener('hashchange', applyHash)
+  }, [])
+
   const base = requireBadge
     ? locations.filter((l) => l.badges.includes(requireBadge))
     : locations
