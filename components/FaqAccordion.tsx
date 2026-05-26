@@ -2,7 +2,10 @@
 
 import { useState } from 'react'
 
-type FaqItem = { q: string; a: string }
+// `a` is the plain-text answer used in the JSON-LD FAQPage schema (Google
+// requires plain text there). `aHtml` is the optional rich version rendered
+// to the page, allowing embedded internal links for topical authority.
+type FaqItem = { q: string; a: string; aHtml?: string }
 
 export default function FaqAccordion({ items }: { items: readonly FaqItem[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
@@ -45,7 +48,14 @@ export default function FaqAccordion({ items }: { items: readonly FaqItem[] }) {
               hidden={!isOpen}
               className="pb-5 pr-12"
             >
-              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">{item.a}</p>
+              {item.aHtml ? (
+                <p
+                  className="text-gray-600 leading-relaxed text-sm sm:text-base [&_a]:text-modern-red [&_a]:font-semibold [&_a:hover]:underline"
+                  dangerouslySetInnerHTML={{ __html: item.aHtml }}
+                />
+              ) : (
+                <p className="text-gray-600 leading-relaxed text-sm sm:text-base">{item.a}</p>
+              )}
             </div>
           </div>
         )

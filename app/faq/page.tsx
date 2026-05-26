@@ -117,27 +117,40 @@ export default async function FaqHubPage() {
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {THEME_PAGES.map((p) => (
-              <Link
-                key={p.slug}
-                href={`${p.href}#faq`}
-                className="group bg-white rounded-2xl p-6 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all flex flex-col"
-              >
-                <p className="text-[10px] font-black uppercase tracking-widest text-modern-red mb-2">
-                  FAQs
-                </p>
-                <h3 className="font-black text-charcoal text-lg leading-tight mb-3 group-hover:text-modern-red transition-colors">
-                  {p.title}
-                </h3>
-                <p className="text-sm text-gray-600 leading-relaxed flex-1 mb-4">{p.description}</p>
-                <span className="text-xs font-bold text-modern-red inline-flex items-center gap-1">
-                  Read FAQs
-                  <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                  </svg>
-                </span>
-              </Link>
-            ))}
+            {THEME_PAGES.map((p) => {
+              // Page-specific FAQ titles for SEO — adds "FAQs" suffix and tweaks
+              // wording per slug so each card targets the long-tail query
+              // (e.g., "household self-storage FAQs"). Falls back to the global
+              // THEME_PAGES title if a new slug is added.
+              const faqTitle =
+                {
+                  'climate-controlled': 'Climate-Controlled Storage FAQs',
+                  'household-storage': 'Household Self-Storage FAQs',
+                  'rv-boat-vehicle': 'Boat & RV Storage FAQs',
+                  'business-storage': 'Business Storage Unit FAQs',
+                }[p.slug] ?? `${p.title} FAQs`
+              return (
+                <Link
+                  key={p.slug}
+                  href={`${p.href}#faq`}
+                  className="group bg-white rounded-2xl p-6 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all flex flex-col"
+                >
+                  <p className="text-[10px] font-black uppercase tracking-widest text-modern-red mb-2">
+                    FAQs
+                  </p>
+                  <h3 className="font-black text-charcoal text-lg leading-tight mb-3 group-hover:text-modern-red transition-colors">
+                    {faqTitle}
+                  </h3>
+                  <p className="text-sm text-gray-600 leading-relaxed flex-1 mb-4">{p.description}</p>
+                  <span className="text-xs font-bold text-modern-red inline-flex items-center gap-1">
+                    Read FAQs
+                    <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </Link>
+              )
+            })}
           </div>
         </div>
       </section>
