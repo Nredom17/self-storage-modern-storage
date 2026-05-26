@@ -82,11 +82,11 @@ export default function Header({
         </Link>
 
         {/* Desktop nav — shows from md (768px) and up. Tighter spacing at small
-            laptop / iPad widths; full breathing room at xl+. overflow-x-auto is
-            a safety net so the tab bar never truly clips. */}
+            laptop / iPad widths; full breathing room at xl+. No overflow clip
+            here — dropdowns position absolute and must escape the nav box. */}
         <nav
           ref={navRef}
-          className="hidden md:flex items-center gap-0 lg:gap-0.5 flex-1 justify-end overflow-x-auto scrollbar-thin"
+          className="hidden md:flex items-center gap-0 lg:gap-0.5 flex-1 justify-end"
         >
           {/* ── Locations (custom drill-down dropdown) ── */}
           <div className="relative">
