@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Suspense } from 'react'
 import { SITE_URL } from '@/lib/site'
 import { getLocations, getSiteSettings } from '@/lib/data'
 import { buildLocationSchemaList } from '@/lib/schema'
 import LocationFinder from '@/components/LocationFinder'
+import NearMeSearch from '@/components/NearMeSearch'
 
 export const revalidate = 60
 
@@ -89,8 +91,26 @@ export default async function LocationsHubPage() {
         </div>
       </section>
 
+      {/* ── NEAR-ME SEARCH ─────────────────────────────────── */}
+      <section id="near-me" className="bg-gray-50 pt-20 pb-10">
+        <div className="max-w-4xl mx-auto px-6">
+          <Suspense
+            fallback={
+              <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
+                <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+                  Find Storage Near You
+                </p>
+                <div className="h-12 bg-gray-100 animate-pulse rounded-full" />
+              </div>
+            }
+          >
+            <NearMeSearch locations={locations} />
+          </Suspense>
+        </div>
+      </section>
+
       {/* ── LOCATION FINDER ──────────────────────────────────── */}
-      <section id="locations" className="bg-gray-50 py-20">
+      <section id="locations" className="bg-gray-50 pb-20">
         <div className="max-w-7xl mx-auto px-6">
           <LocationFinder locations={locations} />
         </div>

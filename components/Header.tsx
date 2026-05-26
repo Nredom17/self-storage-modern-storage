@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { NAV_TREE, LOCATION_NAV_GROUPS } from '@/lib/site'
+import NearMeSearchInput from '@/components/NearMeSearchInput'
 
 type LocationsView = 'top' | 'central-arkansas' | 'northwest-arkansas'
 
@@ -115,14 +116,7 @@ export default function Header({
               >
                 {locationsView === 'top' ? (
                   <>
-                    <Link
-                      href="/locations"
-                      role="menuitem"
-                      onClick={closeAll}
-                      className="block px-4 py-2.5 text-sm font-bold text-charcoal hover:bg-gray-100 transition-colors"
-                    >
-                      Find Storage Near You
-                    </Link>
+                    <NearMeSearchInput onSubmit={closeAll} />
                     <div className="h-px bg-gray-100 my-1" aria-hidden="true" />
                     {LOCATION_NAV_GROUPS.map((group) => (
                       <button
@@ -330,13 +324,9 @@ export default function Header({
           </button>
           {mobileExpanded.has('Locations') && (
             <div className="pl-3 mt-0.5 mb-2 border-l-2 border-modern-red/40 ml-3">
-              <Link
-                href="/locations"
-                onClick={closeAll}
-                className="block text-sm font-bold text-gray-200 hover:text-white px-3 py-2.5 rounded-md hover:bg-white/10 transition-colors"
-              >
-                Find Storage Near You
-              </Link>
+              <div className="bg-white rounded-lg my-1">
+                <NearMeSearchInput onSubmit={closeAll} />
+              </div>
               {LOCATION_NAV_GROUPS.map((group) => (
                 <div key={group.id} className="mt-1">
                   <p className="text-[10px] font-black uppercase tracking-widest text-modern-red px-3 pt-2 pb-1">
