@@ -18,67 +18,112 @@ export const TRUCK_LOCATIONS: Array<{ name: string; area: string; slug: string }
   { slug: 'lowell', name: 'Modern Storage® Lowell', area: 'Northwest Arkansas' },
 ]
 
-// How the truck works — five short steps so customers know exactly what to
-// expect on move-in day. No fabricated specifics: language hedges anything
-// that varies by location.
+// How the truck works — three punchy steps for fast scanning. Customers don't
+// need a five-step checklist; they need to know it's simple. No fabricated
+// specifics: language hedges anything that varies by location.
 export const HOW_IT_WORKS = [
   {
     n: '1',
-    t: 'Reserve your storage unit',
-    b: 'Reserve a Modern Storage® unit online or by phone at any of our 10 Locations. Mention you plan to use the free moving truck so the team can schedule it for your move-in day.',
+    t: 'Reserve Your Unit',
+    b: 'Book your Modern Storage® unit online or by phone, and request the free moving truck for your move-in day.',
   },
   {
     n: '2',
-    t: 'Confirm truck availability for your date',
-    b: 'Trucks are first-come, first-served and book up quickly during peak moving weekends. Lock in a date as soon as your reservation is set so the truck is ready when you arrive.',
+    t: 'Confirm Availability',
+    b: 'Weekend and month-end dates fill quickly. Lock in your truck date as early as possible — ideally a week ahead during peak moving season.',
   },
   {
     n: '3',
-    t: 'Pick up the truck at the facility',
-    b: 'Bring a valid driver’s license and proof of personal auto insurance. We just need to verify your insurance covers use of the moving truck before you drive. Most customers are on the road within 15 minutes.',
-  },
-  {
-    n: '4',
-    t: 'Load, drive, unload',
-    b: 'Move your furniture, appliances, mattresses, and boxes from your home directly to your storage unit. Most moves are a single trip — local distances make the math easy.',
-  },
-  {
-    n: '5',
-    t: 'Return the truck the same day',
-    b: 'We send the truck out with a full tank of gas. Return it the same day with a full tank, and you only pay for the fuel you used along the way. The team confirms mileage at return and your storage rental is fully set up.',
+    t: 'Pick Up & Move',
+    b: 'Bring your driver’s license and proof of insurance, load up, and drive straight to your unit. Return the truck the same day with a full tank.',
   },
 ] as const
 
-export const TRUCK_DETAILS = [
+// Who uses the free moving truck most. Expands keyword reach (apartment moves,
+// college storage, military relocation, home staging, downsizing, business
+// inventory) and helps visitors self-identify with the use case.
+export const WHO_USES_THIS = [
+  'Apartment moves',
+  'College students',
+  'Home staging during a sale',
+  'Military relocation (PCS moves)',
+  'Downsizing & empty nesters',
+  'Business inventory moves',
+  'Local household moves',
+  'Renovations & remodels',
+] as const
+
+// Truck capacity & specs — fully hedged. Real specs vary by Modern Storage®
+// location and truck size; this section gives customers enough to plan
+// without making promises we can't keep.
+export const TRUCK_SPECS = [
   {
-    title: 'Reservation requirements',
+    title: 'Capacity',
     body:
-      'A free moving truck is included with new storage rentals at all 10 Modern Storage® locations. Customers complete a storage unit reservation before booking the truck, and the truck date is tied to your move-in day.',
+      'Most Modern Storage® locations offer a box truck sized to move a one-bedroom to two-bedroom apartment in a single trip. Customers moving a small home typically finish in one trip with efficient loading.',
   },
   {
-    title: 'Driver & insurance',
+    title: 'Loading equipment',
     body:
-      'Bring a valid driver’s license and proof of personal auto insurance when you pick up the truck. We just need to verify your insurance covers use of the moving truck before you drive. Some locations may require the driver to be 21 or older — confirm with the Modern Storage® location you reserved with.',
+      'Most trucks include a rear loading ramp and tie-down points along the cargo walls. Hand trucks and furniture dollies may be available at participating locations — ask when you reserve.',
+  },
+  {
+    title: 'Transmission & drivability',
+    body:
+      'The trucks are automatic transmission with standard car-style controls. If you can drive a full-size SUV or pickup, you can drive the Modern Storage® moving truck.',
+  },
+  {
+    title: 'Will my stuff fit?',
+    body:
+      'A one-bedroom apartment, a 10x10 storage unit’s worth of furniture and boxes, or a typical small-home move usually loads in one trip. Larger four-bedroom moves may need two trips or a supplemental truck — the team can advise when you reserve.',
+  },
+] as const
+
+// Comparison table — head-to-head against the traditional "rent storage + rent
+// a truck separately" workflow. Strong conversion copy because it reframes the
+// decision around bundled value rather than feature-by-feature.
+export const COMPARISON_ROWS: Array<{ aspect: string; traditional: string; modern: string }> = [
+  { aspect: 'Storage unit',          traditional: 'Rent separately',           modern: 'Reserve online' },
+  { aspect: 'Moving truck',          traditional: 'Rent from a second company', modern: 'Included free' },
+  { aspect: 'Reservation steps',     traditional: 'Two companies, two systems', modern: 'One reservation' },
+  { aspect: 'Truck rental fee',      traditional: '$80–$200+ per day',          modern: 'No truck fee' },
+  { aspect: 'Drop-off location',     traditional: 'Drive back to rental site',  modern: 'Return on site' },
+  { aspect: 'Trips on move-in day',  traditional: 'Two or more trips',          modern: 'Often one trip' },
+  { aspect: 'Coordination',          traditional: 'Match schedules & deposits', modern: 'One team, one date' },
+]
+
+// Social proof — short, factual trust signals to break up legal/procedural
+// copy with positive reinforcement. Kept hedged and honest.
+export const SOCIAL_PROOF = {
+  headline: 'One of our most-requested move-in benefits',
+  body:
+    'The free moving truck has been a Modern Storage® move-in benefit for years. Customers across Little Rock, Bentonville, Springdale, Bryant, Hot Springs, and Maumelle have used it for apartment moves, downsizing, home staging, and business inventory loads — without renting a separate truck.',
+} as const
+
+// What customers ask about most — kept to four cards so it reads fast. The
+// long-form verification/approval terms now live in a single VERIFICATION_NOTE
+// (hero) plus the dedicated FAQ entry, instead of being repeated three times
+// across the page.
+export const TRUCK_DETAILS = [
+  {
+    title: 'Reservation & pickup',
+    body:
+      'Reserve your Modern Storage® unit first, then lock in your truck for your move-in day. Bring a valid driver’s license and proof of personal auto insurance to pickup — most customers are on the road within 15 minutes.',
   },
   {
     title: 'Fuel policy',
     body:
-      'We send the truck out with a full tank of gas. Return it with a full tank, and you only pay for the fuel you used. No fuel surcharges, no refueling fees — just pay the pump on your way back.',
+      'Truck goes out with a full tank. Return it the same day with a full tank and you only pay for the fuel you used on your trip. No fuel surcharges, no refueling fees.',
   },
   {
-    title: 'Mileage and use',
+    title: 'Mileage',
     body:
-      'A daily mileage allowance is included with the free truck for local moves. Mileage limits and overage rates vary by location and truck size — the team will walk you through the exact terms before you sign.',
-  },
-  {
-    title: 'Verification & approval',
-    body:
-      'Truck use is subject to verification and approval. Free moving truck use is available to qualifying customers and is subject to location availability, reservation confirmation, valid driver’s license, proof of insurance, account status, and completion of any required rental paperwork. Modern Storage® reserves the right to deny or cancel truck use if any information cannot be verified or if the customer does not meet truck-use requirements.',
+      'A daily mileage allowance is included for local moves. Mileage limits and overage rates vary by location and truck size — the team confirms the exact terms before you sign so there are no surprises.',
   },
   {
     title: 'Availability',
     body:
-      'Trucks are limited and reserved on a first-come, first-served basis. Friday afternoons, weekends, and the first and last weekends of the month book up first. Reserving your storage unit and truck several days ahead is the easiest way to lock in your move-in date.',
+      'Trucks are first-come, first-served. Friday afternoons, weekends, and the first and last weekends of every month book up first. Reserve as early as you can — ideally a week ahead during peak moving season.',
   },
 ] as const
 

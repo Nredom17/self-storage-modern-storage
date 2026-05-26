@@ -8,6 +8,10 @@ import {
   TRUCK_LOCATIONS,
   HOW_IT_WORKS,
   TRUCK_DETAILS,
+  TRUCK_SPECS,
+  WHO_USES_THIS,
+  COMPARISON_ROWS,
+  SOCIAL_PROOF,
   MOVING_TIPS,
   TRUCK_FAQS,
   VERIFICATION_NOTE,
@@ -25,12 +29,12 @@ export const metadata: Metadata = {
     absolute: 'Free Moving Truck with Storage in Arkansas | Modern Storage®',
   },
   description:
-    'Free moving truck with new storage unit rentals at all 10 Modern Storage® locations — West Little Rock, Shackleford, Riverdale, North Little Rock, Maumelle Blvd, Bryant, Hot Springs, Bentonville, Springdale, and Lowell. Full tank in, full tank out. Reserve your unit and truck together.',
+    'Free moving truck included with new storage unit rentals at all 10 Modern Storage® Arkansas locations — West Little Rock, Shackleford, Riverdale, North Little Rock, Maumelle Blvd, Bryant, Hot Springs, Bentonville, Springdale, and Lowell. Move in with one trip instead of two. Reserve your storage unit and lock in your move-in truck date online.',
   alternates: { canonical: SITE_URL + PAGE_PATH },
   openGraph: {
     title: 'Free Moving Truck with Storage in Arkansas | Modern Storage®',
     description:
-      'New storage rentals include a free moving truck at participating Modern Storage® Arkansas locations. Move-in day made easier — no second truck rental, no second trip.',
+      'Every new Modern Storage® storage rental includes a free moving truck for move-in day. Skip the second rental and the second trip.',
     url: SITE_URL + PAGE_PATH,
     siteName: 'Modern Storage®',
     type: 'website',
@@ -40,7 +44,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Free Moving Truck with Storage in Arkansas | Modern Storage®',
     description:
-      'Free moving truck with new Modern Storage® storage rentals at participating Arkansas locations.',
+      'Every new Modern Storage® storage rental includes a free moving truck — at all 10 Arkansas locations.',
     images: [HERO_IMAGE],
   },
 }
@@ -141,11 +145,11 @@ export default async function FreeMovingTruckPage() {
                 Free Moving Truck with <span className="text-modern-red">Storage</span> in Arkansas
               </h1>
               <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-lg">
-                Every new Modern Storage® rental — at all 10 Locations — includes a free moving truck for move-in day. No second rental, no second trip. Load your furniture, appliances, and boxes once and drive straight to your unit.
+                Every new Modern Storage® rental — at all 10 Arkansas locations — includes a free moving truck for move-in day. Move in with one trip instead of two. Load your furniture, appliances, mattresses, and boxes once, and drive straight to your <Link href="/locations" className="text-white underline decoration-modern-red decoration-2 underline-offset-4 hover:text-modern-red transition-colors">Modern Storage® unit</Link>.
               </p>
               <div className="flex flex-wrap gap-4 mb-10">
                 <Link
-                  href="/#locations"
+                  href="/locations"
                   className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-7 py-3.5 rounded-full transition-colors text-sm"
                 >
                   Reserve a Unit with Truck
@@ -163,10 +167,6 @@ export default async function FreeMovingTruckPage() {
                   Call {PHONE_NUMBER_DISPLAY}
                 </a>
               </div>
-
-              <p className="text-xs text-gray-400 italic max-w-lg mb-8 leading-relaxed">
-                {VERIFICATION_NOTE}
-              </p>
 
               <ul className="flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-gray-400">
                 {TRUST_BULLETS.map((t) => (
@@ -192,30 +192,78 @@ export default async function FreeMovingTruckPage() {
                 />
               </div>
               <figcaption className="text-xs text-gray-500 mt-3 italic">
-                Modern Storage® branded moving truck — included with new rentals at participating locations.
+                Free moving truck included with new storage rentals — move directly into your Modern Storage® unit with one trip.
               </figcaption>
             </figure>
           </div>
         </div>
       </section>
 
-      {/* ── HOW IT WORKS ─────────────────────────────────────── */}
-      <section className="bg-white py-20 border-y border-gray-200">
+      {/* ── EARLY CONVERSION CTA ─────────────────────────────────
+          Sits immediately under the hero so customers who skim and
+          decide don't have to scroll back up to reserve. */}
+      <section className="bg-modern-red">
+        <div className="max-w-7xl mx-auto px-6 py-10">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div className="text-white max-w-2xl">
+              <h2 className="text-2xl lg:text-3xl font-black mb-2 tracking-tight">
+                Reserve a Storage Unit &amp; Free Moving Truck
+              </h2>
+              <p className="text-red-50 leading-relaxed">
+                Move in with one trip instead of two. Reserve your Modern Storage® unit online and lock in truck availability for your move-in day — weekend dates fill first.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3 shrink-0">
+              <Link
+                href="/locations"
+                className="bg-white text-modern-red font-black px-6 py-3 rounded-full hover:bg-red-50 transition-colors text-sm shadow-md inline-flex items-center gap-2 whitespace-nowrap"
+              >
+                Reserve a Unit
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <a
+                href={PHONE_NUMBER_HREF}
+                className="bg-charcoal text-white font-black px-6 py-3 rounded-full hover:bg-gray-800 transition-colors text-sm shadow-md inline-flex items-center gap-2 whitespace-nowrap"
+              >
+                Call {PHONE_NUMBER_DISPLAY}
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SOCIAL PROOF STRIP ─────────────────────────────────── */}
+      <section className="bg-white py-12 border-b border-gray-200">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Trusted Move-In Benefit</p>
+          <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-4">
+            {SOCIAL_PROOF.headline}
+          </h2>
+          <p className="text-gray-700 text-base lg:text-lg leading-relaxed max-w-3xl mx-auto">
+            {SOCIAL_PROOF.body}
+          </p>
+        </div>
+      </section>
+
+      {/* ── HOW IT WORKS — three punchy steps ──────────────────── */}
+      <section className="bg-gray-50 py-20 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-3xl mb-12">
-            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">How the free truck works</p>
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">How it works</p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
               How the Free Moving Truck Works
             </h2>
             <p className="text-gray-700 text-lg leading-relaxed">
-              The free moving truck is a move-in convenience tied to your new Modern Storage® storage unit rental. It is not a standalone truck rental — it is included with your unit so move-in day is one trip instead of two.
+              Three steps. Pair the free moving truck with your <Link href="/size-guide" className="text-modern-red font-semibold hover:underline">Modern Storage® unit size</Link> and load straight from your home to your storage unit on move-in day.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {HOW_IT_WORKS.map((s) => (
-              <div key={s.n} className="bg-gray-50 rounded-2xl p-5 border border-gray-200">
+              <div key={s.n} className="bg-white rounded-2xl p-6 border border-gray-200">
                 <div className="font-bebas text-5xl text-modern-red leading-none mb-3">{s.n}</div>
-                <h3 className="font-black text-charcoal text-base mb-2 leading-tight">{s.t}</h3>
+                <h3 className="font-black text-charcoal text-lg mb-2 leading-tight">{s.t}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{s.b}</p>
               </div>
             ))}
@@ -223,8 +271,111 @@ export default async function FreeMovingTruckPage() {
         </div>
       </section>
 
+      {/* ── WHO USES THE FREE TRUCK MOST ─────────────────────────
+          Expands keyword reach and helps visitors self-identify with
+          the most common use cases for the free moving truck. */}
+      <section className="bg-white py-20 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-10">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Who uses it most</p>
+            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+              Most Popular Move-In Truck Use Cases
+            </h2>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              The free moving truck is most often booked alongside <Link href="/household-storage" className="text-modern-red font-semibold hover:underline">household self-storage</Link>, <Link href="/business-storage" className="text-modern-red font-semibold hover:underline">business storage</Link>, and apartment-move rentals. Customers searching for storage units with a free moving truck near me typically fall into one of these categories:
+            </p>
+          </div>
+          <ul className="flex flex-wrap gap-3">
+            {WHO_USES_THIS.map((u) => (
+              <li
+                key={u}
+                className="inline-flex items-center gap-2 bg-gray-50 border border-gray-200 text-charcoal text-sm font-semibold px-4 py-2.5 rounded-full"
+              >
+                <svg className="w-3.5 h-3.5 text-modern-red shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                </svg>
+                {u}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ── TRUCK SPECS — answers "will my stuff fit?" ───────── */}
+      <section className="bg-gray-50 py-20 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-12">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Truck specs</p>
+            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+              What to Expect from the Moving Truck
+            </h2>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              Most customers moving a one-bedroom or two-bedroom apartment complete the move in a single trip. Exact truck dimensions vary by Modern Storage® location and truck size — confirm specifics when you reserve.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {TRUCK_SPECS.map((s) => (
+              <div key={s.title} className="bg-white rounded-2xl p-6 border border-gray-200">
+                <h3 className="font-black text-charcoal text-lg mb-3 leading-tight">{s.title}</h3>
+                <p className="text-sm text-gray-700 leading-relaxed">{s.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── COMPARISON TABLE — Modern Storage® vs traditional ─── */}
+      <section className="bg-charcoal text-white py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-12">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Why customers prefer it</p>
+            <h2 className="text-3xl lg:text-4xl font-black text-white tracking-tight mb-4">
+              Storage Unit With a Free Truck vs. the Traditional Move
+            </h2>
+            <p className="text-gray-400 text-lg leading-relaxed">
+              Renting storage and renting a truck used to mean coordinating two companies, two reservations, and two pickups. With Modern Storage®, the truck is included with your storage unit — one team, one date, one trip.
+            </p>
+          </div>
+          <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+            <table className="w-full text-left text-sm sm:text-base">
+              <thead className="bg-white/10">
+                <tr>
+                  <th scope="col" className="px-4 sm:px-6 py-4 font-black uppercase tracking-widest text-xs text-gray-400">
+                    Aspect
+                  </th>
+                  <th scope="col" className="px-4 sm:px-6 py-4 font-black uppercase tracking-widest text-xs text-gray-400">
+                    Traditional Move
+                  </th>
+                  <th scope="col" className="px-4 sm:px-6 py-4 font-black uppercase tracking-widest text-xs text-modern-red">
+                    Modern Storage®
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/10">
+                {COMPARISON_ROWS.map((row) => (
+                  <tr key={row.aspect}>
+                    <th scope="row" className="px-4 sm:px-6 py-4 font-semibold text-white align-top">
+                      {row.aspect}
+                    </th>
+                    <td className="px-4 sm:px-6 py-4 text-gray-400 align-top">{row.traditional}</td>
+                    <td className="px-4 sm:px-6 py-4 text-white font-semibold align-top">
+                      <span className="inline-flex items-center gap-2">
+                        <svg className="w-4 h-4 text-modern-red shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                        {row.modern}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       {/* ── PARTICIPATING LOCATIONS ──────────────────────────── */}
-      <section id="locations" className="bg-gray-50 py-20">
+      <section id="locations" className="bg-white py-20 border-y border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-3xl mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Where to get the truck</p>
@@ -232,12 +383,12 @@ export default async function FreeMovingTruckPage() {
               All 10 Modern Storage® Locations Participate
             </h2>
             <p className="text-gray-700 text-lg leading-relaxed">
-              The free moving truck is offered at every Modern Storage® Arkansas location — West Little Rock, Shackleford, Riverdale, North Little Rock, Maumelle Blvd, Bryant, Hot Springs, Bentonville, Springdale, and Lowell. Truck availability rotates by location and demand — confirm with your specific facility when you reserve your unit.
+              The free moving truck is offered at every <Link href="/locations" className="text-modern-red font-semibold hover:underline">Modern Storage® Arkansas location</Link> — West Little Rock, Shackleford, Riverdale, North Little Rock, Maumelle Blvd, Bryant, Hot Springs, Bentonville, Springdale, and Lowell. Truck availability rotates by location and demand, so confirm with your specific facility when you reserve your unit.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {TRUCK_LOCATIONS.map((loc) => (
-              <div key={loc.name} className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-modern-red transition-colors">
+              <div key={loc.name} className="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-modern-red transition-colors">
                 <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">{loc.area}</p>
                 <h3 className="font-black text-charcoal text-lg leading-tight">{loc.name}</h3>
               </div>
@@ -245,7 +396,7 @@ export default async function FreeMovingTruckPage() {
           </div>
           <div className="mt-10 flex flex-wrap gap-3">
             <Link
-              href="/#locations"
+              href="/locations"
               className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-6 py-3 rounded-full transition-colors text-sm"
             >
               See All 10 Locations
@@ -263,26 +414,30 @@ export default async function FreeMovingTruckPage() {
         </div>
       </section>
 
-      {/* ── DETAILS (reservation/driver/mileage/availability) ──────── */}
-      <section className="bg-white py-20 border-y border-gray-200">
+      {/* ── DETAILS — reservation, fuel, mileage, availability ── */}
+      <section className="bg-gray-50 py-20 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-3xl mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">What to expect</p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
-              Reservation, Driver, Mileage &amp; Availability
+              Reservation, Fuel, Mileage &amp; Availability
             </h2>
             <p className="text-gray-700 text-lg leading-relaxed">
-              The specifics that customers ask about most. Exact terms vary by Modern Storage® location — the team confirms everything before you sign.
+              The specifics customers ask about most. Exact terms vary slightly by Modern Storage® location — the team walks you through everything before you sign.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {TRUCK_DETAILS.map((d) => (
-              <div key={d.title} className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+              <div key={d.title} className="bg-white rounded-2xl p-6 border border-gray-200">
                 <h3 className="font-black text-charcoal text-lg mb-3 leading-tight">{d.title}</h3>
                 <p className="text-sm text-gray-700 leading-relaxed">{d.body}</p>
               </div>
             ))}
           </div>
+          {/* Single consolidated verification note — no longer repeated in 3+ spots. */}
+          <p className="text-xs text-gray-500 italic mt-10 max-w-3xl leading-relaxed">
+            {VERIFICATION_NOTE}
+          </p>
         </div>
       </section>
 
@@ -295,7 +450,7 @@ export default async function FreeMovingTruckPage() {
               Moving Tips for Your Free Truck Day
             </h2>
             <p className="text-gray-400 text-lg leading-relaxed">
-              Four quick patterns that turn a one-truck move into a one-trip move. Customers who follow these load 30–40% more into the same truck.
+              Four quick patterns that turn a one-truck move into a one-trip move. Customers who follow these load 30–40% more into the same truck — and may want to pair this with our <Link href="/move-in-checklist" className="text-modern-red font-semibold hover:underline">Modern Storage® move-in checklist</Link>.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -313,9 +468,12 @@ export default async function FreeMovingTruckPage() {
       <section className="bg-white py-16 border-y border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Plan the rest of your storage</p>
-          <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-8">
+          <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-3">
             Pair the Free Truck With the Right Unit
           </h2>
+          <p className="text-gray-700 text-base leading-relaxed mb-8 max-w-3xl">
+            Customers pairing the truck with our <Link href="/climate-controlled" className="text-modern-red font-semibold hover:underline">climate-controlled storage</Link> often move electronics, furniture, instruments, and household items in a single trip — no second rental, no second pickup.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link href="/household-storage" className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all">
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Household</p>
@@ -332,10 +490,6 @@ export default async function FreeMovingTruckPage() {
             <Link href="/ai-storage-size-finder" className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all">
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Size Finder</p>
               <p className="font-black text-charcoal group-hover:text-modern-red transition-colors text-sm">AI Storage Size Finder →</p>
-            </Link>
-            <Link href="/move-in-checklist" className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all">
-              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Checklist</p>
-              <p className="font-black text-charcoal group-hover:text-modern-red transition-colors text-sm">Move-In Checklist →</p>
             </Link>
           </div>
         </div>
@@ -357,24 +511,24 @@ export default async function FreeMovingTruckPage() {
         </div>
       </section>
 
-      {/* ── FINAL CTA ──────────────────────────────────────── */}
+      {/* ── FINAL CTA — urgency-forward close ─────────────────── */}
       <section className="bg-modern-red py-20">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl lg:text-4xl font-black text-white mb-5 tracking-tight">
-            Reserve a Storage Unit and Lock in Your Free Moving Truck
+            Reserve Your Storage Unit &amp; Free Moving Truck Today
           </h2>
           <p className="text-red-100 text-lg mb-3 max-w-2xl mx-auto leading-relaxed">
-            Pick a Modern Storage® location near you, reserve a unit, and confirm the truck for your move-in day. Trucks fill quickly on weekends — earlier is better.
+            Truck availability is limited — especially on weekends, month-end move dates, and peak moving season. Reserve early to lock in your move-in day at any of our <Link href="/locations" className="text-white underline decoration-2 underline-offset-4 hover:text-red-50 transition-colors">10 Arkansas Modern Storage® locations</Link>.
           </p>
           <p className="text-red-100/80 text-sm mb-10 max-w-2xl mx-auto leading-relaxed">
-            Available at participating Modern Storage® locations in Little Rock, North Little Rock, Springdale, and Hot Springs.
+            Available in Little Rock, North Little Rock, Maumelle, Bryant, Hot Springs, Bentonville, Springdale, and Lowell.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
-              href="/#locations"
+              href="/locations"
               className="bg-white text-modern-red font-black px-8 py-3.5 rounded-full hover:bg-red-50 transition-colors text-sm shadow-md inline-flex items-center gap-2"
             >
-              Find a Location
+              Reserve Online
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
               </svg>
@@ -386,7 +540,7 @@ export default async function FreeMovingTruckPage() {
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
               </svg>
-              Call {PHONE_NUMBER_DISPLAY}
+              Call Now
             </a>
           </div>
         </div>
