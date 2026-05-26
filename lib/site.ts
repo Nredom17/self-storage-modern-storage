@@ -46,17 +46,41 @@ export type NavTreeItem =
       }[]
     }
 
-export const NAV_TREE: readonly NavTreeItem[] = [
+// Locations dropdown uses a two-level drill-down UX (region → cities) instead
+// of the flat dropdown pattern. Defined separately from NAV_TREE so the Header
+// can render it with its own custom component.
+export const LOCATION_NAV_GROUPS = [
   {
-    type: 'dropdown',
-    label: 'Locations',
-    items: [
-      { label: 'Find Storage Near You', href: '/locations' },
-      { label: 'Little Rock Area', href: '/locations#little-rock-area' },
-      { label: 'Northwest Arkansas', href: '/locations#northwest-arkansas' },
-      { label: 'View All Locations', href: '/locations' },
+    id: 'central-arkansas',
+    label: 'Central Arkansas',
+    cities: [
+      { slug: 'maumelle', label: 'Maumelle, AR' },
+      { slug: 'west-little-rock', label: 'West Little Rock, AR' },
+      // Shackleford location renders as "Little Rock, AR" in the dropdown
+      // (the facility is in Little Rock; "Shackleford" is the street).
+      { slug: 'shackleford', label: 'Little Rock, AR' },
+      // Riverdale services the Downtown / Heights / Hillcrest neighborhoods —
+      // the dropdown label calls all of those out for local search intent.
+      { slug: 'riverdale', label: 'Riverdale - Downtown - Heights - Hillcrest' },
+      { slug: 'north-little-rock', label: 'North Little Rock, AR' },
+      { slug: 'bryant', label: 'Bryant, AR' },
+      { slug: 'hot-springs', label: 'Hot Springs, AR' },
     ],
   },
+  {
+    id: 'northwest-arkansas',
+    label: 'Northwest Arkansas',
+    cities: [
+      { slug: 'springdale', label: 'Springdale, AR' },
+      { slug: 'lowell', label: 'Lowell, AR' },
+      { slug: 'bentonville', label: 'Bentonville, AR' },
+    ],
+  },
+] as const
+
+// NAV_TREE — everything to the RIGHT of the Locations dropdown.
+// Locations is rendered separately via its own drill-down component.
+export const NAV_TREE: readonly NavTreeItem[] = [
   {
     type: 'dropdown',
     label: 'Storage Types',
