@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { SITE_URL, BUSINESS_CONTACT_EMAIL } from '@/lib/site'
+import { SITE_URL } from '@/lib/site'
 import { getLocations, getSiteSettings } from '@/lib/data'
 import { buildLocationSchemaList } from '@/lib/schema'
 import BusinessContactForm from '@/components/BusinessContactForm'
@@ -12,12 +12,12 @@ const PAGE_PATH = '/contact'
 export const metadata: Metadata = {
   title: { absolute: 'Contact Modern Storage® | Self Storage in Arkansas' },
   description:
-    'Contact Modern Storage® — call, email, or visit one of 10 self-storage locations across Arkansas. Phone, addresses, and hours for West Little Rock, Shackleford, Riverdale, North Little Rock, Maumelle, Bryant, Hot Springs, Bentonville, Springdale, and Lowell.',
+    'Contact Modern Storage® — call, send a message, or visit one of 10 self-storage locations across Arkansas. Phone and addresses for West Little Rock, Shackleford, Riverdale, North Little Rock, Maumelle, Bryant, Hot Springs, Bentonville, Springdale, and Lowell.',
   alternates: { canonical: SITE_URL + PAGE_PATH },
   openGraph: {
     title: 'Contact Modern Storage®',
     description:
-      'Phone, email, and 10 Arkansas self-storage location addresses for Modern Storage®.',
+      'Phone, contact form, and 10 Arkansas self-storage location addresses for Modern Storage®.',
     url: SITE_URL + PAGE_PATH,
     siteName: 'Modern Storage®',
     type: 'website',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary',
     title: 'Contact Modern Storage®',
-    description: 'Phone, email, and 10 Arkansas self-storage location addresses.',
+    description: 'Phone, contact form, and 10 Arkansas self-storage location addresses.',
   },
 }
 
@@ -83,7 +83,7 @@ export default async function ContactPage() {
               Contact Modern Storage<sup className="text-[0.55em] font-bold -top-[0.6em] relative ml-0.5">®</sup>
             </h1>
             <p className="text-gray-400 text-lg leading-relaxed">
-              Call, email, or stop by one of our 10 Arkansas self-storage locations.
+              Call, send us a message, or stop by one of our 10 Arkansas self-storage locations.
             </p>
           </div>
         </div>
@@ -112,22 +112,22 @@ export default async function ContactPage() {
               </p>
             </a>
 
-            {/* Email */}
+            {/* Send a message — scrolls to the inquiry form below */}
             <a
-              href={`mailto:${BUSINESS_CONTACT_EMAIL}`}
-              aria-label={`Email Modern Storage® at ${BUSINESS_CONTACT_EMAIL}`}
+              href="#message"
+              aria-label="Scroll to the Modern Storage® contact form"
               className="group bg-gray-50 hover:bg-modern-red rounded-2xl p-6 border border-gray-200 hover:border-modern-red transition-all text-center"
             >
               <div className="w-12 h-12 rounded-full bg-white text-modern-red mx-auto mb-4 flex items-center justify-center shadow-sm">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l1.4-3.6A8.97 8.97 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
               </div>
               <p className="text-xs font-black uppercase tracking-widest text-gray-500 group-hover:text-red-100 mb-1.5">
-                Email
+                Send a message
               </p>
-              <p className="text-base font-black text-charcoal group-hover:text-white break-all">
-                {BUSINESS_CONTACT_EMAIL}
+              <p className="text-base font-black text-charcoal group-hover:text-white">
+                Use our contact form
               </p>
             </a>
 
@@ -217,21 +217,21 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* ── BUSINESS INQUIRY FORM ───────────────────────────── */}
-      <section className="bg-white py-20 border-y border-gray-200">
+      {/* ── CONTACT FORM ─────────────────────────────────── */}
+      <section id="message" className="bg-white py-20 border-y border-gray-200 scroll-mt-20">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-10">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
-              Business inquiries
+              Send a message
             </p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
-              Need storage for your business?
+              Get in touch with Modern Storage®
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              E-commerce, contractors, restoration, staging, document archives — tell us about your use case and we&apos;ll get back to you with the right facility, sizes, and pricing.
+              Tell us what you&apos;re storing or what business need you&apos;re solving — we&apos;ll match you to the right facility, sizes, and pricing and reply during business hours.
             </p>
           </div>
-          <BusinessContactForm inboxEmail={BUSINESS_CONTACT_EMAIL} />
+          <BusinessContactForm inboxEmail="" />
         </div>
       </section>
 

@@ -267,14 +267,7 @@ export default function Header({
             )
           })}
 
-          {/* Right side */}
-          <a
-            href={phoneHref}
-            className="ml-2 text-sm font-semibold text-gray-300 hover:text-white px-3 py-2 rounded-md hover:bg-white/10 transition-colors whitespace-nowrap"
-            onClick={() => setOpenDropdown(null)}
-          >
-            Call {phoneDisplay}
-          </a>
+          {/* Right side — red CTA only; phone moved off the top nav */}
           <Link
             href="/locations"
             className="ml-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-bold px-5 py-2 rounded-full transition-colors whitespace-nowrap"
@@ -424,13 +417,6 @@ export default function Header({
           })}
 
           <div className="h-px bg-white/10 my-2" aria-hidden="true" />
-          <a
-            href={phoneHref}
-            onClick={closeAll}
-            className="text-sm font-semibold text-gray-200 hover:text-white px-3 py-3 rounded-md hover:bg-white/10 transition-colors"
-          >
-            Call {phoneDisplay}
-          </a>
           <Link
             href="/locations"
             onClick={closeAll}

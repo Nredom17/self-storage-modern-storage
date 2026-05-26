@@ -117,7 +117,6 @@ export const NAV_TREE: readonly NavTreeItem[] = [
   },
   { type: 'link', label: 'FAQ', href: '/#faq' },
   { type: 'link', label: 'Contact Us', href: '/contact' },
-  { type: 'link', label: 'Reserve Now', href: '/#reserve' },
 ] as const
 
 export const THEME_PAGES = [
