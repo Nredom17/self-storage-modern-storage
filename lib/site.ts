@@ -115,7 +115,7 @@ export const NAV_TREE: readonly NavTreeItem[] = [
       { label: 'Storage Tips', href: 'https://www.modernstorage.com/blog', external: true },
     ],
   },
-  { type: 'link', label: 'FAQ', href: '/#faq' },
+  { type: 'link', label: 'FAQ', href: '/faq' },
   { type: 'link', label: 'Contact Us', href: '/contact' },
 ] as const
 
