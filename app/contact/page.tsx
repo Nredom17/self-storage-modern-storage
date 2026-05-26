@@ -83,7 +83,7 @@ export default async function ContactPage() {
               Contact Modern Storage<sup className="text-[0.55em] font-bold -top-[0.6em] relative ml-0.5">®</sup>
             </h1>
             <p className="text-gray-400 text-lg leading-relaxed">
-              Call, send us a message, or stop by one of our 10 Arkansas self-storage locations.
+              Call, send us a message, or stop by one of our 10 self-storage locations.
             </p>
           </div>
         </div>
