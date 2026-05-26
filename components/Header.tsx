@@ -82,7 +82,7 @@ export default function Header({
         </Link>
 
         {/* Desktop nav — xl breakpoint and up */}
-        <nav ref={navRef} className="hidden xl:flex items-center gap-0.5 flex-1 justify-end">
+        <nav ref={navRef} className="hidden lg:flex items-center gap-0.5 flex-1 justify-end">
           {/* ── Locations (custom drill-down dropdown) ── */}
           <div className="relative">
             <button
@@ -279,7 +279,7 @@ export default function Header({
 
         {/* Mobile hamburger */}
         <button
-          className="xl:hidden p-2 text-gray-300 hover:text-white transition-colors"
+          className="lg:hidden p-2 text-gray-300 hover:text-white transition-colors"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
           aria-expanded={menuOpen}
@@ -296,7 +296,7 @@ export default function Header({
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="xl:hidden bg-charcoal border-t border-white/10 px-4 py-4 flex flex-col gap-0.5 max-h-[calc(100vh-4rem)] overflow-y-auto">
+        <div className="lg:hidden bg-charcoal border-t border-white/10 px-4 py-4 flex flex-col gap-0.5 max-h-[calc(100vh-4rem)] overflow-y-auto">
           {/* Mobile Locations: accordion with section headers per region */}
           <button
             type="button"
