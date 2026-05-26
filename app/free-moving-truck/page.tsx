@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     absolute: 'Free Moving Truck with Storage in Arkansas | Modern Storage®',
   },
   description:
-    'Free moving truck with new storage unit rentals at all 10 Modern Storage® Arkansas locations — West Little Rock, Shackleford, Riverdale, North Little Rock, Maumelle Blvd, Bryant, Hot Springs, Bentonville, Springdale, and Lowell. Full tank in, full tank out. Reserve your unit and truck together.',
+    'Free moving truck with new storage unit rentals at all 10 Modern Storage® locations — West Little Rock, Shackleford, Riverdale, North Little Rock, Maumelle Blvd, Bryant, Hot Springs, Bentonville, Springdale, and Lowell. Full tank in, full tank out. Reserve your unit and truck together.',
   alternates: { canonical: SITE_URL + PAGE_PATH },
   openGraph: {
     title: 'Free Moving Truck with Storage in Arkansas | Modern Storage®',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 
 const TRUST_BULLETS = [
   'Free with new storage rentals',
-  'All 10 Arkansas locations participate',
+  'All 10 Locations participate',
   'Full tank in, full tank out',
   'Daily mileage allowance included',
   'Same-day pickup and return',
@@ -141,7 +141,7 @@ export default async function FreeMovingTruckPage() {
                 Free Moving Truck with <span className="text-modern-red">Storage</span> in Arkansas
               </h1>
               <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-lg">
-                Every new Modern Storage® rental — at all 10 Arkansas locations — includes a free moving truck for move-in day. No second rental, no second trip. Load your furniture, appliances, and boxes once and drive straight to your unit.
+                Every new Modern Storage® rental — at all 10 Locations — includes a free moving truck for move-in day. No second rental, no second trip. Load your furniture, appliances, and boxes once and drive straight to your unit.
               </p>
               <div className="flex flex-wrap gap-4 mb-10">
                 <Link

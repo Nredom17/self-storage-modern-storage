@@ -90,7 +90,7 @@ export default function NearMeSearch({ locations }: { locations: Location[] }) {
         Enter your ZIP or address
       </h2>
       <p className="text-gray-600 leading-relaxed mb-5">
-        We&apos;ll sort our 10 Arkansas locations by distance from your search point.
+        We&apos;ll sort our 10 Locations by distance from your search point.
       </p>
 
       <form onSubmit={handleSubmit} role="search" aria-label="Find Modern Storage® locations near you" className="flex flex-col sm:flex-row gap-3">

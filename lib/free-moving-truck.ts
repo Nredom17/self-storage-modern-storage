@@ -25,7 +25,7 @@ export const HOW_IT_WORKS = [
   {
     n: '1',
     t: 'Reserve your storage unit',
-    b: 'Reserve a Modern Storage® unit online or by phone at any of our 10 Arkansas locations. Mention you plan to use the free moving truck so the team can schedule it for your move-in day.',
+    b: 'Reserve a Modern Storage® unit online or by phone at any of our 10 Locations. Mention you plan to use the free moving truck so the team can schedule it for your move-in day.',
   },
   {
     n: '2',
@@ -53,7 +53,7 @@ export const TRUCK_DETAILS = [
   {
     title: 'Reservation requirements',
     body:
-      'A free moving truck is included with new storage rentals at all 10 Modern Storage® Arkansas locations. Customers complete a storage unit reservation before booking the truck, and the truck date is tied to your move-in day.',
+      'A free moving truck is included with new storage rentals at all 10 Modern Storage® locations. Customers complete a storage unit reservation before booking the truck, and the truck date is tied to your move-in day.',
   },
   {
     title: 'Driver & insurance',
@@ -113,11 +113,11 @@ export const VERIFICATION_NOTE =
 export const TRUCK_FAQS = [
   {
     q: 'Is the moving truck really free?',
-    a: `Yes. Modern Storage® includes a free moving truck with new storage unit rentals at all 10 Arkansas locations. There is no rental fee for the truck itself when it is used to move into your Modern Storage® unit. We provide the truck with a full tank of gas — return it with a full tank and you only pay for the fuel you used. Mileage allowance and driver requirements vary by location, and the team walks you through the exact terms when you reserve.`,
+    a: `Yes. Modern Storage® includes a free moving truck with new storage unit rentals at all 10 Locations. There is no rental fee for the truck itself when it is used to move into your Modern Storage® unit. We provide the truck with a full tank of gas — return it with a full tank and you only pay for the fuel you used. Mileage allowance and driver requirements vary by location, and the team walks you through the exact terms when you reserve.`,
   },
   {
     q: 'Which Modern Storage® locations offer the free moving truck?',
-    a: `All 10 Modern Storage® Arkansas locations participate in the free moving truck program: West Little Rock, Shackleford, Riverdale, North Little Rock, Maumelle Blvd, Bryant, Hot Springs, Bentonville, Springdale, and Lowell. Truck availability rotates by location and demand. Call 501-910-0096 or check with the location nearest you to confirm a truck is available for your move-in date.`,
+    a: `All 10 Modern Storage® locations participate in the free moving truck program: West Little Rock, Shackleford, Riverdale, North Little Rock, Maumelle Blvd, Bryant, Hot Springs, Bentonville, Springdale, and Lowell. Truck availability rotates by location and demand. Call 501-910-0096 or check with the location nearest you to confirm a truck is available for your move-in date.`,
   },
   {
     q: 'What is the fuel policy for the free moving truck?',

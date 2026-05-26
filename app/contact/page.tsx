@@ -146,7 +146,7 @@ export default async function ContactPage() {
                 Find a location
               </p>
               <p className="text-lg font-black text-charcoal group-hover:text-white">
-                10 Arkansas locations
+                10 Locations
               </p>
             </Link>
           </div>

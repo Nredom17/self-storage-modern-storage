@@ -79,7 +79,7 @@ export default async function LocationsHubPage() {
           <div className="max-w-3xl">
             <span className="inline-flex items-center gap-2 bg-modern-red/20 border border-modern-red/40 text-modern-red text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-modern-red animate-pulse" aria-hidden="true" />
-              10 Arkansas Locations
+              10 Locations
             </span>
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
               Modern Storage® Locations in <span className="text-modern-red">Arkansas</span>

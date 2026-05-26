@@ -278,7 +278,7 @@ export default async function MoveInChecklistPage() {
               className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all"
             >
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Locations</p>
-              <p className="font-black text-charcoal group-hover:text-modern-red transition-colors text-sm">10 Arkansas locations →</p>
+              <p className="font-black text-charcoal group-hover:text-modern-red transition-colors text-sm">10 Locations →</p>
             </Link>
           </div>
         </div>

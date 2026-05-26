@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 }
 
 const TRUST_BULLETS = [
-  '10 Arkansas locations',
+  '10 Locations',
   'Free moving truck with new rentals',
   'Climate-controlled and drive-up units',
   'Month-to-month rentals',
