@@ -93,61 +93,46 @@ export default async function ContactPage() {
       <section className="bg-white py-16 border-b border-gray-200">
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {/* Phone */}
+            {/* Phone — click-to-call. Phone number kept in aria-label for screen readers. */}
             <a
               href={settings.phoneHref}
               aria-label={`Call Modern Storage® at ${settings.phoneDisplay}`}
-              className="group bg-gray-50 hover:bg-modern-red rounded-2xl p-6 border border-gray-200 hover:border-modern-red transition-all text-center"
+              className="group bg-gray-50 hover:bg-modern-red rounded-2xl p-8 border border-gray-200 hover:border-modern-red transition-all text-center flex flex-col items-center justify-center min-h-[180px]"
             >
-              <div className="w-12 h-12 rounded-full bg-white group-hover:bg-white text-modern-red mx-auto mb-4 flex items-center justify-center shadow-sm">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <div className="w-14 h-14 rounded-full bg-white text-modern-red mb-4 flex items-center justify-center shadow-sm">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
                 </svg>
               </div>
-              <p className="text-xs font-black uppercase tracking-widest text-gray-500 group-hover:text-red-100 mb-1.5">
-                Call us
-              </p>
-              <p className="text-lg font-black text-charcoal group-hover:text-white">
-                {settings.phoneDisplay}
-              </p>
+              <p className="text-xl font-black text-charcoal group-hover:text-white">Call Us</p>
             </a>
 
             {/* Send a message — scrolls to the inquiry form below */}
             <a
               href="#message"
               aria-label="Scroll to the Modern Storage® contact form"
-              className="group bg-gray-50 hover:bg-modern-red rounded-2xl p-6 border border-gray-200 hover:border-modern-red transition-all text-center"
+              className="group bg-gray-50 hover:bg-modern-red rounded-2xl p-8 border border-gray-200 hover:border-modern-red transition-all text-center flex flex-col items-center justify-center min-h-[180px]"
             >
-              <div className="w-12 h-12 rounded-full bg-white text-modern-red mx-auto mb-4 flex items-center justify-center shadow-sm">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <div className="w-14 h-14 rounded-full bg-white text-modern-red mb-4 flex items-center justify-center shadow-sm">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l1.4-3.6A8.97 8.97 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
               </div>
-              <p className="text-xs font-black uppercase tracking-widest text-gray-500 group-hover:text-red-100 mb-1.5">
-                Send a message
-              </p>
-              <p className="text-base font-black text-charcoal group-hover:text-white">
-                Use our contact form
-              </p>
+              <p className="text-xl font-black text-charcoal group-hover:text-white">Send a Message</p>
             </a>
 
-            {/* Locations */}
+            {/* Find a location — navigates to the locations hub */}
             <Link
               href="/locations"
-              aria-label="See all 10 Modern Storage® locations in Arkansas"
-              className="group bg-gray-50 hover:bg-modern-red rounded-2xl p-6 border border-gray-200 hover:border-modern-red transition-all text-center"
+              aria-label="See all Modern Storage® locations"
+              className="group bg-gray-50 hover:bg-modern-red rounded-2xl p-8 border border-gray-200 hover:border-modern-red transition-all text-center flex flex-col items-center justify-center min-h-[180px]"
             >
-              <div className="w-12 h-12 rounded-full bg-white text-modern-red mx-auto mb-4 flex items-center justify-center shadow-sm">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <div className="w-14 h-14 rounded-full bg-white text-modern-red mb-4 flex items-center justify-center shadow-sm">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                 </svg>
               </div>
-              <p className="text-xs font-black uppercase tracking-widest text-gray-500 group-hover:text-red-100 mb-1.5">
-                Find a location
-              </p>
-              <p className="text-lg font-black text-charcoal group-hover:text-white">
-                10 Locations
-              </p>
+              <p className="text-xl font-black text-charcoal group-hover:text-white">Find a Location</p>
             </Link>
           </div>
         </div>
