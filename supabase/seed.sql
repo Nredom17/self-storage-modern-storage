@@ -55,7 +55,7 @@ values
     34.7506, -92.2796,
     '/images/modern-storage-riverdale-facility-exterior.jpg',
     'Modern Storage® Riverdale self-storage facility exterior at sunset in Little Rock Arkansas',
-    array['Climate-Controlled','Business Storage','Ground-Floor Access'],
+    array['Climate-Controlled','Business Storage','Ground-Floor Access','Free Moving Truck'],
     'https://www.modernstorage.com/2510-cantrell-rd-little-rock-ar-72202',
     30, true
   ),
@@ -67,7 +67,7 @@ values
     34.802, -92.260,
     '/images/modern-storage-north-little-rock-facility-night.jpg',
     'Modern Storage® North Little Rock self-storage facility at night in North Little Rock Arkansas',
-    array['Climate-Controlled','Drive-Up Access','Business Storage'],
+    array['Climate-Controlled','Drive-Up Access','Business Storage','Free Moving Truck'],
     'https://www.modernstorage.com/self-storage-north-little-rock-ar-f8184',
     40, true
   ),
@@ -91,7 +91,7 @@ values
     34.596, -92.489,
     '/images/modern-storage-bryant-facility-sunset.jpg',
     'Modern Storage® Bryant self-storage facility exterior at sunset in Bryant Arkansas',
-    array['Climate-Controlled','Drive-Up Access','Boat/RV Storage'],
+    array['Climate-Controlled','Drive-Up Access','Boat/RV Storage','Free Moving Truck'],
     'https://www.modernstorage.com/self-storage-bryant-ar-f8249',
     60, true
   ),
@@ -115,7 +115,7 @@ values
     36.372, -94.208,
     '/images/modern-storage-bentonville-facility-exterior.jpg',
     'Modern Storage® Bentonville self-storage facility exterior in Bentonville Arkansas',
-    array['Climate-Controlled','Business Storage','Ground-Floor Access'],
+    array['Climate-Controlled','Business Storage','Ground-Floor Access','Free Moving Truck'],
     'https://www.modernstorage.com/self-storage-bentonville-ar-f3125',
     80, true
   ),
@@ -139,7 +139,7 @@ values
     36.255, -94.140,
     '/images/modern-storage-lowell-facility-night.jpg',
     'Modern Storage® Lowell self-storage facility exterior at night in Lowell Arkansas',
-    array['Climate-Controlled','Boat/RV Storage','Business Storage'],
+    array['Climate-Controlled','Boat/RV Storage','Business Storage','Free Moving Truck'],
     'https://www.modernstorage.com/1407-w-monroe-ave-lowell-ar-72745',
     100, true
   )

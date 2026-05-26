@@ -10,6 +10,7 @@ import {
   TRUCK_DETAILS,
   MOVING_TIPS,
   TRUCK_FAQS,
+  VERIFICATION_NOTE,
 } from '@/lib/free-moving-truck'
 
 export const revalidate = 60
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     absolute: 'Free Moving Truck with Storage in Arkansas | Modern Storage®',
   },
   description:
-    'Free moving truck with new storage unit rentals at participating Modern Storage® Arkansas locations — Little Rock, North Little Rock, Springdale, Hot Springs, and more. Reserve your unit and truck together.',
+    'Free moving truck with new storage unit rentals at all 10 Modern Storage® Arkansas locations — West Little Rock, Shackleford, Riverdale, North Little Rock, Maumelle Blvd, Bryant, Hot Springs, Bentonville, Springdale, and Lowell. Full tank in, full tank out. Reserve your unit and truck together.',
   alternates: { canonical: SITE_URL + PAGE_PATH },
   openGraph: {
     title: 'Free Moving Truck with Storage in Arkansas | Modern Storage®',
@@ -46,10 +47,10 @@ export const metadata: Metadata = {
 
 const TRUST_BULLETS = [
   'Free with new storage rentals',
+  'All 10 Arkansas locations participate',
+  'Full tank in, full tank out',
   'Daily mileage allowance included',
-  '5 participating Arkansas locations',
   'Same-day pickup and return',
-  'No long-term commitment',
 ]
 
 function buildJsonLd(phoneDisplay: string) {
@@ -140,7 +141,7 @@ export default async function FreeMovingTruckPage() {
                 Free Moving Truck with <span className="text-modern-red">Storage</span> in Arkansas
               </h1>
               <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-lg">
-                New Modern Storage® rentals at participating Arkansas locations include a free moving truck for move-in day. No second rental, no second trip — load your furniture, appliances, and boxes once and drive straight to your unit.
+                Every new Modern Storage® rental — at all 10 Arkansas locations — includes a free moving truck for move-in day. No second rental, no second trip. Load your furniture, appliances, and boxes once and drive straight to your unit.
               </p>
               <div className="flex flex-wrap gap-4 mb-10">
                 <Link
@@ -162,6 +163,10 @@ export default async function FreeMovingTruckPage() {
                   Call {PHONE_NUMBER_DISPLAY}
                 </a>
               </div>
+
+              <p className="text-xs text-gray-400 italic max-w-lg mb-8 leading-relaxed">
+                {VERIFICATION_NOTE}
+              </p>
 
               <ul className="flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-gray-400">
                 {TRUST_BULLETS.map((t) => (
@@ -224,10 +229,10 @@ export default async function FreeMovingTruckPage() {
           <div className="max-w-3xl mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Where to get the truck</p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
-              Participating Modern Storage® Locations
+              All 10 Modern Storage® Locations Participate
             </h2>
             <p className="text-gray-700 text-lg leading-relaxed">
-              The free moving truck is offered at participating Modern Storage® locations across Arkansas. Truck availability rotates by location and demand — confirm with your specific facility when you reserve your unit.
+              The free moving truck is offered at every Modern Storage® Arkansas location — West Little Rock, Shackleford, Riverdale, North Little Rock, Maumelle Blvd, Bryant, Hot Springs, Bentonville, Springdale, and Lowell. Truck availability rotates by location and demand — confirm with your specific facility when you reserve your unit.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
