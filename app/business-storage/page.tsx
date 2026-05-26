@@ -300,7 +300,7 @@ export default async function BusinessStoragePage() {
                   Request a Riverdale Quote
                 </Link>
                 <a
-                  href={`https://www.google.com/maps/dir/?api=1&destination=34.7506,-92.2796`}
+                  href="https://www.google.com/maps/dir/?api=1&destination=Modern%20Storage%C2%AE%20Riverdale%2C%202510%20Cantrell%20Rd%2C%20Little%20Rock%2C%20AR%2072202"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-charcoal font-bold px-6 py-3 rounded-full transition-colors text-sm"

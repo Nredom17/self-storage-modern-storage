@@ -6,6 +6,7 @@ import { SITE_URL, LOCATIONS } from '@/lib/site'
 import { getLocations, getSiteSettings } from '@/lib/data'
 import { getLocationPageContent } from '@/lib/location-pages'
 import { buildLocationSchema } from '@/lib/schema'
+import { buildDirectionsUrl } from '@/lib/geo'
 import FaqAccordion from '@/components/FaqAccordion'
 import LocationMap from '@/components/LocationMap'
 
@@ -78,7 +79,7 @@ export default async function LocationPage({ params }: Props) {
     .filter((l) => l.region === loc.region && l.slug !== loc.slug)
     .slice(0, 3)
 
-  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${loc.lat},${loc.lon}`
+  const directionsUrl = buildDirectionsUrl(loc)
 
   // ── JSON-LD ──────────────────────────────────────────────
   const localBusiness = buildLocationSchema(loc, settings.phoneDisplay)

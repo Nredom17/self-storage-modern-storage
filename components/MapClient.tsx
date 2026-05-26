@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import type { Location } from '@/lib/data'
+import { buildDirectionsUrl } from '@/lib/geo'
 
 // Brand-red teardrop pin as an HTML/SVG divIcon (no asset path issues with Next.js bundler).
 function createPinIcon(isSelected: boolean): L.DivIcon {
@@ -96,7 +97,7 @@ export default function MapClient({
 
       {locations.map((loc) => {
         const isSelected = loc.slug === selectedSlug
-        const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${loc.lat},${loc.lon}`
+        const directionsUrl = buildDirectionsUrl(loc)
         return (
           <Marker
             key={loc.slug}

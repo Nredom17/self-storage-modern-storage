@@ -153,6 +153,37 @@ export function formatMiles(miles: number): string {
   return Math.round(miles) + ' mi'
 }
 
+/**
+ * Build a Google Maps directions deep link for a Modern Storage® facility.
+ *
+ * Uses the facility's real street address (not approximate lat/lon) — Google's
+ * geocoder maps street addresses to the actual building entrance, while
+ * approximate coords often resolve to a nearby civic landmark like City Hall.
+ *
+ * Placeholders ([Street address placeholder] / [ZIP]) are skipped so the URL
+ * stays meaningful even before launch-final data lands.
+ */
+export function buildDirectionsUrl(loc: {
+  name?: string
+  streetAddress?: string | null
+  city?: string
+  state?: string
+  zip?: string | null
+}): string {
+  const isPlaceholder = (s: string | null | undefined): boolean =>
+    !s || s.includes('[')
+
+  const parts: string[] = []
+  if (loc.name) parts.push(loc.name)
+  if (!isPlaceholder(loc.streetAddress)) parts.push(loc.streetAddress as string)
+  if (loc.city && loc.state) {
+    const zip = !isPlaceholder(loc.zip) ? ` ${loc.zip}` : ''
+    parts.push(`${loc.city}, ${loc.state}${zip}`)
+  }
+  const destination = parts.join(', ')
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}`
+}
+
 /** Browser geolocation as a Promise. Throws if denied/unavailable. */
 export function getBrowserLocation(): Promise<{ lat: number; lon: number }> {
   return new Promise((resolve, reject) => {

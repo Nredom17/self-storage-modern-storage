@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { SITE_URL } from '@/lib/site'
 import { getLocations, getSiteSettings } from '@/lib/data'
 import { buildLocationSchemaList } from '@/lib/schema'
+import { buildDirectionsUrl } from '@/lib/geo'
 import BusinessContactForm from '@/components/BusinessContactForm'
 
 export const revalidate = 60
@@ -146,10 +147,10 @@ export default async function ContactPage() {
               Location directory
             </p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
-              All 10 Modern Storage® Locations in Arkansas
+              All 10 Modern Storage® Locations
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Every facility&apos;s name, street address, ZIP, and phone — fully crawlable for local search.
+              Every facility&apos;s name, address, ZIP, and phone — all in one place.
             </p>
           </div>
 
@@ -185,7 +186,7 @@ export default async function ContactPage() {
                           View page →
                         </Link>
                         <a
-                          href={`https://www.google.com/maps/dir/?api=1&destination=${loc.lat},${loc.lon}`}
+                          href={buildDirectionsUrl(loc)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-xs font-bold text-charcoal/70 hover:text-modern-red transition-colors"
