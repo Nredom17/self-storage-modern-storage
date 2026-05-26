@@ -81,8 +81,13 @@ export default function Header({
           </span>
         </Link>
 
-        {/* Desktop nav — xl breakpoint and up */}
-        <nav ref={navRef} className="hidden lg:flex items-center gap-0.5 flex-1 justify-end">
+        {/* Desktop nav — shows from md (768px) and up. Tighter spacing at small
+            laptop / iPad widths; full breathing room at xl+. overflow-x-auto is
+            a safety net so the tab bar never truly clips. */}
+        <nav
+          ref={navRef}
+          className="hidden md:flex items-center gap-0 lg:gap-0.5 flex-1 justify-end overflow-x-auto scrollbar-thin"
+        >
           {/* ── Locations (custom drill-down dropdown) ── */}
           <div className="relative">
             <button
@@ -93,7 +98,7 @@ export default function Header({
               }}
               aria-haspopup="menu"
               aria-expanded={locationsIsOpen}
-              className={`text-sm font-semibold px-3 py-2 rounded-md transition-colors inline-flex items-center gap-1.5 whitespace-nowrap ${
+              className={`text-xs lg:text-sm font-semibold px-2 lg:px-3 py-2 rounded-md transition-colors inline-flex items-center gap-1 lg:gap-1.5 whitespace-nowrap ${
                 locationsIsOpen ? 'text-white bg-white/10' : 'text-gray-300 hover:text-white hover:bg-white/10'
               }`}
             >
@@ -196,7 +201,7 @@ export default function Header({
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="text-sm font-semibold text-gray-300 hover:text-white px-3 py-2 rounded-md hover:bg-white/10 transition-colors whitespace-nowrap"
+                  className="text-xs lg:text-sm font-semibold text-gray-300 hover:text-white px-2 lg:px-3 py-2 rounded-md hover:bg-white/10 transition-colors whitespace-nowrap"
                   onClick={() => setOpenDropdown(null)}
                 >
                   {item.label}
@@ -212,7 +217,7 @@ export default function Header({
                   onClick={() => setOpenDropdown(isOpen ? null : item.label)}
                   aria-haspopup="menu"
                   aria-expanded={isOpen}
-                  className={`text-sm font-semibold px-3 py-2 rounded-md transition-colors inline-flex items-center gap-1.5 whitespace-nowrap ${
+                  className={`text-xs lg:text-sm font-semibold px-2 lg:px-3 py-2 rounded-md transition-colors inline-flex items-center gap-1 lg:gap-1.5 whitespace-nowrap ${
                     isOpen ? 'text-white bg-white/10' : 'text-gray-300 hover:text-white hover:bg-white/10'
                   }`}
                 >
@@ -270,7 +275,7 @@ export default function Header({
           {/* Right side — red CTA only; phone moved off the top nav */}
           <Link
             href="/locations"
-            className="ml-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-bold px-5 py-2 rounded-full transition-colors whitespace-nowrap"
+            className="ml-1 lg:ml-2 bg-modern-red hover:bg-modern-red-hover text-white text-xs lg:text-sm font-bold px-3 lg:px-5 py-2 rounded-full transition-colors whitespace-nowrap"
             onClick={() => setOpenDropdown(null)}
           >
             Find a Unit Near You
@@ -279,7 +284,7 @@ export default function Header({
 
         {/* Mobile hamburger */}
         <button
-          className="lg:hidden p-2 text-gray-300 hover:text-white transition-colors"
+          className="md:hidden p-2 text-gray-300 hover:text-white transition-colors"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
           aria-expanded={menuOpen}
@@ -296,7 +301,7 @@ export default function Header({
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="lg:hidden bg-charcoal border-t border-white/10 px-4 py-4 flex flex-col gap-0.5 max-h-[calc(100vh-4rem)] overflow-y-auto">
+        <div className="md:hidden bg-charcoal border-t border-white/10 px-4 py-4 flex flex-col gap-0.5 max-h-[calc(100vh-4rem)] overflow-y-auto">
           {/* Mobile Locations: accordion with section headers per region */}
           <button
             type="button"
