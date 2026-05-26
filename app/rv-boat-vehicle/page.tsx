@@ -483,7 +483,7 @@ export default async function BoatRvStoragePage() {
               </p>
               <p className="text-gray-700 leading-relaxed">
                 Indoor RV storage is available at Modern Storage® Shackleford in Little Rock for owners who want their rig out of the sun and weather. Oversized outdoor spaces at the Northwest Arkansas and central Arkansas locations cover Class A and fifth-wheel sizes that won&apos;t fit in a typical residential driveway. Month-to-month rentals make multi-season storage straightforward — check the centralized{' '}
-                <Link href="/#size-guide" className="text-modern-red font-bold hover:underline">
+                <Link href="/size-guide" className="text-modern-red font-bold hover:underline">
                   Modern Storage® unit size guide
                 </Link>{' '}
                 if you&apos;re also planning to store household items alongside the RV.
@@ -683,7 +683,7 @@ export default async function BoatRvStoragePage() {
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
               A starting point for choosing a boat, RV, or vehicle storage space at Modern Storage®. Measure your rig (including any rear ladder, hitch, and tongue extension) before reserving, and the team will confirm the right space at the right facility. For full household-storage sizes see the{' '}
-              <Link href="/#size-guide" className="text-modern-red font-bold hover:underline">
+              <Link href="/size-guide" className="text-modern-red font-bold hover:underline">
                 Modern Storage® unit size guide
               </Link>
               .

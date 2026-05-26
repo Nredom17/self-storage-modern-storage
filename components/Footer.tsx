@@ -33,7 +33,7 @@ const RESOURCES = [
   { label: 'AI Storage Size Finder', href: '/ai-storage-size-finder' },
   { label: 'Move-In Checklist', href: '/move-in-checklist' },
   { label: 'Free Moving Truck', href: '/free-moving-truck' },
-  { label: 'Size Guide', href: '/#size-guide' },
+  { label: 'Size Guide', href: '/size-guide' },
   { label: 'FAQ', href: '/#faq' },
   { label: 'Storage Tips', href: 'https://www.modernstorage.com/blog' },
 ]

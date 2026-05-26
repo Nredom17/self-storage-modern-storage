@@ -24,7 +24,7 @@ export const STORAGE_OPTION_LINKS = [
 ] as const
 
 export const NAV_LINKS = [
-  { label: 'Unit Sizes', href: '/#size-guide' },
+  { label: 'Unit Sizes', href: '/size-guide' },
   { label: 'Size Finder', href: '/ai-storage-size-finder' },
   { label: 'Locations', href: '/#locations' },
   { label: 'Moving Truck', href: '/free-moving-truck' },
@@ -95,7 +95,7 @@ export const NAV_TREE: readonly NavTreeItem[] = [
     type: 'dropdown',
     label: 'Unit Sizes',
     items: [
-      { label: 'Size Guide', href: '/#size-guide' },
+      { label: 'Size Guide', href: '/size-guide' },
       { label: 'AI Size Finder', href: '/ai-storage-size-finder' },
     ],
   },
