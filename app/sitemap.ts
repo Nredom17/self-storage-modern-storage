@@ -143,5 +143,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
+    // ── Pricing + Fayetteville ───────────────────────────────
+    // /pricing gets high priority — pricing intent is one of the
+    // biggest transactional query clusters in the market.
+    {
+      url: SITE_URL + '/pricing',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
+      url: SITE_URL + '/storage-near-fayetteville',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
   ]
 }

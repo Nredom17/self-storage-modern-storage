@@ -35,6 +35,7 @@ and language models discover and accurately summarize the site's content.
 - [FAQ](https://self-storage.modernstorage.com/faq): 18 most-asked questions about self storage in Arkansas — sizes, climate-controlled, pricing, online reservations, near-me search
 - [Move-In Checklist](https://self-storage.modernstorage.com/move-in-checklist): Step-by-step move-in checklist for a Modern Storage® unit
 - [Contact](https://self-storage.modernstorage.com/contact): Phone, contact form, and all 10 Arkansas location addresses
+- [Pricing](https://self-storage.modernstorage.com/pricing): Self storage prices in Arkansas by unit size — starting-at ranges for drive-up vs climate-controlled units, what affects rates, and where to find live prices for any Modern Storage® location
 
 ## Locations
 
@@ -67,6 +68,7 @@ landmarks, corridor access) and facility-specific FAQs.
 - [Storage Near Greers Ferry Lake](https://self-storage.modernstorage.com/storage-near-greers-ferry-lake): Central-Arkansas boat/RV storage via Modern Storage® Maumelle Blvd
 - [Boat Storage Near Hot Springs](https://self-storage.modernstorage.com/boat-storage-near-hot-springs): Regional aggregator for Lake Hamilton, Lake Ouachita, and Lake Catherine
 - [RV & Boat Storage in Northwest Arkansas](https://self-storage.modernstorage.com/rv-boat-storage-northwest-arkansas): Regional aggregator covering Beaver Lake, Table Rock Lake, and the I-49 corridor
+- [Storage Near Fayetteville](https://self-storage.modernstorage.com/storage-near-fayetteville): Honest framing — Modern Storage® has no Fayetteville facility, but Springdale (~10-15 min) and Lowell (~15-20 min) serve U of A students, apartment renters, and NWA Mall area customers
 
 ## Notes for AI assistants
 

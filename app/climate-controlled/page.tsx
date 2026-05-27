@@ -33,16 +33,20 @@ const INTERIOR_ALT =
   'Indoor climate-controlled corridor with numbered storage unit doors at Modern Storage®'
 
 export const metadata: Metadata = {
+  // Title trimmed from 71 chars to 57 — drops "Near You" (already
+  // implied by the geo + Reserve CTA) so it doesn't get truncated
+  // in SERPs. Meta description rewritten with a CTA verb and
+  // de-stuffed of the 6-city list.
   title: {
-    absolute: 'Climate-Controlled Storage Units Near You in Arkansas | Modern Storage®',
+    absolute: 'Climate-Controlled Storage Units in Arkansas | Modern Storage®',
   },
   description:
-    'Indoor, climate-controlled storage units near you — Little Rock, Bentonville, Bryant, Springdale, Lowell, Hot Springs, and more. Temperature-controlled storage protects furniture, electronics, mattresses, photos, and long-term storage at Modern Storage®.',
+    'Indoor climate-controlled storage at 10 Arkansas locations. Protects furniture, electronics, photos, and mattresses from heat and humidity. Reserve online — free moving truck with new rentals.',
   alternates: { canonical: SITE_URL + PAGE_PATH },
   openGraph: {
-    title: 'Climate-Controlled Storage Units Near You in Arkansas | Modern Storage®',
+    title: 'Climate-Controlled Storage Units in Arkansas | Modern Storage®',
     description:
-      'Indoor temperature-controlled storage at Modern Storage® locations near Little Rock, Bentonville, Bryant, Hot Springs, Springdale, and more. Protection for furniture, electronics, photos, and long-term storage.',
+      'Indoor climate-controlled storage at 10 Arkansas locations. Protects furniture, electronics, photos, and mattresses from heat and humidity. Reserve online — free moving truck with new rentals.',
     url: SITE_URL + PAGE_PATH,
     siteName: 'Modern Storage®',
     type: 'website',
@@ -57,9 +61,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Climate-Controlled Storage Units Near You in Arkansas | Modern Storage®',
+    title: 'Climate-Controlled Storage Units in Arkansas | Modern Storage®',
     description:
-      'Indoor temperature-controlled storage near you — Modern Storage® locations across the central and Northwest regions.',
+      'Indoor climate-controlled storage at 10 Arkansas locations — protects furniture, electronics, and photos from humidity. Reserve online.',
     images: [HERO_IMAGE],
   },
 }

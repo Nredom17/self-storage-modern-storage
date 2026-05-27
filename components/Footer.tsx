@@ -30,10 +30,11 @@ const LOCATIONS: Array<{ label: string; href: string }> = FOOTER_LOCATION_SPEC.f
 )
 
 const RESOURCES = [
+  { label: 'Storage Prices', href: '/pricing' },
   { label: 'AI Storage Size Finder', href: '/ai-storage-size-finder' },
+  { label: 'Size Guide', href: '/size-guide' },
   { label: 'Move-In Checklist', href: '/move-in-checklist' },
   { label: 'Free Moving Truck', href: '/free-moving-truck' },
-  { label: 'Size Guide', href: '/size-guide' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Storage Tips', href: 'https://www.modernstorage.com/blog' },
 ]
@@ -48,6 +49,7 @@ const GUIDES_GROUPS = [
     links: [
       { label: 'Apartment Storage', href: '/guides/apartment-storage' },
       { label: 'Storage During a Move', href: '/guides/moving-storage' },
+      { label: 'Storage Near Fayetteville', href: '/storage-near-fayetteville' },
     ],
   },
   {
