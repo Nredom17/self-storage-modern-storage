@@ -30,6 +30,10 @@ export const metadata: Metadata = {
   description:
     'Find self-storage units across Arkansas with Modern Storage®. Climate-controlled storage, household storage, boat and RV parking, business storage, and free moving truck options available.',
   metadataBase: new URL(SITE_URL),
+  // applicationName drives the <meta name="application-name"> tag.
+  // Google sometimes uses this as a secondary signal for the brand
+  // line in SERPs alongside the WebSite schema below.
+  applicationName: 'Modern Storage®',
   openGraph: {
     siteName: 'Modern Storage®',
     type: 'website',
@@ -38,6 +42,26 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
   },
+}
+
+// Sitewide WebSite schema — drives the "site name" line Google shows
+// in search results (the small brand line above the URL in a SERP
+// card). Without an explicit WebSite.name, Google strips the ® mark
+// when it infers the brand from page titles. Setting `name` here
+// tells Google the canonical brand mark is "Modern Storage®".
+// alternateName covers searches for the bare phrase "Modern Storage"
+// without the symbol.
+function buildWebsiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': SITE_URL + '/#website',
+    name: 'Modern Storage®',
+    alternateName: 'Modern Storage',
+    url: SITE_URL + '/',
+    publisher: { '@id': SITE_URL + '/#organization' },
+    inLanguage: 'en-US',
+  }
 }
 
 // Sitewide Organization schema — anchored at SITE_URL + '#organization' so
@@ -84,9 +108,16 @@ function buildOrganizationSchema(phoneDisplay: string) {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const settings = await getSiteSettings()
   const organizationSchema = buildOrganizationSchema(settings.phoneDisplay)
+  const websiteSchema = buildWebsiteSchema()
   return (
     <html lang="en" className={bebasNeue.variable}>
       <head>
+        {/* Sitewide WebSite schema — drives the SERP site-name brand
+            line and ensures it carries the ® mark. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
         {/* Sitewide Organization schema — emits the canonical brand entity
             on every page. Per-page schemas reference it via @id. */}
         <script
