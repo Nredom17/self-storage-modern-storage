@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     absolute: 'Storage Near Fayetteville, AR | Student & Apartment Storage | Modern Storage®',
   },
   description:
-    'Self storage near Fayetteville, AR — Modern Storage® doesn\'t have a Fayetteville location, but Modern Storage® Springdale and Lowell sit 10-20 minutes from the U of A campus and serve Fayetteville students, apartment renters, and Northwest Arkansas Mall area residents.',
+    'Self storage and student storage near Fayetteville, AR. Modern Storage® Springdale and Lowell sit 10-20 minutes from the U of A campus and serve Fayetteville students, apartment renters, and Northwest Arkansas Mall area residents — climate-controlled and drive-up units, month-to-month rentals.',
   alternates: { canonical: SITE_URL + PAGE_PATH },
   openGraph: {
     title: 'Storage Near Fayetteville, AR | Modern Storage®',
@@ -89,8 +89,8 @@ const STUDENT_USE_CASES = [
 
 const FAQS = [
   {
-    q: 'Does Modern Storage® have a facility in Fayetteville?',
-    a: `No — Modern Storage® operates 10 locations across Arkansas but doesn't have a Fayetteville facility. The two closest options are Modern Storage® Springdale (~10-15 minutes from the U of A campus via I-49) and Modern Storage® Lowell (~15-20 minutes via I-49). Both serve Fayetteville residents, U of A students, and Northwest Arkansas Mall area customers who don't mind a short drive to a larger, modern facility with climate-controlled options.`,
+    q: 'Which Modern Storage® locations serve Fayetteville?',
+    a: `Modern Storage® Springdale (~10-15 minutes from the U of A campus via I-49) and Modern Storage® Lowell (~15-20 minutes via I-49) are the closest facilities to Fayetteville. Both serve U of A students, apartment renters, downtown Fayetteville residents, and Northwest Arkansas Mall area customers from the I-49 corridor north of the city. Springdale is closer to most Fayetteville landmarks; Lowell offers a wider mix of formats including boat/RV parking.`,
   },
   {
     q: 'Which is closer — Modern Storage® Springdale or Lowell?',
@@ -130,7 +130,7 @@ function buildJsonLd() {
     serviceType: 'Storage Near Fayetteville',
     name: 'Storage Near Fayetteville, AR — Modern Storage® Springdale & Lowell',
     description:
-      'Self storage and student storage close to Fayetteville, AR. Modern Storage® doesn\'t have a Fayetteville facility, but Modern Storage® Springdale and Lowell sit 10-20 minutes from the U of A campus and serve Fayetteville students, apartment renters, and Northwest Arkansas Mall area customers.',
+      'Self storage and student storage near Fayetteville, AR. Modern Storage® Springdale and Lowell sit 10-20 minutes from the U of A campus on the I-49 corridor and serve Fayetteville students, apartment renters, and Northwest Arkansas Mall area customers with climate-controlled and drive-up units.',
     url: SITE_URL + PAGE_PATH,
     image: SITE_URL + HERO_IMAGE,
     areaServed: { '@type': 'State', name: 'Arkansas' },
@@ -184,10 +184,10 @@ export default async function FayettevillePage() {
                 Storage Near <span className="text-modern-red">Fayetteville</span>, AR
               </h1>
               <p className="text-gray-300 text-lg leading-relaxed mb-6 max-w-lg">
-                <strong className="text-white">Honest framing first:</strong> Modern Storage® doesn&apos;t have a Fayetteville facility. The two closest options — Modern Storage® Springdale and Modern Storage® Lowell — sit 10-20 minutes from the U of A campus on I-49 and serve a lot of Fayetteville students, apartment renters, and Northwest Arkansas Mall area customers.
+                Modern Storage® Springdale and Modern Storage® Lowell serve the Fayetteville area from the I-49 corridor — 10 to 20 minutes from the U of A campus, downtown Fayetteville, and the Northwest Arkansas Mall area. Climate-controlled and drive-up units, month-to-month rentals, and the free moving truck program at participating locations.
               </p>
               <p className="text-gray-400 text-base leading-relaxed mb-8 max-w-lg">
-                If you don&apos;t mind a short drive to a modern, climate-controlled facility, both work well. If you need something literally inside Fayetteville city limits, this isn&apos;t the right page.
+                Popular for U of A summer storage, apartment moves, study-abroad gaps, and NWA Mall area apartment overflow. See the drive-time table below for exact distances from your starting point.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/locations/springdale" className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-6 py-3 rounded-full transition-colors text-sm">
