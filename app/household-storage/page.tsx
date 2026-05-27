@@ -6,6 +6,8 @@ import { getLocations, getSiteSettings } from '@/lib/data'
 import {
   HOUSEHOLD_UNIT_SIZES,
   LIFE_TRANSITIONS,
+  WHY_CHOOSE_MODERN,
+  DRIVE_UP_VS_CLIMATE,
   HOUSEHOLD_FAQS,
 } from '@/lib/household-storage'
 import FaqAccordion from '@/components/FaqAccordion'
@@ -17,22 +19,22 @@ export const revalidate = 60
 const PAGE_PATH = '/household-storage'
 const HERO_IMAGE = '/images/modern-storage-springdale-best-of-the-best-awards.png'
 const HERO_ALT =
-  'Modern Storage® Springdale facility with Best of the Best 2023-2025 and Best of Northwest Arkansas award seals'
+  'Modern Storage® facility with Best of the Best 2023-2025 and Best of Northwest Arkansas award seals'
 const TRUCK_IMAGE = '/images/modern-storage-free-moving-truck.jpg'
 const TRUCK_ALT =
-  'Modern Storage® free moving truck for new household storage rentals at participating Arkansas locations'
+  'Modern Storage® free moving truck included with new household storage rentals at participating locations'
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Storage Units in Arkansas — 10 Locations | Modern Storage®',
+    absolute: 'Household Storage Units for Moving, Renovating & Extra Space | Modern Storage®',
   },
   description:
-    'Household storage units across Arkansas at 10 Modern Storage® locations. Moving, downsizing, renovating, growing families, life transitions, and seasonal storage with a free moving truck.',
+    'Household storage units for moving, renovating, downsizing, and everyday extra space. Flexible month-to-month rentals, drive-up and climate-controlled options, free moving truck with new rentals at 10 Modern Storage® locations.',
   alternates: { canonical: SITE_URL + PAGE_PATH },
   openGraph: {
-    title: 'Storage Units in Arkansas — 10 Locations | Modern Storage®',
+    title: 'Household Storage Units for Moving, Renovating & Extra Space | Modern Storage®',
     description:
-      'Find household storage units across Arkansas at 10 Modern Storage® locations. Climate-controlled and drive-up options, month-to-month rentals, and free moving truck with new rentals.',
+      'Temporary household storage for moves, renovations, downsizing, and life transitions. Month-to-month rentals with a free moving truck — drive-up and climate-controlled options available.',
     url: SITE_URL + PAGE_PATH,
     siteName: 'Modern Storage®',
     type: 'website',
@@ -40,18 +42,18 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Storage Units in Arkansas — 10 Locations | Modern Storage®',
+    title: 'Household Storage Units for Moving, Renovating & Extra Space | Modern Storage®',
     description:
-      'Household storage units across Arkansas at 10 Modern Storage® locations with a free moving truck for new rentals.',
+      'Flexible household storage for moves, renovations, and life transitions — month-to-month at 10 Modern Storage® locations.',
     images: [HERO_IMAGE],
   },
 }
 
 const TRUST_BULLETS = [
-  '10 Locations',
-  'Free moving truck with new rentals',
-  'Climate-controlled and drive-up units',
   'Month-to-month rentals',
+  '10 convenient locations',
+  'Drive-up and indoor options',
+  'Free moving truck with new rentals',
   'Online reservations in minutes',
 ]
 
@@ -61,9 +63,9 @@ function buildJsonLd(phoneDisplay: string) {
     '@type': 'Service',
     '@id': SITE_URL + PAGE_PATH + '#service',
     serviceType: 'Household Self Storage',
-    name: 'Storage Units in Arkansas — 10 Locations',
+    name: 'Household Storage Units for Moving, Renovating & Extra Space',
     description:
-      'Household self-storage at 10 Modern Storage® locations across Arkansas. Built for moving, downsizing, renovating, growing families, life transitions, and seasonal storage. Climate-controlled and drive-up options available, with a free moving truck at participating locations.',
+      'Residential and household self-storage at 10 Modern Storage® locations. Built for moving, renovating, downsizing, growing families, life transitions, and seasonal storage. Drive-up and climate-controlled options available, with a free moving truck at participating locations. Month-to-month, no long-term contract.',
     url: SITE_URL + PAGE_PATH,
     image: SITE_URL + HERO_IMAGE,
     areaServed: { '@type': 'State', name: 'Arkansas' },
@@ -192,7 +194,10 @@ export default async function HouseholdStoragePage() {
         />
       ))}
 
-      {/* ── HERO ─────────────────────────────────────────────── */}
+      {/* ── HERO — residential / transitional positioning ────────
+          Repositioned per SEO audit: moving, extra space, renovating,
+          life transitions. Climate-controlled is NOT in the headline
+          and is mentioned as one of several available formats only. */}
       <section className="bg-charcoal text-white">
         <div className="h-1 w-full bg-modern-red" />
         <div className="max-w-7xl mx-auto px-6 py-16 lg:py-24">
@@ -215,32 +220,34 @@ export default async function HouseholdStoragePage() {
                 Household Storage
               </span>
               <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
-                Storage Units in <span className="text-modern-red">Arkansas</span> — 10 Locations
+                Household Storage Units for <span className="text-modern-red">Moving, Renovating</span> &amp; Everyday Extra Space
               </h1>
-              <p className="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg">
-                Clean, convenient household storage for moving, downsizing, renovating, growing families, life transitions, and seasonal items. Climate-controlled and drive-up units across 10 Modern Storage® locations in Arkansas.
+              <p className="text-gray-300 text-lg leading-relaxed mb-10 max-w-lg">
+                Store furniture, boxes, seasonal items, and household belongings with flexible month-to-month storage at Modern Storage®. Drive-up and indoor storage options available depending on location.
               </p>
-              <div className="flex flex-wrap gap-4 mb-10">
+              <div className="flex flex-wrap gap-3 mb-10">
                 <Link
                   href="#locations"
-                  aria-label="Find a household storage unit near you at a Modern Storage® Arkansas location"
-                  className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-7 py-3.5 rounded-full transition-colors text-sm"
+                  aria-label="Reserve a household storage unit at a Modern Storage® location near you"
+                  className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-6 py-3 rounded-full transition-colors text-sm"
                 >
-                  Find a Unit Near You
+                  Reserve a Unit
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                   </svg>
                 </Link>
-                <a
-                  href={PHONE_NUMBER_HREF}
-                  aria-label={`Call Modern Storage® at ${PHONE_NUMBER_DISPLAY}`}
-                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-7 py-3.5 rounded-full transition-colors border border-white/20 text-sm"
+                <Link
+                  href="/locations"
+                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-full transition-colors border border-white/20 text-sm"
                 >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
-                  </svg>
-                  Call {PHONE_NUMBER_DISPLAY}
-                </a>
+                  Find a Nearby Location
+                </Link>
+                <Link
+                  href="#sizes"
+                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-full transition-colors border border-white/20 text-sm"
+                >
+                  Check Unit Availability
+                </Link>
               </div>
 
               <ul className="flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-gray-400">
@@ -267,31 +274,49 @@ export default async function HouseholdStoragePage() {
                 />
               </div>
               <figcaption className="text-xs text-gray-500 mt-3 italic">
-                Household storage at a Modern Storage® Arkansas facility.
+                Award-winning household storage trusted by families across the region.
               </figcaption>
             </figure>
           </div>
         </div>
       </section>
 
-      {/* ── LOCATIONS (10 across Arkansas) ──────────────────── */}
-      <section id="locations" className="bg-gray-50 py-20">
+      {/* ── LIFE TRANSITIONS — moved UP per SEO audit ────────────
+          This was the strongest section on the page and now leads
+          the body. Establishes WHY people need household storage
+          before any directory or size grid. */}
+      <section className="bg-white py-20 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-3xl mb-10">
-            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">10 Locations</p>
+          <div className="max-w-3xl mb-12">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+              When household storage helps
+            </p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
-              Find Household Storage Near You
+              Flexible Storage During Real-Life Transitions
             </h2>
-            <p className="text-gray-600 text-lg leading-relaxed">
-              10 Modern Storage® locations serve central Arkansas and Northwest Arkansas — Little Rock, West Little Rock, North Little Rock, Riverdale, Maumelle, Bryant, Hot Springs, Bentonville, Springdale, and Lowell. Filter by region, click a pin for details, and reserve online.
+            <p className="text-gray-700 text-lg leading-relaxed">
+              Households use Modern Storage® for predictable life moments and unexpected ones alike. Create extra space without making permanent decisions — month-to-month rentals make it easy to start, extend, or close out a unit on your schedule.
             </p>
           </div>
-          <LocationFinder locations={locations} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {LIFE_TRANSITIONS.map((t) => (
+              <div
+                key={t.title}
+                className="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all"
+              >
+                <div className="w-11 h-11 rounded-full bg-modern-red/10 text-modern-red flex items-center justify-center mb-4">
+                  <LifeIcon name={t.icon} />
+                </div>
+                <h3 className="font-black text-charcoal mb-2 leading-tight">{t.title}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">{t.body}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ── UNIT SIZE GUIDE ──────────────────────────────────── */}
-      <section id="sizes" className="bg-white py-20 border-y border-gray-200">
+      <section id="sizes" className="bg-gray-50 py-20 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
             <div className="max-w-2xl">
@@ -299,8 +324,8 @@ export default async function HouseholdStoragePage() {
               <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
                 Household Storage Unit Sizes
               </h2>
-              <p className="text-gray-600 text-lg leading-relaxed">
-                Six sizes covering closet overflow through whole-home moves. Availability varies by Modern Storage® location — reserve online and the team will match you to the right unit at the right facility. Not sure which size? Try the{' '}
+              <p className="text-gray-700 text-lg leading-relaxed">
+                Six sizes covering closet overflow through whole-home moves. Availability varies by location — reserve online and the team will match you to the right unit at the right facility. Not sure which size? Try the{' '}
                 <Link href="/ai-storage-size-finder" className="text-modern-red font-bold hover:underline">
                   AI Storage Size Finder
                 </Link>
@@ -320,7 +345,7 @@ export default async function HouseholdStoragePage() {
               <article
                 id={`size-${u.sizeSlug}`}
                 key={u.size}
-                className="group bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:border-modern-red hover:shadow-xl transition-all flex flex-col"
+                className="group bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-modern-red hover:shadow-xl transition-all flex flex-col"
               >
                 <div className="relative aspect-[4/3] bg-gray-100 overflow-hidden">
                   <Image
@@ -360,7 +385,7 @@ export default async function HouseholdStoragePage() {
                   <div className="mt-auto">
                     <Link
                       href="#locations"
-                      aria-label={`Find a ${u.size} household storage unit at a Modern Storage® Arkansas location`}
+                      aria-label={`Find a ${u.size} household storage unit at a nearby Modern Storage® location`}
                       className="inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-black px-5 py-3 rounded-full transition-colors w-full"
                     >
                       Find a {u.size} Unit Near You
@@ -376,42 +401,112 @@ export default async function HouseholdStoragePage() {
         </div>
       </section>
 
-      {/* ── LIFE TRANSITIONS ────────────────────────────────── */}
-      <section className="bg-gray-50 py-20">
+      {/* ── WHY CHOOSE MODERN STORAGE® — NEW differentiator section
+          The auditor flagged this as missing entirely. 8 quick
+          differentiators help conversion by addressing "why this
+          company over the one down the street?" */}
+      <section className="bg-white py-20 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-3xl mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
-              When household storage helps
+              Why customers choose us
             </p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
-              Built for Every Household Transition
+              Why Choose Modern Storage® for Household Storage
             </h2>
-            <p className="text-gray-600 text-lg leading-relaxed">
-              Households across Arkansas use Modern Storage® for predictable life moments and unexpected ones alike. Month-to-month rentals make it easy to start, extend, or close out a unit on your schedule.
+            <p className="text-gray-700 text-lg leading-relaxed">
+              Storage is the easy part. Modern Storage® is built to make the rest of the move — reserving, paying, picking a size, getting to the unit — feel just as easy. Eight reasons households across the region keep choosing us.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {LIFE_TRANSITIONS.map((t) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {WHY_CHOOSE_MODERN.map((c) => (
               <div
-                key={t.title}
-                className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-modern-red hover:shadow-lg transition-all"
+                key={c.title}
+                className="bg-gray-50 rounded-2xl p-5 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all"
               >
-                <div className="w-11 h-11 rounded-full bg-modern-red/10 text-modern-red flex items-center justify-center mb-4">
-                  <LifeIcon name={t.icon} />
-                </div>
-                <h3 className="font-black text-charcoal mb-2 leading-tight">{t.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{t.body}</p>
+                <h3 className="font-black text-charcoal mb-2 leading-tight">{c.title}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">{c.body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* ── DRIVE-UP vs CLIMATE-CONTROLLED — NEW segmentation ────
+          Auditor: "Right now the page blends both together. Add a
+          short section…then link climate users to the dedicated
+          climate page." */}
+      <section className="bg-charcoal text-white py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-12">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+              Pick the right format
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-black text-white tracking-tight mb-4">
+              Drive-Up vs. Climate-Controlled Household Storage
+            </h2>
+            <p className="text-gray-400 text-lg leading-relaxed">
+              Two practical formats for two different use cases. Most Modern Storage® locations offer both, so you can pick what matches your belongings — not what matches the building.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Drive-Up card */}
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-7">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Drive-up</p>
+              <h3 className="text-2xl font-black text-white mb-3 leading-tight">
+                {DRIVE_UP_VS_CLIMATE.driveUp.title}
+              </h3>
+              <p className="text-gray-300 leading-relaxed mb-5">
+                {DRIVE_UP_VS_CLIMATE.driveUp.intro}
+              </p>
+              <p className="text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Best for</p>
+              <ul className="space-y-2">
+                {DRIVE_UP_VS_CLIMATE.driveUp.bestFor.map((item) => (
+                  <li key={item} className="flex gap-2 text-sm text-gray-300">
+                    <svg className="w-4 h-4 text-modern-red shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {/* Climate-Controlled card */}
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-7">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Climate-Controlled</p>
+              <h3 className="text-2xl font-black text-white mb-3 leading-tight">
+                {DRIVE_UP_VS_CLIMATE.climate.title}
+              </h3>
+              <p className="text-gray-300 leading-relaxed mb-5">
+                {DRIVE_UP_VS_CLIMATE.climate.intro}
+              </p>
+              <p className="text-xs font-black uppercase tracking-widest text-gray-400 mb-3">Best for</p>
+              <ul className="space-y-2 mb-6">
+                {DRIVE_UP_VS_CLIMATE.climate.bestFor.map((item) => (
+                  <li key={item} className="flex gap-2 text-sm text-gray-300">
+                    <svg className="w-4 h-4 text-modern-red shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href={DRIVE_UP_VS_CLIMATE.climate.deepLink}
+                className="inline-flex items-center gap-1 text-sm font-bold text-modern-red hover:text-white transition-colors"
+              >
+                {DRIVE_UP_VS_CLIMATE.climate.deepLinkLabel}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── FREE MOVING TRUCK ───────────────────────────────── */}
-      <section id="moving-truck" className="bg-charcoal text-white py-20">
+      <section id="moving-truck" className="bg-white py-20 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-800 relative">
+            <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-100 relative">
               <Image
                 src={TRUCK_IMAGE}
                 alt={TRUCK_ALT}
@@ -425,40 +520,68 @@ export default async function HouseholdStoragePage() {
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
                 Free moving truck
               </p>
-              <h2 className="text-3xl lg:text-4xl font-black text-white tracking-tight mb-5">
-                Move Household Belongings In Without Booking a Second Rental
+              <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-5">
+                Move In with One Trip — Not Two
               </h2>
-              <p className="text-gray-400 text-lg leading-relaxed mb-6">
-                Modern Storage® offers a free moving truck with new household storage rentals at participating Arkansas locations. Load furniture, appliances, and boxes directly to your unit on move-in day.
+              <p className="text-gray-700 text-lg leading-relaxed mb-6">
+                Modern Storage® offers a free moving truck with new household storage rentals at participating locations. Load your furniture, appliances, and boxes once, then drive straight to your unit. No second rental, no second trip, no second pickup line at the truck-rental counter.
               </p>
               <p className="text-sm text-gray-500 italic mb-8">
                 Truck availability, mileage limits, requirements, and location participation may vary.
               </p>
-              <Link
-                href="#locations"
-                className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-7 py-3.5 rounded-full transition-colors text-sm"
-              >
-                Find a Unit Near You
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/free-moving-truck"
+                  className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-7 py-3.5 rounded-full transition-colors text-sm"
+                >
+                  See Free Moving Truck Details
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+                <Link
+                  href="#locations"
+                  className="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-charcoal font-bold px-7 py-3.5 rounded-full transition-colors text-sm"
+                >
+                  Reserve a Unit
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* ── LOCATIONS — moved DOWN per SEO audit ─────────────────
+          Was second from the top. Now appears AFTER hero, life
+          transitions, sizes, why-choose, drive-up-vs-climate, and
+          free truck — so customers have understood the category
+          before being asked to pick a facility. */}
+      <section id="locations" className="bg-gray-50 py-20 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-10">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">10 Locations</p>
+            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+              Find Household Storage Near You
+            </h2>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              Modern Storage® has 10 convenient locations across the central and Northwest regions — Little Rock, West Little Rock, North Little Rock, Riverdale, Maumelle, Bryant, Hot Springs, Bentonville, Springdale, and Lowell. Filter by region, click a pin for details, and reserve online from the nearest facility.
+            </p>
+          </div>
+          <LocationFinder locations={locations} />
+        </div>
+      </section>
+
       {/* ── RELATED STORAGE OPTIONS ─────────────────────────── */}
-      <section className="bg-white py-20 border-y border-gray-200">
+      <section className="bg-white py-20 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-3xl mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
               Need a different kind of storage?
             </p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
-              Other Modern Storage® Options in Arkansas
+              Other Modern Storage® Options
             </h2>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-gray-700 text-lg leading-relaxed">
               Household isn&apos;t the only way customers use Modern Storage®. If you have a boat or RV, a business, or items that need a more stable indoor environment, start here.
             </p>
           </div>
@@ -521,7 +644,7 @@ export default async function HouseholdStoragePage() {
               Household Storage FAQ
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed mt-4 max-w-2xl mx-auto">
-              Answers to the most common questions about household storage units in Arkansas — unit sizes, climate-controlled options, the free moving truck, month-to-month rentals, and how to reserve a Modern Storage® unit online.
+              Answers to the most common questions about household and residential self-storage — unit sizes, temporary storage during moves and renovations, college storage, the free moving truck, online reservations, and how Modern Storage® compares.
             </p>
           </div>
           <FaqAccordion items={HOUSEHOLD_FAQS} />
@@ -534,10 +657,10 @@ export default async function HouseholdStoragePage() {
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7 text-center lg:text-left">
               <h2 className="text-3xl lg:text-4xl font-black text-white mb-5 tracking-tight">
-                Find a Household Storage Unit Near You
+                Reserve Your Household Storage Unit
               </h2>
               <p className="text-red-100 text-lg leading-relaxed mb-6">
-                Pick a Modern Storage® location, choose a size, and reserve online in minutes. Free moving truck available with new rentals at participating locations.
+                Pick a nearby Modern Storage® location, choose a size, and reserve online in minutes. Free moving truck available with new rentals at participating locations.
               </p>
               <p className="text-red-100/80 text-xs italic mb-8 lg:mb-0">
                 Availability, requirements, and free moving truck participation vary by location.
