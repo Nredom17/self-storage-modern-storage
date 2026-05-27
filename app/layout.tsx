@@ -57,7 +57,7 @@ function buildOrganizationSchema(phoneDisplay: string) {
     image: SITE_URL + '/images/modern-storage-springdale-best-of-the-best-awards.png',
     telephone: phoneDisplay,
     description:
-      'Modern Storage® operates 10 self-storage facilities across Arkansas with climate-controlled, household, business, boat, RV, and vehicle storage. Best of the Best Self Storage 2023, 2024, 2025 — Arkansas Democrat Gazette and Best of Northwest Arkansas.',
+      'Modern Storage® operates 10 self-storage facilities across Arkansas with climate-controlled, household, business, boat, RV, and vehicle storage. Three-time winner of the Best of the Best Self-Storage Awards — Arkansas Democrat Gazette and Best of Northwest Arkansas.',
     areaServed: { '@type': 'State', name: 'Arkansas' },
     sameAs: [
       'https://www.modernstorage.com',
@@ -68,11 +68,15 @@ function buildOrganizationSchema(phoneDisplay: string) {
       'https://www.linkedin.com/company/modern-storage',
       'https://www.youtube.com/@modernstorage',
     ],
+    // Multiple Organization.award entries keep each year's distinct
+    // accolade visible to search engines and AI extractors while
+    // sharing the unified "Best of the Best Self-Storage Awards"
+    // brand label.
     award: [
-      'Best of the Best Self Storage 2023 — Arkansas Democrat Gazette',
-      'Best of the Best Self Storage 2024 — Arkansas Democrat Gazette',
-      'Best of the Best Self Storage 2025 — Arkansas Democrat Gazette',
-      'Best of Northwest Arkansas — Self Storage',
+      'Best of the Best Self-Storage Awards 2023 — Arkansas Democrat Gazette',
+      'Best of the Best Self-Storage Awards 2024 — Arkansas Democrat Gazette',
+      'Best of the Best Self-Storage Awards 2025 — Arkansas Democrat Gazette',
+      'Best of Northwest Arkansas — Self-Storage Category',
     ],
   }
 }

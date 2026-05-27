@@ -111,7 +111,7 @@ Cross off as you read. None of these need new work.
 ---
 
 #### 1.4  About + Contact pages
-**Why:** Google E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness). Local SEO favors clear business identity. Currently neither page exists on this subdomain — and the Best of the Best 2023/24/25 awards have no dedicated home.
+**Why:** Google E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness). Local SEO favors clear business identity. Currently neither page exists on this subdomain — and the Best of the Best Self-Storage Awards (three-time winner) have no dedicated home.
 
 **What to build:**
 - `/about` — Company story, Best-of-the-Best awards (with Arkansas Democrat Gazette + Best of NWA attribution), leadership / founder bio if available, brand history, what makes Modern Storage® different.

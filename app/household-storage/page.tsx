@@ -19,7 +19,7 @@ export const revalidate = 60
 const PAGE_PATH = '/household-storage'
 const HERO_IMAGE = '/images/modern-storage-springdale-best-of-the-best-awards.png'
 const HERO_ALT =
-  'Modern Storage® facility with Best of the Best 2023-2025 and Best of Northwest Arkansas award seals'
+  'Modern Storage® facility with Best of the Best Self-Storage Awards and Best of Northwest Arkansas award seals'
 const TRUCK_IMAGE = '/images/modern-storage-free-moving-truck.jpg'
 const TRUCK_ALT =
   'Modern Storage® free moving truck included with new household storage rentals at participating locations'
