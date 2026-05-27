@@ -20,26 +20,30 @@ import { buildLocationSchemaList } from '@/lib/schema'
 export const revalidate = 60
 
 const PAGE_PATH = '/rv-boat-vehicle'
-// Hero image: vintage red Mack fire truck inside a Modern Storage®
-// oversized enclosed storage unit. On-brand red doors + red truck.
-// Shows specialty/collector vehicle storage and oversized enclosed
-// storage clearly — the strongest single image in the asset library.
-const HERO_IMAGE = '/images/collector-vehicle-storage-fire-truck-modern-storage.png'
+// Hero image: GMC truck parked outside a Modern Storage® RV unit
+// with a travel trailer visible inside at sunset. Real-world drive-up
+// access scenario — communicates the most common RV/boat owner use
+// case in a single visual. On-brand red roll-up doors.
+const HERO_IMAGE = '/images/rv-truck-drive-up-storage.png'
 const HERO_ALT =
-  'Vintage red Mack fire truck stored at Modern Storage® Shackleford in an oversized enclosed RV-style storage unit in Little Rock'
+  'Tow truck and travel trailer at a Modern Storage® drive-up RV storage unit at sunset — boat, RV, and vehicle storage in Arkansas'
 const HERO_CAPTION =
-  'Collector and specialty vehicle storage at Modern Storage® Shackleford — oversized enclosed units for fire trucks, RVs, classic cars, and rigs that won\'t fit on a driveway.'
+  'Drive-up RV, boat, and vehicle storage at Modern Storage® Shackleford — pull up, unload, and lock up between weekends on the water.'
 
 // Storage-format showcase images, rendered large in their own section
-// below the three vehicle-type cards. Each photo carries a specific
-// storage-format story per the asset brief.
+// below the three vehicle-type cards.
 const ENCLOSED_RV_IMAGE = '/images/enclosed-rv-storage-trailer-unit-modern-storage.png'
 const ENCLOSED_RV_ALT =
   'Mallard travel trailer parked inside a Modern Storage® enclosed RV storage unit with red roll-up doors at sunset'
 
-const PREMIUM_RV_IMAGE = '/images/premium-rv-storage-truck-trailer-modern-storage.png'
-const PREMIUM_RV_ALT =
-  'GMC pickup truck parked outside a Modern Storage® premium RV storage unit with a travel trailer visible inside — drive-up access at sunset'
+// Specialty / oversized proof point — vintage red Mack fire truck
+// inside an oversized enclosed unit. Moved from hero to "lower on
+// the page" per the asset brief so it functions as a proof point
+// for specialty and oversized vehicle storage, not the primary
+// brand image for the category.
+const SPECIALTY_OVERSIZED_IMAGE = '/images/specialty-oversized-vehicle-fire-truck-storage.png'
+const SPECIALTY_OVERSIZED_ALT =
+  'Vintage red Mack fire truck stored at Modern Storage® Shackleford in an oversized enclosed RV-style storage unit — specialty and collector vehicle storage'
 
 const COMMERCIAL_LARGE_UNIT_IMAGE = '/images/commercial-storage-large-unit-interior-modern-storage.png'
 const COMMERCIAL_LARGE_UNIT_ALT =
@@ -413,12 +417,16 @@ export default async function BoatRvStoragePage() {
               </p>
             </article>
 
-            {/* Premium drive-up — truck + trailer at sunset */}
+            {/* Specialty / oversized vehicle storage — fire truck proof
+                point. The hero already carries the primary drive-up
+                story, so this card uses the most distinctive asset in
+                the library to make a concrete "we can fit the unusual"
+                proof point. */}
             <article className="flex flex-col">
               <figure className="rounded-2xl overflow-hidden shadow-xl mb-5 aspect-[4/3] bg-gray-100 relative">
                 <Image
-                  src={PREMIUM_RV_IMAGE}
-                  alt={PREMIUM_RV_ALT}
+                  src={SPECIALTY_OVERSIZED_IMAGE}
+                  alt={SPECIALTY_OVERSIZED_ALT}
                   fill
                   loading="lazy"
                   sizes="(max-width: 1024px) 100vw, 33vw"
@@ -426,13 +434,13 @@ export default async function BoatRvStoragePage() {
                 />
               </figure>
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">
-                Premium drive-up access
+                Specialty &amp; oversized vehicle storage
               </p>
               <h3 className="text-xl font-black text-charcoal mb-3 leading-tight">
-                Pull up, unload, and drive away
+                If it fits a fire truck, it fits your rig
               </h3>
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-                Drive-up RV and vehicle parking sized for trucks, RVs with toad vehicles, and combined boat + tow vehicle storage. Lock-and-leave between weekends on the water — no waiting in line at a marina lot, no HOA enforcement on a residential driveway. Available at <Link href="/locations/maumelle" className="text-modern-red font-semibold hover:underline">Modern Storage® Maumelle Blvd</Link>, <Link href="/locations/bryant" className="text-modern-red font-semibold hover:underline">Modern Storage® Bryant</Link>, and <Link href="/locations/lowell" className="text-modern-red font-semibold hover:underline">Modern Storage® Lowell</Link>.
+                Vintage Mack fire truck on the left, an oversized enclosed unit at <Link href="/locations/shackleford" className="text-modern-red font-semibold hover:underline">Modern Storage® Shackleford</Link>. Real customers store collector cars, classic trucks, motorcycles, restoration projects, and one-of-a-kind rigs in spaces sized for things that don&apos;t fit anywhere else. If your vehicle is unusual or oversized, call ahead and the team will check space length and door clearance before you reserve.
               </p>
             </article>
 
