@@ -20,11 +20,15 @@ import { buildLocationSchemaList } from '@/lib/schema'
 export const revalidate = 60
 
 const PAGE_PATH = '/rv-boat-vehicle'
-const HERO_IMAGE = '/images/modern-storage-shackleford-rv-storage-unit.jpg'
+// Hero image: distinctive vintage red Mack fire truck stored in a
+// Modern Storage® Shackleford RV unit. On-brand red doors, memorable
+// subject, real Modern Storage® photo. Replaces a less-distinctive
+// generic RV-in-unit shot.
+const HERO_IMAGE = '/images/modern-storage-shackleford-vintage-fire-truck-in-rv-unit.png'
 const HERO_ALT =
-  'RV stored in a Modern Storage® Shackleford indoor RV storage unit with red roll-up doors in Little Rock'
+  'Vintage red Mack fire truck stored at Modern Storage® Shackleford in an RV-sized indoor storage unit in Little Rock'
 const HERO_CAPTION =
-  'Indoor RV storage at Modern Storage® Shackleford in Little Rock.'
+  'A vintage fire truck stored at Modern Storage® Shackleford — vehicle, RV, and oversized rig storage in Little Rock.'
 
 export const metadata: Metadata = {
   title: { absolute: 'Boat, RV & Vehicle Storage in Arkansas | Modern Storage®' },
