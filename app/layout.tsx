@@ -4,6 +4,7 @@ import { Bebas_Neue } from 'next/font/google'
 import Script from 'next/script'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import StickyMobileCTA from '@/components/StickyMobileCTA'
 import { SITE_URL } from '@/lib/site'
 import { getSiteSettings } from '@/lib/data'
 
@@ -155,6 +156,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <Header phoneDisplay={settings.phoneDisplay} phoneHref={settings.phoneHref} />
         <main className="flex-1">{children}</main>
         <Footer phoneDisplay={settings.phoneDisplay} phoneHref={settings.phoneHref} />
+        {/* Sticky bottom CTA bar — mobile-only. Slides in when user
+            scrolls up after passing the hero, hides on scroll-down,
+            and hides when near the bottom of the page so it doesn't
+            double-stack with the final red CTA section. */}
+        <StickyMobileCTA phoneDisplay={settings.phoneDisplay} phoneHref={settings.phoneHref} />
       </body>
     </html>
   )
