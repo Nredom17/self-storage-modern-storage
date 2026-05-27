@@ -51,8 +51,11 @@ landmarks, corridor access) and facility-specific FAQs.
 - [Springdale](https://self-storage.modernstorage.com/locations/springdale): 4555 W Sunset Ave, Springdale, AR 72762 — west Springdale, Hwy 412 corridor, near Tyson HQ. Climate-controlled and drive-up.
 - [Lowell](https://self-storage.modernstorage.com/locations/lowell): 1407 W Monroe Ave, Lowell, AR 72745 — I-49 between Rogers and Springdale, near Beaver Lake. Climate-controlled, business, and boat/RV storage.
 
-## Guides and long-tail content
+## Guides hub and long-tail content
 
+- [Guides Hub](https://self-storage.modernstorage.com/guides): Curated entry point listing every Modern Storage® storage guide
+- [Apartment Storage Guide](https://self-storage.modernstorage.com/guides/apartment-storage): Best unit sizes for apartment overflow, college storage, between-leases gaps, and apartment-renter use cases across Arkansas
+- [Storage During a Move](https://self-storage.modernstorage.com/guides/moving-storage): Moving storage guide — between leases, military PCS, long-distance relocation, renovations, downsizing
 - [Supplier & Business Storage in Bentonville](https://self-storage.modernstorage.com/business-storage-bentonville): Climate-controlled and business storage in Bentonville for NWA vendors, suppliers, e-commerce sellers, and small businesses
 - [Storage Near Beaver Lake](https://self-storage.modernstorage.com/storage-near-beaver-lake): Boat and RV storage near Beaver Lake — Modern Storage® Lowell on I-49 between Rogers and Springdale
 - [Contractor Storage in Little Rock](https://self-storage.modernstorage.com/contractor-storage-little-rock): Tools, equipment, jobsite overflow, and trade inventory storage at four Little Rock area Modern Storage® locations

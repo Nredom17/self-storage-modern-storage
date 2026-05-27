@@ -104,6 +104,7 @@ export const NAV_TREE: readonly NavTreeItem[] = [
     type: 'dropdown',
     label: 'Resources',
     items: [
+      { label: 'Storage Guides', href: '/guides' },
       { label: 'Blog', href: 'https://www.modernstorage.com/blog', external: true },
       {
         label: 'Podcast',

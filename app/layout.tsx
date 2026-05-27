@@ -40,11 +40,55 @@ export const metadata: Metadata = {
   },
 }
 
+// Sitewide Organization schema — anchored at SITE_URL + '#organization' so
+// every per-page Service / Article / LocalBusiness schema can reference it
+// via provider/publisher fields. This is the canonical brand entity for
+// Modern Storage®; per-facility LocalBusiness schemas remain separate and
+// reference each physical location.
+function buildOrganizationSchema(phoneDisplay: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': SITE_URL + '/#organization',
+    name: 'Modern Storage®',
+    legalName: 'Modern Storage',
+    url: SITE_URL + '/',
+    logo: SITE_URL + '/images/modern-storage-springdale-best-of-the-best-awards.png',
+    image: SITE_URL + '/images/modern-storage-springdale-best-of-the-best-awards.png',
+    telephone: phoneDisplay,
+    description:
+      'Modern Storage® operates 10 self-storage facilities across Arkansas with climate-controlled, household, business, boat, RV, and vehicle storage. Best of the Best Self Storage 2023, 2024, 2025 — Arkansas Democrat Gazette and Best of Northwest Arkansas.',
+    areaServed: { '@type': 'State', name: 'Arkansas' },
+    sameAs: [
+      'https://www.modernstorage.com',
+      'https://podcast.modernstorage.com',
+      'https://www.instagram.com/modern.storage',
+      'https://www.tiktok.com/@modernstorage',
+      'https://www.facebook.com/modernstorage',
+      'https://www.linkedin.com/company/modern-storage',
+      'https://www.youtube.com/@modernstorage',
+    ],
+    award: [
+      'Best of the Best Self Storage 2023 — Arkansas Democrat Gazette',
+      'Best of the Best Self Storage 2024 — Arkansas Democrat Gazette',
+      'Best of the Best Self Storage 2025 — Arkansas Democrat Gazette',
+      'Best of Northwest Arkansas — Self Storage',
+    ],
+  }
+}
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const settings = await getSiteSettings()
+  const organizationSchema = buildOrganizationSchema(settings.phoneDisplay)
   return (
     <html lang="en" className={bebasNeue.variable}>
       <head>
+        {/* Sitewide Organization schema — emits the canonical brand entity
+            on every page. Per-page schemas reference it via @id. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
         {GTM_ID && (
           <Script
             id="gtm-init"

@@ -41,7 +41,10 @@ const RESOURCES = [
 // Long-tail authority pages — surfaced in the footer so they’re not
 // orphans. Each links into the main location pages it serves.
 const GUIDES = [
-  { label: 'Supplier & Business Storage — Bentonville', href: '/business-storage-bentonville' },
+  { label: 'All Guides', href: '/guides' },
+  { label: 'Apartment Storage', href: '/guides/apartment-storage' },
+  { label: 'Storage During a Move', href: '/guides/moving-storage' },
+  { label: 'Supplier & Business — Bentonville', href: '/business-storage-bentonville' },
   { label: 'Storage Near Beaver Lake', href: '/storage-near-beaver-lake' },
   { label: 'Contractor Storage — Little Rock', href: '/contractor-storage-little-rock' },
   { label: 'Climate-Controlled & AR Humidity', href: '/climate-controlled-arkansas-humidity' },
