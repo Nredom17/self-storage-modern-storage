@@ -40,14 +40,41 @@ const RESOURCES = [
 
 // Long-tail authority pages — surfaced in the footer so they’re not
 // orphans. Each links into the main location pages it serves.
-const GUIDES = [
-  { label: 'All Guides', href: '/guides' },
-  { label: 'Apartment Storage', href: '/guides/apartment-storage' },
-  { label: 'Storage During a Move', href: '/guides/moving-storage' },
-  { label: 'Supplier & Business — Bentonville', href: '/business-storage-bentonville' },
-  { label: 'Storage Near Beaver Lake', href: '/storage-near-beaver-lake' },
-  { label: 'Contractor Storage — Little Rock', href: '/contractor-storage-little-rock' },
-  { label: 'Climate-Controlled & AR Humidity', href: '/climate-controlled-arkansas-humidity' },
+// Organized into 4 SEO clusters for clearer topical grouping and
+// scannability. Render order in the footer matches array order.
+const GUIDES_GROUPS = [
+  {
+    heading: 'Apartment & Moving',
+    links: [
+      { label: 'Apartment Storage', href: '/guides/apartment-storage' },
+      { label: 'Storage During a Move', href: '/guides/moving-storage' },
+    ],
+  },
+  {
+    heading: 'Business & Contractor',
+    links: [
+      { label: 'Supplier & Business — Bentonville', href: '/business-storage-bentonville' },
+      { label: 'Contractor Storage — Little Rock', href: '/contractor-storage-little-rock' },
+    ],
+  },
+  {
+    heading: 'Lake & Boat Storage',
+    links: [
+      { label: 'Storage Near Beaver Lake', href: '/storage-near-beaver-lake' },
+      { label: 'Storage Near Table Rock Lake', href: '/storage-near-table-rock-lake' },
+      { label: 'Storage Near Lake Hamilton', href: '/storage-near-lake-hamilton' },
+      { label: 'Storage Near Lake Ouachita', href: '/storage-near-lake-ouachita' },
+      { label: 'Storage Near Greers Ferry Lake', href: '/storage-near-greers-ferry-lake' },
+      { label: 'Boat Storage Near Hot Springs', href: '/boat-storage-near-hot-springs' },
+      { label: 'RV & Boat Storage in NWA', href: '/rv-boat-storage-northwest-arkansas' },
+    ],
+  },
+  {
+    heading: 'Climate & Seasonal',
+    links: [
+      { label: 'Climate-Controlled & AR Humidity', href: '/climate-controlled-arkansas-humidity' },
+    ],
+  },
 ]
 
 const SOCIAL_LINKS = [
@@ -198,22 +225,41 @@ export default function Footer({
           </div>
         </div>
 
-        {/* Storage Guides — long-tail authority pages. Surfaced in the
-            footer so they’re not orphans and so the link equity from the
-            sitewide nav reaches them on every page. */}
+        {/* Storage Guides — long-tail authority pages, grouped into 4
+            SEO clusters. 4 columns on lg+, 2 on sm-md, single column
+            on mobile. Each cluster shows a small uppercase header so
+            scanning is fast. "All Guides" link sits below as a single
+            sweep to the curated hub. */}
         <div className="mt-12 pt-8 border-t border-white/10">
-          <h2 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-5">Storage Guides</h2>
-          <nav className="flex flex-wrap gap-x-6 gap-y-2">
-            {GUIDES.map(({ label, href }) => (
-              <Link
-                key={label}
-                href={href}
-                className="text-sm text-gray-400 hover:text-white transition-colors"
-              >
-                {label}
-              </Link>
+          <div className="flex items-baseline justify-between flex-wrap gap-3 mb-5">
+            <h2 className="text-xs font-black uppercase tracking-widest text-gray-500">Storage Guides</h2>
+            <Link
+              href="/guides"
+              className="text-xs font-bold text-modern-red hover:text-white transition-colors"
+            >
+              All guides →
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8">
+            {GUIDES_GROUPS.map((group) => (
+              <div key={group.heading}>
+                <p className="text-[10px] font-black uppercase tracking-widest text-modern-red mb-3">
+                  {group.heading}
+                </p>
+                <nav className="flex flex-col gap-2">
+                  {group.links.map(({ label, href }) => (
+                    <Link
+                      key={label}
+                      href={href}
+                      className="text-sm text-gray-400 hover:text-white transition-colors leading-snug"
+                    >
+                      {label}
+                    </Link>
+                  ))}
+                </nav>
+              </div>
             ))}
-          </nav>
+          </div>
         </div>
 
         {/* Copyright */}

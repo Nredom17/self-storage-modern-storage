@@ -106,5 +106,42 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
+    // ── New lake & regional boat/RV guides (NWA + Hot Springs + central AR)
+    {
+      url: SITE_URL + '/storage-near-lake-hamilton',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: SITE_URL + '/storage-near-lake-ouachita',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: SITE_URL + '/storage-near-table-rock-lake',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: SITE_URL + '/storage-near-greers-ferry-lake',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: SITE_URL + '/boat-storage-near-hot-springs',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: SITE_URL + '/rv-boat-storage-northwest-arkansas',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
   ]
 }
