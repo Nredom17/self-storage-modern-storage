@@ -14,15 +14,15 @@ const HERO_ALT =
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Business Storage in Bentonville, AR | Modern Storage®',
+    absolute: 'Supplier & Business Storage in Bentonville, AR | Modern Storage®',
   },
   description:
-    'Business storage in Bentonville for Northwest Arkansas vendors, suppliers, e-commerce sellers, and small businesses. Indoor climate-controlled units, ground-floor access, and month-to-month rentals at Modern Storage® Bentonville and Lowell.',
+    'Supplier and business storage in Bentonville for Northwest Arkansas vendors, e-commerce sellers, contractors, and small businesses. Indoor climate-controlled units, ground-floor access, and month-to-month rentals at Modern Storage® Bentonville and Lowell.',
   alternates: { canonical: SITE_URL + PAGE_PATH },
   openGraph: {
-    title: 'Business Storage in Bentonville, AR | Modern Storage®',
+    title: 'Supplier & Business Storage in Bentonville, AR | Modern Storage®',
     description:
-      'Indoor business and climate-controlled storage in Bentonville for NWA vendors, suppliers, e-commerce sellers, and small businesses — Modern Storage®.',
+      'Indoor supplier and business storage in Bentonville for NWA vendors, e-commerce sellers, contractors, and small businesses — Modern Storage®.',
     url: SITE_URL + PAGE_PATH,
     siteName: 'Modern Storage®',
     type: 'website',
@@ -30,9 +30,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Business Storage in Bentonville, AR | Modern Storage®',
+    title: 'Supplier & Business Storage in Bentonville, AR | Modern Storage®',
     description:
-      'Indoor business storage in Bentonville for NWA vendors, suppliers, and small businesses — Modern Storage®.',
+      'Indoor supplier and business storage in Bentonville for NWA vendors, e-commerce sellers, and small businesses — Modern Storage®.',
     images: [HERO_IMAGE],
   },
 }
@@ -181,7 +181,7 @@ export default async function BusinessStorageBentonvillePage() {
                 Bentonville &amp; Lowell
               </span>
               <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
-                <span className="text-modern-red">Business Storage</span> in Bentonville, AR
+                <span className="text-modern-red">Supplier &amp; Business Storage</span> in Bentonville, AR
               </h1>
               <p className="text-gray-300 text-lg leading-relaxed mb-10 max-w-lg">
                 Climate-controlled and business storage in Bentonville for Northwest Arkansas vendors, suppliers, e-commerce sellers, and small businesses. Convenient for operations near the downtown Bentonville square and the Walmart Home Office area, with month-to-month flexibility that beats a multi-year commercial warehouse lease.
@@ -292,7 +292,7 @@ export default async function BusinessStorageBentonvillePage() {
           <div className="text-center mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">FAQ</p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight">
-              Bentonville Business Storage FAQ
+              Bentonville Supplier &amp; Business Storage FAQ
             </h2>
           </div>
           <FaqAccordion items={FAQS} />
@@ -302,7 +302,7 @@ export default async function BusinessStorageBentonvillePage() {
       <section className="bg-modern-red py-20">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <h2 className="text-3xl lg:text-4xl font-black text-white mb-5 tracking-tight">
-            Reserve Business Storage in Bentonville
+            Reserve Supplier &amp; Business Storage in Bentonville
           </h2>
           <p className="text-red-100 text-lg leading-relaxed mb-10 max-w-2xl mx-auto">
             Compare unit sizes and climate-controlled availability at Modern Storage® Bentonville and Lowell. Reserve online or call to talk through inventory, samples, or office storage logistics.

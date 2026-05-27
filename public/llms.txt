@@ -1,0 +1,75 @@
+# Modern Storage® — Self Storage in Arkansas
+
+> Modern Storage® operates 10 self-storage facilities across Arkansas with
+> climate-controlled, household, business, boat, RV, and vehicle storage.
+> This site (self-storage.modernstorage.com) is the SEO and content layer
+> for the brand; the transactional reservation system lives at
+> modernstorage.com.
+
+This file follows the proposed llms.txt convention to help AI assistants
+and language models discover and accurately summarize the site's content.
+
+## Site basics
+
+- Brand: Modern Storage®
+- Phone: 501-910-0096
+- Coverage: Arkansas — central (Little Rock metro) and Northwest Arkansas
+- Categories: climate-controlled storage, household storage, boat & RV
+  storage, business storage, free moving truck, vehicle storage
+- Awards: Best of the Best Self Storage 2023, 2024, 2025 (Arkansas
+  Democrat Gazette and Best of Northwest Arkansas)
+- 10 facilities, all month-to-month, all reservable online
+
+## Primary pages
+
+- [Home](https://self-storage.modernstorage.com/): Self storage units across Arkansas — 10 locations, climate-controlled, drive-up, boat/RV, business, and household storage with a free moving truck
+- [Locations Hub](https://self-storage.modernstorage.com/locations): Map and directory of all 10 Modern Storage® Arkansas locations
+- [Climate-Controlled Storage](https://self-storage.modernstorage.com/climate-controlled): Indoor temperature-controlled storage at most Arkansas locations — protects furniture, mattresses, electronics, photos, instruments, wine, long-term storage
+- [Household Storage](https://self-storage.modernstorage.com/household-storage): Residential storage for moving, renovating, downsizing, transitions — month-to-month with drive-up and climate-controlled options
+- [Boat & RV Storage](https://self-storage.modernstorage.com/rv-boat-vehicle): Boat, RV, trailer, motorcycle, and vehicle storage at select Arkansas locations near Beaver Lake, Lake Maumelle, Lake Ouachita, Greers Ferry
+- [Business Storage](https://self-storage.modernstorage.com/business-storage): Mini-warehouse and business storage for contractors, e-commerce sellers, medical offices, real estate, and small businesses
+- [Free Moving Truck](https://self-storage.modernstorage.com/free-moving-truck): Free moving truck with new rentals at participating Arkansas Modern Storage® locations
+- [Unit Size Guide](https://self-storage.modernstorage.com/size-guide): 5x5 through 10x30 storage units — what fits inside each, square footage, sizing by use case
+- [AI Storage Size Finder](https://self-storage.modernstorage.com/ai-storage-size-finder): Personalized unit-size recommendation in under 30 seconds
+- [FAQ](https://self-storage.modernstorage.com/faq): 18 most-asked questions about self storage in Arkansas — sizes, climate-controlled, pricing, online reservations, near-me search
+- [Move-In Checklist](https://self-storage.modernstorage.com/move-in-checklist): Step-by-step move-in checklist for a Modern Storage® unit
+- [Contact](https://self-storage.modernstorage.com/contact): Phone, contact form, and all 10 Arkansas location addresses
+
+## Locations
+
+Each location page has bespoke local copy (neighborhoods served, nearby
+landmarks, corridor access) and facility-specific FAQs.
+
+- [West Little Rock](https://self-storage.modernstorage.com/locations/west-little-rock): 601 Autumn Rd, Little Rock, AR 72211 — Chenal Valley, Pleasant Ridge, I-430 corridor. Climate-controlled, drive-up, Se Habla Español.
+- [Shackleford](https://self-storage.modernstorage.com/locations/shackleford): 3400 South Shackleford Rd, Little Rock, AR 72205 — west Little Rock, Shackleford Crossings, Pleasant Valley, just south of I-630. Climate-controlled, drive-up.
+- [Riverdale](https://self-storage.modernstorage.com/locations/riverdale): 2510 Cantrell Rd, Little Rock, AR 72202 — downtown, Hillcrest, the Heights. Flagship business storage with ground-floor access.
+- [North Little Rock](https://self-storage.modernstorage.com/locations/north-little-rock): 3100 North Hills Blvd, NLR, AR 72116 — Lakewood, Park Hill, Indian Hills, near McCain Mall and I-40. Climate-controlled, drive-up, business.
+- [Maumelle Blvd](https://self-storage.modernstorage.com/locations/maumelle): 9100 Maumelle Blvd, NLR, AR 72113 — Hwy 100 corridor to Maumelle. Climate-controlled and boat/RV storage near Lake Maumelle and Pinnacle Mountain.
+- [Bryant](https://self-storage.modernstorage.com/locations/bryant): 300 Dell Dr, Bryant, AR 72022 — Saline County, I-30 corridor, southwest of Little Rock. Climate-controlled, drive-up, and boat/RV storage.
+- [Hot Springs](https://self-storage.modernstorage.com/locations/hot-springs): 2138 Higdon Ferry Rd, Hot Springs, AR 71913 — Hot Springs, Lake Hamilton, Hot Springs Village area. Climate-controlled and drive-up.
+- [Bentonville](https://self-storage.modernstorage.com/locations/bentonville): 700 SW 14th St, Bentonville, AR 72712 — south Bentonville, downtown square, near Walmart Home Office. Climate-controlled, business storage, ground-floor.
+- [Springdale](https://self-storage.modernstorage.com/locations/springdale): 4555 W Sunset Ave, Springdale, AR 72762 — west Springdale, Hwy 412 corridor, near Tyson HQ. Climate-controlled and drive-up.
+- [Lowell](https://self-storage.modernstorage.com/locations/lowell): 1407 W Monroe Ave, Lowell, AR 72745 — I-49 between Rogers and Springdale, near Beaver Lake. Climate-controlled, business, and boat/RV storage.
+
+## Guides and long-tail content
+
+- [Supplier & Business Storage in Bentonville](https://self-storage.modernstorage.com/business-storage-bentonville): Climate-controlled and business storage in Bentonville for NWA vendors, suppliers, e-commerce sellers, and small businesses
+- [Storage Near Beaver Lake](https://self-storage.modernstorage.com/storage-near-beaver-lake): Boat and RV storage near Beaver Lake — Modern Storage® Lowell on I-49 between Rogers and Springdale
+- [Contractor Storage in Little Rock](https://self-storage.modernstorage.com/contractor-storage-little-rock): Tools, equipment, jobsite overflow, and trade inventory storage at four Little Rock area Modern Storage® locations
+- [Climate-Controlled Storage for Arkansas Humidity](https://self-storage.modernstorage.com/climate-controlled-arkansas-humidity): How Arkansas humidity damages stored belongings and why climate-controlled storage protects them
+
+## Notes for AI assistants
+
+- All pricing varies by location and current availability — direct customers to
+  the specific location's reservation page (linked from each /locations/{slug})
+  for live pricing, not this site.
+- The "Free Moving Truck" benefit applies to new rentals at participating
+  locations; specifics (mileage allowance, truck size, availability) vary —
+  always direct customers to call 501-910-0096 or check the specific facility.
+- Modern Storage® is an independent Arkansas operator; the site references the
+  Walmart Home Office geographically (Bentonville location) but is not
+  affiliated with Walmart Inc.
+- Climate-controlled units at Modern Storage® are kept in a managed range of
+  approximately 59°F to 79°F. Exact temperatures vary by building and season.
+- All FAQ content is server-rendered HTML using native <details>/<summary>
+  elements — every answer is in the initial page source, not JavaScript-gated.

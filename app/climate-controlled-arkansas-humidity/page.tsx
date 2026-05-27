@@ -316,7 +316,80 @@ export default async function HumidityPage() {
         </div>
       </section>
 
+      {/* ── FIND CLIMATE-CONTROLLED STORAGE BY LOCATION ────────
+          Inbound contextual links to specific facility pages — keeps
+          this guide tied into the local SEO layer and gives weak
+          location pages (Bryant, Hot Springs, Springdale, NLR,
+          Maumelle) direct inbound link equity from a topic page. */}
       <section className="bg-white py-20 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-12">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+              Where to reserve
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+              Find Climate-Controlled Storage at These Arkansas Locations
+            </h2>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              Most Modern Storage® locations offer indoor climate-controlled units to protect belongings from Arkansas humidity and heat. Pick the facility nearest you — each page shows live unit availability, climate-controlled sizes, and a reserve-online link.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Link href="/locations/bentonville" className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">Northwest Arkansas</p>
+              <h3 className="font-black text-charcoal leading-tight group-hover:text-modern-red transition-colors">Modern Storage® Bentonville</h3>
+              <p className="text-sm text-gray-600 mt-1">Climate-controlled and ground-floor business storage in south Bentonville.</p>
+            </Link>
+            <Link href="/locations/springdale" className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">Northwest Arkansas</p>
+              <h3 className="font-black text-charcoal leading-tight group-hover:text-modern-red transition-colors">Modern Storage® Springdale</h3>
+              <p className="text-sm text-gray-600 mt-1">Climate-controlled and drive-up storage on the Hwy 412 / I-49 corridor.</p>
+            </Link>
+            <Link href="/locations/lowell" className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">Northwest Arkansas</p>
+              <h3 className="font-black text-charcoal leading-tight group-hover:text-modern-red transition-colors">Modern Storage® Lowell</h3>
+              <p className="text-sm text-gray-600 mt-1">Climate-controlled, business, and boat/RV storage on I-49.</p>
+            </Link>
+            <Link href="/locations/north-little-rock" className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">North Little Rock</p>
+              <h3 className="font-black text-charcoal leading-tight group-hover:text-modern-red transition-colors">Modern Storage® North Little Rock</h3>
+              <p className="text-sm text-gray-600 mt-1">Climate-controlled, drive-up, and business storage near McCain Mall.</p>
+            </Link>
+            <Link href="/locations/maumelle" className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">North Little Rock</p>
+              <h3 className="font-black text-charcoal leading-tight group-hover:text-modern-red transition-colors">Modern Storage® Maumelle Blvd</h3>
+              <p className="text-sm text-gray-600 mt-1">Climate-controlled units and boat/RV storage on Hwy 100.</p>
+            </Link>
+            <Link href="/locations/bryant" className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">Saline County</p>
+              <h3 className="font-black text-charcoal leading-tight group-hover:text-modern-red transition-colors">Modern Storage® Bryant</h3>
+              <p className="text-sm text-gray-600 mt-1">Climate-controlled, drive-up, and boat/RV along the I-30 corridor.</p>
+            </Link>
+            <Link href="/locations/hot-springs" className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">Hot Springs</p>
+              <h3 className="font-black text-charcoal leading-tight group-hover:text-modern-red transition-colors">Modern Storage® Hot Springs</h3>
+              <p className="text-sm text-gray-600 mt-1">Climate-controlled storage for Lake Hamilton and Hot Springs Village residents.</p>
+            </Link>
+            <Link href="/locations/shackleford" className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">Little Rock</p>
+              <h3 className="font-black text-charcoal leading-tight group-hover:text-modern-red transition-colors">Modern Storage® Shackleford</h3>
+              <p className="text-sm text-gray-600 mt-1">Climate-controlled and drive-up storage just south of I-630.</p>
+            </Link>
+            <Link href="/locations/west-little-rock" className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">Little Rock</p>
+              <h3 className="font-black text-charcoal leading-tight group-hover:text-modern-red transition-colors">Modern Storage® West Little Rock</h3>
+              <p className="text-sm text-gray-600 mt-1">Climate-controlled and drive-up units near Chenal and I-430.</p>
+            </Link>
+            <Link href="/locations/riverdale" className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">Little Rock</p>
+              <h3 className="font-black text-charcoal leading-tight group-hover:text-modern-red transition-colors">Modern Storage® Riverdale</h3>
+              <p className="text-sm text-gray-600 mt-1">Climate-controlled and business storage on Cantrell Rd, near downtown.</p>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gray-50 py-20 border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">FAQ</p>

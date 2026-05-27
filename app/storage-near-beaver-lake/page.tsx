@@ -240,7 +240,7 @@ export default async function BeaverLakePage() {
               Closest Modern Storage® Locations to Beaver Lake
             </h2>
             <p className="text-gray-700 text-lg leading-relaxed">
-              Modern Storage® Lowell is the closest NWA facility for Beaver Lake area boat and RV storage. Modern Storage® Bentonville is the next-closest option for indoor and business storage (no boat/RV). Lake Maumelle and Hot Springs customers should see the locations finder for central-Arkansas options.
+              <Link href="/locations/lowell" className="text-modern-red font-semibold hover:underline">Modern Storage® Lowell</Link> is the closest NWA facility for Beaver Lake area boat and RV storage. <Link href="/locations/bentonville" className="text-modern-red font-semibold hover:underline">Modern Storage® Bentonville</Link> is the next-closest option for indoor and business storage (no boat/RV). For indoor climate-controlled storage along the Hwy 412 corridor, <Link href="/locations/springdale" className="text-modern-red font-semibold hover:underline">Modern Storage® Springdale</Link> is a strong NWA option. Lake Maumelle and Lake Conway customers should see <Link href="/locations/maumelle" className="text-modern-red font-semibold hover:underline">Modern Storage® Maumelle Blvd</Link> for central Arkansas boat/RV options.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
