@@ -302,11 +302,6 @@ export default async function LocationPage({ params }: Props) {
           <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-6">
             Self Storage in {loc.city}, Arkansas
           </h2>
-          {content.needsLocalCopy && (
-            <p className="text-xs font-bold uppercase tracking-widest text-modern-red/70 mb-4">
-              [Replace with local copy before final review]
-            </p>
-          )}
           <div className="space-y-5 text-gray-700 leading-relaxed">
             {content.paragraphs.map((para, i) => (
               <p key={i}>{para}</p>
