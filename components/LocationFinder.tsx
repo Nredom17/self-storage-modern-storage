@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { LOCATION_FILTERS } from '@/lib/site'
 import type { Location } from '@/lib/data'
+import { getBadgeIcon } from '@/lib/badge-icons'
 
 // Leaflet uses DOM globals; load only on the client.
 const MapClient = dynamic(() => import('./MapClient'), {
@@ -176,23 +177,35 @@ export default function LocationFinder({
                   <p className="text-sm text-gray-500 mb-4">
                     {loc.city}, {loc.state} {loc.zip}
                   </p>
-                  <div className="flex flex-wrap gap-1.5 mb-5">
+                  {/* Amenities as icon + text list. Per UX feedback,
+                      previously pill-shaped chips read as buttons and
+                      invited clicks. Bullet + icon layout signals
+                      "facility offers this" without false affordance.
+                      Highlighted badge (when filtering by a specific
+                      amenity) gets a stronger color + bold text. */}
+                  <ul className="space-y-1.5 mb-5" aria-label={`Amenities at ${loc.name}`}>
                     {loc.badges.map((badge) => {
                       const isHighlighted = highlightBadge && badge === highlightBadge
+                      const Icon = getBadgeIcon(badge)
                       return (
-                        <span
+                        <li
                           key={badge}
-                          className={`text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full ${
-                            isHighlighted
-                              ? 'bg-modern-red text-white'
-                              : 'bg-gray-100 text-gray-700'
+                          className={`flex items-center gap-2 text-xs font-semibold ${
+                            isHighlighted ? 'text-modern-red' : 'text-charcoal/80'
                           }`}
                         >
-                          {badge}
-                        </span>
+                          <Icon
+                            className={`w-4 h-4 shrink-0 ${
+                              isHighlighted ? 'text-modern-red' : 'text-modern-red/80'
+                            }`}
+                            strokeWidth={2}
+                            aria-hidden="true"
+                          />
+                          <span>{badge}</span>
+                        </li>
                       )
                     })}
-                  </div>
+                  </ul>
                   <a
                     href={loc.reservationUrl}
                     aria-label={`See available units at ${loc.name}`}

@@ -9,6 +9,7 @@ import { buildLocationSchema } from '@/lib/schema'
 import { buildDirectionsUrl } from '@/lib/geo'
 import FaqAccordion from '@/components/FaqAccordion'
 import LocationMap from '@/components/LocationMap'
+import { getBadgeIcon } from '@/lib/badge-icons'
 
 // Re-render every 60s to pick up Supabase edits.
 export const revalidate = 60
@@ -254,24 +255,28 @@ export default async function LocationPage({ params }: Props) {
               <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-6">
                 What this facility offers
               </h2>
-              <ul className="space-y-3 mb-8">
-                {loc.badges.map((badge) => (
-                  <li
-                    key={badge}
-                    className="flex items-start gap-3 bg-white rounded-xl px-5 py-4 border border-gray-200"
-                  >
-                    <svg
-                      className="w-5 h-5 text-modern-red shrink-0 mt-0.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
+              {/* Storage options list — each badge rendered with a
+                  specific Lucide icon (climate-controlled gets a
+                  thermometer, drive-up a truck, business storage a
+                  briefcase, etc.). Replaces a generic checkmark and
+                  makes the offering scannable at a glance. */}
+              <ul className="space-y-3 mb-8" aria-label={`Storage options at ${loc.name}`}>
+                {loc.badges.map((badge) => {
+                  const Icon = getBadgeIcon(badge)
+                  return (
+                    <li
+                      key={badge}
+                      className="flex items-center gap-3 bg-white rounded-xl px-5 py-4 border border-gray-200"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span className="font-bold text-charcoal text-sm">{badge}</span>
-                  </li>
-                ))}
+                      <Icon
+                        className="w-5 h-5 text-modern-red shrink-0"
+                        strokeWidth={2}
+                        aria-hidden="true"
+                      />
+                      <span className="font-bold text-charcoal text-sm">{badge}</span>
+                    </li>
+                  )
+                })}
               </ul>
 
               <div className="flex flex-wrap gap-3">
