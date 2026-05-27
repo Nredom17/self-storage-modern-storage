@@ -302,7 +302,7 @@ export default async function HouseholdStoragePage() {
             {LIFE_TRANSITIONS.map((t) => (
               <div
                 key={t.title}
-                className="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all"
+                className="bg-gray-50 hover:bg-white rounded-2xl p-6 border border-gray-200 transition-colors"
               >
                 <div className="w-11 h-11 rounded-full bg-modern-red/10 text-modern-red flex items-center justify-center mb-4">
                   <LifeIcon name={t.icon} />
@@ -359,7 +359,7 @@ export default async function HouseholdStoragePage() {
                 </div>
                 <div className="p-6 flex flex-col flex-1">
                   <h3 className="flex items-baseline gap-3 mb-5 flex-wrap">
-                    <span className="font-bebas text-5xl text-charcoal leading-none">{u.size}</span>
+                    <span className="font-bebas text-6xl lg:text-7xl text-charcoal leading-none">{u.size}</span>
                     <span className="text-sm font-bold text-charcoal/80 leading-tight">
                       Household Storage Unit
                     </span>
@@ -422,7 +422,7 @@ export default async function HouseholdStoragePage() {
             {WHY_CHOOSE_MODERN.map((c) => (
               <div
                 key={c.title}
-                className="bg-gray-50 rounded-2xl p-5 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all"
+                className="bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 transition-colors"
               >
                 <h3 className="font-black text-charcoal mb-2 leading-tight">{c.title}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{c.body}</p>

@@ -388,7 +388,7 @@ export default async function FreeMovingTruckPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {TRUCK_LOCATIONS.map((loc) => (
-              <div key={loc.name} className="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-modern-red transition-colors">
+              <div key={loc.name} className="bg-gray-50 rounded-2xl p-6 border border-gray-200 transition-colors">
                 <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">{loc.area}</p>
                 <h3 className="font-black text-charcoal text-lg leading-tight">{loc.name}</h3>
               </div>

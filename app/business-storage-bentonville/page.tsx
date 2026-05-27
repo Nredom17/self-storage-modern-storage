@@ -238,7 +238,7 @@ export default async function BusinessStorageBentonvillePage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {USE_CASES.map((c) => (
-              <div key={c.title} className="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all">
+              <div key={c.title} className="bg-gray-50 hover:bg-white rounded-2xl p-6 border border-gray-200 transition-colors">
                 <h3 className="font-black text-charcoal mb-2 leading-tight">{c.title}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{c.body}</p>
               </div>

@@ -198,7 +198,7 @@ export default async function SizeGuidePage() {
                 className="bg-gray-50 rounded-2xl p-7 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all flex flex-col scroll-mt-24"
               >
                 <div className="flex items-baseline gap-3 mb-4 flex-wrap">
-                  <span className="font-bebas text-5xl text-charcoal leading-none">{u.size}</span>
+                  <span className="font-bebas text-6xl lg:text-7xl text-charcoal leading-none">{u.size}</span>
                   <span className="text-sm font-bold text-charcoal/70">Storage Unit</span>
                 </div>
                 <div className="flex gap-4 mb-5 text-xs font-semibold">

@@ -273,7 +273,7 @@ export default async function HumidityPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {DAMAGE_BY_ITEM.map((d) => (
-              <div key={d.title} className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all">
+              <div key={d.title} className="bg-white rounded-2xl p-6 border border-gray-200 transition-colors">
                 <h3 className="font-black text-charcoal mb-2 leading-tight">{d.title}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{d.body}</p>
               </div>

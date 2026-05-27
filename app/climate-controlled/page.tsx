@@ -362,7 +362,7 @@ export default async function ClimateControlledPage() {
             {CLIMATE_CONCEPTS.map((c) => (
               <div
                 key={c.title}
-                className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-modern-red transition-colors"
+                className="bg-white rounded-2xl p-6 border border-gray-200 transition-colors"
               >
                 <div className="w-11 h-11 rounded-full bg-modern-red/10 text-modern-red flex items-center justify-center mb-4">
                   <ConceptIcon title={c.title} />
@@ -424,7 +424,7 @@ export default async function ClimateControlledPage() {
             {ARKANSAS_CLIMATE_CONTEXT.factors.map((f) => (
               <div
                 key={f.title}
-                className="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all"
+                className="bg-gray-50 hover:bg-white rounded-2xl p-6 border border-gray-200 transition-colors"
               >
                 <h3 className="font-black text-charcoal mb-2 leading-tight">{f.title}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{f.body}</p>
@@ -591,7 +591,7 @@ export default async function ClimateControlledPage() {
                 </div>
                 <div className="p-6 flex flex-col flex-1">
                   <h3 className="flex items-baseline gap-3 mb-5 flex-wrap">
-                    <span className="font-bebas text-5xl text-charcoal leading-none">{u.size}</span>
+                    <span className="font-bebas text-6xl lg:text-7xl text-charcoal leading-none">{u.size}</span>
                     <span className="text-sm font-bold text-charcoal/80 leading-tight">
                       Climate-Controlled Storage Unit
                     </span>
@@ -657,7 +657,7 @@ export default async function ClimateControlledPage() {
             {BUSINESS_USE_CASES.uses.map((u) => (
               <div
                 key={u.label}
-                className="bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all"
+                className="bg-white rounded-2xl p-5 border border-gray-200 transition-colors"
               >
                 <h3 className="font-black text-charcoal mb-2 leading-tight">{u.label}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{u.body}</p>

@@ -258,7 +258,7 @@ export default async function MovingStoragePage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {MOVING_SCENARIOS.map((s) => (
-              <div key={s.title} className="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all">
+              <div key={s.title} className="bg-gray-50 hover:bg-white rounded-2xl p-6 border border-gray-200 transition-colors">
                 <h3 className="font-black text-charcoal mb-2 leading-tight">{s.title}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{s.body}</p>
               </div>
@@ -280,7 +280,7 @@ export default async function MovingStoragePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {MOVE_PHASE_GUIDE.map((p, i) => (
-              <div key={p.phase} className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all">
+              <div key={p.phase} className="bg-white rounded-2xl p-6 border border-gray-200 transition-colors">
                 <div className="font-bebas text-4xl text-modern-red leading-none mb-3">{i + 1}</div>
                 <h3 className="font-black text-charcoal text-base mb-3 leading-tight">{p.phase}</h3>
                 <ul className="space-y-2">

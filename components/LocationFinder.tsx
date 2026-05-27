@@ -25,7 +25,11 @@ export default function LocationFinder({
   highlightBadge?: string
   requireBadge?: string
 }) {
-  const [activeFilter, setActiveFilter] = useState<string>('All Arkansas')
+  // Default to the first specific region instead of "All Arkansas".
+  // UX feedback: showing a regional filter on first load makes the
+  // tabs read as interactive — users immediately see other tabs are
+  // clickable. "All Arkansas" is still one click away.
+  const [activeFilter, setActiveFilter] = useState<string>(LOCATION_FILTERS[1] ?? 'All Arkansas')
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null)
   const cardRefs = useRef<Record<string, HTMLElement | null>>({})
 
@@ -70,7 +74,14 @@ export default function LocationFinder({
 
   return (
     <div>
-      {/* Filter chips — horizontally scrollable on mobile */}
+      {/* Pre-header — signals the chips are an action, not decoration */}
+      <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+        Select your area
+      </p>
+
+      {/* Filter chips — horizontally scrollable on mobile. Unselected chips
+          use a deeper gray (bg-gray-200 + text-charcoal) so they don't blend
+          into the page background. */}
       <div
         className="-mx-6 px-6 sm:mx-0 sm:px-0 overflow-x-auto scrollbar-hide mb-6"
         role="tablist"
@@ -88,8 +99,8 @@ export default function LocationFinder({
                 onClick={() => setActiveFilter(region)}
                 className={`text-xs font-bold uppercase tracking-wide px-4 py-2 rounded-full transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-modern-red focus-visible:ring-offset-2 ${
                   isActive
-                    ? 'bg-modern-red text-white'
-                    : 'bg-gray-100 text-gray-600 hover:bg-modern-red hover:text-white'
+                    ? 'bg-modern-red text-white shadow-sm'
+                    : 'bg-gray-200 text-charcoal hover:bg-modern-red hover:text-white'
                 }`}
               >
                 {region}

@@ -227,7 +227,7 @@ export default async function AIStorageSizeFinderPage() {
                 href={u.href}
                 className="group bg-white rounded-2xl p-6 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all flex flex-col"
               >
-                <span className="font-bebas text-5xl text-charcoal leading-none mb-3">{u.size}</span>
+                <span className="font-bebas text-6xl lg:text-7xl text-charcoal leading-none mb-3">{u.size}</span>
                 <h3 className="font-black text-charcoal text-lg mb-2 leading-tight group-hover:text-modern-red transition-colors">
                   {u.title}
                 </h3>
