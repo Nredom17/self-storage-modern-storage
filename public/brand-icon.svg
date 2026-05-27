@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <circle cx="512" cy="512" r="480" fill="#F60001"/>
+  <circle cx="512" cy="512" r="420" fill="none" stroke="#FFFFFF" stroke-width="14"/>
+  
+  <g fill="#FFFFFF">
+    <!-- M : x∈[240,480], 240 wide -->
+    <path d="
+      M 240 332
+      L 300 332
+      L 360 572
+      L 420 332
+      L 480 332
+      L 480 692
+      L 240 692
+      Z
+    "/>
+    <!-- S : x∈[544,784], 240 wide, built from 5 rectangles.
+         Top bar / left connector / middle bar / right connector / bottom bar -->
+    <rect x="544" y="332" width="240" height="80"/>
+    <rect x="544" y="412" width="80"  height="68"/>
+    <rect x="544" y="476" width="240" height="72"/>
+    <rect x="704" y="544" width="80"  height="68"/>
+    <rect x="544" y="612" width="240" height="80"/>
+  </g>
+</svg>

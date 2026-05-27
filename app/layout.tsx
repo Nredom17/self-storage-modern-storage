@@ -35,6 +35,20 @@ export const metadata: Metadata = {
   // Google sometimes uses this as a secondary signal for the brand
   // line in SERPs alongside the WebSite schema below.
   applicationName: 'Modern Storage®',
+  // Favicon + Apple touch icon. The dynamic app/icon.tsx and
+  // app/apple-icon.tsx files Next.js auto-discovers handle the
+  // browser tab favicon and iOS home-screen icon. These explicit
+  // metadata.icons entries surface the larger static brand-icon
+  // assets to OG/social previewers and to crawlers that look for an
+  // explicit <link rel="icon"> with absolute URL.
+  icons: {
+    icon: [
+      { url: '/brand-icon.svg', type: 'image/svg+xml' },
+      { url: '/brand-icon-512.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: [{ url: '/brand-icon-on-white-512.png', sizes: '180x180', type: 'image/png' }],
+    shortcut: '/brand-icon-on-white-512.png',
+  },
   openGraph: {
     siteName: 'Modern Storage®',
     type: 'website',
@@ -78,7 +92,13 @@ function buildOrganizationSchema(phoneDisplay: string) {
     name: 'Modern Storage®',
     legalName: 'Modern Storage',
     url: SITE_URL + '/',
-    logo: SITE_URL + '/images/modern-storage-springdale-best-of-the-best-awards.png',
+    // Organization.logo is the field Google reads to render the
+    // tiny icon next to the brand name in search/listing views.
+    // Using the on-white square PNG (no transparency, ≥112×112,
+    // square aspect) per Google's logo guidelines. The awards
+    // image stays available below as Organization.image for
+    // contexts that prefer a richer visual.
+    logo: SITE_URL + '/brand-icon-on-white-512.png',
     image: SITE_URL + '/images/modern-storage-springdale-best-of-the-best-awards.png',
     telephone: phoneDisplay,
     description:
