@@ -11,6 +11,7 @@ import {
   CLIMATE_CONCEPTS,
   WHAT_TO_STORE,
   ARKANSAS_CLIMATE_CONTEXT,
+  ARKANSAS_CLIMATE_STATS,
   DO_YOU_NEED_CLIMATE,
   COMPARISON_ROWS,
   BUSINESS_USE_CASES,
@@ -409,7 +410,7 @@ export default async function ClimateControlledPage() {
           heat indexes, mold risk, garage heat, attic temperatures. */}
       <section className="bg-white py-20 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-3xl mb-12">
+          <div className="max-w-3xl mb-10">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
               Why climate matters
             </p>
@@ -420,6 +421,28 @@ export default async function ClimateControlledPage() {
               {ARKANSAS_CLIMATE_CONTEXT.intro}
             </p>
           </div>
+
+          {/* Big-number stat band — pulls the strongest data out of the
+              factor-card paragraph bodies into scannable visual anchors.
+              2-col on mobile, 4-col on sm+. Mobile users now read the
+              headline numbers in under 5 seconds before reaching the
+              detail cards below. */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 mb-10 lg:mb-12">
+            {ARKANSAS_CLIMATE_STATS.map((s) => (
+              <div
+                key={s.label}
+                className="bg-modern-red/5 border border-modern-red/20 rounded-2xl p-5 sm:p-6 text-center"
+              >
+                <p className="font-bebas text-4xl sm:text-5xl lg:text-6xl text-modern-red leading-none mb-1.5">
+                  {s.value}
+                </p>
+                <p className="text-xs sm:text-sm font-bold text-charcoal/80 leading-tight uppercase tracking-wide">
+                  {s.label}
+                </p>
+              </div>
+            ))}
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {ARKANSAS_CLIMATE_CONTEXT.factors.map((f) => (
               <div
@@ -506,7 +529,13 @@ export default async function ClimateControlledPage() {
               Both have a place. Here&apos;s a direct comparison of how indoor climate-controlled storage and outdoor drive-up storage differ — and which works better for which use cases.
             </p>
           </div>
-          <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+          {/* Desktop (lg+): full 3-column table — side-by-side
+              comparison reads cleanly at wide widths. Mobile hides
+              this and renders the same data as a stacked 2-card
+              comparison below — each column gets full width and
+              becomes readable without horizontal squeeze. Same
+              COMPARISON_ROWS source, no SEO duplication. */}
+          <div className="hidden lg:block bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
             <table className="w-full text-left text-sm sm:text-base">
               <thead className="bg-white/10">
                 <tr>
@@ -540,6 +569,52 @@ export default async function ClimateControlledPage() {
                 ))}
               </tbody>
             </table>
+          </div>
+
+          {/* Mobile (< lg): stacked card pair. Same data, full readable
+              width per side, no horizontal scroll. */}
+          <div className="lg:hidden grid grid-cols-1 gap-4">
+            {/* Climate-Controlled side — emphasized with red border */}
+            <div className="bg-white/5 border-2 border-modern-red rounded-2xl overflow-hidden shadow-lg">
+              <div className="bg-modern-red px-5 py-3">
+                <p className="text-xs font-black uppercase tracking-widest text-white">
+                  Climate-Controlled
+                </p>
+              </div>
+              <ul className="divide-y divide-white/10">
+                {COMPARISON_ROWS.map((row) => (
+                  <li key={row.aspect} className="px-5 py-3.5">
+                    <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">
+                      {row.aspect}
+                    </p>
+                    <p className="text-sm text-white font-semibold flex items-start gap-2">
+                      <svg className="w-4 h-4 text-modern-red shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>{row.climate}</span>
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {/* Standard Drive-Up side — neutral border, secondary emphasis */}
+            <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+              <div className="bg-white/10 px-5 py-3">
+                <p className="text-xs font-black uppercase tracking-widest text-gray-300">
+                  Standard Drive-Up
+                </p>
+              </div>
+              <ul className="divide-y divide-white/10">
+                {COMPARISON_ROWS.map((row) => (
+                  <li key={row.aspect} className="px-5 py-3.5">
+                    <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">
+                      {row.aspect}
+                    </p>
+                    <p className="text-sm text-gray-300">{row.standard}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -634,33 +709,56 @@ export default async function ClimateControlledPage() {
       </section>
 
       {/* ── CLIMATE-CONTROLLED STORAGE FOR BUSINESSES — NEW ─────
-          Auditor: "huge missed opportunity… business storage
-          searches are valuable… broadens commercial intent." */}
+          Now anchored by the commercial-storage-large-unit-interior
+          photo on the left of an intro band, with the 8 use case
+          cards rendered in a tighter 2-col mobile grid below.
+          Previously: no imagery + 1-col card stack on mobile = 8
+          tall stacked text cards. */}
       <section className="bg-gray-50 py-20 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-3xl mb-12">
-            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
-              For businesses
-            </p>
-            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
-              Climate-Controlled Storage for Businesses
-            </h2>
-            <p className="text-gray-700 text-lg leading-relaxed">
-              {BUSINESS_USE_CASES.intro} See the{' '}
-              <Link href="/business-storage" className="text-modern-red font-bold hover:underline">
-                business storage page
-              </Link>
-              {' '}for the full picture, or pick a use case below.
-            </p>
+          {/* Intro band: photo + heading + intro paragraph in 2 cols.
+              On mobile, photo stacks above text. */}
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-10 lg:mb-12">
+            <figure className="lg:col-span-5">
+              <div className="rounded-2xl overflow-hidden shadow-xl aspect-[4/3] bg-gray-100 relative">
+                <Image
+                  src="/images/commercial-storage-large-unit-interior-modern-storage.png"
+                  alt="Interior view of a Modern Storage® large commercial storage unit with corrugated steel walls and bright LED lighting — climate-controlled storage for business inventory and equipment"
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="object-cover"
+                />
+              </div>
+            </figure>
+            <div className="lg:col-span-7">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+                For businesses
+              </p>
+              <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+                Climate-Controlled Storage for Businesses
+              </h2>
+              <p className="text-gray-700 text-lg leading-relaxed">
+                {BUSINESS_USE_CASES.intro} See the{' '}
+                <Link href="/business-storage" className="text-modern-red font-bold hover:underline">
+                  business storage page
+                </Link>
+                {' '}for the full picture, or pick a use case below.
+              </p>
+            </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+          {/* 8 use case cards in a denser 2-col grid on mobile
+              (was 1-col previously = 8 tall stacked cards). Cards
+              themselves unchanged — same SEO copy, same labels. */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
             {BUSINESS_USE_CASES.uses.map((u) => (
               <div
                 key={u.label}
-                className="bg-white rounded-2xl p-5 border border-gray-200 transition-colors"
+                className="bg-white rounded-2xl p-4 sm:p-5 border border-gray-200 transition-colors"
               >
-                <h3 className="font-black text-charcoal mb-2 leading-tight">{u.label}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{u.body}</p>
+                <h3 className="font-black text-charcoal text-sm sm:text-base mb-2 leading-tight">{u.label}</h3>
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">{u.body}</p>
               </div>
             ))}
           </div>

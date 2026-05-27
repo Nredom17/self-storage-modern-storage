@@ -215,6 +215,18 @@ export const WHAT_TO_STORE = [
   },
 ] as const
 
+// Big-number visual band rendered above the Arkansas factor cards.
+// Lifts the strongest stats out of paragraph bodies and into scannable
+// anchors — 2 seconds of "yes, this is real" vs. 45 seconds of reading.
+// All numbers are taken directly from the factor card bodies below;
+// no new claims, no SEO change.
+export const ARKANSAS_CLIMATE_STATS = [
+  { value: '70%+', label: 'Summer humidity' },
+  { value: '100°F+', label: 'Heat indexes' },
+  { value: '120°F+', label: 'Garage temps' },
+  { value: '40°F', label: 'Single-day swing' },
+] as const
+
 // "Why Arkansas climate matters" — the regional context auditor said could
 // become one of the strongest parts of the page. Builds regional topical
 // authority through humidity, heat-index, mold-risk, garage-heat, attic-temp
