@@ -7,22 +7,22 @@ import FaqAccordion from '@/components/FaqAccordion'
 
 export const revalidate = 60
 
-const PAGE_PATH = '/storage-for-walmart-vendors'
+const PAGE_PATH = '/business-storage-bentonville'
 const HERO_IMAGE = '/images/modern-storage-bentonville-facility-exterior.jpg'
 const HERO_ALT =
-  'Modern Storage® Bentonville facility — climate-controlled storage and business storage for Walmart vendors and Northwest Arkansas suppliers'
+  'Modern Storage® Bentonville facility — business and climate-controlled storage for Northwest Arkansas vendors, suppliers, and small businesses'
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Storage for Walmart Vendors & NWA Suppliers in Bentonville | Modern Storage®',
+    absolute: 'Business Storage in Bentonville, AR | Modern Storage®',
   },
   description:
-    'Climate-controlled and business storage for Walmart suppliers, NWA vendors, and Northwest Arkansas small businesses. Indoor inventory protection, sample storage, and ground-floor access at Modern Storage® Bentonville and Lowell — just minutes from Walmart Home Office.',
+    'Business storage in Bentonville for Northwest Arkansas vendors, suppliers, e-commerce sellers, and small businesses. Indoor climate-controlled units, ground-floor access, and month-to-month rentals at Modern Storage® Bentonville and Lowell.',
   alternates: { canonical: SITE_URL + PAGE_PATH },
   openGraph: {
-    title: 'Storage for Walmart Vendors & NWA Suppliers in Bentonville | Modern Storage®',
+    title: 'Business Storage in Bentonville, AR | Modern Storage®',
     description:
-      'Indoor climate-controlled and business storage for Walmart suppliers and NWA vendors — Bentonville and Lowell, minutes from Walmart Home Office.',
+      'Indoor business and climate-controlled storage in Bentonville for NWA vendors, suppliers, e-commerce sellers, and small businesses — Modern Storage®.',
     url: SITE_URL + PAGE_PATH,
     siteName: 'Modern Storage®',
     type: 'website',
@@ -30,74 +30,78 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Storage for Walmart Vendors & NWA Suppliers | Modern Storage®',
+    title: 'Business Storage in Bentonville, AR | Modern Storage®',
     description:
-      'Indoor climate-controlled storage for Walmart suppliers in Bentonville and Lowell — Modern Storage®.',
+      'Indoor business storage in Bentonville for NWA vendors, suppliers, and small businesses — Modern Storage®.',
     images: [HERO_IMAGE],
   },
 }
 
+// Use cases — written for Bentonville-area business storage in general, not
+// targeted at a specific retailer's vendor base. Any descriptive references
+// to the Home Office area are kept to geographic orientation, never
+// affiliation, branding, or "official" language.
 const USE_CASES = [
   {
     title: 'Product samples & prototypes',
     body:
-      'Climate-controlled units protect retail samples, packaging mocks, and prototypes from Northwest Arkansas summer heat and humidity. Stay meeting-ready year-round.',
+      'Climate-controlled units protect retail samples, packaging mocks, and prototypes from Northwest Arkansas summer humidity. Stay meeting-ready year-round, whether you\'re prepping for a buyer review, a trade show, or a customer pitch.',
   },
   {
-    title: 'Retail inventory overflow',
+    title: 'Retail & e-commerce inventory',
     body:
-      'Seasonal stock, line review inventory, and slow-moving SKUs you don\'t want eating up warehouse space — but still need indoor, climate-stable storage close to Bentonville.',
+      'Seasonal stock, slow-moving SKUs, and overflow inventory you don\'t want eating up shop or warehouse space — kept indoors and climate-stable close to your Bentonville operations.',
   },
   {
     title: 'Marketing & POP materials',
     body:
-      'Endcaps, in-store displays, signage, brochures, and trade-show booths kept ready for the next pitch. Indoor units protect printed materials from humidity damage.',
+      'Endcaps, displays, signage, brochures, and trade-show booths kept ready for the next event. Indoor units protect printed materials from humidity damage between launches.',
   },
   {
     title: 'Office furniture & electronics',
     body:
-      'Conference tables, monitors, networking gear, and AV equipment between project phases, office moves, or temporary downsizing at your supplier office.',
+      'Conference tables, monitors, networking gear, and AV equipment stored between office phases, relocations, or temporary downsizing.',
   },
   {
     title: 'Records & contracts',
     body:
-      'Vendor contracts, tax records, and operational documents stored in a stable indoor environment — without the cost of a commercial archive service.',
+      'Tax records, HR files, contracts, and operational documents stored in a stable indoor environment — without the cost of a commercial archive service.',
   },
   {
     title: 'Bentonville-area moves',
     body:
-      'Relocating a small business or supplier office to Bentonville from out of state? Climate-controlled storage bridges the gap between move-out and new lease build-out.',
+      'Relocating a small business or supplier office to Bentonville? Climate-controlled storage bridges the gap between move-out and the new lease\'s build-out completion.',
   },
 ] as const
 
 const FAQS = [
   {
-    q: 'Is Modern Storage® Bentonville close to Walmart Home Office?',
-    a: `Yes. Modern Storage® Bentonville is at 700 SW 14th Street in ZIP 72712, in south Bentonville and just minutes from Walmart Home Office, the downtown Bentonville square, and Crystal Bridges. The location is built for Walmart suppliers, NWA vendors, and small businesses serving the Northwest Arkansas economy.`,
+    q: 'Where is Modern Storage® Bentonville located?',
+    a: `Modern Storage® Bentonville is at 700 SW 14th Street in ZIP 72712, in south Bentonville and minutes from the downtown Bentonville square, Crystal Bridges Museum, and the Home Office corporate area. The facility offers climate-controlled storage, business storage, and ground-floor access — designed for vendors, suppliers, and small businesses across Benton County.`,
   },
   {
-    q: 'What kind of storage do Walmart vendors usually rent?',
-    a: `Walmart suppliers and NWA vendors typically rent a mix of climate-controlled units (for product samples, electronics, and marketing materials) and standard business storage (for bulk inventory, displays, and supplies). Common sizes range from 5x10 for sample storage to 10x20 or 10x30 for seasonal inventory and POP material. Modern Storage® Bentonville and Modern Storage® Lowell both offer business storage with climate-controlled options.`,
+    q: 'What kind of business storage do Northwest Arkansas vendors typically rent?',
+    a: `NWA vendors and suppliers most commonly rent a mix of climate-controlled units (for samples, electronics, and marketing materials) and business storage units (for bulk inventory, displays, and supplies). Sizes range from 5x10 for sample storage to 10x20 or 10x30 for seasonal inventory and point-of-purchase material. Modern Storage® Bentonville and Modern Storage® Lowell both offer business storage with climate-controlled options.`,
   },
   {
-    q: 'Why use Modern Storage® instead of a leased warehouse?',
-    a: `Modern Storage® offers month-to-month business storage at a fraction of the cost of commercial warehouse space — with no long-term lease, no triple-net charges, and no build-out. For Walmart suppliers managing seasonal inventory swings, sample storage between line reviews, or temporary overflow during a move, month-to-month flexibility is a much better fit than a 3-year warehouse lease.`,
+    q: 'Why use self-storage instead of leasing a warehouse?',
+    a: `Self-storage is month-to-month with no long-term lease, no triple-net charges, and no build-out costs. For Bentonville-area small businesses managing seasonal inventory swings, sample storage between buying cycles, or temporary overflow during a move, that flexibility is a much better fit than a multi-year commercial warehouse lease at a fraction of the monthly cost.`,
   },
   {
-    q: 'Do Modern Storage® locations near Bentonville accept inventory deliveries?',
-    a: `Many Modern Storage® locations accept business deliveries at customer units, including at Modern Storage® Bentonville and Modern Storage® Lowell. Acceptance policies, delivery hours, and signature requirements vary by location — confirm with the team before scheduling a shipment from a manufacturer or freight carrier.`,
+    q: 'Do you accept business deliveries at storage units?',
+    a: `Many Modern Storage® locations accept business deliveries at customer units, including Modern Storage® Bentonville and Modern Storage® Lowell. Acceptance policies, delivery hours, and signature requirements vary by location — confirm with the local team before scheduling shipments from a manufacturer, distributor, or freight carrier.`,
   },
   {
-    q: 'Which Modern Storage® locations serve the NWA supplier ecosystem?',
-    a: `Modern Storage® Bentonville (south Bentonville, near Walmart Home Office) is the flagship for NWA vendors. Modern Storage® Lowell (on I-49 between Rogers and Springdale) is the most flexible option — it combines climate-controlled, business storage, and boat/RV in one facility. Modern Storage® Springdale also offers climate-controlled and drive-up storage convenient to Tyson HQ and the I-49 corridor.`,
+    q: 'Which Modern Storage® locations serve Bentonville-area businesses?',
+    a: `Modern Storage® Bentonville (700 SW 14th St) is the closest facility for downtown Bentonville and south Benton County operations. Modern Storage® Lowell (1407 W Monroe Ave, on I-49 between Rogers and Springdale) is the most flexible NWA option — it combines climate-controlled, business storage, and boat/RV at one facility. Modern Storage® Springdale also offers climate-controlled and drive-up storage along the Hwy 412 / I-49 corridor.`,
   },
   {
     q: 'Can I store electronics and samples that need to stay temperature-stable?',
-    a: `Yes. Modern Storage® Bentonville and other NWA locations offer climate-controlled storage units that stay in a stable indoor temperature range (~59°F to 79°F). That protects samples, electronics, prototypes, printed materials, and anything you wouldn't leave in a hot Northwest Arkansas warehouse during August. See the climate-controlled storage page for full details on what belongs indoors.`,
+    a: `Yes. Modern Storage® Bentonville and Lowell offer climate-controlled storage units that stay within a managed indoor temperature range (~59°F to 79°F). That protects samples, electronics, prototypes, printed marketing materials, and anything sensitive to Northwest Arkansas summer heat and humidity. See the climate-controlled storage page for full details on what belongs in an indoor unit.`,
   },
   {
-    q: 'How do I reserve a unit for my Walmart supplier business?',
-    a: `Use the location finder or visit /locations/bentonville to reserve at Modern Storage® Bentonville directly. You can compare unit sizes, climate-controlled availability, and current move-in offers from your phone or computer. For inventory or business storage needs, call 501-910-0096 and the team can recommend the right unit size and location based on your supplier ops.`,
+    q: 'How do I reserve business storage in Bentonville?',
+    a: `Visit /locations/bentonville to reserve at Modern Storage® Bentonville directly, or /locations/lowell to reserve at the Lowell facility. Both pages show available unit sizes and a direct reservation link. For tailored recommendations on unit size based on your inventory or operational needs, call 501-910-0096 and the team can walk through options.`,
   },
 ] as const
 
@@ -106,10 +110,10 @@ function buildJsonLd(phoneDisplay: string) {
     '@context': 'https://schema.org',
     '@type': 'Service',
     '@id': SITE_URL + PAGE_PATH + '#service',
-    serviceType: 'Business Storage for Walmart Vendors',
-    name: 'Storage for Walmart Vendors & NWA Suppliers',
+    serviceType: 'Business Storage in Bentonville',
+    name: 'Business Storage in Bentonville, AR',
     description:
-      'Climate-controlled and business storage for Walmart suppliers and Northwest Arkansas vendors. Indoor inventory protection, sample storage, marketing materials, electronics, and records at Modern Storage® Bentonville and Lowell.',
+      'Climate-controlled and business storage in Bentonville for Northwest Arkansas vendors, suppliers, e-commerce sellers, and small businesses. Ground-floor access, indoor temperature-stable units, and month-to-month rentals at Modern Storage® Bentonville and Lowell.',
     url: SITE_URL + PAGE_PATH,
     image: SITE_URL + HERO_IMAGE,
     areaServed: { '@type': 'State', name: 'Arkansas' },
@@ -126,7 +130,7 @@ function buildJsonLd(phoneDisplay: string) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL + '/' },
-      { '@type': 'ListItem', position: 2, name: 'Storage for Walmart Vendors', item: SITE_URL + PAGE_PATH },
+      { '@type': 'ListItem', position: 2, name: 'Business Storage in Bentonville', item: SITE_URL + PAGE_PATH },
     ],
   }
 
@@ -143,7 +147,7 @@ function buildJsonLd(phoneDisplay: string) {
   return [service, breadcrumb, faqPage]
 }
 
-export default async function WalmartVendorsPage() {
+export default async function BusinessStorageBentonvillePage() {
   const settings = await getSiteSettings()
   const jsonLd = buildJsonLd(settings.phoneDisplay)
   const PHONE_NUMBER_DISPLAY = settings.phoneDisplay
@@ -166,7 +170,7 @@ export default async function WalmartVendorsPage() {
             <ol className="flex items-center gap-2 flex-wrap">
               <li><Link href="/" className="hover:text-modern-red transition-colors">Self Storage</Link></li>
               <li aria-hidden="true">/</li>
-              <li className="text-gray-300">Storage for Walmart Vendors</li>
+              <li className="text-gray-300">Business Storage in Bentonville</li>
             </ol>
           </nav>
 
@@ -174,13 +178,13 @@ export default async function WalmartVendorsPage() {
             <div>
               <span className="inline-flex items-center gap-2 bg-modern-red/20 border border-modern-red/40 text-modern-red text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-6">
                 <span className="w-1.5 h-1.5 rounded-full bg-modern-red animate-pulse" aria-hidden="true" />
-                Bentonville & Lowell
+                Bentonville &amp; Lowell
               </span>
               <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
-                Storage for <span className="text-modern-red">Walmart Vendors</span> &amp; NWA Suppliers
+                <span className="text-modern-red">Business Storage</span> in Bentonville, AR
               </h1>
               <p className="text-gray-300 text-lg leading-relaxed mb-10 max-w-lg">
-                Climate-controlled and business storage for Walmart suppliers, line-review samples, and Northwest Arkansas vendors. Indoor inventory protection just minutes from Walmart Home Office, with month-to-month flexibility that beats a commercial warehouse lease.
+                Climate-controlled and business storage in Bentonville for Northwest Arkansas vendors, suppliers, e-commerce sellers, and small businesses. Convenient for operations near the downtown Bentonville square and the Walmart Home Office area, with month-to-month flexibility that beats a multi-year commercial warehouse lease.
               </p>
               <div className="flex flex-wrap gap-3 mb-10">
                 <Link
@@ -212,7 +216,7 @@ export default async function WalmartVendorsPage() {
                 <Image src={HERO_IMAGE} alt={HERO_ALT} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
               </div>
               <figcaption className="text-xs text-gray-500 mt-3 italic">
-                Modern Storage® Bentonville — minutes from Walmart Home Office and Crystal Bridges.
+                Modern Storage® Bentonville — minutes from downtown Bentonville and Crystal Bridges.
               </figcaption>
             </figure>
           </div>
@@ -223,13 +227,13 @@ export default async function WalmartVendorsPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-3xl mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
-              Built for the NWA supplier ecosystem
+              Built for NWA business operations
             </p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
-              Why Walmart Suppliers Use Modern Storage®
+              Why Bentonville-Area Businesses Use Modern Storage®
             </h2>
             <p className="text-gray-700 text-lg leading-relaxed">
-              The Walmart Home Office ecosystem runs on samples, inventory, and meeting logistics — and Northwest Arkansas summer humidity is hard on every one of those. Modern Storage® offers <Link href="/climate-controlled" className="text-modern-red font-semibold hover:underline">climate-controlled storage</Link> and <Link href="/business-storage" className="text-modern-red font-semibold hover:underline">business storage</Link> built for vendors who need professional indoor space without leasing commercial warehouse square footage.
+              Northwest Arkansas runs on samples, inventory, and meeting logistics — and NWA summer humidity is hard on every one of those. Modern Storage® offers <Link href="/climate-controlled" className="text-modern-red font-semibold hover:underline">climate-controlled storage</Link> and <Link href="/business-storage" className="text-modern-red font-semibold hover:underline">business storage</Link> built for vendors, suppliers, and small businesses that need professional indoor space without leasing commercial warehouse square footage.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -248,20 +252,20 @@ export default async function WalmartVendorsPage() {
           <div className="max-w-3xl mb-10">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Where to reserve</p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
-              NWA Modern Storage® Locations for Vendors
+              NWA Modern Storage® Locations for Business Storage
             </h2>
             <p className="text-gray-700 text-lg leading-relaxed">
-              Two Modern Storage® locations are specifically positioned for Walmart suppliers and Northwest Arkansas vendors — pick the one closest to your office or supplier hub.
+              Two Modern Storage® locations are positioned for Bentonville-area vendors, suppliers, and small businesses — pick the one closest to your office or operation.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Link href="/locations/bentonville" className="group bg-white rounded-2xl p-7 border-2 border-modern-red shadow-lg hover:shadow-xl transition-all">
-              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Flagship for suppliers</p>
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Closest to downtown Bentonville</p>
               <h3 className="text-xl font-black text-charcoal mb-3 group-hover:text-modern-red transition-colors">
                 Modern Storage® Bentonville
               </h3>
               <p className="text-sm text-gray-700 leading-relaxed mb-4">
-                700 SW 14th St, Bentonville, AR 72712. Climate-controlled, business storage, and ground-floor access. Minutes from Walmart Home Office, the downtown square, and Crystal Bridges. Built for Walmart suppliers, NWA small businesses, and the wider Bentonville supplier ecosystem.
+                700 SW 14th St, Bentonville, AR 72712. Climate-controlled, business storage, and ground-floor access. Minutes from the downtown Bentonville square, Crystal Bridges, and the Home Office corporate area. Convenient for vendors, suppliers, and Benton County small businesses.
               </p>
               <span className="inline-flex items-center gap-1 text-sm font-bold text-modern-red">
                 See Bentonville details →
@@ -273,7 +277,7 @@ export default async function WalmartVendorsPage() {
                 Modern Storage® Lowell
               </h3>
               <p className="text-sm text-gray-700 leading-relaxed mb-4">
-                1407 W Monroe Ave, Lowell, AR 72745. Climate-controlled, business storage, and boat/RV storage at one facility on I-49 between Rogers and Springdale. The most flexible NWA Modern Storage® location for suppliers who also need inventory, samples, and personal storage in one place.
+                1407 W Monroe Ave, Lowell, AR 72745. Climate-controlled, business storage, and boat/RV storage at one facility on I-49 between Rogers and Springdale. The most flexible NWA Modern Storage® location for businesses needing inventory, samples, and personal storage in one place.
               </p>
               <span className="inline-flex items-center gap-1 text-sm font-bold text-modern-red">
                 See Lowell details →
@@ -288,7 +292,7 @@ export default async function WalmartVendorsPage() {
           <div className="text-center mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">FAQ</p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight">
-              Walmart Vendor &amp; NWA Supplier Storage FAQ
+              Bentonville Business Storage FAQ
             </h2>
           </div>
           <FaqAccordion items={FAQS} />
@@ -298,10 +302,10 @@ export default async function WalmartVendorsPage() {
       <section className="bg-modern-red py-20">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <h2 className="text-3xl lg:text-4xl font-black text-white mb-5 tracking-tight">
-            Reserve Indoor Business Storage Near Walmart Home Office
+            Reserve Business Storage in Bentonville
           </h2>
           <p className="text-red-100 text-lg leading-relaxed mb-10 max-w-2xl mx-auto">
-            Compare unit sizes and climate-controlled availability at Modern Storage® Bentonville and Lowell. Reserve online or call to talk through samples, inventory, or office storage logistics.
+            Compare unit sizes and climate-controlled availability at Modern Storage® Bentonville and Lowell. Reserve online or call to talk through inventory, samples, or office storage logistics.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/locations/bentonville" className="bg-white text-modern-red font-black px-8 py-3.5 rounded-full hover:bg-red-50 transition-colors text-sm shadow-md">

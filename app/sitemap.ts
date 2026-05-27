@@ -64,7 +64,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // These deepen topical coverage and link INTO the main location
     // pages — they support, not replace, the core /locations/[slug] URLs.
     {
-      url: SITE_URL + '/storage-for-walmart-vendors',
+      url: SITE_URL + '/business-storage-bentonville',
       lastModified: now,
       changeFrequency: 'monthly' as const,
       priority: 0.7,

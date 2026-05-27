@@ -41,7 +41,7 @@ const RESOURCES = [
 // Long-tail authority pages — surfaced in the footer so they’re not
 // orphans. Each links into the main location pages it serves.
 const GUIDES = [
-  { label: 'Walmart Vendor Storage', href: '/storage-for-walmart-vendors' },
+  { label: 'Business Storage — Bentonville', href: '/business-storage-bentonville' },
   { label: 'Storage Near Beaver Lake', href: '/storage-near-beaver-lake' },
   { label: 'Contractor Storage — Little Rock', href: '/contractor-storage-little-rock' },
   { label: 'Climate-Controlled & AR Humidity', href: '/climate-controlled-arkansas-humidity' },

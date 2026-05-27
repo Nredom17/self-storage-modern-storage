@@ -16,6 +16,8 @@ const nextConfig = {
       { source: '/boat-rv-storage', destination: '/rv-boat-vehicle', statusCode: 301 },
       // Camel-case route renamed to SEO-friendly kebab-case.
       { source: '/AIStorageSizeFinder', destination: '/ai-storage-size-finder', statusCode: 301 },
+      // Renamed away from trademark-targeting URL to geographic commercial intent.
+      { source: '/storage-for-walmart-vendors', destination: '/business-storage-bentonville', statusCode: 301 },
     ]
   },
   async headers() {
