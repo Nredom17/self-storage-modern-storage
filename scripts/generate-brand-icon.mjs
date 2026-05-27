@@ -16,17 +16,19 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const PUBLIC_DIR = resolve(__dirname, '..', 'public')
 mkdirSync(PUBLIC_DIR, { recursive: true })
 
-// Render one icon at the target size.
-// transparent: true   → no background fill
-// transparent: false  → solid white square background
+// Render one icon at the target size. Design: double red outline ring
+// on a clear/white background, with red "MS" Arial Black letters
+// centered inside.
+//   transparent: true  → no background fill (icon floats on transparency)
+//   transparent: false → solid white square background
 async function renderIcon({ size, transparent, outPath }) {
-  // 1. Render "MS" text to a transparent PNG buffer using sharp's
-  //    built-in text rendering. Pango handles the system font lookup.
-  //    Font sizing: ~52% of the icon size gives letters that fit
-  //    inside the inner ring without crowding.
+  // 1. Render "MS" text in RED to a transparent PNG buffer. Pango's
+  //    foreground span sets the fill; we composite this over the ring
+  //    layer in step 3. Font sizing ~62% of icon width / 42% height
+  //    keeps the letters big inside the inner ring without crowding.
   const letterPng = await sharp({
     text: {
-      text: '<span foreground="white" letter_spacing="-2000">MS</span>',
+      text: '<span foreground="#F60001" letter_spacing="-2000">MS</span>',
       font: 'Arial Black',
       fontfile: 'C:\\Windows\\Fonts\\ariblk.ttf',
       width: Math.round(size * 0.62),
@@ -39,16 +41,18 @@ async function renderIcon({ size, transparent, outPath }) {
     .png()
     .toBuffer()
 
-  // 2. Build the red circle + white inner ring as an SVG layer.
+  // 2. Build the double red outline ring on a transparent (or white)
+  //    canvas. Strokes only — no red disc fill — so the inside of the
+  //    badge is light, matching the desired look.
   const ringSvg = Buffer.from(`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="${size}" height="${size}">
       ${transparent ? '' : '<rect width="1024" height="1024" fill="#FFFFFF"/>'}
-      <circle cx="512" cy="512" r="480" fill="#F60001"/>
-      <circle cx="512" cy="512" r="420" fill="none" stroke="#FFFFFF" stroke-width="14"/>
+      <circle cx="512" cy="512" r="478" fill="none" stroke="#F60001" stroke-width="28"/>
+      <circle cx="512" cy="512" r="420" fill="none" stroke="#F60001" stroke-width="20"/>
     </svg>
   `)
 
-  // 3. Composite the letters centered onto the badge.
+  // 3. Composite the letters centered onto the ring.
   await sharp(ringSvg)
     .composite([{ input: letterPng, gravity: 'center' }])
     .png({ compressionLevel: 9 })
@@ -74,10 +78,10 @@ for (const t of TARGETS) {
 const SVG_TRANSPARENT = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Modern Storage">
   <title>Modern Storage®</title>
-  <circle cx="512" cy="512" r="480" fill="#F60001"/>
-  <circle cx="512" cy="512" r="420" fill="none" stroke="#FFFFFF" stroke-width="14"/>
+  <circle cx="512" cy="512" r="478" fill="none" stroke="#F60001" stroke-width="28"/>
+  <circle cx="512" cy="512" r="420" fill="none" stroke="#F60001" stroke-width="20"/>
   <text x="512" y="512"
-        fill="#FFFFFF"
+        fill="#F60001"
         font-family="'Arial Black', 'Helvetica Neue', Helvetica, Arial, sans-serif"
         font-weight="900"
         font-size="440"
@@ -90,10 +94,10 @@ const SVG_ON_WHITE = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Modern Storage">
   <title>Modern Storage®</title>
   <rect width="1024" height="1024" fill="#FFFFFF"/>
-  <circle cx="512" cy="512" r="480" fill="#F60001"/>
-  <circle cx="512" cy="512" r="420" fill="none" stroke="#FFFFFF" stroke-width="14"/>
+  <circle cx="512" cy="512" r="478" fill="none" stroke="#F60001" stroke-width="28"/>
+  <circle cx="512" cy="512" r="420" fill="none" stroke="#F60001" stroke-width="20"/>
   <text x="512" y="512"
-        fill="#FFFFFF"
+        fill="#F60001"
         font-family="'Arial Black', 'Helvetica Neue', Helvetica, Arial, sans-serif"
         font-weight="900"
         font-size="440"
