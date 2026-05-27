@@ -87,38 +87,50 @@ const STUDENT_USE_CASES = [
   },
 ] as const
 
+// FAQ answers use `aHtml` for rich rendering (paragraphs + bullet lists)
+// and `a` as a flattened plain-text version that lands in the FAQPage
+// JSON-LD schema. Crawlers index the schema text; the on-page UI gets the
+// formatted version.
 const FAQS = [
   {
-    q: 'Which Modern Storage® locations serve Fayetteville?',
-    a: `Modern Storage® Springdale (~10-15 minutes from the University of Arkansas campus via I-49) and Modern Storage® Lowell (~15-20 minutes via I-49) are the closest facilities to Fayetteville. Both serve U of A students, apartment renters, downtown Fayetteville residents, and Northwest Arkansas Mall area customers from the I-49 corridor north of the city. Springdale is closer to most Fayetteville landmarks; Lowell offers a wider mix of formats including boat/RV parking.`,
+    q: 'Does Modern Storage® have a storage facility in Fayetteville?',
+    a: `The closest options are Modern Storage® Springdale and Modern Storage® Lowell. Springdale is usually the best fit for Fayetteville residents and University of Arkansas students because it is closest to campus. Lowell is a few minutes farther north but may be a better option for customers who need boat, RV, or additional vehicle storage.`,
+    aHtml: `<p>The closest options are <a href="/locations/springdale">Modern Storage® Springdale</a> and <a href="/locations/lowell">Modern Storage® Lowell</a>. Springdale is usually the best fit for Fayetteville residents and University of Arkansas students because it is closest to campus. Lowell is a few minutes farther north but may be a better option for customers who need <a href="/rv-boat-vehicle">boat, RV, or additional vehicle storage</a>.</p>`,
   },
   {
-    q: 'Which is closer — Modern Storage® Springdale or Lowell?',
-    a: `For Fayetteville and the University of Arkansas campus area, Modern Storage® Springdale at 4555 W Sunset Avenue is the closest (~10-15 min via I-49 / Sunset Avenue exit). Modern Storage® Lowell at 1407 W Monroe Avenue is a few minutes farther (~15-20 min) but offers a wider mix of storage formats including boat/RV parking. For most Fayetteville customers, Springdale is the natural first choice.`,
+    q: 'Which Modern Storage® location is closest to Fayetteville?',
+    a: `Modern Storage® Springdale at 4555 W Sunset Avenue is the closest location for most Fayetteville and U of A customers. It is typically about 10 to 15 minutes from the University of Arkansas campus via I-49, depending on traffic. Modern Storage® Lowell at 1407 W Monroe Avenue is typically about 15 to 20 minutes away and offers a broader mix of storage options, including boat and RV parking.`,
+    aHtml: `<p><a href="/locations/springdale">Modern Storage® Springdale</a> at 4555 W Sunset Avenue is the closest location for most Fayetteville and U of A customers.</p><p>It is typically about 10 to 15 minutes from the University of Arkansas campus via I-49, depending on traffic.</p><p><a href="/locations/lowell">Modern Storage® Lowell</a> at 1407 W Monroe Avenue is typically about 15 to 20 minutes away and offers a broader mix of storage options, including boat and RV parking.</p>`,
   },
   {
     q: 'Do you offer storage for University of Arkansas students?',
-    a: `Yes. Modern Storage® Springdale is one of the most popular Northwest Arkansas locations for University of Arkansas (U of A) student storage — summer storage between semesters, study-abroad storage, and apartment-move storage. Month-to-month rentals match the academic calendar with no long-term contract. A 5x5 unit covers a dorm room; a 5x10 covers an apartment bedroom; a 10x10 covers a full one-bedroom Fayetteville apartment.`,
+    a: `Yes. Modern Storage® Springdale is a convenient Northwest Arkansas storage option for U of A students who need summer storage, study-abroad storage, apartment-move storage, or extra space between leases. All rentals are month-to-month, so students are not locked into a long-term contract. Common student storage sizes include: 5x5 for dorm room items, boxes, and small furniture; 5x10 for an apartment bedroom or studio contents; 10x10 for one-bedroom apartment contents.`,
+    aHtml: `<p>Yes. <a href="/locations/springdale">Modern Storage® Springdale</a> is a convenient Northwest Arkansas storage option for U of A students who need summer storage, study-abroad storage, apartment-move storage, or extra space between leases.</p><p>All rentals are month-to-month, so students are not locked into a long-term contract.</p><p>Common student storage sizes include:</p><ul><li><strong>5x5:</strong> dorm room items, boxes, small furniture</li><li><strong>5x10:</strong> apartment bedroom or studio contents</li><li><strong>10x10:</strong> one-bedroom apartment contents</li></ul>`,
   },
   {
-    q: 'Is climate-controlled storage available?',
-    a: `Yes. Both Modern Storage® Springdale and Modern Storage® Lowell offer indoor climate-controlled storage units. Recommended for furniture, electronics, mattresses, photos, books, and anything you don't want sitting in a hot Northwest Arkansas garage or apartment closet through summer. See the climate-controlled storage page for what belongs indoors.`,
+    q: 'Is climate-controlled storage available near Fayetteville?',
+    a: `Yes. Modern Storage® Springdale and Modern Storage® Lowell both offer indoor climate-controlled storage units. Climate-controlled storage is recommended for furniture, electronics, mattresses, books, photos, documents, clothing, and anything you do not want sitting in a hot garage, attic, or apartment closet during an Arkansas summer.`,
+    aHtml: `<p>Yes. <a href="/locations/springdale">Modern Storage® Springdale</a> and <a href="/locations/lowell">Modern Storage® Lowell</a> both offer indoor <a href="/climate-controlled">climate-controlled storage</a> units.</p><p>Climate-controlled storage is recommended for furniture, electronics, mattresses, books, photos, documents, clothing, and anything you do not want sitting in a hot garage, attic, or apartment closet during an Arkansas summer.</p>`,
   },
   {
-    q: 'What size storage unit do Fayetteville students typically rent?',
-    a: `Most University of Arkansas students use a 5x5 (dorm room contents) or 5x10 (apartment bedroom or studio). One-bedroom Fayetteville apartments fit in a 10x10. Two-bedroom apartments or shared houses need a 10x15. Use the AI Storage Size Finder for a personalized recommendation in under 30 seconds, or see the full size guide.`,
+    q: 'What size storage unit do Fayetteville students usually rent?',
+    a: `Most University of Arkansas students choose a 5x5 or 5x10 storage unit. A 5x5 is usually enough for dorm room contents. A 5x10 works well for an apartment bedroom or studio. A 10x10 is usually better for a one-bedroom Fayetteville apartment. A 10x15 may be needed for a two-bedroom apartment, shared house, or larger furniture load. Use the AI Storage Size Finder for a personalized recommendation, or review the full storage size guide.`,
+    aHtml: `<p>Most University of Arkansas students choose a 5x5 or 5x10 storage unit.</p><ul><li>A <strong>5x5</strong> is usually enough for dorm room contents.</li><li>A <strong>5x10</strong> works well for an apartment bedroom or studio.</li><li>A <strong>10x10</strong> is usually better for a one-bedroom Fayetteville apartment.</li><li>A <strong>10x15</strong> may be needed for a two-bedroom apartment, shared house, or larger furniture load.</li></ul><p>Use the <a href="/ai-storage-size-finder">AI Storage Size Finder</a> for a personalized recommendation, or review the full <a href="/size-guide">storage size guide</a>.</p>`,
   },
   {
-    q: 'Can I rent for just the summer?',
-    a: `Yes. Every Modern Storage® rental is month-to-month with no long-term contract. Rent from late May when classes end through August when fall housing opens — typically 3-4 months for most student summer storage. Close out the unit when you move back, restart next May. No early-termination fees.`,
+    q: 'Can I rent storage for just the summer?',
+    a: `Yes. Modern Storage® rentals are month-to-month, with no long-term contract required. Many U of A students rent from late May through August for summer storage, then move out when fall housing opens. No drama. No year-long commitment. No paying for space you no longer need.`,
+    aHtml: `<p>Yes. Modern Storage® rentals are month-to-month, with no long-term contract required.</p><p>Many U of A students rent from late May through August for summer storage, then move out when fall housing opens. No drama. No year-long commitment. No paying for space you no longer need.</p>`,
   },
   {
-    q: 'Is there a free moving truck for the move?',
-    a: `Yes — Modern Storage® offers a free moving truck with new household storage rentals at participating Arkansas locations, including Modern Storage® Springdale and Lowell. Useful for the May move-out from a Fayetteville apartment or dorm. Truck availability, mileage limits, and participation vary by facility — confirm when you reserve.`,
+    q: 'Is there a free moving truck?',
+    a: `Yes. Modern Storage® offers a free moving truck with new household storage rentals at participating Arkansas locations, including Modern Storage® Springdale and Modern Storage® Lowell. This can be especially helpful during U of A move-out season. Truck availability, mileage limits, and participation can vary by facility, so confirm details when reserving.`,
+    aHtml: `<p>Yes. Modern Storage® offers a <a href="/free-moving-truck">free moving truck</a> with new household storage rentals at participating Arkansas locations, including <a href="/locations/springdale">Modern Storage® Springdale</a> and <a href="/locations/lowell">Modern Storage® Lowell</a>.</p><p>This can be especially helpful during U of A move-out season. Truck availability, mileage limits, and participation can vary by facility, so confirm details when reserving.</p>`,
   },
   {
-    q: 'How do I reserve?',
-    a: `Visit /locations/springdale or /locations/lowell to reserve directly. Each page shows available unit sizes and a reservation link. For student storage and seasonal rentals, calling 501-910-0096 first lets the team match you to the right unit size and confirm any current move-in offers.`,
+    q: 'How do I reserve storage near Fayetteville?',
+    a: `Reserve online through the location pages: Modern Storage® Springdale at /locations/springdale or Modern Storage® Lowell at /locations/lowell. For student storage, seasonal storage, or help choosing the right size, call 501-910-0096 and the team can match you with the best available unit.`,
+    aHtml: `<p>Reserve online through the location pages:</p><ul><li><a href="/locations/springdale">Modern Storage® Springdale</a></li><li><a href="/locations/lowell">Modern Storage® Lowell</a></li></ul><p>For student storage, seasonal storage, or help choosing the right size, call <a href="tel:+15019100096">501-910-0096</a> and the team can match you with the best available unit.</p>`,
   },
 ] as const
 

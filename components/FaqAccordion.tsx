@@ -56,8 +56,18 @@ export default function FaqAccordion({ items }: { items: readonly FaqItem[] }) {
           </summary>
           <div className="pb-5 pr-12">
             {item.aHtml ? (
-              <p
-                className="text-gray-600 leading-relaxed text-sm sm:text-base [&_a]:text-modern-red [&_a]:font-semibold [&_a:hover]:underline"
+              // <div> rather than <p> so aHtml can include block-level
+              // markup (paragraphs, <ul>, <ol>) without invalid nesting.
+              // Child selectors keep the single-paragraph case visually
+              // identical to the plain-text branch.
+              <div
+                className="
+                  text-gray-600 leading-relaxed text-sm sm:text-base
+                  [&_a]:text-modern-red [&_a]:font-semibold [&_a:hover]:underline
+                  [&_p]:mb-3 [&_p:last-child]:mb-0
+                  [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3 [&_ul]:space-y-1
+                  [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3 [&_ol]:space-y-1
+                "
                 dangerouslySetInnerHTML={{ __html: item.aHtml }}
               />
             ) : (
