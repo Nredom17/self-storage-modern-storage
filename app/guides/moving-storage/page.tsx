@@ -318,7 +318,7 @@ export default async function MovingStoragePage() {
               { slug: 'bryant', label: 'Modern Storage® Bryant', note: 'Saline County, I-30 corridor' },
               { slug: 'hot-springs', label: 'Modern Storage® Hot Springs', note: 'Hot Springs, Lake Hamilton, HSV' },
               { slug: 'bentonville', label: 'Modern Storage® Bentonville', note: 'South Bentonville, downtown square' },
-              { slug: 'springdale', label: 'Modern Storage® Springdale', note: 'Hwy 412 / I-49, U of A area' },
+              { slug: 'springdale', label: 'Modern Storage® Springdale', note: 'Hwy 412 / I-49, University of Arkansas area' },
               { slug: 'lowell', label: 'Modern Storage® Lowell', note: 'I-49 between Rogers and Springdale' },
             ].map((loc) => (
               <Link key={loc.slug} href={`/locations/${loc.slug}`} className="group bg-white/5 hover:bg-white/10 hover:border-modern-red rounded-2xl p-5 border border-white/10 transition-all">

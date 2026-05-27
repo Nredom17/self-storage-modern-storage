@@ -87,7 +87,7 @@ const FACILITIES = [
     name: 'Modern Storage® Springdale',
     role: 'Hwy 412 / I-49 corridor',
     description: '4555 W Sunset Ave, Springdale, AR 72762. Climate-controlled and drive-up storage along the Tyson HQ / Don Tyson Pkwy corridor.',
-    serves: 'Beaver Lake (~30 min), Lake Sequoyah, U of A area',
+    serves: 'Beaver Lake (~30 min), Lake Sequoyah, University of Arkansas area',
   },
 ] as const
 

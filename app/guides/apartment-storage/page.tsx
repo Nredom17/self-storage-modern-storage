@@ -329,7 +329,7 @@ export default async function ApartmentStoragePage() {
             <Link href="/locations/springdale" className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all">
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">Springdale</p>
               <h3 className="font-black text-charcoal leading-tight group-hover:text-modern-red transition-colors">Modern Storage® Springdale</h3>
-              <p className="text-sm text-gray-600 mt-1">Hwy 412 / I-49 corridor — popular for U of A student storage and NWA apartments.</p>
+              <p className="text-sm text-gray-600 mt-1">Hwy 412 / I-49 corridor — popular for University of Arkansas (U of A) student storage and NWA apartments.</p>
             </Link>
             <Link href="/locations/bentonville" className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all">
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">Bentonville</p>
