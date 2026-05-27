@@ -393,6 +393,75 @@ export default async function ApartmentStoragePage() {
         </div>
       </section>
 
+      {/* ── APARTMENT LIVING & STORAGE — local SEO context ──────
+          Natural, human-first paragraphs that strengthen the
+          apartment-living + self-storage topical relationship and
+          introduce real Arkansas apartment communities by name.
+          Outbound links use branded anchor text only; no keyword
+          stuffing, no promotional language. */}
+      <section className="bg-white py-20 border-b border-gray-200">
+        <div className="max-w-3xl mx-auto px-6">
+          <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-6 leading-tight">
+            Apartment Living and Storage Go Hand in Hand
+          </h2>
+          <div className="space-y-5 text-gray-700 leading-relaxed text-base sm:text-lg">
+            <p>
+              Apartment living in Arkansas comes with the same recurring storage challenges almost everywhere — small closets, limited garage space, and the constant churn of moves, lease transitions, roommate changes, and seasonal furniture rotation. Modern Storage® works alongside that reality every day, and a large share of our customers are renters from the apartment communities that anchor central Arkansas and Northwest Arkansas. Most use a nearby unit during a specific transition — between leases, during a downsize, or while staging a move — rather than as long-term overflow.
+            </p>
+            <p>
+              In Little Rock, that includes residents from communities like{' '}
+              <a
+                href="https://www.bowmanpointe.com/"
+                target="_blank"
+                rel="noopener"
+                className="text-modern-red font-semibold hover:underline"
+              >
+                Bowman Pointe Apartments
+              </a>
+              {' '}and{' '}
+              <a
+                href="https://www.pointebrodiecreek.com/"
+                target="_blank"
+                rel="noopener"
+                className="text-modern-red font-semibold hover:underline"
+              >
+                Pointe Brodie Creek
+              </a>
+              , who often need somewhere convenient to store furniture during a move or hold seasonal items they don&apos;t need in a smaller floor plan. Across the river, residents of{' '}
+              <a
+                href="https://www.pointenorthhills.com/"
+                target="_blank"
+                rel="noopener"
+                className="text-modern-red font-semibold hover:underline"
+              >
+                Pointe North Hills
+              </a>
+              {' '}in North Little Rock use Modern Storage® for the same kinds of transitions — downsizing into a more efficient layout, bridging the gap between leases, or simply freeing up a tight closet. In Hot Springs, residents of{' '}
+              <a
+                href="https://www.hamiltonhotsprings.com/"
+                target="_blank"
+                rel="noopener"
+                className="text-modern-red font-semibold hover:underline"
+              >
+                Hamilton Hot Springs
+              </a>
+              {' '}lean on Modern Storage® for similar reasons, often combined with seasonal Lake Hamilton gear and out-of-season furniture.
+            </p>
+            <p>
+              For most apartment renters, the practical answer isn&apos;t more apartment — it&apos;s a small, nearby storage unit that flexes month-to-month with whatever comes next. Furniture and electronics that won&apos;t fit in a smaller floor plan are usually safer in a{' '}
+              <Link href="/climate-controlled" className="text-modern-red font-semibold hover:underline">
+                climate-controlled unit
+              </Link>
+              {' '}than a hot garage or attic, and customers planning a move often pair an apartment storage unit with the{' '}
+              <Link href="/guides/moving-storage" className="text-modern-red font-semibold hover:underline">
+                Modern Storage® moving storage guide
+              </Link>
+              {' '}to time things cleanly. Whatever the transition, Modern Storage® has 10 Arkansas locations specifically positioned for the apartment-renter use case — including facilities convenient to each of the communities above.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-modern-red py-20">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <h2 className="text-3xl lg:text-4xl font-black text-white mb-5 tracking-tight">
