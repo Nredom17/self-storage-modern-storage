@@ -67,7 +67,7 @@ export const metadata: Metadata = {
 const TRUST_BULLETS = [
   'Climate-controlled at most locations',
   'Indoor, gated, surveilled access',
-  'Best of the Best Self-Storage Awards',
+  'Best of the Best Self-Storage Awards · 2023, 2024, 2025 winner',
   'Month-to-month rentals',
   'Free moving truck with new rentals',
 ]
@@ -291,13 +291,16 @@ export default async function ClimateControlledPage() {
                 />
                 <div
                   className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-modern-red text-white rounded-xl px-3.5 py-2.5 shadow-lg w-44 sm:w-52"
-                  aria-label="Winner of the Best of the Best Self-Storage Awards by the Arkansas Democrat Gazette and Best of Northwest Arkansas"
+                  aria-label="2023, 2024, 2025 winner of the Best of the Best Self-Storage Awards by the Arkansas Democrat Gazette and Best of Northwest Arkansas"
                 >
                   <p className="text-[9px] font-black uppercase tracking-wider text-red-100 leading-tight">
-                    Best of the Best
+                    Best of the Best Self-Storage Awards
                   </p>
                   <p className="text-base sm:text-lg font-black leading-none my-1.5">
-                    Self-Storage Awards
+                    2023 · 2024 · 2025
+                  </p>
+                  <p className="text-[9px] font-black uppercase tracking-widest text-white leading-tight mb-1">
+                    Winner
                   </p>
                   <p className="text-[9px] font-bold uppercase tracking-tight text-red-100/90 leading-tight">
                     Arkansas Democrat Gazette

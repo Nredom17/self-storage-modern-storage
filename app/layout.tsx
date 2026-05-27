@@ -81,7 +81,7 @@ function buildOrganizationSchema(phoneDisplay: string) {
     image: SITE_URL + '/images/modern-storage-springdale-best-of-the-best-awards.png',
     telephone: phoneDisplay,
     description:
-      'Modern Storage® operates 10 self-storage facilities across Arkansas with climate-controlled, household, business, boat, RV, and vehicle storage. Three-time winner of the Best of the Best Self-Storage Awards — Arkansas Democrat Gazette and Best of Northwest Arkansas.',
+      'Modern Storage® operates 10 self-storage facilities across Arkansas with climate-controlled, household, business, boat, RV, and vehicle storage. Three-time winner (2023, 2024, 2025) of the Best of the Best Self-Storage Awards — Arkansas Democrat Gazette and Best of Northwest Arkansas.',
     areaServed: { '@type': 'State', name: 'Arkansas' },
     sameAs: [
       'https://www.modernstorage.com',

@@ -339,8 +339,8 @@ export const BUSINESS_USE_CASES = {
 // social proof, local expertise."
 export const TRUST_SIGNALS = [
   {
-    headline: 'Best of the Best Self-Storage Awards',
-    body: 'Three-time winner of the Best of the Best Self-Storage Awards by the Arkansas Democrat Gazette, plus recognition from Best of Northwest Arkansas.',
+    headline: 'Best of the Best Self-Storage Awards · 2023, 2024, 2025 winner',
+    body: 'Three-time winner (2023, 2024, 2025) of the Best of the Best Self-Storage Awards by the Arkansas Democrat Gazette, plus recognition from Best of Northwest Arkansas.',
   },
   {
     headline: 'Trusted by families & businesses',

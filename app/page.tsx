@@ -20,7 +20,7 @@ export const revalidate = 60
 
 const HERO_IMAGE = '/images/modern-storage-springdale-best-of-the-best-awards.png'
 const HERO_ALT =
-  'Modern Storage® Springdale facility with Best of the Best Self-Storage Awards and Best of Northwest Arkansas award seals'
+  'Modern Storage® Springdale facility with Best of the Best Self-Storage Awards 2023, 2024, 2025 winner and Best of Northwest Arkansas award seals'
 
 export const metadata: Metadata = {
   title: 'Self Storage Units in Arkansas | Modern Storage®',
