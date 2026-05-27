@@ -384,8 +384,144 @@ export default async function LocationPage({ params }: Props) {
         </section>
       )}
 
+      {/* ── STORAGE TOPICS FOR THIS FACILITY ─────────────────
+          Contextual internal-linking cards. Rendered conditionally
+          per badge so each location only surfaces topics it actually
+          offers — avoids generic nav-style link dumps. */}
+      <section className="bg-white py-20 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-12">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+              Storage topics for this facility
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+              Explore Storage Options at {loc.name}
+            </h2>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              {loc.name} pairs with several Modern Storage® storage categories
+              depending on what you&apos;re moving in. Use the guides below to
+              compare unit types, see what fits, and decide between climate-controlled
+              and drive-up before reserving.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {loc.badges.includes('Climate-Controlled') && (
+              <Link
+                href="/climate-controlled"
+                className="group bg-gray-50 hover:bg-white hover:border-modern-red hover:shadow-lg rounded-2xl p-6 border border-gray-200 transition-all"
+              >
+                <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">
+                  Indoor protection
+                </p>
+                <h3 className="font-black text-charcoal text-lg leading-tight mb-2 group-hover:text-modern-red transition-colors">
+                  Climate-Controlled Storage
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  See what should go in a climate-controlled unit at {loc.city}, including furniture, mattresses, electronics, wine, and long-term storage of valuables.
+                </p>
+                <span className="inline-flex items-center gap-1 mt-3 text-xs font-bold text-modern-red">
+                  Explore climate-controlled →
+                </span>
+              </Link>
+            )}
+            {(loc.badges.includes('Boat/RV Storage') || loc.badges.includes('Boat & RV Storage')) && (
+              <Link
+                href="/rv-boat-vehicle"
+                className="group bg-gray-50 hover:bg-white hover:border-modern-red hover:shadow-lg rounded-2xl p-6 border border-gray-200 transition-all"
+              >
+                <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">
+                  Boat &amp; RV
+                </p>
+                <h3 className="font-black text-charcoal text-lg leading-tight mb-2 group-hover:text-modern-red transition-colors">
+                  Boat &amp; RV Storage
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Outdoor parking, covered parking, and trailer spaces for boats, RVs, motorcycles, and vehicles at {loc.name}.
+                </p>
+                <span className="inline-flex items-center gap-1 mt-3 text-xs font-bold text-modern-red">
+                  Explore boat &amp; RV →
+                </span>
+              </Link>
+            )}
+            {loc.badges.includes('Business Storage') && (
+              <Link
+                href="/business-storage"
+                className="group bg-gray-50 hover:bg-white hover:border-modern-red hover:shadow-lg rounded-2xl p-6 border border-gray-200 transition-all"
+              >
+                <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">
+                  Business
+                </p>
+                <h3 className="font-black text-charcoal text-lg leading-tight mb-2 group-hover:text-modern-red transition-colors">
+                  Business &amp; Mini-Warehouse Storage
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Inventory, records, equipment, and sample storage for {loc.city}-area contractors, e-commerce sellers, medical offices, and small businesses.
+                </p>
+                <span className="inline-flex items-center gap-1 mt-3 text-xs font-bold text-modern-red">
+                  Explore business storage →
+                </span>
+              </Link>
+            )}
+            {loc.badges.includes('Free Moving Truck') && (
+              <Link
+                href="/free-moving-truck"
+                className="group bg-gray-50 hover:bg-white hover:border-modern-red hover:shadow-lg rounded-2xl p-6 border border-gray-200 transition-all"
+              >
+                <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">
+                  Move-in
+                </p>
+                <h3 className="font-black text-charcoal text-lg leading-tight mb-2 group-hover:text-modern-red transition-colors">
+                  Free Moving Truck
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  New {loc.name} rentals include a free moving truck on move-in day — load directly from home to your unit in one trip.
+                </p>
+                <span className="inline-flex items-center gap-1 mt-3 text-xs font-bold text-modern-red">
+                  Explore moving truck details →
+                </span>
+              </Link>
+            )}
+            {/* Always show — household + size guide are universal */}
+            <Link
+              href="/household-storage"
+              className="group bg-gray-50 hover:bg-white hover:border-modern-red hover:shadow-lg rounded-2xl p-6 border border-gray-200 transition-all"
+            >
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">
+                Residential
+              </p>
+              <h3 className="font-black text-charcoal text-lg leading-tight mb-2 group-hover:text-modern-red transition-colors">
+                Household Storage
+              </h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Moving, renovating, downsizing, college storage, and seasonal items — flexible month-to-month for {loc.city} households.
+              </p>
+              <span className="inline-flex items-center gap-1 mt-3 text-xs font-bold text-modern-red">
+                Explore household storage →
+              </span>
+            </Link>
+            <Link
+              href="/size-guide"
+              className="group bg-gray-50 hover:bg-white hover:border-modern-red hover:shadow-lg rounded-2xl p-6 border border-gray-200 transition-all"
+            >
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">
+                Pick a size
+              </p>
+              <h3 className="font-black text-charcoal text-lg leading-tight mb-2 group-hover:text-modern-red transition-colors">
+                Unit Size Guide
+              </h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Compare 5×5 through 10×30 storage units at {loc.name} — square footage, what fits, and recommended size by use case.
+              </p>
+              <span className="inline-flex items-center gap-1 mt-3 text-xs font-bold text-modern-red">
+                See the size guide →
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── FAQ ──────────────────────────────────────────── */}
-      <section id="faq" className="bg-white py-20 border-y border-gray-200">
+      <section id="faq" className="bg-gray-50 py-20 border-y border-gray-200">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">

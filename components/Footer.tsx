@@ -34,8 +34,17 @@ const RESOURCES = [
   { label: 'Move-In Checklist', href: '/move-in-checklist' },
   { label: 'Free Moving Truck', href: '/free-moving-truck' },
   { label: 'Size Guide', href: '/size-guide' },
-  { label: 'FAQ', href: '/#faq' },
+  { label: 'FAQ', href: '/faq' },
   { label: 'Storage Tips', href: 'https://www.modernstorage.com/blog' },
+]
+
+// Long-tail authority pages — surfaced in the footer so they’re not
+// orphans. Each links into the main location pages it serves.
+const GUIDES = [
+  { label: 'Walmart Vendor Storage', href: '/storage-for-walmart-vendors' },
+  { label: 'Storage Near Beaver Lake', href: '/storage-near-beaver-lake' },
+  { label: 'Contractor Storage — Little Rock', href: '/contractor-storage-little-rock' },
+  { label: 'Climate-Controlled & AR Humidity', href: '/climate-controlled-arkansas-humidity' },
 ]
 
 const SOCIAL_LINKS = [
@@ -184,6 +193,24 @@ export default function Footer({
               </a>
             </nav>
           </div>
+        </div>
+
+        {/* Storage Guides — long-tail authority pages. Surfaced in the
+            footer so they’re not orphans and so the link equity from the
+            sitewide nav reaches them on every page. */}
+        <div className="mt-12 pt-8 border-t border-white/10">
+          <h2 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-5">Storage Guides</h2>
+          <nav className="flex flex-wrap gap-x-6 gap-y-2">
+            {GUIDES.map(({ label, href }) => (
+              <Link
+                key={label}
+                href={href}
+                className="text-sm text-gray-400 hover:text-white transition-colors"
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
         </div>
 
         {/* Copyright */}

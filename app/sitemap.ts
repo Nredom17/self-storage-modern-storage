@@ -60,5 +60,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
+    // ── Long-tail authority pages ────────────────────────────
+    // These deepen topical coverage and link INTO the main location
+    // pages — they support, not replace, the core /locations/[slug] URLs.
+    {
+      url: SITE_URL + '/storage-for-walmart-vendors',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: SITE_URL + '/storage-near-beaver-lake',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: SITE_URL + '/contractor-storage-little-rock',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: SITE_URL + '/climate-controlled-arkansas-humidity',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
   ]
 }
