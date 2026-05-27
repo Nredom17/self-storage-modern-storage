@@ -10,6 +10,11 @@ import {
   CLIMATE_UNIT_SIZES,
   CLIMATE_CONCEPTS,
   WHAT_TO_STORE,
+  ARKANSAS_CLIMATE_CONTEXT,
+  DO_YOU_NEED_CLIMATE,
+  COMPARISON_ROWS,
+  BUSINESS_USE_CASES,
+  TRUST_SIGNALS,
   CLIMATE_FAQS,
   CLIMATE_REVIEWS,
 } from '@/lib/climate-controlled'
@@ -20,22 +25,22 @@ import { buildLocationSchemaList, buildReviewsSchemaList } from '@/lib/schema'
 const PAGE_PATH = '/climate-controlled'
 const HERO_IMAGE = '/images/modern-storage-bentonville-climate-controlled-hallway.jpg'
 const HERO_ALT =
-  'Climate-controlled storage hallway at Modern Storage® Bentonville with clean indoor units in Arkansas'
+  'Climate-controlled indoor storage hallway at Modern Storage® Bentonville — temperature-controlled storage units near you'
 const INTERIOR_IMAGE = '/images/modern-storage-bentonville-climate-controlled-hallway.jpg'
 const INTERIOR_ALT =
-  'Indoor climate-controlled corridor at Modern Storage® Bentonville with numbered storage unit doors'
+  'Indoor climate-controlled corridor with numbered storage unit doors at Modern Storage®'
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Climate-Controlled Storage Units in Arkansas | Modern Storage®',
+    absolute: 'Climate-Controlled Storage Units Near You in Arkansas | Modern Storage®',
   },
   description:
-    'Protect furniture, electronics, documents, and valuables with climate-controlled storage units at Modern Storage® locations across Arkansas. Reserve online today.',
+    'Indoor, climate-controlled storage units near you — Little Rock, Bentonville, Bryant, Springdale, Lowell, Hot Springs, and more. Temperature-controlled storage protects furniture, electronics, mattresses, photos, and long-term storage at Modern Storage®.',
   alternates: { canonical: SITE_URL + PAGE_PATH },
   openGraph: {
-    title: 'Climate-Controlled Storage Units in Arkansas | Modern Storage®',
+    title: 'Climate-Controlled Storage Units Near You in Arkansas | Modern Storage®',
     description:
-      'Indoor climate-controlled self-storage units at Modern Storage® locations across Arkansas. Protection for furniture, electronics, documents, photos, instruments, and business inventory.',
+      'Indoor temperature-controlled storage at Modern Storage® locations near Little Rock, Bentonville, Bryant, Hot Springs, Springdale, and more. Protection for furniture, electronics, photos, and long-term storage.',
     url: SITE_URL + PAGE_PATH,
     siteName: 'Modern Storage®',
     type: 'website',
@@ -50,19 +55,19 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Climate-Controlled Storage Units in Arkansas | Modern Storage®',
+    title: 'Climate-Controlled Storage Units Near You in Arkansas | Modern Storage®',
     description:
-      'Indoor, climate-controlled storage at Modern Storage® locations across Arkansas.',
+      'Indoor temperature-controlled storage near you — Modern Storage® locations across the central and Northwest regions.',
     images: [HERO_IMAGE],
   },
 }
 
 const TRUST_BULLETS = [
-  'Climate-controlled at most Arkansas locations',
+  'Climate-controlled at most locations',
   'Indoor, gated, surveilled access',
-  'Free moving truck with new rentals',
+  'Best of the Best 2023, 2024, 2025',
   'Month-to-month rentals',
-  'Best of the Best Self Storage 2023, 2024, 2025 — Arkansas Democrat Gazette & Best of Northwest Arkansas',
+  'Free moving truck with new rentals',
 ]
 
 function buildJsonLd(phoneDisplay: string) {
@@ -71,9 +76,9 @@ function buildJsonLd(phoneDisplay: string) {
     '@type': 'Service',
     '@id': SITE_URL + PAGE_PATH + '#service',
     serviceType: 'Climate-Controlled Self Storage',
-    name: 'Climate-Controlled Storage Units in Arkansas',
+    name: 'Climate-Controlled Storage Units Near You in Arkansas',
     description:
-      'Indoor climate-controlled self-storage units at Modern Storage® locations across Arkansas. Helps protect furniture, electronics, documents, photos, instruments, antiques, and business inventory from outdoor temperature and humidity extremes.',
+      'Indoor, temperature-controlled self-storage units at Modern Storage® locations across Arkansas. Helps protect furniture, mattresses, electronics, documents, photos, instruments, wine, antiques, and business inventory from outdoor temperature and humidity extremes. Long-term storage and year-round indoor access.',
     url: SITE_URL + PAGE_PATH,
     image: SITE_URL + HERO_IMAGE,
     areaServed: { '@type': 'State', name: 'Arkansas' },
@@ -136,73 +141,6 @@ function buildJsonLd(phoneDisplay: string) {
   }
 
   return [service, localBusiness, breadcrumb, faqPage]
-}
-
-// Inline icon set — keeps the page self-contained and matches existing stroke-icon style.
-function StoreIcon({ name }: { name: string }) {
-  const common = 'w-6 h-6'
-  switch (name) {
-    case 'Wood furniture':
-    case 'Leather furniture':
-      return (
-        <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4 12V8a2 2 0 012-2h12a2 2 0 012 2v4M4 12h16M4 12v4a2 2 0 002 2h12a2 2 0 002-2v-4M6 18v2M18 18v2" />
-        </svg>
-      )
-    case 'Electronics':
-      return (
-        <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3 6.75A1.75 1.75 0 014.75 5h14.5A1.75 1.75 0 0121 6.75v8.5A1.75 1.75 0 0119.25 17H4.75A1.75 1.75 0 013 15.25v-8.5zM9 21h6M12 17v4" />
-        </svg>
-      )
-    case 'Photos and documents':
-      return (
-        <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M7 4h7l4 4v12a1 1 0 01-1 1H7a1 1 0 01-1-1V5a1 1 0 011-1zM14 4v4h4M9 13h6M9 17h4" />
-        </svg>
-      )
-    case 'Books':
-      return (
-        <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4 5a2 2 0 012-2h12a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V5zM8 7h8M8 11h8M8 15h5" />
-        </svg>
-      )
-    case 'Art and framed prints':
-      return (
-        <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4 5h16v14H4zM4 16l4-4 3 3 5-5 4 4" />
-          <circle cx="9" cy="9" r="1.4" fill="currentColor" />
-        </svg>
-      )
-    case 'Musical instruments':
-      return (
-        <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 18a3 3 0 100-6 3 3 0 000 6zM12 15V4l8 2v3" />
-        </svg>
-      )
-    case 'Vinyl records':
-      return (
-        <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="12" cy="12" r="9" strokeWidth={1.8} />
-          <circle cx="12" cy="12" r="4" strokeWidth={1.8} />
-          <circle cx="12" cy="12" r="1.2" fill="currentColor" />
-        </svg>
-      )
-    case 'Collectibles':
-      return (
-        <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 21h8M9 21v-3a3 3 0 016 0v3M7 4h10v3a5 5 0 01-10 0V4zM5 5v2a2 2 0 002 2M19 5v2a2 2 0 01-2 2" />
-        </svg>
-      )
-    case 'Business inventory':
-      return (
-        <svg className={common} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4 7h16l-1 13H5L4 7zM9 7V5a3 3 0 016 0v2M9 11v4M15 11v4" />
-        </svg>
-      )
-    default:
-      return null
-  }
 }
 
 function ConceptIcon({ title }: { title: string }) {
@@ -270,11 +208,10 @@ export default async function ClimateControlledPage() {
         />
       ))}
 
-      {/* ── HERO ─────────────────────────────────────────────── */}
+      {/* ── HERO — repositioned with near-me intent ──────────── */}
       <section className="bg-charcoal text-white">
         <div className="h-1 w-full bg-modern-red" />
         <div className="max-w-7xl mx-auto px-6 py-16 lg:py-24">
-          {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="mb-8 text-xs font-semibold text-gray-500">
             <ol className="flex items-center gap-2">
               <li>
@@ -288,42 +225,46 @@ export default async function ClimateControlledPage() {
           </nav>
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left — headline + CTAs */}
             <div>
               <span className="inline-flex items-center gap-2 bg-modern-red/20 border border-modern-red/40 text-modern-red text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-6">
                 <span className="w-1.5 h-1.5 rounded-full bg-modern-red animate-pulse" aria-hidden="true" />
                 Climate-Controlled Storage
               </span>
               <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
-                Climate-Controlled Storage Units in <span className="text-modern-red">Arkansas</span>
+                <span className="text-modern-red">Climate-Controlled</span> Storage Units Near You
               </h1>
-              <p className="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg">
-                Indoor, climate-controlled storage at Modern Storage® locations across Arkansas. Built for furniture, electronics, documents, photos, instruments, and business inventory that deserve real protection.
+              <p className="text-gray-300 text-lg leading-relaxed mb-10 max-w-lg">
+                Indoor, temperature-controlled storage units near Little Rock, Bentonville, Bryant, Springdale, Lowell, and Hot Springs. Built for furniture, mattresses, electronics, photos, instruments, wine, business inventory, and long-term storage of items that deserve real protection.
               </p>
-              <div className="flex flex-wrap gap-4 mb-10">
+              <div className="flex flex-wrap gap-3 mb-10">
                 <Link
                   href="#locations"
-                  aria-label="Reserve a climate-controlled storage unit at Modern Storage® — choose your location"
-                  className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-7 py-3.5 rounded-full transition-colors text-sm"
+                  aria-label="Find climate-controlled storage near you at a Modern Storage® location"
+                  className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-6 py-3 rounded-full transition-colors text-sm"
                 >
-                  Reserve a Climate-Controlled Unit
+                  Find Climate Storage Near Me
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                   </svg>
                 </Link>
+                <Link
+                  href="#sizes"
+                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-full transition-colors border border-white/20 text-sm"
+                >
+                  Check Unit Availability
+                </Link>
                 <a
                   href={PHONE_NUMBER_HREF}
                   aria-label={`Call Modern Storage® at ${PHONE_NUMBER_DISPLAY}`}
-                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-7 py-3.5 rounded-full transition-colors border border-white/20 text-sm"
+                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-full transition-colors border border-white/20 text-sm"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
                   </svg>
-                  Call Modern Storage®
+                  Call {PHONE_NUMBER_DISPLAY}
                 </a>
               </div>
 
-              {/* Trust bullets */}
               <ul className="flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-gray-400">
                 {TRUST_BULLETS.map((t) => (
                   <li key={t} className="flex items-center gap-1.5">
@@ -336,7 +277,6 @@ export default async function ClimateControlledPage() {
               </ul>
             </div>
 
-            {/* Right — hero image */}
             <figure>
               <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-800 relative">
                 <Image
@@ -347,7 +287,6 @@ export default async function ClimateControlledPage() {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
                 />
-                {/* Award badge — top-right of the image, inside the rounded container */}
                 <div
                   className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-modern-red text-white rounded-xl px-3.5 py-2.5 shadow-lg w-44 sm:w-52"
                   aria-label="Voted Best of the Best Self Storage 2023, 2024, and 2025 by the Arkansas Democrat Gazette and The Best of Northwest Arkansas"
@@ -367,31 +306,31 @@ export default async function ClimateControlledPage() {
                 </div>
               </div>
               <figcaption className="text-xs text-gray-500 mt-3 italic">
-                Indoor climate-controlled hallway at a Modern Storage® Arkansas facility.
+                Indoor climate-controlled storage hallway at a Modern Storage® facility — temperature-controlled storage units near you.
               </figcaption>
             </figure>
           </div>
         </div>
       </section>
 
-      {/* ── LOCATIONS ────────────────────────────────────────── */}
-      <section id="locations" className="bg-gray-50 py-20">
+      {/* ── TRUST SIGNALS STRIP — moved high per audit ─────────── */}
+      <section className="bg-white py-12 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-3xl mb-10">
-            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Locations</p>
-            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
-              Find Climate-Controlled Storage Near You
-            </h2>
-            <p className="text-gray-600 text-lg leading-relaxed">
-              Most Modern Storage® locations offer climate-controlled units. Filter by region, click a pin to see details, and reserve online — availability and unit sizes vary by facility.
-            </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {TRUST_SIGNALS.map((t) => (
+              <div key={t.headline} className="text-center sm:text-left">
+                <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">
+                  {t.headline}
+                </p>
+                <p className="text-sm text-gray-700 leading-relaxed">{t.body}</p>
+              </div>
+            ))}
           </div>
-          <LocationFinder locations={locations} highlightBadge="Climate-Controlled" requireBadge="Climate-Controlled" />
         </div>
       </section>
 
       {/* ── WHAT CLIMATE-CONTROLLED STORAGE MEANS ────────────── */}
-      <section className="bg-white py-20 border-y border-gray-200">
+      <section className="bg-gray-50 py-20 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-12">
             <div className="lg:col-span-6">
@@ -401,8 +340,8 @@ export default async function ClimateControlledPage() {
               <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-5">
                 Indoor protection for the things that matter most
               </h2>
-              <p className="text-gray-600 leading-relaxed">
-                Climate-controlled storage at Modern Storage® means an indoor unit inside an enclosed, insulated building — accessed from interior hallways rather than from outside. The building is designed to provide a more stable indoor environment than a standard outdoor drive-up unit, with specifics that vary by facility.
+              <p className="text-gray-700 leading-relaxed">
+                Climate-controlled storage at Modern Storage® means an indoor storage unit inside an enclosed, insulated building — accessed from interior hallways rather than from outside. The building is designed to provide a more stable indoor environment than a standard outdoor drive-up unit, with year-round temperature management and reduced humidity exposure. The specifics vary slightly by facility, but the result is the same: a far better home for anything sensitive to Arkansas heat, cold, or moisture.
               </p>
             </div>
             <div className="lg:col-span-6">
@@ -423,21 +362,190 @@ export default async function ClimateControlledPage() {
             {CLIMATE_CONCEPTS.map((c) => (
               <div
                 key={c.title}
-                className="bg-gray-50 rounded-2xl p-6 border border-gray-100 hover:border-modern-red transition-colors"
+                className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-modern-red transition-colors"
               >
                 <div className="w-11 h-11 rounded-full bg-modern-red/10 text-modern-red flex items-center justify-center mb-4">
                   <ConceptIcon title={c.title} />
                 </div>
                 <h3 className="font-black text-charcoal mb-2 leading-tight">{c.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{c.body}</p>
+                <p className="text-sm text-gray-700 leading-relaxed">{c.body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* ── WHAT BELONGS IN CLIMATE-CONTROLLED — expanded ──────── */}
+      <section className="bg-charcoal text-white py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-12">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+              What belongs in climate-controlled
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-black text-white tracking-tight mb-4">
+              18 Things to Store in Climate-Controlled
+            </h2>
+            <p className="text-gray-400 text-lg leading-relaxed">
+              If it&apos;s sensitive to heat, cold, or humidity, it belongs in indoor climate-controlled storage. Arkansas weather is the reason — these are the 18 categories where it matters most for everyday households, collectors, and long-term storage.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
+            {WHAT_TO_STORE.map((item) => (
+              <div
+                key={item.label}
+                className="bg-white/5 hover:bg-white/10 border border-white/10 hover:border-modern-red rounded-xl p-4 transition-all group"
+              >
+                <h3 className="font-black text-white text-sm mb-2 leading-tight group-hover:text-modern-red transition-colors">{item.label}</h3>
+                <p className="text-xs text-gray-400 leading-relaxed">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── WHY CLIMATE MATTERS IN ARKANSAS — NEW ──────────────
+          Regional topical authority section. Auditor: "this could
+          become one of the strongest parts of the page." Humidity,
+          heat indexes, mold risk, garage heat, attic temperatures. */}
+      <section className="bg-white py-20 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-12">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+              Why climate matters
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+              Why Climate-Controlled Storage Matters in Arkansas
+            </h2>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              {ARKANSAS_CLIMATE_CONTEXT.intro}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {ARKANSAS_CLIMATE_CONTEXT.factors.map((f) => (
+              <div
+                key={f.title}
+                className="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all"
+              >
+                <h3 className="font-black text-charcoal mb-2 leading-tight">{f.title}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">{f.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── DO YOU ACTUALLY NEED CLIMATE-CONTROLLED — NEW ──────
+          Auditor: "This would crush SEO and AI search… deserves a
+          full content section." Two clear lists for fast scanning. */}
+      <section className="bg-gray-50 py-20 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-12">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+              Is it worth it?
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+              Do You Actually Need Climate-Controlled Storage?
+            </h2>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              The honest answer: it depends on what you&apos;re storing. Climate-controlled is the right call for sensitive belongings and long-term storage. Standard drive-up is fine for durable, garage-type items. Here&apos;s how to tell which is which.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Worth-it card */}
+            <div className="bg-white border-2 border-modern-red rounded-2xl p-7 shadow-lg">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Climate-Controlled</p>
+              <h3 className="text-xl font-black text-charcoal mb-5 leading-tight">
+                {DO_YOU_NEED_CLIMATE.worthIt.title}
+              </h3>
+              <ul className="space-y-2.5">
+                {DO_YOU_NEED_CLIMATE.worthIt.items.map((item) => (
+                  <li key={item} className="flex gap-2.5 text-sm text-charcoal">
+                    <svg className="w-4 h-4 text-modern-red shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {/* Drive-up-fine card */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-7">
+              <p className="text-xs font-black uppercase tracking-widest text-gray-500 mb-3">Standard Drive-Up</p>
+              <h3 className="text-xl font-black text-charcoal mb-5 leading-tight">
+                {DO_YOU_NEED_CLIMATE.driveUpFine.title}
+              </h3>
+              <ul className="space-y-2.5">
+                {DO_YOU_NEED_CLIMATE.driveUpFine.items.map((item) => (
+                  <li key={item} className="flex gap-2.5 text-sm text-charcoal">
+                    <svg className="w-4 h-4 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── COMPARISON TABLE — NEW ──────────────────────────────
+          Auditor: "This page BEGS for a comparison chart…
+          improves featured snippets, AI extraction, conversion
+          clarity, SEO depth." */}
+      <section className="bg-charcoal text-white py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-12">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+              Side-by-side
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-black text-white tracking-tight mb-4">
+              Climate-Controlled vs. Standard Storage
+            </h2>
+            <p className="text-gray-400 text-lg leading-relaxed">
+              Both have a place. Here&apos;s a direct comparison of how indoor climate-controlled storage and outdoor drive-up storage differ — and which works better for which use cases.
+            </p>
+          </div>
+          <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+            <table className="w-full text-left text-sm sm:text-base">
+              <thead className="bg-white/10">
+                <tr>
+                  <th scope="col" className="px-4 sm:px-6 py-4 font-black uppercase tracking-widest text-xs text-gray-400">
+                    Aspect
+                  </th>
+                  <th scope="col" className="px-4 sm:px-6 py-4 font-black uppercase tracking-widest text-xs text-modern-red">
+                    Climate-Controlled
+                  </th>
+                  <th scope="col" className="px-4 sm:px-6 py-4 font-black uppercase tracking-widest text-xs text-gray-400">
+                    Standard Drive-Up
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/10">
+                {COMPARISON_ROWS.map((row) => (
+                  <tr key={row.aspect}>
+                    <th scope="row" className="px-4 sm:px-6 py-4 font-semibold text-white align-top">
+                      {row.aspect}
+                    </th>
+                    <td className="px-4 sm:px-6 py-4 text-white font-semibold align-top">
+                      <span className="inline-flex items-start gap-2">
+                        <svg className="w-4 h-4 text-modern-red shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>{row.climate}</span>
+                      </span>
+                    </td>
+                    <td className="px-4 sm:px-6 py-4 text-gray-400 align-top">{row.standard}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       {/* ── UNIT SIZE GUIDE ──────────────────────────────────── */}
-      <section id="sizes" className="bg-gray-50 py-20">
+      <section id="sizes" className="bg-white py-20 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
             <div className="max-w-2xl">
@@ -445,8 +553,8 @@ export default async function ClimateControlledPage() {
               <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
                 Climate-Controlled Unit Sizes
               </h2>
-              <p className="text-gray-600 text-lg leading-relaxed">
-                Six sizes designed for everything from a closet of paperwork to a whole-home move. Availability varies by location — reserve online and we&apos;ll match you to the right size and facility. Not sure which size? Try the{' '}
+              <p className="text-gray-700 text-lg leading-relaxed">
+                Six indoor sizes designed for everything from a closet of paperwork to a whole-home move with year-round climate protection. Availability varies by location — reserve online and we&apos;ll match you to the right size and facility. Not sure which size? Try the{' '}
                 <Link href="/ai-storage-size-finder" className="text-modern-red font-bold hover:underline">
                   AI Storage Size Finder
                 </Link>
@@ -466,7 +574,7 @@ export default async function ClimateControlledPage() {
               <article
                 id={`size-${u.sizeSlug}`}
                 key={u.size}
-                className="group bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-modern-red hover:shadow-xl transition-all flex flex-col"
+                className="group bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:border-modern-red hover:shadow-xl transition-all flex flex-col"
               >
                 <div className="relative aspect-[4/3] bg-gray-100 overflow-hidden">
                   <Image
@@ -509,7 +617,7 @@ export default async function ClimateControlledPage() {
                   <div className="mt-auto">
                     <Link
                       href="#locations"
-                      aria-label={`Find a Modern Storage® location with a ${u.size} climate-controlled storage unit`}
+                      aria-label={`Find a Modern Storage® location with a ${u.size} climate-controlled storage unit near you`}
                       className="inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-black px-5 py-3 rounded-full transition-colors w-full"
                     >
                       Find a {u.size} Near You
@@ -525,31 +633,34 @@ export default async function ClimateControlledPage() {
         </div>
       </section>
 
-      {/* ── WHAT SHOULD GO IN CLIMATE-CONTROLLED ─────────────── */}
-      <section className="bg-charcoal text-white py-20">
+      {/* ── CLIMATE-CONTROLLED STORAGE FOR BUSINESSES — NEW ─────
+          Auditor: "huge missed opportunity… business storage
+          searches are valuable… broadens commercial intent." */}
+      <section className="bg-gray-50 py-20 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-3xl mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
-              What belongs in climate-controlled
+              For businesses
             </p>
-            <h2 className="text-3xl lg:text-4xl font-black text-white tracking-tight mb-4">
-              What Should Go in a Climate-Controlled Unit
+            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+              Climate-Controlled Storage for Businesses
             </h2>
-            <p className="text-gray-400 text-lg leading-relaxed">
-              If it&apos;s sensitive to heat, cold, or humidity, it belongs in climate-controlled. Arkansas weather is the reason — these are the categories where it matters most.
+            <p className="text-gray-700 text-lg leading-relaxed">
+              {BUSINESS_USE_CASES.intro} See the{' '}
+              <Link href="/business-storage" className="text-modern-red font-bold hover:underline">
+                business storage page
+              </Link>
+              {' '}for the full picture, or pick a use case below.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {WHAT_TO_STORE.map((item) => (
+            {BUSINESS_USE_CASES.uses.map((u) => (
               <div
-                key={item.label}
-                className="bg-white/5 hover:bg-white/10 border border-white/10 hover:border-modern-red rounded-2xl p-6 transition-all"
+                key={u.label}
+                className="bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all"
               >
-                <div className="w-11 h-11 rounded-full bg-modern-red/15 text-modern-red flex items-center justify-center mb-4">
-                  <StoreIcon name={item.label} />
-                </div>
-                <h3 className="font-black text-white mb-2 leading-tight">{item.label}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">{item.description}</p>
+                <h3 className="font-black text-charcoal mb-2 leading-tight">{u.label}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">{u.body}</p>
               </div>
             ))}
           </div>
@@ -557,7 +668,7 @@ export default async function ClimateControlledPage() {
       </section>
 
       {/* ── REVIEWS ──────────────────────────────────────────── */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-white py-20 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-3xl mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Customer reviews</p>
@@ -565,12 +676,11 @@ export default async function ClimateControlledPage() {
               What Climate-Controlled Customers Say
             </h2>
           </div>
-          {/* Replace these with real Google reviews before launch. */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {CLIMATE_REVIEWS.map((r) => (
               <figure
                 key={r.author + r.location + r.theme}
-                className="bg-white rounded-2xl p-7 border border-gray-200 flex flex-col"
+                className="bg-gray-50 rounded-2xl p-7 border border-gray-200 flex flex-col"
               >
                 <div className="flex items-center gap-1 mb-5 text-modern-red" aria-label="5 out of 5 stars">
                   {[0, 1, 2, 3, 4].map((i) => (
@@ -600,8 +710,28 @@ export default async function ClimateControlledPage() {
         </div>
       </section>
 
-      {/* ── FAQ ──────────────────────────────────────────────── */}
-      <section id="faq" className="bg-white py-20 border-y border-gray-200">
+      {/* ── LOCATIONS — moved DOWN per audit ─────────────────────
+          Now lives below the topical authority content rather than
+          dominating the top of the page. Customers reach it after
+          understanding what climate-controlled is, what belongs,
+          why it matters in Arkansas, and the comparison. */}
+      <section id="locations" className="bg-gray-50 py-20 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-10">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Nearby locations</p>
+            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+              Find Climate-Controlled Storage Near You
+            </h2>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              Most Modern Storage® locations offer indoor climate-controlled units. Customers searching for climate-controlled storage near me, indoor storage units near me, or temperature-controlled storage near me will find a Modern Storage® facility in most central and Northwest regions — including locations near Little Rock, Bentonville, Bryant, Springdale, Lowell, and Hot Springs. Filter the map, click a pin for details, and reserve online from the nearest facility.
+            </p>
+          </div>
+          <LocationFinder locations={locations} highlightBadge="Climate-Controlled" requireBadge="Climate-Controlled" />
+        </div>
+      </section>
+
+      {/* ── FAQ — expanded to 22 questions ───────────────────── */}
+      <section id="faq" className="bg-white py-20 border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">FAQ</p>
@@ -609,7 +739,7 @@ export default async function ClimateControlledPage() {
               Climate-Controlled Storage FAQ
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed mt-4 max-w-2xl mx-auto">
-              Find answers to the most common questions about climate-controlled storage units in Arkansas, including what to store, which items need indoor protection, how to choose a unit size, and how to reserve a Modern Storage® unit online.
+              22 of the most common questions about indoor climate-controlled storage — temperatures, mold prevention, mattresses, electronics, vinyl, antiques, wine, instruments, long-term storage, business inventory, near-me availability, and more.
             </p>
           </div>
           <FaqAccordion items={CLIMATE_FAQS} />
@@ -622,10 +752,10 @@ export default async function ClimateControlledPage() {
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7 text-center lg:text-left">
               <h2 className="text-3xl lg:text-4xl font-black text-white mb-5 tracking-tight">
-                Reserve Your Climate-Controlled Storage Unit
+                Reserve Indoor Climate-Controlled Storage Near You
               </h2>
               <p className="text-red-100 text-lg leading-relaxed mb-6">
-                Choose your location, pick a size, and reserve online in minutes. Participating Modern Storage® locations offer a free moving truck with new rentals to make move-in easier.
+                Choose a nearby Modern Storage® location, pick an indoor unit size, and reserve online in minutes. Participating locations offer a free moving truck with new rentals to make move-in easier.
               </p>
               <p className="text-red-100/80 text-xs italic mb-8 lg:mb-0">
                 Availability, requirements, and free moving truck participation vary by location.
@@ -636,7 +766,7 @@ export default async function ClimateControlledPage() {
                 href="#locations"
                 className="bg-white text-modern-red font-black px-6 py-3.5 rounded-full hover:bg-red-50 transition-colors text-sm shadow-md inline-flex items-center justify-center gap-2"
               >
-                Find a Climate-Controlled Location
+                Find Climate Storage Near Me
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                 </svg>
