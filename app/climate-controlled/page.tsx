@@ -20,6 +20,7 @@ import {
 } from '@/lib/climate-controlled'
 import FaqAccordion from '@/components/FaqAccordion'
 import LocationFinder from '@/components/LocationFinder'
+import WhatToStoreShowcase from '@/components/WhatToStoreShowcase'
 import { buildLocationSchemaList, buildReviewsSchemaList } from '@/lib/schema'
 
 const PAGE_PATH = '/climate-controlled'
@@ -389,17 +390,16 @@ export default async function ClimateControlledPage() {
               If it&apos;s sensitive to heat, cold, or humidity, it belongs in indoor climate-controlled storage. Arkansas weather is the reason — these are the 18 categories where it matters most for everyday households, collectors, and long-term storage.
             </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
-            {WHAT_TO_STORE.map((item) => (
-              <div
-                key={item.label}
-                className="bg-white/5 hover:bg-white/10 border border-white/10 hover:border-modern-red rounded-xl p-4 transition-all group"
-              >
-                <h3 className="font-black text-white text-sm mb-2 leading-tight group-hover:text-modern-red transition-colors">{item.label}</h3>
-                <p className="text-xs text-gray-400 leading-relaxed">{item.description}</p>
-              </div>
-            ))}
-          </div>
+          {/* Interactive showcase: tabs on the left, large image with
+              dynamic overlay on the right. Replaces the previous dense
+              18-card grid per UX feedback that the section was too
+              text-heavy. Uses the existing real Bentonville climate-
+              controlled hallway photo as the anchor visual. */}
+          <WhatToStoreShowcase
+            items={WHAT_TO_STORE}
+            imageUrl={INTERIOR_IMAGE}
+            imageAlt={INTERIOR_ALT}
+          />
         </div>
       </section>
 
