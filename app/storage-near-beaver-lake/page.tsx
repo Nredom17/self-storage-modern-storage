@@ -8,13 +8,14 @@ import FaqAccordion from '@/components/FaqAccordion'
 export const revalidate = 60
 
 const PAGE_PATH = '/storage-near-beaver-lake'
-// Hero image: GMC truck + Mallard RV in front of red Modern Storage®
-// roll-up doors at sunset. Real Modern Storage® photo, differentiated
-// from the fire-truck hero on /rv-boat-vehicle so the two pages don't
-// share the same image.
-const HERO_IMAGE = '/images/modern-storage-shackleford-truck-and-rv-at-sunset.png'
+// Hero image: original Shackleford RV-in-unit photo. Reverted from the
+// truck-and-RV-at-sunset shot because that asset is now used on the
+// /rv-boat-vehicle "Storage formats" section as the premium-drive-up
+// visual. Keeping a different image here ensures the two pages don't
+// share the same hero when customers cross-link between them.
+const HERO_IMAGE = '/images/modern-storage-shackleford-rv-storage-unit.jpg'
 const HERO_ALT =
-  'Truck and Mallard RV at Modern Storage® red roll-up doors at sunset — boat, RV, and trailer storage for Beaver Lake area customers'
+  'RV stored at Modern Storage® Shackleford — boat, RV, and trailer storage for Beaver Lake area customers in Northwest Arkansas'
 
 export const metadata: Metadata = {
   title: {

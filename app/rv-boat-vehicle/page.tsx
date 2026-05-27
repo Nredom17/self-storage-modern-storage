@@ -20,15 +20,30 @@ import { buildLocationSchemaList } from '@/lib/schema'
 export const revalidate = 60
 
 const PAGE_PATH = '/rv-boat-vehicle'
-// Hero image: distinctive vintage red Mack fire truck stored in a
-// Modern Storage® Shackleford RV unit. On-brand red doors, memorable
-// subject, real Modern Storage® photo. Replaces a less-distinctive
-// generic RV-in-unit shot.
-const HERO_IMAGE = '/images/modern-storage-shackleford-vintage-fire-truck-in-rv-unit.png'
+// Hero image: vintage red Mack fire truck inside a Modern Storage®
+// oversized enclosed storage unit. On-brand red doors + red truck.
+// Shows specialty/collector vehicle storage and oversized enclosed
+// storage clearly — the strongest single image in the asset library.
+const HERO_IMAGE = '/images/collector-vehicle-storage-fire-truck-modern-storage.png'
 const HERO_ALT =
-  'Vintage red Mack fire truck stored at Modern Storage® Shackleford in an RV-sized indoor storage unit in Little Rock'
+  'Vintage red Mack fire truck stored at Modern Storage® Shackleford in an oversized enclosed RV-style storage unit in Little Rock'
 const HERO_CAPTION =
-  'A vintage fire truck stored at Modern Storage® Shackleford — vehicle, RV, and oversized rig storage in Little Rock.'
+  'Collector and specialty vehicle storage at Modern Storage® Shackleford — oversized enclosed units for fire trucks, RVs, classic cars, and rigs that won\'t fit on a driveway.'
+
+// Storage-format showcase images, rendered large in their own section
+// below the three vehicle-type cards. Each photo carries a specific
+// storage-format story per the asset brief.
+const ENCLOSED_RV_IMAGE = '/images/enclosed-rv-storage-trailer-unit-modern-storage.png'
+const ENCLOSED_RV_ALT =
+  'Mallard travel trailer parked inside a Modern Storage® enclosed RV storage unit with red roll-up doors at sunset'
+
+const PREMIUM_RV_IMAGE = '/images/premium-rv-storage-truck-trailer-modern-storage.png'
+const PREMIUM_RV_ALT =
+  'GMC pickup truck parked outside a Modern Storage® premium RV storage unit with a travel trailer visible inside — drive-up access at sunset'
+
+const COMMERCIAL_LARGE_UNIT_IMAGE = '/images/commercial-storage-large-unit-interior-modern-storage.png'
+const COMMERCIAL_LARGE_UNIT_ALT =
+  'Interior view of a Modern Storage® large commercial storage unit with corrugated steel walls and bright LED lighting — sized for warehouse-style storage'
 
 export const metadata: Metadata = {
   title: { absolute: 'Boat, RV & Vehicle Storage in Arkansas | Modern Storage®' },
@@ -349,6 +364,100 @@ export default async function BoatRvStoragePage() {
                 </Link>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── STORAGE FORMATS SHOWCASE ──────────────────────────
+          Three real Modern Storage® storage-format photos rendered
+          large so they read as actual facility imagery, not generic
+          stock. Replaces what was previously a text-only sweep of
+          this section. Each card pairs a photo with a specific
+          storage-format story: enclosed indoor RV storage, premium
+          drive-up access, and commercial/large-unit warehouse-style. */}
+      <section className="bg-white py-20 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-12">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+              Storage formats
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+              How Boats, RVs, and Oversized Vehicles Live at Modern Storage®
+            </h2>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              Three storage formats cover almost every boat, RV, and oversized vehicle scenario in Arkansas — indoor enclosed units, premium drive-up access, and commercial-grade large units for businesses with fleets, equipment, or oversized inventory. All real Modern Storage® facilities; no stock photography below.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+            {/* Enclosed indoor RV — Mallard inside a unit */}
+            <article className="flex flex-col">
+              <figure className="rounded-2xl overflow-hidden shadow-xl mb-5 aspect-[4/3] bg-gray-100 relative">
+                <Image
+                  src={ENCLOSED_RV_IMAGE}
+                  alt={ENCLOSED_RV_ALT}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  className="object-cover"
+                />
+              </figure>
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">
+                Enclosed indoor RV storage
+              </p>
+              <h3 className="text-xl font-black text-charcoal mb-3 leading-tight">
+                Indoor units sized for travel trailers and RVs
+              </h3>
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                Roll-up door enclosed bays at participating Modern Storage® locations. Best for travel trailers, fifth wheels, pop-ups, and any RV you want fully out of Arkansas summer sun, hail, and winter freeze cycles. Available at <Link href="/locations/shackleford" className="text-modern-red font-semibold hover:underline">Modern Storage® Shackleford</Link> and other select locations — space length varies, call ahead to confirm a fit.
+              </p>
+            </article>
+
+            {/* Premium drive-up — truck + trailer at sunset */}
+            <article className="flex flex-col">
+              <figure className="rounded-2xl overflow-hidden shadow-xl mb-5 aspect-[4/3] bg-gray-100 relative">
+                <Image
+                  src={PREMIUM_RV_IMAGE}
+                  alt={PREMIUM_RV_ALT}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  className="object-cover"
+                />
+              </figure>
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">
+                Premium drive-up access
+              </p>
+              <h3 className="text-xl font-black text-charcoal mb-3 leading-tight">
+                Pull up, unload, and drive away
+              </h3>
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                Drive-up RV and vehicle parking sized for trucks, RVs with toad vehicles, and combined boat + tow vehicle storage. Lock-and-leave between weekends on the water — no waiting in line at a marina lot, no HOA enforcement on a residential driveway. Available at <Link href="/locations/maumelle" className="text-modern-red font-semibold hover:underline">Modern Storage® Maumelle Blvd</Link>, <Link href="/locations/bryant" className="text-modern-red font-semibold hover:underline">Modern Storage® Bryant</Link>, and <Link href="/locations/lowell" className="text-modern-red font-semibold hover:underline">Modern Storage® Lowell</Link>.
+              </p>
+            </article>
+
+            {/* Commercial / large-unit — empty interior corridor */}
+            <article className="flex flex-col">
+              <figure className="rounded-2xl overflow-hidden shadow-xl mb-5 aspect-[4/3] bg-gray-100 relative">
+                <Image
+                  src={COMMERCIAL_LARGE_UNIT_IMAGE}
+                  alt={COMMERCIAL_LARGE_UNIT_ALT}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  className="object-cover"
+                />
+              </figure>
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">
+                Commercial &amp; large-unit storage
+              </p>
+              <h3 className="text-xl font-black text-charcoal mb-3 leading-tight">
+                Warehouse-style space for fleets and equipment
+              </h3>
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                Bright, fully enclosed corridors with oversized bays at select Modern Storage® locations. Built for work-vehicle fleets, contractor equipment, restoration crew rigs, and commercial inventory at scale. If a single 10x30 unit won&apos;t cut it, see the <Link href="/business-storage" className="text-modern-red font-semibold hover:underline">business storage page</Link> and <Link href="/contractor-storage-little-rock" className="text-modern-red font-semibold hover:underline">contractor storage guide</Link> for matched setups.
+              </p>
+            </article>
           </div>
         </div>
       </section>
