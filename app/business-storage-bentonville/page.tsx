@@ -77,7 +77,7 @@ const USE_CASES = [
 const FAQS = [
   {
     q: 'Where is Modern Storage® Bentonville located?',
-    a: `Modern Storage® Bentonville is at 700 SW 14th Street in ZIP 72712, in south Bentonville and minutes from the downtown Bentonville square, Crystal Bridges Museum, and the Home Office corporate area. The facility offers climate-controlled storage, business storage, and ground-floor access — designed for vendors, suppliers, and small businesses across Benton County.`,
+    a: `Modern Storage® Bentonville is located at 700 SW 14th Street in ZIP 72712, in south Bentonville and minutes from the downtown Bentonville square, Crystal Bridges Museum, and the Walmart Home Office area. The facility offers climate-controlled storage, business storage, and ground-floor access, making it convenient for Northwest Arkansas businesses, suppliers, inventory-heavy teams, and small businesses across Benton County.`,
   },
   {
     q: 'What kind of business storage do Northwest Arkansas vendors typically rent?',
