@@ -269,6 +269,20 @@ export default async function ClimateControlledPage() {
                   </svg>
                   Call for New Rentals
                 </a>
+                {/* Existing customers → all-locations directory on the
+                    reservation site (account access, gate codes, billing). */}
+                <a
+                  href="https://www.modernstorage.com/self-storage"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Existing customers — see all Modern Storage® locations"
+                  className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white font-bold px-6 py-3 rounded-full transition-colors border border-white/15 text-sm"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-3-6.65" />
+                  </svg>
+                  Existing Customers
+                </a>
               </div>
 
               <ul className="flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-gray-400">
