@@ -169,9 +169,9 @@ export default function Footer({
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Modern Storage® on ${label}`}
-                  className="inline-flex items-center gap-1.5 text-xs text-modern-red hover:text-modern-red-hover transition-colors font-semibold"
+                  className="inline-flex items-center gap-2 text-sm text-modern-red hover:text-modern-red-hover transition-colors font-semibold"
                 >
-                  <SocialIcon name={icon} className="w-4 h-4 shrink-0" />
+                  <SocialIcon name={icon} className="w-5 h-5 shrink-0" />
                   {label}
                 </a>
               ))}
