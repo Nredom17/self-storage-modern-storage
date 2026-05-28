@@ -163,52 +163,64 @@ export default async function LocationPage({ params }: Props) {
               <p className="text-gray-300 text-xl font-bold mb-2">{loc.name}</p>
               <p className="text-gray-400 text-base leading-relaxed mb-6">{content.subtitle}</p>
 
-              {/* NAP block — fully crawlable text */}
+              {/* NAP block — address only; phone actions live in the call
+                  buttons below. (Schema still carries the telephone for SEO.) */}
               <address className="not-italic text-sm text-gray-300 mb-8 space-y-1">
                 <p className="font-bold text-white">{loc.streetAddress}</p>
                 <p>
                   {loc.city}, {loc.state} {loc.zip}
                 </p>
-                <p>
-                  <a href={`tel:${loc.phone.replace(/[^\d+]/g, '')}`} className="text-white hover:text-modern-red transition-colors">
-                    {loc.phone}
-                  </a>
-                </p>
               </address>
 
-              <div className="flex flex-wrap gap-3">
-                <a
-                  href={loc.reservationUrl}
-                  aria-label={`Reserve a unit at ${loc.name}`}
-                  className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-6 py-3 rounded-full transition-colors text-sm"
-                >
-                  See Available Units
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-                <a
-                  href={directionsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Get directions to ${loc.name}`}
-                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-full transition-colors border border-white/20 text-sm"
-                >
-                  Get Directions
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </a>
-                <a
-                  href={`tel:${loc.phone.replace(/[^\d+]/g, '')}`}
-                  aria-label={`Call ${loc.name} at ${loc.phone}`}
-                  className="inline-flex items-center gap-2 text-white/80 hover:text-white font-semibold px-3 py-3 transition-colors text-sm"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
-                  </svg>
-                  Call for New Rentals
-                </a>
+              <div className="flex flex-col gap-3">
+                {/* Top row — primary reserve + directions */}
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href={loc.reservationUrl}
+                    aria-label={`Reserve a unit at ${loc.name}`}
+                    className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-6 py-3 rounded-full transition-colors text-sm"
+                  >
+                    See Available Units
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                  <a
+                    href={directionsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Get directions to ${loc.name}`}
+                    className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-full transition-colors border border-white/20 text-sm"
+                  >
+                    Get Directions
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </div>
+                {/* Second row — white phone-CTA pills (pop on the dark hero) */}
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href={`tel:${loc.phone.replace(/[^\d+]/g, '')}`}
+                    aria-label={`Call for new rentals at ${loc.name} — ${loc.phone}`}
+                    className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-charcoal font-bold px-6 py-3 rounded-full transition-colors text-sm"
+                  >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
+                    </svg>
+                    Call for New Rentals
+                  </a>
+                  <a
+                    href={`tel:${loc.phone.replace(/[^\d+]/g, '')}`}
+                    aria-label={`Call for existing-customer support at ${loc.name} — ${loc.phone}`}
+                    className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-charcoal font-bold px-6 py-3 rounded-full transition-colors text-sm"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-3-6.65" />
+                    </svg>
+                    Call for Existing Customers
+                  </a>
+                </div>
               </div>
             </div>
 
