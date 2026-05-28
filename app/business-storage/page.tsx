@@ -377,6 +377,84 @@ export default async function BusinessStoragePage() {
         </div>
       </section>
 
+      {/* ── BUSINESS STORAGE BY LOCATION ────────────────────── */}
+      <section className="bg-white py-20 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-12">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+              Business storage by location
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+              Where Arkansas Businesses Store
+            </h2>
+            <p className="text-gray-600 text-lg leading-relaxed">
+              Every Modern Storage® location supports business storage. These facilities are the most popular with commercial customers — each with its own strengths for inventory, equipment, and operations.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              {
+                slug: 'riverdale',
+                name: 'Modern Storage® Riverdale',
+                tag: 'Loading docks + package acceptance',
+                blurb:
+                  'Our flagship dock-access location — dock-height loading for pallets, freight, and box trucks, plus package and freight receiving, five minutes from downtown Little Rock.',
+              },
+              {
+                slug: 'shackleford',
+                name: 'Modern Storage® Shackleford',
+                tag: 'Corporate & premium',
+                blurb:
+                  'Premium business storage in west Little Rock for corporate inventory, records, and professional overflow near the Shackleford Crossings corridor.',
+              },
+              {
+                slug: 'west-little-rock',
+                name: 'Modern Storage® West Little Rock',
+                tag: 'Professional',
+                blurb:
+                  'Professional and small-business storage along the I-430 corridor in west Little Rock, with climate-controlled and drive-up options.',
+              },
+              {
+                slug: 'bentonville',
+                name: 'Modern Storage® Bentonville',
+                tag: 'NWA business hub',
+                blurb:
+                  'A Northwest Arkansas business hub for vendors, suppliers, and e-commerce sellers near the Walmart Home Office area.',
+              },
+              {
+                slug: 'springdale',
+                name: 'Modern Storage® Springdale',
+                tag: 'NWA business hub',
+                blurb:
+                  'Business storage on the Hwy 412 / I-49 corridor — convenient for Northwest Arkansas operations and inventory.',
+              },
+            ].map((f) => (
+              <Link
+                key={f.slug}
+                href={`/locations/${f.slug}`}
+                className="group bg-gray-50 hover:bg-white rounded-2xl p-6 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all flex flex-col"
+              >
+                <p className="text-[10px] font-black uppercase tracking-widest text-modern-red mb-2">{f.tag}</p>
+                <h3 className="font-black text-charcoal leading-tight group-hover:text-modern-red transition-colors mb-2">
+                  {f.name}
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed flex-1">{f.blurb}</p>
+                <span className="mt-4 text-xs font-bold text-modern-red inline-flex items-center gap-1">
+                  View location →
+                </span>
+              </Link>
+            ))}
+          </div>
+          <p className="text-sm text-gray-500 mt-8 max-w-3xl">
+            Don&apos;t see your area? All 10 Modern Storage® locations offer business storage —{' '}
+            <Link href="/locations" className="text-modern-red font-semibold hover:underline">
+              see every location
+            </Link>{' '}
+            or tell us where you operate in the inquiry below.
+          </p>
+        </div>
+      </section>
+
       {/* ── USE CASES ───────────────────────────────────────── */}
       <section id="use-cases" className="bg-charcoal text-white py-20">
         <div className="max-w-7xl mx-auto px-6">
