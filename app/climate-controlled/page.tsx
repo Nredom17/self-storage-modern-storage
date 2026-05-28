@@ -25,9 +25,9 @@ import WhatToStoreShowcase from '@/components/WhatToStoreShowcase'
 import { buildLocationSchemaList, buildReviewsSchemaList } from '@/lib/schema'
 
 const PAGE_PATH = '/climate-controlled'
-const HERO_IMAGE = '/images/modern-storage-bentonville-climate-controlled-hallway.jpg'
+const HERO_IMAGE = '/images/modern-storage-red-door-hallway-climate-controlled.png'
 const HERO_ALT =
-  'Climate-controlled indoor storage hallway at Modern Storage® Bentonville — temperature-controlled storage units near you'
+  'Climate-controlled indoor storage hallway with red roll-up unit doors at Modern Storage® — temperature-controlled storage units in Arkansas'
 const INTERIOR_IMAGE = '/images/modern-storage-bentonville-climate-controlled-hallway.jpg'
 const INTERIOR_ALT =
   'Indoor climate-controlled corridor with numbered storage unit doors at Modern Storage®'
