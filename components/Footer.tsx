@@ -142,7 +142,7 @@ export default function Footer({
               href={PHONE_NUMBER_HREF}
               className="bg-white/10 hover:bg-white/20 text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors border border-white/20"
             >
-              New Rentals: {PHONE_NUMBER_DISPLAY}
+              Call for New Rentals
             </a>
           </div>
         </div>
@@ -320,7 +320,7 @@ export default function Footer({
           </div>
           <div className="space-y-8">
             <div>
-              <h3 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-3">Need Help?</h3>
+              <h3 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-3">Need Help Renting a Unit?</h3>
               <p className="text-sm text-gray-400">
                 <span className="font-bold text-white">New Rentals:</span>{' '}
                 <a
@@ -329,6 +329,10 @@ export default function Footer({
                 >
                   {PHONE_NUMBER_DISPLAY}
                 </a>
+              </p>
+              <p className="text-xs text-gray-500 leading-relaxed mt-3">
+                Already rent with Modern Storage®? Please contact your facility directly or use your
+                tenant portal for account, gate code, billing, or access questions.
               </p>
             </div>
             <div>

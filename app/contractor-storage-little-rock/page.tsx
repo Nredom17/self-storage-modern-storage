@@ -193,7 +193,7 @@ export default async function ContractorPage() {
                   All Business Storage Options
                 </Link>
                 <a href={PHONE_NUMBER_HREF} className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-full transition-colors border border-white/20 text-sm">
-                  New Rentals: {PHONE_NUMBER_DISPLAY}
+                  Call for New Rentals
                 </a>
               </div>
             </div>

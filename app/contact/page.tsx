@@ -190,10 +190,14 @@ export default async function ContactPage() {
                         <p>
                           {loc.city}, {loc.state} {loc.zip}
                         </p>
-                        <p>
-                          <a href={`tel:${loc.phone.replace(/[^\d+]/g, '')}`} className="text-charcoal hover:text-modern-red transition-colors font-semibold">
+                        <p className="pt-1">
+                          <span className="font-bold text-charcoal">New Rentals:</span>{' '}
+                          <a href={`tel:${loc.phone.replace(/[^\d+]/g, '')}`} className="text-modern-red hover:text-modern-red-hover transition-colors font-semibold">
                             {loc.phone}
                           </a>
+                        </p>
+                        <p className="text-xs text-gray-500 leading-relaxed pt-1">
+                          Existing customers, please contact your facility directly or use your tenant portal.
                         </p>
                       </address>
                       <div className="mt-auto flex flex-wrap gap-2">
@@ -241,7 +245,7 @@ export default async function ContactPage() {
               href={settings.phoneHref}
               className="bg-charcoal text-white font-black px-8 py-3.5 rounded-full hover:bg-gray-800 transition-colors text-sm shadow-md"
             >
-              New Rentals: {settings.phoneDisplay}
+              Call for New Rentals
             </a>
           </div>
         </div>
