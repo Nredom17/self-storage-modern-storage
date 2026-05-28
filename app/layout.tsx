@@ -5,6 +5,7 @@ import Script from 'next/script'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import StickyMobileCTA from '@/components/StickyMobileCTA'
+import ChatWidget from '@/components/ChatWidget'
 import { SITE_URL } from '@/lib/site'
 import { getSiteSettings } from '@/lib/data'
 
@@ -180,6 +181,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             and hides when near the bottom of the page so it doesn't
             double-stack with the final red CTA section. */}
         <StickyMobileCTA phoneDisplay={settings.phoneDisplay} phoneHref={settings.phoneHref} />
+        {/* Floating FAQ chat widget — answers only from the approved Q&A in
+            lib/chat-faqs.ts (no generative AI, so it can't invent answers). */}
+        <ChatWidget phoneDisplay={settings.phoneDisplay} phoneHref={settings.phoneHref} />
       </body>
     </html>
   )
