@@ -13,6 +13,9 @@ import {
   CHATBOT_TEXT,
   byKey,
   matchLocation,
+  matchFaq,
+  isHoursQuestion,
+  locationHours,
   type ChatLocation,
 } from '@/lib/chatbot'
 
@@ -21,7 +24,7 @@ type Msg = { role: 'bot' | 'user'; text: string; links?: LinkBtn[] }
 type Option = { label: string; value: string }
 type View = 'prompt' | 'launcher' | 'chat'
 // What a chosen location should do next.
-type Purpose = 'decide' | 'explore' | 'page' | 'contact'
+type Purpose = 'decide' | 'explore' | 'page' | 'contact' | 'hours'
 type Step =
   | 'name'
   | 'email'
@@ -111,6 +114,15 @@ export default function ChatWidget() {
     setStep('menu')
   }
 
+  // "Main menu" / home — available any time after the name + email step.
+  function goHome() {
+    setSelectedLoc(null)
+    setPurpose('explore')
+    bot('Main menu — how can we help today?')
+    setOptions(MENU_OPTIONS)
+    setStep('menu')
+  }
+
   function reserveAnswer(loc: ChatLocation, fromAlias: boolean) {
     const lead = fromAlias ? `Modern Storage® ${loc.shortName} is the closest fit for that area. ` : ''
     bot(`${lead}Great. You can view available units, sizes, and pricing for ${loc.name} here:`, [
@@ -124,10 +136,17 @@ export default function ChatWidget() {
     ])
     backToMenu()
   }
+  function hoursAnswer(loc: ChatLocation) {
+    bot(`${loc.name} office hours:\n${locationHours(loc)}`, [
+      { label: 'View location page', href: loc.url },
+    ])
+    backToMenu()
+  }
 
   function resolveLocation(loc: ChatLocation, fromAlias: boolean) {
     if (purpose === 'explore') return reserveAnswer(loc, fromAlias)
     if (purpose === 'contact') return contactAnswer(loc)
+    if (purpose === 'hours') return hoursAnswer(loc)
     if (purpose === 'page') {
       bot('You can access your location page here:', [{ label: 'Open location page', href: loc.url }])
       return backToMenu()
@@ -211,7 +230,16 @@ export default function ChatWidget() {
             return
           }
         }
-        // typed free text at the menu — try to route a location, else fallback
+        // typed free text at the menu — hours, then approved Q&A, then a
+        // location lookup, else the fallback (which re-offers the home menu).
+        if (isHoursQuestion(value)) {
+          return enterLocation('hours', CHATBOT_TEXT.hoursPrompt)
+        }
+        const faq = matchFaq(value)
+        if (faq) {
+          bot(faq.answer, faq.links)
+          return backToMenu()
+        }
         const m = matchLocation(value)
         if (m.type === 'location') {
           setPurpose('contact')
@@ -360,6 +388,19 @@ export default function ChatWidget() {
           <p className="text-sm font-black leading-tight truncate">{CHATBOT_TEXT.agentName}</p>
           <p className="text-[11px] text-gray-400 leading-tight">Typically replies in a moment</p>
         </div>
+        {step !== 'name' && step !== 'email' && (
+          <button
+            type="button"
+            onClick={goHome}
+            aria-label="Back to main menu"
+            className="h-8 px-2.5 rounded-full hover:bg-white/10 flex items-center justify-center gap-1 text-xs font-bold transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10" />
+            </svg>
+            Menu
+          </button>
+        )}
         <button
           type="button"
           onClick={() => setView('launcher')}
@@ -417,6 +458,31 @@ export default function ChatWidget() {
           </div>
         )}
       </div>
+
+      {/* Persistent quick actions — shown under the conversation once we're
+          past the name/email step. New customers call; existing tenants are
+          sent to the account / reservations site. */}
+      {step !== 'name' && step !== 'email' && (
+        <div className="flex items-stretch gap-2 px-3 pt-3 pb-1 bg-white">
+          <a
+            href={CHATBOT_TEXT.newCustomersTel}
+            className="flex-1 inline-flex items-center justify-center gap-1.5 bg-modern-red hover:bg-modern-red-hover text-white text-xs font-black px-3 py-2.5 rounded-full transition-colors"
+          >
+            <svg className="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.24.2 2.45.57 3.57a1 1 0 01-.24 1.02l-2.2 2.2z" />
+            </svg>
+            New Customers
+          </a>
+          <a
+            href={CHATBOT_TEXT.existingTenantsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 bg-white text-charcoal hover:border-modern-red hover:text-modern-red text-xs font-black px-3 py-2.5 rounded-full border border-gray-300 transition-colors"
+          >
+            Existing Tenants →
+          </a>
+        </div>
+      )}
 
       <form onSubmit={onSubmit} className="flex items-center gap-2 p-3 border-t border-gray-100 bg-white">
         <input
