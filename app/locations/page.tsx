@@ -176,6 +176,32 @@ export default async function LocationsHubPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                       </svg>
                     </Link>
+                    {/* New Rentals = click-to-call; Existing Customers =
+                        all-locations directory (account access / tenant portal). */}
+                    <div className="grid grid-cols-2 gap-2">
+                      <a
+                        href={`tel:${settings.phoneDisplay.replace(/[^\d+]/g, '')}`}
+                        aria-label={`Call for new rentals at ${loc.name} — ${settings.phoneDisplay}`}
+                        className="inline-flex items-center justify-center gap-1.5 border border-gray-200 hover:border-modern-red text-charcoal hover:text-modern-red text-[11px] font-bold px-2 py-2 rounded-full transition-colors"
+                      >
+                        <svg className="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
+                        </svg>
+                        New Rentals
+                      </a>
+                      <a
+                        href="https://www.modernstorage.com/self-storage"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Existing customers — see all Modern Storage® locations"
+                        className="inline-flex items-center justify-center gap-1.5 border border-gray-200 hover:border-modern-red text-charcoal hover:text-modern-red text-[11px] font-bold px-2 py-2 rounded-full transition-colors"
+                      >
+                        <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-3-6.65" />
+                        </svg>
+                        Existing
+                      </a>
+                    </div>
                     <a
                       href={loc.reservationUrl}
                       aria-label={`See available units at ${loc.name}`}
