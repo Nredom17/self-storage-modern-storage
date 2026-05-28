@@ -53,7 +53,7 @@ export const CHAT_LOCATIONS: ChatLocation[] = [
     name: 'Modern Storage® Maumelle Blvd',
     shortName: 'Maumelle Blvd',
     phone: '(501) 791-0080',
-    address: '190 Maumelle Blvd, North Little Rock, AR 72113',
+    address: '9100 Maumelle Blvd, North Little Rock, AR 72113',
     url: 'https://www.modernstorage.com/self-storage-maumelle-ar-f9458',
     region: 'little-rock',
     aliases: ['maumelle blvd', 'maumelle', 'north little rock maumelle'],
@@ -151,7 +151,7 @@ export const CHATBOT_TEXT = {
     'I’m not sure on that, but our team can help. Please contact your Modern Storage® location directly.',
   noLocationMatch:
     'I’m not sure which location you mean. Please choose one of these Modern Storage® locations:',
-  avatar: '/brand-icon-on-white-512.png',
+  avatar: '/images/chat-avatar.jpg',
   sizeFinderUrl: 'https://self-storage.modernstorage.com/ai-storage-size-finder',
   sizeGuideUrl: 'https://self-storage.modernstorage.com/size-guide',
 }
