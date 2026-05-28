@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { SITE_URL, THEME_PAGES, LOCATIONS } from '@/lib/site'
-import { REVIEW_FACILITY_CONFIG } from '@/lib/reviews'
+import { REVIEW_FACILITY_CONFIG, REVIEWS_ENABLED } from '@/lib/reviews'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
@@ -25,19 +25,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     })),
-    // Reviews hub + one page per facility (reviews refresh daily)
-    {
-      url: SITE_URL + '/reviews',
-      lastModified: now,
-      changeFrequency: 'daily' as const,
-      priority: 0.8,
-    },
-    ...REVIEW_FACILITY_CONFIG.filter((f) => f.visible).map((f) => ({
-      url: SITE_URL + '/reviews/' + f.slug,
-      lastModified: now,
-      changeFrequency: 'daily' as const,
-      priority: 0.6,
-    })),
+    // Reviews hub + one page per facility (reviews refresh daily).
+    // Omitted entirely while the Reviews section is switched off.
+    ...(REVIEWS_ENABLED
+      ? [
+          {
+            url: SITE_URL + '/reviews',
+            lastModified: now,
+            changeFrequency: 'daily' as const,
+            priority: 0.8,
+          },
+          ...REVIEW_FACILITY_CONFIG.filter((f) => f.visible).map((f) => ({
+            url: SITE_URL + '/reviews/' + f.slug,
+            lastModified: now,
+            changeFrequency: 'daily' as const,
+            priority: 0.6,
+          })),
+        ]
+      : []),
     {
       url: SITE_URL + '/ai-storage-size-finder',
       lastModified: now,

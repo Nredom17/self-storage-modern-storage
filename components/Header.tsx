@@ -3,7 +3,11 @@
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { NAV_TREE, LOCATION_NAV_GROUPS } from '@/lib/site'
+import { REVIEWS_ENABLED } from '@/lib/reviews'
 import NearMeSearchInput from '@/components/NearMeSearchInput'
+
+// Hide the Reviews dropdown link until the Reviews section is switched on.
+const navItemHidden = (href?: string) => !REVIEWS_ENABLED && href === '/reviews'
 
 type LocationsView = 'top' | 'central-arkansas' | 'northwest-arkansas'
 
@@ -238,7 +242,7 @@ export default function Header({
                     aria-label={item.label}
                     className="absolute left-0 top-full mt-2 w-64 bg-charcoal border border-white/10 rounded-xl shadow-2xl py-2 z-50"
                   >
-                    {item.items.map((sub) =>
+                    {item.items.filter((sub) => !navItemHidden(sub.href)).map((sub) =>
                       sub.external ? (
                         <a
                           key={sub.label + sub.href}
@@ -389,7 +393,7 @@ export default function Header({
                 </button>
                 {isExpanded && (
                   <div className="pl-3 mt-0.5 mb-2 border-l-2 border-modern-red/40 ml-3">
-                    {item.items.map((sub) =>
+                    {item.items.filter((sub) => !navItemHidden(sub.href)).map((sub) =>
                       sub.external ? (
                         <a
                           key={sub.label + sub.href}

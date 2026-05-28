@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import { SITE_URL } from '@/lib/site'
 import {
+  REVIEWS_ENABLED,
   getReviewFacilities,
   getAllFacilityReviewData,
   aggregateRating,
@@ -79,6 +81,9 @@ function buildJsonLd(
 }
 
 export default async function ReviewsPage() {
+  // Reviews section is off until the Google Business Profile API is live.
+  if (!REVIEWS_ENABLED) notFound()
+
   const facilities = await getReviewFacilities()
   const bySlug = await getAllFacilityReviewData()
   const allData = facilities.map((f) => bySlug.get(f.slug)).filter(Boolean) as FacilityReviewData[]

@@ -18,6 +18,19 @@
 import { getSupabaseClient } from '@/lib/supabase'
 import { LOCATIONS } from '@/lib/site'
 
+// ─────────────────────────────────────────────────────────────────────────────
+// MASTER ON/OFF SWITCH for the Reviews section.
+//
+// false → /reviews and /reviews/[slug] return 404, the pages drop out of the
+//         sitemap, and the "Reviews" nav link is hidden. Use this until the
+//         Google Business Profile API is approved + credentials are live, so
+//         visitors never see empty "reviews being collected" pages.
+//
+// To turn the Reviews section back ON once Google approves the API:
+//   set REVIEWS_ENABLED = true   (this single change re-enables everything)
+// ─────────────────────────────────────────────────────────────────────────────
+export const REVIEWS_ENABLED = false
+
 // ── Types ────────────────────────────────────────────────────────────────────
 
 export type ReviewFacilityConfig = {

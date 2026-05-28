@@ -3,14 +3,17 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { SITE_URL } from '@/lib/site'
 import {
+  REVIEWS_ENABLED,
   REVIEW_FACILITY_CONFIG,
   getReviewFacility,
   getFacilityReviewData,
 } from '@/lib/reviews'
 import ReviewStars from '@/components/ReviewStars'
 
-// Pre-render one page per configured facility slug.
+// Pre-render one page per configured facility slug — but none while the
+// Reviews section is switched off (REVIEWS_ENABLED = false).
 export function generateStaticParams() {
+  if (!REVIEWS_ENABLED) return []
   return REVIEW_FACILITY_CONFIG.filter((f) => f.visible).map((f) => ({ slug: f.slug }))
 }
 
@@ -41,6 +44,9 @@ function formatDate(iso: string): string {
 }
 
 export default async function FacilityReviewsPage({ params }: { params: { slug: string } }) {
+  // Reviews section is off until the Google Business Profile API is live.
+  if (!REVIEWS_ENABLED) notFound()
+
   const facility = await getReviewFacility(params.slug)
   if (!facility) notFound()
 
