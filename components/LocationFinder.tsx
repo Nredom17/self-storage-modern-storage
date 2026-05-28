@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import Link from 'next/link'
 import { LOCATION_FILTERS } from '@/lib/site'
 import type { Location } from '@/lib/data'
 import { getBadgeIcon } from '@/lib/badge-icons'
@@ -172,7 +173,20 @@ export default function LocationFinder({
                   )}
                 </button>
                 <div className="p-6 flex flex-col flex-1">
-                  <h3 className="font-black text-charcoal text-lg leading-tight mb-2">{loc.name}</h3>
+                  {/* Facility name links to its local content page
+                      (/locations/[slug]) — bespoke local copy, facility
+                      FAQs, amenities, and its own Reserve CTA. Gives the
+                      content pages internal link equity and lets shoppers
+                      read local detail before converting. The red button
+                      below still goes straight to live reservations. */}
+                  <h3 className="font-black text-charcoal text-lg leading-tight mb-2">
+                    <Link
+                      href={`/locations/${loc.slug}`}
+                      className="hover:text-modern-red transition-colors"
+                    >
+                      {loc.name}
+                    </Link>
+                  </h3>
                   <p className="text-sm text-gray-500 mb-1">{loc.streetAddress}</p>
                   <p className="text-sm text-gray-500 mb-4">
                     {loc.city}, {loc.state} {loc.zip}
@@ -206,16 +220,31 @@ export default function LocationFinder({
                       )
                     })}
                   </ul>
-                  <a
-                    href={loc.reservationUrl}
-                    aria-label={`See available units at ${loc.name}`}
-                    className="mt-auto inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors"
-                  >
-                    See Available Units
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </a>
+                  {/* Dual CTA: primary reserves directly (fastest path
+                      to convert); secondary opens the local content page
+                      for shoppers who want details first. */}
+                  <div className="mt-auto flex flex-col gap-2">
+                    <a
+                      href={loc.reservationUrl}
+                      aria-label={`See available units at ${loc.name}`}
+                      className="inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors"
+                    >
+                      See Available Units
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                    <Link
+                      href={`/locations/${loc.slug}`}
+                      aria-label={`View location details for ${loc.name}`}
+                      className="inline-flex items-center justify-center gap-1.5 text-sm font-bold text-charcoal/70 hover:text-modern-red transition-colors"
+                    >
+                      Location details
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                  </div>
                 </div>
               </article>
             )
