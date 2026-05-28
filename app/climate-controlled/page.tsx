@@ -240,7 +240,7 @@ export default async function ClimateControlledPage() {
                 <span className="text-modern-red">Climate-Controlled</span> Storage Units Near You
               </h1>
               <p className="text-gray-300 text-lg leading-relaxed mb-10 max-w-lg">
-                Indoor, temperature-controlled storage units near Little Rock, Bentonville, Bryant, Springdale, Lowell, and Hot Springs. Built for furniture, mattresses, electronics, photos, instruments, wine, business inventory, and long-term storage of items that deserve real protection.
+                Indoor, temperature-controlled storage units near Little Rock, North Little Rock, Maumelle, Bentonville, Bryant, Springdale, Lowell, and Hot Springs. Built for furniture, mattresses, electronics, photos, instruments, wine, business inventory, and long-term storage of items that deserve real protection.
               </p>
               <div className="flex flex-wrap gap-3 mb-10">
                 <Link
@@ -884,7 +884,7 @@ export default async function ClimateControlledPage() {
               Find Climate-Controlled Storage Near You
             </h2>
             <p className="text-gray-700 text-lg leading-relaxed">
-              Most Modern Storage® locations offer indoor climate-controlled units. Customers searching for climate-controlled storage near me, indoor storage units near me, or temperature-controlled storage near me will find a Modern Storage® facility in most central and Northwest regions — including locations near Little Rock, Bentonville, Bryant, Springdale, Lowell, and Hot Springs. Filter the map, click a pin for details, and reserve online from the nearest facility.
+              Most Modern Storage® locations offer indoor climate-controlled units. Customers searching for climate-controlled storage near me, indoor storage units near me, or temperature-controlled storage near me will find a Modern Storage® facility in most central and Northwest regions — including locations near Little Rock, North Little Rock, Maumelle, Bentonville, Bryant, Springdale, Lowell, and Hot Springs. Filter the map, click a pin for details, and reserve online from the nearest facility.
             </p>
           </div>
           <LocationFinder locations={locations} highlightBadge="Climate-Controlled" requireBadge="Climate-Controlled" />
