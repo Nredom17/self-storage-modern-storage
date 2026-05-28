@@ -559,6 +559,18 @@ export default async function HomePage() {
               </svg>
               Call for New Rentals
             </a>
+            <a
+              href="https://www.modernstorage.com/self-storage"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Existing customers — see all Modern Storage® locations"
+              className="bg-white/15 text-white font-bold px-8 py-3.5 rounded-full hover:bg-white/25 transition-colors text-sm border border-white/40 inline-flex items-center gap-2"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-3-6.65" />
+              </svg>
+              Existing Customers
+            </a>
           </div>
         </div>
       </section>
