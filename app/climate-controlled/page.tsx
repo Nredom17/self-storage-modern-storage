@@ -283,7 +283,7 @@ export default async function ClimateControlledPage() {
               </ul>
             </div>
 
-            <figure>
+            <figure className="relative">
               <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-800 relative">
                 <Image
                   src={HERO_IMAGE}
@@ -293,26 +293,32 @@ export default async function ClimateControlledPage() {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
                 />
-                <div
-                  className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-modern-red text-white rounded-xl px-3.5 py-2.5 shadow-lg w-44 sm:w-52"
-                  aria-label="2023, 2024, 2025 winner of the Best of the Best Self-Storage Awards by the Arkansas Democrat Gazette and Best of Northwest Arkansas"
-                >
-                  <p className="text-[9px] font-black uppercase tracking-wider text-red-100 leading-tight">
-                    Best of the Best Self-Storage Awards
-                  </p>
-                  <p className="text-base sm:text-lg font-black leading-none my-1.5">
-                    2023 · 2024 · 2025
-                  </p>
-                  <p className="text-[9px] font-black uppercase tracking-widest text-white leading-tight mb-1">
-                    Winner
-                  </p>
-                  <p className="text-[9px] font-bold uppercase tracking-tight text-red-100/90 leading-tight">
-                    Arkansas Democrat Gazette
-                  </p>
-                  <p className="text-[9px] font-bold uppercase tracking-tight text-red-100/90 leading-tight">
-                    & Best of Northwest Arkansas
-                  </p>
-                </div>
+              </div>
+              {/* Award plaque — overhangs the image's left edge so it reads
+                  as an editorial award plaque rather than a sticker. Sits
+                  outside the overflow-hidden image container (sibling, not
+                  child) so the overhang isn't clipped. Dark glass panel
+                  (charcoal + backdrop-blur + hairline ring + soft shadow);
+                  red is an accent only, and the award years are the focal
+                  point. Vertically centered over the calm left wall of the
+                  photo so it doesn't fight the red doors. */}
+              <div
+                className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-3 sm:-translate-x-8 z-10 w-56 sm:w-72 rounded-3xl bg-charcoal/85 backdrop-blur-md ring-1 ring-white/10 shadow-[0_16px_50px_rgba(0,0,0,0.5)] px-5 py-4 sm:px-7 sm:py-6"
+                aria-label="2023, 2024, 2025 winner of the Best of the Best Self-Storage Awards by the Arkansas Democrat Gazette and Best of Northwest Arkansas"
+              >
+                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-modern-red mb-2">
+                  Best of the Best
+                </p>
+                <p className="text-lg sm:text-2xl font-black text-white leading-none tracking-tight whitespace-nowrap">
+                  2023<span className="text-modern-red mx-0.5">·</span>2024<span className="text-modern-red mx-0.5">·</span>2025
+                </p>
+                <div className="h-px w-9 bg-white/20 my-3 sm:my-4" />
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/80 leading-tight">
+                  Self-Storage Awards Winner
+                </p>
+                <p className="text-[9px] font-medium uppercase tracking-wide text-white/45 leading-snug mt-1">
+                  Arkansas Democrat Gazette · Best of NWA
+                </p>
               </div>
               <figcaption className="text-xs text-gray-500 mt-3 italic">
                 Indoor climate-controlled storage hallway at a Modern Storage® facility — temperature-controlled storage units near you.
