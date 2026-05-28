@@ -283,24 +283,29 @@ export default async function BusinessStoragePage() {
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div className="lg:col-span-6">
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
-                Flagship dock-access location
+                Business storage across Arkansas
               </p>
               <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-5">
-                Modern Storage® Riverdale — Dock-Access Business Storage in Little Rock
+                Modern Storage® Business Storage for Inventory, Equipment &amp; Operations
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed mb-5">
-                Modern Storage® Riverdale at 2510 Cantrell Rd is the company&apos;s primary dock-access business storage location — built for pallet deliveries, freight unloading, inventory movement, contractor access, and ground-floor convenience, five minutes from downtown Little Rock.
+                Modern Storage® locations support business storage for inventory, contractor equipment, records, e-commerce products, staging furniture, tools, and overflow space.
               </p>
               <p className="text-gray-600 text-lg leading-relaxed mb-5">
-                While <strong>every Modern Storage® location supports business storage</strong>, Riverdale is the best fit for customers who need dock-height loading and heavier commercial movement.
+                Business amenities may include conference room access, business centers with computers and printers, package acceptance, smart locks, powered doors, electricity in select units, climate control, ground-floor access, 4-foot-wide standard doors, and roll-up warehouse doors on select units.
+              </p>
+              <p className="text-gray-600 text-lg leading-relaxed mb-5">
+                For businesses that need dock-height loading, <strong>Modern Storage® Riverdale</strong> offers loading dock access for pallets, freight, and box trucks.
               </p>
               <ul className="space-y-2.5 mb-7">
                 {[
-                  'Loading dock access for pallets, freight, and box trucks',
-                  'Package and freight receiving for e-commerce and contractors',
-                  'Climate-controlled mini-warehouse units',
-                  'Ground-floor access — no stairs or shared elevators',
-                  'Extended access hours for active business use',
+                  'Business storage available at all Modern Storage® locations',
+                  'Package acceptance at participating locations',
+                  'Conference room and business center access at select locations',
+                  'Smart locks, powered doors, and electricity in select units',
+                  '4-foot-wide doors on standard storage units',
+                  'Roll-up warehouse doors on select warehouse units',
+                  'Dock-height loading available at Riverdale',
                 ].map((b) => (
                   <li key={b} className="flex gap-3 text-sm text-charcoal">
                     <svg className="w-4 h-4 text-modern-red shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -315,16 +320,14 @@ export default async function BusinessStoragePage() {
                   href="#contact"
                   className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-6 py-3 rounded-full transition-colors text-sm"
                 >
-                  Request a Riverdale Quote
+                  Get a Business Storage Quote
                 </Link>
-                <a
-                  href="https://www.google.com/maps/dir/?api=1&destination=Modern%20Storage%C2%AE%20Riverdale%2C%202510%20Cantrell%20Rd%2C%20Little%20Rock%2C%20AR%2072202"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="#features"
                   className="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-charcoal font-bold px-6 py-3 rounded-full transition-colors text-sm"
                 >
-                  Get Directions to Riverdale
-                </a>
+                  View Business Amenities
+                </Link>
               </div>
             </div>
             <div className="lg:col-span-6">
