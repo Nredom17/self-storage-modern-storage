@@ -283,7 +283,69 @@ export default async function ClimateControlledPage() {
               </ul>
             </div>
 
-            <figure className="relative">
+            <figure>
+              {/* Award trust banner — sits directly above the image as an
+                  integrated header bar (not overlapping the photo). Matches
+                  the image's rounded corners and width, with equal spacing
+                  below (mb-4). Dark charcoal glass (backdrop-blur + hairline
+                  ring + soft shadow); red is an accent only and the award
+                  years are the focal point. Styling intent: high-end hotel /
+                  luxury-automotive trust signal, not a promotional banner. */}
+              <div
+                className="mb-4 flex items-center gap-4 sm:gap-6 rounded-2xl bg-charcoal/85 backdrop-blur-md ring-1 ring-white/10 shadow-[0_12px_40px_rgba(0,0,0,0.45)] px-5 py-4 sm:px-8 sm:py-5"
+                aria-label="2023, 2024, 2025 winner of the Best of the Best Self-Storage Awards by the Arkansas Democrat Gazette and Best of Northwest Arkansas"
+              >
+                {/* Laurel-wreath + trophy emblem (red accent) */}
+                <svg
+                  viewBox="0 0 96 96"
+                  className="w-12 h-12 sm:w-16 sm:h-16 shrink-0 text-modern-red"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  {/* laurel leaves — left branch */}
+                  <g>
+                    <ellipse cx="26" cy="64" rx="5" ry="2.3" transform="rotate(-52 26 64)" />
+                    <ellipse cx="22" cy="53" rx="5" ry="2.3" transform="rotate(-66 22 53)" />
+                    <ellipse cx="21" cy="42" rx="5" ry="2.3" transform="rotate(-80 21 42)" />
+                    <ellipse cx="24" cy="32" rx="5" ry="2.3" transform="rotate(-98 24 32)" />
+                    <ellipse cx="31" cy="25" rx="5" ry="2.3" transform="rotate(-114 31 25)" />
+                  </g>
+                  {/* laurel leaves — right branch (mirrored) */}
+                  <g>
+                    <ellipse cx="70" cy="64" rx="5" ry="2.3" transform="rotate(52 70 64)" />
+                    <ellipse cx="74" cy="53" rx="5" ry="2.3" transform="rotate(66 74 53)" />
+                    <ellipse cx="75" cy="42" rx="5" ry="2.3" transform="rotate(80 75 42)" />
+                    <ellipse cx="72" cy="32" rx="5" ry="2.3" transform="rotate(98 72 32)" />
+                    <ellipse cx="65" cy="25" rx="5" ry="2.3" transform="rotate(114 65 25)" />
+                  </g>
+                  {/* laurel stems */}
+                  <path d="M31 67 Q22 50 26 29" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                  <path d="M65 67 Q74 50 70 29" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                  {/* trophy cup */}
+                  <path d="M40 30h16v4c0 9-4 13-8 13s-8-4-8-13z" />
+                  {/* trophy handles */}
+                  <path d="M40 32c-6 0-6 8-1 9.2" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+                  <path d="M56 32c6 0 6 8 1 9.2" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+                  {/* trophy stem + base */}
+                  <rect x="46" y="47" width="4" height="7" />
+                  <path d="M41 54h14v3H41z" />
+                  <path d="M38 57h20v3.5H38z" />
+                </svg>
+
+                {/* Typographic block — years as focal point */}
+                <div className="min-w-0">
+                  <p className="text-[9px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-modern-red leading-tight">
+                    Best of the Best Self-Storage Awards
+                  </p>
+                  <p className="text-2xl sm:text-4xl font-black text-white leading-none tracking-tight my-1 sm:my-1.5 whitespace-nowrap">
+                    2023<span className="text-modern-red mx-1.5">•</span>2024<span className="text-modern-red mx-1.5">•</span>2025
+                  </p>
+                  <p className="text-[8px] sm:text-[10px] font-medium uppercase tracking-wide text-white/55 leading-snug">
+                    <span className="font-black text-white/85">Winner</span> · Arkansas Democrat Gazette &amp; Best of Northwest Arkansas
+                  </p>
+                </div>
+              </div>
+
               <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-800 relative">
                 <Image
                   src={HERO_IMAGE}
@@ -293,32 +355,6 @@ export default async function ClimateControlledPage() {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
                 />
-              </div>
-              {/* Award plaque — overhangs the image's left edge so it reads
-                  as an editorial award plaque rather than a sticker. Sits
-                  outside the overflow-hidden image container (sibling, not
-                  child) so the overhang isn't clipped. Dark glass panel
-                  (charcoal + backdrop-blur + hairline ring + soft shadow);
-                  red is an accent only, and the award years are the focal
-                  point. Vertically centered over the calm left wall of the
-                  photo so it doesn't fight the red doors. */}
-              <div
-                className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-3 sm:-translate-x-8 z-10 w-56 sm:w-72 rounded-3xl bg-charcoal/85 backdrop-blur-md ring-1 ring-white/10 shadow-[0_16px_50px_rgba(0,0,0,0.5)] px-5 py-4 sm:px-7 sm:py-6"
-                aria-label="2023, 2024, 2025 winner of the Best of the Best Self-Storage Awards by the Arkansas Democrat Gazette and Best of Northwest Arkansas"
-              >
-                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-modern-red mb-2">
-                  Best of the Best
-                </p>
-                <p className="text-lg sm:text-2xl font-black text-white leading-none tracking-tight whitespace-nowrap">
-                  2023<span className="text-modern-red mx-0.5">·</span>2024<span className="text-modern-red mx-0.5">·</span>2025
-                </p>
-                <div className="h-px w-9 bg-white/20 my-3 sm:my-4" />
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/80 leading-tight">
-                  Self-Storage Awards Winner
-                </p>
-                <p className="text-[9px] font-medium uppercase tracking-wide text-white/45 leading-snug mt-1">
-                  Arkansas Democrat Gazette · Best of NWA
-                </p>
               </div>
               <figcaption className="text-xs text-gray-500 mt-3 italic">
                 Indoor climate-controlled storage hallway at a Modern Storage® facility — temperature-controlled storage units near you.
