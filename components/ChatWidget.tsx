@@ -1,62 +1,303 @@
 'use client'
 
-// Floating bottom-right chat widget.
+// Modern Storage® guided chatbot widget.
 //
-// Safety model: answers come ONLY from lib/chat-faqs.ts via answerFor().
-// There is no generative model — the bot can only return an approved answer
-// or the single fallback line, so it cannot invent pricing, policies, or
-// promises. Edit the Q&A in lib/chat-faqs.ts.
+// SAFETY: this is a guided, button-driven flow backed by approved data in
+// lib/chatbot.ts. It never generates free-form answers — it routes visitors to
+// approved location links / contact info, or shows the fallback line. It cannot
+// invent pricing, availability, discounts, policies, or legal statements.
 
 import { useEffect, useRef, useState } from 'react'
-import Link from 'next/link'
-import { CHAT_CONFIG, answerFor } from '@/lib/chat-faqs'
+import {
+  CHAT_LOCATIONS,
+  CHATBOT_TEXT,
+  byKey,
+  matchLocation,
+  type ChatLocation,
+} from '@/lib/chatbot'
 
-type Msg = { role: 'bot' | 'user'; text: string }
+type LinkBtn = { label: string; href: string }
+type Msg = { role: 'bot' | 'user'; text: string; links?: LinkBtn[] }
+type Option = { label: string; value: string }
 type View = 'prompt' | 'launcher' | 'chat'
+// What a chosen location should do next.
+type Purpose = 'decide' | 'explore' | 'page' | 'contact'
+type Step =
+  | 'name'
+  | 'email'
+  | 'menu'
+  | 'location'
+  | 'decide-size'
+  | 'decide-bedrooms'
+  | 'tenant-menu'
 
-export default function ChatWidget({
-  phoneDisplay = '501-910-0096',
-  phoneHref = 'tel:+15019100096',
-}: {
-  phoneDisplay?: string
-  phoneHref?: string
-}) {
+const MENU_OPTIONS: Option[] = [
+  { label: 'I need help deciding', value: 'decide' },
+  { label: 'I would like to explore options myself', value: 'explore' },
+  { label: 'I am an existing tenant', value: 'tenant' },
+  { label: 'I need a phone number or address', value: 'contact' },
+]
+const TENANT_OPTIONS: Option[] = [
+  { label: 'Make a payment', value: 'payment' },
+  { label: 'Contact my location', value: 'contact' },
+  { label: 'Access or gate question', value: 'access' },
+  { label: 'Move-out question', value: 'moveout' },
+  { label: 'Other tenant support', value: 'other' },
+]
+const SIZE_OPTIONS: Option[] = [
+  { label: 'Yes, I know the size', value: 'yes' },
+  { label: 'No, I’m not sure', value: 'no' },
+  { label: 'I know how many bedrooms or rooms I’m storing', value: 'bedrooms' },
+]
+const BEDROOM_OPTIONS: Option[] = [
+  { label: 'Studio or small amount', value: 'studio' },
+  { label: '1 bedroom', value: '1' },
+  { label: '2 bedrooms', value: '2' },
+  { label: '3 bedrooms', value: '3' },
+  { label: '4+ bedrooms', value: '4' },
+]
+const ALL_LOC: Option[] = CHAT_LOCATIONS.map((l) => ({ label: l.shortName, value: l.key }))
+const LR_SUBSET: Option[] = CHAT_LOCATIONS.filter((l) =>
+  ['west-little-rock', 'shackleford', 'riverdale', 'north-little-rock'].includes(l.key),
+).map((l) => ({ label: l.shortName, value: l.key }))
+const NWA_SUBSET: Option[] = CHAT_LOCATIONS.filter((l) =>
+  ['bentonville', 'springdale', 'lowell'].includes(l.key),
+).map((l) => ({ label: l.shortName, value: l.key }))
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+export default function ChatWidget() {
   const [view, setView] = useState<View>('prompt')
+  const [step, setStep] = useState<Step>('name')
+  const [purpose, setPurpose] = useState<Purpose>('explore')
+  const [selectedLoc, setSelectedLoc] = useState<ChatLocation | null>(null)
+  const [messages, setMessages] = useState<Msg[]>([])
+  const [options, setOptions] = useState<Option[]>([])
   const [input, setInput] = useState('')
-  const [messages, setMessages] = useState<Msg[]>([{ role: 'bot', text: CHAT_CONFIG.greeting }])
-  const [showSuggestions, setShowSuggestions] = useState(true)
+  const [name, setName] = useState('')
   const scrollRef = useRef<HTMLDivElement | null>(null)
 
-  // Auto-scroll to the newest message.
   useEffect(() => {
     if (view === 'chat' && scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
     }
-  }, [messages, view])
+  }, [messages, options, view])
 
-  function ask(question: string) {
-    const q = question.trim()
-    if (!q) return
-    setShowSuggestions(false)
-    setMessages((m) => [...m, { role: 'user', text: q }])
-    // Small delay so the reply feels conversational, not instant.
-    setTimeout(() => {
-      setMessages((m) => [...m, { role: 'bot', text: answerFor(q) }])
-    }, 350)
+  const bot = (text: string, links?: LinkBtn[]) =>
+    setMessages((m) => [...m, { role: 'bot', text, links }])
+  const user = (text: string) => setMessages((m) => [...m, { role: 'user', text }])
+
+  function startChat() {
+    setMessages([
+      { role: 'bot', text: CHATBOT_TEXT.welcome },
+      { role: 'bot', text: CHATBOT_TEXT.askName },
+    ])
+    setOptions([])
+    setStep('name')
+    setSelectedLoc(null)
+    setView('chat')
+  }
+
+  function enterLocation(p: Purpose, intro: string, opts: Option[] = ALL_LOC) {
+    setPurpose(p)
+    bot(intro)
+    setOptions(opts)
+    setStep('location')
+  }
+
+  function backToMenu() {
+    bot('Is there anything else I can help with?')
+    setOptions(MENU_OPTIONS)
+    setStep('menu')
+  }
+
+  function reserveAnswer(loc: ChatLocation, fromAlias: boolean) {
+    const lead = fromAlias ? `Modern Storage® ${loc.shortName} is the closest fit for that area. ` : ''
+    bot(`${lead}Great. You can view available units, sizes, and pricing for ${loc.name} here:`, [
+      { label: 'View available units', href: loc.url },
+    ])
+    backToMenu()
+  }
+  function contactAnswer(loc: ChatLocation) {
+    bot(`${loc.name}\nPhone: ${loc.phone}\nAddress: ${loc.address}`, [
+      { label: 'View location page', href: loc.url },
+    ])
+    backToMenu()
+  }
+
+  function resolveLocation(loc: ChatLocation, fromAlias: boolean) {
+    if (purpose === 'explore') return reserveAnswer(loc, fromAlias)
+    if (purpose === 'contact') return contactAnswer(loc)
+    if (purpose === 'page') {
+      bot('You can access your location page here:', [{ label: 'Open location page', href: loc.url }])
+      return backToMenu()
+    }
+    // purpose === 'decide' → ask the size question next
+    setSelectedLoc(loc)
+    bot('Do you already know what size storage unit you need?')
+    setOptions(SIZE_OPTIONS)
+    setStep('decide-size')
+  }
+
+  function handleLocationInput(text: string) {
+    const m = matchLocation(text)
+    if (m.type === 'location') return resolveLocation(m.loc, m.fromAlias)
+    if (m.type === 'ambiguous-lr') {
+      bot('Modern Storage® has several Little Rock area locations. Which one would you like?')
+      setOptions(LR_SUBSET)
+      return
+    }
+    if (m.type === 'ambiguous-nwa') {
+      bot('Modern Storage® has several Northwest Arkansas locations. Which one would you like?')
+      setOptions(NWA_SUBSET)
+      return
+    }
+    bot(CHATBOT_TEXT.noLocationMatch)
+    setOptions(ALL_LOC)
+  }
+
+  // Central handler for every user action (button click or typed text).
+  function handle(value: string, label: string, isButton: boolean) {
+    user(label)
     setInput('')
+
+    switch (step) {
+      case 'name': {
+        const nm = value.trim()
+        if (!nm) return
+        setName(nm)
+        bot(CHATBOT_TEXT.askEmail)
+        setStep('email')
+        return
+      }
+      case 'email': {
+        const email = value.trim()
+        if (!EMAIL_RE.test(email)) {
+          bot('Please enter a valid email so our team can follow up.')
+          return
+        }
+        // Best-effort lead capture; chat proceeds regardless.
+        void fetch('/api/chat-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email }),
+        }).catch(() => {})
+        bot(CHATBOT_TEXT.menuIntro)
+        setOptions(MENU_OPTIONS)
+        setStep('menu')
+        return
+      }
+      case 'menu': {
+        if (isButton) {
+          if (value === 'decide')
+            return enterLocation(
+              'decide',
+              'Great, I can help with that. Which Modern Storage® location are you interested in?',
+            )
+          if (value === 'explore')
+            return enterLocation(
+              'explore',
+              'Absolutely. Which Modern Storage® location would you like to view?',
+            )
+          if (value === 'contact')
+            return enterLocation(
+              'contact',
+              'Which store or city do you need the phone number or address for?',
+            )
+          if (value === 'tenant') {
+            bot('What do you need help with today?')
+            setOptions(TENANT_OPTIONS)
+            setStep('tenant-menu')
+            return
+          }
+        }
+        // typed free text at the menu — try to route a location, else fallback
+        const m = matchLocation(value)
+        if (m.type === 'location') {
+          setPurpose('contact')
+          setStep('location')
+          return contactAnswer(m.loc)
+        }
+        bot(CHATBOT_TEXT.fallback)
+        setOptions(MENU_OPTIONS)
+        return
+      }
+      case 'location': {
+        if (isButton) {
+          const loc = byKey(value)
+          if (loc) return resolveLocation(loc, false)
+        }
+        return handleLocationInput(value)
+      }
+      case 'decide-size': {
+        if (value === 'yes' && selectedLoc) return reserveAnswer(selectedLoc, false)
+        if (value === 'no') {
+          bot(
+            'No problem. You can use our AI Storage Size Finder or view our Size Guide to help choose the right unit.',
+            [
+              { label: 'AI Storage Size Finder', href: CHATBOT_TEXT.sizeFinderUrl },
+              { label: 'Size Guide', href: CHATBOT_TEXT.sizeGuideUrl },
+            ],
+          )
+          return backToMenu()
+        }
+        if (value === 'bedrooms') {
+          bot('How many bedrooms or rooms are you storing?')
+          setOptions(BEDROOM_OPTIONS)
+          setStep('decide-bedrooms')
+          return
+        }
+        return
+      }
+      case 'decide-bedrooms': {
+        const links: LinkBtn[] = [{ label: 'Size Guide', href: CHATBOT_TEXT.sizeGuideUrl }]
+        if (selectedLoc) links.unshift({ label: `View ${selectedLoc.shortName} units`, href: selectedLoc.url })
+        bot(
+          'Thanks. Based on that, the next step is to view available units at your preferred location or use our Size Guide for a better estimate.',
+          links,
+        )
+        return backToMenu()
+      }
+      case 'tenant-menu': {
+        if (value === 'payment')
+          return enterLocation(
+            'page',
+            'You can make a payment through your Modern Storage® account online. Please select your location so we can send you to the right page.',
+          )
+        if (value === 'contact')
+          return enterLocation('contact', 'Which Modern Storage® location do you need to contact?')
+        if (value === 'access')
+          return enterLocation(
+            'contact',
+            'Access and gate details can vary by location and account. Please contact your Modern Storage® location directly so our team can help. Which location do you need?',
+          )
+        if (value === 'moveout')
+          return enterLocation(
+            'contact',
+            'Move-out details may vary by location and rental agreement. Please contact your Modern Storage® location directly so our team can help. Which location do you need?',
+          )
+        // 'other'
+        return enterLocation('contact', `${CHATBOT_TEXT.fallback} Which location do you need?`)
+      }
+    }
   }
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault()
-    ask(input)
+    const v = input.trim()
+    if (!v) return
+    handle(v, v, false)
   }
 
-  // ── Collapsed launcher (after the prompt is dismissed) ──
+  const placeholder =
+    step === 'name' ? 'Enter your name' : step === 'email' ? CHATBOT_TEXT.emailPlaceholder : 'Type or pick an option…'
+
+  // ── Collapsed launcher ──
   if (view === 'launcher') {
     return (
       <button
         type="button"
-        onClick={() => setView('chat')}
+        onClick={() => (messages.length ? setView('chat') : startChat())}
         aria-label="Open chat — can I help you?"
         className="fixed bottom-24 right-4 lg:bottom-6 lg:right-6 z-50 w-14 h-14 rounded-full bg-modern-red hover:bg-modern-red-hover text-white shadow-[0_8px_24px_rgba(0,0,0,0.25)] flex items-center justify-center transition-colors"
       >
@@ -67,7 +308,7 @@ export default function ChatWidget({
     )
   }
 
-  // ── "Can I help you?" prompt bubble (matches the old popup) ──
+  // ── "Can I help you?" prompt bubble ──
   if (view === 'prompt') {
     return (
       <div className="fixed bottom-24 right-4 lg:bottom-6 lg:right-6 z-50">
@@ -83,10 +324,10 @@ export default function ChatWidget({
             </svg>
           </button>
           <div className="flex flex-col items-start">
-            <span className="text-xs text-gray-500 leading-none mb-1.5">{CHAT_CONFIG.prompt}</span>
+            <span className="text-xs text-gray-500 leading-none mb-1.5">{CHATBOT_TEXT.prompt}</span>
             <button
               type="button"
-              onClick={() => setView('chat')}
+              onClick={startChat}
               className="bg-modern-red hover:bg-modern-red-hover text-white text-sm font-black px-4 py-2 rounded-full transition-colors"
             >
               Start Chat
@@ -94,7 +335,7 @@ export default function ChatWidget({
           </div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={CHAT_CONFIG.avatar}
+            src={CHATBOT_TEXT.avatar}
             alt=""
             aria-hidden="true"
             className="w-12 h-12 rounded-full object-cover border border-gray-100 shrink-0"
@@ -110,14 +351,13 @@ export default function ChatWidget({
       role="dialog"
       aria-label="Chat with Modern Storage"
       className="fixed bottom-24 right-4 lg:bottom-6 lg:right-6 z-50 w-[calc(100vw-2rem)] max-w-sm bg-white rounded-2xl shadow-[0_16px_50px_rgba(0,0,0,0.3)] border border-gray-100 flex flex-col overflow-hidden"
-      style={{ height: 'min(32rem, 70vh)' }}
+      style={{ height: 'min(34rem, 76vh)' }}
     >
-      {/* Header */}
       <div className="flex items-center gap-3 bg-charcoal text-white px-4 py-3">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={CHAT_CONFIG.avatar} alt="" aria-hidden="true" className="w-9 h-9 rounded-full object-cover border border-white/20" />
+        <img src={CHATBOT_TEXT.avatar} alt="" aria-hidden="true" className="w-9 h-9 rounded-full object-cover border border-white/20" />
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-black leading-tight truncate">{CHAT_CONFIG.agentName}</p>
+          <p className="text-sm font-black leading-tight truncate">{CHATBOT_TEXT.agentName}</p>
           <p className="text-[11px] text-gray-400 leading-tight">Typically replies in a moment</p>
         </div>
         <button
@@ -132,56 +372,59 @@ export default function ChatWidget({
         </button>
       </div>
 
-      {/* Messages */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-3 bg-gray-50">
         {messages.map((m, i) => (
           <div key={i} className={m.role === 'user' ? 'flex justify-end' : 'flex justify-start'}>
             <div
               className={
                 m.role === 'user'
-                  ? 'bg-modern-red text-white text-sm rounded-2xl rounded-br-sm px-3.5 py-2 max-w-[80%]'
-                  : 'bg-white text-charcoal text-sm rounded-2xl rounded-bl-sm px-3.5 py-2 max-w-[85%] border border-gray-200'
+                  ? 'bg-modern-red text-white text-sm rounded-2xl rounded-br-sm px-3.5 py-2 max-w-[80%] whitespace-pre-line'
+                  : 'bg-white text-charcoal text-sm rounded-2xl rounded-bl-sm px-3.5 py-2 max-w-[88%] border border-gray-200 whitespace-pre-line'
               }
             >
               {m.text}
+              {m.links && m.links.length > 0 && (
+                <span className="mt-2 flex flex-col gap-1.5">
+                  {m.links.map((l) => (
+                    <a
+                      key={l.href + l.label}
+                      href={l.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1.5 bg-modern-red hover:bg-modern-red-hover text-white text-xs font-bold px-3 py-2 rounded-full transition-colors"
+                    >
+                      {l.label} →
+                    </a>
+                  ))}
+                </span>
+              )}
             </div>
           </div>
         ))}
 
-        {showSuggestions && (
-          <div className="flex flex-wrap gap-2 pt-1">
-            {CHAT_CONFIG.suggestions.map((s) => (
+        {options.length > 0 && (
+          <div className="flex flex-col gap-2 pt-1">
+            {options.map((o) => (
               <button
-                key={s}
+                key={o.value + o.label}
                 type="button"
-                onClick={() => ask(s)}
-                className="text-xs font-semibold text-modern-red border border-modern-red/40 hover:bg-modern-red hover:text-white rounded-full px-3 py-1.5 transition-colors"
+                onClick={() => handle(o.value, o.label, true)}
+                className="text-left text-sm font-semibold text-charcoal bg-white border border-gray-300 hover:border-modern-red hover:text-modern-red rounded-xl px-3.5 py-2 transition-colors"
               >
-                {s}
+                {o.label}
               </button>
             ))}
           </div>
         )}
       </div>
 
-      {/* Talk-to-team strip */}
-      <div className="px-4 py-2 border-t border-gray-100 bg-white flex items-center justify-between gap-2 text-xs">
-        <Link href="/contact" className="font-bold text-charcoal hover:text-modern-red transition-colors">
-          Contact our team →
-        </Link>
-        <a href={phoneHref} className="font-bold text-modern-red hover:text-modern-red-hover transition-colors">
-          {phoneDisplay}
-        </a>
-      </div>
-
-      {/* Input */}
       <form onSubmit={onSubmit} className="flex items-center gap-2 p-3 border-t border-gray-100 bg-white">
         <input
-          type="text"
+          type={step === 'email' ? 'email' : 'text'}
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your question…"
-          aria-label="Type your question"
+          placeholder={placeholder}
+          aria-label={placeholder}
           className="flex-1 text-sm rounded-full border border-gray-300 px-4 py-2.5 focus:outline-none focus:border-modern-red"
         />
         <button

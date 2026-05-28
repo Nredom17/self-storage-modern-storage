@@ -181,9 +181,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             and hides when near the bottom of the page so it doesn't
             double-stack with the final red CTA section. */}
         <StickyMobileCTA phoneDisplay={settings.phoneDisplay} phoneHref={settings.phoneHref} />
-        {/* Floating FAQ chat widget — answers only from the approved Q&A in
-            lib/chat-faqs.ts (no generative AI, so it can't invent answers). */}
-        <ChatWidget phoneDisplay={settings.phoneDisplay} phoneHref={settings.phoneHref} />
+        {/* Floating guided chatbot — captures name/email, then routes to
+            approved location links + contact info from lib/chatbot.ts.
+            No generative AI, so it can't invent answers. */}
+        <ChatWidget />
       </body>
     </html>
   )
