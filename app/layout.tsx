@@ -7,7 +7,7 @@ import Footer from '@/components/Footer'
 import StickyMobileCTA from '@/components/StickyMobileCTA'
 import ChatWidget from '@/components/ChatWidget'
 import { SITE_URL } from '@/lib/site'
-import { getSiteSettings } from '@/lib/data'
+import { getSiteSettings, getChatFaqs } from '@/lib/data'
 
 // Google Tag Manager — only fires when the env var is set in Vercel.
 // Marketing team manages GA4, conversions, Meta Pixel, call tracking, etc. via
@@ -128,6 +128,7 @@ function buildOrganizationSchema(phoneDisplay: string) {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const settings = await getSiteSettings()
+  const chatFaqs = await getChatFaqs()
   const organizationSchema = buildOrganizationSchema(settings.phoneDisplay)
   const websiteSchema = buildWebsiteSchema()
   return (
@@ -182,9 +183,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             double-stack with the final red CTA section. */}
         <StickyMobileCTA phoneDisplay={settings.phoneDisplay} phoneHref={settings.phoneHref} />
         {/* Floating guided chatbot — captures name/email, then routes to
-            approved location links + contact info from lib/chatbot.ts.
+            approved location links + contact info. Q&A is editable from
+            /admin/chatbot (Supabase), falling back to lib/chatbot.ts.
             No generative AI, so it can't invent answers. */}
-        <ChatWidget />
+        <ChatWidget faqs={chatFaqs} />
       </body>
     </html>
   )

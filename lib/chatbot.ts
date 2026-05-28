@@ -214,10 +214,14 @@ export function locationHours(loc: ChatLocation): string {
 // store's hours from the OFFICE HOURS section above) — you don't add it here.
 // ─────────────────────────────────────────────────────────────────────────────
 export type ChatFaq = {
+  /** Optional DB id (present when the answer comes from Supabase). */
+  id?: string
   question: string
   keywords: string[]
   answer: string
   links?: { label: string; href: string }[]
+  /** Optional per-location answer overrides, keyed by location key. */
+  locationAnswers?: Record<string, string>
 }
 
 export const CHAT_FAQS: ChatFaq[] = [
@@ -282,12 +286,17 @@ export function isHoursQuestion(text: string): boolean {
   return HOURS_KEYWORDS.some((k) => t.includes(' ' + k + ' '))
 }
 
-/** Match a typed message to a single approved Q&A, longest keyword first. */
-export function matchFaq(text: string): ChatFaq | null {
+/**
+ * Match a typed message to a single approved Q&A, longest keyword first.
+ * Pass the live list from the database; defaults to the hardcoded CHAT_FAQS
+ * so the function still works as a fallback when no DB list is supplied.
+ */
+export function matchFaq(text: string, faqs: ChatFaq[] = CHAT_FAQS): ChatFaq | null {
   const t = ' ' + text.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim() + ' '
-  const pairs = CHAT_FAQS.flatMap((f) => f.keywords.map((k) => ({ f, k }))).sort(
-    (a, b) => b.k.length - a.k.length,
-  )
+  const pairs = faqs
+    .flatMap((f) => f.keywords.map((k) => ({ f, k: k.trim().toLowerCase() })))
+    .filter(({ k }) => k.length > 0)
+    .sort((a, b) => b.k.length - a.k.length)
   for (const { f, k } of pairs) {
     if (t.includes(' ' + k + ' ')) return f
   }

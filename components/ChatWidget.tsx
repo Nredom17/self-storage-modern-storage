@@ -10,6 +10,7 @@
 import { useEffect, useRef, useState } from 'react'
 import {
   CHAT_LOCATIONS,
+  CHAT_FAQS,
   CHATBOT_TEXT,
   byKey,
   matchLocation,
@@ -17,6 +18,7 @@ import {
   isHoursQuestion,
   locationHours,
   type ChatLocation,
+  type ChatFaq,
 } from '@/lib/chatbot'
 
 type LinkBtn = { label: string; href: string }
@@ -24,7 +26,7 @@ type Msg = { role: 'bot' | 'user'; text: string; links?: LinkBtn[] }
 type Option = { label: string; value: string }
 type View = 'prompt' | 'launcher' | 'chat'
 // What a chosen location should do next.
-type Purpose = 'decide' | 'explore' | 'page' | 'contact' | 'hours'
+type Purpose = 'decide' | 'explore' | 'page' | 'contact' | 'hours' | 'faq'
 type Step =
   | 'name'
   | 'email'
@@ -69,11 +71,12 @@ const NWA_SUBSET: Option[] = CHAT_LOCATIONS.filter((l) =>
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-export default function ChatWidget() {
+export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
   const [view, setView] = useState<View>('prompt')
   const [step, setStep] = useState<Step>('name')
   const [purpose, setPurpose] = useState<Purpose>('explore')
   const [selectedLoc, setSelectedLoc] = useState<ChatLocation | null>(null)
+  const [selectedFaq, setSelectedFaq] = useState<ChatFaq | null>(null)
   const [messages, setMessages] = useState<Msg[]>([])
   const [options, setOptions] = useState<Option[]>([])
   const [input, setInput] = useState('')
@@ -175,6 +178,7 @@ export default function ChatWidget() {
   // "Main menu" / home — available any time after the name + email step.
   function goHome() {
     setSelectedLoc(null)
+    setSelectedFaq(null)
     setPurpose('explore')
     bot('Main menu — how can we help today?')
     setOptions(MENU_OPTIONS)
@@ -201,10 +205,19 @@ export default function ChatWidget() {
     backToMenu()
   }
 
+  function faqAnswer(loc: ChatLocation) {
+    const f = selectedFaq
+    const text = (f?.locationAnswers && f.locationAnswers[loc.key]) || f?.answer || ''
+    bot(`${loc.shortName}: ${text}`, f?.links)
+    setSelectedFaq(null)
+    backToMenu()
+  }
+
   function resolveLocation(loc: ChatLocation, fromAlias: boolean) {
     if (purpose === 'explore') return reserveAnswer(loc, fromAlias)
     if (purpose === 'contact') return contactAnswer(loc)
     if (purpose === 'hours') return hoursAnswer(loc)
+    if (purpose === 'faq') return faqAnswer(loc)
     if (purpose === 'page') {
       bot('You can access your location page here:', [{ label: 'Open location page', href: loc.url }])
       return backToMenu()
@@ -294,8 +307,13 @@ export default function ChatWidget() {
         if (isHoursQuestion(value)) {
           return enterLocation('hours', CHATBOT_TEXT.hoursPrompt)
         }
-        const faq = matchFaq(value)
+        const faq = matchFaq(value, faqs)
         if (faq) {
+          // If this answer has location-specific variants, ask which store first.
+          if (faq.locationAnswers && Object.keys(faq.locationAnswers).length > 0) {
+            setSelectedFaq(faq)
+            return enterLocation('faq', 'Which Modern Storage® location are you asking about?')
+          }
           bot(faq.answer, faq.links)
           return backToMenu()
         }
