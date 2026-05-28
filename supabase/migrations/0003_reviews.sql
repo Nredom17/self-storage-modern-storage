@@ -10,6 +10,20 @@
 --     refresh cron using the service role. Never hand-edited.
 
 -- =====================================================================
+-- 0. Prerequisite: shared updated_at trigger function.
+--    Normally created by 0001_init, but defined here too (create or replace
+--    is harmless if it already exists) so this script is self-contained and
+--    runs cleanly on a fresh database without 0001.
+-- =====================================================================
+create or replace function public.set_updated_at()
+returns trigger language plpgsql as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$;
+
+-- =====================================================================
 -- 1. review_facilities — admin-manageable config
 -- =====================================================================
 create table if not exists public.review_facilities (
