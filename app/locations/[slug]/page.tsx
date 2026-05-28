@@ -536,7 +536,7 @@ export default async function LocationPage({ params }: Props) {
               {loc.name} FAQs
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed mt-4 max-w-2xl mx-auto">
-              Common questions about storage at Modern Storage® {loc.city}.
+              Common questions about storage at {loc.name}.
             </p>
           </div>
           <FaqAccordion items={content.faqs} />
