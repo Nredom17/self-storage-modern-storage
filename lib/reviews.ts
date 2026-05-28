@@ -91,17 +91,24 @@ type DbFacilityReviews = {
 //
 // Leave googleLocationId/googleReviewLink as '' for any facility not ready yet —
 // it will show a "reviews coming soon" state and hide the review buttons.
+// google_location_id values below are the BARE numeric Google Business Profile
+// location IDs. The full API path (accounts/{GOOGLE_GBP_ACCOUNT_ID}/locations/{id})
+// is constructed at request time in lib/google-reviews.ts — the account ID lives
+// only in the GOOGLE_GBP_ACCOUNT_ID env var, not in each row.
+// googleReviewLink is still TODO — grab each facility's "write a review" share
+// link from the Google Business Profile dashboard ("Get more reviews") and paste
+// it here or into the Supabase review_facilities table.
 export const REVIEW_FACILITY_CONFIG: readonly ReviewFacilityConfig[] = [
-  { slug: 'west-little-rock', googleLocationId: '', googleReviewLink: '', displayOrder: 1, visible: true },
-  { slug: 'shackleford', googleLocationId: '', googleReviewLink: '', displayOrder: 2, visible: true },
-  { slug: 'riverdale', googleLocationId: '', googleReviewLink: '', displayOrder: 3, visible: true },
-  { slug: 'north-little-rock', googleLocationId: '', googleReviewLink: '', displayOrder: 4, visible: true },
-  { slug: 'maumelle', googleLocationId: '', googleReviewLink: '', displayOrder: 5, visible: true },
-  { slug: 'bryant', googleLocationId: '', googleReviewLink: '', displayOrder: 6, visible: true },
-  { slug: 'hot-springs', googleLocationId: '', googleReviewLink: '', displayOrder: 7, visible: true },
-  { slug: 'bentonville', googleLocationId: '', googleReviewLink: '', displayOrder: 8, visible: true },
-  { slug: 'springdale', googleLocationId: '', googleReviewLink: '', displayOrder: 9, visible: true },
-  { slug: 'lowell', googleLocationId: '', googleReviewLink: '', displayOrder: 10, visible: true },
+  { slug: 'west-little-rock', googleLocationId: '3545697766148035071', googleReviewLink: '', displayOrder: 1, visible: true },
+  { slug: 'shackleford', googleLocationId: '3175547647606788676', googleReviewLink: '', displayOrder: 2, visible: true },
+  { slug: 'riverdale', googleLocationId: '929544472539379667', googleReviewLink: '', displayOrder: 3, visible: true },
+  { slug: 'north-little-rock', googleLocationId: '18421663604750145698', googleReviewLink: '', displayOrder: 4, visible: true },
+  { slug: 'maumelle', googleLocationId: '6587449134877690465', googleReviewLink: '', displayOrder: 5, visible: true },
+  { slug: 'bryant', googleLocationId: '7696638473675809402', googleReviewLink: '', displayOrder: 6, visible: true },
+  { slug: 'hot-springs', googleLocationId: '7479507421660671255', googleReviewLink: '', displayOrder: 7, visible: true },
+  { slug: 'bentonville', googleLocationId: '12363285006312786967', googleReviewLink: '', displayOrder: 8, visible: true },
+  { slug: 'springdale', googleLocationId: '6078013281856811934', googleReviewLink: '', displayOrder: 9, visible: true },
+  { slug: 'lowell', googleLocationId: '2453008661674091219', googleReviewLink: '', displayOrder: 10, visible: true },
 ] as const
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
