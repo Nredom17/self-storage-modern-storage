@@ -142,7 +142,7 @@ export default function Footer({
               href={PHONE_NUMBER_HREF}
               className="bg-white/10 hover:bg-white/20 text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors border border-white/20"
             >
-              Call {PHONE_NUMBER_DISPLAY}
+              New Rentals: {PHONE_NUMBER_DISPLAY}
             </a>
           </div>
         </div>

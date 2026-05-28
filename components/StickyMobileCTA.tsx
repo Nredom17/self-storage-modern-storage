@@ -100,7 +100,7 @@ export default function StickyMobileCTA({
       <div className="grid grid-cols-2 gap-2 px-3 pt-3">
         <a
           href={phoneHref}
-          aria-label={`Call Modern Storage® at ${phoneDisplay}`}
+          aria-label={`Call for New Rentals at ${phoneDisplay}`}
           className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 active:bg-white/30 text-white font-bold py-3.5 rounded-full border border-white/20 transition-colors text-sm"
         >
           <Phone className="w-4 h-4" strokeWidth={2.5} aria-hidden="true" />

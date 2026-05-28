@@ -97,7 +97,7 @@ export default async function ContactPage() {
             {/* Phone — click-to-call. Phone number kept in aria-label for screen readers. */}
             <a
               href={settings.phoneHref}
-              aria-label={`Call Modern Storage® at ${settings.phoneDisplay}`}
+              aria-label={`Call for New Rentals at ${settings.phoneDisplay}`}
               className="group bg-gray-50 hover:bg-modern-red rounded-2xl p-8 border border-gray-200 hover:border-modern-red transition-all text-center flex flex-col items-center justify-center min-h-[180px]"
             >
               <div className="w-14 h-14 rounded-full bg-white text-modern-red mb-4 flex items-center justify-center shadow-sm">
@@ -241,7 +241,7 @@ export default async function ContactPage() {
               href={settings.phoneHref}
               className="bg-charcoal text-white font-black px-8 py-3.5 rounded-full hover:bg-gray-800 transition-colors text-sm shadow-md"
             >
-              Call {settings.phoneDisplay}
+              New Rentals: {settings.phoneDisplay}
             </a>
           </div>
         </div>
