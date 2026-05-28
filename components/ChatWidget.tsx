@@ -78,13 +78,71 @@ export default function ChatWidget() {
   const [options, setOptions] = useState<Option[]>([])
   const [input, setInput] = useState('')
   const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
   const scrollRef = useRef<HTMLDivElement | null>(null)
+  // Mirror of the latest state so the pagehide/close handlers can read it.
+  const stateRef = useRef({ name: '', email: '', messages: [] as Msg[] })
+  // Number of messages already emailed to the team, to avoid duplicates.
+  const sentLenRef = useRef(0)
 
   useEffect(() => {
     if (view === 'chat' && scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
     }
   }, [messages, options, view])
+
+  useEffect(() => {
+    stateRef.current = { name, email, messages }
+  }, [name, email, messages])
+
+  // Email the conversation transcript to the team (info@modernstorage.com via
+  // the API route). Fires when the visitor closes the chat or leaves the page.
+  // Only sends when there's a real conversation beyond the name + email prompts,
+  // and never sends the same messages twice.
+  function flushTranscript(useBeacon: boolean) {
+    const { name: nm, email: em, messages: msgs } = stateRef.current
+    if (!EMAIL_RE.test(em)) return
+    if (msgs.length <= sentLenRef.current) return
+    const userTurns = msgs.filter((m) => m.role === 'user').length
+    if (userTurns < 3) return // name + email only — nothing worth sending yet
+    sentLenRef.current = msgs.length
+    const payload = JSON.stringify({
+      name: nm,
+      email: em,
+      transcript: msgs.map((m) => ({ role: m.role, text: m.text })),
+    })
+    if (useBeacon && typeof navigator !== 'undefined' && navigator.sendBeacon) {
+      navigator.sendBeacon('/api/chat-lead', new Blob([payload], { type: 'application/json' }))
+    } else {
+      void fetch('/api/chat-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload,
+        keepalive: true,
+      }).catch(() => {})
+    }
+  }
+
+  // Capture the conversation if the visitor closes the tab or navigates away
+  // without clicking the close button.
+  useEffect(() => {
+    const onHide = () => flushTranscript(true)
+    const onVisibility = () => {
+      if (document.visibilityState === 'hidden') flushTranscript(true)
+    }
+    window.addEventListener('pagehide', onHide)
+    document.addEventListener('visibilitychange', onVisibility)
+    return () => {
+      window.removeEventListener('pagehide', onHide)
+      document.removeEventListener('visibilitychange', onVisibility)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  function closeChat() {
+    flushTranscript(false)
+    setView('launcher')
+  }
 
   const bot = (text: string, links?: LinkBtn[]) =>
     setMessages((m) => [...m, { role: 'bot', text, links }])
@@ -190,16 +248,17 @@ export default function ChatWidget() {
         return
       }
       case 'email': {
-        const email = value.trim()
-        if (!EMAIL_RE.test(email)) {
+        const emailVal = value.trim()
+        if (!EMAIL_RE.test(emailVal)) {
           bot('Please enter a valid email so our team can follow up.')
           return
         }
+        setEmail(emailVal)
         // Best-effort lead capture; chat proceeds regardless.
         void fetch('/api/chat-lead', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email }),
+          body: JSON.stringify({ name, email: emailVal }),
         }).catch(() => {})
         bot(CHATBOT_TEXT.menuIntro)
         setOptions(MENU_OPTIONS)
@@ -403,7 +462,7 @@ export default function ChatWidget() {
         )}
         <button
           type="button"
-          onClick={() => setView('launcher')}
+          onClick={closeChat}
           aria-label="Close chat"
           className="w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center transition-colors"
         >
