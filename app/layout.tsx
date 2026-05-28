@@ -35,19 +35,18 @@ export const metadata: Metadata = {
   // Google sometimes uses this as a secondary signal for the brand
   // line in SERPs alongside the WebSite schema below.
   applicationName: 'Modern Storage®',
-  // Favicon + Apple touch icon. The dynamic app/icon.tsx and
-  // app/apple-icon.tsx files Next.js auto-discovers handle the
-  // browser tab favicon and iOS home-screen icon. These explicit
-  // metadata.icons entries surface the larger static brand-icon
-  // assets to OG/social previewers and to crawlers that look for an
-  // explicit <link rel="icon"> with absolute URL.
+  // Favicon — the "MS" brand mark trimmed to fill the frame and placed
+  // on a solid white tile so it stays legible at 16–32px tab size on any
+  // background. We intentionally do NOT reference an SVG here: browsers
+  // prioritize SVG favicons, and the transparent thin-ring SVG rendered
+  // as a near-invisible blob at tab size. A white-tile PNG reads reliably.
   icons: {
     icon: [
-      { url: '/brand-icon.svg', type: 'image/svg+xml' },
-      { url: '/brand-icon-512.png', type: 'image/png', sizes: '512x512' },
+      { url: '/favicon-ms-512.png', type: 'image/png', sizes: '512x512' },
+      { url: '/favicon-ms-192.png', type: 'image/png', sizes: '192x192' },
     ],
-    apple: [{ url: '/brand-icon-on-white-512.png', sizes: '180x180', type: 'image/png' }],
-    shortcut: '/brand-icon-on-white-512.png',
+    apple: [{ url: '/favicon-ms-512.png', sizes: '180x180', type: 'image/png' }],
+    shortcut: '/favicon-ms-512.png',
   },
   openGraph: {
     siteName: 'Modern Storage®',
