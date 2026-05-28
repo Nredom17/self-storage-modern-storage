@@ -139,6 +139,24 @@ export default async function ContactPage() {
         </div>
       </section>
 
+      {/* ── CONTACT FORM ─────────────────────────────────── */}
+      <section id="message" className="bg-white py-20 border-b border-gray-200 scroll-mt-20">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="text-center mb-10">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+              Send a message
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+              Get in touch with Modern Storage®
+            </h2>
+            <p className="text-gray-600 text-lg leading-relaxed">
+              Tell us what you&apos;re storing or what business need you&apos;re solving — we&apos;ll match you to the right facility, sizes, and pricing and reply during business hours.
+            </p>
+          </div>
+          <BusinessContactForm inboxEmail="" />
+        </div>
+      </section>
+
       {/* ── ALL LOCATIONS NAP DIRECTORY ─────────────────────── */}
       <section className="bg-gray-50 py-20">
         <div className="max-w-7xl mx-auto px-6">
@@ -200,24 +218,6 @@ export default async function ContactPage() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── CONTACT FORM ─────────────────────────────────── */}
-      <section id="message" className="bg-white py-20 border-y border-gray-200 scroll-mt-20">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="text-center mb-10">
-            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
-              Send a message
-            </p>
-            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
-              Get in touch with Modern Storage®
-            </h2>
-            <p className="text-gray-600 text-lg leading-relaxed">
-              Tell us what you&apos;re storing or what business need you&apos;re solving — we&apos;ll match you to the right facility, sizes, and pricing and reply during business hours.
-            </p>
-          </div>
-          <BusinessContactForm inboxEmail="" />
         </div>
       </section>
 
