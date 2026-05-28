@@ -38,56 +38,56 @@ function defaultFaqs(slug: Slug): { q: string; a: string }[] {
 
   return [
     {
-      q: `Where is Modern Storage® ${loc.city} located?`,
-      a: `Modern Storage® ${loc.city} is located at ${loc.streetAddress}, ${loc.city}, ${loc.state} ${loc.zip}. Use the map and "Get Directions" button above to navigate to the facility from your current location.`,
+      q: `Where is ${loc.name} located?`,
+      a: `${loc.name} is located at ${loc.streetAddress}, ${loc.city}, ${loc.state} ${loc.zip}. Use the map and "Get Directions" button above to navigate to the facility from your current location.`,
     },
     {
-      q: `What types of storage does Modern Storage® ${loc.city} offer?`,
-      a: `Modern Storage® ${loc.city} offers ${offers.join(', ').toLowerCase()}. Availability and unit sizes vary — use the "See Available Units" button to view live inventory and pricing for this facility.`,
+      q: `What types of storage does ${loc.name} offer?`,
+      a: `${loc.name} offers ${offers.join(', ').toLowerCase()}. Availability and unit sizes vary — use the "See Available Units" button to view live inventory and pricing for this facility.`,
     },
     ...(climate
       ? [
           {
-            q: `Is climate-controlled storage available at Modern Storage® ${loc.city}?`,
-            a: `Yes. Modern Storage® ${loc.city} offers climate-controlled storage units designed to help protect furniture, electronics, documents, photos, and other temperature-sensitive items from Arkansas heat, cold, and humidity swings.`,
+            q: `Is climate-controlled storage available at ${loc.name}?`,
+            a: `Yes. ${loc.name} offers climate-controlled storage units designed to help protect furniture, electronics, documents, photos, and other temperature-sensitive items from Arkansas heat, cold, and humidity swings.`,
           },
         ]
       : []),
     ...(driveUp
       ? [
           {
-            q: `Does Modern Storage® ${loc.city} have drive-up storage?`,
-            a: `Yes. Modern Storage® ${loc.city} offers drive-up storage units, which let you load and unload directly from your vehicle — ideal for heavy furniture, business inventory, and frequent access.`,
+            q: `Does ${loc.name} have drive-up storage?`,
+            a: `Yes. ${loc.name} offers drive-up storage units, which let you load and unload directly from your vehicle — ideal for heavy furniture, business inventory, and frequent access.`,
           },
         ]
       : []),
     ...(boatRv
       ? [
           {
-            q: `Does Modern Storage® ${loc.city} offer boat, RV, or vehicle storage?`,
-            a: `Yes. Modern Storage® ${loc.city} is one of the Modern Storage® locations that offer boat storage, RV storage, trailer parking, and vehicle storage. Availability and space size vary — check live availability online.`,
+            q: `Does ${loc.name} offer boat, RV, or vehicle storage?`,
+            a: `Yes. ${loc.name} is one of the Modern Storage® locations that offer boat storage, RV storage, trailer parking, and vehicle storage. Availability and space size vary — check live availability online.`,
           },
         ]
       : []),
     ...(business
       ? [
           {
-            q: `Is Modern Storage® ${loc.city} a good fit for business storage?`,
-            a: `Yes. Modern Storage® ${loc.city} offers business storage and mini-warehouse units for contractors, e-commerce sellers, sales reps, medical offices, real estate professionals, and small businesses.`,
+            q: `Is ${loc.name} a good fit for business storage?`,
+            a: `Yes. ${loc.name} offers business storage and mini-warehouse units for contractors, e-commerce sellers, sales reps, medical offices, real estate professionals, and small businesses.`,
           },
         ]
       : []),
     ...(freeTruck
       ? [
           {
-            q: `Does Modern Storage® ${loc.city} offer a free moving truck?`,
-            a: `Yes — Modern Storage® ${loc.city} is a participating location for the free moving truck program with new rentals. Truck availability, mileage limits, and requirements vary — contact the facility before move-in to confirm.`,
+            q: `Does ${loc.name} offer a free moving truck?`,
+            a: `Yes — ${loc.name} is a participating location for the free moving truck program with new rentals. Truck availability, mileage limits, and requirements vary — contact the facility before move-in to confirm.`,
           },
         ]
       : []),
     {
-      q: `Can I reserve a storage unit online at Modern Storage® ${loc.city}?`,
-      a: `Yes. Click "See Available Units" on this page to go to the live reservation page for Modern Storage® ${loc.city}. You can choose your unit size, review pricing, and complete the reservation in a few minutes.`,
+      q: `Can I reserve a storage unit online at ${loc.name}?`,
+      a: `Yes. Click "See Available Units" on this page to go to the live reservation page for ${loc.name}. You can choose your unit size, review pricing, and complete the reservation in a few minutes.`,
     },
   ]
 }
