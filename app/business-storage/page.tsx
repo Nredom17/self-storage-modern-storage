@@ -47,11 +47,12 @@ export const metadata: Metadata = {
 }
 
 const TRUST_BULLETS = [
-  'Mini-warehouse units led by Modern Storage® Riverdale',
-  'Loading docks at select locations',
-  'Package and freight acceptance',
+  'Business storage at all Modern Storage® locations',
+  'Loading dock access at Modern Storage® Riverdale',
+  'Package & freight acceptance at participating locations',
+  'Climate-controlled options available',
   'Electricity in select units',
-  '24/7 access where available',
+  'Extended & 24/7 access at select locations',
 ]
 
 function buildJsonLd(phoneDisplay: string) {
@@ -206,7 +207,7 @@ export default async function BusinessStoragePage() {
                 Business Storage &amp; Mini-Warehouse Space in <span className="text-modern-red">Arkansas</span>
               </h1>
               <p className="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg">
-                Mini-warehouse and business storage at Modern Storage® locations across Arkansas — led by Modern Storage® Riverdale. Loading docks, package and freight acceptance, electricity in select units, and 24/7 access where available.
+                Business storage and mini-warehouse space is available at every Modern Storage® location across Arkansas — for inventory, contractor equipment, records, staging furniture, e-commerce products, tools, and operational overflow. Modern Storage® Riverdale is the lead commercial location, with dock-height loading and freight-friendly access for higher-volume businesses.
               </p>
               <div className="flex flex-wrap gap-4 mb-10">
                 <Link
@@ -228,6 +229,20 @@ export default async function BusinessStoragePage() {
                     <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
                   </svg>
                   Call for New Rentals
+                </a>
+                {/* Existing customers → all-locations directory on the
+                    reservation site (account access, gate codes, billing). */}
+                <a
+                  href="https://www.modernstorage.com/self-storage"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Existing customers — see all Modern Storage® locations"
+                  className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white font-bold px-7 py-3.5 rounded-full transition-colors border border-white/15 text-sm"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-3-6.65" />
+                  </svg>
+                  Existing Customers
                 </a>
               </div>
 
@@ -268,13 +283,16 @@ export default async function BusinessStoragePage() {
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div className="lg:col-span-6">
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
-                Lead business location
+                Flagship dock-access location
               </p>
               <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-5">
-                Modern Storage® Riverdale — Central Arkansas&apos;s Mini-Warehouse Hub
+                Modern Storage® Riverdale — Dock-Access Business Storage in Little Rock
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed mb-5">
-                Modern Storage® Riverdale at 2510 Cantrell Rd in Little Rock is purpose-built for commercial customers. Climate-controlled mini-warehouse units, dock-height loading, ground-floor access, and extended-hours availability — all five minutes from downtown.
+                Modern Storage® Riverdale at 2510 Cantrell Rd is the company&apos;s primary dock-access business storage location — built for pallet deliveries, freight unloading, inventory movement, contractor access, and ground-floor convenience, five minutes from downtown Little Rock.
+              </p>
+              <p className="text-gray-600 text-lg leading-relaxed mb-5">
+                While <strong>every Modern Storage® location supports business storage</strong>, Riverdale is the best fit for customers who need dock-height loading and heavier commercial movement.
               </p>
               <ul className="space-y-2.5 mb-7">
                 {[
@@ -336,7 +354,7 @@ export default async function BusinessStoragePage() {
               What Sets Business Storage Apart
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Mini-warehouse units at Modern Storage® are configured for active commercial use, not long-term household storage. Availability of each feature varies by location — confirm in your inquiry.
+              Business storage at Modern Storage® is built for active commercial use rather than simple household storage. Features vary by location, but businesses across Arkansas use Modern Storage® for inventory, contractor equipment, records, operational overflow, and staging. Modern Storage® Riverdale offers the broadest set of commercial features, including loading dock access — confirm the specifics for your preferred location in your inquiry.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -381,6 +399,18 @@ export default async function BusinessStoragePage() {
               </div>
             ))}
           </div>
+
+          <p className="text-gray-400 text-base leading-relaxed mt-10 max-w-3xl [&_a]:text-modern-red [&_a]:font-semibold [&_a:hover]:underline">
+            Modern Storage® supports{' '}
+            <Link href="/contractor-storage-little-rock">contractors across Little Rock</Link>, Bentonville,
+            Springdale, and Northwest Arkansas; staging companies serving central Arkansas real estate
+            markets; and e-commerce businesses operating throughout Arkansas. Suppliers and vendors in
+            the Bentonville area can also see{' '}
+            <Link href="/business-storage-bentonville">supplier &amp; business storage in Bentonville</Link>.
+            Tell us where your crews, inventory, or projects are active and we&apos;ll point you to the
+            closest fit among our{' '}
+            <Link href="/locations">10 Arkansas locations</Link>.
+          </p>
         </div>
       </section>
 
@@ -395,7 +425,7 @@ export default async function BusinessStoragePage() {
               Programs for Volume, Property, and Industry Partners
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              For organizations that need more than a single mini-warehouse — or recurring access across multiple Modern Storage® Arkansas locations — these structured programs replace ad-hoc rentals.
+              For organizations that need more than a single mini-warehouse — or recurring access across multiple Modern Storage® Arkansas locations — these structured programs replace ad-hoc rentals. Many businesses use multiple Modern Storage® locations simultaneously depending on where crews, inventory, or projects are active, and our team can help coordinate business storage across Arkansas under a single point of contact.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
