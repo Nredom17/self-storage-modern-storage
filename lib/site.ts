@@ -143,7 +143,7 @@ export const THEME_PAGES = [
     cta: 'Explore Household Storage',
     href: '/household-storage',
     image: '/images/modern-storage-springdale-facility-exterior.jpg',
-    alt: 'Modern Storage® Springdale self storage facility exterior in Arkansas with clean grounds.',
+    alt: 'Self-storage facility exterior at Modern Storage® Springdale — household storage in Arkansas',
   },
   {
     slug: 'rv-boat-vehicle',
