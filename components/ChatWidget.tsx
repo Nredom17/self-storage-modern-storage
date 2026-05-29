@@ -194,6 +194,32 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
     backToMenu()
   }
 
+  // Try to answer a freely-typed question from the approved Q&A (hours, payment,
+  // then keyword/FAQ match). Returns true if it handled the message. Used from
+  // every step so a visitor can type a question at any point in the flow.
+  function tryAnswerFreeText(value: string): boolean {
+    if (isHoursQuestion(value)) {
+      enterLocation('hours', CHATBOT_TEXT.hoursPrompt)
+      return true
+    }
+    if (isPaymentQuestion(value)) {
+      paymentAnswer()
+      return true
+    }
+    const faq = matchFaq(value, faqs)
+    if (faq) {
+      if (faq.locationAnswers && Object.keys(faq.locationAnswers).length > 0) {
+        setSelectedFaq(faq)
+        enterLocation('faq', 'Which Modern Storage® location are you asking about?')
+        return true
+      }
+      bot(faq.answer, faq.links)
+      backToMenu()
+      return true
+    }
+    return false
+  }
+
   function reserveAnswer(loc: ChatLocation, fromAlias: boolean) {
     const lead = fromAlias ? `Modern Storage® ${loc.shortName} is the closest fit for that area. ` : ''
     bot(`${lead}Great. You can view available units, sizes, and pricing for ${loc.name} here:`, [
@@ -314,22 +340,7 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
         }
         // typed free text at the menu — hours, then approved Q&A, then a
         // location lookup, else the fallback (which re-offers the home menu).
-        if (isHoursQuestion(value)) {
-          return enterLocation('hours', CHATBOT_TEXT.hoursPrompt)
-        }
-        if (isPaymentQuestion(value)) {
-          return paymentAnswer()
-        }
-        const faq = matchFaq(value, faqs)
-        if (faq) {
-          // If this answer has location-specific variants, ask which store first.
-          if (faq.locationAnswers && Object.keys(faq.locationAnswers).length > 0) {
-            setSelectedFaq(faq)
-            return enterLocation('faq', 'Which Modern Storage® location are you asking about?')
-          }
-          bot(faq.answer, faq.links)
-          return backToMenu()
-        }
+        if (tryAnswerFreeText(value)) return
         const m = matchLocation(value)
         if (m.type === 'location') {
           setPurpose('contact')
@@ -390,6 +401,8 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
             'contact',
             'Move-out details may vary by location and rental agreement. Please contact your Modern Storage® location directly so our team can help. Which location do you need?',
           )
+        // A freely-typed tenant question — try to answer it from the Q&A first.
+        if (!isButton && tryAnswerFreeText(value)) return
         // 'other'
         return enterLocation('contact', `${CHATBOT_TEXT.fallback} Which location do you need?`)
       }

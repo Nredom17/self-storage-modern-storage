@@ -306,13 +306,33 @@ export function isPaymentQuestion(text: string): boolean {
   return PAYMENT_KEYWORDS.some((k) => t.includes(' ' + k + ' '))
 }
 
+// Common words that shouldn't, on their own, drive a match.
+const MATCH_STOPWORDS = new Set([
+  'the', 'a', 'an', 'and', 'or', 'for', 'to', 'of', 'in', 'on', 'at', 'is', 'are',
+  'do', 'does', 'you', 'your', 'i', 'my', 'me', 'we', 'it', 'can', 'how', 'what',
+  'where', 'when', 'which', 'need', 'want', 'help', 'please', 'with', 'have',
+  'about', 'this', 'that', 'near', 'get', 'storage', 'store', 'stored', 'unit',
+  'units', 'modern', 'rent', 'rental',
+])
+
+function normalizeMsg(text: string): string {
+  return text.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim()
+}
+
 /**
- * Match a typed message to a single approved Q&A, longest keyword first.
- * Pass the live list from the database; defaults to the hardcoded CHAT_FAQS
- * so the function still works as a fallback when no DB list is supplied.
+ * Match a typed message to a single approved Q&A.
+ *  1) Strong match — a keyword word/phrase appears verbatim (longest first).
+ *  2) Looser match — score answers by how many distinctive keyword words appear
+ *     anywhere in the message, and return the best-scoring approved answer.
+ * It only ever returns an APPROVED answer (or null → the fallback line); it
+ * never generates text, so it cannot invent an answer.
  */
 export function matchFaq(text: string, faqs: ChatFaq[] = CHAT_FAQS): ChatFaq | null {
-  const t = ' ' + text.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim() + ' '
+  const norm = normalizeMsg(text)
+  if (!norm) return null
+  const t = ' ' + norm + ' '
+
+  // 1) Verbatim keyword / phrase match, longest keyword first.
   const pairs = faqs
     .flatMap((f) => f.keywords.map((k) => ({ f, k: k.trim().toLowerCase() })))
     .filter(({ k }) => k.length > 0)
@@ -320,7 +340,25 @@ export function matchFaq(text: string, faqs: ChatFaq[] = CHAT_FAQS): ChatFaq | n
   for (const { f, k } of pairs) {
     if (t.includes(' ' + k + ' ')) return f
   }
-  return null
+
+  // 2) Distinctive single-word overlap fallback.
+  const msgWords = new Set(norm.split(' ').filter((w) => w.length >= 3 && !MATCH_STOPWORDS.has(w)))
+  if (msgWords.size === 0) return null
+  let best: ChatFaq | null = null
+  let bestScore = 0
+  for (const f of faqs) {
+    const matched = new Set<string>()
+    for (const kw of f.keywords) {
+      for (const w of kw.toLowerCase().split(/\s+/)) {
+        if (w.length >= 3 && !MATCH_STOPWORDS.has(w) && msgWords.has(w)) matched.add(w)
+      }
+    }
+    if (matched.size > bestScore) {
+      bestScore = matched.size
+      best = f
+    }
+  }
+  return bestScore >= 1 ? best : null
 }
 
 export type LocationMatch =
