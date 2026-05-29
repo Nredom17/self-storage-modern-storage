@@ -144,8 +144,8 @@ export const CHATBOT_TEXT = {
   agentName: 'Modern Storage® Help',
   welcome: 'Welcome to Modern Storage®! I’m here to help with your storage needs.',
   askName: 'First, what’s your name?',
-  askEmail: 'Thanks. What’s your email?',
-  emailPlaceholder: 'Enter your email',
+  askPhone: 'Thanks. What’s your phone number?',
+  phonePlaceholder: 'Enter your phone number',
   menuIntro:
     'Great, thank you. How can we help today? You can type a question — like “What are your hours?” — or pick an option below.',
   fallback:
@@ -168,6 +168,22 @@ export const CHATBOT_TEXT = {
 
 export const byKey = (key: string): ChatLocation | undefined =>
   CHAT_LOCATIONS.find((l) => l.key === key)
+
+/**
+ * Normalize a typed phone number to 10 digits, or return null if it isn't a
+ * valid US 10-digit number. Accepts common formats like (501) 555-1234,
+ * 501-555-1234, or a leading 1 (e.g. 1-501-555-1234).
+ */
+export function normalizePhone(raw: string): string | null {
+  let d = (raw || '').replace(/\D/g, '')
+  if (d.length === 11 && d.startsWith('1')) d = d.slice(1)
+  return d.length === 10 ? d : null
+}
+
+/** Format 10 digits as (XXX) XXX-XXXX for display. */
+export function formatPhone(tenDigits: string): string {
+  return `(${tenDigits.slice(0, 3)}) ${tenDigits.slice(3, 6)}-${tenDigits.slice(6)}`
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // OFFICE HOURS

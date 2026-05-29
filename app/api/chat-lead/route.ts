@@ -9,6 +9,7 @@
 // Best-effort: never blocks the chat — the widget ignores the response.
 
 import { NextResponse } from 'next/server'
+import { normalizePhone, formatPhone } from '@/lib/chatbot'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -16,7 +17,7 @@ export const dynamic = 'force-dynamic'
 type Turn = { role?: unknown; text?: unknown }
 
 export async function POST(req: Request) {
-  let body: { name?: unknown; email?: unknown; transcript?: unknown; message?: unknown } = {}
+  let body: { name?: unknown; phone?: unknown; email?: unknown; transcript?: unknown; message?: unknown } = {}
   try {
     body = await req.json()
   } catch {
@@ -25,11 +26,15 @@ export async function POST(req: Request) {
 
   const name = String(body.name ?? '').slice(0, 120).trim()
   const email = String(body.email ?? '').slice(0, 200).trim()
+  // The chat widget collects a 10-digit phone number as the contact field.
+  const phoneDigits = normalizePhone(String(body.phone ?? ''))
+  const phoneDisplay = phoneDigits ? formatPhone(phoneDigits) : ''
   // A free-typed "Send us a message" from the chat widget.
   const message = String(body.message ?? '').slice(0, 4000).trim()
 
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return NextResponse.json({ ok: false, error: 'valid email required' }, { status: 400 })
+  const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  if (!phoneDigits && !validEmail) {
+    return NextResponse.json({ ok: false, error: 'valid phone or email required' }, { status: 400 })
   }
 
   // Build a readable transcript, if one was sent.
@@ -46,7 +51,7 @@ export async function POST(req: Request) {
 
   const kind = message ? 'MESSAGE' : hasTranscript ? 'TRANSCRIPT' : 'LEAD'
   console.log(
-    `[CHAT ${kind}] name="${name}" email="${email}" turns=${transcript.length} at=${new Date().toISOString()}`,
+    `[CHAT ${kind}] name="${name}" phone="${phoneDisplay}" turns=${transcript.length} at=${new Date().toISOString()}`,
   )
 
   const apiKey = process.env.RESEND_API_KEY
@@ -67,7 +72,8 @@ export async function POST(req: Request) {
       `New Modern Storage® chatbot ${message ? 'message' : hasTranscript ? 'conversation' : 'lead'}`,
       '',
       `Name:  ${name || '(not given)'}`,
-      `Email: ${email}`,
+      `Phone: ${phoneDisplay || '(not given)'}`,
+      ...(validEmail ? [`Email: ${email}`] : []),
       `Time:  ${new Date().toISOString()}`,
       `Source: website chat widget`,
       ...(message ? ['', 'Message:', message] : []),
@@ -78,7 +84,8 @@ export async function POST(req: Request) {
       await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ from, to: [to], reply_to: email, subject, text }),
+        // Only set reply_to when we actually have an email (phone-only leads omit it).
+        body: JSON.stringify({ from, to: [to], ...(validEmail ? { reply_to: email } : {}), subject, text }),
       })
     } catch (err) {
       console.warn('[CHAT LEAD] email send failed (non-fatal):', err)

@@ -18,6 +18,7 @@ import {
   isHoursQuestion,
   isPaymentQuestion,
   locationHours,
+  normalizePhone,
   type ChatLocation,
   type ChatFaq,
 } from '@/lib/chatbot'
@@ -30,7 +31,7 @@ type View = 'prompt' | 'launcher' | 'chat'
 type Purpose = 'decide' | 'explore' | 'page' | 'contact' | 'hours' | 'faq'
 type Step =
   | 'name'
-  | 'email'
+  | 'phone'
   | 'menu'
   | 'location'
   | 'decide-size'
@@ -72,8 +73,6 @@ const NWA_SUBSET: Option[] = CHAT_LOCATIONS.filter((l) =>
   ['bentonville', 'springdale', 'lowell'].includes(l.key),
 ).map((l) => ({ label: l.shortName, value: l.key }))
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
 // A "Main menu" escape appended to every sub-flow option list so a visitor is
 // never stuck inside a follow-up question (e.g. "which location?").
 const BACK_OPTION: Option = { label: '← Main menu', value: '__home__' }
@@ -91,14 +90,14 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
   const [options, setOptions] = useState<Option[]>([])
   const [input, setInput] = useState('')
   const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
   // After an answer the main menu collapses to a small chip so it doesn't bury
   // the conversation; the visitor expands it on demand.
   const [menuCollapsed, setMenuCollapsed] = useState(false)
   const scrollRef = useRef<HTMLDivElement | null>(null)
   const lastUserRef = useRef<HTMLDivElement | null>(null)
   // Mirror of the latest state so the pagehide/close handlers can read it.
-  const stateRef = useRef({ name: '', email: '', messages: [] as Msg[] })
+  const stateRef = useRef({ name: '', phone: '', messages: [] as Msg[] })
   // Number of messages already emailed to the team, to avoid duplicates.
   const sentLenRef = useRef(0)
 
@@ -119,23 +118,23 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
   }, [messages, options, view])
 
   useEffect(() => {
-    stateRef.current = { name, email, messages }
-  }, [name, email, messages])
+    stateRef.current = { name, phone, messages }
+  }, [name, phone, messages])
 
   // Email the conversation transcript to the team (info@modernstorage.com via
   // the API route). Fires when the visitor closes the chat or leaves the page.
-  // Only sends when there's a real conversation beyond the name + email prompts,
+  // Only sends when there's a real conversation beyond the name + phone prompts,
   // and never sends the same messages twice.
   function flushTranscript(useBeacon: boolean) {
-    const { name: nm, email: em, messages: msgs } = stateRef.current
-    if (!EMAIL_RE.test(em)) return
+    const { name: nm, phone: ph, messages: msgs } = stateRef.current
+    if (!normalizePhone(ph)) return
     if (msgs.length <= sentLenRef.current) return
     const userTurns = msgs.filter((m) => m.role === 'user').length
-    if (userTurns < 3) return // name + email only — nothing worth sending yet
+    if (userTurns < 3) return // name + phone only — nothing worth sending yet
     sentLenRef.current = msgs.length
     const payload = JSON.stringify({
       name: nm,
-      email: em,
+      phone: ph,
       transcript: msgs.map((m) => ({ role: m.role, text: m.text })),
     })
     if (useBeacon && typeof navigator !== 'undefined' && navigator.sendBeacon) {
@@ -330,22 +329,22 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
         const nm = value.trim()
         if (!nm) return
         setName(nm)
-        bot(CHATBOT_TEXT.askEmail)
-        setStep('email')
+        bot(CHATBOT_TEXT.askPhone)
+        setStep('phone')
         return
       }
-      case 'email': {
-        const emailVal = value.trim()
-        if (!EMAIL_RE.test(emailVal)) {
-          bot('Please enter a valid email so our team can follow up.')
+      case 'phone': {
+        const tenDigits = normalizePhone(value)
+        if (!tenDigits) {
+          bot('Please enter a valid 10-digit phone number so our team can reach you.')
           return
         }
-        setEmail(emailVal)
+        setPhone(tenDigits)
         // Best-effort lead capture; chat proceeds regardless.
         void fetch('/api/chat-lead', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email: emailVal }),
+          body: JSON.stringify({ name, phone: tenDigits }),
         }).catch(() => {})
         bot(CHATBOT_TEXT.menuIntro)
         setOptions(MENU_OPTIONS)
@@ -359,10 +358,10 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
         void fetch('/api/chat-lead', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, message: msg }),
+          body: JSON.stringify({ name, phone, message: msg }),
         }).catch(() => {})
         bot(
-          `Thanks${name ? ', ' + name : ''}! Your message has been sent to our team and we’ll follow up at ${email}.`,
+          `Thanks${name ? ', ' + name : ''}! Your message has been sent to our team and we’ll follow up using the phone number you provided.`,
         )
         return backToMenu()
       }
@@ -478,8 +477,8 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
   const placeholder =
     step === 'name'
       ? 'Enter your name'
-      : step === 'email'
-        ? CHATBOT_TEXT.emailPlaceholder
+      : step === 'phone'
+        ? CHATBOT_TEXT.phonePlaceholder
         : step === 'message'
           ? 'Type your message…'
           : 'Type or pick an option…'
@@ -562,7 +561,7 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
           <p className="text-sm font-black leading-tight truncate">{CHATBOT_TEXT.agentName}</p>
           <p className="text-[11px] text-gray-400 leading-tight">Typically replies in a moment</p>
         </div>
-        {step !== 'name' && step !== 'email' && (
+        {step !== 'name' && step !== 'phone' && (
           <button
             type="button"
             onClick={goHome}
@@ -654,7 +653,7 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
       {/* Persistent quick actions — shown under the conversation once we're
           past the name/email step. New customers call; existing tenants are
           sent to the account / reservations site. */}
-      {step !== 'name' && step !== 'email' && (
+      {step !== 'name' && step !== 'phone' && (
         <div className="flex items-stretch gap-2 px-3 pt-3 pb-1 bg-white">
           <a
             href={CHATBOT_TEXT.newCustomersTel}
@@ -678,7 +677,7 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
 
       <form onSubmit={onSubmit} className="flex items-center gap-2 p-3 border-t border-gray-100 bg-white">
         <input
-          type={step === 'email' ? 'email' : 'text'}
+          type={step === 'phone' ? 'tel' : 'text'}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={placeholder}
