@@ -49,6 +49,7 @@ const GUIDES_GROUPS = [
     heading: 'Apartment & Moving',
     links: [
       { label: 'Apartment Storage', href: '/guides/apartment-storage' },
+      { label: 'Student Storage', href: '/student-storage' },
       { label: 'Storage During a Move', href: '/guides/moving-storage' },
       { label: 'Storage Near Fayetteville', href: '/storage-near-fayetteville' },
     ],

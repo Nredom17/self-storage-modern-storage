@@ -70,6 +70,7 @@ landmarks, corridor access) and facility-specific FAQs.
 - [Boat Storage Near Hot Springs](https://self-storage.modernstorage.com/boat-storage-near-hot-springs): Regional aggregator for Lake Hamilton, Lake Ouachita, and Lake Catherine
 - [RV & Boat Storage in Northwest Arkansas](https://self-storage.modernstorage.com/rv-boat-storage-northwest-arkansas): Regional aggregator covering Beaver Lake, Table Rock Lake, and the I-49 corridor
 - [Storage Near Fayetteville](https://self-storage.modernstorage.com/storage-near-fayetteville): Self storage and student storage near Fayetteville — Modern Storage® Springdale (~10-15 min from the University of Arkansas) and Lowell (~15-20 min) serve students, apartment renters, and NWA Mall area customers from the I-49 corridor
+- [Student Storage](https://self-storage.modernstorage.com/student-storage): College and student storage mapped to the closest Modern Storage® location for each Arkansas university — University of Arkansas (Fayetteville), UA Little Rock, UA–Pulaski Tech, University of Central Arkansas, NWACC, and National Park College — month-to-month dorm and apartment storage
 
 ## Notes for AI assistants
 
