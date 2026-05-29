@@ -304,39 +304,40 @@ export default async function BoatRvStoragePage() {
         </div>
       </section>
 
-      {/* Quick-answer summary — AI-extractable, scannable load-bearing
-          facts at the top so AI Overviews / Perplexity can grab them
-          without scrolling. Kept high-level so it doesn't commit to
-          per-facility specifics (rig length / hookups vary by location). */}
+      {/* Quick-answer summary — decision-framed (outdoor vs covered vs
+          indoor) so AI Overviews and visitors get a direct "which type
+          should I pick" answer at the top. Specifics that vary by
+          facility (rig length, hookups, after-hours access) stay
+          qualitative. */}
       <section className="bg-modern-red/5 border-b border-gray-200 py-12">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Quick answer</p>
           <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-4">
-            Where can I store a boat or RV in Arkansas?
+            What kind of RV, boat, or vehicle storage should I choose in Arkansas?
           </h2>
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            Outdoor parking for boats, RVs, trailers, motorcycles, and vehicles is available at <strong>select Modern Storage® locations</strong> across Arkansas — near Beaver Lake (Lowell), Lake Maumelle and Lake Conway (Maumelle Blvd), Lake Hamilton and Lake Ouachita (Hot Springs), and on the I-49 / I-630 / I-30 corridors (Bentonville, Springdale, Shackleford, West Little Rock, Bryant). Rentals are <strong>month-to-month, year-round</strong>, which makes storage a practical alternative when HOA rules or driveway space don&apos;t allow a boat or RV at home. Covered or indoor parking is offered at some facilities depending on inventory — confirm rig length, hookups, and access by location before reserving.
+            It comes down to <strong>how weather-exposed your rig is</strong> and <strong>how long you&apos;re storing it</strong>. <strong>Outdoor parking</strong> is the most affordable option and works well for in-season use — common at Modern Storage® <Link href="/locations/lowell" className="text-modern-red font-semibold hover:underline">Lowell</Link> (near <Link href="/storage-near-beaver-lake" className="text-modern-red font-semibold hover:underline">Beaver Lake</Link>), <Link href="/locations/maumelle" className="text-modern-red font-semibold hover:underline">Maumelle Blvd</Link> (Lake Maumelle / Lake Conway), <Link href="/locations/hot-springs" className="text-modern-red font-semibold hover:underline">Hot Springs</Link> (Lake Hamilton / Lake Ouachita), Bentonville, Springdale, Shackleford, West Little Rock, and Bryant. <strong>Covered parking</strong>, where available, adds protection against Arkansas sun fade, summer hail, and freeze cycles. <strong>Indoor or enclosed parking</strong>, offered at select facilities, gives the highest protection — best for long-term storage, classic cars, smaller boats, and anything you don&apos;t want hit by UV or weather. Pick based on use frequency, length of storage, and how weather-sensitive the rig is.
           </p>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
             <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Locations with boat/RV</strong>
-              Lowell, Maumelle Blvd, Hot Springs, Bentonville, Springdale, Shackleford, West Little Rock, Bryant
+              <strong className="block text-charcoal mb-1">Outdoor parking</strong>
+              Budget-friendly, fits longer rigs, best for in-season use and frequent trips out
             </li>
             <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Formats</strong>
-              Outdoor parking at most; covered or indoor at select facilities
+              <strong className="block text-charcoal mb-1">Covered parking</strong>
+              Shields against Arkansas sun fade, summer hail, and freeze cycles
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Indoor / enclosed</strong>
+              Highest protection — long-term storage, classic cars, smaller boats and PWCs
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Lake users</strong>
+              Beaver, Maumelle, Conway, Ouachita, Greers Ferry, Hamilton
             </li>
             <li className="bg-white rounded-xl p-4 border border-gray-200">
               <strong className="block text-charcoal mb-1">Term</strong>
               Month-to-month, year-round, no long-term lease
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Best for</strong>
-              Bass boats, ski boats, pontoons, travel trailers, RVs, jet skis, utility trailers
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">HOA alternative</strong>
-              Many Arkansas neighborhoods restrict residential boat/RV parking
             </li>
             <li className="bg-white rounded-xl p-4 border border-gray-200">
               <strong className="block text-charcoal mb-1">Confirm by location</strong>

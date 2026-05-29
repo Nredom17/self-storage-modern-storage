@@ -277,42 +277,42 @@ export default async function BusinessStoragePage() {
         </div>
       </section>
 
-      {/* Quick-answer summary — AI-extractable load-bearing facts at
-          the top so AI Overviews can pull a tight "what is business
-          storage and where" answer without scrolling. */}
+      {/* Quick-answer summary — decision-framed (climate-controlled vs
+          drive-up by use case) so AI Overviews and visitors get a
+          direct "which type for what" answer without scrolling. */}
       <section className="bg-modern-red/5 border-b border-gray-200 py-12">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Quick answer</p>
           <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-4">
-            Where can businesses store inventory in Arkansas?
+            What kind of business storage is best for inventory, equipment, or records?
           </h2>
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            Modern Storage® offers <strong>business and mini-warehouse storage</strong> for inventory, tools, equipment, records, samples, and overflow — used by contractors, e-commerce sellers, restoration crews, real estate professionals, stagers, moving companies, and small businesses across Arkansas. <strong>Riverdale leads</strong> with ground-floor units, drive-up access sized for a 26‑ft moving truck, and package acceptance (subject to facility policy); <strong>Shackleford, West Little Rock, Bentonville, and Springdale</strong> serve the rest of the metro and Northwest Arkansas. Rentals are <strong>month-to-month with no long-term lease</strong>, so units scale up or down as inventory needs change. Units are intended for storage — not as active workspaces or operating business locations.
+            It depends on <strong>what you&apos;re storing</strong> and <strong>how often you need to get to it</strong>. <strong>Climate-controlled</strong> units are the right pick for records, paper files, electronics, packaged e-commerce inventory, samples, and anything that mildews, warps, or yellows in Arkansas humidity — the units reduce exposure to summer heat and humidity swings that would otherwise damage stock or paperwork. <strong>Drive-up</strong> units fit contractor tools, equipment, building materials, durable inventory, and anything you load and unload frequently from a truck. <Link href="/locations/riverdale" className="text-modern-red font-semibold hover:underline">Modern Storage® Riverdale</Link> leads for high-touch business operations — ground-floor units, drive-up access sized for a 26‑ft truck, and package acceptance (subject to facility policy). Other key facilities serve the metro and NWA. All units are <strong>month-to-month</strong>, so storage scales up or down with seasonal cycles, project ramp-ups, or growth. Units are intended for storage, not as active workspaces.
           </p>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
             <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Lead location</strong>
-              Riverdale — ground-floor, drive-up for 26‑ft truck, package acceptance
+              <strong className="block text-charcoal mb-1">Climate-controlled — best for</strong>
+              Records, paper files, electronics, packaged e-commerce inventory, samples
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Drive-up — best for</strong>
+              Contractor tools, equipment, building materials, frequent-access inventory
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Lead location for business ops</strong>
+              <Link href="/locations/riverdale" className="text-modern-red font-semibold hover:underline">Riverdale</Link> — ground-floor, 26-ft truck access, package acceptance
             </li>
             <li className="bg-white rounded-xl p-4 border border-gray-200">
               <strong className="block text-charcoal mb-1">Other key facilities</strong>
-              Shackleford, West Little Rock, Bentonville, Springdale
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Who uses it</strong>
-              E-commerce, contractors, real estate, restoration, stagers, movers, professional services
+              <Link href="/locations/shackleford" className="text-modern-red font-semibold hover:underline">Shackleford</Link>, <Link href="/locations/west-little-rock" className="text-modern-red font-semibold hover:underline">West Little Rock</Link>, <Link href="/locations/bentonville" className="text-modern-red font-semibold hover:underline">Bentonville</Link>, <Link href="/locations/springdale" className="text-modern-red font-semibold hover:underline">Springdale</Link>
             </li>
             <li className="bg-white rounded-xl p-4 border border-gray-200">
               <strong className="block text-charcoal mb-1">Term</strong>
-              Month-to-month, scalable, no long-term lease
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Common formats</strong>
-              Drive-up, ground-floor access, climate-controlled at select facilities
+              Month-to-month — scale with cycles or growth, no long-term lease
             </li>
             <li className="bg-white rounded-xl p-4 border border-gray-200">
               <strong className="block text-charcoal mb-1">Important</strong>
-              Units are for storage, not workspaces — per facility policy
+              Units are for storage, not workspaces or operating business locations
             </li>
           </ul>
         </div>

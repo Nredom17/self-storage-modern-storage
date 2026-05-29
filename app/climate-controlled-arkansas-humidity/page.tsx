@@ -74,7 +74,7 @@ const DAMAGE_BY_ITEM = [
   {
     title: 'Musical instruments',
     body:
-      'Guitars, pianos, and brass instruments require stable humidity (40-60%) and temperature to stay tuned and structurally sound. Outdoor and garage storage will warp wood, fail glue joints, and tarnish metal.',
+      'Guitars, pianos, and brass instruments need stable indoor conditions to stay tuned and structurally sound. Outdoor and garage storage subjects them to wide temperature and humidity swings that warp wood, fail glue joints, and tarnish metal.',
   },
 ] as const
 

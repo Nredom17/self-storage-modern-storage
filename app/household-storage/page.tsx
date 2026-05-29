@@ -281,30 +281,35 @@ export default async function HouseholdStoragePage() {
         </div>
       </section>
 
-      {/* Quick-answer summary — AI-extractable load-bearing facts
-          high on the page so AI Overviews / Perplexity can pull a
-          tight "when do you need household storage" answer. */}
+      {/* Quick-answer summary — decision-framed (climate-controlled vs
+          drive-up + size by contents) so AI Overviews and visitors
+          get a direct "which type and size should I pick" answer
+          without scrolling. */}
       <section className="bg-modern-red/5 border-b border-gray-200 py-12">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Quick answer</p>
           <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-4">
-            When do you need household storage in Arkansas?
+            What type of household storage unit should I choose for moving, downsizing, or extra space?
           </h2>
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            Household storage at Modern Storage® handles the gaps the life calendar creates: <strong>moving, downsizing, renovating, growing families, life transitions, and seasonal items</strong>. With <strong>10 Arkansas locations</strong> across the Little Rock metro, North Little Rock, Bryant, Hot Springs, and Northwest Arkansas (Bentonville, Springdale, Lowell), most facilities offer both <strong>climate-controlled and drive-up</strong> options. Rentals are <strong>month-to-month with no long-term lease</strong>, and participating locations include a <strong>free moving truck</strong> for move-in day.
+            Match the unit to <strong>what you&apos;re storing, how long, and how often you need to get to it</strong>. <strong><Link href="/climate-controlled" className="text-modern-red font-semibold hover:underline">Climate-controlled</Link></strong> is the right pick for furniture, mattresses, electronics, photos, documents, books, leather, and instruments — anything that warps, mildews, or fades in Arkansas humidity and heat over time. <strong>Drive-up</strong> units are fine for short-term moves, tools, seasonal items, holiday décor, and durable household goods you&apos;ll access often. <strong>Size by contents:</strong> a 5x5 holds a closet or seasonal items, a 5x10 fits a studio bedroom, a 10x10 holds a one-bedroom apartment, and a 10x20 handles a full home. All rentals are <strong>month-to-month</strong>, and participating locations include a <Link href="/free-moving-truck" className="text-modern-red font-semibold hover:underline">free moving truck</Link> for move-in day.
           </p>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
             <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Coverage</strong>
-              10 Arkansas locations — central AR + NWA
+              <strong className="block text-charcoal mb-1">Climate-controlled — best for</strong>
+              Furniture, mattresses, electronics, photos, books, leather, instruments, long-term storage
             </li>
             <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Life moments served</strong>
-              Moving, downsizing, renovating, growing families, transitions, seasonal
+              <strong className="block text-charcoal mb-1">Drive-up — best for</strong>
+              Short-term moves, tools, seasonal items, durable items, frequent access
             </li>
             <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Formats</strong>
-              Climate-controlled and drive-up at most locations
+              <strong className="block text-charcoal mb-1">Decision drivers</strong>
+              Contents + duration + access frequency
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Common sizes</strong>
+              5x5 closet · 5x10 studio · 10x10 1-bedroom · 10x20 full home · 10x30 large home
             </li>
             <li className="bg-white rounded-xl p-4 border border-gray-200">
               <strong className="block text-charcoal mb-1">Term</strong>
@@ -312,11 +317,7 @@ export default async function HouseholdStoragePage() {
             </li>
             <li className="bg-white rounded-xl p-4 border border-gray-200">
               <strong className="block text-charcoal mb-1">Move-in benefit</strong>
-              Free moving truck at participating locations
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Common sizes</strong>
-              5x5 closet · 5x10 studio · 10x10 1-bedroom · 10x20 home · 10x30 large home
+              <Link href="/free-moving-truck" className="text-modern-red font-semibold hover:underline">Free moving truck</Link> at participating locations · <Link href="/size-guide" className="text-modern-red font-semibold hover:underline">Size Guide</Link> for help picking
             </li>
           </ul>
         </div>
