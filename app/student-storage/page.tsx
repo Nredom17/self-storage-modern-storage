@@ -217,8 +217,9 @@ export default async function StudentStoragePage() {
             <p className="text-gray-300 text-lg leading-relaxed mb-10">
               Store your dorm or apartment over summer break, study abroad, or between leases — month-to-month, with no long-term contract. Find the closest Modern Storage® location to your campus and reserve online in minutes.
             </p>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/#locations" className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-6 py-3 rounded-full transition-colors text-sm">
+            {/* Row 1 — browse intents (transparent pills). */}
+            <div className="flex flex-wrap gap-3 mb-3">
+              <Link href="/#locations" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-full transition-colors border border-white/20 text-sm">
                 Find a Location
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
@@ -227,8 +228,34 @@ export default async function StudentStoragePage() {
               <Link href="/size-guide" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-full transition-colors border border-white/20 text-sm">
                 Size Guide
               </Link>
-              <a href={PHONE_NUMBER_HREF} className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-full transition-colors border border-white/20 text-sm">
-                Call for New Rentals
+            </div>
+            {/* Row 2 — audience-split pills with distinct colors.
+                New Rentals (red) dials the centralized line; Existing
+                Customers (white) opens the modernstorage.com tenant
+                portal. Phone number lives in aria-label only — the
+                pill itself dials when tapped. */}
+            <div className="flex flex-wrap gap-3">
+              <a
+                href={PHONE_NUMBER_HREF}
+                aria-label={`New Rentals — call ${settings.phoneDisplay}`}
+                className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-bold px-6 py-3 rounded-full transition-colors text-sm shadow-md"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
+                </svg>
+                New Rentals
+              </a>
+              <a
+                href="https://www.modernstorage.com/self-storage"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Existing Customers — manage your account at modernstorage.com"
+                className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-charcoal font-bold px-6 py-3 rounded-full transition-colors text-sm shadow-md"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-3-6.65" />
+                </svg>
+                Existing Customers
               </a>
             </div>
           </div>
