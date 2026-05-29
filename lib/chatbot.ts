@@ -149,7 +149,7 @@ export const CHATBOT_TEXT = {
   menuIntro:
     'Great, thank you. How can we help today? You can type a question — like “What are your hours?” — or pick an option below.',
   fallback:
-    'I’m not sure on that, but our team can help. Please contact your Modern Storage® location directly, or pick an option below.',
+    'I don’t have an answer for that one. For more information, please contact your Modern Storage® office directly and our team will be glad to help — or pick an option below.',
   noLocationMatch:
     'I’m not sure which location you mean. Please choose one of these Modern Storage® locations:',
   // Shown when a visitor asks about hours — we ask which store first, then show

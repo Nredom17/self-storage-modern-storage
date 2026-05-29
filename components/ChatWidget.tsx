@@ -73,6 +73,11 @@ const NWA_SUBSET: Option[] = CHAT_LOCATIONS.filter((l) =>
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+// A "Main menu" escape appended to every sub-flow option list so a visitor is
+// never stuck inside a follow-up question (e.g. "which location?").
+const BACK_OPTION: Option = { label: '← Main menu', value: '__home__' }
+const withHome = (opts: Option[]): Option[] => [...opts, BACK_OPTION]
+
 export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
   const [view, setView] = useState<View>('prompt')
   const [step, setStep] = useState<Step>('name')
@@ -169,7 +174,7 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
   function enterLocation(p: Purpose, intro: string, opts: Option[] = ALL_LOC) {
     setPurpose(p)
     bot(intro)
-    setOptions(opts)
+    setOptions(withHome(opts))
     setStep('location')
   }
 
@@ -301,7 +306,7 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
     // purpose === 'decide' → ask the size question next
     setSelectedLoc(loc)
     bot('Do you already know what size storage unit you need?')
-    setOptions(SIZE_OPTIONS)
+    setOptions(withHome(SIZE_OPTIONS))
     setStep('decide-size')
   }
 
@@ -310,22 +315,25 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
     if (m.type === 'location') return resolveLocation(m.loc, m.fromAlias)
     if (m.type === 'ambiguous-lr') {
       bot('Modern Storage® has several Little Rock area locations. Which one would you like?')
-      setOptions(LR_SUBSET)
+      setOptions(withHome(LR_SUBSET))
       return
     }
     if (m.type === 'ambiguous-nwa') {
       bot('Modern Storage® has several Northwest Arkansas locations. Which one would you like?')
-      setOptions(NWA_SUBSET)
+      setOptions(withHome(NWA_SUBSET))
       return
     }
     bot(CHATBOT_TEXT.noLocationMatch)
-    setOptions(ALL_LOC)
+    setOptions(withHome(ALL_LOC))
   }
 
   // Central handler for every user action (button click or typed text).
   function handle(value: string, label: string, isButton: boolean) {
     user(label)
     setInput('')
+
+    // "Main menu" escape works from any step.
+    if (isButton && value === '__home__') return goHome()
 
     switch (step) {
       case 'name': {
@@ -374,7 +382,7 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
             )
           if (value === 'tenant') {
             bot('What do you need help with today?')
-            setOptions(TENANT_OPTIONS)
+            setOptions(withHome(TENANT_OPTIONS))
             setStep('tenant-menu')
             return
           }
@@ -413,7 +421,7 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
         }
         if (value === 'bedrooms') {
           bot('How many bedrooms or rooms are you storing?')
-          setOptions(BEDROOM_OPTIONS)
+          setOptions(withHome(BEDROOM_OPTIONS))
           setStep('decide-bedrooms')
           return
         }
