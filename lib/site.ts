@@ -531,20 +531,42 @@ export const FAQS = [
   },
 ] as const
 
-// The homepage shows a short "getting started" subset of the FAQs; the full
-// set lives on /faq. Selecting from FAQS keeps a single source of truth and
-// avoids duplicating the entire FAQ block across both pages.
-const HOME_FAQ_QUESTIONS: readonly string[] = [
-  'What size storage unit do I need?',
-  'Do you offer climate-controlled storage?',
-  'How much does self-storage cost in Arkansas?',
-  'Can I reserve a storage unit online?',
-  'Do you offer a free moving truck?',
-  'How do I find the closest Modern Storage® location?',
-]
-export const HOME_FAQS = HOME_FAQ_QUESTIONS.map((q) => FAQS.find((f) => f.q === q)).filter(
-  (f): f is (typeof FAQS)[number] => Boolean(f),
-)
+// Homepage "getting started" FAQs. These are intentionally SHORTER and more
+// action-leading than the long, authoritative answers on /faq — distinct
+// wording so the two pages don't compete for the same AI-overview citations.
+// The /faq page carries the comprehensive 80–150-word versions.
+export const HOME_FAQS = [
+  {
+    q: 'What size storage unit do I need?',
+    a: `Not sure what fits? A 5x5 holds closet and seasonal overflow, a 10x10 fits a one-bedroom apartment, and a 10x20 handles a full home or business inventory. Use our AI Storage Size Finder or Size Guide to pick the right size, then reserve online in minutes.`,
+    aHtml: `Not sure what fits? A 5x5 holds closet and seasonal overflow, a 10x10 fits a one-bedroom apartment, and a 10x20 handles a full home or business inventory. Use our <a href="/ai-storage-size-finder">AI Storage Size Finder</a> or <a href="/size-guide">Size Guide</a> to pick the right size, then reserve online in minutes.`,
+  },
+  {
+    q: 'Do you offer climate-controlled storage?',
+    a: `Yes — climate-controlled units are available at select Arkansas locations to help protect furniture, electronics, documents, and other temperature-sensitive items. Learn what climate-controlled storage covers, or choose your location to check current availability and reserve online.`,
+    aHtml: `Yes — <a href="/climate-controlled">climate-controlled units</a> are available at select Arkansas locations to help protect furniture, electronics, documents, and other temperature-sensitive items. Learn what climate-controlled storage covers, or <a href="/#locations">choose your location</a> to check current availability and reserve online.`,
+  },
+  {
+    q: 'How much does self-storage cost in Arkansas?',
+    a: `Your rate depends on unit size, climate-controlled vs. drive-up, and which location you choose. See typical price ranges in our storage pricing guide, then check live rates and any move-in specials on your nearest location's reservation page.`,
+    aHtml: `Your rate depends on unit size, climate-controlled vs. drive-up, and which location you choose. See typical price ranges in our <a href="/pricing">storage pricing guide</a>, then check live rates and any move-in specials on your <a href="/#locations">nearest location's reservation page</a>.`,
+  },
+  {
+    q: 'Can I reserve a storage unit online?',
+    a: `Yes — you can reserve a unit online in just a few minutes. Compare sizes, climate-controlled options, and parking, then book your unit. Some rentals may require ID, payment, or signed documents before gate access. Pick your location to get started.`,
+    aHtml: `Yes — you can reserve a unit online in just a few minutes. Compare sizes, climate-controlled options, and parking, then book your unit. Some rentals may require ID, payment, or signed documents before gate access. <a href="/#locations">Pick your location</a> to get started.`,
+  },
+  {
+    q: 'Do you offer a free moving truck?',
+    a: `Yes — new renters get a free moving truck at participating Arkansas locations, so move-in day is one trip instead of five. Availability, mileage, and terms vary by location. See how the free moving truck works, then reserve your unit.`,
+    aHtml: `Yes — new renters get a <a href="/free-moving-truck">free moving truck</a> at participating Arkansas locations, so move-in day is one trip instead of five. Availability, mileage, and terms vary by location. See how it works, then <a href="/#locations">reserve your unit</a>.`,
+  },
+  {
+    q: 'How do I find the closest Modern Storage® location?',
+    a: `Modern Storage® has 10 Arkansas locations across the Little Rock metro and Northwest Arkansas. Use our locations page to find the closest facility with its address, phone number, and a reserve link — whether you're near downtown, a lake, or the I-49 corridor.`,
+    aHtml: `Modern Storage® has 10 Arkansas locations across the Little Rock metro and Northwest Arkansas. Use our <a href="/locations">locations page</a> to find the closest facility with its address, phone number, and a reserve link — whether you're near downtown, a lake, or the I-49 corridor.`,
+  },
+] as const
 
 export const REVIEWS = [
   {
