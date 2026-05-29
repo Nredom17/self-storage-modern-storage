@@ -16,6 +16,7 @@ import {
   matchLocation,
   matchFaq,
   isHoursQuestion,
+  isPaymentQuestion,
   locationHours,
   type ChatLocation,
   type ChatFaq,
@@ -40,6 +41,7 @@ const MENU_OPTIONS: Option[] = [
   { label: 'I need help deciding', value: 'decide' },
   { label: 'I would like to explore options myself', value: 'explore' },
   { label: 'I am an existing tenant', value: 'tenant' },
+  { label: 'I need to pay my bill', value: 'pay' },
   { label: 'I need a phone number or address', value: 'contact' },
 ]
 const TENANT_OPTIONS: Option[] = [
@@ -185,6 +187,13 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
     setStep('menu')
   }
 
+  function paymentAnswer() {
+    bot('You can pay your bill and manage your Modern Storage® account online here:', [
+      { label: 'Pay my bill online', href: CHATBOT_TEXT.payOnlineUrl },
+    ])
+    backToMenu()
+  }
+
   function reserveAnswer(loc: ChatLocation, fromAlias: boolean) {
     const lead = fromAlias ? `Modern Storage® ${loc.shortName} is the closest fit for that area. ` : ''
     bot(`${lead}Great. You can view available units, sizes, and pricing for ${loc.name} here:`, [
@@ -290,6 +299,7 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
               'explore',
               'Absolutely. Which Modern Storage® location would you like to view?',
             )
+          if (value === 'pay') return paymentAnswer()
           if (value === 'contact')
             return enterLocation(
               'contact',
@@ -306,6 +316,9 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
         // location lookup, else the fallback (which re-offers the home menu).
         if (isHoursQuestion(value)) {
           return enterLocation('hours', CHATBOT_TEXT.hoursPrompt)
+        }
+        if (isPaymentQuestion(value)) {
+          return paymentAnswer()
         }
         const faq = matchFaq(value, faqs)
         if (faq) {
@@ -364,11 +377,7 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
         return backToMenu()
       }
       case 'tenant-menu': {
-        if (value === 'payment')
-          return enterLocation(
-            'page',
-            'You can make a payment through your Modern Storage® account online. Please select your location so we can send you to the right page.',
-          )
+        if (value === 'payment') return paymentAnswer()
         if (value === 'contact')
           return enterLocation('contact', 'Which Modern Storage® location do you need to contact?')
         if (value === 'access')

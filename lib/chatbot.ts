@@ -162,6 +162,8 @@ export const CHATBOT_TEXT = {
   newCustomersPhone: '501-910-0096',
   newCustomersTel: 'tel:+15019100096',
   existingTenantsUrl: 'https://www.modernstorage.com/self-storage',
+  // Online bill pay for existing tenants.
+  payOnlineUrl: 'https://www.modernstorage.com/payonline',
 }
 
 export const byKey = (key: string): ChatLocation | undefined =>
@@ -284,6 +286,24 @@ const HOURS_KEYWORDS = [
 export function isHoursQuestion(text: string): boolean {
   const t = ' ' + text.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim() + ' '
   return HOURS_KEYWORDS.some((k) => t.includes(' ' + k + ' '))
+}
+
+const PAYMENT_KEYWORDS = [
+  'payment',
+  'pay my bill',
+  'pay bill',
+  'pay my rent',
+  'pay rent',
+  'pay online',
+  'make a payment',
+  'autopay',
+  'invoice',
+]
+
+/** True when a typed message is about paying a bill / making a payment. */
+export function isPaymentQuestion(text: string): boolean {
+  const t = ' ' + text.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim() + ' '
+  return PAYMENT_KEYWORDS.some((k) => t.includes(' ' + k + ' '))
 }
 
 /**
