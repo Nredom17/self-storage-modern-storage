@@ -90,14 +90,25 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const scrollRef = useRef<HTMLDivElement | null>(null)
+  const lastUserRef = useRef<HTMLDivElement | null>(null)
   // Mirror of the latest state so the pagehide/close handlers can read it.
   const stateRef = useRef({ name: '', email: '', messages: [] as Msg[] })
   // Number of messages already emailed to the team, to avoid duplicates.
   const sentLenRef = useRef(0)
 
   useEffect(() => {
-    if (view === 'chat' && scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+    if (view !== 'chat') return
+    const container = scrollRef.current
+    if (!container) return
+    const el = lastUserRef.current
+    if (el) {
+      // Pin the visitor's most recent question near the top of the panel so the
+      // answer below it stays visible — instead of scrolling all the way down to
+      // the menu buttons and pushing the answer out of view.
+      const offset = el.getBoundingClientRect().top - container.getBoundingClientRect().top
+      container.scrollTop += offset - 8
+    } else {
+      container.scrollTop = container.scrollHeight
     }
   }, [messages, options, view])
 
@@ -430,6 +441,16 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
   const placeholder =
     step === 'name' ? 'Enter your name' : step === 'email' ? CHATBOT_TEXT.emailPlaceholder : 'Type or pick an option…'
 
+  // Index of the visitor's most recent message — used to keep their question
+  // pinned near the top so the answer beneath it stays in view.
+  let lastUserIndex = -1
+  for (let i = messages.length - 1; i >= 0; i--) {
+    if (messages[i].role === 'user') {
+      lastUserIndex = i
+      break
+    }
+  }
+
   // ── Collapsed launcher ──
   if (view === 'launcher') {
     return (
@@ -525,7 +546,11 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
 
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-3 bg-gray-50">
         {messages.map((m, i) => (
-          <div key={i} className={m.role === 'user' ? 'flex justify-end' : 'flex justify-start'}>
+          <div
+            key={i}
+            ref={i === lastUserIndex ? lastUserRef : undefined}
+            className={m.role === 'user' ? 'flex justify-end' : 'flex justify-start'}
+          >
             <div
               className={
                 m.role === 'user'
