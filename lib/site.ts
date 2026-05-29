@@ -558,8 +558,8 @@ export const HOME_FAQS = [
   },
   {
     q: 'Do you offer a free moving truck?',
-    a: `Yes — new renters get a free moving truck at participating Arkansas locations, so move-in day is one trip instead of five. Availability, mileage, and terms vary by location. See how the free moving truck works, then reserve your unit.`,
-    aHtml: `Yes — new renters get a <a href="/free-moving-truck">free moving truck</a> at participating Arkansas locations, so move-in day is one trip instead of five. Availability, mileage, and terms vary by location. See how it works, then <a href="/#locations">reserve your unit</a>.`,
+    a: `Yes — a free moving truck is included with qualifying new rentals at participating Modern Storage® locations, so you can move in without renting one yourself. Availability, mileage, and terms vary by location. See how the free moving truck works, then reserve your unit.`,
+    aHtml: `Yes — a <a href="/free-moving-truck">free moving truck</a> is included with qualifying new rentals at participating Modern Storage® locations, so you can move in without renting one yourself. Availability, mileage, and terms vary by location. See how it works, then <a href="/#locations">reserve your unit</a>.`,
   },
   {
     q: 'How do I find the closest Modern Storage® location?',
