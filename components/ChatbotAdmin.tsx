@@ -146,7 +146,7 @@ export default function ChatbotAdmin() {
   const nextSort = rows.length ? Math.max(...rows.map((r) => r.sort_order)) + 1 : 1
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10">
+    <div className="mx-auto max-w-6xl px-4 py-10">
       <div className="flex items-center justify-between gap-4 mb-2">
         <h1 className="text-2xl font-black text-charcoal">Chatbot Q&amp;A Editor</h1>
         <button
@@ -176,11 +176,11 @@ export default function ChatbotAdmin() {
       ) : rows.length === 0 ? (
         <p className="text-gray-500">No questions yet. Click “Add question” to create one.</p>
       ) : (
-        <ul className="space-y-3">
+        <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
           {rows.map((faq) => (
             <li
               key={faq.id}
-              className={`rounded-xl border p-4 ${
+              className={`flex flex-col rounded-xl border p-4 ${
                 faq.active ? 'border-gray-200 bg-white' : 'border-gray-200 bg-gray-50 opacity-70'
               }`}
             >
