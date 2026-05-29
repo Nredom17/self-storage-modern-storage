@@ -281,6 +281,47 @@ export default async function HouseholdStoragePage() {
         </div>
       </section>
 
+      {/* Quick-answer summary — AI-extractable load-bearing facts
+          high on the page so AI Overviews / Perplexity can pull a
+          tight "when do you need household storage" answer. */}
+      <section className="bg-modern-red/5 border-b border-gray-200 py-12">
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Quick answer</p>
+          <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-4">
+            When do you need household storage in Arkansas?
+          </h2>
+          <p className="text-gray-700 text-lg leading-relaxed mb-6">
+            Household storage at Modern Storage® handles the gaps the life calendar creates: <strong>moving, downsizing, renovating, growing families, life transitions, and seasonal items</strong>. With <strong>10 Arkansas locations</strong> across the Little Rock metro, North Little Rock, Bryant, Hot Springs, and Northwest Arkansas (Bentonville, Springdale, Lowell), most facilities offer both <strong>climate-controlled and drive-up</strong> options. Rentals are <strong>month-to-month with no long-term lease</strong>, and participating locations include a <strong>free moving truck</strong> for move-in day.
+          </p>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Coverage</strong>
+              10 Arkansas locations — central AR + NWA
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Life moments served</strong>
+              Moving, downsizing, renovating, growing families, transitions, seasonal
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Formats</strong>
+              Climate-controlled and drive-up at most locations
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Term</strong>
+              Month-to-month, no long-term lease
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Move-in benefit</strong>
+              Free moving truck at participating locations
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Common sizes</strong>
+              5x5 closet · 5x10 studio · 10x10 1-bedroom · 10x20 home · 10x30 large home
+            </li>
+          </ul>
+        </div>
+      </section>
+
       {/* ── LIFE TRANSITIONS — moved UP per SEO audit ────────────
           This was the strongest section on the page and now leads
           the body. Establishes WHY people need household storage

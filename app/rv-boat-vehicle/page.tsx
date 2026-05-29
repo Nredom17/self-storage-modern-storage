@@ -304,6 +304,48 @@ export default async function BoatRvStoragePage() {
         </div>
       </section>
 
+      {/* Quick-answer summary — AI-extractable, scannable load-bearing
+          facts at the top so AI Overviews / Perplexity can grab them
+          without scrolling. Kept high-level so it doesn't commit to
+          per-facility specifics (rig length / hookups vary by location). */}
+      <section className="bg-modern-red/5 border-b border-gray-200 py-12">
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Quick answer</p>
+          <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-4">
+            Where can I store a boat or RV in Arkansas?
+          </h2>
+          <p className="text-gray-700 text-lg leading-relaxed mb-6">
+            Outdoor parking for boats, RVs, trailers, motorcycles, and vehicles is available at <strong>select Modern Storage® locations</strong> across Arkansas — near Beaver Lake (Lowell), Lake Maumelle and Lake Conway (Maumelle Blvd), Lake Hamilton and Lake Ouachita (Hot Springs), and on the I-49 / I-630 / I-30 corridors (Bentonville, Springdale, Shackleford, West Little Rock, Bryant). Rentals are <strong>month-to-month, year-round</strong>, which makes storage a practical alternative when HOA rules or driveway space don&apos;t allow a boat or RV at home. Covered or indoor parking is offered at some facilities depending on inventory — confirm rig length, hookups, and access by location before reserving.
+          </p>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Locations with boat/RV</strong>
+              Lowell, Maumelle Blvd, Hot Springs, Bentonville, Springdale, Shackleford, West Little Rock, Bryant
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Formats</strong>
+              Outdoor parking at most; covered or indoor at select facilities
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Term</strong>
+              Month-to-month, year-round, no long-term lease
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Best for</strong>
+              Bass boats, ski boats, pontoons, travel trailers, RVs, jet skis, utility trailers
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">HOA alternative</strong>
+              Many Arkansas neighborhoods restrict residential boat/RV parking
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Confirm by location</strong>
+              Longest rig that fits, power hookups, after-hours access — varies by facility
+            </li>
+          </ul>
+        </div>
+      </section>
+
       {/* ── HERO SEO COPY ────────────────────────────────────── */}
       <section className="bg-white py-16 border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6">

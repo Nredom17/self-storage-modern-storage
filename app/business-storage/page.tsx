@@ -277,6 +277,47 @@ export default async function BusinessStoragePage() {
         </div>
       </section>
 
+      {/* Quick-answer summary — AI-extractable load-bearing facts at
+          the top so AI Overviews can pull a tight "what is business
+          storage and where" answer without scrolling. */}
+      <section className="bg-modern-red/5 border-b border-gray-200 py-12">
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Quick answer</p>
+          <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-4">
+            Where can businesses store inventory in Arkansas?
+          </h2>
+          <p className="text-gray-700 text-lg leading-relaxed mb-6">
+            Modern Storage® offers <strong>business and mini-warehouse storage</strong> for inventory, tools, equipment, records, samples, and overflow — used by contractors, e-commerce sellers, restoration crews, real estate professionals, stagers, moving companies, and small businesses across Arkansas. <strong>Riverdale leads</strong> with ground-floor units, drive-up access sized for a 26‑ft moving truck, and package acceptance (subject to facility policy); <strong>Shackleford, West Little Rock, Bentonville, and Springdale</strong> serve the rest of the metro and Northwest Arkansas. Rentals are <strong>month-to-month with no long-term lease</strong>, so units scale up or down as inventory needs change. Units are intended for storage — not as active workspaces or operating business locations.
+          </p>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Lead location</strong>
+              Riverdale — ground-floor, drive-up for 26‑ft truck, package acceptance
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Other key facilities</strong>
+              Shackleford, West Little Rock, Bentonville, Springdale
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Who uses it</strong>
+              E-commerce, contractors, real estate, restoration, stagers, movers, professional services
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Term</strong>
+              Month-to-month, scalable, no long-term lease
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Common formats</strong>
+              Drive-up, ground-floor access, climate-controlled at select facilities
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Important</strong>
+              Units are for storage, not workspaces — per facility policy
+            </li>
+          </ul>
+        </div>
+      </section>
+
       {/* ── LEAD LOCATION: RIVERDALE ────────────────────────── */}
       <section className="bg-white py-20 border-y border-gray-200">
         <div className="max-w-7xl mx-auto px-6">

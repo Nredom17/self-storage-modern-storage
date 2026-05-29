@@ -108,8 +108,8 @@ const FAQS = [
     a: `No. Arkansas garages routinely hit 110-115°F in July and August, and attics run even hotter — often 130-150°F. Both spaces also experience large humidity swings as they heat and cool through the day, which is exactly the condition that condenses moisture inside electronics and warps wood. If you wouldn\'t leave it in your car all summer, don\'t leave it in your garage or attic either.`,
   },
   {
-    q: 'How does Modern Storage® manage humidity in climate-controlled buildings?',
-    a: `Modern Storage® climate-controlled buildings use insulation and HVAC systems to maintain a stable indoor environment year-round. The temperature management indirectly reduces humidity by keeping the air conditioned — warm air holds more moisture, so a cooler indoor space stays drier. Specific system details vary by facility, but the day-to-day humidity inside a climate-controlled unit is far lower than outside.`,
+    q: 'Does climate-controlled storage reduce humidity in Arkansas?',
+    a: `Indirectly — Modern Storage® climate-controlled buildings use insulation and HVAC systems to maintain a stable indoor temperature year-round, and because cooler air holds less moisture, a temperature-managed indoor space stays meaningfully drier than an outdoor unit. These units are designed to reduce humidity exposure rather than actively control humidity to a set percentage; specific system details vary by facility. In practice, the day-to-day humidity inside a climate-controlled unit is far lower than outside.`,
   },
   {
     q: 'Where can I find climate-controlled storage in Arkansas?',
