@@ -179,13 +179,42 @@ export default async function HomePage() {
         <div className="h-1 w-full bg-modern-red" />
         <div className="max-w-7xl mx-auto px-6 py-12 lg:py-24">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-start">
-            {/* Block A — Header text (badge, H1, subhead).
+            {/* Block A — Header text (badge, action pills, H1, subhead).
                 Mobile: appears first. Desktop: left column, row 1. */}
             <div className="lg:col-span-6 lg:col-start-1 lg:row-start-1">
               <span className="inline-flex items-center gap-2 bg-modern-red/20 border border-modern-red/40 text-modern-red text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-5 lg:mb-6">
                 <span className="w-1.5 h-1.5 rounded-full bg-modern-red animate-pulse" aria-hidden="true" />
                 10 Locations
               </span>
+              {/* Audience split — New Rentals dials the centralized line;
+                  Existing Customers opens the modernstorage.com tenant /
+                  self-storage portal. Mirrors the pills on /contact and
+                  /locations/[slug] so the pattern is consistent
+                  site-wide. */}
+              <div className="flex flex-wrap gap-3 mb-5 lg:mb-6">
+                <a
+                  href={settings.phoneHref}
+                  aria-label={`New Rentals — call ${settings.phoneDisplay}`}
+                  className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-charcoal font-bold px-5 py-2.5 rounded-full transition-colors text-sm"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
+                  </svg>
+                  New Rentals
+                </a>
+                <a
+                  href="https://www.modernstorage.com/self-storage"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Existing Customers — manage your account at modernstorage.com"
+                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-5 py-2.5 rounded-full transition-colors border border-white/30 text-sm"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-3-6.65" />
+                  </svg>
+                  Existing Customers
+                </a>
+              </div>
               <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight mb-4 lg:mb-6">
                 Self Storage Units in <span className="text-modern-red">Arkansas</span>
               </h1>
