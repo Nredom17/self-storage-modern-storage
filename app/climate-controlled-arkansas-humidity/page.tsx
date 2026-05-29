@@ -221,6 +221,48 @@ export default async function HumidityPage() {
         </div>
       </section>
 
+      {/* Quick-answer summary — lives high on the page so AI Overviews,
+          Perplexity, and ChatGPT can extract the load-bearing facts
+          without scrolling. Every claim here is defensible to public
+          climate data (NWS) or already published on the site. */}
+      <section className="bg-modern-red/5 border-b border-gray-200 py-12">
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Quick answer</p>
+          <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-4">
+            Why climate-controlled storage matters in Arkansas
+          </h2>
+          <p className="text-gray-700 text-lg leading-relaxed mb-6">
+            Arkansas summer humidity routinely runs <strong>70–90%</strong>, with attic temperatures of <strong>120–150°F</strong> and garages of <strong>100–115°F</strong> in July — conditions that warp wood furniture, mildew leather and fabric, fade photos, and fog electronics over a single season. Climate-controlled storage at Modern Storage® keeps belongings in an indoor range of roughly <strong>59°F to 79°F</strong> year-round, well within the safe zone for furniture, electronics, photos, instruments, and long-term household storage.
+          </p>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Summer humidity</strong>
+              Typically 70–90% in Arkansas; dew points routinely 70°F+
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Attic in July</strong>
+              120–150°F — too hot for nearly anything stored
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Garage / outdoor unit in July</strong>
+              100–125°F with daily humidity swings
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Climate-controlled (Modern Storage®)</strong>
+              Approximately 59°F to 79°F year-round
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Most at risk</strong>
+              Wood furniture, leather, mattresses, electronics, photos, books, instruments
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Damage threshold</strong>
+              Sustained humidity above 60% causes wood swelling and mildew
+            </li>
+          </ul>
+        </div>
+      </section>
+
       <section className="bg-white py-20 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-3xl mb-12">

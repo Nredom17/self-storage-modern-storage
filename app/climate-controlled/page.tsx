@@ -394,6 +394,45 @@ export default async function ClimateControlledPage() {
         </div>
       </section>
 
+      {/* Quick-answer summary — AI-extractable load-bearing facts so
+          AI Overviews / Perplexity / ChatGPT can pull the answer to
+          "is climate-controlled storage worth it in Arkansas?" without
+          having to scroll the full page. Claims are defensible to
+          public climate data (NWS) and already-published site content. */}
+      <section className="bg-modern-red/5 border-b border-gray-200 py-12">
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Quick answer</p>
+          <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-4">
+            Is climate-controlled storage worth it in Arkansas?
+          </h2>
+          <p className="text-gray-700 text-lg leading-relaxed mb-6">
+            Yes — for anything you wouldn't leave in a hot garage. Arkansas summers regularly hit <strong>95–100°F+</strong> with <strong>70–90% humidity</strong>, and attics commonly reach <strong>120–150°F</strong>. Those conditions warp wood, mildew leather and fabric, fade photos, and damage electronics over a single season. Climate-controlled units at Modern Storage® hold an indoor range of roughly <strong>59°F to 79°F</strong> year-round — well within the safe zone for furniture, mattresses, electronics, photos, documents, instruments, and long-term household storage. For tools, plastic bins, and durable garage-type items, drive-up storage is usually fine.
+          </p>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">When climate-controlled pays off</strong>
+              Long-term storage, furniture, electronics, photos &amp; documents, instruments, mattresses, leather
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">When drive-up is fine</strong>
+              Tools, plastic bins, lawn equipment, vehicles, short-term garage-type storage
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">Indoor range we maintain</strong>
+              Approximately 59°F to 79°F year-round
+            </li>
+            <li className="bg-white rounded-xl p-4 border border-gray-200">
+              <strong className="block text-charcoal mb-1">What it&apos;s protecting against</strong>
+              Summer humidity 70–90% · garage 100–115°F · attic 120–150°F
+            </li>
+          </ul>
+          <p className="text-sm text-gray-500 italic mt-5">
+            Deeper detail on Arkansas conditions and item-by-item damage:{' '}
+            <Link href="/climate-controlled-arkansas-humidity" className="text-modern-red font-semibold hover:underline">Climate-controlled storage for Arkansas humidity</Link>.
+          </p>
+        </div>
+      </section>
+
       {/* ── WHAT CLIMATE-CONTROLLED STORAGE MEANS ────────────── */}
       <section className="bg-gray-50 py-20 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
