@@ -176,7 +176,7 @@ export default function ChatbotAdmin() {
       ) : rows.length === 0 ? (
         <p className="text-gray-500">No questions yet. Click “Add question” to create one.</p>
       ) : (
-        <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
           {rows.map((faq) => (
             <li
               key={faq.id}
