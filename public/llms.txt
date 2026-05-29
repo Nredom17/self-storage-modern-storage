@@ -30,6 +30,7 @@ and language models discover and accurately summarize the site's content.
 - [Boat & RV Storage](https://self-storage.modernstorage.com/rv-boat-vehicle): Boat, RV, trailer, motorcycle, and vehicle storage at select Arkansas locations near Beaver Lake, Lake Maumelle, Lake Ouachita, Greers Ferry
 - [Business Storage](https://self-storage.modernstorage.com/business-storage): Mini-warehouse and business storage for contractors, e-commerce sellers, medical offices, real estate, and small businesses
 - [Free Moving Truck](https://self-storage.modernstorage.com/free-moving-truck): Free moving truck with new rentals at participating Arkansas Modern Storage® locations
+- [Packing & Moving Supplies](https://self-storage.modernstorage.com/packing-moving-supplies): Moving boxes, packing tape, bubble wrap, mattress and furniture covers, and locks available for purchase at participating Arkansas Modern Storage® locations — selection varies by facility
 - [Unit Size Guide](https://self-storage.modernstorage.com/size-guide): 5x5 through 10x30 storage units — what fits inside each, square footage, sizing by use case
 - [AI Storage Size Finder](https://self-storage.modernstorage.com/ai-storage-size-finder): Personalized unit-size recommendation in under 30 seconds
 - [FAQ](https://self-storage.modernstorage.com/faq): 18 most-asked questions about self storage in Arkansas — sizes, climate-controlled, pricing, online reservations, near-me search

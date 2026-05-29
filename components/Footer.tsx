@@ -35,6 +35,7 @@ const RESOURCES = [
   { label: 'Size Guide', href: '/size-guide' },
   { label: 'Move-In Checklist', href: '/move-in-checklist' },
   { label: 'Free Moving Truck', href: '/free-moving-truck' },
+  { label: 'Packing & Moving Supplies', href: '/packing-moving-supplies' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Storage Tips', href: 'https://www.modernstorage.com/blog' },
 ]

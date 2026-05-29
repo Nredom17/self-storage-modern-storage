@@ -56,6 +56,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: SITE_URL + '/packing-moving-supplies',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+    {
       url: SITE_URL + '/move-in-checklist',
       lastModified: now,
       changeFrequency: 'monthly' as const,
