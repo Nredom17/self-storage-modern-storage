@@ -259,7 +259,9 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
     backToMenu()
   }
   function contactAnswer(loc: ChatLocation) {
-    bot(`${loc.name}\nPhone: ${loc.phone}\nAddress: ${loc.address}`, [
+    // Phone policy: show the centralized number for every location (one number,
+    // one funnel) — never the per-location GBP number in visible content.
+    bot(`${loc.name}\nPhone: ${CHATBOT_TEXT.newCustomersPhone}\nAddress: ${loc.address}`, [
       { label: 'View location page', href: loc.url },
     ])
     backToMenu()

@@ -15,7 +15,7 @@ const FOOTER_LOCATION_SPEC: Array<{ slug: string; label: string }> = [
   { slug: 'north-little-rock', label: 'North Little Rock' },
   { slug: 'riverdale', label: 'Riverdale' },
   { slug: 'bentonville', label: 'Bentonville' },
-  { slug: 'maumelle', label: 'Maumelle' },
+  { slug: 'maumelle', label: 'Maumelle Blvd' },
   { slug: 'springdale', label: 'Springdale' },
   { slug: 'hot-springs', label: 'Hot Springs' },
   { slug: 'bryant', label: 'Bryant' },

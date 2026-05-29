@@ -54,7 +54,7 @@ export const LOCATION_NAV_GROUPS = [
     id: 'central-arkansas',
     label: 'Central Arkansas',
     cities: [
-      { slug: 'maumelle', label: 'Maumelle, AR' },
+      { slug: 'maumelle', label: 'Maumelle Blvd, AR' },
       { slug: 'west-little-rock', label: 'West Little Rock, AR' },
       // Shackleford location renders as "Little Rock, AR" in the dropdown
       // (the facility is in Little Rock; "Shackleford" is the street).
