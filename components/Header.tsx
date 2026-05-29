@@ -201,8 +201,9 @@ export default function Header({
           {/* ── Rest of nav tree ── */}
           {NAV_TREE.map((item) => {
             if (item.type === 'link') {
-              const linkClass =
-                'text-xs lg:text-sm font-semibold text-gray-300 hover:text-white px-2 lg:px-3 py-2 rounded-md hover:bg-white/10 transition-colors whitespace-nowrap'
+              const linkClass = item.cta
+                ? 'text-xs lg:text-sm font-black uppercase tracking-wide text-charcoal bg-white hover:bg-gray-100 px-3 lg:px-4 py-2 rounded-md transition-colors whitespace-nowrap'
+                : 'text-xs lg:text-sm font-semibold text-gray-300 hover:text-white px-2 lg:px-3 py-2 rounded-md hover:bg-white/10 transition-colors whitespace-nowrap'
               return item.external ? (
                 <a
                   key={item.label}
@@ -372,8 +373,9 @@ export default function Header({
           {/* Rest of the mobile nav */}
           {NAV_TREE.map((item) => {
             if (item.type === 'link') {
-              const mLinkClass =
-                'text-sm font-semibold text-gray-200 hover:text-white px-3 py-3 rounded-md hover:bg-white/10 transition-colors'
+              const mLinkClass = item.cta
+                ? 'text-sm font-black uppercase tracking-wide text-charcoal bg-white hover:bg-gray-100 px-3 py-3 rounded-md transition-colors text-center'
+                : 'text-sm font-semibold text-gray-200 hover:text-white px-3 py-3 rounded-md hover:bg-white/10 transition-colors'
               return item.external ? (
                 <a
                   key={item.label}

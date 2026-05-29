@@ -35,7 +35,7 @@ export const NAV_LINKS = [
 // Header nav tree. Mix of `link` (single anchor) and `dropdown` (menu).
 // Order is left-to-right on desktop, top-to-bottom on mobile.
 export type NavTreeItem =
-  | { type: 'link'; label: string; href: string; external?: boolean }
+  | { type: 'link'; label: string; href: string; external?: boolean; cta?: boolean }
   | {
       type: 'dropdown'
       label: string
@@ -121,7 +121,7 @@ export const NAV_TREE: readonly NavTreeItem[] = [
   { type: 'link', label: 'FAQ', href: '/faq' },
   { type: 'link', label: 'Contact Us', href: '/contact' },
   { type: 'link', label: 'Management', href: 'https://management.modernstorage.com/', external: true },
-  { type: 'link', label: 'Pay Bill', href: 'https://www.modernstorage.com/payonline', external: true },
+  { type: 'link', label: 'Pay Bill', href: 'https://www.modernstorage.com/payonline', external: true, cta: true },
 ] as const
 
 export const THEME_PAGES = [

@@ -1,6 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Bebas_Neue } from 'next/font/google'
+import { Bebas_Neue, Poppins } from 'next/font/google'
 import Script from 'next/script'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -21,6 +21,15 @@ const bebasNeue = Bebas_Neue({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-bebas',
+  display: 'swap',
+})
+
+// Poppins is the site's default body + UI font (nav, headings, paragraphs).
+// The Bebas Neue display font above stays reserved for the brand logo.
+const poppins = Poppins({
+  weight: ['400', '500', '600', '700', '800', '900'],
+  subsets: ['latin'],
+  variable: '--font-poppins',
   display: 'swap',
 })
 
@@ -132,7 +141,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const organizationSchema = buildOrganizationSchema(settings.phoneDisplay)
   const websiteSchema = buildWebsiteSchema()
   return (
-    <html lang="en" className={bebasNeue.variable}>
+    <html lang="en" className={`${bebasNeue.variable} ${poppins.variable}`}>
       <head>
         {/* Sitewide WebSite schema — drives the SERP site-name brand
             line and ensures it carries the ® mark. */}
@@ -160,7 +169,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         )}
       </head>
-      <body className="bg-gray-50 text-charcoal min-h-screen flex flex-col">
+      <body className="font-sans bg-gray-50 text-charcoal min-h-screen flex flex-col">
         {/* GTM noscript iframe — fires for users with JS disabled */}
         {GTM_ID && (
           <noscript>
