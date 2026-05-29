@@ -89,6 +89,9 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
   const [input, setInput] = useState('')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  // After an answer the main menu collapses to a small chip so it doesn't bury
+  // the conversation; the visitor expands it on demand.
+  const [menuCollapsed, setMenuCollapsed] = useState(false)
   const scrollRef = useRef<HTMLDivElement | null>(null)
   const lastUserRef = useRef<HTMLDivElement | null>(null)
   // Mirror of the latest state so the pagehide/close handlers can read it.
@@ -175,6 +178,7 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
       { role: 'bot', text: CHATBOT_TEXT.askName },
     ])
     setOptions([])
+    setMenuCollapsed(false)
     setStep('name')
     setSelectedLoc(null)
     setView('chat')
@@ -188,8 +192,9 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
   }
 
   function backToMenu() {
-    bot('Is there anything else I can help with?')
+    bot('Is there anything else I can help with? Type your question, or open the menu.')
     setOptions(MENU_OPTIONS)
+    setMenuCollapsed(true)
     setStep('menu')
   }
 
@@ -200,6 +205,7 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
     setPurpose('explore')
     bot('Main menu — how can we help today?')
     setOptions(MENU_OPTIONS)
+    setMenuCollapsed(false)
     setStep('menu')
   }
 
@@ -301,6 +307,8 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
   function handle(value: string, label: string, isButton: boolean) {
     user(label)
     setInput('')
+    // Any navigation expands the menu again; an answer step re-collapses it after.
+    setMenuCollapsed(false)
 
     // "Main menu" escape works from any step.
     if (isButton && value === '__home__') return goHome()
@@ -368,6 +376,7 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
         }
         bot(CHATBOT_TEXT.fallback)
         setOptions(MENU_OPTIONS)
+        setMenuCollapsed(true)
         return
       }
       case 'location': {
@@ -578,20 +587,34 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
           </div>
         ))}
 
-        {options.length > 0 && (
-          <div className="flex flex-col gap-2 pt-1">
-            {options.map((o) => (
+        {options.length > 0 &&
+          (menuCollapsed ? (
+            <div className="pt-1">
               <button
-                key={o.value + o.label}
                 type="button"
-                onClick={() => handle(o.value, o.label, true)}
-                className="text-left text-sm font-semibold text-charcoal bg-white border border-gray-300 hover:border-modern-red hover:text-modern-red rounded-xl px-3.5 py-2 transition-colors"
+                onClick={() => setMenuCollapsed(false)}
+                className="inline-flex items-center gap-2 text-sm font-bold text-modern-red hover:text-modern-red-hover bg-white border border-gray-300 hover:border-modern-red rounded-xl px-3.5 py-2 transition-colors"
               >
-                {o.label}
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                Show menu options
               </button>
-            ))}
-          </div>
-        )}
+            </div>
+          ) : (
+            <div className="flex flex-col gap-2 pt-1">
+              {options.map((o) => (
+                <button
+                  key={o.value + o.label}
+                  type="button"
+                  onClick={() => handle(o.value, o.label, true)}
+                  className="text-left text-sm font-semibold text-charcoal bg-white border border-gray-300 hover:border-modern-red hover:text-modern-red rounded-xl px-3.5 py-2 transition-colors"
+                >
+                  {o.label}
+                </button>
+              ))}
+            </div>
+          ))}
       </div>
 
       {/* Persistent quick actions — shown under the conversation once we're
