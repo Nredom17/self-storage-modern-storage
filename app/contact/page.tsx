@@ -92,12 +92,12 @@ export default async function ContactPage() {
 
       {/* ── HERO CONTACT CARDS ──────────────────────────────── */}
       <section className="bg-white py-16 border-b border-gray-200">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {/* Phone — click-to-call. Phone number kept in aria-label for screen readers. */}
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* New Rentals — click-to-call the centralized line. */}
             <a
               href={settings.phoneHref}
-              aria-label={`Call for New Rentals at ${settings.phoneDisplay}`}
+              aria-label={`New Rentals — call ${settings.phoneDisplay}`}
               className="group bg-gray-50 hover:bg-modern-red rounded-2xl p-8 border border-gray-200 hover:border-modern-red transition-all text-center flex flex-col items-center justify-center min-h-[180px]"
             >
               <div className="w-14 h-14 rounded-full bg-white text-modern-red mb-4 flex items-center justify-center shadow-sm">
@@ -105,7 +105,25 @@ export default async function ContactPage() {
                   <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
                 </svg>
               </div>
-              <p className="text-xl font-black text-charcoal group-hover:text-white">Call Us</p>
+              <p className="text-xl font-black text-charcoal group-hover:text-white">New Rentals</p>
+              <p className="text-xs font-semibold text-gray-500 group-hover:text-white/80 mt-1">{settings.phoneDisplay}</p>
+            </a>
+
+            {/* Existing Customers — opens the modernstorage.com tenant / self-storage portal. */}
+            <a
+              href="https://www.modernstorage.com/self-storage"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Existing Customers — manage your account at modernstorage.com"
+              className="group bg-gray-50 hover:bg-modern-red rounded-2xl p-8 border border-gray-200 hover:border-modern-red transition-all text-center flex flex-col items-center justify-center min-h-[180px]"
+            >
+              <div className="w-14 h-14 rounded-full bg-white text-modern-red mb-4 flex items-center justify-center shadow-sm">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-3-6.65" />
+                </svg>
+              </div>
+              <p className="text-xl font-black text-charcoal group-hover:text-white">Existing Customers</p>
+              <p className="text-xs font-semibold text-gray-500 group-hover:text-white/80 mt-1">Manage your account →</p>
             </a>
 
             {/* Send a message — scrolls to the inquiry form below */}
