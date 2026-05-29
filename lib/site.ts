@@ -89,6 +89,7 @@ export const NAV_TREE: readonly NavTreeItem[] = [
       { label: 'Boat & RV Storage', href: '/rv-boat-vehicle' },
       { label: 'Business Storage', href: '/business-storage' },
       { label: 'Household Storage', href: '/household-storage' },
+      { label: 'Student Storage', href: '/student-storage' },
     ],
   },
   {
