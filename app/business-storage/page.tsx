@@ -277,44 +277,45 @@ export default async function BusinessStoragePage() {
         </div>
       </section>
 
-      {/* Quick-answer summary — decision-framed (climate-controlled vs
-          drive-up by use case) so AI Overviews and visitors get a
-          direct "which type for what" answer without scrolling. */}
+      {/* Quick-answer summary — decision engine. Short direct answer,
+          two "Choose X if" decision blocks, Arkansas context, and a
+          single soft internal link. Optimized for AI extraction and
+          for visitors making a real format decision. */}
       <section className="bg-modern-red/5 border-b border-gray-200 py-12">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Quick answer</p>
           <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-4">
-            What kind of business storage is best for inventory, equipment, or records?
+            What&apos;s the best storage type for business inventory or equipment?
           </h2>
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            It depends on <strong>what you&apos;re storing</strong> and <strong>how often you need to get to it</strong>. <strong>Climate-controlled</strong> units are the right pick for records, paper files, electronics, packaged e-commerce inventory, samples, and anything that mildews, warps, or yellows in Arkansas humidity — the units reduce exposure to summer heat and humidity swings that would otherwise damage stock or paperwork. <strong>Drive-up</strong> units fit contractor tools, equipment, building materials, durable inventory, and anything you load and unload frequently from a truck. <Link href="/locations/riverdale" className="text-modern-red font-semibold hover:underline">Modern Storage® Riverdale</Link> leads for high-touch business operations — ground-floor units, drive-up access sized for a 26‑ft truck, and package acceptance (subject to facility policy). Other key facilities serve the metro and NWA. All units are <strong>month-to-month</strong>, so storage scales up or down with seasonal cycles, project ramp-ups, or growth. Units are intended for storage, not as active workspaces.
+            It comes down to <strong>what you&apos;re storing</strong> and <strong>how often you need access</strong>. Climate-controlled is the safer choice for records, electronics, and packaged inventory; drive-up is the practical pick for tools, contractor gear, and operations that load and unload from a truck.
           </p>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Climate-controlled — best for</strong>
-              Records, paper files, electronics, packaged e-commerce inventory, samples
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Drive-up — best for</strong>
-              Contractor tools, equipment, building materials, frequent-access inventory
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Lead location for business ops</strong>
-              <Link href="/locations/riverdale" className="text-modern-red font-semibold hover:underline">Riverdale</Link> — ground-floor, 26-ft truck access, package acceptance
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Other key facilities</strong>
-              <Link href="/locations/shackleford" className="text-modern-red font-semibold hover:underline">Shackleford</Link>, <Link href="/locations/west-little-rock" className="text-modern-red font-semibold hover:underline">West Little Rock</Link>, <Link href="/locations/bentonville" className="text-modern-red font-semibold hover:underline">Bentonville</Link>, <Link href="/locations/springdale" className="text-modern-red font-semibold hover:underline">Springdale</Link>
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Term</strong>
-              Month-to-month — scale with cycles or growth, no long-term lease
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Important</strong>
-              Units are for storage, not workspaces or operating business locations
-            </li>
-          </ul>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+            <div className="bg-white rounded-xl p-5 border border-gray-200">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Choose climate-controlled if:</p>
+              <ul className="text-sm text-gray-700 space-y-1.5 list-disc list-outside ml-4">
+                <li>You&apos;re storing records, paper files, or electronics</li>
+                <li>You&apos;re holding packaged e-commerce inventory or samples</li>
+                <li>Items would be impacted by Arkansas heat and humidity</li>
+              </ul>
+            </div>
+            <div className="bg-white rounded-xl p-5 border border-gray-200">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Choose drive-up if:</p>
+              <ul className="text-sm text-gray-700 space-y-1.5 list-disc list-outside ml-4">
+                <li>You&apos;re storing contractor tools, equipment, or building materials</li>
+                <li>Frequent truck access matters more than environmental protection</li>
+                <li>Items are durable and handle weather swings</li>
+              </ul>
+            </div>
+          </div>
+
+          <p className="text-gray-700 leading-relaxed mb-4">
+            <strong>In Arkansas:</strong> summer heat and humidity routinely damage cardboard, paperwork, labels, and electronics in unconditioned storage — which is why most businesses with active inventory default to climate-controlled, while drive-up serves trades and contractor operations on the I-30 / I-40 / I-49 corridors. All units are month-to-month, so storage scales up or down with seasonal cycles, project ramp-ups, or growth. Units are intended for storage, not as active workspaces.
+          </p>
+          <p>
+            <Link href="/locations/riverdale" className="text-modern-red font-bold hover:underline">→ See business storage at Modern Storage® Riverdale (ground-floor, 26‑ft truck access, package acceptance)</Link>
+          </p>
         </div>
       </section>
 

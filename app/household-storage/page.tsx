@@ -281,45 +281,45 @@ export default async function HouseholdStoragePage() {
         </div>
       </section>
 
-      {/* Quick-answer summary — decision-framed (climate-controlled vs
-          drive-up + size by contents) so AI Overviews and visitors
-          get a direct "which type and size should I pick" answer
-          without scrolling. */}
+      {/* Quick-answer summary — decision engine. Short direct answer,
+          two "Choose X if" decision blocks, Arkansas context, and a
+          single soft internal link. Optimized for AI extraction and
+          for visitors making a real format decision. */}
       <section className="bg-modern-red/5 border-b border-gray-200 py-12">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Quick answer</p>
           <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-4">
-            What type of household storage unit should I choose for moving, downsizing, or extra space?
+            What kind of storage unit should I choose for moving or extra space?
           </h2>
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            Match the unit to <strong>what you&apos;re storing, how long, and how often you need to get to it</strong>. <strong><Link href="/climate-controlled" className="text-modern-red font-semibold hover:underline">Climate-controlled</Link></strong> is the right pick for furniture, mattresses, electronics, photos, documents, books, leather, and instruments — anything that warps, mildews, or fades in Arkansas humidity and heat over time. <strong>Drive-up</strong> units are fine for short-term moves, tools, seasonal items, holiday décor, and durable household goods you&apos;ll access often. <strong>Size by contents:</strong> a 5x5 holds a closet or seasonal items, a 5x10 fits a studio bedroom, a 10x10 holds a one-bedroom apartment, and a 10x20 handles a full home. All rentals are <strong>month-to-month</strong>, and participating locations include a <Link href="/free-moving-truck" className="text-modern-red font-semibold hover:underline">free moving truck</Link> for move-in day.
+            Match the unit to <strong>what you&apos;re storing</strong> and <strong>how long</strong>. Climate-controlled is the safer choice for furniture, electronics, and anything you want to keep in livable condition; drive-up works for short moves, tools, and durable items you&apos;ll access often.
           </p>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Climate-controlled — best for</strong>
-              Furniture, mattresses, electronics, photos, books, leather, instruments, long-term storage
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Drive-up — best for</strong>
-              Short-term moves, tools, seasonal items, durable items, frequent access
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Decision drivers</strong>
-              Contents + duration + access frequency
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Common sizes</strong>
-              5x5 closet · 5x10 studio · 10x10 1-bedroom · 10x20 full home · 10x30 large home
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Term</strong>
-              Month-to-month, no long-term lease
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Move-in benefit</strong>
-              <Link href="/free-moving-truck" className="text-modern-red font-semibold hover:underline">Free moving truck</Link> at participating locations · <Link href="/size-guide" className="text-modern-red font-semibold hover:underline">Size Guide</Link> for help picking
-            </li>
-          </ul>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+            <div className="bg-white rounded-xl p-5 border border-gray-200">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Choose climate-controlled if:</p>
+              <ul className="text-sm text-gray-700 space-y-1.5 list-disc list-outside ml-4">
+                <li>You&apos;re storing furniture, mattresses, electronics, or photos</li>
+                <li>Storage is longer than ~2–3 months</li>
+                <li>You&apos;re protecting items that warp, mildew, or fade in heat and humidity</li>
+              </ul>
+            </div>
+            <div className="bg-white rounded-xl p-5 border border-gray-200">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Choose drive-up if:</p>
+              <ul className="text-sm text-gray-700 space-y-1.5 list-disc list-outside ml-4">
+                <li>You&apos;re storing during a short-term move</li>
+                <li>You&apos;re storing tools, seasonal items, or durable goods</li>
+                <li>Easy truck access matters more than environmental protection</li>
+              </ul>
+            </div>
+          </div>
+
+          <p className="text-gray-700 leading-relaxed mb-4">
+            <strong>In Arkansas:</strong> summers regularly run 95–100°F+ with humidity in the 70–90% range, which over a few months damages wood furniture, mattresses, photos, and electronics stored in garages or outdoor units. Climate-controlled units reduce that exposure and keep household items in livable condition. Common renovation or downsizing scenarios — between leases, summer overflow, life transitions — usually call for climate-controlled if anything in the load is finish-, fabric-, or moisture-sensitive.
+          </p>
+          <p>
+            <Link href="/size-guide" className="text-modern-red font-bold hover:underline">→ See the unit size guide to match a size to what you&apos;re storing</Link>
+          </p>
         </div>
       </section>
 

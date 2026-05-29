@@ -304,11 +304,10 @@ export default async function BoatRvStoragePage() {
         </div>
       </section>
 
-      {/* Quick-answer summary — decision-framed (outdoor vs covered vs
-          indoor) so AI Overviews and visitors get a direct "which type
-          should I pick" answer at the top. Specifics that vary by
-          facility (rig length, hookups, after-hours access) stay
-          qualitative. */}
+      {/* Quick-answer summary — decision engine. Short direct answer,
+          three "Choose X if" decision blocks, Arkansas context, and
+          one soft internal link. Optimized for AI extraction and
+          for visitors making a real format decision. */}
       <section className="bg-modern-red/5 border-b border-gray-200 py-12">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Quick answer</p>
@@ -316,34 +315,42 @@ export default async function BoatRvStoragePage() {
             What kind of RV, boat, or vehicle storage should I choose in Arkansas?
           </h2>
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            It comes down to <strong>how weather-exposed your rig is</strong> and <strong>how long you&apos;re storing it</strong>. <strong>Outdoor parking</strong> is the most affordable option and works well for in-season use — common at Modern Storage® <Link href="/locations/lowell" className="text-modern-red font-semibold hover:underline">Lowell</Link> (near <Link href="/storage-near-beaver-lake" className="text-modern-red font-semibold hover:underline">Beaver Lake</Link>), <Link href="/locations/maumelle" className="text-modern-red font-semibold hover:underline">Maumelle Blvd</Link> (Lake Maumelle / Lake Conway), <Link href="/locations/hot-springs" className="text-modern-red font-semibold hover:underline">Hot Springs</Link> (Lake Hamilton / Lake Ouachita), Bentonville, Springdale, Shackleford, West Little Rock, and Bryant. <strong>Covered parking</strong>, where available, adds protection against Arkansas sun fade, summer hail, and freeze cycles. <strong>Indoor or enclosed parking</strong>, offered at select facilities, gives the highest protection — best for long-term storage, classic cars, smaller boats, and anything you don&apos;t want hit by UV or weather. Pick based on use frequency, length of storage, and how weather-sensitive the rig is.
+            The right format depends on <strong>how long you&apos;re storing the rig</strong> and <strong>how exposed it is to weather</strong>. Outdoor is the budget pick for active boat or RV season; covered adds weather protection; enclosed or indoor is the safer choice for long-term or weather-sensitive rigs.
           </p>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Outdoor parking</strong>
-              Budget-friendly, fits longer rigs, best for in-season use and frequent trips out
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Covered parking</strong>
-              Shields against Arkansas sun fade, summer hail, and freeze cycles
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Indoor / enclosed</strong>
-              Highest protection — long-term storage, classic cars, smaller boats and PWCs
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Lake users</strong>
-              Beaver, Maumelle, Conway, Ouachita, Greers Ferry, Hamilton
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Term</strong>
-              Month-to-month, year-round, no long-term lease
-            </li>
-            <li className="bg-white rounded-xl p-4 border border-gray-200">
-              <strong className="block text-charcoal mb-1">Confirm by location</strong>
-              Longest rig that fits, power hookups, after-hours access — varies by facility
-            </li>
-          </ul>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+            <div className="bg-white rounded-xl p-5 border border-gray-200">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Choose outdoor parking if:</p>
+              <ul className="text-sm text-gray-700 space-y-1.5 list-disc list-outside ml-4">
+                <li>You&apos;re using the rig regularly (lake season, weekly trips)</li>
+                <li>Storage is short- to mid-term</li>
+                <li>Budget is the deciding factor</li>
+              </ul>
+            </div>
+            <div className="bg-white rounded-xl p-5 border border-gray-200">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Choose covered parking if:</p>
+              <ul className="text-sm text-gray-700 space-y-1.5 list-disc list-outside ml-4">
+                <li>You want protection from sun fade and summer hail</li>
+                <li>Storage spans a full season</li>
+                <li>The rig has upholstery, electronics, or finishes that degrade in UV</li>
+              </ul>
+            </div>
+            <div className="bg-white rounded-xl p-5 border border-gray-200">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Choose enclosed / indoor if:</p>
+              <ul className="text-sm text-gray-700 space-y-1.5 list-disc list-outside ml-4">
+                <li>You&apos;re storing long-term (off-season or longer)</li>
+                <li>The rig is a classic car, vintage boat, or PWC</li>
+                <li>You want to limit UV, freeze, and storm exposure</li>
+              </ul>
+            </div>
+          </div>
+
+          <p className="text-gray-700 leading-relaxed mb-4">
+            <strong>In Arkansas:</strong> summer heat and humidity, plus seasonal storms and freeze cycles, drive most off-season damage to upholstery, electronics, and finishes — which is why many lake-area customers pair outdoor parking through boating season with covered or indoor storage in the off-months.
+          </p>
+          <p>
+            <Link href="/storage-near-beaver-lake" className="text-modern-red font-bold hover:underline">→ See boat &amp; RV storage near Arkansas lakes</Link>
+          </p>
         </div>
       </section>
 

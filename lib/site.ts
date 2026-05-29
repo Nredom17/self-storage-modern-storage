@@ -402,7 +402,7 @@ export const WHY_US = [
   },
   {
     title: 'Climate-controlled options',
-    description: 'Temperature- and humidity-managed units that protect sensitive belongings year-round.',
+    description: 'Temperature-managed indoor units that reduce exposure to Arkansas heat and humidity swings — helping protect sensitive belongings year-round.',
   },
   {
     title: 'Free moving truck with new rentals',
