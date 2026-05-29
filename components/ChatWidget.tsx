@@ -84,6 +84,8 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
   const [input, setInput] = useState('')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  // True while the AI answer-router is being queried (shows a typing bubble).
+  const [thinking, setThinking] = useState(false)
   const scrollRef = useRef<HTMLDivElement | null>(null)
   // Mirror of the latest state so the pagehide/close handlers can read it.
   const stateRef = useRef({ name: '', email: '', messages: [] as Msg[] })
@@ -94,7 +96,7 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
     if (view === 'chat' && scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
     }
-  }, [messages, options, view])
+  }, [messages, options, view, thinking])
 
   useEffect(() => {
     stateRef.current = { name, email, messages }
@@ -218,6 +220,45 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
       return true
     }
     return false
+  }
+
+  // Last resort for a typed question that keywords didn't catch: ask the AI
+  // router to pick the best APPROVED answer. The answer text always comes from
+  // the approved list (server-side); the AI only chooses. Falls back to the
+  // standard fallback line if there's no good match or no AI key is configured.
+  async function aiAnswer(value: string) {
+    setOptions([])
+    setThinking(true)
+    try {
+      const res = await fetch('/api/chat-answer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: value }),
+      })
+      const data = await res.json()
+      setThinking(false)
+      if (data && data.matched) {
+        const la = (data.locationAnswers as Record<string, string> | null) || null
+        const links = (data.links as LinkBtn[] | null) || undefined
+        if (la && Object.keys(la).length > 0) {
+          setSelectedFaq({
+            question: String(data.question || ''),
+            keywords: [],
+            answer: String(data.answer || ''),
+            links,
+            locationAnswers: la,
+          })
+          return enterLocation('faq', 'Which Modern Storage® location are you asking about?')
+        }
+        bot(String(data.answer || CHATBOT_TEXT.fallback), links)
+        return backToMenu()
+      }
+    } catch {
+      setThinking(false)
+    }
+    bot(CHATBOT_TEXT.fallback)
+    setOptions(MENU_OPTIONS)
+    setStep('menu')
   }
 
   function reserveAnswer(loc: ChatLocation, fromAlias: boolean) {
@@ -347,8 +388,8 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
           setStep('location')
           return contactAnswer(m.loc)
         }
-        bot(CHATBOT_TEXT.fallback)
-        setOptions(MENU_OPTIONS)
+        // Keywords missed — let the AI router try to pick an approved answer.
+        void aiAnswer(value)
         return
       }
       case 'location': {
@@ -401,10 +442,14 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
             'contact',
             'Move-out details may vary by location and rental agreement. Please contact your Modern Storage® location directly so our team can help. Which location do you need?',
           )
-        // A freely-typed tenant question — try to answer it from the Q&A first.
-        if (!isButton && tryAnswerFreeText(value)) return
-        // 'other'
-        return enterLocation('contact', `${CHATBOT_TEXT.fallback} Which location do you need?`)
+        // "Other tenant support" button → straight to the contact fallback.
+        if (isButton) {
+          return enterLocation('contact', `${CHATBOT_TEXT.fallback} Which location do you need?`)
+        }
+        // A freely-typed tenant question — approved Q&A first, then AI router.
+        if (tryAnswerFreeText(value)) return
+        void aiAnswer(value)
+        return
       }
     }
   }
@@ -541,6 +586,18 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
             </div>
           </div>
         ))}
+
+        {thinking && (
+          <div className="flex justify-start">
+            <div className="bg-white text-charcoal rounded-2xl rounded-bl-sm px-3.5 py-3 border border-gray-200">
+              <span className="flex gap-1" aria-label="Typing">
+                <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:-0.3s]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:-0.15s]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce" />
+              </span>
+            </div>
+          </div>
+        )}
 
         {options.length > 0 && (
           <div className="flex flex-col gap-2 pt-1">
