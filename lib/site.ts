@@ -104,17 +104,18 @@ export const NAV_TREE: readonly NavTreeItem[] = [
     type: 'dropdown',
     label: 'Resources',
     items: [
+      // Reviews stays in the list but is hidden while the Reviews section is
+      // switched off (gated by REVIEWS_ENABLED), so it isn't visible today.
       { label: 'Reviews', href: '/reviews' },
-      { label: 'Storage Guides', href: '/guides' },
-      { label: 'Blog', href: 'https://www.modernstorage.com/blog', external: true },
       {
         label: 'Podcast',
         href: 'https://podcast.modernstorage.com',
         external: true,
       },
+      { label: 'Blogs', href: 'https://www.modernstorage.com/blog', external: true },
       { label: 'Video Library', href: 'https://www.youtube.com/@modernstorage', external: true },
       { label: 'Free Moving Checklist', href: '/move-in-checklist' },
-      { label: 'Storage Tips', href: 'https://www.modernstorage.com/blog', external: true },
+      { label: 'Storage Guides', href: '/guides' },
     ],
   },
   { type: 'link', label: 'FAQ', href: '/faq' },
