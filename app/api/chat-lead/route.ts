@@ -16,7 +16,7 @@ export const dynamic = 'force-dynamic'
 type Turn = { role?: unknown; text?: unknown }
 
 export async function POST(req: Request) {
-  let body: { name?: unknown; email?: unknown; transcript?: unknown } = {}
+  let body: { name?: unknown; email?: unknown; transcript?: unknown; message?: unknown } = {}
   try {
     body = await req.json()
   } catch {
@@ -25,6 +25,8 @@ export async function POST(req: Request) {
 
   const name = String(body.name ?? '').slice(0, 120).trim()
   const email = String(body.email ?? '').slice(0, 200).trim()
+  // A free-typed "Send us a message" from the chat widget.
+  const message = String(body.message ?? '').slice(0, 4000).trim()
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ ok: false, error: 'valid email required' }, { status: 400 })
@@ -42,8 +44,9 @@ export async function POST(req: Request) {
     .filter(Boolean)
   const hasTranscript = transcript.length > 0
 
+  const kind = message ? 'MESSAGE' : hasTranscript ? 'TRANSCRIPT' : 'LEAD'
   console.log(
-    `[CHAT ${hasTranscript ? 'TRANSCRIPT' : 'LEAD'}] name="${name}" email="${email}" turns=${transcript.length} at=${new Date().toISOString()}`,
+    `[CHAT ${kind}] name="${name}" email="${email}" turns=${transcript.length} at=${new Date().toISOString()}`,
   )
 
   const apiKey = process.env.RESEND_API_KEY
@@ -54,17 +57,20 @@ export async function POST(req: Request) {
       process.env.BUSINESS_INQUIRY_FROM ??
       'Modern Storage Chat <onboarding@resend.dev>'
 
-    const subject = hasTranscript
-      ? `Chat conversation — ${name || 'website visitor'}`
-      : `New chat lead — ${name || 'website visitor'}`
+    const subject = message
+      ? `Chat message — ${name || 'website visitor'}`
+      : hasTranscript
+        ? `Chat conversation — ${name || 'website visitor'}`
+        : `New chat lead — ${name || 'website visitor'}`
 
     const text = [
-      `New Modern Storage® chatbot ${hasTranscript ? 'conversation' : 'lead'}`,
+      `New Modern Storage® chatbot ${message ? 'message' : hasTranscript ? 'conversation' : 'lead'}`,
       '',
       `Name:  ${name || '(not given)'}`,
       `Email: ${email}`,
       `Time:  ${new Date().toISOString()}`,
       `Source: website chat widget`,
+      ...(message ? ['', 'Message:', message] : []),
       ...(hasTranscript ? ['', 'Conversation:', ...transcript] : []),
     ].join('\n')
 

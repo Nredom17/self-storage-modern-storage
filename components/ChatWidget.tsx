@@ -36,6 +36,7 @@ type Step =
   | 'decide-size'
   | 'decide-bedrooms'
   | 'tenant-menu'
+  | 'message'
 
 const MENU_OPTIONS: Option[] = [
   { label: 'I need help deciding', value: 'decide' },
@@ -77,6 +78,8 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 // never stuck inside a follow-up question (e.g. "which location?").
 const BACK_OPTION: Option = { label: '← Main menu', value: '__home__' }
 const withHome = (opts: Option[]): Option[] => [...opts, BACK_OPTION]
+// "Send us a message" — lets a visitor type a note that's emailed to the team.
+const MESSAGE_OPTION: Option = { label: '✉ Send us a message', value: '__message__' }
 
 export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
   const [view, setView] = useState<View>('prompt')
@@ -209,6 +212,13 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
     setStep('menu')
   }
 
+  function startMessage() {
+    bot('Sure — type your message below and our team will get back to you by email.')
+    setOptions([])
+    setMenuCollapsed(false)
+    setStep('message')
+  }
+
   function paymentAnswer() {
     bot('You can pay your bill and manage your Modern Storage® account online here:', [
       { label: 'Pay my bill online', href: CHATBOT_TEXT.payOnlineUrl },
@@ -312,6 +322,8 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
 
     // "Main menu" escape works from any step.
     if (isButton && value === '__home__') return goHome()
+    // "Send us a message" works from any step.
+    if (isButton && value === '__message__') return startMessage()
 
     switch (step) {
       case 'name': {
@@ -339,6 +351,20 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
         setOptions(MENU_OPTIONS)
         setStep('menu')
         return
+      }
+      case 'message': {
+        const msg = value.trim()
+        if (!msg) return
+        // Email the typed message to the team (best-effort; never blocks chat).
+        void fetch('/api/chat-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, message: msg }),
+        }).catch(() => {})
+        bot(
+          `Thanks${name ? ', ' + name : ''}! Your message has been sent to our team and we’ll follow up at ${email}.`,
+        )
+        return backToMenu()
       }
       case 'menu': {
         if (isButton) {
@@ -375,8 +401,10 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
           return contactAnswer(m.loc)
         }
         bot(CHATBOT_TEXT.fallback)
-        setOptions(MENU_OPTIONS)
-        setMenuCollapsed(true)
+        // Offer a direct "Send us a message" path (emailed to the team) plus
+        // the menu — shown expanded since this is a dead-end the bot can't answer.
+        setOptions([MESSAGE_OPTION, ...MENU_OPTIONS])
+        setMenuCollapsed(false)
         return
       }
       case 'location': {
@@ -448,7 +476,13 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
   }
 
   const placeholder =
-    step === 'name' ? 'Enter your name' : step === 'email' ? CHATBOT_TEXT.emailPlaceholder : 'Type or pick an option…'
+    step === 'name'
+      ? 'Enter your name'
+      : step === 'email'
+        ? CHATBOT_TEXT.emailPlaceholder
+        : step === 'message'
+          ? 'Type your message…'
+          : 'Type or pick an option…'
 
   // Index of the visitor's most recent message — used to keep their question
   // pinned near the top so the answer beneath it stays in view.
