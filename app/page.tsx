@@ -7,7 +7,7 @@ import {
   THEME_PAGES,
   UNIT_SIZES,
   WHY_US,
-  FAQS,
+  HOME_FAQS,
   REVIEWS,
 } from '@/lib/site'
 import { getLocations, getSiteSettings } from '@/lib/data'
@@ -136,7 +136,7 @@ function buildJsonLd(phoneDisplay: string) {
   const faqPage = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: FAQS.map((f) => ({
+    mainEntity: HOME_FAQS.map((f) => ({
       '@type': 'Question',
       name: f.q,
       acceptedAnswer: { '@type': 'Answer', text: f.a },
@@ -524,10 +524,18 @@ export default async function HomePage() {
               Self Storage Frequently Asked Questions
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed mt-4 max-w-2xl mx-auto">
-              Find answers to the most common self storage FAQs — unit sizes, climate-controlled storage, boat and RV storage, business storage, free moving truck, online reservations, and finding the nearest Modern Storage® location in Arkansas.
+              Quick answers to help you get started — unit sizes, climate-controlled storage, pricing, online reservations, the free moving truck, and finding the nearest Modern Storage® location in Arkansas.
             </p>
           </div>
-          <FaqAccordion items={FAQS} />
+          <FaqAccordion items={HOME_FAQS} />
+          <div className="mt-8 text-center">
+            <Link
+              href="/faq"
+              className="inline-flex items-center gap-2 text-modern-red hover:text-modern-red-hover font-bold transition-colors"
+            >
+              See all storage FAQs →
+            </Link>
+          </div>
         </div>
       </section>
 

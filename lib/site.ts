@@ -531,6 +531,21 @@ export const FAQS = [
   },
 ] as const
 
+// The homepage shows a short "getting started" subset of the FAQs; the full
+// set lives on /faq. Selecting from FAQS keeps a single source of truth and
+// avoids duplicating the entire FAQ block across both pages.
+const HOME_FAQ_QUESTIONS: readonly string[] = [
+  'What size storage unit do I need?',
+  'Do you offer climate-controlled storage?',
+  'How much does self-storage cost in Arkansas?',
+  'Can I reserve a storage unit online?',
+  'Do you offer a free moving truck?',
+  'How do I find the closest Modern Storage® location?',
+]
+export const HOME_FAQS = HOME_FAQ_QUESTIONS.map((q) => FAQS.find((f) => f.q === q)).filter(
+  (f): f is (typeof FAQS)[number] => Boolean(f),
+)
+
 export const REVIEWS = [
   {
     quote: `Just rented a unit at Modern Storage® Springdale and I'm seriously impressed. Hunter helped me get set up and showed me my temperature-controlled 10x20 unit, which was exactly what I needed. Easy process, clean facility, and great service overall.`,
