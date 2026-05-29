@@ -201,11 +201,24 @@ export default function Header({
           {/* ── Rest of nav tree ── */}
           {NAV_TREE.map((item) => {
             if (item.type === 'link') {
-              return (
+              const linkClass =
+                'text-xs lg:text-sm font-semibold text-gray-300 hover:text-white px-2 lg:px-3 py-2 rounded-md hover:bg-white/10 transition-colors whitespace-nowrap'
+              return item.external ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={linkClass}
+                  onClick={() => setOpenDropdown(null)}
+                >
+                  {item.label}
+                </a>
+              ) : (
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="text-xs lg:text-sm font-semibold text-gray-300 hover:text-white px-2 lg:px-3 py-2 rounded-md hover:bg-white/10 transition-colors whitespace-nowrap"
+                  className={linkClass}
                   onClick={() => setOpenDropdown(null)}
                 >
                   {item.label}
@@ -359,12 +372,25 @@ export default function Header({
           {/* Rest of the mobile nav */}
           {NAV_TREE.map((item) => {
             if (item.type === 'link') {
-              return (
+              const mLinkClass =
+                'text-sm font-semibold text-gray-200 hover:text-white px-3 py-3 rounded-md hover:bg-white/10 transition-colors'
+              return item.external ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeAll}
+                  className={mLinkClass}
+                >
+                  {item.label}
+                </a>
+              ) : (
                 <Link
                   key={item.label}
                   href={item.href}
                   onClick={closeAll}
-                  className="text-sm font-semibold text-gray-200 hover:text-white px-3 py-3 rounded-md hover:bg-white/10 transition-colors"
+                  className={mLinkClass}
                 >
                   {item.label}
                 </Link>

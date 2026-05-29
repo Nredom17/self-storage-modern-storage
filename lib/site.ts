@@ -120,6 +120,8 @@ export const NAV_TREE: readonly NavTreeItem[] = [
   },
   { type: 'link', label: 'FAQ', href: '/faq' },
   { type: 'link', label: 'Contact Us', href: '/contact' },
+  { type: 'link', label: 'Management', href: 'https://management.modernstorage.com/', external: true },
+  { type: 'link', label: 'Pay Bill', href: 'https://www.modernstorage.com/payonline', external: true },
 ] as const
 
 export const THEME_PAGES = [
