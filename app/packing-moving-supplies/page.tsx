@@ -10,10 +10,10 @@ const PAGE_PATH = '/packing-moving-supplies'
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Packing & Moving Supplies in Arkansas | Modern Storage®',
+    absolute: 'Packing & Moving Supplies | Modern Storage®',
   },
   description:
-    'Moving boxes, packing tape, bubble wrap, mattress and furniture covers, locks, and more — available for purchase at Modern Storage® locations across Arkansas. Selection varies by facility.',
+    'Boxes, tape, locks, bubble wrap, mattress covers, and other moving and packing supplies available for purchase on-site at Modern Storage® — to help with storage, moving, and organization. Selection varies by location.',
   alternates: { canonical: SITE_URL + PAGE_PATH },
   openGraph: {
     title: 'Packing & Moving Supplies | Modern Storage®',
@@ -67,7 +67,7 @@ const SUPPLIES = [
 const FAQS = [
   {
     q: 'Does Modern Storage® sell moving boxes and packing supplies?',
-    a: `Yes — Modern Storage® offers packing and moving supplies for purchase at participating Arkansas locations, including moving boxes, packing tape, bubble wrap, and more. Selection and availability vary by facility, so call 501-910-0096 or check with your local Modern Storage® location to confirm what's in stock before you visit.`,
+    a: `Yes — boxes, tape, locks, bubble wrap, mattress covers, and other moving and packing supplies are available for purchase on-site at participating Modern Storage® locations to help with storage, moving, and organization. Selection and availability vary by location, so call 501-910-0096 or check with your local Modern Storage® location to confirm what's in stock before you visit.`,
   },
   {
     q: 'What packing supplies do you carry?',
@@ -99,7 +99,7 @@ function buildJsonLd(phoneDisplay: string) {
     serviceType: 'Packing & Moving Supplies',
     name: 'Packing & Moving Supplies',
     description:
-      'Moving boxes, packing tape, bubble wrap, mattress and furniture covers, locks, and other packing supplies available for purchase at Modern Storage® locations across Arkansas. Selection varies by facility.',
+      'Boxes, tape, locks, bubble wrap, mattress covers, and other moving and packing supplies available for purchase on-site at Modern Storage® to help with storage, moving, and organization. Selection varies by location.',
     url: SITE_URL + PAGE_PATH,
     areaServed: { '@type': 'State', name: 'Arkansas' },
     provider: {
@@ -159,13 +159,13 @@ export default async function PackingSuppliesPage() {
               Moving Made Easier
             </span>
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
-              Packing &amp; Moving Supplies in <span className="text-modern-red">Arkansas</span>
+              Packing &amp; <span className="text-modern-red">Moving Supplies</span>
             </h1>
             <p className="text-gray-300 text-lg leading-relaxed mb-10">
-              Grab everything you need for move-in day in one stop. Modern Storage® locations
-              carry moving boxes, packing tape, bubble wrap, covers, locks, and more — so you can
-              pack, protect, and store without an extra trip to another store. Selection varies by
-              location.
+              Boxes, tape, locks, bubble wrap, mattress covers, and other moving and packing
+              supplies available for purchase on-site to help with storage, moving, and
+              organization. Grab everything you need in one stop at Modern Storage® — selection
+              varies by location.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link href="/#locations" className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-6 py-3 rounded-full transition-colors text-sm">
