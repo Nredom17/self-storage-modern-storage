@@ -159,6 +159,49 @@ const FAQS = [
     a: `Choose the location closest to your campus on the locations page and reserve online in a few minutes, or call 501-910-0096 and the team will help you pick the right unit size. Reserve early in spring — student storage fills up fast around May move-out.`,
     aHtml: `Choose the location closest to your campus on the <a href="/locations">locations page</a> and reserve online in a few minutes, or call <a href="tel:+15019100096">501-910-0096</a> and the team will help you pick the right unit size. Reserve early in spring — student storage fills up fast around May move-out.`,
   },
+  // ── Comparison-style entries (student alternatives) ──────────────────
+  // Skipped: "What Size Storage Unit Do College Students Need?" — covered
+  // by the existing "What size storage unit do students usually need?"
+  {
+    q: 'Student Storage vs Bringing Everything Home — which is better?',
+    a: `Bringing everything home each semester can be time-consuming and expensive. Student storage provides a convenient solution for keeping belongings near campus between terms.`,
+  },
+  {
+    q: 'Dorm Storage vs Storage Unit — which is better?',
+    a: `Dorm storage is often limited and unavailable during breaks. Storage units provide additional room for furniture, clothing, electronics, and personal belongings.`,
+  },
+  {
+    q: 'Shared Storage Unit vs Individual Storage Unit — which is better?',
+    a: `Shared storage units help reduce costs by splitting expenses among roommates. Individual units provide greater privacy and control over access.`,
+  },
+  {
+    q: 'College Storage vs Moving Everything Every Semester — which is better?',
+    a: `Moving belongings every semester requires transportation, packing, and time. College storage simplifies transitions by keeping items stored until they are needed again.`,
+  },
+  {
+    q: '5x5 vs 5x10 Storage Unit for College Students — which is better?',
+    a: `A 5x5 unit is ideal for boxes, clothing, and small dorm items. A 5x10 unit provides additional room for mattresses, desks, mini-fridges, and larger furniture. Students moving out of apartments often find a 5x10 more practical.`,
+  },
+  {
+    q: 'Shared Storage Unit vs Renting Multiple Units — which is better?',
+    a: `Sharing a larger storage unit with roommates can reduce costs while keeping everyone's belongings in one location. Multiple units may provide better privacy but usually cost more.`,
+  },
+  {
+    q: 'Storage Unit vs Leaving Items in a Dorm Room — which is better?',
+    a: `Many schools require students to completely vacate dorm rooms during summer break. A storage unit provides a secure place to keep belongings until the next semester begins.`,
+  },
+  {
+    q: "Storage Unit vs Moving Furniture Back to Parents' House — which is better?",
+    a: `Transporting furniture home every semester can require truck rentals, extra labor, and long-distance travel. A nearby storage unit may be more convenient and cost-effective.`,
+  },
+  {
+    q: 'Summer Storage vs Year-Round Storage — which should I choose?',
+    a: `Students who only need storage during breaks may prefer short-term rentals. Year-round storage can be beneficial for students who frequently move between apartments or dorms.`,
+  },
+  {
+    q: 'Best Storage Unit for College Students — how do I choose?',
+    a: `The best option depends on the amount of belongings being stored, the length of storage needed, and whether the student is sharing space with roommates. Most students find a 5x5 or 5x10 unit provides sufficient space for summer storage.`,
+  },
 ] as const
 
 function buildJsonLd() {

@@ -126,4 +126,89 @@ export const BUSINESS_FAQS = [
     q: 'How do I get a business storage quote?',
     a: `Fill out the business inquiry form on this page with your name, company, preferred location, use case, and a brief description of what you need to store. The Modern Storage® team will respond with available options based on your needs. You can also call 501-910-0096 directly to speak with the business storage team.`,
   },
+  // ── Comparison-style entries (business storage alternatives) ────────
+  // Frames Modern Storage® mini-warehouse units against warehouses, office
+  // space, retail backrooms, commercial leases, and other ways businesses
+  // create operational space. None duplicate the existing "Do you offer X?"
+  // or "Which Modern Storage® location?" entries above.
+  {
+    q: 'Warehouse vs Self Storage — which is right for my business?',
+    a: `Warehouses are designed for large-scale inventory and logistics operations. Self storage offers a more affordable solution for businesses that need extra space without committing to a commercial facility.`,
+  },
+  {
+    q: 'Office Storage vs Self Storage — which is better?',
+    a: `Office storage consumes valuable workspace that could be used for employees and productivity. Self storage helps businesses keep records, equipment, and inventory off-site while freeing up office space.`,
+  },
+  {
+    q: 'Retail Backroom vs Storage Unit — which is better?',
+    a: `Retail backrooms provide immediate access to inventory but are often limited in size. A storage unit offers overflow space for seasonal products, displays, and excess inventory.`,
+  },
+  {
+    q: 'Contractor Storage vs Warehouse — which is better?',
+    a: `Many contractors do not need an entire warehouse. A storage unit provides a cost-effective alternative for tools, equipment, materials, and supplies.`,
+  },
+  {
+    q: 'Business Storage vs Commercial Lease — which is better?',
+    a: `Commercial leases often involve long-term commitments and significantly higher costs. Business storage offers flexibility and lower overhead for companies needing additional space.`,
+  },
+  {
+    q: 'Inventory Storage vs Warehouse — which is better?',
+    a: `A warehouse may be excessive for smaller businesses. Storage units provide scalable inventory space without the expense of a dedicated commercial facility.`,
+  },
+  {
+    q: 'Storage Unit vs Shipping Container — which is better?',
+    a: `Shipping containers offer storage at a fixed location but may lack climate protection and accessibility. Storage units often provide greater convenience, security, and flexibility.`,
+  },
+  {
+    q: 'Storage Unit vs Commercial Building — which is better?',
+    a: `Purchasing or leasing a commercial building requires substantial capital. Storage units provide extra space without the financial burden of property ownership.`,
+  },
+  {
+    q: 'Self Storage vs Industrial Space — which is better?',
+    a: `Industrial space is designed for manufacturing and operations. Self storage is generally more affordable for businesses focused primarily on storage needs.`,
+  },
+  {
+    q: 'Small Business Storage vs Warehouse — which is better?',
+    a: `Most small businesses do not require warehouse-scale operations. Storage units provide practical space for inventory, records, and equipment without unnecessary costs.`,
+  },
+  {
+    q: 'E-Commerce Storage vs Warehouse — which is better?',
+    a: `Many e-commerce businesses start with storage units because they offer flexibility and lower monthly expenses. Warehouses become more attractive as order volume grows.`,
+  },
+  {
+    q: 'Contractor Storage vs Home Garage — which is better?',
+    a: `Storing contractor equipment at home can consume valuable space and create security concerns. Storage units provide dedicated room for tools, trailers, and materials.`,
+  },
+  {
+    q: 'Storage Unit vs Retail Lease for Inventory — which is better?',
+    a: `Retail leases are designed to generate sales, not simply store products. Storage units are often far more affordable when inventory storage is the primary goal.`,
+  },
+  {
+    q: 'Storage Unit vs Office Lease for Storage — which is better?',
+    a: `Using office space solely for storage may be an inefficient use of resources. Storage units help businesses maximize productive office square footage.`,
+  },
+  {
+    q: 'Storage Unit vs Expanding Your Business Location — which is better?',
+    a: `Expanding a location can be expensive and permanent. A storage unit provides immediate additional space without major capital investment.`,
+  },
+  {
+    q: 'Self Storage vs Off-Site Records Storage — which is better?',
+    a: `Records storage services specialize in document management. Self storage offers flexibility for businesses that need access to records along with other stored items.`,
+  },
+  {
+    q: 'Storage Unit vs Purchasing a Warehouse — which is better?',
+    a: `Buying a warehouse requires significant capital and ongoing maintenance. Storage units offer flexibility without long-term ownership commitments.`,
+  },
+  {
+    q: 'Storage Unit vs Keeping Inventory at Home — which is better?',
+    a: `Home inventory storage can quickly overwhelm living spaces. Storage units help separate business operations from personal life.`,
+  },
+  {
+    q: 'Business Storage vs Coworking Space Storage — which is better?',
+    a: `Coworking spaces are designed for work environments rather than inventory storage. Storage units provide significantly more room for equipment and products.`,
+  },
+  {
+    q: 'Storage Unit vs Using a Spare Office as Storage — which is better?',
+    a: `A spare office can often generate greater value when used for employees or operations. Storage units free up office space while keeping inventory and equipment accessible.`,
+  },
 ] as const

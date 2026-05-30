@@ -451,6 +451,69 @@ export const CLIMATE_FAQS = [
     q: 'What size climate-controlled storage unit do I need?',
     a: `The right climate-controlled storage unit size depends on what you're storing. A 5x5 climate-controlled unit (25 sq ft) holds boxes, documents, photos, and small valuables. A 5x10 fits a single room of furniture or college storage. A 10x10 fits a one-bedroom apartment, while 10x15, 10x20, and 10x30 sizes are sized for two-bedroom, three-bedroom, and whole-home moves respectively. Use the size guide on this page or try the AI Storage Size Finder for a personalized recommendation.`,
   },
+  // ── Comparison-style entries (climate vs other storage formats) ─────
+  // Skipped: "Heated Storage vs Climate-Controlled" — covered above by
+  // "What's the difference between climate-controlled and heated storage?"
+  // Skipped: "Antiques vs Standard Storage" — covered by the existing
+  // antiques entry. Skipped: "Is Climate-Controlled Storage Necessary in
+  // Arkansas?" — covered by the existing "Is it worth it in Arkansas?"
+  {
+    q: 'Climate-Controlled vs Standard Storage — what is the difference?',
+    a: `Climate-controlled storage maintains a more consistent environment than standard storage units. Standard units are excellent for many household items, but climate-controlled storage is often preferred for temperature-sensitive belongings.`,
+  },
+  {
+    q: 'Indoor Storage vs Outdoor Storage — what is the difference?',
+    a: `Indoor storage units are located within a building and provide additional protection from weather exposure. Outdoor storage offers convenient drive-up access and is often more affordable.`,
+  },
+  {
+    q: 'Climate-Controlled Storage vs Garage — which is better?',
+    a: `Garages often experience significant temperature swings throughout the year. Climate-controlled storage provides a more stable environment that may better protect furniture, electronics, and collectibles.`,
+  },
+  {
+    q: 'Climate-Controlled Storage vs Basement — which is better?',
+    a: `Basements can be susceptible to moisture, humidity, and occasional water intrusion. Climate-controlled storage offers a more predictable environment for long-term storage.`,
+  },
+  {
+    q: 'Climate-Controlled Storage vs Attic — which is better?',
+    a: `Attics frequently experience extreme temperatures. Climate-controlled storage helps reduce exposure to excessive heat that can affect furniture, photographs, electronics, and documents.`,
+  },
+  {
+    q: 'Climate-Controlled Storage for Electronics vs Standard Storage',
+    a: `Electronics can be sensitive to extreme temperatures and humidity. Climate-controlled storage provides a more consistent environment for computers, televisions, and other electronic devices.`,
+  },
+  {
+    q: 'Climate-Controlled Storage for Furniture vs Standard Storage',
+    a: `Wood furniture, leather furniture, and upholstered items often benefit from stable storage conditions. Climate-controlled storage may help reduce risks associated with prolonged temperature fluctuations.`,
+  },
+  {
+    q: 'Is Climate-Controlled Storage Worth the Extra Cost?',
+    a: `For valuable, sentimental, or temperature-sensitive belongings, many customers find the additional protection worthwhile. For durable items such as tools and outdoor equipment, standard storage may be sufficient.`,
+  },
+  // ── Arkansas-specific comparisons ──────────────────────────────────
+  {
+    q: 'Climate-Controlled Storage vs Garage in Arkansas',
+    a: `Arkansas summers regularly bring high heat and humidity. Climate-controlled storage provides a more stable alternative to a residential garage for sensitive belongings.`,
+  },
+  {
+    q: 'Climate-Controlled Storage vs Attic in Arkansas',
+    a: `Attics in Arkansas can become extremely hot during summer months. Climate-controlled storage offers a cooler and more consistent environment.`,
+  },
+  {
+    q: 'Climate-Controlled Storage vs Basement in Arkansas',
+    a: `Arkansas basements can experience humidity issues depending on construction and location. Climate-controlled storage provides additional environmental stability.`,
+  },
+  {
+    q: 'Climate-Controlled Storage vs Standard Storage in Arkansas',
+    a: `Many items store well in standard storage, but climate-controlled units may be preferred for electronics, furniture, documents, and collectibles due to Arkansas weather conditions.`,
+  },
+  {
+    q: 'Indoor Storage vs Outdoor Storage in Arkansas Summers',
+    a: `Indoor storage provides additional protection from summer heat and weather exposure, while outdoor storage offers convenient access and lower cost.`,
+  },
+  {
+    q: 'Best Storage Option for Arkansas Heat',
+    a: `For heat-sensitive items, climate-controlled indoor storage generally offers the highest level of protection during Arkansas summers.`,
+  },
 ] as const
 
 export const CLIMATE_REVIEWS = [

@@ -224,4 +224,104 @@ export const BOAT_RV_FAQS = [
     q: 'How do I reserve boat or RV storage?',
     a: `Choose your location from the options above, select the space that fits your rig, and reserve online in minutes. You can also call 501-910-0096 and the team will help you find the right space and confirm current availability. Month-to-month rentals mean no long-term commitment — store seasonally or year-round based on your schedule.`,
   },
+  // ── Comparison-style entries (boat, RV, vehicle alternatives) ───────
+  // Frames Modern Storage® parking and indoor RV bays against home
+  // storage, marinas, garages, and other ways owners protect rigs.
+  // None duplicate the existing entries above.
+  {
+    q: 'Covered RV Storage vs Outdoor RV Storage — which is better?',
+    a: `Covered RV storage protects against direct sunlight, rain, and weather exposure. Outdoor RV storage is generally more affordable but provides less protection.`,
+  },
+  {
+    q: 'Indoor RV Storage vs Outdoor RV Storage — which is better?',
+    a: `Indoor RV storage offers the highest level of protection from weather, UV exposure, and environmental conditions. Outdoor storage is often the most budget-friendly option.`,
+  },
+  {
+    q: 'Covered Boat Storage vs Outdoor Boat Storage — which is better?',
+    a: `Covered boat storage helps reduce weather exposure while remaining more affordable than indoor storage. Outdoor storage provides basic parking for boats between uses.`,
+  },
+  {
+    q: 'Indoor Boat Storage vs Outdoor Boat Storage — which is better?',
+    a: `Indoor boat storage offers maximum protection from weather, sunlight, and debris. Outdoor storage prioritizes affordability and convenience.`,
+  },
+  {
+    q: 'Garage vs Vehicle Storage Unit — which is better?',
+    a: `Garages provide convenient home access but are often limited in space. Vehicle storage units offer dedicated protection without occupying household parking areas.`,
+  },
+  {
+    q: 'Classic Car Storage vs Garage — which is better?',
+    a: `Classic vehicles often benefit from dedicated storage environments that provide additional protection from weather and long-term exposure.`,
+  },
+  {
+    q: 'Indoor Car Storage vs Outdoor Parking — which is better?',
+    a: `Indoor storage protects vehicles from sun, weather, debris, and environmental exposure. Outdoor parking provides convenience at a lower cost.`,
+  },
+  {
+    q: 'Covered Vehicle Storage vs Open Parking — which is better?',
+    a: `Covered storage offers protection from direct sunlight and precipitation while remaining more affordable than fully enclosed storage.`,
+  },
+  {
+    q: 'Motorcycle Storage vs Garage — which is better?',
+    a: `Motorcycles can share garage space, but storage units provide additional security and room for riding gear and accessories.`,
+  },
+  {
+    q: 'Boat Storage vs Marina Storage — which is better?',
+    a: `Boat storage is often more affordable during the off-season. Marina storage provides convenient water access but may come at a higher cost.`,
+  },
+  {
+    q: 'Boat Storage vs Marina Slip — which is better?',
+    a: `A marina slip offers immediate access to the water. Boat storage may reduce long-term wear and often lowers overall ownership costs.`,
+  },
+  {
+    q: 'RV Storage vs Keeping an RV at Home — which is better?',
+    a: `Many neighborhoods have parking restrictions for RVs. Dedicated RV storage helps preserve driveway space and may provide additional security.`,
+  },
+  {
+    q: 'RV Storage vs Driveway Parking — which is better?',
+    a: `Driveway parking offers convenience but exposes RVs to weather and may violate neighborhood regulations. Storage facilities provide a dedicated alternative.`,
+  },
+  {
+    q: 'Boat Storage vs Home Storage — which is better?',
+    a: `Keeping a boat at home is convenient when space allows. Storage facilities provide an alternative when driveway or yard space is limited.`,
+  },
+  {
+    q: 'Boat Storage vs Trailer Parking — which is better?',
+    a: `Trailer parking stores the trailer but may not provide dedicated protection for the boat itself. Boat storage often offers more comprehensive solutions.`,
+  },
+  {
+    q: 'Vehicle Storage vs Garage Cost — which is more affordable?',
+    a: `Building or expanding a garage can require a substantial investment. Vehicle storage often provides a more affordable alternative without construction costs.`,
+  },
+  {
+    q: 'Covered RV Storage vs Indoor RV Storage — which is better?',
+    a: `Covered storage protects against direct weather exposure, while indoor storage provides the highest level of protection and security.`,
+  },
+  {
+    q: 'Indoor Vehicle Storage vs Covered Vehicle Storage — which is better?',
+    a: `Indoor storage fully encloses the vehicle. Covered storage protects against many weather elements while maintaining lower costs.`,
+  },
+  {
+    q: 'Motorcycle Storage vs Outdoor Parking — which is better?',
+    a: `Motorcycle storage helps protect against weather, theft, and long-term exposure. Outdoor parking offers convenience but less protection.`,
+  },
+  {
+    q: 'Vehicle Storage vs Street Parking — which is better?',
+    a: `Street parking may expose vehicles to weather, traffic, and local restrictions. Vehicle storage offers a more controlled environment.`,
+  },
+  {
+    q: 'ATV Storage vs Garage — which is better?',
+    a: `ATVs can consume valuable garage space. Storage units provide dedicated room for vehicles, gear, and accessories.`,
+  },
+  {
+    q: 'Jet Ski Storage vs Keeping It at Home — which is better?',
+    a: `Storage facilities help free up driveway and yard space while providing a designated location for seasonal equipment.`,
+  },
+  {
+    q: 'Trailer Storage vs Home Parking — which is better?',
+    a: `Trailer storage can help homeowners reclaim driveway space while keeping trailers secure and accessible.`,
+  },
+  {
+    q: 'Vehicle Storage vs Building a New Garage — which is better?',
+    a: `Building a new garage requires permits, construction, and significant investment. Vehicle storage offers immediate space without a long-term commitment.`,
+  },
 ] as const

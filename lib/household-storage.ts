@@ -268,4 +268,65 @@ export const HOUSEHOLD_FAQS = [
     q: 'Do you have boat, RV, or business storage as well?',
     a: `Yes. Modern Storage® offers boat storage, RV storage, and vehicle parking at select locations near Beaver Lake, Lake Maumelle, Lake Ouachita, and Greers Ferry. Business storage and mini-warehouse units for contractors, inventory, equipment, and records are available across most locations. See the Boat & RV Storage page and Business Storage page for full details.`,
   },
+  // ── Comparison-style entries (household alternatives) ────────────────
+  // Comparison topics frame Modern Storage® alongside other ways
+  // homeowners and renters create extra space — garage, basement, attic,
+  // shed, spare bedroom, additions, etc. None duplicate the existing
+  // "Do you offer X?" / "What size?" entries above.
+  {
+    q: 'Garage vs Storage Unit — which is better for household storage?',
+    a: `A garage provides convenient access to stored items, but it often competes with vehicle parking and workspace needs. A storage unit helps free up garage space while providing dedicated room for furniture, seasonal items, and household belongings. If your garage is overflowing, a storage unit may be the better long-term solution.`,
+  },
+  {
+    q: 'Basement vs Storage Unit — which is better?',
+    a: `Basements can offer convenient storage, but they may be vulnerable to moisture, humidity, and occasional flooding. Storage units provide additional space outside the home and can help protect belongings while reducing household clutter.`,
+  },
+  {
+    q: 'Attic vs Storage Unit — which is better?',
+    a: `Attics are commonly used for storage but can experience extreme temperature fluctuations. Storage units offer easier access and often provide more usable space for large furniture, appliances, and household items.`,
+  },
+  {
+    q: 'Shed vs Storage Unit — which is better?',
+    a: `A backyard shed works well for lawn equipment and outdoor supplies. Storage units provide greater flexibility, larger storage options, and can accommodate furniture, boxes, business inventory, and household goods.`,
+  },
+  {
+    q: 'Spare Bedroom vs Storage Unit — which is better?',
+    a: `Using a spare bedroom for storage can reduce the functionality of your home. A storage unit allows you to reclaim living space while keeping important belongings accessible.`,
+  },
+  {
+    q: 'Closet vs Storage Unit — which is better?',
+    a: `Closets are ideal for everyday storage, but they fill up quickly. A storage unit provides substantially more space for seasonal decorations, keepsakes, furniture, and infrequently used items.`,
+  },
+  {
+    q: 'Storage Unit vs Home Addition — which is better?',
+    a: `A home addition creates permanent square footage but often requires a significant investment. A storage unit provides immediate extra space at a fraction of the cost and may eliminate the need for construction.`,
+  },
+  {
+    q: 'Storage Unit vs Outdoor Storage Shed — which is better?',
+    a: `An outdoor shed can be convenient but requires installation, maintenance, and available yard space. A storage unit offers flexible sizing and often eliminates maintenance responsibilities.`,
+  },
+  {
+    q: 'Storage Unit vs Portable Garage — which is better?',
+    a: `Portable garages provide temporary protection for vehicles and equipment. Storage units generally offer better security, weather protection, and flexibility for household storage.`,
+  },
+  {
+    q: 'Storage Unit vs Decluttering — which is better?',
+    a: `Decluttering involves reducing possessions, while storage provides a place for items you want to keep but do not need every day. Many homeowners use both strategies together.`,
+  },
+  {
+    q: 'Storage Unit vs Selling Furniture — which is better?',
+    a: `Selling furniture creates immediate space but may be difficult if you plan to use the items again. A storage unit allows you to keep valuable furniture until it is needed.`,
+  },
+  {
+    q: 'Storage Unit vs Donating Belongings — which is better?',
+    a: `Donating unwanted items is often a good solution for permanent downsizing. A storage unit is better suited for belongings with sentimental, financial, or future practical value.`,
+  },
+  {
+    q: 'Storage Unit vs Keeping Everything in Your Apartment — which is better?',
+    a: `Overcrowded apartments can feel smaller and less organized. A storage unit creates additional space while allowing you to keep belongings that may not fit comfortably at home.`,
+  },
+  {
+    q: 'Storage Unit vs Buying a Bigger House — which is better?',
+    a: `Buying a larger home is a major financial commitment. For many families, a storage unit provides the extra space they need without increasing their mortgage, taxes, and maintenance costs.`,
+  },
 ] as const
