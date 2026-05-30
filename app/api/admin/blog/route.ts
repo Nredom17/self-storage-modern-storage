@@ -21,6 +21,7 @@ import { getServiceSupabaseClient } from '@/lib/supabase'
 import {
   countWords,
   estimateReadingMinutes,
+  isStorageTipsPublic,
   slugify,
   type BlogPost,
   type BlogBlock,
@@ -146,7 +147,9 @@ export async function GET() {
     .select('*')
     .order('updated_at', { ascending: false })
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-  return NextResponse.json({ posts: data ?? [] })
+  // publicEnabled lets the admin UI render a clear "Live" vs "Private"
+  // banner so editors know whether published posts are reaching the public.
+  return NextResponse.json({ posts: data ?? [], publicEnabled: isStorageTipsPublic() })
 }
 
 export async function POST(req: Request) {

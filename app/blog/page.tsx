@@ -1,33 +1,40 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+import { notFound } from 'next/navigation'
 import { SITE_URL } from '@/lib/site'
-import { getPublishedPosts } from '@/lib/blog'
+import { getPublishedPosts, isStorageTipsPublic, STORAGE_TIPS_BRAND } from '@/lib/blog'
 
-// Blog index — lists every published post, newest first. Re-renders every
-// 60s so newly-published posts appear without a code redeploy.
+// Storage Tips index — lists every published post, newest first. Re-renders
+// every 60s so newly-published posts appear without a code redeploy.
+//
+// Gated by the STORAGE_TIPS_PUBLIC env var. When OFF (the default) any
+// request to /blog returns a 404 — but the admin at /admin/blog stays
+// available so the team can stage posts before launch.
 export const revalidate = 60
 
 const PAGE_PATH = '/blog'
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Modern Storage® Blog — Self-Storage Guides & Tips',
+    absolute: `Modern Storage® ${STORAGE_TIPS_BRAND} — Self-Storage Guides & Advice`,
   },
   description:
-    'In-depth guides, tips, and answers from the Modern Storage® team — storage unit sizes, pricing, climate-controlled storage, boat and RV storage, business storage, and Arkansas-specific advice.',
+    'In-depth storage tips, guides, and answers from the Modern Storage® team — storage unit sizes, pricing, climate-controlled storage, boat and RV storage, business storage, and Arkansas-specific advice.',
   alternates: { canonical: SITE_URL + PAGE_PATH },
   openGraph: {
-    title: 'Modern Storage® Blog',
+    title: `Modern Storage® ${STORAGE_TIPS_BRAND}`,
     description:
-      'Self-storage guides, tips, and answers from the Modern Storage® team across 10 Arkansas locations.',
+      'Self-storage tips, guides, and answers from the Modern Storage® team across 10 Arkansas locations.',
     url: SITE_URL + PAGE_PATH,
     siteName: 'Modern Storage®',
     type: 'website',
   },
 }
 
-export default async function BlogIndexPage() {
+export default async function StorageTipsIndexPage() {
+  // Public kill-switch — hide the entire section until the team is ready.
+  if (!isStorageTipsPublic()) notFound()
   const posts = await getPublishedPosts()
 
   return (
@@ -44,16 +51,16 @@ export default async function BlogIndexPage() {
                 </Link>
               </li>
               <li aria-hidden="true">/</li>
-              <li className="text-gray-300">Blog</li>
+              <li className="text-gray-300">{STORAGE_TIPS_BRAND}</li>
             </ol>
           </nav>
           <div className="max-w-3xl">
-            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-4">Modern Storage® Blog</p>
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-4">Modern Storage® {STORAGE_TIPS_BRAND}</p>
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
-              Self-Storage Guides &amp; <span className="text-modern-red">Tips</span>
+              Storage <span className="text-modern-red">Tips</span> &amp; Guides
             </h1>
             <p className="text-gray-300 text-lg leading-relaxed">
-              In-depth guides on storage unit sizes, pricing, climate-controlled storage, boat and RV storage, business storage, and Arkansas-specific advice from the Modern Storage® team.
+              Practical storage tips on unit sizes, pricing, climate-controlled storage, boat and RV storage, business storage, and Arkansas-specific advice from the Modern Storage® team.
             </p>
           </div>
         </div>

@@ -8,6 +8,10 @@ import { useRouter } from 'next/navigation'
 // gate (middleware.ts). Shows all posts (draft + published + archived),
 // most-recently-updated first, with quick links into the editor and a
 // "New Post" button that creates a blank draft and routes to its editor.
+//
+// Surfaces the STORAGE_TIPS_PUBLIC kill-switch state at the top so
+// editors can immediately tell whether their published posts are
+// reaching the public or staying private.
 
 type Row = {
   id: string
@@ -20,16 +24,20 @@ type Row = {
   published_at: string | null
 }
 
+type StatusPayload = { posts: Row[]; publicEnabled: boolean }
+
 export default function BlogAdminList() {
   const router = useRouter()
   const [rows, setRows] = useState<Row[] | null>(null)
+  const [publicEnabled, setPublicEnabled] = useState<boolean | null>(null)
   const [creating, setCreating] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   async function load() {
     const r = await fetch('/api/admin/blog', { cache: 'no-store' })
-    const data = await r.json()
+    const data = (await r.json()) as StatusPayload
     setRows(data.posts ?? [])
+    setPublicEnabled(Boolean(data.publicEnabled))
   }
   useEffect(() => {
     void load()
@@ -78,9 +86,9 @@ export default function BlogAdminList() {
       <div className="max-w-6xl mx-auto">
         <header className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-black text-charcoal tracking-tight">Blog editor</h1>
+            <h1 className="text-3xl font-black text-charcoal tracking-tight">Storage Tips editor</h1>
             <p className="text-sm text-gray-500 mt-1">
-              Modern Storage® blog posts — write, save drafts, publish.
+              Modern Storage® Storage Tips — write, save drafts, publish.
             </p>
           </div>
           <div className="flex gap-3">
@@ -100,6 +108,46 @@ export default function BlogAdminList() {
             </button>
           </div>
         </header>
+
+        {/* Public / private kill-switch status. Editors can publish posts
+            either way, but when the section is OFF nothing reaches the
+            customer-facing site at /blog — that returns a 404 and the
+            sitemap omits all blog URLs. Editors switch the public state
+            by setting STORAGE_TIPS_PUBLIC in Vercel env vars and
+            redeploying. */}
+        {publicEnabled !== null && (
+          <div
+            className={
+              'mb-6 p-4 rounded-xl border flex items-start gap-3 ' +
+              (publicEnabled
+                ? 'bg-emerald-50 border-emerald-200 text-emerald-900'
+                : 'bg-amber-50 border-amber-200 text-amber-900')
+            }
+          >
+            <span
+              className={
+                'text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full mt-0.5 ' +
+                (publicEnabled ? 'bg-emerald-200 text-emerald-900' : 'bg-amber-200 text-amber-900')
+              }
+            >
+              {publicEnabled ? 'Live' : 'Private'}
+            </span>
+            <div className="text-sm leading-relaxed">
+              {publicEnabled ? (
+                <>
+                  <strong>Storage Tips is live.</strong> Published posts are visible to the public at{' '}
+                  <code className="bg-emerald-100 px-1.5 py-0.5 rounded text-xs">/blog</code> and appear in the sitemap.
+                </>
+              ) : (
+                <>
+                  <strong>Storage Tips is private.</strong> Nothing is visible to the public — the customer-facing{' '}
+                  <code className="bg-amber-100 px-1.5 py-0.5 rounded text-xs">/blog</code> page returns a 404 and blog URLs are omitted from the sitemap. You can still write and stage published posts here. <br />
+                  To go live: set <code className="bg-amber-100 px-1.5 py-0.5 rounded text-xs">STORAGE_TIPS_PUBLIC=true</code> in Vercel env vars and redeploy.
+                </>
+              )}
+            </div>
+          </div>
+        )}
 
         {error && (
           <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-800 text-sm">

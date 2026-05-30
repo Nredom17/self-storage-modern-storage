@@ -4,10 +4,10 @@ import BlogAdminEditor from '@/components/BlogAdminEditor'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Edit Blog Post',
+  title: 'Edit Storage Tip',
   robots: { index: false, follow: false },
 }
 
-export default function BlogAdminEditPage({ params }: { params: { id: string } }) {
+export default function StorageTipsAdminEditPage({ params }: { params: { id: string } }) {
   return <BlogAdminEditor id={params.id} />
 }

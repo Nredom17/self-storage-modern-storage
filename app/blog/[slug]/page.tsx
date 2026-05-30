@@ -3,14 +3,17 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { SITE_URL } from '@/lib/site'
-import { getPostBySlug, getPublishedSlugs } from '@/lib/blog'
+import { getPostBySlug, getPublishedSlugs, isStorageTipsPublic, STORAGE_TIPS_BRAND } from '@/lib/blog'
 import BlogBlocks from '@/components/BlogBlocks'
 
 // Re-render every 60s — picks up new/edited posts in Supabase without redeploy.
 export const revalidate = 60
 
 // Static-generate every published post at build time + revalidate as above.
+// When the public kill-switch is off, generateStaticParams returns nothing so
+// the build doesn't pre-render any post pages.
 export async function generateStaticParams() {
+  if (!isStorageTipsPublic()) return []
   const slugs = await getPublishedSlugs()
   return slugs.map((slug) => ({ slug }))
 }
@@ -49,7 +52,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function BlogPostPage({ params }: Props) {
+export default async function StorageTipPage({ params }: Props) {
+  // Public kill-switch — hide the section until the team is ready.
+  if (!isStorageTipsPublic()) notFound()
   const post = await getPostBySlug(params.slug)
   if (!post) notFound()
 
@@ -106,7 +111,7 @@ export default async function BlogPostPage({ params }: Props) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL + '/' },
-      { '@type': 'ListItem', position: 2, name: 'Blog', item: SITE_URL + '/blog' },
+      { '@type': 'ListItem', position: 2, name: STORAGE_TIPS_BRAND, item: SITE_URL + '/blog' },
       { '@type': 'ListItem', position: 3, name: post.h1, item: url },
     ],
   }
@@ -134,7 +139,7 @@ export default async function BlogPostPage({ params }: Props) {
             <ol className="flex items-center gap-2 flex-wrap">
               <li><Link href="/" className="hover:text-modern-red transition-colors">Self Storage</Link></li>
               <li aria-hidden="true">/</li>
-              <li><Link href="/blog" className="hover:text-modern-red transition-colors">Blog</Link></li>
+              <li><Link href="/blog" className="hover:text-modern-red transition-colors">{STORAGE_TIPS_BRAND}</Link></li>
               <li aria-hidden="true">/</li>
               <li className="text-gray-300 line-clamp-1">{post.h1}</li>
             </ol>

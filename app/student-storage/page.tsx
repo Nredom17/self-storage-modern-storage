@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { SITE_URL } from '@/lib/site'
 import { getSiteSettings } from '@/lib/data'
 import FaqAccordion from '@/components/FaqAccordion'
@@ -7,6 +8,12 @@ import FaqAccordion from '@/components/FaqAccordion'
 export const revalidate = 60
 
 const PAGE_PATH = '/student-storage'
+// Hero image — sunset aerial of an Arkansas university campus. Loaded
+// as a 2-col hero so the image fills the right half on lg+ and stacks
+// below the heading on mobile.
+const HERO_IMAGE = '/images/student-storage-arkansas-universities-campus.png'
+const HERO_ALT =
+  'Arkansas university campus at sunset — student storage near University of Arkansas, NWACC, UALR, UCA, and other Arkansas colleges'
 
 export const metadata: Metadata = {
   title: {
@@ -22,11 +29,13 @@ export const metadata: Metadata = {
     url: SITE_URL + PAGE_PATH,
     siteName: 'Modern Storage®',
     type: 'website',
+    images: [{ url: HERO_IMAGE, width: 1600, height: 1000, alt: HERO_ALT }],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'Student Storage Near Arkansas Universities | Modern Storage®',
     description: 'Dorm and apartment storage near Arkansas campuses, month-to-month.',
+    images: [HERO_IMAGE],
   },
 }
 
@@ -198,9 +207,29 @@ export default async function StudentStoragePage() {
         <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       ))}
 
-      <section className="bg-charcoal text-white">
+      <section className="bg-charcoal text-white relative overflow-hidden">
         <div className="h-1 w-full bg-modern-red" />
-        <div className="max-w-7xl mx-auto px-6 py-16 lg:py-24">
+        {/* Two-column hero: text on the left, full-bleed campus image on
+            the right. The image is absolutely positioned on lg+ so it
+            extends to the right edge of the viewport (echoing the design
+            in the latest screenshot) while the text content stays
+            constrained to the max-w-7xl container. On mobile the image
+            is hidden and the text takes the full width. */}
+        <div className="hidden lg:block absolute inset-y-0 right-0 w-1/2 z-0">
+          <Image
+            src={HERO_IMAGE}
+            alt={HERO_ALT}
+            fill
+            priority
+            sizes="50vw"
+            className="object-cover"
+          />
+          {/* Soft left-edge gradient so the image blends into the charcoal
+              text panel instead of presenting a hard vertical seam. */}
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-charcoal to-transparent" aria-hidden="true" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 py-16 lg:py-24 relative z-10">
           <nav aria-label="Breadcrumb" className="mb-8 text-xs font-semibold text-gray-500">
             <ol className="flex items-center gap-2 flex-wrap">
               <li><Link href="/" className="hover:text-modern-red transition-colors">Self Storage</Link></li>
@@ -209,7 +238,21 @@ export default async function StudentStoragePage() {
             </ol>
           </nav>
 
-          <div className="max-w-3xl">
+          {/* Mobile image — shown only below lg so the text doesn't sit on
+              top of the photo on small screens. Constrained to a 16:9
+              card under the headline. */}
+          <div className="lg:hidden mb-8 rounded-2xl overflow-hidden shadow-xl aspect-[16/9] bg-gray-800 relative">
+            <Image
+              src={HERO_IMAGE}
+              alt={HERO_ALT}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
+
+          <div className="max-w-xl lg:max-w-2xl">
             <span className="inline-flex items-center gap-2 bg-modern-red/20 border border-modern-red/40 text-modern-red text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-6">
               College & Student Storage
             </span>
@@ -233,9 +276,8 @@ export default async function StudentStoragePage() {
             </div>
             {/* Row 2 — audience-split pills with distinct colors.
                 New Rentals (red) dials the centralized line; Existing
-                Customers (white) opens the modernstorage.com tenant
-                portal. Phone number lives in aria-label only — the
-                pill itself dials when tapped. */}
+                Customers (white with red text — matches the recent
+                niche-page treatment) opens the tenant portal. */}
             <div className="flex flex-wrap gap-3">
               <a
                 href={PHONE_NUMBER_HREF}
@@ -252,7 +294,7 @@ export default async function StudentStoragePage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Existing Customers — manage your account at modernstorage.com"
-                className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-charcoal font-bold px-6 py-3 rounded-full transition-colors text-sm shadow-md"
+                className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-modern-red font-bold px-6 py-3 rounded-full transition-colors text-sm shadow-md"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-3-6.65" />

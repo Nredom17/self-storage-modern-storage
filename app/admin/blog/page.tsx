@@ -5,10 +5,10 @@ import BlogAdminList from '@/components/BlogAdminList'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Blog Editor',
+  title: 'Storage Tips Editor',
   robots: { index: false, follow: false },
 }
 
-export default function BlogAdminPage() {
+export default function StorageTipsAdminPage() {
   return <BlogAdminList />
 }

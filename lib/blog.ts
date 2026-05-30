@@ -1,4 +1,30 @@
-// Modern Storage® — blog data model + helpers.
+// Modern Storage® — "Storage Tips" (a.k.a. blog) data model + helpers.
+//
+// PUBLIC KILL-SWITCH
+// ────────────────────────────────────────────────────────────────────────
+// The customer-facing pages at /blog and /blog/[slug] are gated by the
+// STORAGE_TIPS_PUBLIC env var. Default is OFF so a brand-new deploy never
+// surfaces the section before the team is ready. To turn it on:
+//
+//   In Vercel → Project Settings → Environment Variables, add:
+//     STORAGE_TIPS_PUBLIC = true        (any of: true / 1 / on / yes)
+//
+//   Then redeploy or wait for the next ISR revalidation (60s).
+//
+// The admin pages at /admin/blog and /admin/blog/[id] are ALWAYS
+// accessible (behind the HTTP Basic Auth middleware). That's the whole
+// point: write and stage posts privately, then flip the env var when
+// ready to launch.
+export function isStorageTipsPublic(): boolean {
+  const v = (process.env.STORAGE_TIPS_PUBLIC ?? '').trim().toLowerCase()
+  return v === 'true' || v === '1' || v === 'on' || v === 'yes'
+}
+
+// Public-facing brand name for the section. The URL path stays /blog
+// because it's semantic for crawlers and SEO, but every visible label
+// reads "Storage Tips" so the customer sees the brand framing.
+export const STORAGE_TIPS_BRAND = 'Storage Tips'
+
 //
 // One row in the Supabase `blog_posts` table maps to one BlogPost in this
 // file. The `body` jsonb column holds an array of BlogBlock structures
