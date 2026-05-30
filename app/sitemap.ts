@@ -120,6 +120,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      // Storage Unit Sizes guide — highest-priority guide page.
+      // Mirrors the proven AI-citation pattern on the legacy domain's
+      // /blog/the-complete-guide-to-storage-unit-sizes (175 AI Overview
+      // / AI Mode citations). Priority bumped to 0.8 — same as the
+      // /size-guide service page it complements.
+      url: SITE_URL + '/guides/storage-unit-sizes',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
       url: SITE_URL + '/guides/apartment-storage',
       lastModified: now,
       changeFrequency: 'monthly' as const,

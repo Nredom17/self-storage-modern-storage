@@ -33,6 +33,18 @@ export const metadata: Metadata = {
 // list, the footer "Storage Guides" section lists it, and the sitemap
 // includes the URLs. New cluster hubs added here propagate automatically.
 const GUIDES = [
+  // Headline guide — listed first because it targets the highest-volume
+  // PAA + AI-Overview queries ("what size storage unit do I need", "how big
+  // is a 10x10 storage unit", etc.). Mirrors the proven AI-citation pattern
+  // on the legacy domain's /blog/the-complete-guide-to-storage-unit-sizes
+  // (cited 175 times in AI Overviews and AI Mode).
+  {
+    href: '/guides/storage-unit-sizes',
+    cluster: 'Sizing',
+    title: 'Storage Unit Sizes Guide',
+    description:
+      'Complete walkthrough of every Modern Storage® unit size — 5x5, 5x10, 10x10, 10x15, 10x20, and 10x30 — with what fits in each, climate-controlled vs drive-up pricing, and how to pick the right size for your situation.',
+  },
   {
     href: '/guides/apartment-storage',
     cluster: 'Residential',
