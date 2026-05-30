@@ -46,6 +46,16 @@ const GUIDES = [
       'Complete walkthrough of every Modern Storage® unit size — 5x5, 5x10, 10x10, 10x15, 10x20, and 10x30 — with what fits in each, climate-controlled vs drive-up pricing, and how to pick the right size for your situation.',
   },
   {
+    // Security guide — mirrors the legacy domain's #2 AI-cited blog
+    // (/blog/the-top-4-storage-unit-security-must-haves-1, 39 prompts).
+    // Six layered features explained with a 10-step pre-rent checklist.
+    href: '/guides/storage-security',
+    cluster: 'Security',
+    title: 'Storage Unit Security Guide',
+    description:
+      'What makes a storage facility actually secure — gated access, video surveillance, perimeter fencing, exterior lighting, disc locks, and on-site management — plus a 10-step pre-rent checklist for evaluating any facility.',
+  },
+  {
     href: '/guides/apartment-storage',
     cluster: 'Residential',
     title: 'Apartment Storage Guide',

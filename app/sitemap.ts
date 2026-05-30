@@ -131,6 +131,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      // Storage Security guide — mirrors the legacy domain's #2
+      // AI-cited blog (/blog/the-top-4-storage-unit-security-must-haves-1,
+      // 39 prompts). Priority 0.7.
+      url: SITE_URL + '/guides/storage-security',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
       url: SITE_URL + '/guides/apartment-storage',
       lastModified: now,
       changeFrequency: 'monthly' as const,
