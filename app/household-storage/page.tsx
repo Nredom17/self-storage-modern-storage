@@ -17,14 +17,19 @@ import { buildLocationSchemaList } from '@/lib/schema'
 export const revalidate = 60
 
 const PAGE_PATH = '/household-storage'
-// Hero swapped to the Riverdale household-storage interior shot —
-// stronger thematic match than the prior Springdale awards image,
-// which fits brand storytelling but doesn't read as "household
-// storage" specifically. Awards image still lives on the homepage hero
-// where the brand-level signal is the priority.
-const HERO_IMAGE = '/images/Modern-Storage-Riverdale-HouseHoldStorage.png'
+// Hero swapped a second time, per design feedback (2026-05-30): the
+// previous Riverdale handshake photo read as a customer-service /
+// leasing-office image, which fought the page headline about moving,
+// renovating, and extra space. The non-climate unit interior shows a
+// packed household-storage scene — boxes, furniture, real stuff — so
+// the image now ANSWERS the headline instead of competing with it.
+//
+// Source is 1254x1254 (square) — wired into aspect-[1/1] below so we
+// render at native pixel density with no crop and no upscaling beyond
+// the natural retina factor.
+const HERO_IMAGE = '/images/Nonclimate-Storage-unit-Modern-Storage.png'
 const HERO_ALT =
-  'Modern Storage® Riverdale household storage unit interior in Little Rock, Arkansas — sized for apartment and home moves'
+  'Modern Storage® non-climate drive-up unit packed with household furniture and boxes — Arkansas household storage for moves and renovation'
 const TRUCK_IMAGE = '/images/modern-storage-free-moving-truck.jpg'
 const TRUCK_ALT =
   'Modern Storage® free moving truck included with new household storage rentals at participating locations'
@@ -310,16 +315,17 @@ export default async function HouseholdStoragePage() {
               </ul>
             </div>
 
-            {/* Hero image card. Aspect ratio matches the source photo's
-                native 3/2 landscape so we render at native pixel density
-                instead of cropping a landscape image into a portrait
-                container (which was upscaling the displayed crop ~1.28×
-                on retina and softening the photo). Caption removed per
-                the latest design pass — the headline already carries the
-                message and a caption under a hero ends up reading as
-                noise. */}
+            {/* Hero image card. Container is aspect-[1/1] to match the
+                new source photo's native 1254x1254 dimensions — no
+                cropping, no aspect-ratio mismatch upscaling. The image
+                shows a packed non-climate unit (boxes + household
+                furniture) so it directly visually answers the headline
+                about moving, renovating, and extra space.
+
+                quality={90} (Next.js default is 75) keeps the WebP/AVIF
+                re-encoder from softening the photo. */}
             <figure>
-              <div className="rounded-2xl overflow-hidden shadow-2xl bg-gray-800 relative aspect-[3/2]">
+              <div className="rounded-2xl overflow-hidden shadow-2xl bg-gray-800 relative aspect-[1/1]">
                 <Image
                   src={HERO_IMAGE}
                   alt={HERO_ALT}
