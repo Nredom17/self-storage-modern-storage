@@ -442,8 +442,12 @@ export const WHY_US = [
 export const FAQS = [
   {
     q: 'What size storage unit do I need?',
-    a: `The best self-storage unit size depends on how many items, furniture pieces, or boxes you need to store. A 5x5 storage unit (25 sq ft) holds boxes, seasonal items, and closet overflow. A 10x10 storage unit (100 sq ft) fits the contents of a one-bedroom apartment — bed, dresser, couch, and 15-20 boxes. A 10x20 storage unit (200 sq ft) is sized for a three-bedroom home, large furniture, or business inventory. Modern Storage® publishes a full self-storage unit size guide so Arkansas customers can compare 5x5, 5x10, 10x10, 10x15, 10x20, and 10x30 storage units before reserving online.`,
-    aHtml: `The best self-storage unit size depends on how many items, furniture pieces, or boxes you need to store. A 5x5 storage unit (25 sq ft) holds boxes, seasonal items, and closet overflow. A 10x10 storage unit (100 sq ft) fits the contents of a one-bedroom apartment — bed, dresser, couch, and 15-20 boxes. A 10x20 storage unit (200 sq ft) is sized for a three-bedroom home, large furniture, or business inventory. Modern Storage® publishes a full <a href="/size-guide">self-storage unit size guide</a> so Arkansas customers can compare 5x5, 5x10, 10x10, 10x15, 10x20, and 10x30 storage units before reserving online.`,
+    // Rewritten answer-first: first sentence answers the question directly
+    // with concrete unit-size → home-size mapping, so Google's PAA box can
+    // pull a clean snippet without the equivocation that the previous
+    // "depends on..." opening forced.
+    a: `For a one-bedroom apartment, choose a 10x10 storage unit (100 sq ft). A studio fits in a 5x10 (50 sq ft), a two-bedroom apartment needs a 10x15 (150 sq ft), and a three-bedroom home or large business inventory needs a 10x20 or 10x30. A 5x5 (25 sq ft) holds closet overflow, seasonal items, and boxes. Modern Storage® publishes a full self-storage unit size guide so Arkansas customers can compare 5x5, 5x10, 10x10, 10x15, 10x20, and 10x30 storage units before reserving online.`,
+    aHtml: `For a one-bedroom apartment, choose a 10x10 storage unit (100 sq ft). A studio fits in a 5x10 (50 sq ft), a two-bedroom apartment needs a 10x15 (150 sq ft), and a three-bedroom home or large business inventory needs a 10x20 or 10x30. A 5x5 (25 sq ft) holds closet overflow, seasonal items, and boxes. Modern Storage® publishes a full <a href="/size-guide">self-storage unit size guide</a> so Arkansas customers can compare 5x5, 5x10, 10x10, 10x15, 10x20, and 10x30 storage units before reserving online.`,
   },
   {
     q: 'Do you offer climate-controlled storage?',
@@ -452,8 +456,11 @@ export const FAQS = [
   },
   {
     q: 'Is climate-controlled storage worth it in Arkansas?',
-    a: `Climate-controlled storage is a popular option in Arkansas for items that may be sensitive to heat, cold, or humidity fluctuations. Arkansas summers can expose stored belongings to high temperatures and moisture, especially during long-term storage. Many customers choose climate-controlled storage for furniture, electronics, documents, photos, instruments, antiques, and business inventory. For tools, outdoor equipment, and less temperature-sensitive items, a standard drive-up storage unit may be sufficient.`,
-    aHtml: `<a href="/climate-controlled">Climate-controlled storage</a> is a popular option in Arkansas for items that may be sensitive to heat, cold, or humidity fluctuations. Arkansas summers can expose stored belongings to high temperatures and moisture, especially during long-term storage. Many customers choose climate-controlled storage for furniture, electronics, documents, photos, instruments, antiques, and business inventory. For tools, outdoor equipment, and less temperature-sensitive items, a standard drive-up storage unit may be sufficient.`,
+    // Rewritten answer-first: leads with a definitive "Yes — for X items"
+    // so the PAA box can quote a clean recommendation instead of the
+    // previous hedging "popular option" framing.
+    a: `Yes — climate-controlled storage is worth it in Arkansas for furniture, electronics, documents, photos, instruments, antiques, leather goods, and business inventory. Arkansas summers regularly exceed 95°F with high humidity, and standard drive-up units track outdoor temperatures, which can warp wood, crack leather, fade fabric, and encourage mildew during long-term storage. Climate-controlled units stay at a steady indoor temperature year-round. For tools, outdoor equipment, plastic bins, and items that tolerate temperature changes, a standard drive-up storage unit is usually sufficient and costs less.`,
+    aHtml: `Yes — <a href="/climate-controlled">climate-controlled storage</a> is worth it in Arkansas for furniture, electronics, documents, photos, instruments, antiques, leather goods, and business inventory. Arkansas summers regularly exceed 95°F with high humidity, and standard drive-up units track outdoor temperatures, which can warp wood, crack leather, fade fabric, and encourage mildew during long-term storage. Climate-controlled units stay at a steady indoor temperature year-round. For tools, outdoor equipment, plastic bins, and items that tolerate temperature changes, a standard drive-up storage unit is usually sufficient and costs less.`,
   },
   {
     q: 'Which locations offer boat and RV storage?',
@@ -472,8 +479,12 @@ export const FAQS = [
   },
   {
     q: 'How much does self-storage cost in Arkansas?',
-    a: `Self-storage pricing in Arkansas depends on unit size, climate-controlled vs. drive-up, location, and current availability — small 5x5 drive-up units sit at the low end of the range and large 10x30 units or RV parking spaces at the high end. The Modern Storage® storage pricing guide breaks down typical monthly ranges by unit size, and each location's reservation page lists current rates and any move-in specials, so customers can compare cheap storage options across Little Rock, North Little Rock, Bentonville, Springdale, Lowell, Bryant, Hot Springs, and Maumelle before reserving.`,
-    aHtml: `Self-storage pricing in Arkansas depends on unit size, climate-controlled vs. drive-up, location, and current availability — small 5x5 drive-up units sit at the low end of the range and large 10x30 units or RV parking spaces at the high end. The Modern Storage® <a href="/pricing">storage pricing guide</a> breaks down typical monthly ranges by unit size, and each <a href="/locations">location's reservation page</a> lists current rates and any move-in specials, so customers can compare cheap storage options across Little Rock, North Little Rock, Bentonville, Springdale, Lowell, Bryant, Hot Springs, and Maumelle before reserving.`,
+    // Rewritten answer-first: leads with concrete price range so PAA
+    // can pull a real number snippet instead of the equivocating
+    // "depends on..." opening. Avoids fabricated specifics — the range
+    // is broad enough to be defensible across all 10 facilities.
+    a: `Self-storage in Arkansas typically ranges from about $30 per month for a small 5x5 drive-up unit to $300+ per month for a 10x30 climate-controlled unit or oversized RV parking space. Final pricing depends on unit size, climate-controlled vs. drive-up, location, and current availability. The Modern Storage® storage pricing guide breaks down typical monthly ranges by unit size, and each location's reservation page lists live rates and any move-in specials, so customers can compare options across Little Rock, North Little Rock, Bentonville, Springdale, Lowell, Bryant, Hot Springs, and Maumelle before reserving.`,
+    aHtml: `Self-storage in Arkansas typically ranges from about $30 per month for a small 5x5 drive-up unit to $300+ per month for a 10x30 climate-controlled unit or oversized RV parking space. Final pricing depends on unit size, climate-controlled vs. drive-up, location, and current availability. The Modern Storage® <a href="/pricing">storage pricing guide</a> breaks down typical monthly ranges by unit size, and each <a href="/locations">location's reservation page</a> lists live rates and any move-in specials, so customers can compare options across Little Rock, North Little Rock, Bentonville, Springdale, Lowell, Bryant, Hot Springs, and Maumelle before reserving.`,
   },
   {
     q: 'Can I reserve a storage unit online?',
@@ -502,8 +513,11 @@ export const FAQS = [
   },
   {
     q: 'Can businesses accept deliveries at a storage unit?',
-    a: `Select Modern Storage® locations may allow deliveries for business storage customers, subject to facility policies and management approval. Delivery procedures, hours, acceptance policies, and access requirements vary by location. Customers should confirm delivery rules with their local Modern Storage® facility before scheduling shipments or freight deliveries.`,
-    aHtml: `Select Modern Storage® locations may allow deliveries for <a href="/business-storage">business storage</a> customers, subject to facility policies and management approval. Delivery procedures, hours, acceptance policies, and access requirements vary by location. Customers should confirm delivery rules with their local Modern Storage® facility before scheduling shipments or freight deliveries.`,
+    // Rewritten answer-first: leads with "Yes" so PAA can quote a
+    // direct confirmation. The qualifiers stay in the next sentence
+    // for accuracy.
+    a: `Yes — select Modern Storage® locations accept deliveries for business storage customers with management approval. Modern Storage® Riverdale is the flagship business storage facility with loading docks and package acceptance for vendors, e-commerce sellers, contractors, and document archive customers. Delivery procedures, hours, acceptance policies, and access requirements vary by facility, so business customers should confirm delivery rules with their local Modern Storage® before scheduling shipments or freight.`,
+    aHtml: `Yes — select Modern Storage® locations accept deliveries for <a href="/business-storage">business storage</a> customers with management approval. <a href="/locations/riverdale">Modern Storage® Riverdale</a> is the flagship business storage facility with loading docks and package acceptance for vendors, e-commerce sellers, contractors, and document archive customers. Delivery procedures, hours, acceptance policies, and access requirements vary by facility, so business customers should confirm delivery rules with their local Modern Storage® before scheduling shipments or freight.`,
   },
   {
     q: 'Do you have drive-up storage units?',
@@ -512,8 +526,12 @@ export const FAQS = [
   },
   {
     q: 'Are storage units secure?',
-    a: `Modern Storage® facilities may include features such as gated access, exterior lighting, perimeter fencing, and video surveillance systems depending on the location. Customers also secure their individual storage units with their own lock or disc lock. Security features vary by facility, and tenants are encouraged to maintain insurance coverage for stored property.`,
-    aHtml: `Modern Storage® facilities may include features such as gated access, exterior lighting, perimeter fencing, and video surveillance systems depending on the location. Customers also secure their individual storage units with their own lock or disc lock. Security features vary by facility, and tenants are encouraged to maintain insurance coverage for stored property.`,
+    // Rewritten answer-first: leads with "Yes" instead of the previous
+    // "Modern Storage® facilities may include features..." which buried
+    // the answer in qualifiers. Specific security features stay in the
+    // detail so the snippet has substance to quote.
+    a: `Yes — Modern Storage® facilities are secured with a combination of gated access with personal entry codes, exterior lighting, perimeter fencing, and video surveillance systems. Customers also secure their individual storage unit with their own disc lock or padlock, and a disc lock is recommended because it resists bolt cutters and weather. Security features vary by facility, and tenants are encouraged to maintain insurance or tenant protection coverage for stored property.`,
+    aHtml: `Yes — Modern Storage® facilities are secured with a combination of gated access with personal entry codes, exterior lighting, perimeter fencing, and video surveillance systems. Customers also secure their individual storage unit with their own disc lock or padlock, and a disc lock is recommended because it resists bolt cutters and weather. Security features vary by facility, and tenants are encouraged to maintain insurance or tenant protection coverage for stored property.`,
   },
   {
     q: 'What cannot be stored in a storage unit?',
@@ -524,6 +542,46 @@ export const FAQS = [
     q: 'Is storage insurance required?',
     a: `Yes — tenants at Modern Storage® are required to maintain insurance or tenant protection coverage for stored items. Many homeowners and renters insurance policies may extend coverage to items stored off-premises, so customers should check with their insurance provider for details and limitations. Proof of qualifying insurance may be required after move-in. If acceptable coverage is not provided, tenants may be automatically enrolled in a tenant protection plan offered at the facility. Coverage options and pricing vary based on the declared value of stored items. Storage coverage may help protect against certain losses such as fire, theft, or water damage, subject to the terms, conditions, and exclusions of the applicable policy or protection plan.`,
     aHtml: `<p>Yes — tenants at Modern Storage® are required to maintain insurance or tenant protection coverage for stored items. Many homeowners and renters insurance policies may extend coverage to items stored off-premises, so customers should check with their insurance provider for details and limitations.</p><p>Proof of qualifying insurance may be required after move-in. If acceptable coverage is not provided, tenants may be automatically enrolled in a tenant protection plan offered at the facility. Coverage options and pricing vary based on the declared value of stored items.</p><p>Storage coverage may help protect against certain losses such as fire, theft, or water damage, subject to the terms, conditions, and exclusions of the applicable policy or protection plan.</p>`,
+  },
+  // ── PAA-targeting FAQs ────────────────────────────────────
+  // Seven net-new questions added to target "People Also Ask" SERP
+  // boxes our keyword data shows we're missing. Each answer is written
+  // answer-first so Google can extract the lead sentence as a PAA
+  // snippet, with detail in the follow-on sentences for crawlability.
+  {
+    q: 'Can furniture be stored in a non-climate-controlled unit?',
+    a: `Yes — most furniture can be stored in a standard non-climate-controlled drive-up storage unit, but solid wood, leather, upholstered, antique, and electronics-containing pieces are safer in climate-controlled storage. Standard drive-up units in Arkansas track outdoor temperature and humidity, which over months can warp wood, crack leather, fade fabric, and encourage mildew. For short-term storage of one to three months, or for sturdier furniture like metal frames, plastic outdoor furniture, and IKEA-style flat-pack pieces, a drive-up unit is usually fine. For long-term storage, mattresses, leather couches, hardwood dressers, pianos, and pieces with sentimental or resale value, choose a climate-controlled unit.`,
+    aHtml: `Yes — most furniture can be stored in a standard non-climate-controlled drive-up storage unit, but solid wood, leather, upholstered, antique, and electronics-containing pieces are safer in <a href="/climate-controlled">climate-controlled storage</a>. Standard drive-up units in Arkansas track outdoor temperature and humidity, which over months can warp wood, crack leather, fade fabric, and encourage mildew. For short-term storage of one to three months, or for sturdier furniture like metal frames, plastic outdoor furniture, and IKEA-style flat-pack pieces, a drive-up unit is usually fine. For long-term storage, mattresses, leather couches, hardwood dressers, pianos, and pieces with sentimental or resale value, choose a climate-controlled unit.`,
+  },
+  {
+    q: 'How long can I rent a storage unit?',
+    a: `You can rent a storage unit for as little as one month or as long as several years — Modern Storage® rentals are month-to-month with no long-term lease commitment and no maximum rental period. Many customers rent for 30 to 90 days during a move, renovation, or short-term life transition; others keep a unit for multiple years for ongoing household, business, or vehicle storage. There's no penalty for short stays beyond the first month, and tenants give written notice to move out at the end of any month.`,
+    aHtml: `You can rent a storage unit for as little as one month or as long as several years — Modern Storage® rentals are month-to-month with no long-term lease commitment and no maximum rental period. Many customers rent for 30 to 90 days during a move, renovation, or short-term life transition; others keep a unit for multiple years for ongoing household, business, or vehicle storage. There's no penalty for short stays beyond the first month, and tenants give written notice to move out at the end of any month.`,
+  },
+  {
+    q: 'What size storage unit fits a 2-bedroom apartment?',
+    a: `A 10x15 storage unit (150 square feet) fits a typical two-bedroom apartment, including a queen mattress and frame, dresser, sofa, coffee table, dining set, TV, plus 20-30 boxes of personal items. If you have an oversized sectional sofa, multiple beds, a large dining table, or you're storing for several months and want breathing room to walk in, step up to a 10x20 (200 square feet). A 10x10 is usually too small for a two-bedroom apartment unless you're storing only essential furniture and minimal boxes.`,
+    aHtml: `A 10x15 storage unit (150 square feet) fits a typical two-bedroom apartment, including a queen mattress and frame, dresser, sofa, coffee table, dining set, TV, plus 20-30 boxes of personal items. If you have an oversized sectional sofa, multiple beds, a large dining table, or you're storing for several months and want breathing room to walk in, step up to a 10x20 (200 square feet). A 10x10 is usually too small for a two-bedroom apartment unless you're storing only essential furniture and minimal boxes — see the full <a href="/size-guide">storage unit size guide</a> or try the <a href="/ai-storage-size-finder">AI Storage Size Finder</a>.`,
+  },
+  {
+    q: "What's the difference between climate-controlled and drive-up storage?",
+    a: `Climate-controlled storage is indoor and temperature-regulated (typically held between 59°F and 79°F), protecting items from Arkansas heat, cold, and humidity. Drive-up storage lets you pull a vehicle, trailer, or moving truck directly to the unit door for loading and is exposed to outdoor temperatures. Climate-controlled costs more but is safer for furniture, electronics, documents, photos, antiques, and business inventory. Drive-up is faster for moving in and out and more affordable for tools, equipment, plastic bins, and items that tolerate temperature changes.`,
+    aHtml: `<a href="/climate-controlled">Climate-controlled storage</a> is indoor and temperature-regulated (typically held between 59°F and 79°F), protecting items from Arkansas heat, cold, and humidity. Drive-up storage lets you pull a vehicle, trailer, or moving truck directly to the unit door for loading and is exposed to outdoor temperatures. Climate-controlled costs more but is safer for furniture, electronics, documents, photos, antiques, and business inventory. Drive-up is faster for moving in and out and more affordable for tools, equipment, plastic bins, and items that tolerate temperature changes.`,
+  },
+  {
+    q: 'How do I pack a storage unit efficiently?',
+    a: `Pack a storage unit efficiently by placing heavy and bulky items (dressers, appliances, sofas, mattresses) at the back and bottom, then layering medium-weight boxes in the middle, and lightweight or fragile items on top. Leave a center aisle if you'll need access to specific items during your rental, and label boxes on multiple sides so you can read them from the aisle. Stand mattresses upright, disassemble bed frames and tables, fill drawers with soft items, and use uniform-sized boxes so they stack flat. Cover furniture with sheets or moving blankets — not plastic, which can trap moisture.`,
+    aHtml: `Pack a storage unit efficiently by placing heavy and bulky items (dressers, appliances, sofas, mattresses) at the back and bottom, then layering medium-weight boxes in the middle, and lightweight or fragile items on top. Leave a center aisle if you'll need access to specific items during your rental, and label boxes on multiple sides so you can read them from the aisle. Stand mattresses upright, disassemble bed frames and tables, fill drawers with soft items, and use uniform-sized boxes so they stack flat. Cover furniture with sheets or moving blankets — not plastic, which can trap moisture. Try the <a href="/move-in-checklist">move-in checklist</a> for a step-by-step packing plan.`,
+  },
+  {
+    q: 'Do I need to bring my own lock for a storage unit?',
+    a: `Yes — most Modern Storage® rentals require you to bring your own lock, and disc locks or padlocks are also available for purchase at the facility office at move-in. A disc lock is recommended over a standard padlock because it has a shrouded shackle that resists bolt cutters and weather. Choose a lock with a hardened steel shackle and weather-resistant body. Only you keep the key — facility staff do not hold customer lock keys.`,
+    aHtml: `Yes — most Modern Storage® rentals require you to bring your own lock, and disc locks or padlocks are also available for purchase at the facility office at move-in. A disc lock is recommended over a standard padlock because it has a shrouded shackle that resists bolt cutters and weather. Choose a lock with a hardened steel shackle and weather-resistant body. Only you keep the key — facility staff do not hold customer lock keys.`,
+  },
+  {
+    q: 'Can I store a car in a storage unit?',
+    a: `Yes — Modern Storage® offers vehicle parking storage at select Arkansas locations for cars, SUVs, work vans, classic cars, project cars, and motorcycles. Most vehicle storage is outdoor parking, with some covered parking spaces available at facilities including Modern Storage® Maumelle Blvd, Modern Storage® Bryant, and Modern Storage® Lowell. Stored vehicles must be operable, registered, and insured. Indoor enclosed vehicle storage is limited and depends on facility availability and unit size — a 10x20 or 10x30 drive-up unit is typically large enough for a single car.`,
+    aHtml: `Yes — Modern Storage® offers <a href="/rv-boat-vehicle">vehicle parking storage</a> at select Arkansas locations for cars, SUVs, work vans, classic cars, project cars, and motorcycles. Most vehicle storage is outdoor parking, with some covered parking spaces available at facilities including <a href="/locations/maumelle">Modern Storage® Maumelle Blvd</a>, <a href="/locations/bryant">Modern Storage® Bryant</a>, and <a href="/locations/lowell">Modern Storage® Lowell</a>. Stored vehicles must be operable, registered, and insured. Indoor enclosed vehicle storage is limited and depends on facility availability and unit size — a 10x20 or 10x30 drive-up unit is typically large enough for a single car.`,
   },
   {
     q: 'Do you have storage units in Little Rock, Bentonville, Springdale, Hot Springs, Bryant, and North Little Rock?',
@@ -539,8 +597,11 @@ export const FAQS = [
 export const HOME_FAQS = [
   {
     q: 'What size storage unit do I need?',
-    a: `Not sure what fits? A 5x5 holds closet and seasonal overflow, a 10x10 fits a one-bedroom apartment, and a 10x20 handles a full home or business inventory. Use our AI Storage Size Finder or Size Guide to pick the right size, then reserve online in minutes.`,
-    aHtml: `Not sure what fits? A 5x5 holds closet and seasonal overflow, a 10x10 fits a one-bedroom apartment, and a 10x20 handles a full home or business inventory. Use our <a href="/ai-storage-size-finder">AI Storage Size Finder</a> or <a href="/size-guide">Size Guide</a> to pick the right size, then reserve online in minutes.`,
+    // Rewritten answer-first: drops the "Not sure what fits?" rhetorical
+    // opener so Google's PAA box can quote the concrete size mapping in
+    // the first sentence.
+    a: `A 10x10 storage unit (100 sq ft) fits a one-bedroom apartment, a 5x10 (50 sq ft) fits a studio, a 10x15 fits a two-bedroom apartment, and a 10x20 or 10x30 handles a full home or business inventory. A 5x5 holds closet and seasonal overflow. Use our AI Storage Size Finder or Size Guide to pick the right size, then reserve online in minutes.`,
+    aHtml: `A 10x10 storage unit (100 sq ft) fits a one-bedroom apartment, a 5x10 (50 sq ft) fits a studio, a 10x15 fits a two-bedroom apartment, and a 10x20 or 10x30 handles a full home or business inventory. A 5x5 holds closet and seasonal overflow. Use our <a href="/ai-storage-size-finder">AI Storage Size Finder</a> or <a href="/size-guide">Size Guide</a> to pick the right size, then reserve online in minutes.`,
   },
   {
     q: 'Do you offer climate-controlled storage?',
@@ -549,8 +610,11 @@ export const HOME_FAQS = [
   },
   {
     q: 'How much does self-storage cost in Arkansas?',
-    a: `Your rate depends on unit size, climate-controlled vs. drive-up, and which location you choose. See typical price ranges in our storage pricing guide, then check live rates and any move-in specials on your nearest location's reservation page.`,
-    aHtml: `Your rate depends on unit size, climate-controlled vs. drive-up, and which location you choose. See typical price ranges in our <a href="/pricing">storage pricing guide</a>, then check live rates and any move-in specials on your <a href="/#locations">nearest location's reservation page</a>.`,
+    // Rewritten answer-first: leads with concrete price range so PAA
+    // can quote a real number instead of the previous "depends on..."
+    // dodge.
+    a: `Self-storage in Arkansas typically starts around $30 per month for a small 5x5 drive-up unit and runs to $300+ per month for a large climate-controlled unit or RV parking space. Pricing depends on unit size, climate-controlled vs. drive-up, and which location you choose. See typical ranges in our storage pricing guide, then check live rates and move-in specials on your nearest location's reservation page.`,
+    aHtml: `Self-storage in Arkansas typically starts around $30 per month for a small 5x5 drive-up unit and runs to $300+ per month for a large climate-controlled unit or RV parking space. Pricing depends on unit size, climate-controlled vs. drive-up, and which location you choose. See typical ranges in our <a href="/pricing">storage pricing guide</a>, then check live rates and move-in specials on your <a href="/#locations">nearest location's reservation page</a>.`,
   },
   {
     q: 'Can I reserve a storage unit online?',
