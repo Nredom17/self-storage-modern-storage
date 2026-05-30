@@ -35,11 +35,14 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Self Storage Units in Arkansas | Modern Storage®',
+    // Default title mirrors the homepage hook (10 Arkansas locations) so that any
+    // page without its own metadata.title also leads with the brand differentiator
+    // rather than the generic "Self Storage Units in Arkansas" phrase.
+    default: 'Self Storage in Arkansas — 10 Locations | Modern Storage®',
     template: '%s | Modern Storage®',
   },
   description:
-    'Find self-storage units across Arkansas with Modern Storage®. Climate-controlled storage, household storage, boat and RV parking, business storage, and free moving truck options available.',
+    'Modern Storage® — 10 Arkansas self-storage locations with climate-controlled units, household storage, boat and RV parking, business storage, and a free moving truck with new rentals.',
   metadataBase: new URL(SITE_URL),
   // applicationName drives the <meta name="application-name"> tag.
   // Google sometimes uses this as a secondary signal for the brand

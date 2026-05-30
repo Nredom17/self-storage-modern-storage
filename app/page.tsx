@@ -22,17 +22,22 @@ const HERO_IMAGE = '/images/modern-storage-springdale-best-of-the-best-awards.pn
 const HERO_ALT =
   'Modern Storage® Springdale facility with Best of the Best Self-Storage Awards 2023, 2024, 2025 winner and Best of Northwest Arkansas award seals'
 
+// Title tightened from the generic "Self Storage Units in Arkansas | Modern Storage®"
+// to a hook-led version that promotes our key differentiators (10 locations + free
+// moving truck) inside the ~60-char SERP budget. Length: 58 chars including ®.
+const HOME_TITLE = 'Self Storage in Arkansas — 10 Locations | Modern Storage®'
+
 export const metadata: Metadata = {
-  title: 'Self Storage Units in Arkansas | Modern Storage®',
+  title: HOME_TITLE,
   description:
-    'Find self-storage units across Arkansas with Modern Storage®. Climate-controlled storage, household storage, boat and RV parking, business storage, and free moving truck options available.',
+    'Modern Storage® — 10 Arkansas self-storage locations with climate-controlled units, household storage, boat and RV parking, business storage, and a free moving truck with new rentals.',
   alternates: {
     canonical: SITE_URL + '/',
   },
   openGraph: {
-    title: 'Self Storage Units in Arkansas | Modern Storage®',
+    title: HOME_TITLE,
     description:
-      'Find clean, convenient storage units across Arkansas at Modern Storage®, including climate-controlled, household, business, boat, RV, and vehicle storage.',
+      'Modern Storage® operates 10 self-storage locations across Arkansas with climate-controlled, household, business, boat, RV, and vehicle storage — plus a free moving truck with new rentals.',
     url: SITE_URL + '/',
     siteName: 'Modern Storage®',
     type: 'website',
@@ -47,9 +52,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Self Storage Units in Arkansas | Modern Storage®',
+    title: HOME_TITLE,
     description:
-      'Clean, convenient self-storage units across Arkansas — climate-controlled, household, business, boat, RV, and vehicle storage.',
+      '10 Arkansas self-storage locations — climate-controlled, household, business, boat, RV, and vehicle storage with a free moving truck.',
     images: [HERO_IMAGE],
   },
 }
@@ -359,6 +364,56 @@ export default async function HomePage() {
             </p>
           </div>
           <LocationFinder locations={locations} />
+
+          {/* ── STATIC LOCATIONS DIRECTORY (SERVER-RENDERED) ──────
+              The LocationFinder above is a client component (Leaflet
+              needs the DOM), so its address grid and the map both
+              render after JS hydration. The SEO audit flagged that
+              the initial HTML only contains "Loading map…", which
+              means crawlers that don't reliably execute JS (or that
+              cut off rendering early) may not see the per-facility
+              addresses or the links to /locations/[slug].
+
+              This static <ul> mirrors the same 10 facilities in
+              plain server-rendered HTML so Googlebot, Bing, and AI
+              search agents always have a crawlable directory with
+              real street addresses + per-facility URLs, even when JS
+              fails. Visually de-emphasized (small grid below the
+              interactive finder) so it doesn't compete with the map
+              UX, but fully indexable. */}
+          <div className="mt-12 pt-10 border-t border-gray-200">
+            <h3 className="text-lg font-black uppercase tracking-widest text-charcoal mb-2">
+              All Modern Storage® Arkansas Locations
+            </h3>
+            <p className="text-sm text-gray-500 leading-relaxed mb-6 max-w-3xl">
+              Quick directory of every Modern Storage® facility in Arkansas with street address and a direct page for unit sizes, amenities, and reservations.
+            </p>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
+              {locations.map((loc) => (
+                <li key={loc.slug} className="text-sm leading-relaxed">
+                  <Link
+                    href={`/locations/${loc.slug}`}
+                    className="font-bold text-charcoal hover:text-modern-red transition-colors"
+                  >
+                    {loc.name}
+                  </Link>
+                  <div className="text-gray-600 mt-0.5">
+                    {loc.streetAddress}, {loc.city}, {loc.state} {loc.zip}
+                  </div>
+                  <div className="text-xs text-gray-500 mt-0.5">
+                    <a
+                      href={settings.phoneHref}
+                      className="hover:text-modern-red transition-colors"
+                    >
+                      {loc.phone || settings.phoneDisplay}
+                    </a>
+                    <span className="mx-2" aria-hidden="true">·</span>
+                    <span>{loc.region}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
