@@ -184,9 +184,9 @@ export const CLASSIC_CAR_LOCATIONS = [
 ] as const
 
 export const BY_THE_NUMBERS = [
-  { stat: '10', label: 'Arkansas locations' },
+  { stat: '10', label: 'Locations' },
   { stat: '10,000+', label: 'Storage units across the state' },
-  { stat: '3×', label: 'Best of the Best Self Storage winner (2023, 2024, 2025)' },
+  { stat: '3×', label: 'Best of the Best Self-Storage Awards winner (2023, 2024, 2025)' },
   { stat: 'Climate', label: 'Controlled options across most Modern Storage® facilities' },
   { stat: 'Central & NWA', label: 'Boat, RV, and vehicle storage from Hot Springs to Bentonville' },
 ] as const

@@ -1,8 +1,8 @@
 export const BUSINESS_FEATURES = [
   {
-    title: 'Loading docks',
+    title: 'Loading dock access',
     body:
-      'Dock-height loading at Modern Storage® Riverdale and select locations lets pallets, freight, and box trucks unload straight into a mini-warehouse without a forklift detour.',
+      'Dock-height loading at Modern Storage® Riverdale lets pallets, freight shipments, and box trucks unload directly into a business storage unit — the best fit for higher-volume commercial movement.',
     icon: 'dock',
   },
   {
@@ -91,8 +91,12 @@ export const BUSINESS_FAQS = [
     a: `All Modern Storage® locations across Arkansas offer business storage units. The right location depends on where your business operates — Modern Storage® has facilities in Little Rock, North Little Rock, Bentonville, Springdale, Lowell, Maumelle, Bryant, and Hot Springs. Use the inquiry form above or call 501-910-0096 and the team will match you to the right facility and unit size for your business.`,
   },
   {
+    q: 'Is business storage available at all Modern Storage® locations?',
+    a: `Yes. Every Modern Storage® location across Arkansas offers business storage options. Available features vary by location, but businesses commonly use Modern Storage® for inventory, equipment, records, contractor materials, staging furniture, overflow storage, and operational support. If you need dock-height loading or freight access specifically, Modern Storage® Riverdale is the best fit.`,
+  },
+  {
     q: 'Do you have loading docks?',
-    a: `Loading docks are available at select Modern Storage® locations for pallets, freight, and box trucks. Availability varies by facility — confirm when you submit a business inquiry or call 501-910-0096.`,
+    a: `Yes. Modern Storage® Riverdale offers dock-height loading access for approved business customers. Dock access is especially useful for freight deliveries, pallet unloading, contractor materials, restoration equipment, and inventory movement. Other Modern Storage® locations support business storage too, but Riverdale is the lead facility for dock-height loading.`,
   },
   {
     q: 'Can Modern Storage® accept packages for my business?',

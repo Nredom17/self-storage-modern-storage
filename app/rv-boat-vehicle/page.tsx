@@ -20,11 +20,34 @@ import { buildLocationSchemaList } from '@/lib/schema'
 export const revalidate = 60
 
 const PAGE_PATH = '/rv-boat-vehicle'
-const HERO_IMAGE = '/images/modern-storage-shackleford-rv-storage-unit.jpg'
+// Hero image: GMC truck parked outside a Modern Storage® RV unit
+// with a travel trailer visible inside at sunset. Real-world drive-up
+// access scenario — communicates the most common RV/boat owner use
+// case in a single visual. On-brand red roll-up doors.
+const HERO_IMAGE = '/images/rv-truck-drive-up-storage.png'
 const HERO_ALT =
-  'RV stored in a Modern Storage® Shackleford indoor RV storage unit with red roll-up doors in Little Rock'
+  'Tow truck and travel trailer at a Modern Storage® drive-up RV storage unit at sunset — boat, RV, and vehicle storage in Arkansas'
 const HERO_CAPTION =
-  'Indoor RV storage at Modern Storage® Shackleford in Little Rock.'
+  'Drive-up RV, boat, and vehicle storage at Modern Storage® Shackleford — pull up, unload, and lock up between weekends on the water.'
+
+// Storage-format showcase images, rendered large in their own section
+// below the three vehicle-type cards.
+const ENCLOSED_RV_IMAGE = '/images/enclosed-rv-storage-trailer-unit-modern-storage.png'
+const ENCLOSED_RV_ALT =
+  'Mallard travel trailer parked inside a Modern Storage® enclosed RV storage unit with red roll-up doors at sunset'
+
+// Specialty / oversized proof point — vintage red Mack fire truck
+// inside an oversized enclosed unit. Moved from hero to "lower on
+// the page" per the asset brief so it functions as a proof point
+// for specialty and oversized vehicle storage, not the primary
+// brand image for the category.
+const SPECIALTY_OVERSIZED_IMAGE = '/images/specialty-oversized-vehicle-fire-truck-storage.png'
+const SPECIALTY_OVERSIZED_ALT =
+  'Vintage red Mack fire truck stored at Modern Storage® Shackleford in an oversized enclosed RV-style storage unit — specialty and collector vehicle storage'
+
+const COMMERCIAL_LARGE_UNIT_IMAGE = '/images/commercial-storage-large-unit-interior-modern-storage.png'
+const COMMERCIAL_LARGE_UNIT_ALT =
+  'Interior view of a Modern Storage® large commercial storage unit with corrugated steel walls and bright LED lighting — sized for warehouse-style storage'
 
 export const metadata: Metadata = {
   title: { absolute: 'Boat, RV & Vehicle Storage in Arkansas | Modern Storage®' },
@@ -228,13 +251,27 @@ export default async function BoatRvStoragePage() {
                 </Link>
                 <a
                   href={PHONE_NUMBER_HREF}
-                  aria-label={`Call Modern Storage® at ${PHONE_NUMBER_DISPLAY}`}
+                  aria-label={`Call for New Rentals at ${PHONE_NUMBER_DISPLAY}`}
                   className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-full transition-colors border border-white/20 text-sm"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
                   </svg>
-                  Call {PHONE_NUMBER_DISPLAY}
+                  Call for New Rentals
+                </a>
+                {/* Existing customers → all-locations directory on the
+                    reservation site (account access, gate codes, billing). */}
+                <a
+                  href="https://www.modernstorage.com/self-storage"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Existing customers — see all Modern Storage® locations"
+                  className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white font-bold px-6 py-3 rounded-full transition-colors border border-white/15 text-sm"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-3-6.65" />
+                  </svg>
+                  Existing Customers
                 </a>
               </div>
 
@@ -264,6 +301,56 @@ export default async function BoatRvStoragePage() {
               <figcaption className="text-xs text-gray-500 mt-3 italic">{HERO_CAPTION}</figcaption>
             </figure>
           </div>
+        </div>
+      </section>
+
+      {/* Quick-answer summary — decision engine. Short direct answer,
+          three "Choose X if" decision blocks, Arkansas context, and
+          one soft internal link. Optimized for AI extraction and
+          for visitors making a real format decision. */}
+      <section className="bg-modern-red/5 border-b border-gray-200 py-12">
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Quick answer</p>
+          <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-4">
+            What kind of RV, boat, or vehicle storage should I choose in Arkansas?
+          </h2>
+          <p className="text-gray-700 text-lg leading-relaxed mb-6">
+            The right format depends on <strong>how long you&apos;re storing the rig</strong> and <strong>how exposed it is to weather</strong>. Outdoor is the budget pick for active boat or RV season; covered adds weather protection; enclosed or indoor is the safer choice for long-term or weather-sensitive rigs.
+          </p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+            <div className="bg-white rounded-xl p-5 border border-gray-200">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Choose outdoor parking if:</p>
+              <ul className="text-sm text-gray-700 space-y-1.5 list-disc list-outside ml-4">
+                <li>You&apos;re using the rig regularly (lake season, weekly trips)</li>
+                <li>Storage is short- to mid-term</li>
+                <li>Budget is the deciding factor</li>
+              </ul>
+            </div>
+            <div className="bg-white rounded-xl p-5 border border-gray-200">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Choose covered parking if:</p>
+              <ul className="text-sm text-gray-700 space-y-1.5 list-disc list-outside ml-4">
+                <li>You want protection from sun fade and summer hail</li>
+                <li>Storage spans a full season</li>
+                <li>The rig has upholstery, electronics, or finishes that degrade in UV</li>
+              </ul>
+            </div>
+            <div className="bg-white rounded-xl p-5 border border-gray-200">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Choose enclosed / indoor if:</p>
+              <ul className="text-sm text-gray-700 space-y-1.5 list-disc list-outside ml-4">
+                <li>You&apos;re storing long-term (off-season or longer)</li>
+                <li>The rig is a classic car, vintage boat, or PWC</li>
+                <li>You want to limit UV, freeze, and storm exposure</li>
+              </ul>
+            </div>
+          </div>
+
+          <p className="text-gray-700 leading-relaxed mb-4">
+            <strong>In Arkansas:</strong> summer heat and humidity, plus seasonal storms and freeze cycles, drive most off-season damage to upholstery, electronics, and finishes — which is why many lake-area customers pair outdoor parking through boating season with covered or indoor storage in the off-months.
+          </p>
+          <p>
+            <Link href="/storage-near-beaver-lake" className="text-modern-red font-bold hover:underline">→ See boat &amp; RV storage near Arkansas lakes</Link>
+          </p>
         </div>
       </section>
 
@@ -345,6 +432,104 @@ export default async function BoatRvStoragePage() {
                 </Link>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── STORAGE FORMATS SHOWCASE ──────────────────────────
+          Three real Modern Storage® storage-format photos rendered
+          large so they read as actual facility imagery, not generic
+          stock. Replaces what was previously a text-only sweep of
+          this section. Each card pairs a photo with a specific
+          storage-format story: enclosed indoor RV storage, premium
+          drive-up access, and commercial/large-unit warehouse-style. */}
+      <section className="bg-white py-20 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-12">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+              Storage formats
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+              How Boats, RVs, and Oversized Vehicles Live at Modern Storage®
+            </h2>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              Three storage formats cover almost every boat, RV, and oversized vehicle scenario in Arkansas — indoor enclosed units, premium drive-up access, and commercial-grade large units for businesses with fleets, equipment, or oversized inventory. All real Modern Storage® facilities; no stock photography below.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+            {/* Enclosed indoor RV — Mallard inside a unit */}
+            <article className="flex flex-col">
+              <figure className="rounded-2xl overflow-hidden shadow-xl mb-5 aspect-[4/3] bg-gray-100 relative">
+                <Image
+                  src={ENCLOSED_RV_IMAGE}
+                  alt={ENCLOSED_RV_ALT}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  className="object-cover"
+                />
+              </figure>
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">
+                Enclosed indoor RV storage
+              </p>
+              <h3 className="text-xl font-black text-charcoal mb-3 leading-tight">
+                Indoor units sized for travel trailers and RVs
+              </h3>
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                Roll-up door enclosed bays at participating Modern Storage® locations. Best for travel trailers, fifth wheels, pop-ups, and any RV you want fully out of Arkansas summer sun, hail, and winter freeze cycles. Available at <Link href="/locations/shackleford" className="text-modern-red font-semibold hover:underline">Modern Storage® Shackleford</Link> and other select locations — space length varies, call ahead to confirm a fit.
+              </p>
+            </article>
+
+            {/* Specialty / oversized vehicle storage — fire truck proof
+                point. The hero already carries the primary drive-up
+                story, so this card uses the most distinctive asset in
+                the library to make a concrete "we can fit the unusual"
+                proof point. */}
+            <article className="flex flex-col">
+              <figure className="rounded-2xl overflow-hidden shadow-xl mb-5 aspect-[4/3] bg-gray-100 relative">
+                <Image
+                  src={SPECIALTY_OVERSIZED_IMAGE}
+                  alt={SPECIALTY_OVERSIZED_ALT}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  className="object-cover"
+                />
+              </figure>
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">
+                Specialty &amp; oversized vehicle storage
+              </p>
+              <h3 className="text-xl font-black text-charcoal mb-3 leading-tight">
+                If it fits a fire truck, it fits your rig
+              </h3>
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                Vintage Mack fire truck on the left, an oversized enclosed unit at <Link href="/locations/shackleford" className="text-modern-red font-semibold hover:underline">Modern Storage® Shackleford</Link>. Real customers store collector cars, classic trucks, motorcycles, restoration projects, and one-of-a-kind rigs in spaces sized for things that don&apos;t fit anywhere else. If your vehicle is unusual or oversized, call ahead and the team will check space length and door clearance before you reserve.
+              </p>
+            </article>
+
+            {/* Commercial / large-unit — empty interior corridor */}
+            <article className="flex flex-col">
+              <figure className="rounded-2xl overflow-hidden shadow-xl mb-5 aspect-[4/3] bg-gray-100 relative">
+                <Image
+                  src={COMMERCIAL_LARGE_UNIT_IMAGE}
+                  alt={COMMERCIAL_LARGE_UNIT_ALT}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  className="object-cover"
+                />
+              </figure>
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">
+                Commercial &amp; large-unit storage
+              </p>
+              <h3 className="text-xl font-black text-charcoal mb-3 leading-tight">
+                Warehouse-style space for fleets and equipment
+              </h3>
+              <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                Bright, fully enclosed corridors with oversized bays at select Modern Storage® locations. Built for work-vehicle fleets, contractor equipment, restoration crew rigs, and commercial inventory at scale. If a single 10x30 unit won&apos;t cut it, see the <Link href="/business-storage" className="text-modern-red font-semibold hover:underline">business storage page</Link> and <Link href="/contractor-storage-little-rock" className="text-modern-red font-semibold hover:underline">contractor storage guide</Link> for matched setups.
+              </p>
+            </article>
           </div>
         </div>
       </section>
@@ -483,7 +668,7 @@ export default async function BoatRvStoragePage() {
               </p>
               <p className="text-gray-700 leading-relaxed">
                 Indoor RV storage is available at Modern Storage® Shackleford in Little Rock for owners who want their rig out of the sun and weather. Oversized outdoor spaces at the Northwest Arkansas and central Arkansas locations cover Class A and fifth-wheel sizes that won&apos;t fit in a typical residential driveway. Month-to-month rentals make multi-season storage straightforward — check the centralized{' '}
-                <Link href="/#size-guide" className="text-modern-red font-bold hover:underline">
+                <Link href="/size-guide" className="text-modern-red font-bold hover:underline">
                   Modern Storage® unit size guide
                 </Link>{' '}
                 if you&apos;re also planning to store household items alongside the RV.
@@ -661,7 +846,7 @@ export default async function BoatRvStoragePage() {
                       href={PHONE_NUMBER_HREF}
                       className="inline-flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-charcoal text-sm font-bold px-5 py-2.5 rounded-full transition-colors"
                     >
-                      Call {PHONE_NUMBER_DISPLAY}
+                      Call for New Rentals
                     </a>
                   </div>
                 </div>
@@ -683,7 +868,7 @@ export default async function BoatRvStoragePage() {
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
               A starting point for choosing a boat, RV, or vehicle storage space at Modern Storage®. Measure your rig (including any rear ladder, hitch, and tongue extension) before reserving, and the team will confirm the right space at the right facility. For full household-storage sizes see the{' '}
-              <Link href="/#size-guide" className="text-modern-red font-bold hover:underline">
+              <Link href="/size-guide" className="text-modern-red font-bold hover:underline">
                 Modern Storage® unit size guide
               </Link>
               .
@@ -725,7 +910,7 @@ export default async function BoatRvStoragePage() {
               href={PHONE_NUMBER_HREF}
               className="inline-flex items-center gap-2 bg-charcoal hover:bg-gray-800 text-white font-bold px-6 py-3 rounded-full transition-colors text-sm"
             >
-              Call {PHONE_NUMBER_DISPLAY}
+              Call for New Rentals
             </a>
           </div>
         </div>
@@ -838,7 +1023,7 @@ export default async function BoatRvStoragePage() {
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
                 </svg>
-                Call {PHONE_NUMBER_DISPLAY}
+                Call for New Rentals
               </a>
               <Link
                 href="/"

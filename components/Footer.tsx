@@ -15,7 +15,7 @@ const FOOTER_LOCATION_SPEC: Array<{ slug: string; label: string }> = [
   { slug: 'north-little-rock', label: 'North Little Rock' },
   { slug: 'riverdale', label: 'Riverdale' },
   { slug: 'bentonville', label: 'Bentonville' },
-  { slug: 'maumelle', label: 'Maumelle' },
+  { slug: 'maumelle', label: 'Maumelle Blvd' },
   { slug: 'springdale', label: 'Springdale' },
   { slug: 'hot-springs', label: 'Hot Springs' },
   { slug: 'bryant', label: 'Bryant' },
@@ -30,21 +30,90 @@ const LOCATIONS: Array<{ label: string; href: string }> = FOOTER_LOCATION_SPEC.f
 )
 
 const RESOURCES = [
+  { label: 'Storage Prices', href: '/pricing' },
   { label: 'AI Storage Size Finder', href: '/ai-storage-size-finder' },
+  { label: 'Size Guide', href: '/size-guide' },
   { label: 'Move-In Checklist', href: '/move-in-checklist' },
   { label: 'Free Moving Truck', href: '/free-moving-truck' },
-  { label: 'Size Guide', href: '/#size-guide' },
-  { label: 'FAQ', href: '/#faq' },
+  { label: 'Packing & Moving Supplies', href: '/packing-moving-supplies' },
+  { label: 'FAQ', href: '/faq' },
   { label: 'Storage Tips', href: 'https://www.modernstorage.com/blog' },
 ]
 
-const SOCIAL_LINKS = [
-  { label: 'Instagram', href: 'https://www.instagram.com/modern.storage' },
-  { label: 'TikTok', href: 'https://www.tiktok.com/@modernstorage' },
-  { label: 'Facebook', href: 'https://www.facebook.com/modernstorage' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/modern-storage' },
-  { label: 'YouTube', href: 'https://www.youtube.com/@modernstorage' },
+// Long-tail authority pages — surfaced in the footer so they’re not
+// orphans. Each links into the main location pages it serves.
+// Organized into 4 SEO clusters for clearer topical grouping and
+// scannability. Render order in the footer matches array order.
+const GUIDES_GROUPS = [
+  {
+    heading: 'Apartment & Moving',
+    links: [
+      { label: 'Apartment Storage', href: '/guides/apartment-storage' },
+      { label: 'Student Storage', href: '/student-storage' },
+      { label: 'Storage During a Move', href: '/guides/moving-storage' },
+      { label: 'Storage Near Fayetteville', href: '/storage-near-fayetteville' },
+    ],
+  },
+  {
+    heading: 'Business & Contractor',
+    links: [
+      { label: 'Supplier & Business — Bentonville', href: '/business-storage-bentonville' },
+      { label: 'Contractor Storage — Little Rock', href: '/contractor-storage-little-rock' },
+    ],
+  },
+  {
+    heading: 'Lake & Boat Storage',
+    links: [
+      { label: 'Storage Near Beaver Lake', href: '/storage-near-beaver-lake' },
+      { label: 'Storage Near Table Rock Lake', href: '/storage-near-table-rock-lake' },
+      { label: 'Storage Near Lake Hamilton', href: '/storage-near-lake-hamilton' },
+      { label: 'Storage Near Lake Ouachita', href: '/storage-near-lake-ouachita' },
+      { label: 'Storage Near Greers Ferry Lake', href: '/storage-near-greers-ferry-lake' },
+      { label: 'Boat Storage Near Hot Springs', href: '/boat-storage-near-hot-springs' },
+      { label: 'RV & Boat Storage in NWA', href: '/rv-boat-storage-northwest-arkansas' },
+    ],
+  },
+  {
+    heading: 'Climate & Seasonal',
+    links: [
+      { label: 'Climate-Controlled & AR Humidity', href: '/climate-controlled-arkansas-humidity' },
+    ],
+  },
 ]
+
+const SOCIAL_LINKS = [
+  { label: 'Instagram', href: 'https://www.instagram.com/modern.storage', icon: 'instagram' },
+  { label: 'TikTok', href: 'https://www.tiktok.com/@modernstorage', icon: 'tiktok' },
+  { label: 'Facebook', href: 'https://www.facebook.com/modernstorage', icon: 'facebook' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/modern-storage', icon: 'linkedin' },
+  { label: 'YouTube', href: 'https://www.youtube.com/@modernstorage', icon: 'youtube' },
+] as const
+
+// Brand glyphs as single-path SVGs (currentColor-filled, so they inherit the
+// link's red text color). TikTok isn't in lucide-react, so all five use inline
+// brand paths for a consistent solid-glyph look.
+const SOCIAL_ICON_PATHS: Record<string, string> = {
+  instagram:
+    'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z',
+  tiktok:
+    'M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z',
+  facebook:
+    'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z',
+  linkedin:
+    'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z',
+  youtube:
+    'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z',
+}
+
+function SocialIcon({ name, className }: { name: string; className?: string }) {
+  const d = SOCIAL_ICON_PATHS[name]
+  if (!d) return null
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
+      <path d={d} />
+    </svg>
+  )
+}
 
 export default function Footer({
   phoneDisplay,
@@ -75,7 +144,7 @@ export default function Footer({
               href={PHONE_NUMBER_HREF}
               className="bg-white/10 hover:bg-white/20 text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors border border-white/20"
             >
-              Call {PHONE_NUMBER_DISPLAY}
+              Call for New Rentals
             </a>
           </div>
         </div>
@@ -95,14 +164,16 @@ export default function Footer({
               Clean, convenient self-storage units across Arkansas — climate-controlled, household, business, boat, RV, and vehicle storage.
             </p>
             <div className="flex flex-wrap gap-x-4 gap-y-2 mt-5">
-              {SOCIAL_LINKS.map(({ label, href }) => (
+              {SOCIAL_LINKS.map(({ label, href, icon }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-gray-500 hover:text-modern-red transition-colors font-medium"
+                  aria-label={`Modern Storage® on ${label}`}
+                  className="inline-flex items-center gap-2 text-sm text-modern-red hover:text-modern-red-hover transition-colors font-semibold"
                 >
+                  <SocialIcon name={icon} className="w-5 h-5 shrink-0" />
                   {label}
                 </a>
               ))}
@@ -186,13 +257,127 @@ export default function Footer({
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-gray-600">
-            &copy; {new Date().getFullYear()} Modern Storage®. All rights reserved.
+        {/* Storage Guides — long-tail authority pages, grouped into 4
+            SEO clusters. 4 columns on lg+, 2 on sm-md, single column
+            on mobile. Each cluster shows a small uppercase header so
+            scanning is fast. "All Guides" link sits below as a single
+            sweep to the curated hub. */}
+        <div className="mt-12 pt-8 border-t border-white/10">
+          <div className="flex items-baseline justify-between flex-wrap gap-3 mb-5">
+            <h2 className="text-xs font-black uppercase tracking-widest text-gray-500">Storage Guides</h2>
+            <Link
+              href="/guides"
+              className="text-xs font-bold text-modern-red hover:text-white transition-colors"
+            >
+              All guides →
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8">
+            {GUIDES_GROUPS.map((group) => (
+              <div key={group.heading}>
+                <p className="text-[10px] font-black uppercase tracking-widest text-modern-red mb-3">
+                  {group.heading}
+                </p>
+                <nav className="flex flex-col gap-2">
+                  {group.links.map(({ label, href }) => (
+                    <Link
+                      key={label}
+                      href={href}
+                      className="text-sm text-gray-400 hover:text-white transition-colors leading-snug"
+                    >
+                      {label}
+                    </Link>
+                  ))}
+                </nav>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Learn More — long-form brand/about content, Need Help, Stay Connected */}
+        <div className="border-t border-white/10 mt-12 pt-10 grid lg:grid-cols-3 gap-10">
+          <div className="lg:col-span-2">
+            <h2 className="text-sm font-black uppercase tracking-widest text-gray-400 mb-4">
+              Learn More About Modern Storage®
+            </h2>
+            <div className="space-y-4 text-sm text-gray-400 leading-relaxed max-w-2xl">
+              <p>
+                Modern Storage® provides clean, secure, and convenient self storage solutions across
+                Arkansas, with locations designed to make storing simple for households, businesses,
+                students, movers, and anyone needing extra space.
+              </p>
+              <p>
+                From climate-controlled units to drive-up storage and easy online rentals, our goal is to
+                provide a straightforward storage experience backed by responsive customer service, simple
+                online tools, and well-maintained facilities.
+              </p>
+              <p>
+                Beyond storage, Modern Storage® creates educational content focused on self storage, real
+                estate, organization, moving, business growth, technology, and AI tools shaping the future
+                of the industry. Through blogs, videos, social media, and the Modern Storage® Unpacked
+                Podcast™, we help customers and operators stay informed while making storage easier to
+                understand.
+              </p>
+            </div>
+          </div>
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-3">Need Help Renting a Unit?</h3>
+              <p className="text-sm text-gray-400">
+                <span className="font-bold text-white">New Rentals:</span>{' '}
+                <a
+                  href={PHONE_NUMBER_HREF}
+                  className="text-modern-red hover:text-modern-red-hover font-semibold transition-colors"
+                >
+                  {PHONE_NUMBER_DISPLAY}
+                </a>
+              </p>
+              <p className="text-xs text-gray-500 leading-relaxed mt-3">
+                Already rent with Modern Storage®? Please contact your facility directly or use your
+                tenant portal for account, gate code, billing, or access questions.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-3">Stay Connected</h3>
+              <p className="text-sm text-gray-400 leading-relaxed mb-3">
+                Follow Modern Storage® for storage tips, facility updates, educational content, blogs,
+                local stories, and new episodes of the Modern Storage® Unpacked Podcast™.
+              </p>
+              <a
+                href="https://open.spotify.com/show/1eXmTMKzNBUng1ayinZudS"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Listen to the Modern Storage® Unpacked Podcast™ on Spotify"
+                className="inline-flex items-center gap-2 text-sm text-modern-red hover:text-modern-red-hover font-semibold transition-colors"
+              >
+                <svg viewBox="0 0 24 24" className="w-5 h-5 shrink-0" fill="currentColor" aria-hidden="true">
+                  <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z" />
+                </svg>
+                Listen to the Modern Storage® Unpacked Podcast™
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Legal */}
+        <div className="border-t border-white/10 mt-10 pt-6 space-y-3">
+          <p className="text-xs text-gray-500">
+            &copy; {new Date().getFullYear()} Modern Storage®. All Rights Reserved.
           </p>
-          <p className="text-xs text-gray-700">
-            Self-storage facilities serving Arkansas.
+          <p className="text-xs text-gray-600 leading-relaxed">
+            Modern Storage® is a registered trademark. Unauthorized use of the Modern Storage® name, logo,
+            branding, website content, or marketing materials is strictly prohibited.
+          </p>
+          <p className="text-xs text-gray-600 leading-relaxed">
+            Features, promotions, pricing, unit availability, and rental terms may vary by location and are
+            subject to change without notice. Online pricing, discounts, and promotions may apply only to
+            select units, rental periods, or new customers. Additional fees, taxes, insurance requirements,
+            and restrictions may apply.
+          </p>
+          <p className="text-xs text-gray-600 leading-relaxed">
+            Climate-controlled features, security systems, access hours, and amenities vary by facility.
+            Customers should confirm specific unit features and availability directly with their selected
+            Modern Storage® location.
           </p>
         </div>
       </div>

@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+import { MapPin, ShieldCheck, Thermometer, Calendar, type LucideIcon } from 'lucide-react'
 import {
   SITE_URL,
   THEME_PAGES,
   UNIT_SIZES,
   WHY_US,
-  FAQS,
+  HOME_FAQS,
   REVIEWS,
 } from '@/lib/site'
 import { getLocations, getSiteSettings } from '@/lib/data'
@@ -19,7 +20,7 @@ export const revalidate = 60
 
 const HERO_IMAGE = '/images/modern-storage-springdale-best-of-the-best-awards.png'
 const HERO_ALT =
-  'Modern Storage® Springdale facility with Best of the Best 2023-2025 and Best of Northwest Arkansas award seals'
+  'Modern Storage® Springdale facility with Best of the Best Self-Storage Awards 2023, 2024, 2025 winner and Best of Northwest Arkansas award seals'
 
 export const metadata: Metadata = {
   title: 'Self Storage Units in Arkansas | Modern Storage®',
@@ -53,12 +54,17 @@ export const metadata: Metadata = {
   },
 }
 
-const TRUST_STRIP = [
-  '10 Arkansas locations',
-  'Climate-controlled units available',
-  'Boat, RV, and vehicle storage',
-  'Free moving truck with new rentals',
-  'Best of the Best Self Storage 2023, 2024, 2025 — Arkansas Democrat Gazette & Best of Northwest Arkansas',
+// Compressed trust signals — replaces a 5-item text list whose longest
+// entry was 90 characters and wrapped to 3 lines on mobile. Each signal
+// is now scannable in a single glance. The "Best of the Best" award is
+// already visually communicated by the hero image (which has the award
+// seals baked in) and lives in the Organization JSON-LD.
+type TrustSignal = { icon: LucideIcon; text: string }
+const TRUST_SIGNALS: TrustSignal[] = [
+  { icon: MapPin, text: '10 Arkansas locations' },
+  { icon: ShieldCheck, text: 'Gated & surveilled' },
+  { icon: Thermometer, text: 'Climate-controlled available' },
+  { icon: Calendar, text: 'Month-to-month rentals' },
 ]
 
 function buildJsonLd(phoneDisplay: string) {
@@ -130,7 +136,7 @@ function buildJsonLd(phoneDisplay: string) {
   const faqPage = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: FAQS.map((f) => ({
+    mainEntity: HOME_FAQS.map((f) => ({
       '@type': 'Question',
       name: f.q,
       acceptedAnswer: { '@type': 'Answer', text: f.a },
@@ -158,71 +164,142 @@ export default async function HomePage() {
         />
       ))}
 
-      {/* ── HERO ─────────────────────────────────────────────── */}
+      {/* ── HERO ─────────────────────────────────────────────────
+          Mobile flow (single column, DOM order):
+            1. Header text block (badge → H1 → subhead)
+            2. Image (shorter 16:9 aspect)
+            3. Primary CTA + trust signals + secondary text link
+          Desktop flow (12-col grid, lg+):
+            Left col (6/12): Header text in row 1, then CTA/trust in row 2
+            Right col (6/12): Image spans both rows
+          Implemented with grid-area placement so the DOM order doesn't
+          change between breakpoints — no layout shift, no CSS hidden/
+          shown duplicate images, no JS. */}
       <section className="bg-charcoal text-white">
         <div className="h-1 w-full bg-modern-red" />
-        <div className="max-w-7xl mx-auto px-6 py-16 lg:py-24">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left — headline + CTAs */}
-            <div>
-              <span className="inline-flex items-center gap-2 bg-modern-red/20 border border-modern-red/40 text-modern-red text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-6">
+        <div className="max-w-7xl mx-auto px-6 py-12 lg:py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-start">
+            {/* Block A — Header text (badge, action pills, H1, subhead).
+                Mobile: appears first. Desktop: left column, row 1. */}
+            <div className="lg:col-span-6 lg:col-start-1 lg:row-start-1">
+              <span className="inline-flex items-center gap-2 bg-modern-red/20 border border-modern-red/40 text-modern-red text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-5 lg:mb-6">
                 <span className="w-1.5 h-1.5 rounded-full bg-modern-red animate-pulse" aria-hidden="true" />
-                10 Arkansas Locations
+                10 Locations
               </span>
-              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
+              {/* Audience split — New Rentals (red) dials the centralized
+                  line; Existing Customers (white) opens the
+                  modernstorage.com tenant / self-storage portal.
+                  Distinct colors so the two audiences see their own
+                  button immediately. Phone number is in aria-label only
+                  — the button itself dials when tapped. */}
+              <div className="flex flex-wrap gap-3 mb-5 lg:mb-6">
+                <a
+                  href={settings.phoneHref}
+                  aria-label={`New Rentals — call ${settings.phoneDisplay}`}
+                  className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-bold px-5 py-2.5 rounded-full transition-colors text-sm shadow-md"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
+                  </svg>
+                  New Rentals
+                </a>
+                <a
+                  href="https://www.modernstorage.com/self-storage"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Existing Customers — manage your account at modernstorage.com"
+                  className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-charcoal font-bold px-5 py-2.5 rounded-full transition-colors text-sm shadow-md"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-3-6.65" />
+                  </svg>
+                  Existing Customers
+                </a>
+              </div>
+              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight mb-4 lg:mb-6">
                 Self Storage Units in <span className="text-modern-red">Arkansas</span>
               </h1>
-              <p className="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg">
+              <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-lg">
                 Find clean, convenient storage units across Arkansas, including climate-controlled storage, household storage, boat and RV parking, vehicle storage, and business storage.
               </p>
-              <div className="flex flex-wrap gap-4 mb-10">
+            </div>
+
+            {/* Block B — Hero image. Mobile: appears between header text
+                and CTAs. Desktop: right column, spans both rows. Image
+                is shorter on mobile (16:9) to keep the primary CTA close
+                to the fold. Reserved aspect ratio prevents CLS. */}
+            <figure className="lg:col-span-6 lg:col-start-7 lg:row-start-1 lg:row-span-2">
+              <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[16/9] lg:aspect-[4/3] bg-gray-800 relative">
+                <Image
+                  src={HERO_IMAGE}
+                  alt={HERO_ALT}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+            </figure>
+
+            {/* Block C — Primary CTA + trust signals + (mobile-only)
+                secondary text link. Mobile: appears after the image.
+                Desktop: left column, row 2 (under the header text). */}
+            <div className="lg:col-span-6 lg:col-start-1 lg:row-start-2">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 mb-8">
+                {/* Primary CTA — same styling at all breakpoints */}
                 <Link
                   href="#locations"
-                  className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-7 py-3.5 rounded-full transition-colors text-sm"
+                  className="inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-7 py-3.5 rounded-full transition-colors text-sm"
                 >
                   Find a Unit Near You
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                   </svg>
                 </Link>
+                {/* Secondary CTA — desktop only (hidden on mobile to reduce
+                    competing CTA noise per UX brief). Mobile gets a less-
+                    prominent text link below the trust signals instead. */}
                 <Link
                   href="#storage-options"
-                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-7 py-3.5 rounded-full transition-colors border border-white/20 text-sm"
+                  className="hidden lg:inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-7 py-3.5 rounded-full transition-colors border border-white/20 text-sm"
                 >
                   View Storage Options
                 </Link>
               </div>
 
-              {/* Trust strip */}
-              <ul className="flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-gray-400">
-                {TRUST_STRIP.map((t) => (
-                  <li key={t} className="flex items-center gap-1.5">
-                    <svg className="w-3.5 h-3.5 text-modern-red shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                    </svg>
-                    {t}
+              {/* Trust signals — 4 icon-driven items in a 2-col grid on
+                  mobile, single row on desktop. Replaces a 5-item text
+                  list with one 90-char award line that wrapped to 3
+                  lines on mobile. */}
+              <ul className="grid grid-cols-2 sm:flex sm:flex-wrap gap-x-5 gap-y-3 text-xs sm:text-xs font-semibold text-gray-300">
+                {TRUST_SIGNALS.map(({ icon: Icon, text }) => (
+                  <li key={text} className="flex items-center gap-2">
+                    <Icon className="w-4 h-4 text-modern-red shrink-0" strokeWidth={2} aria-hidden="true" />
+                    <span>{text}</span>
                   </li>
                 ))}
               </ul>
-            </div>
 
-            {/* Right — hero image (awards are baked into the photo) */}
-            <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-800 relative">
-              <Image
-                src={HERO_IMAGE}
-                alt={HERO_ALT}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
+              {/* Mobile-only secondary action — text link instead of a
+                  button, so the primary CTA above remains the obvious
+                  action. Hidden on desktop where the button version is
+                  already visible. */}
+              <Link
+                href="#storage-options"
+                className="lg:hidden inline-flex items-center gap-1.5 mt-6 text-sm font-bold text-gray-300 hover:text-white transition-colors"
+              >
+                View storage options
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── STORAGE OPTIONS ──────────────────────────────────── */}
-      <section id="storage-options" className="bg-gray-50 py-20">
+      <section id="storage-options" className="bg-gray-50 py-12 lg:py-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-3xl mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Storage Options</p>
@@ -270,7 +347,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── LOCATIONS ────────────────────────────────────────── */}
-      <section id="locations" className="bg-white py-20 border-y border-gray-200">
+      <section id="locations" className="bg-white py-12 lg:py-20 border-y border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-3xl mb-10">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Locations</p>
@@ -286,7 +363,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── SIZE GUIDE PREVIEW ───────────────────────────────── */}
-      <section id="size-guide" className="bg-gray-50 py-20">
+      <section id="size-guide" className="bg-gray-50 py-12 lg:py-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
             <div className="max-w-2xl">
@@ -477,10 +554,18 @@ export default async function HomePage() {
               Self Storage Frequently Asked Questions
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed mt-4 max-w-2xl mx-auto">
-              Find answers to the most common self storage FAQs — unit sizes, climate-controlled storage, boat and RV storage, business storage, free moving truck, online reservations, and finding the nearest Modern Storage® location in Arkansas.
+              Quick answers to help you get started — unit sizes, climate-controlled storage, pricing, online reservations, the free moving truck, and finding the nearest Modern Storage® location in Arkansas.
             </p>
           </div>
-          <FaqAccordion items={FAQS} />
+          <FaqAccordion items={HOME_FAQS} />
+          <div className="mt-8 text-center">
+            <Link
+              href="/faq"
+              className="inline-flex items-center gap-2 text-modern-red hover:text-modern-red-hover font-bold transition-colors"
+            >
+              See all storage FAQs →
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -510,7 +595,19 @@ export default async function HomePage() {
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
               </svg>
-              Call Modern Storage®
+              Call for New Rentals
+            </a>
+            <a
+              href="https://www.modernstorage.com/self-storage"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Existing customers — see all Modern Storage® locations"
+              className="bg-white/15 text-white font-bold px-8 py-3.5 rounded-full hover:bg-white/25 transition-colors text-sm border border-white/40 inline-flex items-center gap-2"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-3-6.65" />
+              </svg>
+              Existing Customers
             </a>
           </div>
         </div>

@@ -47,11 +47,12 @@ export const metadata: Metadata = {
 }
 
 const TRUST_BULLETS = [
-  'Mini-warehouse units led by Modern Storage® Riverdale',
-  'Loading docks at select locations',
-  'Package and freight acceptance',
+  'Business storage at all Modern Storage® locations',
+  'Loading dock access at Modern Storage® Riverdale',
+  'Package & freight acceptance at participating locations',
+  'Climate-controlled options available',
   'Electricity in select units',
-  '24/7 access where available',
+  'Extended & 24/7 access at select locations',
 ]
 
 function buildJsonLd(phoneDisplay: string) {
@@ -206,7 +207,7 @@ export default async function BusinessStoragePage() {
                 Business Storage &amp; Mini-Warehouse Space in <span className="text-modern-red">Arkansas</span>
               </h1>
               <p className="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg">
-                Mini-warehouse and business storage at Modern Storage® locations across Arkansas — led by Modern Storage® Riverdale. Loading docks, package and freight acceptance, electricity in select units, and 24/7 access where available.
+                Business storage and mini-warehouse space is available at every Modern Storage® location across Arkansas — for inventory, contractor equipment, records, staging furniture, e-commerce products, tools, and operational overflow. Modern Storage® Riverdale is the lead commercial location, with dock-height loading and freight-friendly access for higher-volume businesses.
               </p>
               <div className="flex flex-wrap gap-4 mb-10">
                 <Link
@@ -221,13 +222,27 @@ export default async function BusinessStoragePage() {
                 </Link>
                 <a
                   href={PHONE_NUMBER_HREF}
-                  aria-label={`Call Modern Storage® at ${PHONE_NUMBER_DISPLAY}`}
+                  aria-label={`Call for New Rentals at ${PHONE_NUMBER_DISPLAY}`}
                   className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-7 py-3.5 rounded-full transition-colors border border-white/20 text-sm"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
                   </svg>
-                  Call {PHONE_NUMBER_DISPLAY}
+                  Call for New Rentals
+                </a>
+                {/* Existing customers → all-locations directory on the
+                    reservation site (account access, gate codes, billing). */}
+                <a
+                  href="https://www.modernstorage.com/self-storage"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Existing customers — see all Modern Storage® locations"
+                  className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white font-bold px-7 py-3.5 rounded-full transition-colors border border-white/15 text-sm"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-3-6.65" />
+                  </svg>
+                  Existing Customers
                 </a>
               </div>
 
@@ -262,27 +277,77 @@ export default async function BusinessStoragePage() {
         </div>
       </section>
 
+      {/* Quick-answer summary — decision engine. Short direct answer,
+          two "Choose X if" decision blocks, Arkansas context, and a
+          single soft internal link. Optimized for AI extraction and
+          for visitors making a real format decision. */}
+      <section className="bg-modern-red/5 border-b border-gray-200 py-12">
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Quick answer</p>
+          <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-4">
+            What&apos;s the best storage type for business inventory or equipment?
+          </h2>
+          <p className="text-gray-700 text-lg leading-relaxed mb-6">
+            It comes down to <strong>what you&apos;re storing</strong> and <strong>how often you need access</strong>. Climate-controlled is the safer choice for records, electronics, and packaged inventory; drive-up is the practical pick for tools, contractor gear, and operations that load and unload from a truck.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+            <div className="bg-white rounded-xl p-5 border border-gray-200">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Choose climate-controlled if:</p>
+              <ul className="text-sm text-gray-700 space-y-1.5 list-disc list-outside ml-4">
+                <li>You&apos;re storing records, paper files, or electronics</li>
+                <li>You&apos;re holding packaged e-commerce inventory or samples</li>
+                <li>Items would be impacted by Arkansas heat and humidity</li>
+              </ul>
+            </div>
+            <div className="bg-white rounded-xl p-5 border border-gray-200">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Choose drive-up if:</p>
+              <ul className="text-sm text-gray-700 space-y-1.5 list-disc list-outside ml-4">
+                <li>You&apos;re storing contractor tools, equipment, or building materials</li>
+                <li>Frequent truck access matters more than environmental protection</li>
+                <li>Items are durable and handle weather swings</li>
+              </ul>
+            </div>
+          </div>
+
+          <p className="text-gray-700 leading-relaxed mb-4">
+            <strong>In Arkansas:</strong> summer heat and humidity routinely damage cardboard, paperwork, labels, and electronics in unconditioned storage — which is why most businesses with active inventory default to climate-controlled, while drive-up serves trades and contractor operations on the I-30 / I-40 / I-49 corridors. All units are month-to-month, so storage scales up or down with seasonal cycles, project ramp-ups, or growth. Units are intended for storage, not as active workspaces.
+          </p>
+          <p>
+            <Link href="/locations/riverdale" className="text-modern-red font-bold hover:underline">→ See business storage at Modern Storage® Riverdale (ground-floor, 26‑ft truck access, package acceptance)</Link>
+          </p>
+        </div>
+      </section>
+
       {/* ── LEAD LOCATION: RIVERDALE ────────────────────────── */}
       <section className="bg-white py-20 border-y border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div className="lg:col-span-6">
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
-                Lead business location
+                Business storage across Arkansas
               </p>
               <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-5">
-                Modern Storage® Riverdale — Central Arkansas&apos;s Mini-Warehouse Hub
+                Modern Storage® Business Storage for Inventory, Equipment &amp; Operations
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed mb-5">
-                Modern Storage® Riverdale at 2510 Cantrell Rd in Little Rock is purpose-built for commercial customers. Climate-controlled mini-warehouse units, dock-height loading, ground-floor access, and extended-hours availability — all five minutes from downtown.
+                Modern Storage® locations support business storage for inventory, contractor equipment, records, e-commerce products, staging furniture, tools, and overflow space.
+              </p>
+              <p className="text-gray-600 text-lg leading-relaxed mb-5">
+                Business amenities may include conference room access, business centers with computers and printers, package acceptance, smart locks, powered doors, electricity in select units, climate control, ground-floor access, 4-foot-wide standard doors, and roll-up warehouse doors on select units.
+              </p>
+              <p className="text-gray-600 text-lg leading-relaxed mb-5">
+                For businesses that need dock-height loading, <strong>Modern Storage® Riverdale</strong> offers loading dock access for pallets, freight, and box trucks.
               </p>
               <ul className="space-y-2.5 mb-7">
                 {[
-                  'Loading dock access for pallets, freight, and box trucks',
-                  'Package and freight receiving for e-commerce and contractors',
-                  'Climate-controlled mini-warehouse units',
-                  'Ground-floor access — no stairs or shared elevators',
-                  'Extended access hours for active business use',
+                  'Business storage available at all Modern Storage® locations',
+                  'Package acceptance at participating locations',
+                  'Conference room and business center access at select locations',
+                  'Smart locks, powered doors, and electricity in select units',
+                  '4-foot-wide doors on standard storage units',
+                  'Roll-up warehouse doors on select warehouse units',
+                  'Dock-height loading available at Riverdale',
                 ].map((b) => (
                   <li key={b} className="flex gap-3 text-sm text-charcoal">
                     <svg className="w-4 h-4 text-modern-red shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -297,16 +362,14 @@ export default async function BusinessStoragePage() {
                   href="#contact"
                   className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-6 py-3 rounded-full transition-colors text-sm"
                 >
-                  Request a Riverdale Quote
+                  Get a Business Storage Quote
                 </Link>
-                <a
-                  href={`https://www.google.com/maps/dir/?api=1&destination=34.7506,-92.2796`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="#features"
                   className="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-charcoal font-bold px-6 py-3 rounded-full transition-colors text-sm"
                 >
-                  Get Directions to Riverdale
-                </a>
+                  View Business Amenities
+                </Link>
               </div>
             </div>
             <div className="lg:col-span-6">
@@ -336,7 +399,7 @@ export default async function BusinessStoragePage() {
               What Sets Business Storage Apart
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Mini-warehouse units at Modern Storage® are configured for active commercial use, not long-term household storage. Availability of each feature varies by location — confirm in your inquiry.
+              Business storage at Modern Storage® is built for active commercial use rather than simple household storage. Features vary by location, but businesses across Arkansas use Modern Storage® for inventory, contractor equipment, records, operational overflow, and staging. Modern Storage® Riverdale offers the broadest set of commercial features, including loading dock access — confirm the specifics for your preferred location in your inquiry.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -353,6 +416,84 @@ export default async function BusinessStoragePage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── BUSINESS STORAGE BY LOCATION ────────────────────── */}
+      <section className="bg-white py-20 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-12">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+              Business storage by location
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+              Where Arkansas Businesses Store
+            </h2>
+            <p className="text-gray-600 text-lg leading-relaxed">
+              Every Modern Storage® location supports business storage. These facilities are the most popular with commercial customers — each with its own strengths for inventory, equipment, and operations.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              {
+                slug: 'riverdale',
+                name: 'Modern Storage® Riverdale',
+                tag: 'Loading docks + package acceptance',
+                blurb:
+                  'Our flagship dock-access location — dock-height loading for pallets, freight, and box trucks, plus package and freight receiving, five minutes from downtown Little Rock.',
+              },
+              {
+                slug: 'shackleford',
+                name: 'Modern Storage® Shackleford',
+                tag: 'Corporate & premium',
+                blurb:
+                  'Premium business storage in west Little Rock for corporate inventory, records, and professional overflow near the Shackleford Crossings corridor.',
+              },
+              {
+                slug: 'west-little-rock',
+                name: 'Modern Storage® West Little Rock',
+                tag: 'Professional',
+                blurb:
+                  'Professional and small-business storage along the I-430 corridor in west Little Rock, with climate-controlled and drive-up options.',
+              },
+              {
+                slug: 'bentonville',
+                name: 'Modern Storage® Bentonville',
+                tag: 'NWA business hub',
+                blurb:
+                  'A Northwest Arkansas business hub for vendors, suppliers, and e-commerce sellers near the Walmart Home Office area.',
+              },
+              {
+                slug: 'springdale',
+                name: 'Modern Storage® Springdale',
+                tag: 'NWA business hub',
+                blurb:
+                  'Business storage on the Hwy 412 / I-49 corridor — convenient for Northwest Arkansas operations and inventory.',
+              },
+            ].map((f) => (
+              <Link
+                key={f.slug}
+                href={`/locations/${f.slug}`}
+                className="group bg-gray-50 hover:bg-white rounded-2xl p-6 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all flex flex-col"
+              >
+                <p className="text-[10px] font-black uppercase tracking-widest text-modern-red mb-2">{f.tag}</p>
+                <h3 className="font-black text-charcoal leading-tight group-hover:text-modern-red transition-colors mb-2">
+                  {f.name}
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed flex-1">{f.blurb}</p>
+                <span className="mt-4 text-xs font-bold text-modern-red inline-flex items-center gap-1">
+                  View location →
+                </span>
+              </Link>
+            ))}
+          </div>
+          <p className="text-sm text-gray-500 mt-8 max-w-3xl">
+            Don&apos;t see your area? All 10 Modern Storage® locations offer business storage —{' '}
+            <Link href="/locations" className="text-modern-red font-semibold hover:underline">
+              see every location
+            </Link>{' '}
+            or tell us where you operate in the inquiry below.
+          </p>
         </div>
       </section>
 
@@ -381,6 +522,18 @@ export default async function BusinessStoragePage() {
               </div>
             ))}
           </div>
+
+          <p className="text-gray-400 text-base leading-relaxed mt-10 max-w-3xl [&_a]:text-modern-red [&_a]:font-semibold [&_a:hover]:underline">
+            Modern Storage® supports{' '}
+            <Link href="/contractor-storage-little-rock">contractors across Little Rock</Link>, Bentonville,
+            Springdale, and Northwest Arkansas; staging companies serving central Arkansas real estate
+            markets; and e-commerce businesses operating throughout Arkansas. Suppliers and vendors in
+            the Bentonville area can also see{' '}
+            <Link href="/business-storage-bentonville">supplier &amp; business storage in Bentonville</Link>.
+            Tell us where your crews, inventory, or projects are active and we&apos;ll point you to the
+            closest fit among our{' '}
+            <Link href="/locations">10 Arkansas locations</Link>.
+          </p>
         </div>
       </section>
 
@@ -395,7 +548,7 @@ export default async function BusinessStoragePage() {
               Programs for Volume, Property, and Industry Partners
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              For organizations that need more than a single mini-warehouse — or recurring access across multiple Modern Storage® Arkansas locations — these structured programs replace ad-hoc rentals.
+              For organizations that need more than a single mini-warehouse — or recurring access across multiple Modern Storage® Arkansas locations — these structured programs replace ad-hoc rentals. Many businesses use multiple Modern Storage® locations simultaneously depending on where crews, inventory, or projects are active, and our team can help coordinate business storage across Arkansas under a single point of contact.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -499,7 +652,7 @@ export default async function BusinessStoragePage() {
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
                 </svg>
-                Call {PHONE_NUMBER_DISPLAY}
+                Call for New Rentals
               </a>
               <Link
                 href="/"

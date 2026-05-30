@@ -227,7 +227,7 @@ export default async function AIStorageSizeFinderPage() {
                 href={u.href}
                 className="group bg-white rounded-2xl p-6 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all flex flex-col"
               >
-                <span className="font-bebas text-5xl text-charcoal leading-none mb-3">{u.size}</span>
+                <span className="font-bebas text-6xl lg:text-7xl text-charcoal leading-none mb-3">{u.size}</span>
                 <h3 className="font-black text-charcoal text-lg mb-2 leading-tight group-hover:text-modern-red transition-colors">
                   {u.title}
                 </h3>
@@ -324,7 +324,7 @@ export default async function AIStorageSizeFinderPage() {
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
               </svg>
-              Call {PHONE_NUMBER_DISPLAY}
+              Call for New Rentals
             </a>
           </div>
         </div>

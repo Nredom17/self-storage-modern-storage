@@ -44,6 +44,13 @@ export function buildLocationSchema(loc: Location, phoneDisplay: string) {
   if (loc.badges && loc.badges.length > 0) {
     // Surface amenity badges as keywords so they're indexable but not over-claimed.
     block.keywords = loc.badges.join(', ')
+    // Structured amenityFeature so Google/AI can read each offering discretely
+    // (climate-controlled, drive-up, business storage, boat/RV, free truck, etc.).
+    block.amenityFeature = loc.badges.map((b) => ({
+      '@type': 'LocationFeatureSpecification',
+      name: b,
+      value: true,
+    }))
   }
 
   return block

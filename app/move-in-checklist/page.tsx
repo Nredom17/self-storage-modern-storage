@@ -278,7 +278,7 @@ export default async function MoveInChecklistPage() {
               className="group bg-gray-50 hover:bg-white rounded-2xl p-5 border border-gray-200 hover:border-modern-red transition-all"
             >
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Locations</p>
-              <p className="font-black text-charcoal group-hover:text-modern-red transition-colors text-sm">10 Arkansas locations →</p>
+              <p className="font-black text-charcoal group-hover:text-modern-red transition-colors text-sm">10 Locations →</p>
             </Link>
           </div>
         </div>
@@ -335,7 +335,7 @@ export default async function MoveInChecklistPage() {
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
               </svg>
-              Call {PHONE_NUMBER_DISPLAY}
+              Call for New Rentals
             </a>
           </div>
         </div>

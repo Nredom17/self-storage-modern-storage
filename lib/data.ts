@@ -5,6 +5,7 @@ import {
   PHONE_NUMBER_HREF,
   RESERVATION_URL,
 } from '@/lib/site'
+import { CHAT_FAQS as STATIC_CHAT_FAQS, type ChatFaq } from '@/lib/chatbot'
 
 // Common Location shape — wide enough for both static literals (lib/site.ts) and
 // Supabase rows. Components import this, not the readonly tuple type from lib/site.
@@ -74,6 +75,65 @@ export async function getLocations(): Promise<Location[]> {
     return (data as DbLocation[]).map(mapDbLocation)
   } catch {
     return STATIC_LOCATIONS as unknown as Location[]
+  }
+}
+
+// Row shape for the chat_faqs table (see supabase/migrations/0004_chat_faqs.sql).
+type DbChatFaq = {
+  id: string
+  question: string
+  keywords: string | null
+  answer: string
+  button_label: string | null
+  button_url: string | null
+  location_answers: Record<string, string> | null
+  active: boolean
+  sort_order: number
+}
+
+/** Convert a DB row into the ChatFaq shape the widget uses. */
+export function mapDbChatFaq(row: DbChatFaq): ChatFaq {
+  const keywords = (row.keywords ?? '')
+    .split(',')
+    .map((k) => k.trim().toLowerCase())
+    .filter(Boolean)
+  const links =
+    row.button_label && row.button_url
+      ? [{ label: row.button_label, href: row.button_url }]
+      : undefined
+  const locationAnswers =
+    row.location_answers && Object.keys(row.location_answers).length > 0
+      ? row.location_answers
+      : undefined
+  return {
+    id: row.id,
+    question: row.question,
+    keywords,
+    answer: row.answer,
+    links,
+    locationAnswers,
+  }
+}
+
+/**
+ * Fetch active chatbot Q&A from Supabase, ordered for matching, falling back to
+ * the hardcoded CHAT_FAQS list when Supabase is unconfigured, empty, or errors.
+ */
+export async function getChatFaqs(): Promise<ChatFaq[]> {
+  const client = getSupabaseClient()
+  if (!client) return STATIC_CHAT_FAQS
+
+  try {
+    const { data, error } = await client
+      .from('chat_faqs')
+      .select('*')
+      .eq('active', true)
+      .order('sort_order', { ascending: true })
+
+    if (error || !data || data.length === 0) return STATIC_CHAT_FAQS
+    return (data as DbChatFaq[]).map(mapDbChatFaq)
+  } catch {
+    return STATIC_CHAT_FAQS
   }
 }
 

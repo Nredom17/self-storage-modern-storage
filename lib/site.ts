@@ -24,12 +24,105 @@ export const STORAGE_OPTION_LINKS = [
 ] as const
 
 export const NAV_LINKS = [
-  { label: 'Unit Sizes', href: '/#size-guide' },
+  { label: 'Unit Sizes', href: '/size-guide' },
   { label: 'Size Finder', href: '/ai-storage-size-finder' },
   { label: 'Locations', href: '/#locations' },
   { label: 'Moving Truck', href: '/free-moving-truck' },
   { label: 'FAQ', href: '/#faq' },
   { label: 'Reserve Now', href: '/#reserve' },
+] as const
+
+// Header nav tree. Mix of `link` (single anchor) and `dropdown` (menu).
+// Order is left-to-right on desktop, top-to-bottom on mobile.
+export type NavTreeItem =
+  | { type: 'link'; label: string; href: string; external?: boolean; cta?: boolean }
+  | {
+      type: 'dropdown'
+      label: string
+      items: {
+        label: string
+        href: string
+        external?: boolean
+      }[]
+    }
+
+// Locations dropdown uses a two-level drill-down UX (region → cities) instead
+// of the flat dropdown pattern. Defined separately from NAV_TREE so the Header
+// can render it with its own custom component.
+export const LOCATION_NAV_GROUPS = [
+  {
+    id: 'central-arkansas',
+    label: 'Central Arkansas',
+    cities: [
+      { slug: 'maumelle', label: 'Maumelle Blvd, AR' },
+      { slug: 'west-little-rock', label: 'West Little Rock, AR' },
+      // Shackleford location renders as "Little Rock, AR" in the dropdown
+      // (the facility is in Little Rock; "Shackleford" is the street).
+      { slug: 'shackleford', label: 'Little Rock, AR' },
+      // Riverdale services the Downtown / Heights / Hillcrest neighborhoods —
+      // the dropdown label calls all of those out for local search intent.
+      { slug: 'riverdale', label: 'Riverdale - Downtown - Heights - Hillcrest' },
+      { slug: 'north-little-rock', label: 'North Little Rock, AR' },
+      { slug: 'bryant', label: 'Bryant, AR' },
+      { slug: 'hot-springs', label: 'Hot Springs, AR' },
+    ],
+  },
+  {
+    id: 'northwest-arkansas',
+    label: 'Northwest Arkansas',
+    cities: [
+      { slug: 'springdale', label: 'Springdale, AR' },
+      { slug: 'lowell', label: 'Lowell, AR' },
+      { slug: 'bentonville', label: 'Bentonville, AR' },
+    ],
+  },
+] as const
+
+// NAV_TREE — everything to the RIGHT of the Locations dropdown.
+// Locations is rendered separately via its own drill-down component.
+export const NAV_TREE: readonly NavTreeItem[] = [
+  {
+    type: 'dropdown',
+    label: 'Storage Types',
+    items: [
+      { label: 'Climate-Controlled Storage', href: '/climate-controlled' },
+      { label: 'Boat & RV Storage', href: '/rv-boat-vehicle' },
+      { label: 'Business Storage', href: '/business-storage' },
+      { label: 'Household Storage', href: '/household-storage' },
+      { label: 'Student Storage', href: '/student-storage' },
+    ],
+  },
+  {
+    type: 'dropdown',
+    label: 'Unit Sizes',
+    items: [
+      { label: 'Size Guide', href: '/size-guide' },
+      { label: 'AI Size Finder', href: '/ai-storage-size-finder' },
+    ],
+  },
+  { type: 'link', label: 'Moving Truck', href: '/free-moving-truck' },
+  {
+    type: 'dropdown',
+    label: 'Resources',
+    items: [
+      // Reviews stays in the list but is hidden while the Reviews section is
+      // switched off (gated by REVIEWS_ENABLED), so it isn't visible today.
+      { label: 'Reviews', href: '/reviews' },
+      {
+        label: 'Podcast',
+        href: 'https://podcast.modernstorage.com',
+        external: true,
+      },
+      { label: 'Blogs', href: 'https://www.modernstorage.com/blog', external: true },
+      { label: 'Video Library', href: 'https://www.youtube.com/@modernstorage', external: true },
+      { label: 'Free Moving Checklist', href: '/move-in-checklist' },
+      { label: 'Storage Guides', href: '/guides' },
+    ],
+  },
+  { type: 'link', label: 'FAQ', href: '/faq' },
+  { type: 'link', label: 'Contact Us', href: '/contact' },
+  { type: 'link', label: 'Management', href: 'https://management.modernstorage.com/', external: true },
+  { type: 'link', label: 'Pay Bill', href: 'https://www.modernstorage.com/payonline', external: true, cta: true },
 ] as const
 
 export const THEME_PAGES = [
@@ -51,7 +144,7 @@ export const THEME_PAGES = [
     cta: 'Explore Household Storage',
     href: '/household-storage',
     image: '/images/modern-storage-springdale-facility-exterior.jpg',
-    alt: 'Modern Storage® Springdale self storage facility exterior in Arkansas with clean grounds.',
+    alt: 'Self-storage facility exterior at Modern Storage® Springdale — household storage in Arkansas',
   },
   {
     slug: 'rv-boat-vehicle',
@@ -122,7 +215,7 @@ export const LOCATIONS = [
     lon: -92.2796,
     image: '/images/modern-storage-riverdale-facility-exterior.jpg',
     alt: 'Modern Storage® Riverdale self-storage facility exterior at sunset in Little Rock Arkansas',
-    badges: ['Climate-Controlled', 'Business Storage', 'Ground-Floor Access'],
+    badges: ['Climate-Controlled', 'Business Storage', 'Ground-Floor Access', 'Free Moving Truck'],
     reservationUrl: 'https://www.modernstorage.com/2510-cantrell-rd-little-rock-ar-72202',
   },
   {
@@ -138,7 +231,7 @@ export const LOCATIONS = [
     lon: -92.260,
     image: '/images/modern-storage-north-little-rock-facility-night.jpg',
     alt: 'Modern Storage® North Little Rock self-storage facility at night in North Little Rock Arkansas',
-    badges: ['Climate-Controlled', 'Drive-Up Access', 'Business Storage'],
+    badges: ['Climate-Controlled', 'Drive-Up Access', 'Business Storage', 'Free Moving Truck'],
     reservationUrl: 'https://www.modernstorage.com/self-storage-north-little-rock-ar-f8184',
   },
   {
@@ -170,7 +263,7 @@ export const LOCATIONS = [
     lon: -92.489,
     image: '/images/modern-storage-bryant-facility-sunset.jpg',
     alt: 'Modern Storage® Bryant self-storage facility exterior at sunset in Bryant Arkansas',
-    badges: ['Climate-Controlled', 'Drive-Up Access', 'Boat/RV Storage'],
+    badges: ['Climate-Controlled', 'Drive-Up Access', 'Boat/RV Storage', 'Free Moving Truck'],
     reservationUrl: 'https://www.modernstorage.com/self-storage-bryant-ar-f8249',
   },
   {
@@ -202,7 +295,7 @@ export const LOCATIONS = [
     lon: -94.208,
     image: '/images/modern-storage-bentonville-facility-exterior.jpg',
     alt: 'Modern Storage® Bentonville self-storage facility exterior in Bentonville Arkansas',
-    badges: ['Climate-Controlled', 'Business Storage', 'Ground-Floor Access'],
+    badges: ['Climate-Controlled', 'Business Storage', 'Ground-Floor Access', 'Free Moving Truck'],
     reservationUrl: 'https://www.modernstorage.com/self-storage-bentonville-ar-f3125',
   },
   {
@@ -234,7 +327,7 @@ export const LOCATIONS = [
     lon: -94.140,
     image: '/images/modern-storage-lowell-facility-night.jpg',
     alt: 'Modern Storage® Lowell self-storage facility exterior at night in Lowell Arkansas',
-    badges: ['Climate-Controlled', 'Boat/RV Storage', 'Business Storage'],
+    badges: ['Climate-Controlled', 'Boat/RV Storage', 'Business Storage', 'Free Moving Truck'],
     reservationUrl: 'https://www.modernstorage.com/1407-w-monroe-ave-lowell-ar-72745',
   },
 ] as const
@@ -309,7 +402,7 @@ export const WHY_US = [
   },
   {
     title: 'Climate-controlled options',
-    description: 'Temperature- and humidity-managed units that protect sensitive belongings year-round.',
+    description: 'Temperature-managed indoor units that reduce exposure to Arkansas heat and humidity swings — helping protect sensitive belongings year-round.',
   },
   {
     title: 'Free moving truck with new rentals',
@@ -337,46 +430,142 @@ export const WHY_US = [
   },
 ] as const
 
+// FAQ answers below follow a deliberate SEO pattern:
+//   1. First sentence answers the query directly (snippet-friendly).
+//   2. Body weaves in exact-match phrases — self-storage units, storage facility,
+//      indoor storage, secure storage, month-to-month, storage near me,
+//      parking storage, square footage references, common search variants.
+//   3. `aHtml` mirrors `a` with embedded internal links to size-guide,
+//      climate-controlled, rv-boat-vehicle, business-storage, free-moving-truck,
+//      and locations — strengthens topical authority and crawl pathways.
+//   4. `a` (plain text) is what feeds the FAQPage JSON-LD schema.
 export const FAQS = [
   {
     q: 'What size storage unit do I need?',
-    a: `The right storage unit size depends on what you plan to store. A 5x5 storage unit is great for boxes, seasonal items, and closet overflow. A 10x10 storage unit can usually hold the contents of a one-bedroom apartment. A 10x20 storage unit is often used for the contents of a three-bedroom home, large furniture, or business inventory. Modern Storage® offers a storage unit size guide to help Arkansas customers choose the best fit before renting.`,
+    a: `The best self-storage unit size depends on how many items, furniture pieces, or boxes you need to store. A 5x5 storage unit (25 sq ft) holds boxes, seasonal items, and closet overflow. A 10x10 storage unit (100 sq ft) fits the contents of a one-bedroom apartment — bed, dresser, couch, and 15-20 boxes. A 10x20 storage unit (200 sq ft) is sized for a three-bedroom home, large furniture, or business inventory. Modern Storage® publishes a full self-storage unit size guide so Arkansas customers can compare 5x5, 5x10, 10x10, 10x15, 10x20, and 10x30 storage units before reserving online.`,
+    aHtml: `The best self-storage unit size depends on how many items, furniture pieces, or boxes you need to store. A 5x5 storage unit (25 sq ft) holds boxes, seasonal items, and closet overflow. A 10x10 storage unit (100 sq ft) fits the contents of a one-bedroom apartment — bed, dresser, couch, and 15-20 boxes. A 10x20 storage unit (200 sq ft) is sized for a three-bedroom home, large furniture, or business inventory. Modern Storage® publishes a full <a href="/size-guide">self-storage unit size guide</a> so Arkansas customers can compare 5x5, 5x10, 10x10, 10x15, 10x20, and 10x30 storage units before reserving online.`,
   },
   {
     q: 'Do you offer climate-controlled storage?',
-    a: `Yes. Many Modern Storage® locations in Arkansas offer climate-controlled storage units designed to help protect furniture, electronics, documents, photos, clothing, antiques, and business inventory from extreme temperature changes and humidity. Climate-controlled storage is a smart option if you are storing items long term or storing anything sensitive to heat, cold, or moisture.`,
+    a: `Yes — Modern Storage® offers climate-controlled storage units at select Arkansas locations. Climate-controlled units help reduce exposure to extreme temperature changes and seasonal humidity fluctuations compared to standard drive-up storage. These units are commonly used for furniture, electronics, documents, clothing, antiques, instruments, and business inventory. Availability and building features vary by location.`,
+    aHtml: `Yes — Modern Storage® offers <a href="/climate-controlled">climate-controlled storage units</a> at select Arkansas locations. Climate-controlled units help reduce exposure to extreme temperature changes and seasonal humidity fluctuations compared to standard drive-up storage. These units are commonly used for furniture, electronics, documents, clothing, antiques, instruments, and <a href="/business-storage">business inventory</a>. Availability and building features vary by location.`,
+  },
+  {
+    q: 'Is climate-controlled storage worth it in Arkansas?',
+    a: `Climate-controlled storage is a popular option in Arkansas for items that may be sensitive to heat, cold, or humidity fluctuations. Arkansas summers can expose stored belongings to high temperatures and moisture, especially during long-term storage. Many customers choose climate-controlled storage for furniture, electronics, documents, photos, instruments, antiques, and business inventory. For tools, outdoor equipment, and less temperature-sensitive items, a standard drive-up storage unit may be sufficient.`,
+    aHtml: `<a href="/climate-controlled">Climate-controlled storage</a> is a popular option in Arkansas for items that may be sensitive to heat, cold, or humidity fluctuations. Arkansas summers can expose stored belongings to high temperatures and moisture, especially during long-term storage. Many customers choose climate-controlled storage for furniture, electronics, documents, photos, instruments, antiques, and business inventory. For tools, outdoor equipment, and less temperature-sensitive items, a standard drive-up storage unit may be sufficient.`,
   },
   {
     q: 'Which locations offer boat and RV storage?',
-    a: `Select Modern Storage® locations offer boat storage, RV storage, trailer parking, and vehicle storage. Availability varies by location, but options may include outdoor parking, covered parking, and oversized spaces for larger vehicles. Customers looking for boat and RV storage in Arkansas can check availability at Modern Storage® locations including Maumelle Blvd in North Little Rock, Bentonville, West Little Rock, and Lowell.`,
+    a: `Modern Storage® offers boat storage, RV storage, trailer parking, motorcycle storage, and vehicle parking storage at select Arkansas locations. Outdoor parking, covered parking, and oversized parking spaces are available depending on the facility. Customers searching for boat storage near Beaver Lake, RV storage near Lake Maumelle, or trailer storage near Greers Ferry can compare availability at Modern Storage® Maumelle Blvd in North Little Rock, Modern Storage® Bentonville, Modern Storage® West Little Rock, Modern Storage® Lowell, and Modern Storage® Shackleford.`,
+    aHtml: `Modern Storage® offers <a href="/rv-boat-vehicle">boat storage, RV storage, trailer parking, motorcycle storage, and vehicle parking storage</a> at select Arkansas locations. Outdoor parking, covered parking, and oversized parking spaces are available depending on the facility. Customers searching for boat storage near Beaver Lake, RV storage near Lake Maumelle, or trailer storage near Greers Ferry can compare availability at Modern Storage® Maumelle Blvd in North Little Rock, Modern Storage® Bentonville, Modern Storage® West Little Rock, Modern Storage® Lowell, and Modern Storage® Shackleford.`,
+  },
+  {
+    q: 'Can I store a boat year-round in Arkansas?',
+    a: `Yes — Modern Storage® offers year-round boat storage in Arkansas. Boat owners near Beaver Lake, Lake Maumelle, Lake Ouachita, and Greers Ferry use Modern Storage® for off-season boat storage, trailer storage, and storage between weekends on the water. Year-round boat storage protects the hull, upholstery, and electronics from sun damage, freeze cycles, and winter weather. Available formats include outdoor parking storage, covered boat parking, and indoor storage for smaller boats and personal watercraft, depending on the location.`,
+    aHtml: `Yes — Modern Storage® offers year-round <a href="/rv-boat-vehicle">boat storage in Arkansas</a>. Boat owners near Beaver Lake, Lake Maumelle, Lake Ouachita, and Greers Ferry use Modern Storage® for off-season boat storage, trailer storage, and storage between weekends on the water. Year-round boat storage protects the hull, upholstery, and electronics from sun damage, freeze cycles, and winter weather. Available formats include outdoor parking storage, covered boat parking, and indoor storage for smaller boats and personal watercraft, depending on the location.`,
+  },
+  {
+    q: 'What fits in a 10x10 storage unit?',
+    a: `A 10x10 storage unit (100 square feet) holds the contents of a typical one-bedroom apartment: a queen mattress and frame, a dresser, a sofa, a coffee table, a TV, a small dining set, plus 15-20 boxes of personal items. Most customers also fit a few lamps, a bookshelf, and seasonal items. A 10x10 is a popular self-storage unit size for college storage, apartment storage near downtown, storage during a move, and short-term overflow. If you are storing the contents of a two-bedroom home, look at a 10x15 or 10x20 instead.`,
+    aHtml: `A 10x10 storage unit (100 square feet) holds the contents of a typical one-bedroom apartment: a queen mattress and frame, a dresser, a sofa, a coffee table, a TV, a small dining set, plus 15-20 boxes of personal items. Most customers also fit a few lamps, a bookshelf, and seasonal items. A 10x10 is a popular self-storage unit size for college storage, apartment storage near downtown, storage during a move, and short-term overflow. If you are storing the contents of a two-bedroom home, look at a 10x15 or 10x20 instead — see the full <a href="/size-guide">storage unit size guide</a>.`,
+  },
+  {
+    q: 'How much does self-storage cost in Arkansas?',
+    a: `Self-storage pricing in Arkansas depends on unit size, climate-controlled vs. drive-up, location, and current availability — small 5x5 drive-up units sit at the low end of the range and large 10x30 units or RV parking spaces at the high end. The Modern Storage® storage pricing guide breaks down typical monthly ranges by unit size, and each location's reservation page lists current rates and any move-in specials, so customers can compare cheap storage options across Little Rock, North Little Rock, Bentonville, Springdale, Lowell, Bryant, Hot Springs, and Maumelle before reserving.`,
+    aHtml: `Self-storage pricing in Arkansas depends on unit size, climate-controlled vs. drive-up, location, and current availability — small 5x5 drive-up units sit at the low end of the range and large 10x30 units or RV parking spaces at the high end. The Modern Storage® <a href="/pricing">storage pricing guide</a> breaks down typical monthly ranges by unit size, and each <a href="/locations">location's reservation page</a> lists current rates and any move-in specials, so customers can compare cheap storage options across Little Rock, North Little Rock, Bentonville, Springdale, Lowell, Bryant, Hot Springs, and Maumelle before reserving.`,
   },
   {
     q: 'Can I reserve a storage unit online?',
-    a: `Yes. You can reserve a storage unit online through the Modern Storage® website in just a few minutes. Choose your Arkansas storage location, select the unit size that works best for you, and complete your reservation from your phone, tablet, or computer. Online reservations make it easy to compare storage options before visiting the facility.`,
+    a: `Yes — customers can reserve a storage unit online with Modern Storage® in just a few minutes. Available unit sizes, pricing, climate-controlled availability, and parking options can all be reviewed online before move-in. Some rentals may require identity verification, payment confirmation, signed documents, or an in-person first visit check-in before facility access is granted.`,
+    aHtml: `Yes — customers can reserve a storage unit online with Modern Storage® in just a few minutes. Available unit sizes, pricing, <a href="/climate-controlled">climate-controlled availability</a>, and parking options can all be reviewed online before move-in. Some rentals may require identity verification, payment confirmation, signed documents, or an in-person first visit check-in before facility access is granted.`,
   },
   {
     q: 'Do you offer a free moving truck?',
-    a: `Modern Storage® offers a free moving truck with new rentals at participating locations. Truck availability, rental requirements, mileage limits, and location participation may vary, so customers should contact their local Modern Storage® facility before move-in. It is a helpful option for moving furniture, boxes, apartment contents, or business inventory into storage.`,
+    a: `Yes — Modern Storage® offers a free moving truck with new self-storage rentals at participating Arkansas locations. The free truck is a popular move-in benefit for customers moving apartments, homes, business inventory, or large furniture into storage. Truck availability, mileage limits, fuel responsibility, participation, and scheduling vary by location. Truck use is subject to a separate rental addendum and tenant responsibility for any damage during use.`,
+    aHtml: `Yes — Modern Storage® offers a <a href="/free-moving-truck">free moving truck</a> with new self-storage rentals at participating Arkansas locations. The free truck is a popular move-in benefit for customers moving apartments, homes, business inventory, or large furniture into storage. Truck availability, mileage limits, fuel responsibility, participation, and scheduling vary by location. Truck use is subject to a separate rental addendum and tenant responsibility for any damage during use.`,
   },
   {
     q: 'Are storage rentals month-to-month?',
-    a: `Yes. Modern Storage® storage rentals are month-to-month, giving customers flexibility without a long-term contract. Month-to-month storage is ideal for moving, remodeling, downsizing, business storage, seasonal storage, college storage, or short-term overflow needs.`,
+    a: `Yes — Modern Storage® offers month-to-month storage rentals with no long-term lease commitment. Month-to-month storage is commonly used for moving, remodeling, business storage, seasonal storage, college storage, and temporary overflow needs. Written notice may be required before move-out, and tenants remain responsible for cleaning out the unit and removing their lock at the end of occupancy.`,
+    aHtml: `Yes — Modern Storage® offers month-to-month storage rentals with no long-term lease commitment. Month-to-month storage is commonly used for moving, remodeling, <a href="/business-storage">business storage</a>, seasonal storage, college storage, and temporary overflow needs. Written notice may be required before move-out, and tenants remain responsible for cleaning out the unit and removing their lock at the end of occupancy.`,
   },
   {
     q: 'How do I find the closest Modern Storage® location?',
-    a: `Modern Storage® has convenient self-storage locations across Arkansas, including Little Rock, West Little Rock, North Little Rock (with two facilities — North Hills Blvd and Maumelle Blvd), Bentonville, Bryant, Hot Springs, Springdale, and Lowell. Customers can visit the Modern Storage® locations page to find the nearest facility, compare amenities, and view available storage units.`,
+    a: `The fastest way to find a Modern Storage® storage unit near me is to use the locations page, which lists all 10 Arkansas facilities with addresses, phone numbers, and reservation links. Modern Storage® has self-storage facilities in Little Rock (Shackleford and Riverdale), West Little Rock, North Little Rock (North Hills Blvd and Maumelle Blvd), Bentonville, Bryant, Hot Springs, Springdale, and Lowell. Each location page shows climate-controlled availability, drive-up storage, boat and RV storage, and current move-in offers.`,
+    aHtml: `The fastest way to find a Modern Storage® storage unit near me is to use the <a href="/locations">locations page</a>, which lists all 10 Arkansas facilities with addresses, phone numbers, and reservation links. Modern Storage® has self-storage facilities in Little Rock (<a href="/locations/shackleford">Shackleford</a> and <a href="/locations/riverdale">Riverdale</a>), <a href="/locations/west-little-rock">West Little Rock</a>, North Little Rock (<a href="/locations/north-little-rock">North Hills Blvd</a> and <a href="/locations/maumelle">Maumelle Blvd</a>), <a href="/locations/bentonville">Bentonville</a>, <a href="/locations/bryant">Bryant</a>, <a href="/locations/hot-springs">Hot Springs</a>, <a href="/locations/springdale">Springdale</a>, and <a href="/locations/lowell">Lowell</a>. Each location page shows climate-controlled availability, drive-up storage, boat and RV storage, and current move-in offers.`,
   },
   {
     q: 'Do you offer business storage?',
-    a: `Yes. Modern Storage® offers business storage and mini-warehouse storage for contractors, e-commerce sellers, sales reps, medical offices, real estate professionals, and small businesses. Business storage units can be used for inventory, tools, equipment, records, supplies, furniture, and overflow materials.`,
+    a: `Yes — Modern Storage® offers business storage for inventory, tools, supplies, equipment, records, and commercial overflow storage. Business storage is commonly used by contractors, e-commerce sellers, real estate professionals, restoration companies, and small businesses looking for flexible month-to-month storage space. Storage units are intended primarily for storage purposes and may not be used as active workspaces, repair shops, or operating business locations unless specifically approved by management.`,
+    aHtml: `Yes — Modern Storage® offers <a href="/business-storage">business storage</a> for inventory, tools, supplies, equipment, records, and commercial overflow storage. Business storage is commonly used by contractors, e-commerce sellers, real estate professionals, restoration companies, and small businesses looking for flexible month-to-month storage space. Storage units are intended primarily for storage purposes and may not be used as active workspaces, repair shops, or operating business locations unless specifically approved by management.`,
+  },
+  {
+    q: 'Can businesses accept deliveries at a storage unit?',
+    a: `Select Modern Storage® locations may allow deliveries for business storage customers, subject to facility policies and management approval. Delivery procedures, hours, acceptance policies, and access requirements vary by location. Customers should confirm delivery rules with their local Modern Storage® facility before scheduling shipments or freight deliveries.`,
+    aHtml: `Select Modern Storage® locations may allow deliveries for <a href="/business-storage">business storage</a> customers, subject to facility policies and management approval. Delivery procedures, hours, acceptance policies, and access requirements vary by location. Customers should confirm delivery rules with their local Modern Storage® facility before scheduling shipments or freight deliveries.`,
   },
   {
     q: 'Do you have drive-up storage units?',
-    a: `Yes. Many Modern Storage® locations offer drive-up storage units, allowing customers to load and unload directly from their vehicle. Drive-up access is especially helpful for heavy furniture, tools, equipment, business inventory, and frequent trips to your storage unit.`,
+    a: `Yes — Modern Storage® offers drive-up storage units at most Arkansas locations. Drive-up storage lets customers pull a vehicle, trailer, or moving truck directly to the unit door for loading and unloading. It is the fastest format for heavy furniture, tools, equipment, business inventory, frequent access, and apartment storage during a move. Drive-up storage units are typically standard (non-climate-controlled), making them a more affordable option than indoor storage for items that tolerate temperature changes.`,
+    aHtml: `Yes — Modern Storage® offers drive-up storage units at most Arkansas locations. Drive-up storage lets customers pull a vehicle, trailer, or moving truck directly to the unit door for loading and unloading. It is the fastest format for heavy furniture, tools, equipment, business inventory, frequent access, and apartment storage during a move. Drive-up storage units are typically standard (non-climate-controlled), making them a more affordable option than <a href="/climate-controlled">indoor climate-controlled storage</a> for items that tolerate temperature changes.`,
+  },
+  {
+    q: 'Are storage units secure?',
+    a: `Modern Storage® facilities may include features such as gated access, exterior lighting, perimeter fencing, and video surveillance systems depending on the location. Customers also secure their individual storage units with their own lock or disc lock. Security features vary by facility, and tenants are encouraged to maintain insurance coverage for stored property.`,
+    aHtml: `Modern Storage® facilities may include features such as gated access, exterior lighting, perimeter fencing, and video surveillance systems depending on the location. Customers also secure their individual storage units with their own lock or disc lock. Security features vary by facility, and tenants are encouraged to maintain insurance coverage for stored property.`,
+  },
+  {
+    q: 'What cannot be stored in a storage unit?',
+    a: `Self-storage units cannot be used for living, sleeping, or working out of, and cannot hold hazardous, flammable, perishable, or illegal items. That includes gasoline and fuel (drain mowers and equipment before storing), propane tanks, paint and solvents, fireworks, ammunition, food and groceries, plants, live animals, stolen property, and anything regulated by state or federal law. Wet items should also be avoided — they cause mold that can damage neighboring units. Modern Storage® provides a full prohibited-items list at move-in for each Arkansas storage facility.`,
+    aHtml: `Self-storage units cannot be used for living, sleeping, or working out of, and cannot hold hazardous, flammable, perishable, or illegal items. That includes gasoline and fuel (drain mowers and equipment before storing), propane tanks, paint and solvents, fireworks, ammunition, food and groceries, plants, live animals, stolen property, and anything regulated by state or federal law. Wet items should also be avoided — they cause mold that can damage neighboring units. Modern Storage® provides a full prohibited-items list at move-in for each <a href="/locations">Arkansas storage facility</a>.`,
+  },
+  {
+    q: 'Is storage insurance required?',
+    a: `Yes — tenants at Modern Storage® are required to maintain insurance or tenant protection coverage for stored items. Many homeowners and renters insurance policies may extend coverage to items stored off-premises, so customers should check with their insurance provider for details and limitations. Proof of qualifying insurance may be required after move-in. If acceptable coverage is not provided, tenants may be automatically enrolled in a tenant protection plan offered at the facility. Coverage options and pricing vary based on the declared value of stored items. Storage coverage may help protect against certain losses such as fire, theft, or water damage, subject to the terms, conditions, and exclusions of the applicable policy or protection plan.`,
+    aHtml: `<p>Yes — tenants at Modern Storage® are required to maintain insurance or tenant protection coverage for stored items. Many homeowners and renters insurance policies may extend coverage to items stored off-premises, so customers should check with their insurance provider for details and limitations.</p><p>Proof of qualifying insurance may be required after move-in. If acceptable coverage is not provided, tenants may be automatically enrolled in a tenant protection plan offered at the facility. Coverage options and pricing vary based on the declared value of stored items.</p><p>Storage coverage may help protect against certain losses such as fire, theft, or water damage, subject to the terms, conditions, and exclusions of the applicable policy or protection plan.</p>`,
   },
   {
     q: 'Do you have storage units in Little Rock, Bentonville, Springdale, Hot Springs, Bryant, and North Little Rock?',
-    a: `Yes. Modern Storage® offers self-storage units in Little Rock, West Little Rock, North Little Rock (including the Maumelle Blvd facility), Bentonville, Bryant, Hot Springs, Springdale, and Lowell. Depending on the location, customers can find climate-controlled storage, drive-up storage, boat and RV storage, vehicle parking, business storage, and mini-warehouse options.`,
+    a: `Yes — Modern Storage® has self-storage facilities serving every major Arkansas market. Customers searching for storage units near Little Rock can rent at Modern Storage® Shackleford, Modern Storage® Riverdale, or Modern Storage® West Little Rock. Self-storage facilities near North Little Rock include North Hills Blvd and Maumelle Blvd. Storage units near Bentonville, Lowell, and Springdale serve all of Northwest Arkansas. Modern Storage® also has storage facilities in Bryant (south of Little Rock), Hot Springs, and Maumelle. Depending on the location, customers can choose climate-controlled storage, drive-up storage, boat and RV storage, vehicle parking storage, business storage, and mini-warehouse units — all month-to-month, all reservable online.`,
+    aHtml: `Yes — Modern Storage® has self-storage facilities serving every major Arkansas market. Customers searching for storage units near Little Rock can rent at <a href="/locations/shackleford">Modern Storage® Shackleford</a>, <a href="/locations/riverdale">Modern Storage® Riverdale</a>, or <a href="/locations/west-little-rock">Modern Storage® West Little Rock</a>. Self-storage facilities near North Little Rock include <a href="/locations/north-little-rock">North Hills Blvd</a> and <a href="/locations/maumelle">Maumelle Blvd</a>. Storage units near <a href="/locations/bentonville">Bentonville</a>, <a href="/locations/lowell">Lowell</a>, and <a href="/locations/springdale">Springdale</a> serve all of Northwest Arkansas. Modern Storage® also has storage facilities in <a href="/locations/bryant">Bryant</a> (south of Little Rock) and <a href="/locations/hot-springs">Hot Springs</a>. Depending on the location, customers can choose <a href="/climate-controlled">climate-controlled storage</a>, drive-up storage, <a href="/rv-boat-vehicle">boat and RV storage</a>, vehicle parking storage, <a href="/business-storage">business storage</a>, and mini-warehouse units — all month-to-month, all reservable online via the <a href="/locations">Modern Storage® locations page</a>.`,
+  },
+] as const
+
+// Homepage "getting started" FAQs. These are intentionally SHORTER and more
+// action-leading than the long, authoritative answers on /faq — distinct
+// wording so the two pages don't compete for the same AI-overview citations.
+// The /faq page carries the comprehensive 80–150-word versions.
+export const HOME_FAQS = [
+  {
+    q: 'What size storage unit do I need?',
+    a: `Not sure what fits? A 5x5 holds closet and seasonal overflow, a 10x10 fits a one-bedroom apartment, and a 10x20 handles a full home or business inventory. Use our AI Storage Size Finder or Size Guide to pick the right size, then reserve online in minutes.`,
+    aHtml: `Not sure what fits? A 5x5 holds closet and seasonal overflow, a 10x10 fits a one-bedroom apartment, and a 10x20 handles a full home or business inventory. Use our <a href="/ai-storage-size-finder">AI Storage Size Finder</a> or <a href="/size-guide">Size Guide</a> to pick the right size, then reserve online in minutes.`,
+  },
+  {
+    q: 'Do you offer climate-controlled storage?',
+    a: `Yes — climate-controlled units are available at select Arkansas locations to help protect furniture, electronics, documents, and other temperature-sensitive items. Learn what climate-controlled storage covers, or choose your location to check current availability and reserve online.`,
+    aHtml: `Yes — <a href="/climate-controlled">climate-controlled units</a> are available at select Arkansas locations to help protect furniture, electronics, documents, and other temperature-sensitive items. Learn what climate-controlled storage covers, or <a href="/#locations">choose your location</a> to check current availability and reserve online.`,
+  },
+  {
+    q: 'How much does self-storage cost in Arkansas?',
+    a: `Your rate depends on unit size, climate-controlled vs. drive-up, and which location you choose. See typical price ranges in our storage pricing guide, then check live rates and any move-in specials on your nearest location's reservation page.`,
+    aHtml: `Your rate depends on unit size, climate-controlled vs. drive-up, and which location you choose. See typical price ranges in our <a href="/pricing">storage pricing guide</a>, then check live rates and any move-in specials on your <a href="/#locations">nearest location's reservation page</a>.`,
+  },
+  {
+    q: 'Can I reserve a storage unit online?',
+    a: `Yes — you can reserve a unit online in just a few minutes. Compare sizes, climate-controlled options, and parking, then book your unit. Some rentals may require ID, payment, or signed documents before gate access. Pick your location to get started.`,
+    aHtml: `Yes — you can reserve a unit online in just a few minutes. Compare sizes, climate-controlled options, and parking, then book your unit. Some rentals may require ID, payment, or signed documents before gate access. <a href="/#locations">Pick your location</a> to get started.`,
+  },
+  {
+    q: 'Do you offer a free moving truck?',
+    a: `Yes — a free moving truck is included with qualifying new rentals at participating Modern Storage® locations, so you can move in without renting one yourself. Availability, mileage, and terms vary by location. See how the free moving truck works, then reserve your unit.`,
+    aHtml: `Yes — a <a href="/free-moving-truck">free moving truck</a> is included with qualifying new rentals at participating Modern Storage® locations, so you can move in without renting one yourself. Availability, mileage, and terms vary by location. See how it works, then <a href="/#locations">reserve your unit</a>.`,
+  },
+  {
+    q: 'How do I find the closest Modern Storage® location?',
+    a: `Modern Storage® has 10 Arkansas locations across the Little Rock metro and Northwest Arkansas. Use our locations page to find the closest facility with its address, phone number, and a reserve link — whether you're near downtown, a lake, or the I-49 corridor.`,
+    aHtml: `Modern Storage® has 10 Arkansas locations across the Little Rock metro and Northwest Arkansas. Use our <a href="/locations">locations page</a> to find the closest facility with its address, phone number, and a reserve link — whether you're near downtown, a lake, or the I-49 corridor.`,
   },
 ] as const
 

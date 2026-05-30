@@ -98,11 +98,20 @@ export default function BusinessContactForm({ inboxEmail }: { inboxEmail: string
         </div>
         <h3 className="text-xl font-black text-charcoal mb-2">Inquiry sent — we&apos;ll be in touch</h3>
         <p className="text-sm text-gray-600 leading-relaxed">
-          Your business storage inquiry has been delivered to the Modern Storage® team at{' '}
-          <a href={`mailto:${inboxEmail}`} className="text-modern-red font-bold hover:underline">
-            {inboxEmail}
-          </a>
-          . Expect a reply during business hours.
+          {inboxEmail ? (
+            <>
+              Your inquiry has been delivered to the Modern Storage® team at{' '}
+              <a href={`mailto:${inboxEmail}`} className="text-modern-red font-bold hover:underline">
+                {inboxEmail}
+              </a>
+              . Expect a reply during business hours.
+            </>
+          ) : (
+            <>
+              Your inquiry has been delivered to the Modern Storage® team. Expect a reply during
+              business hours.
+            </>
+          )}
         </p>
       </div>
     )
@@ -220,13 +229,19 @@ export default function BusinessContactForm({ inboxEmail }: { inboxEmail: string
         >
           <p className="font-bold text-modern-red mb-1">Couldn&apos;t send your inquiry</p>
           <p className="text-gray-700">{errorMsg}</p>
-          <p className="text-gray-500 mt-2 text-xs">
-            You can also email us directly at{' '}
-            <a href={`mailto:${inboxEmail}`} className="text-modern-red font-bold hover:underline">
-              {inboxEmail}
-            </a>
-            .
-          </p>
+          {inboxEmail ? (
+            <p className="text-gray-500 mt-2 text-xs">
+              You can also email us directly at{' '}
+              <a href={`mailto:${inboxEmail}`} className="text-modern-red font-bold hover:underline">
+                {inboxEmail}
+              </a>
+              .
+            </p>
+          ) : (
+            <p className="text-gray-500 mt-2 text-xs">
+              Please try again, or call Modern Storage® during business hours.
+            </p>
+          )}
         </div>
       )}
 
