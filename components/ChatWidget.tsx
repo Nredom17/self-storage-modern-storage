@@ -127,12 +127,24 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
   // the API route). Fires when the visitor closes the chat or leaves the page.
   // Only sends when there's a real conversation beyond the name + phone prompts,
   // and never sends the same messages twice.
-  function flushTranscript(useBeacon: boolean) {
+  //
+  // `forceFlush` skips the userTurns threshold — used by closeChat() so that an
+  // X-button click ALWAYS sends whatever transcript exists. Without this, a
+  // visitor who entered name+phone and immediately closed produced only the
+  // lead email and the team never saw the bot's automatic greeting or any
+  // partial interaction.
+  function flushTranscript(useBeacon: boolean, forceFlush = false) {
     const { name: nm, phone: ph, messages: msgs } = stateRef.current
     if (!normalizePhone(ph)) return
     if (msgs.length <= sentLenRef.current) return
-    const userTurns = msgs.filter((m) => m.role === 'user').length
-    if (userTurns < 3) return // name + phone only — nothing worth sending yet
+    if (!forceFlush) {
+      const userTurns = msgs.filter((m) => m.role === 'user').length
+      // Threshold lowered from 3 → 2 so any post-phone interaction (button
+      // click or typed question) triggers a transcript on the next auto-flush
+      // event (pagehide / visibilitychange). closeChat() bypasses this check
+      // entirely via forceFlush=true.
+      if (userTurns < 2) return
+    }
     sentLenRef.current = msgs.length
     const payload = JSON.stringify({
       name: nm,
@@ -168,7 +180,10 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
   }, [])
 
   function closeChat() {
-    flushTranscript(false)
+    // Force-flush — an X-click means the visitor is done, so send whatever
+    // transcript exists regardless of the userTurns threshold. Previously a
+    // close after just name+phone never produced a transcript email.
+    flushTranscript(false, true)
     setView('launcher')
   }
 

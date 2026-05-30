@@ -152,10 +152,12 @@ export const CHATBOT_TEXT = {
     'I don’t have an answer for that one. For more information, please contact your Modern Storage® office directly and our team will be glad to help — or pick an option below.',
   // Polite ending — shown when the visitor signs off ("thanks", "bye",
   // "that's all", etc.). Keeps the door open without burying the visitor in
-  // a fallback dead-end menu, and reminds them how to reach the team if they
-  // think of something else later.
+  // a fallback dead-end menu. Phone number intentionally OMITTED — the
+  // persistent "Call for New Rentals" pill below the conversation already
+  // carries the number, and the New Rentals / Existing Customers pills give
+  // them the right paths for either audience.
   goodbye:
-    'You’re welcome! Thanks for chatting with Modern Storage®. If you think of anything else, you can reach our team anytime at 501-910-0096 or reserve online from any location page. Have a great day!',
+    'You’re welcome! Thanks for chatting with Modern Storage®. If you think of anything else, our team is just a tap away — or reserve online from any location page. Have a great day!',
   noLocationMatch:
     'I’m not sure which location you mean. Please choose one of these Modern Storage® locations:',
   // Shown when a visitor asks about hours — we ask which store first, then show
