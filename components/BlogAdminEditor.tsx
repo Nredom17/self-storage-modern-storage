@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import ImageUploadField from '@/components/ImageUploadField'
 
 // Per-post editor at /admin/blog/[id]. Phase 1 uses simple inputs for the
 // scalar SEO fields and a single JSON textarea for the `body` block array
@@ -261,11 +262,25 @@ export default function BlogAdminEditor({ id }: { id: string }) {
         </Section>
 
         <Section title="Hero & social images">
-          <Field label="Hero image URL or /path" value={row.hero_image ?? ''} onChange={(v) => update('hero_image', v)} />
+          <ImageUploadField
+            label="Hero image"
+            value={row.hero_image ?? ''}
+            onChange={(v) => update('hero_image', v)}
+            hint="Click Upload to drop a file straight into Supabase Storage, or paste a /images/* path or full URL. JPG / PNG / WebP / AVIF / GIF, 5 MB max."
+          />
           <Field label="Hero alt text (under 125 chars)" value={row.hero_alt ?? ''} onChange={(v) => update('hero_alt', v)} />
           <Field label="Hero caption (optional, italic under image)" value={row.hero_caption ?? ''} onChange={(v) => update('hero_caption', v)} />
-          <Field label="Open Graph image override (optional)" value={row.og_image ?? ''} onChange={(v) => update('og_image', v)} />
-          <Field label="Twitter card image override (optional)" value={row.twitter_image ?? ''} onChange={(v) => update('twitter_image', v)} />
+          <ImageUploadField
+            label="Open Graph image override (optional — defaults to hero)"
+            value={row.og_image ?? ''}
+            onChange={(v) => update('og_image', v)}
+            hint="Used when the post is shared on Facebook, LinkedIn, etc. 1200×630 recommended."
+          />
+          <ImageUploadField
+            label="Twitter card image override (optional — defaults to hero)"
+            value={row.twitter_image ?? ''}
+            onChange={(v) => update('twitter_image', v)}
+          />
         </Section>
 
         <Section title="Content">
@@ -295,6 +310,22 @@ export default function BlogAdminEditor({ id }: { id: string }) {
               <code className="bg-gray-100 px-1 mx-1 rounded">faq</code>
             </p>
           </div>
+          {/* In-body image uploader. Uploads to Supabase Storage and
+              appends a ready-made { type: 'image', ... } block to the
+              JSON above so editors don't have to hand-edit JSON to add
+              a photo. */}
+          <BodyImageUploader
+            onUploaded={(url) => {
+              let arr: unknown
+              try {
+                arr = JSON.parse(bodyJson)
+              } catch {
+                arr = []
+              }
+              const next = Array.isArray(arr) ? [...arr, { type: 'image', src: url, alt: '' }] : [{ type: 'image', src: url, alt: '' }]
+              setBodyJson(JSON.stringify(next, null, 2))
+            }}
+          />
         </Section>
 
         <Section title="Conversion">
@@ -339,6 +370,38 @@ function Textarea({ label, value, onChange, rows = 3 }: { label: string; value: 
         onChange={(e) => onChange(e.target.value)}
         rows={rows}
         className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm leading-relaxed focus:outline-none focus:border-modern-red"
+      />
+    </div>
+  )
+}
+
+// "Add an image to the body" helper. Lets the editor upload a file and
+// have a ready-made { type: 'image', src, alt } block appended to the
+// body JSON above — saves them from hand-editing JSON. The image block
+// still needs an alt value, so we leave alt: '' for the editor to fill
+// in before publishing.
+function BodyImageUploader({ onUploaded }: { onUploaded: (url: string) => void }) {
+  const [tempUrl, setTempUrl] = useState('')
+  return (
+    <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
+      <p className="text-xs font-black uppercase tracking-widest text-gray-600 mb-2">
+        Add an image block to the body
+      </p>
+      <p className="text-xs text-gray-500 mb-3 leading-relaxed">
+        Upload an image and we'll append a ready-made <code className="bg-gray-100 px-1 rounded">{'{ type: "image", src, alt }'}</code> block to the JSON above. Don't forget to fill in the <code className="bg-gray-100 px-1 rounded">alt</code> field before publishing.
+      </p>
+      <ImageUploadField
+        label="Upload image"
+        value={tempUrl}
+        onChange={(v) => {
+          setTempUrl(v)
+          if (v) {
+            onUploaded(v)
+            // Reset so the same widget can be reused for the next image
+            // without re-clearing manually.
+            window.setTimeout(() => setTempUrl(''), 50)
+          }
+        }}
       />
     </div>
   )
