@@ -17,6 +17,8 @@
 // strips unknown keys.
 
 import { NextResponse } from 'next/server'
+import { promises as fs } from 'node:fs'
+import path from 'node:path'
 import { getServiceSupabaseClient } from '@/lib/supabase'
 import {
   countWords,
@@ -29,6 +31,41 @@ import {
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
+
+// First-run guard: Supabase JS doesn't expose DDL, so the migration in
+// supabase/migrations/0005_blog_posts.sql has to be run once by the
+// editor in Supabase Studio. To make that painless, GET returns the
+// migration SQL inline whenever the table is missing — the admin UI
+// then renders a copy-paste card so the editor doesn't have to dig
+// through the repo.
+//
+// We read the SQL from disk lazily and cache it across requests on the
+// Node runtime. The file ships with the deployment under
+// /supabase/migrations/0005_blog_posts.sql.
+let _setupSqlCache: string | null = null
+async function loadSetupSql(): Promise<string> {
+  if (_setupSqlCache) return _setupSqlCache
+  try {
+    const p = path.join(process.cwd(), 'supabase', 'migrations', '0005_blog_posts.sql')
+    _setupSqlCache = await fs.readFile(p, 'utf8')
+  } catch {
+    // Fall back to a minimal version if the file can't be read at runtime
+    // (e.g. unexpected deployment trimming). Editors can still paste this
+    // into Supabase and get a working table — admin features work the same.
+    _setupSqlCache = MINIMAL_BLOG_POSTS_SQL
+  }
+  return _setupSqlCache
+}
+
+// Postgres returns SQLSTATE 42P01 (undefined_table) when a query references
+// a relation that doesn't exist. Supabase JS surfaces it via error.code.
+// PGRST205 is PostgREST's "schema cache" variant of the same condition.
+function isMissingTableError(err: { code?: string; message?: string } | null | undefined): boolean {
+  if (!err) return false
+  if (err.code === '42P01' || err.code === 'PGRST205') return true
+  const m = (err.message ?? '').toLowerCase()
+  return m.includes('schema cache') || m.includes('does not exist')
+}
 
 // Whitelist of columns the admin form is allowed to write. Anything not on
 // this list is silently dropped — defense in depth against accidental
@@ -146,6 +183,19 @@ export async function GET() {
     .from('blog_posts')
     .select('*')
     .order('updated_at', { ascending: false })
+  // First-run guard. If the table doesn't exist yet, return the migration
+  // SQL alongside the empty post list so the admin UI can render the
+  // copy-paste setup card.
+  if (error && isMissingTableError(error)) {
+    const setupSql = await loadSetupSql()
+    return NextResponse.json({
+      posts: [],
+      publicEnabled: isStorageTipsPublic(),
+      needsSetup: true,
+      setupSql,
+      setupError: error.message,
+    })
+  }
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   // publicEnabled lets the admin UI render a clear "Live" vs "Private"
   // banner so editors know whether published posts are reaching the public.
@@ -221,3 +271,63 @@ export async function DELETE(req: Request) {
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   return NextResponse.json({ ok: true })
 }
+
+// Last-resort fallback SQL — used only if the migration file can't be read
+// from disk at runtime. Keep it minimally sufficient to make the admin UI
+// fully functional. The canonical version lives in
+// supabase/migrations/0005_blog_posts.sql; update both if you change one.
+const MINIMAL_BLOG_POSTS_SQL = `-- Minimal Modern Storage Tips schema (fallback)
+create extension if not exists "pgcrypto";
+
+create table if not exists public.blog_posts (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
+  status text not null default 'draft' check (status in ('draft','published','archived')),
+  published_at timestamptz,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  title text not null,
+  h1 text not null,
+  meta_description text not null,
+  canonical_url text,
+  primary_keyword text,
+  secondary_keywords text[] default '{}',
+  entity_keywords text[] default '{}',
+  category text,
+  tags text[] default '{}',
+  search_intent text,
+  target_audience text,
+  funnel_stage text,
+  author text default 'Modern Storage® Team',
+  reviewer text,
+  last_reviewed_at date,
+  disclaimer text,
+  hero_image text,
+  hero_alt text,
+  hero_caption text,
+  og_image text,
+  twitter_image text,
+  intro text,
+  quick_answer text,
+  body jsonb default '[]',
+  cta_label text,
+  cta_url text,
+  related_service_url text,
+  reading_minutes int,
+  word_count int
+);
+
+create index if not exists blog_posts_slug_idx on public.blog_posts (slug);
+create index if not exists blog_posts_published_idx on public.blog_posts (published_at desc nulls last) where status = 'published';
+
+create or replace function public.set_updated_at() returns trigger language plpgsql as $$
+begin new.updated_at = now(); return new; end;
+$$;
+drop trigger if exists blog_posts_set_updated_at on public.blog_posts;
+create trigger blog_posts_set_updated_at before update on public.blog_posts for each row execute function public.set_updated_at();
+
+alter table public.blog_posts enable row level security;
+drop policy if exists "anyone can read published blog posts" on public.blog_posts;
+create policy "anyone can read published blog posts" on public.blog_posts for select using (status = 'published');
+`
+
