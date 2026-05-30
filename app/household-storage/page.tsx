@@ -17,9 +17,14 @@ import { buildLocationSchemaList } from '@/lib/schema'
 export const revalidate = 60
 
 const PAGE_PATH = '/household-storage'
-const HERO_IMAGE = '/images/modern-storage-springdale-best-of-the-best-awards.png'
+// Hero swapped to the Riverdale household-storage interior shot —
+// stronger thematic match than the prior Springdale awards image,
+// which fits brand storytelling but doesn't read as "household
+// storage" specifically. Awards image still lives on the homepage hero
+// where the brand-level signal is the priority.
+const HERO_IMAGE = '/images/Modern-Storage-Riverdale-HouseHoldStorage.png'
 const HERO_ALT =
-  'Modern Storage® facility with Best of the Best Self-Storage Awards 2023, 2024, 2025 winner and Best of Northwest Arkansas award seals'
+  'Modern Storage® Riverdale household storage unit interior in Little Rock, Arkansas — sized for apartment and home moves'
 const TRUCK_IMAGE = '/images/modern-storage-free-moving-truck.jpg'
 const TRUCK_ALT =
   'Modern Storage® free moving truck included with new household storage rentals at participating locations'
