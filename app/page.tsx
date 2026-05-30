@@ -72,52 +72,32 @@ const TRUST_SIGNALS: TrustSignal[] = [
   { icon: Calendar, text: 'Month-to-month rentals' },
 ]
 
-function buildJsonLd(phoneDisplay: string) {
-  const selfStorage = {
-    '@context': 'https://schema.org',
-    '@type': 'SelfStorage',
-    '@id': SITE_URL + '/#selfstorage',
-    name: 'Modern Storage®',
-    url: SITE_URL + '/',
-    image: SITE_URL + HERO_IMAGE,
-    telephone: phoneDisplay,
-    areaServed: { '@type': 'State', name: 'Arkansas' },
-    address: {
-      '@type': 'PostalAddress',
-      addressRegion: 'AR',
-      addressCountry: 'US',
-    },
-    description:
-      'Modern Storage® operates 10 self-storage facilities across Arkansas with climate-controlled, household, business, boat, RV, and vehicle storage.',
-    sameAs: [
-      'https://www.modernstorage.com',
-      'https://www.instagram.com/modern.storage',
-      'https://www.facebook.com/modernstorage',
-    ],
-  }
-
-  const localBusiness = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': SITE_URL + '/#localbusiness',
-    name: 'Modern Storage®',
-    url: SITE_URL + '/',
-    telephone: phoneDisplay,
-    image: SITE_URL + HERO_IMAGE,
-    priceRange: '$$',
-    address: {
-      '@type': 'PostalAddress',
-      addressRegion: 'AR',
-      addressCountry: 'US',
-    },
-    areaServed: { '@type': 'State', name: 'Arkansas' },
-  }
-
+// Per Semrush + Google's structured-data validators, a LocalBusiness /
+// SelfStorage node MUST carry a real PostalAddress (street, city, postal
+// code) — not just region + country. The brand entity "Modern Storage®"
+// doesn't have a single physical address, it spans 10 locations, so we
+// removed the brand-level SelfStorage and LocalBusiness blocks that
+// previously emitted only `{ addressRegion: 'AR', addressCountry: 'US' }`
+// and tripped the "Structured data contains markup errors" flag.
+//
+// The brand entity is still fully represented sitewide via the
+// Organization block in app/layout.tsx (#organization), and the 10
+// per-facility SelfStorage blocks emitted below carry full street-level
+// addresses for each physical location — that's now the only source of
+// LocalBusiness markup on this page.
+function buildJsonLd() {
+  // Service block describes the offering itself. provider repoints from
+  // the deleted brand-level #selfstorage to the canonical #organization
+  // entity defined in app/layout.tsx, so the @id graph stays connected.
   const service = {
     '@context': 'https://schema.org',
     '@type': 'Service',
+    '@id': SITE_URL + '/#service',
+    name: 'Self Storage in Arkansas',
     serviceType: 'Self Storage',
-    provider: { '@id': SITE_URL + '/#selfstorage' },
+    description:
+      'Modern Storage® operates 10 self-storage facilities across Arkansas with climate-controlled, household, business, boat, RV, and vehicle storage.',
+    provider: { '@id': SITE_URL + '/#organization' },
     areaServed: { '@type': 'State', name: 'Arkansas' },
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
@@ -130,14 +110,6 @@ function buildJsonLd(phoneDisplay: string) {
     },
   }
 
-  const breadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL + '/' },
-    ],
-  }
-
   const faqPage = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -148,13 +120,16 @@ function buildJsonLd(phoneDisplay: string) {
     })),
   }
 
-  return [selfStorage, localBusiness, service, breadcrumb, faqPage]
+  // BreadcrumbList intentionally omitted on the homepage — a single-item
+  // breadcrumb (just "Home") is a known Semrush flag and provides no SEO
+  // value. Sub-pages still emit proper multi-step breadcrumbs.
+  return [service, faqPage]
 }
 
 export default async function HomePage() {
   const [locations, settings] = await Promise.all([getLocations(), getSiteSettings()])
   const jsonLd = [
-    ...buildJsonLd(settings.phoneDisplay),
+    ...buildJsonLd(),
     ...buildLocationSchemaList(locations, settings.phoneDisplay),
     ...buildReviewsSchemaList(REVIEWS),
   ]

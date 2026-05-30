@@ -13,8 +13,13 @@ const HERO_ALT =
   'Modern Storage® Riverdale business storage in Little Rock — built for contractors, trades, and restoration crews'
 
 export const metadata: Metadata = {
+  // Title trimmed from 90 to 51 chars to clear the Semrush "title too
+  // long" flag and stay inside Google's ~60-char SERP truncation budget.
+  // The "Tools, Inventory & Jobsite Overflow" descriptor lives in the H1,
+  // the meta description, and the page body — no need to repeat it in the
+  // <title> at the cost of brand-mark truncation.
   title: {
-    absolute: 'Contractor Storage in Little Rock | Tools, Inventory & Jobsite Overflow | Modern Storage®',
+    absolute: 'Contractor Storage in Little Rock | Modern Storage®',
   },
   description:
     'Contractor and trade storage in Little Rock — tools, equipment, jobsite overflow, and business inventory at Modern Storage® Riverdale, West Little Rock, and North Little Rock. Drive-up access, climate-controlled units, and month-to-month rentals.',
@@ -117,12 +122,9 @@ function buildJsonLd(phoneDisplay: string) {
     url: SITE_URL + PAGE_PATH,
     image: SITE_URL + HERO_IMAGE,
     areaServed: { '@type': 'State', name: 'Arkansas' },
-    provider: {
-      '@type': 'SelfStorage',
-      name: 'Modern Storage®',
-      url: SITE_URL + '/',
-      telephone: phoneDisplay,
-    },
+    // Repointed to sitewide #organization @id to avoid emitting a nested
+    // SelfStorage with no PostalAddress (a Semrush markup-error trigger).
+    provider: { '@id': SITE_URL + '/#organization' },
   }
 
   const breadcrumb = {

@@ -163,7 +163,9 @@ function buildJsonLd() {
       'Month-to-month dorm and apartment storage for college students near Arkansas universities, with the closest Modern Storage® location mapped to each campus.',
     url: SITE_URL + PAGE_PATH,
     areaServed: { '@type': 'State', name: 'Arkansas' },
-    provider: { '@type': 'SelfStorage', name: 'Modern Storage®', url: SITE_URL + '/', telephone: '501-910-0096' },
+    // Repointed to sitewide #organization @id to avoid emitting a nested
+    // SelfStorage with no PostalAddress (a Semrush markup-error trigger).
+    provider: { '@id': SITE_URL + '/#organization' },
   }
   const breadcrumb = {
     '@context': 'https://schema.org',

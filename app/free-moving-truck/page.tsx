@@ -69,12 +69,9 @@ function buildJsonLd(phoneDisplay: string) {
     url: SITE_URL + PAGE_PATH,
     image: SITE_URL + HERO_IMAGE,
     areaServed: { '@type': 'State', name: 'Arkansas' },
-    provider: {
-      '@type': 'SelfStorage',
-      name: 'Modern Storage®',
-      url: SITE_URL + '/',
-      telephone: phoneDisplay,
-    },
+    // Repointed to sitewide #organization @id to avoid emitting a nested
+    // SelfStorage with no PostalAddress (a Semrush markup-error trigger).
+    provider: { '@id': SITE_URL + '/#organization' },
     offers: {
       '@type': 'Offer',
       price: '0',

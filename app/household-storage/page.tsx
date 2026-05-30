@@ -25,8 +25,12 @@ const TRUCK_ALT =
   'Modern Storage® free moving truck included with new household storage rentals at participating locations'
 
 export const metadata: Metadata = {
+  // Title trimmed from 79 to 53 chars to clear the Semrush "title too
+  // long" flag and avoid Google SERP truncation. The full "Moving,
+  // Renovating & Extra Space" framing stays in the H1 and meta
+  // description where it isn't competing with the brand mark for space.
   title: {
-    absolute: 'Household Storage Units for Moving, Renovating & Extra Space | Modern Storage®',
+    absolute: 'Household Storage Units in Arkansas | Modern Storage®',
   },
   description:
     'Household storage units for moving, renovating, downsizing, and everyday extra space. Flexible month-to-month rentals, drive-up and climate-controlled options, free moving truck with new rentals at 10 Modern Storage® locations.',
@@ -57,7 +61,7 @@ const TRUST_BULLETS = [
   'Online reservations in minutes',
 ]
 
-function buildJsonLd(phoneDisplay: string) {
+function buildJsonLd() {
   const service = {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -69,12 +73,9 @@ function buildJsonLd(phoneDisplay: string) {
     url: SITE_URL + PAGE_PATH,
     image: SITE_URL + HERO_IMAGE,
     areaServed: { '@type': 'State', name: 'Arkansas' },
-    provider: {
-      '@type': 'SelfStorage',
-      name: 'Modern Storage®',
-      url: SITE_URL + '/',
-      telephone: phoneDisplay,
-    },
+    // Repointed to sitewide #organization @id to avoid emitting a nested
+    // SelfStorage with no PostalAddress (a Semrush markup-error trigger).
+    provider: { '@id': SITE_URL + '/#organization' },
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Household Storage Unit Sizes',
@@ -90,18 +91,11 @@ function buildJsonLd(phoneDisplay: string) {
     },
   }
 
-  const localBusiness = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': SITE_URL + PAGE_PATH + '#localbusiness',
-    name: 'Modern Storage®',
-    url: SITE_URL + '/',
-    telephone: phoneDisplay,
-    image: SITE_URL + HERO_IMAGE,
-    priceRange: '$$',
-    address: { '@type': 'PostalAddress', addressRegion: 'AR', addressCountry: 'US' },
-    areaServed: { '@type': 'State', name: 'Arkansas' },
-  }
+  // Brand-level LocalBusiness block removed: schema.org + Semrush flag
+  // LocalBusiness nodes that lack a real PostalAddress. The brand entity
+  // spans 10 physical locations and doesn't map to a single address. The
+  // sitewide Organization block covers brand identity; per-facility
+  // SelfStorage blocks emitted below carry full street addresses.
 
   const breadcrumb = {
     '@context': 'https://schema.org',
@@ -127,7 +121,7 @@ function buildJsonLd(phoneDisplay: string) {
     })),
   }
 
-  return [service, localBusiness, breadcrumb, faqPage]
+  return [service, breadcrumb, faqPage]
 }
 
 function LifeIcon({ name }: { name: string }) {
@@ -178,7 +172,7 @@ function LifeIcon({ name }: { name: string }) {
 export default async function HouseholdStoragePage() {
   const [locations, settings] = await Promise.all([getLocations(), getSiteSettings()])
   const jsonLd = [
-    ...buildJsonLd(settings.phoneDisplay),
+    ...buildJsonLd(),
     ...buildLocationSchemaList(locations, settings.phoneDisplay),
   ]
   const PHONE_NUMBER_DISPLAY = settings.phoneDisplay

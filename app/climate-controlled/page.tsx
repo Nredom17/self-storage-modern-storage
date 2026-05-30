@@ -76,7 +76,7 @@ const TRUST_BULLETS = [
   'Free moving truck with new rentals',
 ]
 
-function buildJsonLd(phoneDisplay: string) {
+function buildJsonLd() {
   const service = {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -88,12 +88,11 @@ function buildJsonLd(phoneDisplay: string) {
     url: SITE_URL + PAGE_PATH,
     image: SITE_URL + HERO_IMAGE,
     areaServed: { '@type': 'State', name: 'Arkansas' },
-    provider: {
-      '@type': 'SelfStorage',
-      name: 'Modern Storage®',
-      url: SITE_URL + '/',
-      telephone: phoneDisplay,
-    },
+    // Service.provider now references the canonical sitewide Organization
+    // entity (defined in app/layout.tsx) via @id, rather than emitting a
+    // nested SelfStorage with no address — which Semrush flagged as a
+    // structured-data markup error.
+    provider: { '@id': SITE_URL + '/#organization' },
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Climate-Controlled Unit Sizes',
@@ -109,18 +108,13 @@ function buildJsonLd(phoneDisplay: string) {
     },
   }
 
-  const localBusiness = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': SITE_URL + PAGE_PATH + '#localbusiness',
-    name: 'Modern Storage®',
-    url: SITE_URL + '/',
-    telephone: phoneDisplay,
-    image: SITE_URL + HERO_IMAGE,
-    priceRange: '$$',
-    address: { '@type': 'PostalAddress', addressRegion: 'AR', addressCountry: 'US' },
-    areaServed: { '@type': 'State', name: 'Arkansas' },
-  }
+  // Brand-level LocalBusiness block removed: schema.org + Semrush flag
+  // LocalBusiness nodes that lack a real PostalAddress (street + city +
+  // postal code). The brand entity "Modern Storage®" spans 10 physical
+  // locations and doesn't map to a single address. Sitewide Organization
+  // (app/layout.tsx) covers brand identity, and the per-facility
+  // SelfStorage blocks emitted by buildLocationSchemaList() below carry
+  // full street addresses for each real location on this page.
 
   const breadcrumb = {
     '@context': 'https://schema.org',
@@ -146,7 +140,7 @@ function buildJsonLd(phoneDisplay: string) {
     })),
   }
 
-  return [service, localBusiness, breadcrumb, faqPage]
+  return [service, breadcrumb, faqPage]
 }
 
 function ConceptIcon({ title }: { title: string }) {
@@ -197,7 +191,7 @@ function ConceptIcon({ title }: { title: string }) {
 export default async function ClimateControlledPage() {
   const [locations, settings] = await Promise.all([getLocations(), getSiteSettings()])
   const jsonLd = [
-    ...buildJsonLd(settings.phoneDisplay),
+    ...buildJsonLd(),
     ...buildLocationSchemaList(locations, settings.phoneDisplay),
     ...buildReviewsSchemaList(CLIMATE_REVIEWS),
   ]

@@ -13,8 +13,13 @@ const HERO_ALT =
   'Modern Storage® Bentonville facility — business and climate-controlled storage for Northwest Arkansas vendors, suppliers, and small businesses'
 
 export const metadata: Metadata = {
+  // Title trimmed from 65 to 53 chars to clear the Semrush "title too
+  // long" flag (Semrush threshold = 60 incl. spaces). The "Supplier"
+  // qualifier stays in the H1, body copy, and meta description — the
+  // <title> leads with the broader "Business Storage in Bentonville"
+  // phrase that has higher search volume.
   title: {
-    absolute: 'Supplier & Business Storage in Bentonville, AR | Modern Storage®',
+    absolute: 'Business Storage in Bentonville, AR | Modern Storage®',
   },
   description:
     'Supplier and business storage in Bentonville for Northwest Arkansas vendors, e-commerce sellers, contractors, and small businesses. Indoor climate-controlled units, ground-floor access, and month-to-month rentals at Modern Storage® Bentonville and Lowell.',
@@ -117,12 +122,9 @@ function buildJsonLd(phoneDisplay: string) {
     url: SITE_URL + PAGE_PATH,
     image: SITE_URL + HERO_IMAGE,
     areaServed: { '@type': 'State', name: 'Arkansas' },
-    provider: {
-      '@type': 'SelfStorage',
-      name: 'Modern Storage®',
-      url: SITE_URL + '/',
-      telephone: phoneDisplay,
-    },
+    // Repointed to sitewide #organization @id to avoid emitting a nested
+    // SelfStorage with no PostalAddress (a Semrush markup-error trigger).
+    provider: { '@id': SITE_URL + '/#organization' },
   }
 
   const breadcrumb = {

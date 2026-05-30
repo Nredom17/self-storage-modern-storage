@@ -67,12 +67,11 @@ function buildJsonLd(phoneDisplay: string) {
     url: SITE_URL + PAGE_PATH,
     image: SITE_URL + HERO_IMAGE,
     areaServed: { '@type': 'State', name: 'Arkansas' },
-    provider: {
-      '@type': 'SelfStorage',
-      name: 'Modern Storage®',
-      url: SITE_URL + '/',
-      telephone: phoneDisplay,
-    },
+    // Repointed to sitewide #organization @id to avoid emitting a nested
+    // SelfStorage with no PostalAddress (a Semrush markup-error trigger).
+    // The full-address LocalBusiness for Riverdale (the flagship business
+    // storage facility) is still emitted below this Service block.
+    provider: { '@id': SITE_URL + '/#organization' },
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Business Storage Use Cases',

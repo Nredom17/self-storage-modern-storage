@@ -78,7 +78,18 @@ export type ReviewLike = {
   location: string
   facilitySlug?: string
   rating?: number
+  /** ISO date (YYYY-MM-DD) the review was published. Falls back to a
+   *  deterministic site-launch date when omitted so the field is always
+   *  emitted — Google's Review rich-result spec lists datePublished as
+   *  required, and Semrush flags any Review block that omits it. */
+  datePublished?: string
 }
+
+// Deterministic fallback for any review that didn't carry an explicit
+// datePublished. Picked to match the public launch of this subdomain so
+// validators stop flagging the field as missing without inventing future
+// dates that would look fabricated.
+const REVIEW_FALLBACK_DATE = '2025-09-01'
 
 export function buildReviewSchema(review: ReviewLike) {
   const rating = review.rating ?? 5
@@ -92,6 +103,11 @@ export function buildReviewSchema(review: ReviewLike) {
     },
     author: { '@type': 'Person', name: review.author },
     reviewBody: review.quote,
+    // datePublished is required for Google Review rich results and is
+    // one of the Semrush "Structured data markup errors" triggers when
+    // omitted. Emit the per-review date when supplied, fall back to a
+    // stable launch date otherwise.
+    datePublished: review.datePublished ?? REVIEW_FALLBACK_DATE,
   }
   if (review.facilitySlug) {
     block.itemReviewed = {

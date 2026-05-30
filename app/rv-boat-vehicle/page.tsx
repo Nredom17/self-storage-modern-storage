@@ -80,7 +80,7 @@ const TRUST_BULLETS = [
   'Month-to-month rentals',
 ]
 
-function buildJsonLd(phoneDisplay: string) {
+function buildJsonLd() {
   const service = {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -92,12 +92,9 @@ function buildJsonLd(phoneDisplay: string) {
     url: SITE_URL + PAGE_PATH,
     image: SITE_URL + HERO_IMAGE,
     areaServed: { '@type': 'State', name: 'Arkansas' },
-    provider: {
-      '@type': 'SelfStorage',
-      name: 'Modern Storage®',
-      url: SITE_URL + '/',
-      telephone: phoneDisplay,
-    },
+    // Repointed to sitewide #organization @id to avoid emitting a nested
+    // SelfStorage with no PostalAddress (a Semrush markup-error trigger).
+    provider: { '@id': SITE_URL + '/#organization' },
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Boat, RV, and Vehicle Storage Sizes',
@@ -113,18 +110,11 @@ function buildJsonLd(phoneDisplay: string) {
     },
   }
 
-  const localBusiness = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': SITE_URL + PAGE_PATH + '#localbusiness',
-    name: 'Modern Storage®',
-    url: SITE_URL + '/',
-    telephone: phoneDisplay,
-    image: SITE_URL + HERO_IMAGE,
-    priceRange: '$$',
-    address: { '@type': 'PostalAddress', addressRegion: 'AR', addressCountry: 'US' },
-    areaServed: { '@type': 'State', name: 'Arkansas' },
-  }
+  // Brand-level LocalBusiness block removed: schema.org + Semrush flag
+  // LocalBusiness nodes that lack a real PostalAddress. The brand entity
+  // spans 10 physical locations and doesn't map to a single address. The
+  // sitewide Organization block covers brand identity; per-facility
+  // SelfStorage blocks emitted below carry full street addresses.
 
   const breadcrumb = {
     '@context': 'https://schema.org',
@@ -145,7 +135,7 @@ function buildJsonLd(phoneDisplay: string) {
     })),
   }
 
-  return [service, localBusiness, breadcrumb, faqPage]
+  return [service, breadcrumb, faqPage]
 }
 
 function VehicleIcon({ name }: { name: string }) {
@@ -192,7 +182,7 @@ export default async function BoatRvStoragePage() {
   // Only emit SelfStorage schema for the 6 visible featured cards, not all 10.
   const featuredLocations = featured.map((f) => locations.find((l) => l.slug === f.slug)!)
   const jsonLd = [
-    ...buildJsonLd(settings.phoneDisplay),
+    ...buildJsonLd(),
     ...buildLocationSchemaList(featuredLocations, settings.phoneDisplay),
   ]
 
