@@ -1,8 +1,14 @@
 import type { MetadataRoute } from 'next'
 import { SITE_URL, THEME_PAGES, LOCATIONS } from '@/lib/site'
 import { REVIEW_FACILITY_CONFIG, REVIEWS_ENABLED } from '@/lib/reviews'
+import { getPublishedSlugs } from '@/lib/blog'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Pull published blog slugs from Supabase so newly-published posts appear
+  // in the sitemap without a code redeploy. Falls back to [] when Supabase
+  // isn't configured.
+  const blogSlugs = await getPublishedSlugs()
+
   const now = new Date()
   return [
     { url: SITE_URL + '/', lastModified: now, changeFrequency: 'weekly', priority: 1 },
@@ -209,5 +215,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
+    // ── Blog hub + dynamically-listed posts ──────────────────
+    {
+      url: SITE_URL + '/blog',
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    ...blogSlugs.map((slug) => ({
+      url: SITE_URL + '/blog/' + slug,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
   ]
 }

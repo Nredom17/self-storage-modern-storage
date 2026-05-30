@@ -1,0 +1,285 @@
+// Modern Storage® — blog data model + helpers.
+//
+// One row in the Supabase `blog_posts` table maps to one BlogPost in this
+// file. The `body` jsonb column holds an array of BlogBlock structures
+// rendered by components/BlogBlocks.tsx — the block schema is the editorial
+// contract between admin edits and public render.
+//
+// Adding a new block type is a 3-step change:
+//   1. add the variant to BlogBlock here
+//   2. handle it in components/BlogBlocks.tsx
+//   3. (optional) document it in /admin/blog so editors know it exists
+//
+// The block list is intentionally short for Phase 1 (heading, paragraph,
+// list, quote, callout, image, cta, comparison, faq). More can be added
+// later without breaking existing rows because each block carries its own
+// `type` tag.
+
+import { getSupabaseClient } from '@/lib/supabase'
+
+export type BlogStatus = 'draft' | 'published' | 'archived'
+
+export type BlogBlock =
+  | { type: 'heading'; level: 2 | 3; text: string; anchor?: string }
+  | { type: 'paragraph'; text: string }
+  | { type: 'list'; ordered?: boolean; items: string[] }
+  | { type: 'quote'; text: string; attribution?: string }
+  | {
+      type: 'callout'
+      tone?: 'info' | 'warn' | 'success'
+      title?: string
+      text: string
+    }
+  | { type: 'image'; src: string; alt: string; caption?: string }
+  | {
+      type: 'cta'
+      label: string
+      href: string
+      variant?: 'primary' | 'secondary'
+    }
+  | {
+      type: 'comparison'
+      leftHeader?: string
+      rightHeader?: string
+      rows: { left: string; right: string }[]
+    }
+  | { type: 'faq'; items: { q: string; a: string }[] }
+
+export type BlogPost = {
+  id: string
+  slug: string
+  status: BlogStatus
+  publishedAt: string | null
+  createdAt: string
+  updatedAt: string
+
+  // SEO meta
+  title: string
+  h1: string
+  metaDescription: string
+  canonicalUrl: string | null
+  primaryKeyword: string | null
+  secondaryKeywords: string[]
+  entityKeywords: string[]
+
+  // Classification
+  category: string | null
+  tags: string[]
+  searchIntent: string | null
+  targetAudience: string | null
+  funnelStage: string | null
+
+  // Authorship
+  author: string
+  reviewer: string | null
+  lastReviewedAt: string | null
+  disclaimer: string | null
+
+  // Hero / social images
+  heroImage: string | null
+  heroAlt: string | null
+  heroCaption: string | null
+  ogImage: string | null
+  twitterImage: string | null
+
+  // Content
+  intro: string | null
+  quickAnswer: string | null
+  body: BlogBlock[]
+
+  // Conversion
+  ctaLabel: string | null
+  ctaUrl: string | null
+  relatedServiceUrl: string | null
+
+  // Reading metadata
+  readingMinutes: number | null
+  wordCount: number | null
+}
+
+// Row shape from Supabase — snake_case to BlogPost camelCase mapper.
+type DbBlogPost = {
+  id: string
+  slug: string
+  status: BlogStatus
+  published_at: string | null
+  created_at: string
+  updated_at: string
+  title: string
+  h1: string
+  meta_description: string
+  canonical_url: string | null
+  primary_keyword: string | null
+  secondary_keywords: string[] | null
+  entity_keywords: string[] | null
+  category: string | null
+  tags: string[] | null
+  search_intent: string | null
+  target_audience: string | null
+  funnel_stage: string | null
+  author: string | null
+  reviewer: string | null
+  last_reviewed_at: string | null
+  disclaimer: string | null
+  hero_image: string | null
+  hero_alt: string | null
+  hero_caption: string | null
+  og_image: string | null
+  twitter_image: string | null
+  intro: string | null
+  quick_answer: string | null
+  body: BlogBlock[] | null
+  cta_label: string | null
+  cta_url: string | null
+  related_service_url: string | null
+  reading_minutes: number | null
+  word_count: number | null
+}
+
+function mapDb(row: DbBlogPost): BlogPost {
+  return {
+    id: row.id,
+    slug: row.slug,
+    status: row.status,
+    publishedAt: row.published_at,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+    title: row.title,
+    h1: row.h1,
+    metaDescription: row.meta_description,
+    canonicalUrl: row.canonical_url,
+    primaryKeyword: row.primary_keyword,
+    secondaryKeywords: row.secondary_keywords ?? [],
+    entityKeywords: row.entity_keywords ?? [],
+    category: row.category,
+    tags: row.tags ?? [],
+    searchIntent: row.search_intent,
+    targetAudience: row.target_audience,
+    funnelStage: row.funnel_stage,
+    author: row.author ?? 'Modern Storage® Team',
+    reviewer: row.reviewer,
+    lastReviewedAt: row.last_reviewed_at,
+    disclaimer: row.disclaimer,
+    heroImage: row.hero_image,
+    heroAlt: row.hero_alt,
+    heroCaption: row.hero_caption,
+    ogImage: row.og_image,
+    twitterImage: row.twitter_image,
+    intro: row.intro,
+    quickAnswer: row.quick_answer,
+    body: Array.isArray(row.body) ? row.body : [],
+    ctaLabel: row.cta_label,
+    ctaUrl: row.cta_url,
+    relatedServiceUrl: row.related_service_url,
+    readingMinutes: row.reading_minutes,
+    wordCount: row.word_count,
+  }
+}
+
+// ─── Public read paths ────────────────────────────────────────────────────
+
+/** All published posts, newest first. */
+export async function getPublishedPosts(): Promise<BlogPost[]> {
+  const client = getSupabaseClient()
+  if (!client) return []
+  const { data, error } = await client
+    .from('blog_posts')
+    .select('*')
+    .eq('status', 'published')
+    .order('published_at', { ascending: false })
+  if (error || !data) return []
+  return (data as DbBlogPost[]).map(mapDb)
+}
+
+/** Single published post by slug. */
+export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+  const client = getSupabaseClient()
+  if (!client) return null
+  const { data, error } = await client
+    .from('blog_posts')
+    .select('*')
+    .eq('slug', slug)
+    .eq('status', 'published')
+    .maybeSingle()
+  if (error || !data) return null
+  return mapDb(data as DbBlogPost)
+}
+
+/** Slugs only — used by the sitemap. */
+export async function getPublishedSlugs(): Promise<string[]> {
+  const client = getSupabaseClient()
+  if (!client) return []
+  const { data, error } = await client
+    .from('blog_posts')
+    .select('slug')
+    .eq('status', 'published')
+  if (error || !data) return []
+  return (data as { slug: string }[]).map((r) => r.slug)
+}
+
+// ─── Admin read path (includes drafts) ────────────────────────────────────
+// Server-side only — used by /api/admin/blog and /admin/blog pages.
+// Requires the SUPABASE_SERVICE_ROLE_KEY env var to bypass RLS.
+
+export async function getAllPostsAdmin(): Promise<BlogPost[]> {
+  const client = getSupabaseClient()
+  if (!client) return []
+  const { data, error } = await client
+    .from('blog_posts')
+    .select('*')
+    .order('updated_at', { ascending: false })
+  if (error || !data) return []
+  return (data as DbBlogPost[]).map(mapDb)
+}
+
+export async function getPostByIdAdmin(id: string): Promise<BlogPost | null> {
+  const client = getSupabaseClient()
+  if (!client) return null
+  const { data, error } = await client
+    .from('blog_posts')
+    .select('*')
+    .eq('id', id)
+    .maybeSingle()
+  if (error || !data) return null
+  return mapDb(data as DbBlogPost)
+}
+
+// ─── Slug + reading-time helpers ─────────────────────────────────────────
+
+export function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/[̀-ͯ]/g, '') // strip accents
+    .replace(/®|™|©/g, '') // strip brand marks
+    .replace(/[^a-z0-9\s-]/g, '') // drop punctuation
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/-{2,}/g, '-')
+    .slice(0, 80)
+}
+
+/** Approximate reading time (words / 220 wpm). Used when not set explicitly. */
+export function estimateReadingMinutes(text: string): number {
+  const wordCount = text.split(/\s+/).filter(Boolean).length
+  return Math.max(1, Math.round(wordCount / 220))
+}
+
+/** Word count across intro + quick_answer + body text blocks. */
+export function countWords(post: BlogPost): number {
+  const pieces: string[] = []
+  if (post.intro) pieces.push(post.intro)
+  if (post.quickAnswer) pieces.push(post.quickAnswer)
+  for (const b of post.body) {
+    if (b.type === 'paragraph' || b.type === 'heading' || b.type === 'quote') pieces.push(b.text)
+    if (b.type === 'callout') pieces.push((b.title ?? '') + ' ' + b.text)
+    if (b.type === 'list') pieces.push(b.items.join(' '))
+    if (b.type === 'comparison') {
+      for (const r of b.rows) pieces.push(r.left + ' ' + r.right)
+    }
+    if (b.type === 'faq') {
+      for (const q of b.items) pieces.push(q.q + ' ' + q.a)
+    }
+  }
+  return pieces.join(' ').split(/\s+/).filter(Boolean).length
+}
