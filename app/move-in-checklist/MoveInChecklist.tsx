@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import {
   CHECKLIST_DATA,
   STORAGE_TYPES,
@@ -128,6 +129,72 @@ function BackNext({
       >
         {nextLabel}
       </button>
+    </div>
+  )
+}
+
+// ─── PRINTABLE CHECKLIST (PORTAL TARGET) ─────────────────────────────────────
+// Rendered via createPortal as a direct child of document.body. On screen it
+// is display:none. During print, a body.printing-checklist class flips it
+// visible AND hides every other body child via display:none, so the rest of
+// the page (header, hero, FAQ, footer, CTA) collapses out of layout entirely
+// and stops generating blank trailing pages.
+//
+// Critical: we use `display: none` (not `visibility: hidden`) to remove the
+// screen UI from layout. visibility:hidden was the bug — it kept the hidden
+// elements occupying their original vertical space, which made the browser
+// allocate 8 print pages even when only page 1 had visible content.
+function PrintableChecklist({
+  type,
+  unitSize,
+  moveDate,
+  checked,
+}: {
+  type: string
+  unitSize: string
+  moveDate: string
+  checked: Record<string, boolean>
+}) {
+  const checklist = CHECKLIST_DATA[type] || CHECKLIST_DATA.household
+  const typeLabel = STORAGE_TYPES.find((t) => t.id === type)?.label || 'Storage'
+  const unitLabel = UNIT_SIZES.find((u) => u.id === unitSize)?.label || unitSize
+  const formattedDate = formatDate(moveDate)
+
+  return (
+    <div className="printable-checklist">
+      <div className="pc-header">
+        <div className="pc-brand">MODERN STORAGE®</div>
+        <div className="pc-title">Move-In Checklist</div>
+        <div className="pc-context">
+          {unitLabel} unit · {typeLabel}
+          {formattedDate ? ` · Move-in: ${formattedDate}` : ''}
+        </div>
+        <div className="pc-source">
+          self-storage.modernstorage.com/move-in-checklist
+        </div>
+      </div>
+
+      {Object.entries(checklist).map(([section, items]) => (
+        <div key={section} className="pc-section">
+          <div className="pc-section-title">{section}</div>
+          <div className="pc-items">
+            {items.map((item, i) => {
+              const key = `${section}-${i}`
+              const done = Boolean(checked[key])
+              return (
+                <div key={key} className={'pc-item' + (done ? ' pc-item--done' : '')}>
+                  <div className={'pc-checkbox' + (done ? ' pc-checkbox--done' : '')}>
+                    {done ? '✓' : ''}
+                  </div>
+                  <span className={'pc-text' + (done ? ' pc-text--done' : '')}>
+                    {item}
+                  </span>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      ))}
     </div>
   )
 }
@@ -460,6 +527,10 @@ function ChecklistView({
   const [leadSubmitted, setLeadSubmitted] = useState(false)
   const [showLeadForm, setShowLeadForm] = useState(false)
 
+  // Portals can't run during SSR (no document). Flip a flag after first
+  // client render so createPortal has a real document.body to target.
+  const [mounted, setMounted] = useState(false)
+
   useEffect(() => {
     if (typeof window === 'undefined') return
     try {
@@ -468,6 +539,21 @@ function ChecklistView({
       }
     } catch {
       /* localStorage blocked or unavailable — fall through, user will refill */
+    }
+    setMounted(true)
+
+    // Clean up the body class when the browser's print dialog closes. Some
+    // browsers fire 'afterprint' on cancel too, which is what we want — we
+    // never want the class to stick around outside of an active print.
+    const handleAfterPrint = () => {
+      document.body.classList.remove('printing-checklist')
+    }
+    window.addEventListener('afterprint', handleAfterPrint)
+    return () => {
+      window.removeEventListener('afterprint', handleAfterPrint)
+      // Safety: if the component unmounts mid-print (extremely unlikely)
+      // make sure we don't leave the class on body.
+      document.body.classList.remove('printing-checklist')
     }
   }, [])
 
@@ -488,16 +574,26 @@ function ChecklistView({
     })
   }
 
+  // Triggers the browser print dialog with the portal-based print layout.
+  // Adds body.printing-checklist before print() — that class is the switch
+  // the @media print CSS uses to:
+  //   1. Hide every body child except the .printable-checklist portal
+  //   2. Show the portal (which is display:none on screen by default)
+  // afterprint removes the class so the screen UI returns to normal.
+  const triggerPrint = () => {
+    if (typeof window === 'undefined') return
+    document.body.classList.add('printing-checklist')
+    // setTimeout 0 gives the browser one paint to apply the class before
+    // the print snapshot is taken. Without it, some browsers print the
+    // pre-class layout (which is the blank-pages bug we just fixed).
+    setTimeout(() => window.print(), 50)
+  }
+
   // Browser-native print, gated on the lead form. window.print() is the only
-  // path to PDF here and we hard-block it server-of-truth: if the lead hasn't
-  // been captured yet, the call is a no-op regardless of how the UI is
-  // manipulated, so the gate can't be bypassed by enabling the hidden button
-  // via devtools.
+  // path to PDF here and we hard-block it: if the lead hasn't been captured,
+  // the call short-circuits regardless of UI manipulation.
   const handlePrint = () => {
     if (!leadSubmitted) {
-      // Open the form instead of firing print. Belt-and-suspenders — the
-      // button shouldn't even be visible when leadSubmitted=false, but if
-      // someone manipulates state, print still won't fire.
       setShowLeadForm(true)
       return
     }
@@ -508,9 +604,7 @@ function ChecklistView({
       doneCount,
       totalItems: allItems.length,
     })
-    if (typeof window !== 'undefined') {
-      window.print()
-    }
+    triggerPrint()
   }
 
   // Called when the lead form POSTs to /api/checklist-lead successfully.
@@ -524,8 +618,7 @@ function ChecklistView({
         window.localStorage.setItem(LEAD_STORAGE_KEY, 'true')
       }
     } catch {
-      /* localStorage blocked — that's fine, the in-memory unlock still works
-       * for this session. */
+      /* localStorage blocked — in-memory unlock still works for this session. */
     }
     track('checklist_print', {
       type,
@@ -535,55 +628,25 @@ function ChecklistView({
       totalItems: allItems.length,
       autoTriggered: true,
     })
-    // Tiny delay so React paints the unlocked state before the print dialog
-    // takes over (avoids printing a half-rendered state on slow devices).
+    // Slightly longer delay than triggerPrint so the success state paints
+    // before the browser print dialog takes over.
     if (typeof window !== 'undefined') {
+      document.body.classList.add('printing-checklist')
       setTimeout(() => window.print(), 250)
     }
   }
 
   return (
-    <div className="checklist-print-area">
-      {/* Print-only header — hidden on screen, only renders in the printout.
-       * Gives the printed sheet a clear Modern Storage® brand line plus the
-       * customer's unit/type/date so it's a useful artifact on its own. */}
-      <div
-        className="print-only"
-        style={{
-          marginBottom: 16,
-          paddingBottom: 12,
-          borderBottom: '2px solid #F60001',
-        }}
-      >
-        <div
-          style={{
-            fontFamily: "'Bebas Neue', cursive",
-            fontSize: 14,
-            letterSpacing: '0.18em',
-            color: '#F60001',
-          }}
-        >
-          MODERN STORAGE®
-        </div>
-        <div
-          style={{
-            fontFamily: "'Bebas Neue', cursive",
-            fontSize: 28,
-            color: '#1A1A1A',
-            lineHeight: 1,
-            margin: '4px 0',
-          }}
-        >
-          Move-In Checklist
-        </div>
-        <div style={{ fontSize: 12, color: '#555' }}>
-          {unitLabel} unit · {typeLabel}
-          {formattedDate ? ` · Move-in: ${formattedDate}` : ''}
-        </div>
-        <div style={{ fontSize: 10, color: '#999', marginTop: 4 }}>
-          Generated at self-storage.modernstorage.com/move-in-checklist
-        </div>
-      </div>
+    <>
+      {/* Screen UI. Always rendered. During print, body.printing-checklist
+       * hides every body child except the .printable-checklist portal
+       * (rendered at the bottom of this fragment), so this whole subtree
+       * collapses out of layout and stops generating blank trailing pages. */}
+      <div>
+      {/* Legacy print-only header removed — the print path now uses the
+       * PrintableChecklist portal at the bottom of this fragment, which
+       * has its own clean header and avoids the layout-space leak that
+       * the old visibility:hidden approach was causing. */}
 
       {/* Print / lead-gate UI — three states:
        *   1. Lead NOT submitted, form NOT open: "Save and Print" button
@@ -938,6 +1001,23 @@ function ChecklistView({
         Start over
       </button>
     </div>
+
+    {/* Print portal — renders the printable checklist as a direct child of
+     * document.body so the @media print + body.printing-checklist CSS can
+     * hide every other body child via display:none. This is what eliminates
+     * the trailing blank pages the visibility:hidden approach was leaving. */}
+    {mounted &&
+      typeof document !== 'undefined' &&
+      createPortal(
+        <PrintableChecklist
+          type={type}
+          unitSize={unitSize}
+          moveDate={moveDate}
+          checked={checked}
+        />,
+        document.body,
+      )}
+    </>
   )
 }
 

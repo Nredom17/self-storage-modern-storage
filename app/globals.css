@@ -49,177 +49,189 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
- * Print styles — used by /move-in-checklist so users can print or save-as-PDF
- * a paper copy to carry on move-in day. Standard "visibility-only" pattern:
- * hide everything, then re-show only the .checklist-print-area subtree and
- * position it at the top of the page. Inline styles win over CSS unless we use
- * !important here, since the checklist component uses heavy inline styling.
+ * PRINT STYLES — /move-in-checklist
+ *
+ * The previous visibility-only pattern caused a blank-pages bug: hidden
+ * page chrome (header, hero, FAQ, footer, CTA) kept its layout space, so
+ * the browser allocated 8 print pages even when only page 1 had visible
+ * content.
+ *
+ * Current approach: the printable content is rendered into a React portal
+ * as a direct child of document.body (see PrintableChecklist in
+ * app/move-in-checklist/MoveInChecklist.tsx). On screen the portal is
+ * display:none. When the user clicks Print, we add `printing-checklist`
+ * to the body class, then call window.print(). The CSS below uses that
+ * class as a switch to:
+ *   1. display:none every body child EXCEPT the portal (no layout-space
+ *      leak — the rest of the page collapses out of flow entirely)
+ *   2. Reset html/body/main heights so they don't force minimum page size
+ *   3. Display the portal as a normal block element with the actual print
+ *      styling (compact header, 2-col grid, etc.)
+ *
+ * afterprint removes the class. The screen UI returns to normal.
  * ──────────────────────────────────────────────────────────────────────────── */
 
-/* Print-only header is hidden on screen; only visible during print. */
-.print-only {
+/* Portal is always rendered but hidden on screen. Only the in-flow screen
+ * UI is visible to the user until they hit Print. */
+.printable-checklist {
   display: none;
 }
 
 @media print {
-  /* Letter portrait, tight margin. The whole printout aims for 1 page
-   * (rarely 2). Print colors must render so red accents survive cheap
-   * laser drivers that strip "background colors" by default. */
+  /* Landscape Letter with tight margins — wider canvas means the 2-col
+   * grid has room to breathe and the whole printout stays on one page
+   * for the vast majority of checklists. */
   @page {
-    size: letter;
+    size: Letter landscape;
     margin: 0.3in;
   }
+
+  /* Force print color rendering so the red brand accents survive cheap
+   * laser drivers that strip "background colors" by default. */
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
+  /* Reset container heights. These wrappers carry `min-h-screen` (=
+   * min-height: 100vh) and flex layouts on screen. In print mode that
+   * forces blank pages because the browser allocates whole-page rows
+   * for any container that's 100vh tall. height:auto + min-height:0 +
+   * overflow:visible lets these containers collapse to their content. */
   html,
-  body {
+  body,
+  main {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
     background: white !important;
     color: black !important;
-    margin: 0 !important;
-    padding: 0 !important;
   }
 
-  /* Hide everything by default, then opt the printable subtree back in. */
-  body * {
-    visibility: hidden !important;
+  /* When the user has clicked Print, body.printing-checklist becomes the
+   * switch. Every direct child of body is hidden EXCEPT the portal target.
+   * This is the line that fixes the blank-pages bug — display:none
+   * collapses the screen UI out of layout entirely so it stops generating
+   * trailing pages. */
+  body.printing-checklist > *:not(.printable-checklist) {
+    display: none !important;
   }
-  .checklist-print-area,
-  .checklist-print-area * {
-    visibility: visible !important;
-  }
-
-  /* Pull the printable area to the top of the page so the hidden chrome
-   * doesn't push it down with blank space. */
-  .checklist-print-area {
-    position: absolute !important;
-    left: 0 !important;
-    top: 0 !important;
-    right: 0 !important;
+  body.printing-checklist .printable-checklist {
+    display: block !important;
+    position: static !important;
     width: 100% !important;
-    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
     background: white !important;
-    box-shadow: none !important;
-    font-size: 10.5px !important;
-    line-height: 1.3 !important;
+    color: black !important;
+    font-family: 'DM Sans', sans-serif !important;
   }
 
-  /* Print-only branded header — compact one-line band so it eats < 0.5"
-   * of vertical space and never pushes content to a second page on its
-   * own. */
-  .print-only {
-    display: block !important;
-    margin-bottom: 8px !important;
-    padding-bottom: 5px !important;
+  /* ── PRINTABLE CHECKLIST CONTENT ────────────────────────────────────── */
+
+  .printable-checklist .pc-header {
+    margin: 0 0 8px 0 !important;
+    padding: 0 0 5px 0 !important;
     border-bottom: 1.5px solid #F60001 !important;
   }
-  .print-only > div {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  .print-only > div:nth-child(1) {
-    /* MODERN STORAGE eyebrow */
-    font-size: 9px !important;
+  .printable-checklist .pc-brand {
+    font-family: 'Bebas Neue', cursive !important;
+    font-size: 10px !important;
     letter-spacing: 0.18em !important;
+    color: #F60001 !important;
+    margin: 0 !important;
   }
-  .print-only > div:nth-child(2) {
-    /* Move-In Checklist title */
-    font-size: 16px !important;
+  .printable-checklist .pc-title {
+    font-family: 'Bebas Neue', cursive !important;
+    font-size: 18px !important;
+    color: #1A1A1A !important;
     margin: 1px 0 !important;
+    line-height: 1.1 !important;
   }
-  .print-only > div:nth-child(3),
-  .print-only > div:nth-child(4) {
-    /* unit/type/date + URL footer */
-    font-size: 8.5px !important;
+  .printable-checklist .pc-context {
+    font-size: 9px !important;
+    color: #555 !important;
+    margin-top: 1px !important;
+  }
+  .printable-checklist .pc-source {
+    font-size: 8px !important;
+    color: #999 !important;
     margin-top: 1px !important;
   }
 
-  /* Anything explicitly excluded from the printout — print/lead form
-   * buttons, Reset, Reserve CTA block, AND the dark progress summary. */
-  .print-hide,
-  .checklist-print-summary {
-    display: none !important;
+  /* Sections — no forced page breaks, only `break-inside: avoid` so a
+   * single section stays together when possible. Natural document flow
+   * does the rest. */
+  .printable-checklist .pc-section {
+    margin-bottom: 6px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
-
-  /* Sections flow naturally — NO page-break-inside on the section so a
-   * partial section can sit at the bottom of page 1 and continue at the
-   * top of page 2. Section title gets page-break-after: avoid so it
-   * never orphans at the very bottom. */
-  .checklist-print-section {
-    margin-top: 8px !important;
-    margin-bottom: 0 !important;
-    page-break-inside: auto !important;
-    break-inside: auto !important;
-  }
-  .checklist-print-section:first-of-type {
-    margin-top: 2px !important;
-  }
-
-  /* Compact section title — thin underline, small font, tight spacing. */
-  .checklist-print-section-title {
-    font-size: 11px !important;
-    margin-bottom: 4px !important;
-    padding-bottom: 2px !important;
-    border-bottom: 1px solid #F60001 !important;
+  .printable-checklist .pc-section-title {
+    font-family: 'Bebas Neue', cursive !important;
+    font-size: 12px !important;
     letter-spacing: 0.08em !important;
-    page-break-after: avoid !important;
-    break-after: avoid !important;
+    color: #1A1A1A !important;
+    border-bottom: 1px solid #F60001 !important;
+    padding-bottom: 2px !important;
+    margin: 0 0 4px 0 !important;
   }
 
-  /* Two-column grid for items. Auto-row sizing — no min-height forcing
-   * empty space. */
-  .checklist-print-items {
+  /* Two-column grid. grid-auto-rows: min-content means rows shrink to
+   * their item height — no min-height forcing empty space. */
+  .printable-checklist .pc-items {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
     grid-auto-rows: min-content !important;
-    gap: 3px 10px !important;
+    gap: 3px 12px !important;
   }
 
-  /* Compact item box — content sizes the height, no min-height. */
-  .checklist-print-item {
+  .printable-checklist .pc-item {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
     background: white !important;
     border: 1px solid #CCC !important;
-    color: black !important;
     border-radius: 5px !important;
-    min-height: 0 !important;
     padding: 4px 7px !important;
+    min-height: 0 !important;
+    font-family: 'DM Sans', sans-serif !important;
     font-size: 10px !important;
     line-height: 1.25 !important;
-    gap: 6px !important;
-    page-break-inside: avoid !important;
+    color: #1A1A1A !important;
     break-inside: avoid !important;
-  }
-  .checklist-print-item-text {
-    color: black !important;
-    font-size: 10px !important;
-    line-height: 1.25 !important;
+    page-break-inside: avoid !important;
   }
 
-  /* Smaller checkbox to match the smaller box. */
-  .checklist-print-checkbox {
-    background: white !important;
-    border: 1.5px solid #1A1A1A !important;
+  .printable-checklist .pc-checkbox {
     width: 12px !important;
     height: 12px !important;
+    flex-shrink: 0 !important;
+    background: white !important;
+    border: 1.5px solid #1A1A1A !important;
     border-radius: 2.5px !important;
     margin-top: 1px !important;
-  }
-  .checklist-print-checkbox--done {
-    background: #1A1A1A !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 9px !important;
     color: white !important;
   }
-  .checklist-print-checkbox span {
-    font-size: 9px !important;
+  .printable-checklist .pc-checkbox--done {
+    background: #1A1A1A !important;
   }
 
-  /* Strip shadows + decorative effects. */
-  .checklist-print-area *,
-  .checklist-print-area {
-    box-shadow: none !important;
-    text-shadow: none !important;
+  .printable-checklist .pc-text {
+    color: #1A1A1A !important;
+    font-size: 10px !important;
+    line-height: 1.25 !important;
+  }
+  .printable-checklist .pc-text--done {
+    color: #555 !important;
+    text-decoration: line-through !important;
   }
 }
