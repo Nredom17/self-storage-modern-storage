@@ -17,6 +17,7 @@ import {
   matchFaq,
   isHoursQuestion,
   isPaymentQuestion,
+  isGoodbye,
   locationHours,
   normalizePhone,
   type ChatLocation,
@@ -229,6 +230,15 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
   // then keyword/FAQ match). Returns true if it handled the message. Used from
   // every step so a visitor can type a question at any point in the flow.
   function tryAnswerFreeText(value: string): boolean {
+    // Polite-ending check FIRST — so a sign-off like "thanks" or "that's
+    // all" gets the warm goodbye instead of the generic "I don't have an
+    // answer for that one" fallback. We still leave the home menu visible
+    // (collapsed) so the visitor can re-engage if they think of something.
+    if (isGoodbye(value)) {
+      bot(CHATBOT_TEXT.goodbye)
+      backToMenu()
+      return true
+    }
     if (isHoursQuestion(value)) {
       enterLocation('hours', CHATBOT_TEXT.hoursPrompt)
       return true

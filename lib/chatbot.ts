@@ -150,6 +150,12 @@ export const CHATBOT_TEXT = {
     'Great, thank you. How can we help today? You can type a question — like “What are your hours?” — or pick an option below.',
   fallback:
     'I don’t have an answer for that one. For more information, please contact your Modern Storage® office directly and our team will be glad to help — or pick an option below.',
+  // Polite ending — shown when the visitor signs off ("thanks", "bye",
+  // "that's all", etc.). Keeps the door open without burying the visitor in
+  // a fallback dead-end menu, and reminds them how to reach the team if they
+  // think of something else later.
+  goodbye:
+    'You’re welcome! Thanks for chatting with Modern Storage®. If you think of anything else, you can reach our team anytime at 501-910-0096 or reserve online from any location page. Have a great day!',
   noLocationMatch:
     'I’m not sure which location you mean. Please choose one of these Modern Storage® locations:',
   // Shown when a visitor asks about hours — we ask which store first, then show
@@ -320,6 +326,77 @@ const PAYMENT_KEYWORDS = [
 export function isPaymentQuestion(text: string): boolean {
   const t = ' ' + text.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim() + ' '
   return PAYMENT_KEYWORDS.some((k) => t.includes(' ' + k + ' '))
+}
+
+// ─── Goodbye / sign-off detection ─────────────────────────────────────────
+// These phrases mean the visitor is wrapping up the conversation. We catch
+// them BEFORE the keyword/FAQ match so a polite "thanks" never falls into
+// the generic "I don't have an answer for that one" fallback.
+//
+// Two categories:
+//  • SHORT_GOODBYES = the entire message is one of these words (after we
+//    strip punctuation and whitespace). Catches "thanks", "bye", "ok".
+//  • GOODBYE_PHRASES = the message contains one of these multi-word phrases.
+//    Catches "that's all", "no thanks", "thank you so much", "I'm good".
+//
+// Single-word checks are kept tight so we don't false-positive on legit
+// product questions like "is climate ok for furniture?".
+const SHORT_GOODBYES = new Set([
+  'thanks',
+  'thx',
+  'ty',
+  'bye',
+  'goodbye',
+  'cya',
+  'later',
+  'done',
+  'okay',
+  'ok',
+  'cool',
+  'great',
+  'awesome',
+  'perfect',
+  'nope',
+  'no',
+])
+
+const GOODBYE_PHRASES = [
+  'thank you',
+  'thanks so much',
+  'thanks a lot',
+  'thanks for your help',
+  'thank you so much',
+  'thank you for your help',
+  'that is all',
+  "that's all",
+  'that is it',
+  "that's it",
+  'all good',
+  'no thanks',
+  'no thank you',
+  "i'm good",
+  'im good',
+  'i am good',
+  'got it',
+  'sounds good',
+  'have a good day',
+  'have a great day',
+  'see you',
+  'see ya',
+  'talk later',
+  'all set',
+  'i am all set',
+  "i'm all set",
+]
+
+export function isGoodbye(text: string): boolean {
+  const t = text.toLowerCase().replace(/[^a-z0-9\s']/g, ' ').replace(/\s+/g, ' ').trim()
+  if (!t) return false
+  // Exact single-word match — message is JUST "thanks" or similar.
+  if (SHORT_GOODBYES.has(t)) return true
+  // Multi-word phrase match.
+  const padded = ' ' + t + ' '
+  return GOODBYE_PHRASES.some((p) => padded.includes(' ' + p + ' '))
 }
 
 // Common words that shouldn't, on their own, drive a match.
