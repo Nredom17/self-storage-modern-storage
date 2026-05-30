@@ -18,6 +18,7 @@ import {
   isHoursQuestion,
   isPaymentQuestion,
   isGoodbye,
+  isMessageRequest,
   locationHours,
   normalizePhone,
   type ChatLocation,
@@ -237,6 +238,13 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
     if (isGoodbye(value)) {
       bot(CHATBOT_TEXT.goodbye)
       backToMenu()
+      return true
+    }
+    // "I need a human" / "send a message" shortcuts — auto-open the same
+    // free-text message form that the "✉ Send us a message" button opens,
+    // instead of routing the visitor through the menu first.
+    if (isMessageRequest(value)) {
+      startMessage()
       return true
     }
     if (isHoursQuestion(value)) {

@@ -224,45 +224,50 @@ export default async function BoatRvStoragePage() {
               <p className="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg">
                 Park boats, RVs, travel trailers, motorcycles, and vehicles at Modern Storage® locations across Arkansas — including outdoor, covered, and select indoor options near Beaver Lake, Lake Maumelle, Lake Ouachita, and Greers Ferry.
               </p>
-              <div className="flex flex-wrap gap-3 mb-10">
-                <Link
-                  href="#featured-locations"
-                  aria-label="Reserve boat storage at a Modern Storage® Arkansas location"
-                  className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-6 py-3 rounded-full transition-colors text-sm"
-                >
-                  Reserve Boat Storage
-                </Link>
-                <Link
-                  href="#featured-locations"
-                  aria-label="Reserve RV storage at a Modern Storage® Arkansas location"
-                  className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-black px-6 py-3 rounded-full transition-colors text-sm"
-                >
-                  Reserve RV Storage
-                </Link>
+              {/* Row 1 — audience-split pills (transactional intent first).
+                  New Rentals (red) dials the centralized line; Existing
+                  Customers (white with red text) opens the modernstorage.com
+                  tenant portal. */}
+              <div className="flex flex-wrap gap-3 mb-3">
                 <a
                   href={PHONE_NUMBER_HREF}
                   aria-label={`Call for New Rentals at ${PHONE_NUMBER_DISPLAY}`}
-                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-full transition-colors border border-white/20 text-sm"
+                  className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-bold px-6 py-3 rounded-full transition-colors text-sm shadow-md"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
                   </svg>
                   Call for New Rentals
                 </a>
-                {/* Existing customers → all-locations directory on the
-                    reservation site (account access, gate codes, billing). */}
                 <a
                   href="https://www.modernstorage.com/self-storage"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Existing customers — see all Modern Storage® locations"
-                  className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white font-bold px-6 py-3 rounded-full transition-colors border border-white/15 text-sm"
+                  aria-label="Existing Customers — manage your account at modernstorage.com"
+                  className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-modern-red font-bold px-6 py-3 rounded-full transition-colors text-sm shadow-md"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-3-6.65" />
                   </svg>
                   Existing Customers
                 </a>
+              </div>
+              {/* Row 2 — browse intents (transparent pills). */}
+              <div className="flex flex-wrap gap-3 mb-10">
+                <Link
+                  href="#featured-locations"
+                  aria-label="Reserve boat storage at a Modern Storage® Arkansas location"
+                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-full transition-colors border border-white/20 text-sm"
+                >
+                  Reserve Boat Storage
+                </Link>
+                <Link
+                  href="#featured-locations"
+                  aria-label="Reserve RV storage at a Modern Storage® Arkansas location"
+                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-full transition-colors border border-white/20 text-sm"
+                >
+                  Reserve RV Storage
+                </Link>
               </div>
 
               <ul className="flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-gray-400">

@@ -389,6 +389,65 @@ const GOODBYE_PHRASES = [
   "i'm all set",
 ]
 
+// ─── "I want to talk to a human" / "send a message" detection ────────────
+// Triggers the chat widget's existing startMessage() flow, which opens the
+// free-text "send us a message" input that gets emailed to info@
+// modernstorage.com. We want to catch the common shortcuts a visitor uses
+// when the menu options aren't matching what they need.
+//
+// Two layers (same pattern as isGoodbye above):
+//   • SHORT_MESSAGE_TRIGGERS = whole-message single-word match. Tight so
+//     legit product words ("agent" alone is rare; "help" is sometimes typed
+//     when a visitor wants help in general but is acceptable here because
+//     opening the message form IS a help action).
+//   • MESSAGE_PHRASES = multi-word phrase match anywhere in the message.
+const SHORT_MESSAGE_TRIGGERS = new Set([
+  'agent',
+  'human',
+  'representative',
+  'rep',
+  'help',
+  'message',
+])
+
+const MESSAGE_PHRASES = [
+  'send message',
+  'send a message',
+  'send us a message',
+  'send you a message',
+  'leave a message',
+  'send email',
+  'send an email',
+  'email you',
+  'email me',
+  'contact me',
+  'contact us',
+  'talk to a human',
+  'talk to someone',
+  'talk to a person',
+  'talk to a real person',
+  'talk to an agent',
+  'speak to a human',
+  'speak to someone',
+  'speak to an agent',
+  'speak with a person',
+  'real person',
+  'live agent',
+  'live person',
+  'customer service',
+  'customer support',
+  'reach support',
+  'get in touch',
+]
+
+export function isMessageRequest(text: string): boolean {
+  const t = text.toLowerCase().replace(/[^a-z0-9\s']/g, ' ').replace(/\s+/g, ' ').trim()
+  if (!t) return false
+  if (SHORT_MESSAGE_TRIGGERS.has(t)) return true
+  const padded = ' ' + t + ' '
+  return MESSAGE_PHRASES.some((p) => padded.includes(' ' + p + ' '))
+}
+
 export function isGoodbye(text: string): boolean {
   const t = text.toLowerCase().replace(/[^a-z0-9\s']/g, ' ').replace(/\s+/g, ' ').trim()
   if (!t) return false
