@@ -196,11 +196,22 @@ export default async function HouseholdStoragePage() {
       {/* ── HERO — residential / transitional positioning ────────
           Repositioned per SEO audit: moving, extra space, renovating,
           life transitions. Climate-controlled is NOT in the headline
-          and is mentioned as one of several available formats only. */}
+          and is mentioned as one of several available formats only.
+
+          Hero layout tightened per design feedback (2026-05-30):
+            - py reduced from 16/24 → 10/16 (~30%) so there's less
+              charcoal padding above and below the content.
+            - items-center → lg:items-stretch so the image card fills
+              the full height of the text column instead of centering
+              and feeling like an afterthought.
+            - Image container went from aspect-[4/3] (short + wide) to
+              aspect-[4/5] on mobile + flex-1 + min-h on desktop so the
+              image fills from the headline down through the buttons.
+            - Caption rewritten and upsized so it actually pulls weight. */}
       <section className="bg-charcoal text-white">
         <div className="h-1 w-full bg-modern-red" />
-        <div className="max-w-7xl mx-auto px-6 py-16 lg:py-24">
-          <nav aria-label="Breadcrumb" className="mb-8 text-xs font-semibold text-gray-500">
+        <div className="max-w-7xl mx-auto px-6 py-10 lg:py-16">
+          <nav aria-label="Breadcrumb" className="mb-6 text-xs font-semibold text-gray-500">
             <ol className="flex items-center gap-2">
               <li>
                 <Link href="/" className="hover:text-modern-red transition-colors">
@@ -212,7 +223,7 @@ export default async function HouseholdStoragePage() {
             </ol>
           </nav>
 
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 lg:items-stretch">
             <div>
               <span className="inline-flex items-center gap-2 bg-modern-red/20 border border-modern-red/40 text-modern-red text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-6">
                 <span className="w-1.5 h-1.5 rounded-full bg-modern-red animate-pulse" aria-hidden="true" />
@@ -221,7 +232,7 @@ export default async function HouseholdStoragePage() {
               <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
                 Household Storage Units for <span className="text-modern-red">Moving, Renovating</span> &amp; Everyday Extra Space
               </h1>
-              <p className="text-gray-300 text-lg leading-relaxed mb-10 max-w-lg">
+              <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-lg">
                 Store furniture, boxes, seasonal items, and household belongings with flexible month-to-month storage at Modern Storage®. Drive-up and indoor storage options available depending on location.
               </p>
               {/* Row 1 — audience-split pills (transactional intent first).
@@ -254,7 +265,7 @@ export default async function HouseholdStoragePage() {
                 </a>
               </div>
               {/* Row 2 — browse intents (transparent pills). */}
-              <div className="flex flex-wrap gap-3 mb-10">
+              <div className="flex flex-wrap gap-3 mb-8">
                 <Link
                   href="#locations"
                   aria-label="Reserve a household storage unit at a Modern Storage® location near you"
@@ -291,19 +302,33 @@ export default async function HouseholdStoragePage() {
               </ul>
             </div>
 
-            <figure>
-              <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-800 relative">
+            {/* Hero image card. On lg+ the figure becomes a flex column
+                so the image card fills all available vertical space
+                (matching the text column's height via lg:items-stretch
+                on the grid above), with the caption pinned at the bottom.
+                Mobile keeps a portrait aspect ratio so the image still
+                gets meaningful screen real estate.
+
+                Aspect choice (4/5 portrait → flex-1 desktop) — chosen
+                deliberately because the source photo is wider than tall.
+                object-cover crops the LEFT/RIGHT sides instead of top/
+                bottom in a portrait container, which trims away the
+                ceiling/counter background and emphasizes the people in
+                the center of the frame — the "crop tighter around the
+                handshake" note from the design feedback. */}
+            <figure className="lg:h-full lg:flex lg:flex-col">
+              <div className="rounded-2xl overflow-hidden shadow-2xl bg-gray-800 relative aspect-[4/5] lg:aspect-auto lg:flex-1 lg:min-h-[520px]">
                 <Image
                   src={HERO_IMAGE}
                   alt={HERO_ALT}
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
+                  className="object-cover object-center"
                 />
               </div>
-              <figcaption className="text-xs text-gray-500 mt-3 italic">
-                Award-winning household storage trusted by families across the region.
+              <figcaption className="text-sm text-gray-400 mt-3 italic leading-relaxed lg:shrink-0">
+                Flexible household storage for moves, remodels, seasonal items, and extra space.
               </figcaption>
             </figure>
           </div>
