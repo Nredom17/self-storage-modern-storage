@@ -110,7 +110,11 @@ function renderConversationHtml(
     .map((t, i) => {
       const prev = turns[i - 1]
       const showLabel = !prev || prev.role !== t.role
-      const label = t.role === 'visitor' ? visitorName || 'Visitor' : 'Modern Storage® bot'
+      // Label above the bubble. We dropped the explicit "bot" tag — the
+      // brand-side label now reads cleanly as "Modern Storage®" so the
+      // conversation looks like a normal customer-service exchange rather
+      // than flagging the automated nature.
+      const label = t.role === 'visitor' ? visitorName || 'Visitor' : 'Modern Storage®'
       return renderBubble(t, label, showLabel)
     })
     .join('\n')
