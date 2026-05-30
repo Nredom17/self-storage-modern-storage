@@ -223,7 +223,15 @@ export default async function HouseholdStoragePage() {
             </ol>
           </nav>
 
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 lg:items-stretch">
+          {/* Grid columns biased toward the image (~45/55 text/image)
+              per design feedback note 4. Also reverted to lg:items-center
+              so the image vertically aligns with the headline block
+              instead of stretching alongside it — the prior items-stretch
+              forced a portrait crop on a landscape source, which upscaled
+              the cropped center region (~1.28× on retina) and softened
+              the photo. With the native landscape aspect ratio below the
+              image stays at native pixel density. */}
+          <div className="grid lg:grid-cols-[5fr_6fr] gap-8 lg:gap-10 lg:items-center">
             <div>
               <span className="inline-flex items-center gap-2 bg-modern-red/20 border border-modern-red/40 text-modern-red text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-6">
                 <span className="w-1.5 h-1.5 rounded-full bg-modern-red animate-pulse" aria-hidden="true" />
@@ -302,34 +310,26 @@ export default async function HouseholdStoragePage() {
               </ul>
             </div>
 
-            {/* Hero image card. On lg+ the figure becomes a flex column
-                so the image card fills all available vertical space
-                (matching the text column's height via lg:items-stretch
-                on the grid above), with the caption pinned at the bottom.
-                Mobile keeps a portrait aspect ratio so the image still
-                gets meaningful screen real estate.
-
-                Aspect choice (4/5 portrait → flex-1 desktop) — chosen
-                deliberately because the source photo is wider than tall.
-                object-cover crops the LEFT/RIGHT sides instead of top/
-                bottom in a portrait container, which trims away the
-                ceiling/counter background and emphasizes the people in
-                the center of the frame — the "crop tighter around the
-                handshake" note from the design feedback. */}
-            <figure className="lg:h-full lg:flex lg:flex-col">
-              <div className="rounded-2xl overflow-hidden shadow-2xl bg-gray-800 relative aspect-[4/5] lg:aspect-auto lg:flex-1 lg:min-h-[520px]">
+            {/* Hero image card. Aspect ratio matches the source photo's
+                native 3/2 landscape so we render at native pixel density
+                instead of cropping a landscape image into a portrait
+                container (which was upscaling the displayed crop ~1.28×
+                on retina and softening the photo). Caption removed per
+                the latest design pass — the headline already carries the
+                message and a caption under a hero ends up reading as
+                noise. */}
+            <figure>
+              <div className="rounded-2xl overflow-hidden shadow-2xl bg-gray-800 relative aspect-[3/2]">
                 <Image
                   src={HERO_IMAGE}
                   alt={HERO_ALT}
                   fill
                   priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  sizes="(max-width: 1024px) 100vw, 55vw"
+                  quality={90}
                   className="object-cover object-center"
                 />
               </div>
-              <figcaption className="text-sm text-gray-400 mt-3 italic leading-relaxed lg:shrink-0">
-                Flexible household storage for moves, remodels, seasonal items, and extra space.
-              </figcaption>
             </figure>
           </div>
         </div>
