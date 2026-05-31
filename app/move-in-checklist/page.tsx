@@ -292,7 +292,7 @@ export default async function MoveInChecklistPage() {
               Common questions about preparing for a storage unit move-in, what to bring, packing strategy, insurance, and storage by category — household, business, vehicle, seasonal, and renovation.
             </p>
           </div>
-          <FaqAccordion items={CHECKLIST_FAQS} />
+          <FaqAccordion items={CHECKLIST_FAQS} columns={2} />
         </div>
       </section>
 

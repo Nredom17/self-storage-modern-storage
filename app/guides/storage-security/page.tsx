@@ -469,7 +469,7 @@ export default async function StorageSecurityGuidePage() {
               The most-asked questions about self-storage security — written answer-first for People Also Ask, AI Overview, and direct customer reference.
             </p>
           </div>
-          <FaqAccordion items={FAQS} />
+          <FaqAccordion items={FAQS} columns={2} />
         </div>
       </section>
 

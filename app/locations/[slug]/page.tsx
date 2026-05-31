@@ -681,7 +681,7 @@ export default async function LocationPage({ params }: Props) {
               Common questions about storage at {loc.name}.
             </p>
           </div>
-          <FaqAccordion items={content.faqs} />
+          <FaqAccordion items={content.faqs} columns={2} />
         </div>
       </section>
 

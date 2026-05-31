@@ -281,7 +281,7 @@ export default async function AIStorageSizeFinderPage() {
               Common questions about choosing the right storage unit size, what fits in each unit, and how to use the Modern Storage® AI Storage Size Finder for home, apartment, or business storage.
             </p>
           </div>
-          <FaqAccordion items={FINDER_FAQS} />
+          <FaqAccordion items={FINDER_FAQS} columns={2} />
         </div>
       </section>
 

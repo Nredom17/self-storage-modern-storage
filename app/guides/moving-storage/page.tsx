@@ -340,7 +340,7 @@ export default async function MovingStoragePage() {
               Moving Storage FAQ
             </h2>
           </div>
-          <FaqAccordion items={FAQS} />
+          <FaqAccordion items={FAQS} columns={2} />
         </div>
       </section>
 

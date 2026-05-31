@@ -251,7 +251,7 @@ export default async function TableRockLakePage() {
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">FAQ</p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight">Table Rock Lake Storage FAQ</h2>
           </div>
-          <FaqAccordion items={FAQS} />
+          <FaqAccordion items={FAQS} columns={2} />
         </div>
       </section>
 

@@ -967,7 +967,7 @@ export default async function BoatRvStoragePage() {
               Common questions about boat storage, RV storage, vehicle parking, sizing, climate-controlled vehicle storage, access hours, and reserving boat or RV storage at Modern Storage® locations across Arkansas.
             </p>
           </div>
-          <FaqAccordion items={BOAT_RV_FAQS} />
+          <FaqAccordion items={BOAT_RV_FAQS} columns={2} />
         </div>
       </section>
 

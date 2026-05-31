@@ -297,7 +297,7 @@ export default async function BusinessStorageBentonvillePage() {
               Bentonville Supplier &amp; Business Storage FAQ
             </h2>
           </div>
-          <FaqAccordion items={FAQS} />
+          <FaqAccordion items={FAQS} columns={2} />
         </div>
       </section>
 

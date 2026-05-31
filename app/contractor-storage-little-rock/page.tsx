@@ -290,7 +290,7 @@ export default async function ContractorPage() {
               Little Rock Contractor Storage FAQ
             </h2>
           </div>
-          <FaqAccordion items={FAQS} />
+          <FaqAccordion items={FAQS} columns={2} />
         </div>
       </section>
 

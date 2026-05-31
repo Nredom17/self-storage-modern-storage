@@ -246,7 +246,7 @@ export default async function PackingSuppliesPage() {
               Packing &amp; Moving Supplies FAQ
             </h2>
           </div>
-          <FaqAccordion items={FAQS} />
+          <FaqAccordion items={FAQS} columns={2} />
         </div>
       </section>
 

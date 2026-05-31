@@ -282,7 +282,7 @@ export default async function BeaverLakePage() {
               Beaver Lake Boat &amp; RV Storage FAQ
             </h2>
           </div>
-          <FaqAccordion items={FAQS} />
+          <FaqAccordion items={FAQS} columns={2} />
         </div>
       </section>
 

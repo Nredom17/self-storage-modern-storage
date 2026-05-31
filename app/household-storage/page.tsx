@@ -749,7 +749,7 @@ export default async function HouseholdStoragePage() {
               Answers to the most common questions about household and residential self-storage — unit sizes, temporary storage during moves and renovations, college storage, the free moving truck, online reservations, and how Modern Storage® compares.
             </p>
           </div>
-          <FaqAccordion items={HOUSEHOLD_FAQS} />
+          <FaqAccordion items={HOUSEHOLD_FAQS} columns={2} />
         </div>
       </section>
 

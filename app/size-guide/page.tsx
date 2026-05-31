@@ -299,7 +299,7 @@ export default async function SizeGuidePage() {
               The questions Modern Storage® customers ask most about picking a unit size.
             </p>
           </div>
-          <FaqAccordion items={SIZE_GUIDE_FAQS} />
+          <FaqAccordion items={SIZE_GUIDE_FAQS} columns={2} />
         </div>
       </section>
 

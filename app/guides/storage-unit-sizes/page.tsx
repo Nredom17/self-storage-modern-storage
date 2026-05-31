@@ -772,7 +772,7 @@ export default async function StorageUnitSizesGuidePage() {
               The most-asked questions about Modern Storage® unit sizes — answered for People Also Ask, AI Overview, and direct customer reference.
             </p>
           </div>
-          <FaqAccordion items={FAQS} />
+          <FaqAccordion items={FAQS} columns={2} />
         </div>
       </section>
 

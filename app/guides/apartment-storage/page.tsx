@@ -389,7 +389,7 @@ export default async function ApartmentStoragePage() {
               Apartment Storage FAQ
             </h2>
           </div>
-          <FaqAccordion items={FAQS} />
+          <FaqAccordion items={FAQS} columns={2} />
         </div>
       </section>
 

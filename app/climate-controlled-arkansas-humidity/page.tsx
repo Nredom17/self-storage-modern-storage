@@ -439,7 +439,7 @@ export default async function HumidityPage() {
               Arkansas Humidity &amp; Storage FAQ
             </h2>
           </div>
-          <FaqAccordion items={FAQS} />
+          <FaqAccordion items={FAQS} columns={2} />
         </div>
       </section>
 

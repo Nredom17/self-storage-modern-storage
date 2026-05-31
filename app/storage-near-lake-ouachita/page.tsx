@@ -238,7 +238,7 @@ export default async function LakeOuachitaPage() {
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">FAQ</p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight">Lake Ouachita Storage FAQ</h2>
           </div>
-          <FaqAccordion items={FAQS} />
+          <FaqAccordion items={FAQS} columns={2} />
         </div>
       </section>
 

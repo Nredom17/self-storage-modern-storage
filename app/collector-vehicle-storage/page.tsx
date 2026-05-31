@@ -11,35 +11,32 @@ export const revalidate = 60
 const PAGE_PATH = '/collector-vehicle-storage'
 
 // Hero — silver Porsche 911 in golden hour against red Modern Storage®
-// roll-up doors. Picked over the white Ferrari side view because the
-// atmospheric lighting + dramatic rear-3/4 angle reads more "collector
-// garage" than "parking lot."
-const HERO_IMAGE = '/images/modern-storage-porsche-911-collector-car-storage.jpg'
+// roll-up doors. The atmospheric lighting + dramatic rear-3/4 angle reads
+// more "collector garage" than "parking lot."
+const HERO_IMAGE = '/images/porsche-911-secure-modern.storage..png'
 const HERO_ALT =
   'Silver Porsche 911 parked in golden-hour light against Modern Storage® red roll-up doors — Arkansas collector and exotic car storage'
 
-// Other in-page photos and their suggested alt text. Each filename should
-// hold one of the uploaded exotic-car photos (see the README at the bottom
-// of this file's commit for the mapping).
-const MASERATI_IMAGE = '/images/modern-storage-maserati-indoor-enclosed-storage.jpg'
+// Other in-page photos. Filenames match what's saved in public/images/.
+const MASERATI_IMAGE = '/images/exotic-vehicle-storage-at-modern-storage.webp.png'
 const MASERATI_ALT =
-  'Maserati MC20 emerging from under a red Modern Storage® roll-up door — indoor enclosed RV bay storage at Modern Storage® Shackleford in Little Rock'
+  'Exotic car emerging from a red Modern Storage® roll-up door — indoor enclosed bay storage at Modern Storage® Shackleford in Little Rock'
 
-const COLLECTION_IMAGE = '/images/modern-storage-exotic-car-collection.jpg'
+const COLLECTION_IMAGE = '/images/luxury-car-storage-facility-collection.Modern.Storage.png'
 const COLLECTION_ALT =
-  'Five collector cars — Porsche 911, Maserati MC20, Ferrari F8, Lamborghini Huracán, and a track-prepped Porsche — parked in front of red Modern Storage® roll-up doors in Arkansas'
+  'Five collector cars parked in front of red Modern Storage® roll-up doors — Arkansas exotic and collector vehicle storage'
 
-const FERRARI_IMAGE = '/images/modern-storage-ferrari-classic-car-storage.jpg'
+const FERRARI_IMAGE = '/images/ferrari-296-gtb-modern.storage-facility..png'
 const FERRARI_ALT =
-  'White Ferrari F8 Tributo beside a red Modern Storage® roll-up door — Arkansas exotic and classic car storage'
+  'Ferrari beside a red Modern Storage® roll-up door — Arkansas exotic and classic car storage'
 
-const AERIAL_IMAGE = '/images/modern-storage-collector-cars-aerial-view.jpg'
+const AERIAL_IMAGE = '/images/luxury-vehicle-storage-drone-photo.Modern.Storage.png'
 const AERIAL_ALT =
-  'Aerial top-down view of five exotic cars at a Modern Storage® facility — Arkansas collector vehicle storage'
+  'Aerial top-down view of collector cars at a Modern Storage® facility — Arkansas collector vehicle storage'
 
-const GREEN_PORSCHE_IMAGE = '/images/modern-storage-porsche-green-storage.jpg'
+const GREEN_PORSCHE_IMAGE = '/images/porsche-gts-modern.storage-storage-unit..png'
 const GREEN_PORSCHE_ALT =
-  'Lizard Green Porsche 911 parked beside a red Modern Storage® roll-up door — climate-controlled vehicle storage in Arkansas'
+  'Porsche GTS parked beside a Modern Storage® unit — climate-controlled vehicle storage in Arkansas'
 
 export const metadata: Metadata = {
   // Meta title — 57 chars including the ® symbol, fits the SERP budget
@@ -686,7 +683,7 @@ export default async function CollectorVehicleStoragePage() {
               Twelve answers for the questions collectors actually ask before reserving — answer-first so search engines and AI can extract clean snippets.
             </p>
           </div>
-          <FaqAccordion items={FAQS} />
+          <FaqAccordion items={FAQS} columns={2} />
         </div>
       </section>
 

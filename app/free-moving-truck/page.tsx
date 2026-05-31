@@ -504,7 +504,7 @@ export default async function FreeMovingTruckPage() {
               Common questions about the free Modern Storage® moving truck — eligibility, locations, mileage, driver requirements, and how to reserve.
             </p>
           </div>
-          <FaqAccordion items={TRUCK_FAQS} />
+          <FaqAccordion items={TRUCK_FAQS} columns={2} />
         </div>
       </section>
 

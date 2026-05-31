@@ -625,7 +625,7 @@ export default async function BusinessStoragePage() {
               Common questions about Modern Storage® mini-warehouse space — loading docks, package acceptance, electricity, 24/7 access, climate control, and partner programs for businesses across Arkansas.
             </p>
           </div>
-          <FaqAccordion items={BUSINESS_FAQS} />
+          <FaqAccordion items={BUSINESS_FAQS} columns={2} />
         </div>
       </section>
 
