@@ -217,6 +217,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
+    {
+      // Collector vehicle storage — niche page targeting classic / exotic /
+      // supercar / project car / motorcycle / snowbird storage. Indoor
+      // enclosed bays at Shackleford + climate-controlled portfolio +
+      // mini-warehouse business storage at Riverdale.
+      url: SITE_URL + '/collector-vehicle-storage',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
     // ── Storage Tips hub + dynamically-listed posts ──────────
     // Both the hub and each post are omitted when the kill-switch is OFF
     // so crawlers don't get pointed at 404s before the section is live.

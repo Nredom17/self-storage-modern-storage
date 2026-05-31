@@ -587,16 +587,21 @@ export default async function BusinessStoragePage() {
                 <p className="text-xs font-black uppercase tracking-widest text-gray-500 mb-3">
                   Prefer to talk?
                 </p>
+                {/* Phone digits hidden per design pass — replaced with a
+                    solid red call button. tel: number and full digits live
+                    in href + aria-label so the button still dials and
+                    screen readers still read the number aloud. */}
                 <a
                   href={PHONE_NUMBER_HREF}
-                  className="inline-flex items-center gap-2 text-charcoal font-black text-lg hover:text-modern-red transition-colors"
+                  aria-label={`Call Modern Storage® new rentals at ${PHONE_NUMBER_DISPLAY}`}
+                  className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-bold px-5 py-3 rounded-full transition-colors text-sm shadow-sm"
                 >
-                  <svg className="w-5 h-5 text-modern-red" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
                   </svg>
-                  {PHONE_NUMBER_DISPLAY}
+                  Call New Rentals
                 </a>
-                <p className="text-xs text-gray-500 mt-3">
+                <p className="text-xs text-gray-500 mt-3 leading-relaxed">
                   Call the centralized Modern Storage® line and ask for the business storage team.
                 </p>
               </div>

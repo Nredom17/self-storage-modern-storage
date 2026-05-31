@@ -327,18 +327,35 @@ export default function Footer({
           <div className="space-y-8">
             <div>
               <h3 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-3">Need Help Renting a Unit?</h3>
-              <p className="text-sm text-gray-400">
-                <span className="font-bold text-white">New Rentals:</span>{' '}
+              {/* Phone digits hidden per design pass — replaced with two
+                  audience-split buttons. New Rentals dials the centralized
+                  line (digits in href + aria-label only). Existing
+                  Customers routes to the locations directory so they can
+                  jump into the right facility page. */}
+              <div className="flex flex-wrap gap-2 mb-3">
                 <a
                   href={PHONE_NUMBER_HREF}
-                  className="text-modern-red hover:text-modern-red-hover font-semibold transition-colors"
+                  aria-label={`Call Modern Storage® new rentals at ${PHONE_NUMBER_DISPLAY}`}
+                  className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-bold px-4 py-2 rounded-full transition-colors text-xs shadow-sm"
                 >
-                  {PHONE_NUMBER_DISPLAY}
+                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
+                  </svg>
+                  New Rentals
                 </a>
-              </p>
-              <p className="text-xs text-gray-500 leading-relaxed mt-3">
-                Already rent with Modern Storage®? Please contact your facility directly or use your
-                tenant portal for account, gate code, billing, or access questions.
+                <Link
+                  href="/locations"
+                  aria-label="Existing Customers — open the Modern Storage® locations directory"
+                  className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-modern-red font-bold px-4 py-2 rounded-full transition-colors text-xs shadow-sm"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm6 0a4 4 0 10-3-6.65" />
+                  </svg>
+                  Existing Customers
+                </Link>
+              </div>
+              <p className="text-xs text-gray-500 leading-relaxed">
+                Already rent with Modern Storage®? Open your facility's page above or use your tenant portal for account, gate code, billing, or access questions.
               </p>
             </div>
             <div>
