@@ -421,7 +421,7 @@ export default async function StudentStoragePage() {
       </section>
 
       <section className="bg-white py-20 border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">FAQ</p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight">Student Storage FAQ</h2>

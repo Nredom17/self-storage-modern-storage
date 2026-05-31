@@ -271,7 +271,7 @@ export default async function AIStorageSizeFinderPage() {
 
       {/* ── FAQ ──────────────────────────────────────────────── */}
       <section id="faq" className="bg-gray-50 py-20">
-        <div className="max-w-4xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">FAQ</p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight">

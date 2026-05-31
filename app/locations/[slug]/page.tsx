@@ -669,7 +669,7 @@ export default async function LocationPage({ params }: Props) {
 
       {/* ── FAQ ──────────────────────────────────────────── */}
       <section id="faq" className="bg-gray-50 py-20 border-y border-gray-200">
-        <div className="max-w-4xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
               Frequently Asked Questions
