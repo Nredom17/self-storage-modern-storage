@@ -237,11 +237,15 @@ export default function Footer({
           <div className="md:col-span-2">
             <h2 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-5">Contact</h2>
             <nav className="flex flex-col gap-3">
+              {/* Phone digits hidden from visible label per design pass.
+                  The tel: number + full digits live in href + aria-label
+                  so click-to-call and screen readers still get them. */}
               <a
                 href={PHONE_NUMBER_HREF}
+                aria-label={`Call Modern Storage® new rentals at ${PHONE_NUMBER_DISPLAY}`}
                 className="text-sm text-gray-400 hover:text-white transition-colors"
               >
-                {PHONE_NUMBER_DISPLAY}
+                Call new rentals
               </a>
               <Link
                 href="/#locations"

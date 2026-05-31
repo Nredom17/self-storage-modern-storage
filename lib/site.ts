@@ -20,6 +20,7 @@ export const STORAGE_OPTION_LINKS = [
   { label: 'Climate-Controlled Storage', href: '/climate-controlled' },
   { label: 'Household Storage', href: '/household-storage' },
   { label: 'Boat and RV Storage', href: '/rv-boat-vehicle' },
+  { label: 'Classic & Collector Car Storage', href: '/collector-vehicle-storage' },
   { label: 'Business Storage', href: '/business-storage' },
 ] as const
 
@@ -87,6 +88,7 @@ export const NAV_TREE: readonly NavTreeItem[] = [
     items: [
       { label: 'Climate-Controlled Storage', href: '/climate-controlled' },
       { label: 'Boat & RV Storage', href: '/rv-boat-vehicle' },
+      { label: 'Classic & Collector Car Storage', href: '/collector-vehicle-storage' },
       { label: 'Business Storage', href: '/business-storage' },
       { label: 'Household Storage', href: '/household-storage' },
       { label: 'Student Storage', href: '/student-storage' },
