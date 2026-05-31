@@ -238,6 +238,18 @@ export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
             // left accent, designed to sit at the top of policy / how-to
             // posts so the visitor gets the bottom line before the body.
             // Matches the design-pass screenshot exactly.
+            //
+            // Defensive skip: new posts are pre-seeded with placeholder
+            // bullets like "Replace this with…". If an editor hits
+            // publish without filling them in (or deletes every bullet),
+            // we silently drop the card rather than shipping an empty
+            // box or the placeholder text. An item counts as "real" if
+            // it has any non-whitespace content AND doesn't start with
+            // the literal "Replace this" seed string.
+            const realItems = block.items.filter(
+              (it) => it.trim().length > 0 && !/^replace this/i.test(it.trim()),
+            )
+            if (realItems.length === 0) return null
             const title = block.title ?? 'Key Takeaways'
             return (
               <aside
@@ -246,7 +258,7 @@ export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
               >
                 <h3 className="font-black text-blue-700 text-lg mb-3">{title}</h3>
                 <ul className="space-y-2.5">
-                  {block.items.map((item, j) => (
+                  {realItems.map((item, j) => (
                     <li
                       key={j}
                       className="flex gap-2.5 text-gray-700 leading-relaxed text-sm sm:text-base"

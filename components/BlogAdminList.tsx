@@ -77,6 +77,34 @@ export default function BlogAdminList() {
       .toISOString()
       .replace(/[-:T]/g, '')
       .slice(0, 12)
+    // Every new draft gets the Key Takeaways card and the Table of
+    // Contents block prefilled at the top, so editors never have to
+    // remember to add them by hand. The takeaways start with four
+    // placeholder bullets — fill them in (or leave blank and the
+    // renderer skips the card gracefully). The TOC auto-builds itself
+    // from every level-2 heading the editor adds below.
+    const defaultBody = [
+      {
+        type: 'takeaways',
+        title: 'Key Takeaways',
+        items: [
+          'Replace this with the first key takeaway.',
+          'Replace this with the second key takeaway.',
+          'Replace this with the third key takeaway.',
+          'Replace this with the fourth key takeaway.',
+        ],
+      },
+      { type: 'toc', title: 'Table of Contents' },
+      {
+        type: 'heading',
+        level: 2,
+        text: 'Replace this with your first section heading',
+      },
+      {
+        type: 'paragraph',
+        text: 'Replace this with your first paragraph of body content.',
+      },
+    ]
     const r = await fetch('/api/admin/blog', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -86,6 +114,7 @@ export default function BlogAdminList() {
         h1: 'Untitled draft',
         meta_description: 'Edit me before publishing.',
         status: 'draft',
+        body: defaultBody,
       }),
     })
     const data = await r.json()
