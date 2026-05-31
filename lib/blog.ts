@@ -52,7 +52,11 @@ export type BlogBlock =
   | { type: 'quote'; text: string; attribution?: string }
   | {
       type: 'callout'
-      tone?: 'info' | 'warn' | 'success'
+      // Color-coded callout tones. info=gray for general notes,
+      // tip=blue for helpful guidance, success=green for positive
+      // confirmations, warn=amber for caveats, danger=red for
+      // prohibited actions, fees, or policy enforcement.
+      tone?: 'info' | 'tip' | 'success' | 'warn' | 'danger'
       title?: string
       text: string
     }
@@ -70,6 +74,23 @@ export type BlogBlock =
       rows: { left: string; right: string }[]
     }
   | { type: 'faq'; items: { q: string; a: string }[] }
+  | {
+      // Key Takeaways block — a styled summary box that goes at the top of
+      // a post. Renders as a red-accent card with a bulleted list. Great
+      // for policy articles, "things to know before X" posts, and any
+      // content where the visitor needs the bottom line before the body.
+      type: 'takeaways'
+      title?: string
+      items: string[]
+    }
+  | {
+      // Table-of-contents block. When the renderer hits this, it walks
+      // the entire body array and lists every heading-block as a sticky
+      // jump link. Each heading needs an `anchor` field (or it gets one
+      // auto-derived from the text) for the # link to work.
+      type: 'toc'
+      title?: string
+    }
 
 export type BlogPost = {
   id: string

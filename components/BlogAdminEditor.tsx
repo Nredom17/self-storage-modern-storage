@@ -308,6 +308,19 @@ export default function BlogAdminEditor({ id }: { id: string }) {
               <code className="bg-gray-100 px-1 mx-1 rounded">cta</code>
               <code className="bg-gray-100 px-1 mx-1 rounded">comparison</code>
               <code className="bg-gray-100 px-1 mx-1 rounded">faq</code>
+              <code className="bg-gray-100 px-1 mx-1 rounded">takeaways</code>
+              <code className="bg-gray-100 px-1 mx-1 rounded">toc</code>
+            </p>
+            <p className="text-xs text-gray-500 mt-2 leading-relaxed">
+              <strong className="text-charcoal">Callout tones</strong> (add a <code className="bg-gray-100 px-1 rounded">tone</code> field):
+              <code className="bg-gray-100 px-1 mx-1 rounded">info</code> gray (default),
+              <code className="bg-gray-100 px-1 mx-1 rounded">tip</code> blue,
+              <code className="bg-gray-100 px-1 mx-1 rounded">success</code> green,
+              <code className="bg-gray-100 px-1 mx-1 rounded">warn</code> amber,
+              <code className="bg-gray-100 px-1 mx-1 rounded">danger</code> red (for prohibited actions, fees, policy).
+            </p>
+            <p className="text-xs text-gray-500 mt-2 leading-relaxed">
+              <strong className="text-charcoal">takeaways</strong> renders the blue "Key Takeaways" card at the top of the post — pass <code className="bg-gray-100 px-1 rounded">{'{ type: "takeaways", items: ["..."] }'}</code>. <strong className="text-charcoal">toc</strong> auto-builds a purple "Table of Contents" jump-list from every level-2 heading in the body — just drop <code className="bg-gray-100 px-1 rounded">{'{ "type": "toc" }'}</code> where you want it.
             </p>
           </div>
           {/* In-body image uploader. Uploads to Supabase Storage and

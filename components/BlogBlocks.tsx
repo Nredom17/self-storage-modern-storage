@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import FaqAccordion from '@/components/FaqAccordion'
-import type { BlogBlock } from '@/lib/blog'
+import { slugify, type BlogBlock } from '@/lib/blog'
 
 // Renders the array of BlogBlock structures stored in a blog_posts row's
 // `body` jsonb column. New block types added to lib/blog.ts must also
@@ -10,29 +10,43 @@ import type { BlogBlock } from '@/lib/blog'
 // All blocks read deterministic Tailwind classes (no dynamic strings) so
 // Next.js can tree-shake correctly and PurgeCSS doesn't strip anything.
 
+// Resolve an anchor for a heading: explicit anchor field wins; otherwise
+// auto-slug from the text so TOC links + scroll-to-section work without
+// the editor having to set every anchor by hand.
+function anchorFor(block: Extract<BlogBlock, { type: 'heading' }>): string {
+  return block.anchor ?? slugify(block.text)
+}
+
 export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
   return (
     <>
       {blocks.map((block, i) => {
         switch (block.type) {
-          case 'heading':
+          case 'heading': {
+            // Both h2 and h3 get an auto-generated id from the text when no
+            // explicit anchor is supplied. The h2 also picks up a thin
+            // red-modern-left accent border so big section headings have
+            // the same visual treatment as the Key Takeaways and TOC
+            // cards below — design-pass consistency across block types.
+            const id = anchorFor(block)
             return block.level === 2 ? (
               <h2
                 key={i}
-                id={block.anchor}
-                className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mt-10 mb-4 scroll-mt-24"
+                id={id}
+                className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mt-12 mb-5 scroll-mt-24 border-l-4 border-modern-red pl-4"
               >
                 {block.text}
               </h2>
             ) : (
               <h3
                 key={i}
-                id={block.anchor}
+                id={id}
                 className="text-xl lg:text-2xl font-black text-charcoal tracking-tight mt-8 mb-3 scroll-mt-24"
               >
                 {block.text}
               </h3>
             )
+          }
 
           case 'paragraph':
             return (
@@ -78,19 +92,48 @@ export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
 
           case 'callout': {
             const tone = block.tone ?? 'info'
-            const toneClasses =
-              tone === 'warn'
-                ? 'bg-amber-50 border-amber-300'
-                : tone === 'success'
-                  ? 'bg-emerald-50 border-emerald-300'
-                  : 'bg-gray-50 border-gray-200'
+            // Five tones for editorial color-coding. Each tone uses a
+            // distinct background + left accent + title color so the
+            // visual semantic carries even when the title is omitted.
+            //   info     gray   general note
+            //   tip      blue   helpful guidance
+            //   success  green  positive confirmation
+            //   warn     amber  caveat / heads-up
+            //   danger   red    prohibited action, fee, policy
+            // Deterministic class strings (no dynamic concatenation) so
+            // Tailwind's JIT doesn't strip them at build time.
+            const styles =
+              tone === 'danger'
+                ? {
+                    container: 'bg-red-50 border-red-500',
+                    title: 'text-red-700',
+                  }
+                : tone === 'warn'
+                  ? {
+                      container: 'bg-amber-50 border-amber-400',
+                      title: 'text-amber-700',
+                    }
+                  : tone === 'tip'
+                    ? {
+                        container: 'bg-blue-50 border-blue-500',
+                        title: 'text-blue-700',
+                      }
+                    : tone === 'success'
+                      ? {
+                          container: 'bg-emerald-50 border-emerald-500',
+                          title: 'text-emerald-700',
+                        }
+                      : {
+                          container: 'bg-gray-50 border-gray-300',
+                          title: 'text-charcoal',
+                        }
             return (
               <aside
                 key={i}
-                className={`border-l-4 rounded-r-xl px-5 py-4 my-6 ${toneClasses}`}
+                className={`border-l-4 rounded-r-xl px-5 py-4 my-6 ${styles.container}`}
               >
                 {block.title && (
-                  <p className="font-black text-charcoal mb-1.5">{block.title}</p>
+                  <p className={`font-black mb-1.5 ${styles.title}`}>{block.title}</p>
                 )}
                 <p className="text-gray-700 leading-relaxed">{block.text}</p>
               </aside>
@@ -189,6 +232,69 @@ export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
                 <FaqAccordion items={block.items} />
               </div>
             )
+
+          case 'takeaways': {
+            // Key Takeaways box — blue gradient card with a thick blue
+            // left accent, designed to sit at the top of policy / how-to
+            // posts so the visitor gets the bottom line before the body.
+            // Matches the design-pass screenshot exactly.
+            const title = block.title ?? 'Key Takeaways'
+            return (
+              <aside
+                key={i}
+                className="my-8 bg-gradient-to-br from-sky-50 to-blue-100 border-l-4 border-blue-600 rounded-r-2xl px-6 py-5"
+              >
+                <h3 className="font-black text-blue-700 text-lg mb-3">{title}</h3>
+                <ul className="space-y-2.5">
+                  {block.items.map((item, j) => (
+                    <li
+                      key={j}
+                      className="flex gap-2.5 text-gray-700 leading-relaxed text-sm sm:text-base"
+                    >
+                      <span className="text-gray-700 mt-1.5 shrink-0" aria-hidden="true">•</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </aside>
+            )
+          }
+
+          case 'toc': {
+            // Table of Contents — purple/fuchsia gradient card with a
+            // thick violet left accent. Auto-built from every heading
+            // block in the body array (level-2 only — keeps the TOC
+            // scannable on long posts; sub-headings get rendered in the
+            // body but don't clutter the jump list).
+            const headings = blocks.flatMap((b) =>
+              b.type === 'heading' && b.level === 2
+                ? [{ text: b.text, anchor: anchorFor(b) }]
+                : [],
+            )
+            if (headings.length === 0) return null
+            const title = block.title ?? 'Table of Contents'
+            return (
+              <aside
+                key={i}
+                className="my-8 bg-gradient-to-br from-violet-50 to-fuchsia-100 border-l-4 border-violet-600 rounded-r-2xl px-6 py-5"
+              >
+                <h3 className="font-black text-violet-700 text-lg mb-3">{title}</h3>
+                <ul className="space-y-2.5">
+                  {headings.map((h, j) => (
+                    <li key={j}>
+                      <a
+                        href={`#${h.anchor}`}
+                        className="text-violet-700 hover:text-violet-900 font-bold transition-colors inline-flex items-start gap-2 text-sm sm:text-base leading-relaxed"
+                      >
+                        <span aria-hidden="true">→</span>
+                        <span>{h.text}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </aside>
+            )
+          }
 
           default:
             return null
