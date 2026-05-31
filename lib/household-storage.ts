@@ -172,7 +172,7 @@ export const WHY_CHOOSE_MODERN = [
   {
     title: 'Climate-controlled available',
     body:
-      'Indoor, climate-controlled units are available at most locations for items sensitive to heat and humidity — furniture, electronics, and photos.',
+      'Indoor, climate-controlled units are available at every Modern Storage® location for items sensitive to heat and humidity — furniture, electronics, and photos.',
   },
   {
     title: 'Clean, well-kept facilities',
@@ -250,11 +250,11 @@ export const HOUSEHOLD_FAQS = [
   },
   {
     q: `What's the difference between drive-up and climate-controlled household storage?`,
-    a: `Drive-up units let you pull your vehicle right up to the unit door — fastest for heavy furniture, garage contents, tools, and items you'll access often. Climate-controlled units sit inside enclosed, insulated buildings and stay temperature-stable year-round — best for wood furniture, electronics, photos, documents, art, and anything sensitive to heat or humidity. Most Modern Storage® locations offer both formats. If you're storing a mix, climate-controlled covers everything.`,
+    a: `Drive-up units let you pull your vehicle right up to the unit door — fastest for heavy furniture, garage contents, tools, and items you'll access often. Climate-controlled units sit inside enclosed, insulated buildings and stay temperature-stable year-round — best for wood furniture, electronics, photos, documents, art, and anything sensitive to heat or humidity. Every Modern Storage® location offers climate-controlled, and most also offer drive-up. If you're storing a mix, climate-controlled covers everything.`,
   },
   {
     q: 'Do you offer climate-controlled household storage?',
-    a: `Yes. Climate-controlled household storage units are available at most Modern Storage® locations. Indoor, insulated buildings keep furniture, electronics, photos, mattresses, and other temperature-sensitive items in a stable environment year-round. If you're storing anything you wouldn't leave in a hot car or a damp garage, climate-controlled is the right call. Use the location finder to check availability near you, or see the dedicated climate-controlled storage page for full details.`,
+    a: `Yes. Climate-controlled household storage units are available at every Modern Storage® location — all 10 Arkansas facilities. Indoor, insulated buildings keep furniture, electronics, photos, mattresses, and other temperature-sensitive items in a stable environment year-round. If you're storing anything you wouldn't leave in a hot car or a damp garage, climate-controlled is the right call. Use the location finder to check unit sizes near you, or see the dedicated climate-controlled storage page for full details.`,
   },
   {
     q: 'How do I find a household storage unit near me?',

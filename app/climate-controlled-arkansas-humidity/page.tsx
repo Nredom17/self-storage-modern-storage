@@ -113,7 +113,7 @@ const FAQS = [
   },
   {
     q: 'Where can I find climate-controlled storage in Arkansas?',
-    a: `Most Modern Storage® locations across Arkansas offer climate-controlled storage, including facilities in Little Rock (Shackleford, Riverdale), West Little Rock, North Little Rock (North Hills, Maumelle Blvd), Bentonville, Springdale, Lowell, Bryant, and Hot Springs. See the climate-controlled storage page or the locations finder to filter by climate-controlled availability near you.`,
+    a: `Every Modern Storage® location across Arkansas offers climate-controlled storage — all 10 facilities. That includes Little Rock (Shackleford, Riverdale), West Little Rock, North Little Rock (North Hills, Maumelle Blvd), Bentonville, Springdale, Lowell, Bryant, and Hot Springs. See the climate-controlled storage page or the locations finder to pick the facility nearest you.`,
   },
 ] as const
 
@@ -373,7 +373,7 @@ export default async function HumidityPage() {
               Find Climate-Controlled Storage at These Arkansas Locations
             </h2>
             <p className="text-gray-700 text-lg leading-relaxed">
-              Most Modern Storage® locations offer indoor climate-controlled units to protect belongings from Arkansas humidity and heat. Pick the facility nearest you — each page shows live unit availability, climate-controlled sizes, and a reserve-online link.
+              Every Modern Storage® location offers indoor climate-controlled units — all 10 Arkansas facilities, designed to protect belongings from humidity and heat. Pick the facility nearest you — each page shows live unit availability, climate-controlled sizes, and a reserve-online link.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -160,7 +160,7 @@ export const SIZE_GUIDE_FAQS = [
   },
   {
     q: 'Are climate-controlled units available in every size?',
-    a: `Most Modern Storage® locations offer climate-controlled units in 5x5 through 10x20 sizes, with 10x30 availability varying by facility. Climate-controlled storage keeps temperature and humidity more stable than an outdoor unit — the right call for furniture, electronics, documents, photos, art, and instruments. See the Climate-Controlled Storage page for the full breakdown.`,
+    a: `Every Modern Storage® location offers climate-controlled units in 5x5 through 10x20 sizes, with 10x30 availability varying by facility. Climate-controlled storage keeps temperature and humidity more stable than an outdoor unit — the right call for furniture, electronics, documents, photos, art, and instruments. See the Climate-Controlled Storage page for the full breakdown.`,
   },
   // ── Comparison-style entries (size vs size) ──────────────────────────
   // Skipped "Which Storage Unit Size Do I Need?" — same topic as the

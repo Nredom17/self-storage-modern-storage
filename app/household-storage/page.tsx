@@ -548,7 +548,7 @@ export default async function HouseholdStoragePage() {
               Drive-Up vs. Climate-Controlled Household Storage
             </h2>
             <p className="text-gray-400 text-lg leading-relaxed">
-              Two practical formats for two different use cases. Most Modern Storage® locations offer both, so you can pick what matches your belongings — not what matches the building.
+              Two practical formats for two different use cases. Every Modern Storage® location offers climate-controlled, and most also offer drive-up — so you can pick what matches your belongings, not what matches the building.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

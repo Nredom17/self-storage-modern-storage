@@ -351,8 +351,8 @@ export const TRUST_SIGNALS = [
     body: 'On-site managers at every Modern Storage® location — not a call center 1,000 miles away. Real people who know the building and the units.',
   },
   {
-    headline: 'Climate-controlled at most locations',
-    body: 'Climate-controlled storage units are available at most of the 10 Modern Storage® facilities, so there\'s usually one near you.',
+    headline: 'Climate-controlled at every location',
+    body: 'Climate-controlled storage units are available at all 10 Modern Storage® facilities across Arkansas, so there\'s always one near you.',
   },
 ] as const
 
@@ -435,8 +435,8 @@ export const CLIMATE_FAQS = [
   },
   {
     q: 'Which Modern Storage® locations offer climate-controlled storage?',
-    a: `Most Modern Storage® locations offer climate-controlled storage, including facilities in Little Rock (Shackleford and Riverdale), West Little Rock, North Little Rock (North Hills Blvd and Maumelle Blvd), Bentonville, Bryant, Hot Springs, Springdale, and Lowell. Use the location finder on this page to filter to climate-controlled-only facilities and reserve online from the nearest one.`,
-    aHtml: `Most Modern Storage® locations offer climate-controlled storage, including facilities in Little Rock (<a href="/locations/shackleford">Shackleford</a> and <a href="/locations/riverdale">Riverdale</a>), <a href="/locations/west-little-rock">West Little Rock</a>, North Little Rock (<a href="/locations/north-little-rock">North Hills Blvd</a> and <a href="/locations/maumelle">Maumelle Blvd</a>), <a href="/locations/bentonville">Bentonville</a>, <a href="/locations/bryant">Bryant</a>, <a href="/locations/hot-springs">Hot Springs</a>, <a href="/locations/springdale">Springdale</a>, and <a href="/locations/lowell">Lowell</a>. Use the location finder on this page to filter to climate-controlled-only facilities and reserve online from the nearest one.`,
+    a: `Every Modern Storage® location offers climate-controlled storage — all 10 facilities, including Little Rock (Shackleford and Riverdale), West Little Rock, North Little Rock (North Hills Blvd and Maumelle Blvd), Bentonville, Bryant, Hot Springs, Springdale, and Lowell. Use the location finder on this page to reserve online at the nearest facility.`,
+    aHtml: `Every Modern Storage® location offers climate-controlled storage — all 10 facilities, including Little Rock (<a href="/locations/shackleford">Shackleford</a> and <a href="/locations/riverdale">Riverdale</a>), <a href="/locations/west-little-rock">West Little Rock</a>, North Little Rock (<a href="/locations/north-little-rock">North Hills Blvd</a> and <a href="/locations/maumelle">Maumelle Blvd</a>), <a href="/locations/bentonville">Bentonville</a>, <a href="/locations/bryant">Bryant</a>, <a href="/locations/hot-springs">Hot Springs</a>, <a href="/locations/springdale">Springdale</a>, and <a href="/locations/lowell">Lowell</a>. Use the location finder on this page to reserve online at the nearest facility.`,
   },
   {
     q: 'How do I find climate-controlled storage near me?',

@@ -69,7 +69,7 @@ export const metadata: Metadata = {
 }
 
 const TRUST_BULLETS = [
-  'Climate-controlled at most locations',
+  'Climate-controlled at every location',
   'Indoor, gated, surveilled access',
   'Best of the Best Self-Storage Awards · 2023, 2024, 2025 winner',
   'Month-to-month rentals',
@@ -923,7 +923,7 @@ export default async function ClimateControlledPage() {
               Find Climate-Controlled Storage Near You
             </h2>
             <p className="text-gray-700 text-lg leading-relaxed">
-              Most Modern Storage® locations offer indoor climate-controlled units. Customers searching for climate-controlled storage near me, indoor storage units near me, or temperature-controlled storage near me will find a Modern Storage® facility in most central and Northwest regions — including locations near Little Rock, North Little Rock, Maumelle, Bentonville, Bryant, Springdale, Lowell, and Hot Springs. Filter the map, click a pin for details, and reserve online from the nearest facility.
+              Every Modern Storage® location offers indoor climate-controlled units — all 10 Arkansas facilities. Customers searching for climate-controlled storage near me, indoor storage units near me, or temperature-controlled storage near me will find a Modern Storage® facility across central and Northwest Arkansas — including locations near Little Rock, North Little Rock, Maumelle, Bentonville, Bryant, Springdale, Lowell, and Hot Springs. Filter the map, click a pin for details, and reserve online from the nearest facility.
             </p>
           </div>
           <LocationFinder locations={locations} highlightBadge="Climate-Controlled" requireBadge="Climate-Controlled" />
