@@ -20,7 +20,7 @@ const HERO_ALT =
 // Other in-page photos. Filenames match what's saved in public/images/.
 const MASERATI_IMAGE = '/images/exotic-vehicle-storage-at-modern-storage.webp.png'
 const MASERATI_ALT =
-  'Exotic car emerging from a red Modern Storage® roll-up door — indoor enclosed bay storage at Modern Storage® Shackleford in Little Rock'
+  'Exotic car emerging from a red Modern Storage® roll-up door — indoor enclosed vehicle storage in Arkansas'
 
 const COLLECTION_IMAGE = '/images/luxury-car-storage-facility-collection.Modern.Storage.png'
 const COLLECTION_ALT =
@@ -84,7 +84,7 @@ const VALUE_PROPS = [
   {
     title: 'Restoration headroom',
     body:
-      'A bare-shell restoration needs more than just space for the car — it needs room for the donor parts, the engine on a stand, the rolling tool cart, and the boxes of trim pieces. Mini-warehouse units at Modern Storage® Riverdale handle the whole footprint.',
+      'A bare-shell restoration needs more than just space for the car — it needs room for the donor parts, the engine on a stand, the rolling tool cart, and the boxes of trim pieces. Mini-warehouse and business storage units at Modern Storage® handle the whole footprint.',
   },
 ] as const
 
@@ -95,12 +95,12 @@ const VEHICLE_TYPES = [
   {
     title: 'Classic cars',
     body:
-      'Pre-war coupes, muscle-era V8s, vintage European cruisers — anything you bought to keep, not commute in. Climate-controlled indoor units at most Modern Storage® locations and indoor enclosed RV bays at Modern Storage® Shackleford give classics the year-round temperature stability their original materials need.',
+      'Pre-war coupes, muscle-era V8s, vintage European cruisers — anything you bought to keep, not commute in. Climate-controlled indoor units and indoor enclosed bays at Modern Storage® locations across Arkansas give classics the year-round temperature stability their original materials need.',
   },
   {
     title: 'Exotic & supercars',
     body:
-      'Ferrari, Lamborghini, McLaren, Porsche GT cars, AMG GT — modern exotics that respond badly to heat soak, UV, and humidity. Indoor enclosed storage keeps the paint, leather, electronics, and rubber in show-floor condition between drives.',
+      'Ferrari, Lamborghini, McLaren, Porsche GT cars, AMG GT — exotics that respond badly to heat soak, UV, and humidity. Indoor enclosed storage keeps the paint, leather, electronics, and rubber in show-floor condition between drives.',
   },
   {
     title: 'Motorcycles',
@@ -110,7 +110,7 @@ const VEHICLE_TYPES = [
   {
     title: 'Project cars',
     body:
-      'Long-term builds need somewhere to live between work sessions. Drive-up units at most Modern Storage® locations and mini-warehouse business units at Modern Storage® Riverdale give the rolling chassis, the donor parts, and the tool cart room to coexist.',
+      'Long-term builds need somewhere to live between work sessions. Drive-up units at most Modern Storage® locations across Arkansas give the rolling chassis, the donor parts, and the tool cart room to coexist.',
   },
   {
     title: 'Convertibles & roadsters',
@@ -120,7 +120,7 @@ const VEHICLE_TYPES = [
   {
     title: 'Weekend & track cars',
     body:
-      'Cars you drive on weekends — track-prepped Caymans, Miatas with cage and harness, restored S-chassis builds — deserve indoor storage that keeps them ready to go. Climate-controlled units and indoor enclosed bays at Modern Storage® Shackleford fit the bill.',
+      'Cars you drive on weekends — track-prepped Caymans, Miatas with cage and harness, restored S-chassis builds — deserve indoor storage that keeps them ready to go. Climate-controlled units and indoor enclosed bays at Modern Storage® locations fit the bill.',
   },
   {
     title: 'Snowbird vehicles',
@@ -176,15 +176,15 @@ const PREP_CHECKLIST = [
 const FAQS = [
   {
     q: 'Does Modern Storage® offer indoor enclosed storage for classic and exotic cars?',
-    a: `Yes. Modern Storage® Shackleford in Little Rock offers indoor enclosed RV bays sized for classic cars, exotic vehicles, project cars, and motorcycles. Climate-controlled units across the rest of the Arkansas portfolio also accommodate smaller vehicles, motorcycles, parts, and accessories.`,
+    a: `Yes. Modern Storage® offers indoor enclosed bays and climate-controlled units sized for classic cars, exotic vehicles, project cars, and motorcycles at locations across Arkansas. Drive-up and outdoor parking options also accommodate larger or daily-driver-style vehicles.`,
   },
   {
     q: 'Where can I store a classic car in Arkansas?',
-    a: `Modern Storage® offers collector vehicle storage at locations across Arkansas, with indoor enclosed bays at Modern Storage® Shackleford in Little Rock and climate-controlled units at most other Modern Storage® locations. Outdoor and covered parking spaces accommodate larger or daily-driver-style vehicles.`,
+    a: `Modern Storage® offers collector vehicle storage at locations across Arkansas — indoor enclosed bays, climate-controlled units, drive-up storage, and outdoor parking. Use the location finder to pick the Modern Storage® closest to your garage and confirm which formats are available.`,
   },
   {
     q: 'What size storage unit do I need for a classic or exotic car?',
-    a: `Most classic cars, modern exotics, and weekend cars fit comfortably in a 10×20 storage unit (200 sq ft) — about the size of a one-car garage. Longer wheelbase vehicles, full-size pickups, and restomod project cars typically need a 10×30. Two collector cars side-by-side fit in an indoor RV bay at Modern Storage® Shackleford.`,
+    a: `Most classic cars, exotics, and weekend cars fit comfortably in a 10×20 storage unit (200 sq ft) — about the size of a one-car garage. Longer wheelbase vehicles, full-size pickups, and restomod project cars typically need a 10×30. Two collector cars side-by-side fit in an indoor enclosed bay.`,
   },
   {
     q: 'Can I store car parts and tools alongside my collector car?',
@@ -196,7 +196,7 @@ const FAQS = [
   },
   {
     q: 'Do you offer storage for restoration projects?',
-    a: `Yes. Modern Storage® Riverdale in Little Rock is the flagship business storage facility — drive-up access, ground-floor mini-warehouse units, and the space to keep a rolling shell, donor parts, tools, and a workbench together. Restoration crews and personal builders both rent at Riverdale.`,
+    a: `Yes. Modern Storage® offers drive-up units and mini-warehouse business storage at locations across Arkansas — ground-floor access, room for the rolling chassis, donor parts, tools, and a workbench together. Restoration crews and personal builders rent at the Modern Storage® closest to their shop or garage.`,
   },
   {
     q: 'How do I prepare a classic car for long-term storage?',
@@ -204,7 +204,7 @@ const FAQS = [
   },
   {
     q: 'Can I store a motorcycle at Modern Storage®?',
-    a: `Yes. Most Modern Storage® locations accommodate motorcycles in 5×10 or 5×15 climate-controlled units, with indoor enclosed bays at Modern Storage® Shackleford in Little Rock for collectors who want vault-quality storage. Helmets, jackets, tools, and seasonal gear store alongside.`,
+    a: `Yes. Modern Storage® locations across Arkansas accommodate motorcycles in 5×10 or 5×15 climate-controlled units, with indoor enclosed bays at select facilities for collectors who want vault-quality storage. Helmets, jackets, tools, and seasonal gear store alongside.`,
   },
   {
     q: 'Are storage units secure enough for a six-figure car?',
@@ -234,7 +234,7 @@ function buildJsonLd() {
     serviceType: 'Classic, Exotic, and Collector Vehicle Storage',
     name: 'Classic, Exotic & Collector Car Storage in Arkansas',
     description:
-      'Indoor enclosed and climate-controlled storage for classic cars, exotics, supercars, project cars, motorcycles, convertibles, weekend drivers, and snowbird vehicles across Arkansas. Indoor RV bays at Modern Storage® Shackleford, climate-controlled units across the portfolio, and mini-warehouse business storage at Modern Storage® Riverdale for restoration projects.',
+      'Indoor enclosed and climate-controlled storage for classic cars, exotics, supercars, project cars, motorcycles, convertibles, weekend drivers, and snowbird vehicles across Arkansas. Indoor enclosed bays, climate-controlled units, drive-up storage, and mini-warehouse business storage at Modern Storage® locations across the state.',
     url: SITE_URL + PAGE_PATH,
     image: SITE_URL + HERO_IMAGE,
     areaServed: { '@type': 'State', name: 'Arkansas' },
@@ -364,7 +364,7 @@ export default async function CollectorVehicleStoragePage() {
 
             <ul className="flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-gray-300 mt-6">
               {[
-                'Indoor enclosed bays at Shackleford',
+                'Indoor enclosed bays available',
                 'Climate-controlled across Arkansas',
                 'Mini-warehouse for restoration projects',
                 'Month-to-month',
@@ -460,7 +460,7 @@ export default async function CollectorVehicleStoragePage() {
         </div>
       </section>
 
-      {/* ── INDOOR ENCLOSED BAYS AT SHACKLEFORD ───────────────── */}
+      {/* ── INDOOR ENCLOSED BAYS — generic to all locations ──── */}
       <section className="bg-charcoal text-white py-16 lg:py-24 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -469,20 +469,20 @@ export default async function CollectorVehicleStoragePage() {
                 Indoor enclosed bays
               </p>
               <h2 className="text-3xl lg:text-4xl font-black text-white tracking-tight mb-5">
-                Modern Storage® Shackleford — Little Rock
+                The vault for cars that don&apos;t see weather
               </h2>
               <p className="text-gray-300 leading-relaxed mb-5">
-                The vault for the cars that don't see weather. Indoor RV bays at <Link href="/locations/shackleford" className="text-modern-red font-bold hover:text-modern-red-hover transition-colors">Modern Storage® Shackleford</Link> are sized for full classic cars, modern exotics, restored project builds, and multiple motorcycles side-by-side — all behind a roll-up door, under a roof, and inside the gate.
+                Indoor enclosed bays at Modern Storage® locations across Arkansas are sized for full classic cars, exotics, restored project builds, and multiple motorcycles side-by-side — all behind a roll-up door, under a roof, and inside the gate.
               </p>
               <p className="text-gray-300 leading-relaxed mb-8">
-                Climate-stable indoor air keeps paint, leather, electronics, soft tops, and rubber out of the heat-and-humidity cycle that punishes cars sitting in a Little Rock garage. Reserve early — indoor bays at Shackleford fill quickly heading into show and event season.
+                Climate-stable indoor air keeps paint, leather, electronics, soft tops, and rubber out of the heat-and-humidity cycle that punishes cars sitting in an Arkansas garage. Reserve early — indoor bays fill quickly heading into show and event season.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
-                  href="/locations/shackleford"
+                  href="/#locations"
                   className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-bold px-6 py-3 rounded-full transition-colors text-sm"
                 >
-                  Reserve at Shackleford →
+                  Find a Location →
                 </Link>
                 <Link
                   href="/rv-boat-vehicle"
@@ -563,29 +563,29 @@ export default async function CollectorVehicleStoragePage() {
         </div>
       </section>
 
-      {/* ── MINI-WAREHOUSE AT RIVERDALE FOR RESTORATIONS ───────── */}
+      {/* ── MINI-WAREHOUSE / DRIVE-UP — generic, no per-facility callout ── */}
       <section className="bg-gray-50 py-16 lg:py-24 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.2em] text-modern-red mb-3">
-                Mini-warehouse business storage
+                Drive-up &amp; mini-warehouse storage
               </p>
               <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-5">
-                Modern Storage® Riverdale — for restoration projects
+                Drive-up storage for restoration projects
               </h2>
               <p className="text-gray-700 leading-relaxed mb-5">
-                A bare-shell restoration isn't just a car — it's a rolling chassis, a donor parts pile, a workbench, an engine stand, a tool cart, and forty boxes of trim. That's a business storage footprint, not a household one.
+                A bare-shell restoration isn't just a car — it's a rolling chassis, a donor parts pile, a workbench, an engine stand, a tool cart, and forty boxes of trim. That's a drive-up + mini-warehouse footprint, not a household one.
               </p>
               <p className="text-gray-700 leading-relaxed mb-8">
-                <Link href="/locations/riverdale" className="text-modern-red font-bold hover:text-modern-red-hover transition-colors">Modern Storage® Riverdale</Link> is the central-Arkansas flagship for <Link href="/business-storage" className="text-modern-red font-bold hover:text-modern-red-hover transition-colors">business storage</Link> — drive-up access, ground-floor units, and mini-warehouse formats that handle a project car and everything around it. Restoration shops and personal builders both rent here.
+                Modern Storage® locations across Arkansas offer <Link href="/business-storage" className="text-modern-red font-bold hover:text-modern-red-hover transition-colors">drive-up business storage</Link> sized to handle a project car and everything around it. Restoration shops and personal builders rent at the Modern Storage® closest to their garage.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
-                  href="/locations/riverdale"
+                  href="/#locations"
                   className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-bold px-6 py-3 rounded-full transition-colors text-sm"
                 >
-                  See Riverdale →
+                  Find a Location →
                 </Link>
                 <Link
                   href="/business-storage"
@@ -655,9 +655,9 @@ export default async function CollectorVehicleStoragePage() {
               { href: '/climate-controlled', label: 'Climate-Controlled' },
               { href: '/rv-boat-vehicle', label: 'RV & Boat Storage' },
               { href: '/business-storage', label: 'Business Storage' },
-              { href: '/locations/shackleford', label: 'Shackleford' },
-              { href: '/locations/riverdale', label: 'Riverdale' },
+              { href: '/locations', label: 'All Locations' },
               { href: '/size-guide', label: 'Size Guide' },
+              { href: '/pricing', label: 'Pricing' },
             ].map((link) => (
               <Link
                 key={link.href}
@@ -720,13 +720,13 @@ export default async function CollectorVehicleStoragePage() {
               Call Modern Storage®
             </a>
             <Link
-              href="/locations/shackleford"
+              href="/#locations"
               className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-charcoal font-black px-8 py-3.5 rounded-full transition-colors text-sm shadow-md"
             >
-              Reserve at Shackleford →
+              Find a Location →
             </Link>
             <Link
-              href="/#locations"
+              href="/locations"
               className="inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 text-white font-bold px-8 py-3.5 rounded-full transition-colors border border-white/40 text-sm"
             >
               All Arkansas Locations
