@@ -171,9 +171,13 @@ export default function Footer({
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Modern Storage® on ${label}`}
-                  className="inline-flex items-center gap-2 text-sm text-modern-red hover:text-modern-red-hover transition-colors font-semibold"
+                  // Label is white for legibility against the dark footer
+                  // background; the icon keeps its red brand color via the
+                  // explicit text-modern-red class on SocialIcon (which
+                  // overrides the link's inherited white).
+                  className="inline-flex items-center gap-2 text-sm text-white hover:text-gray-200 transition-colors font-semibold"
                 >
-                  <SocialIcon name={icon} className="w-5 h-5 shrink-0" />
+                  <SocialIcon name={icon} className="w-5 h-5 shrink-0 text-modern-red" />
                   {label}
                 </a>
               ))}

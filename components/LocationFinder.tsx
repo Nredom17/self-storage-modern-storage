@@ -27,11 +27,12 @@ export default function LocationFinder({
   highlightBadge?: string
   requireBadge?: string
 }) {
-  // Default to the first specific region instead of "All Arkansas".
-  // UX feedback: showing a regional filter on first load makes the
-  // tabs read as interactive — users immediately see other tabs are
-  // clickable. "All Arkansas" is still one click away.
-  const [activeFilter, setActiveFilter] = useState<string>(LOCATION_FILTERS[1] ?? 'All Arkansas')
+  // Default to "All Arkansas" so the map opens with every facility pin
+  // visible. Earlier we defaulted to the first specific region to make
+  // the tabs read as interactive, but the design pass found that
+  // landing on Little Rock implies the brand is Little Rock-only and
+  // hides the Northwest Arkansas / Hot Springs / Bryant footprint.
+  const [activeFilter, setActiveFilter] = useState<string>(LOCATION_FILTERS[0] ?? 'All Arkansas')
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null)
   const cardRefs = useRef<Record<string, HTMLElement | null>>({})
 
