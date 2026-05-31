@@ -316,6 +316,130 @@ export default async function LocationPage({ params }: Props) {
         </div>
       </section>
 
+      {/* ── FACILITY INFORMATION ─────────────────────────────
+          Hours, gate access, unit-size range, and security
+          features. Office hours are uniform across the portfolio
+          EXCEPT Maumelle and Lowell are closed Sundays — that's the
+          only per-location split, handled inline below. Everything
+          else (gate access 6 AM – 10 PM, unit sizes 5×5 through
+          10×30, the same six-layer security stack) is identical at
+          every Modern Storage® facility, so it's hardcoded in the
+          template rather than duplicated in lib/location-pages.ts. */}
+      <section className="bg-white py-12 lg:py-16 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-8">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+              Facility information
+            </p>
+            <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight">
+              Hours, access, sizes &amp; security
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {/* Office hours */}
+            <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+              <div className="flex items-start gap-3 mb-4">
+                <svg className="w-5 h-5 text-modern-red shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h3 className="font-black text-charcoal text-sm leading-tight">Office hours</h3>
+              </div>
+              <dl className="space-y-1.5 text-sm">
+                <div className="flex justify-between gap-2">
+                  <dt className="text-gray-600">Mon – Sat</dt>
+                  <dd className="font-semibold text-charcoal">8:30 AM – 5:30 PM</dd>
+                </div>
+                <div className="flex justify-between gap-2">
+                  <dt className="text-gray-600">Sunday</dt>
+                  <dd className="font-semibold text-charcoal">
+                    {loc.slug === 'maumelle' || loc.slug === 'lowell'
+                      ? 'Closed'
+                      : '1:00 PM – 6:00 PM'}
+                  </dd>
+                </div>
+              </dl>
+              <p className="text-xs text-gray-500 leading-relaxed mt-3">
+                On-site team available during office hours for new rentals, tours, and tenant questions.
+              </p>
+            </div>
+
+            {/* Gate access hours */}
+            <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+              <div className="flex items-start gap-3 mb-4">
+                <svg className="w-5 h-5 text-modern-red shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                <h3 className="font-black text-charcoal text-sm leading-tight">Gate access</h3>
+              </div>
+              <dl className="space-y-1.5 text-sm">
+                <div className="flex justify-between gap-2">
+                  <dt className="text-gray-600">Every day</dt>
+                  <dd className="font-semibold text-charcoal">6:00 AM – 10:00 PM</dd>
+                </div>
+              </dl>
+              <p className="text-xs text-gray-500 leading-relaxed mt-3">
+                Tenants enter the property with a personal keypad code issued at move-in. Every entry and exit is logged.
+              </p>
+            </div>
+
+            {/* Unit sizes */}
+            <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+              <div className="flex items-start gap-3 mb-4">
+                <svg className="w-5 h-5 text-modern-red shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM9 9h6v6H9V9z" />
+                </svg>
+                <h3 className="font-black text-charcoal text-sm leading-tight">Unit sizes</h3>
+              </div>
+              <p className="text-sm font-bold text-charcoal mb-1">5×5 through 10×30</p>
+              <p className="text-xs text-gray-500 leading-relaxed">
+                Drive-up and climate-controlled formats available depending on the unit. See the live reservation page for current sizes, pricing, and any move-in offer at {loc.name}.
+              </p>
+              <Link
+                href="/size-guide"
+                className="inline-flex items-center gap-1 text-xs font-bold text-modern-red hover:text-modern-red-hover transition-colors mt-3"
+              >
+                See size guide →
+              </Link>
+            </div>
+
+            {/* Security */}
+            <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+              <div className="flex items-start gap-3 mb-4">
+                <svg className="w-5 h-5 text-modern-red shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <h3 className="font-black text-charcoal text-sm leading-tight">Security</h3>
+              </div>
+              <ul className="space-y-1.5 text-xs text-gray-700 leading-relaxed">
+                <li className="flex gap-1.5">
+                  <span className="text-modern-red shrink-0">•</span>
+                  <span>Gated property with personal keypad codes</span>
+                </li>
+                <li className="flex gap-1.5">
+                  <span className="text-modern-red shrink-0">•</span>
+                  <span>Video surveillance &amp; on-site management</span>
+                </li>
+                <li className="flex gap-1.5">
+                  <span className="text-modern-red shrink-0">•</span>
+                  <span>Perimeter fencing &amp; exterior lighting</span>
+                </li>
+                <li className="flex gap-1.5">
+                  <span className="text-modern-red shrink-0">•</span>
+                  <span>Disc-lock recommended &amp; available on-site</span>
+                </li>
+              </ul>
+              <Link
+                href="/guides/storage-security"
+                className="inline-flex items-center gap-1 text-xs font-bold text-modern-red hover:text-modern-red-hover transition-colors mt-3"
+              >
+                Read security guide →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── ABOUT THIS LOCATION ──────────────────────────── */}
       <section className="bg-white py-20 border-y border-gray-200">
         <div className="max-w-4xl mx-auto px-6">
