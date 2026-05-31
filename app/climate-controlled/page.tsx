@@ -930,9 +930,14 @@ export default async function ClimateControlledPage() {
         </div>
       </section>
 
-      {/* ── FAQ — expanded to 22 questions ───────────────────── */}
+      {/* ── FAQ — expanded to 22 questions ─────────────────────
+          Container widened from max-w-4xl → max-w-6xl on lg+ so the
+          two-column accordion has room to breathe. FaqAccordion runs
+          with columns={2} on this page because the list is long
+          enough (22 entries) that a single stacked column made the
+          page feel like it required excessive scrolling. */}
       <section id="faq" className="bg-white py-20 border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">FAQ</p>
             <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight">
@@ -942,7 +947,7 @@ export default async function ClimateControlledPage() {
               22 of the most common questions about indoor climate-controlled storage — temperatures, mold prevention, mattresses, electronics, vinyl, antiques, wine, instruments, long-term storage, business inventory, near-me availability, and more.
             </p>
           </div>
-          <FaqAccordion items={CLIMATE_FAQS} />
+          <FaqAccordion items={CLIMATE_FAQS} columns={2} />
         </div>
       </section>
 

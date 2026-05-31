@@ -17,17 +17,48 @@
 
 type FaqItem = { q: string; a: string; aHtml?: string }
 
-export default function FaqAccordion({ items }: { items: readonly FaqItem[] }) {
+// `columns` controls the on-page layout. Default 1 = single stacked
+// accordion (the historical behavior — preserved so every existing caller
+// keeps rendering unchanged). 2 = side-by-side grid on md+ screens, with
+// items flowing in DOM order across two columns. Each column expands
+// independently when an item opens because `<details>` height is intrinsic
+// to its grid cell; siblings in the same row stay top-aligned.
+//
+// Use 2 columns for long FAQ lists (15+ items) where vertical scroll feels
+// excessive. Short FAQ blocks (~6 items) stay single-column so visitors
+// don't have to track two parallel reading lanes for a 3-item list.
+export default function FaqAccordion({
+  items,
+  columns = 1,
+}: {
+  items: readonly FaqItem[]
+  columns?: 1 | 2
+}) {
+  // Container variants — single column keeps the original divide-y border
+  // treatment. Two-column uses a responsive grid with a vertical divider
+  // between the cells via gap-x and each <details> getting its own bottom
+  // border so the visual rhythm matches the single-column look.
+  const containerClass =
+    columns === 2
+      ? 'grid grid-cols-1 md:grid-cols-2 md:gap-x-10 border-t border-gray-200'
+      : 'divide-y divide-gray-200 border-y border-gray-200'
+  const itemClass =
+    columns === 2
+      ? 'group py-2 border-b border-gray-200'
+      : 'group py-2'
+
   return (
-    <div className="divide-y divide-gray-200 border-y border-gray-200">
+    <div className={containerClass}>
       {items.map((item, i) => (
         <details
           key={item.q}
           // Open the first item by default so the page has visible answer
           // content above the fold. Every other answer is still in the DOM
-          // (and crawlable), just visually collapsed.
-          open={i === 0}
-          className="group py-2"
+          // (and crawlable), just visually collapsed. In 2-column mode we
+          // open the first item in EACH column (index 0 and 1) so both
+          // sides have visible answer content on initial render.
+          open={columns === 2 ? i < 2 : i === 0}
+          className={itemClass}
         >
           <summary
             className="
