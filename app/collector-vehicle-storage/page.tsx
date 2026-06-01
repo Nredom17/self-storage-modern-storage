@@ -36,7 +36,7 @@ const AERIAL_ALT =
 
 const GREEN_PORSCHE_IMAGE = '/images/porsche-gts-modern.storage-storage-unit..png'
 const GREEN_PORSCHE_ALT =
-  'Porsche GTS parked beside a Modern Storage® unit — climate-controlled vehicle storage in Arkansas'
+  'Porsche GTS parked beside a Modern Storage® unit — indoor enclosed vehicle storage in Arkansas'
 
 export const metadata: Metadata = {
   // Meta title — 57 chars including the ® symbol, fits the SERP budget
@@ -45,12 +45,12 @@ export const metadata: Metadata = {
     absolute: 'Classic, Exotic & Collector Car Storage | Modern Storage®',
   },
   description:
-    'Indoor enclosed and climate-controlled storage for classic cars, exotics, and collector vehicles across Arkansas at Modern Storage®.',
+    'Indoor enclosed storage for classic cars, exotics, and collector vehicles across Arkansas at Modern Storage®, with separate climate-controlled units for parts and restoration projects.',
   alternates: { canonical: SITE_URL + PAGE_PATH },
   openGraph: {
     title: 'Classic, Exotic & Collector Car Storage | Modern Storage®',
     description:
-      'Indoor enclosed RV bays, climate-controlled units, and restoration-project mini-warehouse space for collector vehicles across Arkansas.',
+      'Indoor enclosed bays for collector vehicles, drive-up units for project cars, and climate-controlled units for parts and restoration projects across Arkansas.',
     url: SITE_URL + PAGE_PATH,
     siteName: 'Modern Storage®',
     type: 'website',
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Classic, Exotic & Collector Car Storage | Modern Storage®',
     description:
-      'Indoor enclosed and climate-controlled storage for classic cars, exotics, and collector vehicles across Arkansas.',
+      'Indoor enclosed storage for collector vehicles, plus climate-controlled units for parts and documents, across Arkansas.',
     images: [HERO_IMAGE],
   },
 }
@@ -79,7 +79,7 @@ const VALUE_PROPS = [
   {
     title: 'Year-round protection',
     body:
-      'Arkansas summers regularly exceed 95°F with high humidity — conditions that crack leather, oxidize paint, dry-rot seals, and corrode electronics. Climate-controlled and indoor enclosed storage keep show-floor finishes show-floor.',
+      'Arkansas summers regularly exceed 95°F with high humidity — conditions that crack leather, oxidize paint, dry-rot seals, and corrode electronics. Indoor enclosed storage keeps the vehicle out of direct sun, dust, and the worst of Arkansas weather; climate-controlled units (a separate option) handle the leather pieces, parts, and documents that ride along with the build.',
   },
   {
     title: 'Restoration headroom',
@@ -95,7 +95,7 @@ const VEHICLE_TYPES = [
   {
     title: 'Classic cars',
     body:
-      'Pre-war coupes, muscle-era V8s, vintage European cruisers — anything you bought to keep, not commute in. Climate-controlled indoor units and indoor enclosed bays at Modern Storage® locations across Arkansas give classics the year-round temperature stability their original materials need.',
+      'Pre-war coupes, muscle-era V8s, vintage European cruisers — anything you bought to keep, not commute in. Indoor enclosed bays and drive-up units at Modern Storage® locations across Arkansas keep classics out of direct sun, weather, and the dust that wears finishes down over time.',
   },
   {
     title: 'Exotic & supercars',
@@ -105,7 +105,7 @@ const VEHICLE_TYPES = [
   {
     title: 'Motorcycles',
     body:
-      'Modern Storage® stores cruisers, sport bikes, adventure bikes, café customs, and gear together. A 5×10 climate-controlled unit covers a single motorcycle plus helmets, jackets, tools, and spares. Larger units accommodate multiple bikes and a workbench.',
+      'Modern Storage® stores cruisers, sport bikes, adventure bikes, café customs, and gear together. A 5×10 indoor unit covers a single motorcycle plus helmets, jackets, tools, and spares. Larger units accommodate multiple bikes and a workbench.',
   },
   {
     title: 'Project cars',
@@ -115,12 +115,12 @@ const VEHICLE_TYPES = [
   {
     title: 'Convertibles & roadsters',
     body:
-      'Convertible tops and leather interiors are the first things to suffer in an unconditioned garage. Climate-controlled storage at Modern Storage® keeps the soft top supple, the leather conditioned, and the carpets dry through Arkansas summer humidity.',
+      'Convertible tops and leather interiors are the first things to suffer in direct sun and outdoor humidity. Indoor enclosed storage at Modern Storage® keeps the soft top out of UV, the leather away from outdoor moisture swings, and the carpets dry.',
   },
   {
     title: 'Weekend & track cars',
     body:
-      'Cars you drive on weekends — track-prepped Caymans, Miatas with cage and harness, restored S-chassis builds — deserve indoor storage that keeps them ready to go. Climate-controlled units and indoor enclosed bays at Modern Storage® locations fit the bill.',
+      'Cars you drive on weekends — track-prepped Caymans, Miatas with cage and harness, restored S-chassis builds — deserve indoor storage that keeps them ready to go. Indoor enclosed bays and drive-up indoor units at Modern Storage® locations fit the bill.',
   },
   {
     title: 'Snowbird vehicles',
@@ -176,11 +176,11 @@ const PREP_CHECKLIST = [
 const FAQS = [
   {
     q: 'Does Modern Storage® offer indoor enclosed storage for classic and exotic cars?',
-    a: `Yes. Modern Storage® offers indoor enclosed bays and climate-controlled units sized for classic cars, exotic vehicles, project cars, and motorcycles at locations across Arkansas. Drive-up and outdoor parking options also accommodate larger or daily-driver-style vehicles.`,
+    a: `Yes. Modern Storage® offers indoor enclosed bays and drive-up indoor units sized for classic cars, exotic vehicles, project cars, and motorcycles at locations across Arkansas. Outdoor parking also accommodates larger or daily-driver-style vehicles. Climate-controlled units are available for parts, leather pieces, and documents stored alongside the vehicle.`,
   },
   {
     q: 'Where can I store a classic car in Arkansas?',
-    a: `Modern Storage® offers collector vehicle storage at locations across Arkansas — indoor enclosed bays, climate-controlled units, drive-up storage, and outdoor parking. Use the location finder to pick the Modern Storage® closest to your garage and confirm which formats are available.`,
+    a: `Modern Storage® offers collector vehicle storage at locations across Arkansas — indoor enclosed bays, drive-up storage, and outdoor parking. Use the location finder to pick the Modern Storage® closest to your garage and confirm which formats are available. Separate climate-controlled units are available for parts and documents.`,
   },
   {
     q: 'What size storage unit do I need for a classic or exotic car?',
@@ -191,8 +191,8 @@ const FAQS = [
     a: `Yes. Climate-controlled storage at Modern Storage® is the right choice for spare body panels, leather interiors, engine internals, wiring harnesses, build documents, tools, and any parts vulnerable to Arkansas heat and humidity. A separate climate-controlled unit alongside a drive-up vehicle space is a common collector setup.`,
   },
   {
-    q: 'Is climate-controlled storage worth it for a collector car?',
-    a: `For most collector vehicles, yes. Arkansas summers regularly exceed 95°F with sustained high humidity — conditions that accelerate paint oxidation, soft-top and seal degradation, leather cracking, and electronics failure. Indoor enclosed bays and climate-controlled storage keep the car in show-floor condition between drives.`,
+    q: 'Is indoor enclosed storage worth it for a collector car?',
+    a: `For most collector vehicles, yes. Arkansas summers regularly exceed 95°F with sustained high humidity — conditions that accelerate paint oxidation, soft-top and seal degradation, leather cracking, and electronics failure. Indoor enclosed bays at Modern Storage® keep the car out of direct sun, weather, and the dust that wears finishes down between drives. (Modern Storage® does not offer climate-controlled storage for vehicles themselves — climate-controlled units are intended for parts, leather pieces, and documents stored alongside.)`,
   },
   {
     q: 'Do you offer storage for restoration projects?',
@@ -204,7 +204,7 @@ const FAQS = [
   },
   {
     q: 'Can I store a motorcycle at Modern Storage®?',
-    a: `Yes. Modern Storage® locations across Arkansas accommodate motorcycles in 5×10 or 5×15 climate-controlled units, with indoor enclosed bays at select facilities for collectors who want vault-quality storage. Helmets, jackets, tools, and seasonal gear store alongside.`,
+    a: `Yes. Modern Storage® locations across Arkansas accommodate motorcycles in 5×10 or 5×15 indoor units, with indoor enclosed bays at select facilities for collectors who want vault-quality storage. Helmets, jackets, tools, and seasonal gear store alongside.`,
   },
   {
     q: 'Are storage units secure enough for a six-figure car?',
@@ -212,7 +212,7 @@ const FAQS = [
   },
   {
     q: 'How long can I store a collector car at Modern Storage®?',
-    a: `As long as you need. Modern Storage® rentals are month-to-month with no long-term lease commitment, so you can store seasonally (winter only, snowbird trips), between restoration phases, or year-round. Climate-controlled storage is recommended for stays longer than ~3 months.`,
+    a: `As long as you need. Modern Storage® rentals are month-to-month with no long-term lease commitment, so you can store seasonally (winter only, snowbird trips), between restoration phases, or year-round. Indoor enclosed storage is recommended for stays longer than ~3 months — and a separate climate-controlled unit makes sense for any leather pieces, parts, or documents stored alongside.`,
   },
   {
     q: 'Can I access my car at Modern Storage® any day of the week?',
@@ -234,7 +234,7 @@ function buildJsonLd() {
     serviceType: 'Classic, Exotic, and Collector Vehicle Storage',
     name: 'Classic, Exotic & Collector Car Storage in Arkansas',
     description:
-      'Indoor enclosed and climate-controlled storage for classic cars, exotics, supercars, project cars, motorcycles, convertibles, weekend drivers, and snowbird vehicles across Arkansas. Indoor enclosed bays, climate-controlled units, drive-up storage, and mini-warehouse business storage at Modern Storage® locations across the state.',
+      'Indoor enclosed storage for classic cars, exotics, supercars, project cars, motorcycles, convertibles, weekend drivers, and snowbird vehicles across Arkansas. Indoor enclosed bays, drive-up storage, and mini-warehouse business storage at Modern Storage® locations across the state. Climate-controlled units are available separately for parts, leather pieces, and documents.',
     url: SITE_URL + PAGE_PATH,
     image: SITE_URL + HERO_IMAGE,
     areaServed: { '@type': 'State', name: 'Arkansas' },
@@ -337,7 +337,7 @@ export default async function CollectorVehicleStoragePage() {
               Classic Car &amp; Collector Vehicle <span className="text-modern-red">Storage</span>
             </h1>
             <p className="text-gray-200 text-lg lg:text-xl leading-relaxed mb-10 max-w-xl">
-              Indoor enclosed bays, climate-controlled units, and restoration-project space for the cars you drive on weekends, the ones still in pieces in the garage, and the ones that only come out for the show. Across Arkansas at Modern Storage®.
+              Indoor enclosed bays and restoration-project space for the cars you drive on weekends, the ones still in pieces in the garage, and the ones that only come out for the show. Climate-controlled units are available separately for parts, leather, and documents. Across Arkansas at Modern Storage®.
             </p>
 
             <div className="flex flex-wrap gap-3 mb-3">
@@ -365,7 +365,7 @@ export default async function CollectorVehicleStoragePage() {
             <ul className="flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-gray-300 mt-6">
               {[
                 'Indoor enclosed bays available',
-                'Climate-controlled across Arkansas',
+                'Climate-controlled units for parts & interiors',
                 'Mini-warehouse for restoration projects',
                 'Month-to-month',
               ].map((b) => (
@@ -442,7 +442,7 @@ export default async function CollectorVehicleStoragePage() {
               Built for the cars you actually own
             </h2>
             <p className="text-gray-700 text-lg leading-relaxed">
-              Every collector's garage looks a little different. Modern Storage® has the format to match — indoor enclosed bays for show cars, climate-controlled units for weekend drivers and parts, drive-up units for project cars, and outdoor parking for daily-driver-style vehicles.
+              Every collector's garage looks a little different. Modern Storage® has the format to match — indoor enclosed bays for show cars, drive-up units for project cars, outdoor parking for daily-driver-style vehicles, and climate-controlled units for parts, leather, and documents.
             </p>
           </div>
 
@@ -475,7 +475,7 @@ export default async function CollectorVehicleStoragePage() {
                 Indoor enclosed bays at Modern Storage® locations across Arkansas are sized for full classic cars, exotics, restored project builds, and multiple motorcycles side-by-side — all behind a roll-up door, under a roof, and inside the gate.
               </p>
               <p className="text-gray-300 leading-relaxed mb-8">
-                Climate-stable indoor air keeps paint, leather, electronics, soft tops, and rubber out of the heat-and-humidity cycle that punishes cars sitting in an Arkansas garage. Reserve early — indoor bays fill quickly heading into show and event season.
+                Indoor walls and a sealed roof shield paint, leather, electronics, soft tops, and rubber from sun, rain, and the worst of the heat-and-humidity cycle that punishes cars sitting in an Arkansas driveway. Reserve early — indoor bays fill quickly heading into show and event season.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
@@ -706,7 +706,7 @@ export default async function CollectorVehicleStoragePage() {
             Protect What You Love <span className="text-modern-red">Driving</span>
           </h2>
           <p className="text-gray-200 text-lg lg:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-            Reserve indoor enclosed, climate-controlled, or mini-warehouse business storage at the Modern Storage® location closest to your garage. Month-to-month. No long-term lease. Ready when you are.
+            Reserve an indoor enclosed bay, drive-up, or mini-warehouse business unit at the Modern Storage® location closest to your garage — plus climate-controlled units for parts, leather, and documents. Month-to-month. No long-term lease. Ready when you are.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <a
