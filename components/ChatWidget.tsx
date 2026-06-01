@@ -17,6 +17,7 @@ import {
   matchFaq,
   isHoursQuestion,
   isPaymentQuestion,
+  isContactQuestion,
   isGoodbye,
   isMessageRequest,
   locationHours,
@@ -283,6 +284,15 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
     }
     if (isPaymentQuestion(value)) {
       paymentAnswer()
+      return true
+    }
+    // Contact intent — "whats wlr number", "address for shackleford", etc.
+    if (isContactQuestion(value)) {
+      if (namedLocation) {
+        contactAnswer(namedLocation)
+        return true
+      }
+      enterLocation('contact', 'Which store do you need the phone number or address for?')
       return true
     }
     const faq = matchFaq(value, faqs)

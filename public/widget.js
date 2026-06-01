@@ -69,6 +69,7 @@
     { question: 'What size do I need?', keywords: ['size', 'sizes', 'how big', 'how large', 'dimensions', 'what size', 'square feet'], answer: 'Not sure what size you need? Our AI Storage Size Finder and Size Guide can help you choose the right unit.', links: [{ label: 'AI Storage Size Finder', href: TEXT.sizeFinderUrl }, { label: 'Size Guide', href: TEXT.sizeGuideUrl }] },
     { question: 'How do I reserve?', keywords: ['reserve', 'reservation', 'rent online', 'book', 'sign up', 'how do i rent'], answer: 'You can view available units and reserve online for any Modern Storage® location. Tell me which location you’re interested in and I’ll send you the right link.' },
     { question: 'RV / boat / vehicle storage?', keywords: ['boat', 'rv', 'camper', 'vehicle', 'car storage', 'trailer', 'motorhome'], answer: 'Select Modern Storage® locations offer boat, RV, and vehicle storage. Availability varies by facility — let me know which area you’re in and I can point you to the right location.', links: [{ label: 'Boat, RV & vehicle storage', href: API_BASE + '/rv-boat-vehicle' }] },
+    { question: 'Can I live or sleep in my unit?', keywords: ['live', 'living', 'sleep', 'sleeping', 'reside', 'residence', 'stay overnight', 'sleep in', 'dwelling', 'occupancy', 'habitation', 'move in to', 'move into'], answer: 'No. Modern Storage® units are for storage only — they cannot be used as a residence, for sleeping, or for any kind of overnight occupancy. State and local fire codes, building regulations, and your rental agreement all prohibit anyone from living in a storage unit, for safety reasons. If you’re between homes and need short-term housing options, our team can still help you store your belongings while you arrange other accommodations.' },
   ]
 
   // Office hours (mirrors lib/chatbot.ts).
@@ -100,6 +101,16 @@
   function isPaymentQuestion(text) {
     var t = ' ' + normalize(text) + ' '
     for (var i = 0; i < PAYMENT_KEYWORDS.length; i++) if (t.indexOf(' ' + PAYMENT_KEYWORDS[i] + ' ') >= 0) return true
+    return false
+  }
+  // Contact-info intent detection — "whats wlr number", "address for
+  // shackleford", "phone for bryant", etc.
+  var CONTACT_PHRASES = ['phone number', 'phone for', 'phone of', 'number for', 'number of', 'the number', 'whats the number', "what's the number", 'whats their number', 'address for', 'address of', 'the address', 'whats the address', "what's the address", 'contact info', 'contact information', 'contact number', 'where is', 'how do i contact', 'how can i contact', 'how do i reach', 'how can i reach', 'call them']
+  var CONTACT_SINGLE = ['address']
+  function isContactQuestion(text) {
+    var t = ' ' + normalize(text) + ' '
+    for (var i = 0; i < CONTACT_SINGLE.length; i++) if (t.indexOf(' ' + CONTACT_SINGLE[i] + ' ') >= 0) return true
+    for (var j = 0; j < CONTACT_PHRASES.length; j++) if (t.indexOf(' ' + CONTACT_PHRASES[j] + ' ') >= 0) return true
     return false
   }
   var SHORT_GOODBYES = ['thanks', 'thx', 'ty', 'bye', 'goodbye', 'cya', 'later', 'done', 'okay', 'ok', 'cool', 'great', 'awesome', 'perfect', 'nope', 'no']
@@ -479,6 +490,11 @@
       enterLocation('hours', TEXT.hoursPrompt); return true
     }
     if (isPaymentQuestion(value)) { paymentAnswer(); return true }
+    if (isContactQuestion(value)) {
+      if (namedLocation) { contactAnswer(namedLocation); return true }
+      enterLocation('contact', 'Which store do you need the phone number or address for?')
+      return true
+    }
     var faq = matchFaq(value)
     if (faq) {
       var hasPerLocation = faq.locationAnswers && Object.keys(faq.locationAnswers).length > 0

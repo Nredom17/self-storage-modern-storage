@@ -294,6 +294,28 @@ export const CHAT_FAQS: ChatFaq[] = [
       { label: 'Boat, RV & vehicle storage', href: 'https://self-storage.modernstorage.com/rv-boat-vehicle' },
     ],
   },
+  // Common safety / legal question. Plain "no" answer with the why — keeps
+  // us in compliance with state/local fire code and the rental agreement.
+  {
+    question: 'Can I live or sleep in my storage unit?',
+    keywords: [
+      'live',
+      'living',
+      'sleep',
+      'sleeping',
+      'reside',
+      'residence',
+      'stay overnight',
+      'sleep in',
+      'dwelling',
+      'occupancy',
+      'habitation',
+      'move in to',
+      'move into',
+    ],
+    answer:
+      'No. Modern Storage® units are for storage only — they cannot be used as a residence, for sleeping, or for any kind of overnight occupancy. State and local fire codes, building regulations, and your rental agreement all prohibit anyone from living in a storage unit, for safety reasons. If you’re between homes and need short-term housing options, our team can still help you store your belongings while you arrange other accommodations.',
+  },
 ]
 
 const HOURS_KEYWORDS = [
@@ -329,6 +351,46 @@ const PAYMENT_KEYWORDS = [
 export function isPaymentQuestion(text: string): boolean {
   const t = ' ' + text.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim() + ' '
   return PAYMENT_KEYWORDS.some((k) => t.includes(' ' + k + ' '))
+}
+
+// ─── Contact-info question detection ─────────────────────────────────────
+// Catches "what's wlr number", "phone number for shackleford", "address for
+// bryant", "where is hot springs" — anything asking for a store's phone or
+// physical address. When matched alongside a known location alias, the
+// chatbot answers immediately with that store's contact info instead of
+// asking "which location?".
+const CONTACT_PHRASES = [
+  'phone number',
+  'phone for',
+  'phone of',
+  'number for',
+  'number of',
+  'the number',
+  'whats the number',
+  "what's the number",
+  'whats their number',
+  'address for',
+  'address of',
+  'the address',
+  'whats the address',
+  "what's the address",
+  'contact info',
+  'contact information',
+  'contact number',
+  'where is',
+  'how do i contact',
+  'how can i contact',
+  'how do i reach',
+  'how can i reach',
+  'call them',
+]
+const CONTACT_SINGLE = ['address']
+
+/** True when a typed message is asking for a store's phone or address. */
+export function isContactQuestion(text: string): boolean {
+  const t = ' ' + text.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim() + ' '
+  if (CONTACT_SINGLE.some((k) => t.includes(' ' + k + ' '))) return true
+  return CONTACT_PHRASES.some((p) => t.includes(' ' + p + ' '))
 }
 
 // ─── Goodbye / sign-off detection ─────────────────────────────────────────
