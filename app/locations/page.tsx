@@ -161,7 +161,7 @@ export default async function LocationsHubPage() {
                   <a
                     href={`tel:+1${loc.phone.replace(/\D/g, '')}`}
                     aria-label={`Call ${loc.name} at ${loc.phone}`}
-                    className="inline-flex items-center gap-1.5 text-sm font-bold text-modern-red hover:text-modern-red-hover transition-colors mb-4 w-fit"
+                    className="inline-flex items-center gap-2 bg-charcoal hover:bg-black text-white text-sm font-bold px-4 py-2 rounded-full transition-colors mb-4 w-fit"
                   >
                     <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
