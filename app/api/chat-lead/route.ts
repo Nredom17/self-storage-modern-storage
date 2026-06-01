@@ -14,6 +14,21 @@ import { normalizePhone, formatPhone } from '@/lib/chatbot'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
+// CORS — the embeddable widget.js is loaded by other Modern Storage® sites
+// (modernstorage.com, podcast.modernstorage.com, etc.) and posts here from a
+// different origin. We allow any origin since this endpoint is one-way write
+// (no PII read), validated server-side, and gated by phone/email requirement.
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Max-Age': '86400',
+}
+
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 204, headers: CORS_HEADERS })
+}
+
 type Turn = { role?: unknown; text?: unknown }
 
 // ────────────────────────────────────────────────────────────────────────
@@ -207,7 +222,10 @@ export async function POST(req: Request) {
 
   const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   if (!phoneDigits && !validEmail) {
-    return NextResponse.json({ ok: false, error: 'valid phone or email required' }, { status: 400 })
+    return NextResponse.json(
+      { ok: false, error: 'valid phone or email required' },
+      { status: 400, headers: CORS_HEADERS },
+    )
   }
 
   // Build a readable transcript, if one was sent.
@@ -287,5 +305,5 @@ export async function POST(req: Request) {
     }
   }
 
-  return NextResponse.json({ ok: true })
+  return NextResponse.json({ ok: true }, { headers: CORS_HEADERS })
 }

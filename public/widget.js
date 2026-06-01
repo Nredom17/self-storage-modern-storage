@@ -1,0 +1,709 @@
+/*!
+ * Modern Storage® Chat Widget — Standalone Embed
+ *
+ * Drop-in vanilla JS port of the React ChatWidget that lives at
+ * self-storage.modernstorage.com. No framework, no dependencies — paste a
+ * single <script> tag on any site and the widget appears in the corner.
+ *
+ *   <script src="https://self-storage.modernstorage.com/widget.js" defer></script>
+ *
+ * SAFETY: button-driven, backed by the same approved data. Never invents
+ * pricing, availability, discounts, policies, or legal statements. Routes
+ * everything to approved location URLs or the team via email.
+ *
+ * Transcripts POST to https://self-storage.modernstorage.com/api/chat-lead
+ * which is CORS-enabled for cross-origin embedding.
+ */
+(function () {
+  'use strict'
+
+  // Don't double-mount if the script is included twice.
+  if (window.__MS_CHAT_LOADED__) return
+  window.__MS_CHAT_LOADED__ = true
+
+  // ────────────────────────────────────────────────────────────────────────
+  // CONFIG
+  // ────────────────────────────────────────────────────────────────────────
+  var API_BASE = 'https://self-storage.modernstorage.com'
+  var API_ENDPOINT = API_BASE + '/api/chat-lead'
+  var AVATAR_URL = API_BASE + '/images/chat-avatar.jpg'
+
+  // ────────────────────────────────────────────────────────────────────────
+  // DATA — locations, FAQs, copy. Mirrors lib/chatbot.ts.
+  // ────────────────────────────────────────────────────────────────────────
+  var CHAT_LOCATIONS = [
+    { key: 'west-little-rock', name: 'Modern Storage® West Little Rock', shortName: 'West Little Rock', phone: '(501) 812-6500', address: '601 Autumn Rd, Little Rock, AR 72211', url: 'https://www.modernstorage.com/self-storage-little-rock-ar-f5198', region: 'little-rock', aliases: ['west little rock', 'chenal', 'little rock west'] },
+    { key: 'shackleford', name: 'Modern Storage® Shackleford', shortName: 'Shackleford', phone: '(501) 500-5467', address: '3400 South Shackleford Road, Little Rock, AR 72205', url: 'https://www.modernstorage.com/3400-south-shackleford-road-little-rock-ar-72205', region: 'little-rock', aliases: ['shackleford', 'little rock shackleford'] },
+    { key: 'maumelle', name: 'Modern Storage® Maumelle Blvd', shortName: 'Maumelle Blvd', phone: '(501) 791-0080', address: '9100 Maumelle Blvd, North Little Rock, AR 72113', url: 'https://www.modernstorage.com/self-storage-maumelle-ar-f9458', region: 'little-rock', aliases: ['maumelle blvd', 'maumelle', 'north little rock maumelle'] },
+    { key: 'riverdale', name: 'Modern Storage® Riverdale', shortName: 'Riverdale', phone: '(501) 632-7770', address: '2510 Cantrell Rd, Little Rock, AR 72202', url: 'https://www.modernstorage.com/2510-cantrell-rd-little-rock-ar-72202', region: 'little-rock', aliases: ['riverdale', 'cantrell', 'cammack village', 'camack village', 'the heights', 'heights', 'hillcrest', 'pulaski heights'] },
+    { key: 'bryant', name: 'Modern Storage® Bryant', shortName: 'Bryant', phone: '(501) 302-5000', address: '300 Dell Dr, Bryant, AR 72022', url: 'https://www.modernstorage.com/self-storage-bryant-ar-f8249', region: 'other', aliases: ['bryant'] },
+    { key: 'north-little-rock', name: 'Modern Storage® North Little Rock', shortName: 'North Little Rock', phone: '(501) 441-5333', address: '3100 North Hills Blvd, North Little Rock, AR 72116', url: 'https://www.modernstorage.com/self-storage-north-little-rock-ar-f8184', region: 'little-rock', aliases: ['north little rock', 'north hills'] },
+    { key: 'hot-springs', name: 'Modern Storage® Hot Springs', shortName: 'Hot Springs', phone: '(501) 302-1400', address: '1238 Higdon Ferry Rd, Hot Springs, AR 71913', url: 'https://www.modernstorage.com/self-storage-hot-springs-ar-f5404', region: 'other', aliases: ['hot springs'] },
+    { key: 'springdale', name: 'Modern Storage® Springdale', shortName: 'Springdale', phone: '(479) 480-7600', address: '4555 W Sunset Ave, Springdale, AR 72762', url: 'https://www.modernstorage.com/self-storage-springdale-ar-f2741', region: 'nwa', aliases: ['springdale'] },
+    { key: 'lowell', name: 'Modern Storage® Lowell', shortName: 'Lowell', phone: '(479) 485-2299', address: '1407 W Monroe Ave, Lowell, AR 72745', url: 'https://www.modernstorage.com/1407-w-monroe-ave-lowell-ar-72745', region: 'nwa', aliases: ['lowell'] },
+    { key: 'bentonville', name: 'Modern Storage® Bentonville', shortName: 'Bentonville', phone: '(479) 316-2500', address: '700 SW 14th St, Bentonville, AR 72712', url: 'https://www.modernstorage.com/self-storage-bentonville-ar-f3125', region: 'nwa', aliases: ['bentonville'] },
+  ]
+
+  var TEXT = {
+    prompt: 'Can I help you?',
+    agentName: 'Modern Storage® Help',
+    welcome: 'Welcome to Modern Storage®! I’m here to help with your storage needs.',
+    askName: 'First, what’s your name?',
+    askPhone: 'Thanks. What’s your phone number?',
+    phonePlaceholder: 'Enter your phone number',
+    menuIntro: 'Great, thank you. How can we help today? You can type a question — like “What are your hours?” — or pick an option below.',
+    fallback: 'I don’t have an answer for that one. For more information, please contact your Modern Storage® office directly and our team will be glad to help — or pick an option below.',
+    goodbye: 'You’re welcome! Thanks for chatting with Modern Storage®. If you think of anything else, our team is just a tap away — or reserve online from any location page. Have a great day!',
+    noLocationMatch: 'I’m not sure which location you mean. Please choose one of these Modern Storage® locations:',
+    hoursPrompt: 'Which Modern Storage® location are you interested in?',
+    sizeFinderUrl: API_BASE + '/ai-storage-size-finder',
+    sizeGuideUrl: API_BASE + '/size-guide',
+    newCustomersPhone: '501-910-0096',
+    newCustomersTel: 'tel:+15019100096',
+    existingTenantsUrl: 'https://www.modernstorage.com/self-storage',
+    payOnlineUrl: 'https://www.modernstorage.com/payonline',
+  }
+
+  var CHAT_FAQS = [
+    { question: 'Climate-controlled units?', keywords: ['climate', 'climate controlled', 'temperature', 'air conditioned', 'air conditioning', 'heated', 'cooled'], answer: 'Many Modern Storage® locations offer climate-controlled units, though availability and sizes vary by facility. You can learn more about climate-controlled storage below, or tell me which location you’re interested in.', links: [{ label: 'Climate-controlled storage', href: API_BASE + '/climate-controlled' }] },
+    { question: 'What size do I need?', keywords: ['size', 'sizes', 'how big', 'how large', 'dimensions', 'what size', 'square feet'], answer: 'Not sure what size you need? Our AI Storage Size Finder and Size Guide can help you choose the right unit.', links: [{ label: 'AI Storage Size Finder', href: TEXT.sizeFinderUrl }, { label: 'Size Guide', href: TEXT.sizeGuideUrl }] },
+    { question: 'How do I reserve?', keywords: ['reserve', 'reservation', 'rent online', 'book', 'sign up', 'how do i rent'], answer: 'You can view available units and reserve online for any Modern Storage® location. Tell me which location you’re interested in and I’ll send you the right link.' },
+    { question: 'RV / boat / vehicle storage?', keywords: ['boat', 'rv', 'camper', 'vehicle', 'car storage', 'trailer', 'motorhome'], answer: 'Select Modern Storage® locations offer boat, RV, and vehicle storage. Availability varies by facility — let me know which area you’re in and I can point you to the right location.', links: [{ label: 'Boat, RV & vehicle storage', href: API_BASE + '/rv-boat-vehicle' }] },
+  ]
+
+  // Office hours (mirrors lib/chatbot.ts).
+  var SUNDAY_CLOSED = ['lowell', 'maumelle']
+  function locationHours(loc) {
+    var weekday = 'Monday–Saturday: 8:30 AM – 5:30 PM'
+    var sunday = SUNDAY_CLOSED.indexOf(loc.key) >= 0 ? 'Sunday: Closed' : 'Sunday: 1:00 PM – 6:00 PM'
+    return weekday + '\n' + sunday
+  }
+
+  // ────────────────────────────────────────────────────────────────────────
+  // MATCHING (ported from lib/chatbot.ts)
+  // ────────────────────────────────────────────────────────────────────────
+  function normalize(text) {
+    return (text || '').toLowerCase().replace(/[^a-z0-9\s']/g, ' ').replace(/\s+/g, ' ').trim()
+  }
+  function normalizePhone(raw) {
+    var d = (raw || '').replace(/\D/g, '')
+    if (d.length === 11 && d.charAt(0) === '1') d = d.slice(1)
+    return d.length === 10 ? d : null
+  }
+  var HOURS_KEYWORDS = ['hours', 'hour', 'open', 'opening', 'close', 'closing', 'closed', 'what time']
+  var PAYMENT_KEYWORDS = ['payment', 'pay my bill', 'pay bill', 'pay my rent', 'pay rent', 'pay online', 'make a payment', 'autopay', 'invoice']
+  function isHoursQuestion(text) {
+    var t = ' ' + normalize(text) + ' '
+    for (var i = 0; i < HOURS_KEYWORDS.length; i++) if (t.indexOf(' ' + HOURS_KEYWORDS[i] + ' ') >= 0) return true
+    return false
+  }
+  function isPaymentQuestion(text) {
+    var t = ' ' + normalize(text) + ' '
+    for (var i = 0; i < PAYMENT_KEYWORDS.length; i++) if (t.indexOf(' ' + PAYMENT_KEYWORDS[i] + ' ') >= 0) return true
+    return false
+  }
+  var SHORT_GOODBYES = ['thanks', 'thx', 'ty', 'bye', 'goodbye', 'cya', 'later', 'done', 'okay', 'ok', 'cool', 'great', 'awesome', 'perfect', 'nope', 'no']
+  var GOODBYE_PHRASES = ['thank you', 'thanks so much', 'thanks a lot', 'thanks for your help', 'thank you so much', 'thank you for your help', 'that is all', "that's all", 'that is it', "that's it", 'all good', 'no thanks', 'no thank you', "i'm good", 'im good', 'i am good', 'got it', 'sounds good', 'have a good day', 'have a great day', 'see you', 'see ya', 'talk later', 'all set', 'i am all set', "i'm all set"]
+  function isGoodbye(text) {
+    var t = normalize(text)
+    if (!t) return false
+    if (SHORT_GOODBYES.indexOf(t) >= 0) return true
+    var padded = ' ' + t + ' '
+    for (var i = 0; i < GOODBYE_PHRASES.length; i++) if (padded.indexOf(' ' + GOODBYE_PHRASES[i] + ' ') >= 0) return true
+    return false
+  }
+  var SHORT_MESSAGE = ['agent', 'human', 'representative', 'rep', 'help', 'message']
+  var MESSAGE_PHRASES = ['send message', 'send a message', 'send us a message', 'leave a message', 'send email', 'send an email', 'contact me', 'contact us', 'talk to a human', 'talk to someone', 'talk to a person', 'talk to a real person', 'talk to an agent', 'speak to a human', 'speak to someone', 'speak to an agent', 'real person', 'live agent', 'live person', 'customer service', 'customer support', 'get in touch']
+  function isMessageRequest(text) {
+    var t = normalize(text)
+    if (!t) return false
+    if (SHORT_MESSAGE.indexOf(t) >= 0) return true
+    var padded = ' ' + t + ' '
+    for (var i = 0; i < MESSAGE_PHRASES.length; i++) if (padded.indexOf(' ' + MESSAGE_PHRASES[i] + ' ') >= 0) return true
+    return false
+  }
+  var STOPWORDS = ['the', 'a', 'an', 'and', 'or', 'for', 'to', 'of', 'in', 'on', 'at', 'is', 'are', 'do', 'does', 'you', 'your', 'i', 'my', 'me', 'we', 'it', 'can', 'how', 'what', 'where', 'when', 'which', 'need', 'want', 'help', 'please', 'with', 'have', 'about', 'this', 'that', 'near', 'get', 'storage', 'store', 'stored', 'unit', 'units', 'modern', 'rent', 'rental']
+  function matchFaq(text) {
+    var norm = normalize(text)
+    if (!norm) return null
+    var t = ' ' + norm + ' '
+    var pairs = []
+    for (var i = 0; i < CHAT_FAQS.length; i++) {
+      var f = CHAT_FAQS[i]
+      for (var j = 0; j < f.keywords.length; j++) pairs.push({ f: f, k: f.keywords[j].toLowerCase() })
+    }
+    pairs.sort(function (a, b) { return b.k.length - a.k.length })
+    for (var p = 0; p < pairs.length; p++) {
+      if (t.indexOf(' ' + pairs[p].k + ' ') >= 0) return pairs[p].f
+    }
+    var words = {}
+    var parts = norm.split(' ')
+    for (var w = 0; w < parts.length; w++) if (parts[w].length >= 3 && STOPWORDS.indexOf(parts[w]) < 0) words[parts[w]] = true
+    if (Object.keys(words).length === 0) return null
+    var best = null
+    var bestScore = 0
+    for (var fi = 0; fi < CHAT_FAQS.length; fi++) {
+      var faq = CHAT_FAQS[fi]
+      var matched = {}
+      for (var ki = 0; ki < faq.keywords.length; ki++) {
+        var kparts = faq.keywords[ki].toLowerCase().split(/\s+/)
+        for (var kp = 0; kp < kparts.length; kp++) {
+          var kw = kparts[kp]
+          if (kw.length >= 3 && STOPWORDS.indexOf(kw) < 0 && words[kw]) matched[kw] = true
+        }
+      }
+      var score = Object.keys(matched).length
+      if (score > bestScore) { bestScore = score; best = faq }
+    }
+    return bestScore >= 1 ? best : null
+  }
+  function matchLocation(text) {
+    var t = ' ' + normalize(text) + ' '
+    var pairs = []
+    for (var i = 0; i < CHAT_LOCATIONS.length; i++) {
+      var loc = CHAT_LOCATIONS[i]
+      for (var j = 0; j < loc.aliases.length; j++) pairs.push({ loc: loc, a: loc.aliases[j] })
+    }
+    pairs.sort(function (a, b) { return b.a.length - a.a.length })
+    for (var p = 0; p < pairs.length; p++) {
+      var pa = pairs[p].a
+      if (t.indexOf(' ' + pa + ' ') >= 0 || t.indexOf(pa) >= 0) return { type: 'location', loc: pairs[p].loc, fromAlias: true }
+    }
+    if (/\bnwa\b/.test(t) || t.indexOf('northwest arkansas') >= 0) return { type: 'ambiguous-nwa' }
+    if (t.indexOf('little rock') >= 0) return { type: 'ambiguous-lr' }
+    return { type: 'none' }
+  }
+  function byKey(key) {
+    for (var i = 0; i < CHAT_LOCATIONS.length; i++) if (CHAT_LOCATIONS[i].key === key) return CHAT_LOCATIONS[i]
+    return null
+  }
+
+  // ────────────────────────────────────────────────────────────────────────
+  // MENU OPTIONS
+  // ────────────────────────────────────────────────────────────────────────
+  var MENU_OPTIONS = [
+    { label: 'I need help deciding', value: 'decide' },
+    { label: 'I would like to explore options myself', value: 'explore' },
+    { label: 'I am an existing tenant', value: 'tenant' },
+    { label: 'I need to pay my bill', value: 'pay' },
+    { label: 'I need a phone number or address', value: 'contact' },
+  ]
+  var TENANT_OPTIONS = [
+    { label: 'Make a payment', value: 'payment' },
+    { label: 'Contact my location', value: 'contact' },
+    { label: 'Access or gate question', value: 'access' },
+    { label: 'Move-out question', value: 'moveout' },
+    { label: 'Other tenant support', value: 'other' },
+  ]
+  var SIZE_OPTIONS = [
+    { label: 'Yes, I know the size', value: 'yes' },
+    { label: 'No, I’m not sure', value: 'no' },
+    { label: 'I know how many bedrooms or rooms I’m storing', value: 'bedrooms' },
+  ]
+  var BEDROOM_OPTIONS = [
+    { label: 'Studio or small amount', value: 'studio' },
+    { label: '1 bedroom', value: '1' },
+    { label: '2 bedrooms', value: '2' },
+    { label: '3 bedrooms', value: '3' },
+    { label: '4+ bedrooms', value: '4' },
+  ]
+  var BACK_OPTION = { label: '← Main menu', value: '__home__' }
+  var MESSAGE_OPTION = { label: '✉ Send us a message', value: '__message__' }
+  function withHome(opts) { return opts.concat([BACK_OPTION]) }
+  function allLocOptions() { return CHAT_LOCATIONS.map(function (l) { return { label: l.shortName, value: l.key } }) }
+  function lrSubset() {
+    var keys = ['west-little-rock', 'shackleford', 'riverdale', 'north-little-rock']
+    return CHAT_LOCATIONS.filter(function (l) { return keys.indexOf(l.key) >= 0 }).map(function (l) { return { label: l.shortName, value: l.key } })
+  }
+  function nwaSubset() {
+    var keys = ['bentonville', 'springdale', 'lowell']
+    return CHAT_LOCATIONS.filter(function (l) { return keys.indexOf(l.key) >= 0 }).map(function (l) { return { label: l.shortName, value: l.key } })
+  }
+
+  // ────────────────────────────────────────────────────────────────────────
+  // STYLES — scoped under `.ms-chat` so they don't leak into the host site
+  // ────────────────────────────────────────────────────────────────────────
+  var CSS = ''
+    + '.ms-chat,.ms-chat *{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}'
+    + '.ms-chat{position:fixed;z-index:2147483647;bottom:24px;right:24px}'
+    + '@media (max-width:1024px){.ms-chat{bottom:96px;right:16px}}'
+    + '.ms-chat button{font-family:inherit;cursor:pointer;border:0;background:transparent}'
+    + '.ms-chat input{font-family:inherit}'
+    + '.ms-chat a{text-decoration:none}'
+    /* Launcher button */
+    + '.ms-chat-launcher{width:56px;height:56px;border-radius:9999px;background:#F60001;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:background .15s}'
+    + '.ms-chat-launcher:hover{background:#C40001}'
+    + '.ms-chat-launcher svg{width:24px;height:24px}'
+    /* Prompt bubble */
+    + '.ms-chat-prompt{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e5e7eb;border-radius:9999px;padding:8px 8px 8px 20px;box-shadow:0 8px 24px rgba(0,0,0,.2);position:relative}'
+    + '.ms-chat-prompt-close{position:absolute;top:-8px;left:-8px;width:24px;height:24px;border-radius:9999px;background:#fff;border:1px solid #e5e7eb;color:#6b7280;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,.05)}'
+    + '.ms-chat-prompt-close svg{width:14px;height:14px}'
+    + '.ms-chat-prompt-text{font-size:12px;color:#6b7280;margin:0 0 6px}'
+    + '.ms-chat-prompt-btn{background:#F60001;color:#fff;font-weight:900;font-size:14px;padding:8px 16px;border-radius:9999px;transition:background .15s}'
+    + '.ms-chat-prompt-btn:hover{background:#C40001}'
+    + '.ms-chat-prompt-avatar{width:48px;height:48px;border-radius:9999px;object-fit:cover;border:1px solid #f3f4f6;flex-shrink:0}'
+    /* Panel */
+    + '.ms-chat-panel{width:calc(100vw - 32px);max-width:384px;height:min(544px,76vh);background:#fff;border-radius:16px;box-shadow:0 16px 50px rgba(0,0,0,.3);border:1px solid #f3f4f6;display:flex;flex-direction:column;overflow:hidden}'
+    + '.ms-chat-header{display:flex;align-items:center;gap:12px;background:#1A1A1A;color:#fff;padding:12px 16px}'
+    + '.ms-chat-header-avatar{width:36px;height:36px;border-radius:9999px;object-fit:cover;border:1px solid rgba(255,255,255,.2)}'
+    + '.ms-chat-header-name{font-size:14px;font-weight:900;line-height:1.1;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
+    + '.ms-chat-header-sub{font-size:11px;color:#9ca3af;line-height:1.1;margin:0}'
+    + '.ms-chat-header-info{flex:1;min-width:0}'
+    + '.ms-chat-icon-btn{height:32px;width:32px;border-radius:9999px;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .15s}'
+    + '.ms-chat-icon-btn:hover{background:rgba(255,255,255,.1)}'
+    + '.ms-chat-menu-btn{height:32px;padding:0 10px;border-radius:9999px;color:#fff;display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;transition:background .15s}'
+    + '.ms-chat-menu-btn:hover{background:rgba(255,255,255,.1)}'
+    + '.ms-chat-icon-btn svg,.ms-chat-menu-btn svg{width:16px;height:16px}'
+    + '.ms-chat-scroll{flex:1;overflow-y:auto;padding:16px;background:#f9fafb;display:flex;flex-direction:column;gap:12px}'
+    + '.ms-chat-row{display:flex}'
+    + '.ms-chat-row.bot{justify-content:flex-start}'
+    + '.ms-chat-row.user{justify-content:flex-end}'
+    + '.ms-chat-bubble{font-size:14px;border-radius:16px;padding:8px 14px;max-width:88%;white-space:pre-line;line-height:1.4}'
+    + '.ms-chat-bubble.bot{background:#fff;color:#1A1A1A;border:1px solid #e5e7eb;border-bottom-left-radius:4px}'
+    + '.ms-chat-bubble.user{background:#F60001;color:#fff;border-bottom-right-radius:4px;max-width:80%}'
+    + '.ms-chat-bubble-links{display:flex;flex-direction:column;gap:6px;margin-top:8px}'
+    + '.ms-chat-bubble-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:#F60001;color:#fff;font-size:12px;font-weight:700;padding:8px 12px;border-radius:9999px;transition:background .15s}'
+    + '.ms-chat-bubble-link:hover{background:#C40001}'
+    + '.ms-chat-options{display:flex;flex-direction:column;gap:8px;padding-top:4px}'
+    + '.ms-chat-option{text-align:left;font-size:14px;font-weight:600;color:#1A1A1A;background:#fff;border:1px solid #d1d5db;border-radius:12px;padding:8px 14px;transition:border-color .15s,color .15s}'
+    + '.ms-chat-option:hover{border-color:#F60001;color:#F60001}'
+    + '.ms-chat-menu-toggle{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#F60001;background:#fff;border:1px solid #d1d5db;border-radius:12px;padding:8px 14px;align-self:flex-start;transition:border-color .15s,color .15s}'
+    + '.ms-chat-menu-toggle:hover{border-color:#F60001;color:#C40001}'
+    + '.ms-chat-menu-toggle svg{width:16px;height:16px}'
+    + '.ms-chat-quick{display:flex;gap:8px;padding:12px 12px 4px;background:#fff}'
+    + '.ms-chat-quick a{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:12px;font-weight:900;padding:10px 12px;border-radius:9999px;transition:background .15s,border-color .15s,color .15s}'
+    + '.ms-chat-quick-call{background:#F60001;color:#fff}'
+    + '.ms-chat-quick-call:hover{background:#C40001}'
+    + '.ms-chat-quick-call svg{width:14px;height:14px;fill:#fff}'
+    + '.ms-chat-quick-tenant{background:#fff;color:#1A1A1A;border:1px solid #d1d5db}'
+    + '.ms-chat-quick-tenant:hover{border-color:#F60001;color:#F60001}'
+    + '.ms-chat-form{display:flex;align-items:center;gap:8px;padding:12px;border-top:1px solid #f3f4f6;background:#fff}'
+    + '.ms-chat-input{flex:1;font-size:14px;border:1px solid #d1d5db;border-radius:9999px;padding:10px 16px;outline:none;color:#1A1A1A}'
+    + '.ms-chat-input:focus{border-color:#F60001}'
+    + '.ms-chat-send{width:40px;height:40px;border-radius:9999px;background:#F60001;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .15s;flex-shrink:0}'
+    + '.ms-chat-send:hover{background:#C40001}'
+    + '.ms-chat-send svg{width:16px;height:16px}'
+
+  // ────────────────────────────────────────────────────────────────────────
+  // ICONS
+  // ────────────────────────────────────────────────────────────────────────
+  var ICON_CHAT = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l1.4-3.6A8.97 8.97 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>'
+  var ICON_X = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>'
+  var ICON_HOME = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10"/></svg>'
+  var ICON_PHONE = '<svg fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.24.2 2.45.57 3.57a1 1 0 01-.24 1.02l-2.2 2.2z"/></svg>'
+  var ICON_SEND = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 12h14M13 6l6 6-6 6"/></svg>'
+  var ICON_MENU = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>'
+
+  // ────────────────────────────────────────────────────────────────────────
+  // RUNTIME STATE
+  // ────────────────────────────────────────────────────────────────────────
+  var state = {
+    view: 'prompt',                // prompt | launcher | chat
+    step: 'name',                  // name | phone | menu | location | decide-size | decide-bedrooms | tenant-menu | message
+    purpose: 'explore',
+    selectedLoc: null,
+    selectedFaq: null,
+    messages: [],
+    options: [],
+    input: '',
+    name: '',
+    phone: '',
+    menuCollapsed: false,
+  }
+  var sentLen = 0
+  var rootEl = null
+
+  // ────────────────────────────────────────────────────────────────────────
+  // TRANSCRIPT FLUSH
+  // ────────────────────────────────────────────────────────────────────────
+  function flushTranscript(useBeacon, force) {
+    if (!normalizePhone(state.phone)) return
+    if (state.messages.length <= sentLen) return
+    if (!force) {
+      var userTurns = 0
+      for (var i = 0; i < state.messages.length; i++) if (state.messages[i].role === 'user') userTurns++
+      if (userTurns < 2) return
+    }
+    sentLen = state.messages.length
+    var payload = JSON.stringify({
+      name: state.name,
+      phone: state.phone,
+      transcript: state.messages.map(function (m) { return { role: m.role, text: m.text } }),
+    })
+    if (useBeacon && navigator.sendBeacon) {
+      try { navigator.sendBeacon(API_ENDPOINT, new Blob([payload], { type: 'application/json' })) } catch (e) {}
+    } else {
+      try { fetch(API_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true, mode: 'cors' }).catch(function () {}) } catch (e) {}
+    }
+  }
+  window.addEventListener('pagehide', function () { flushTranscript(true, false) })
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') flushTranscript(true, false) })
+
+  // ────────────────────────────────────────────────────────────────────────
+  // DOM HELPERS
+  // ────────────────────────────────────────────────────────────────────────
+  function el(tag, attrs, children) {
+    var node = document.createElement(tag)
+    if (attrs) {
+      for (var k in attrs) {
+        if (k === 'class') node.className = attrs[k]
+        else if (k === 'html') node.innerHTML = attrs[k]
+        else if (k.indexOf('on') === 0) node.addEventListener(k.slice(2).toLowerCase(), attrs[k])
+        else node.setAttribute(k, attrs[k])
+      }
+    }
+    if (children) {
+      for (var i = 0; i < children.length; i++) {
+        var c = children[i]
+        if (c == null) continue
+        if (typeof c === 'string') node.appendChild(document.createTextNode(c))
+        else node.appendChild(c)
+      }
+    }
+    return node
+  }
+
+  // ────────────────────────────────────────────────────────────────────────
+  // CONVERSATION HELPERS
+  // ────────────────────────────────────────────────────────────────────────
+  function bot(text, links) { state.messages.push({ role: 'bot', text: text, links: links || null }); render() }
+  function user(text) { state.messages.push({ role: 'user', text: text }); render() }
+  function setOptions(opts) { state.options = opts; render() }
+
+  function startChat() {
+    state.messages = [{ role: 'bot', text: TEXT.welcome }, { role: 'bot', text: TEXT.askName }]
+    state.options = []
+    state.menuCollapsed = false
+    state.step = 'name'
+    state.selectedLoc = null
+    state.view = 'chat'
+    render()
+  }
+
+  function closeChat() {
+    flushTranscript(false, true)
+    state.view = 'launcher'
+    render()
+  }
+
+  function enterLocation(purpose, intro, opts) {
+    state.purpose = purpose
+    state.messages.push({ role: 'bot', text: intro })
+    state.options = withHome(opts || allLocOptions())
+    state.step = 'location'
+    render()
+  }
+
+  function backToMenu() {
+    state.messages.push({ role: 'bot', text: 'Is there anything else I can help with? Type your question, or open the menu.' })
+    state.options = MENU_OPTIONS
+    state.menuCollapsed = true
+    state.step = 'menu'
+    render()
+  }
+
+  function goHome() {
+    state.selectedLoc = null
+    state.selectedFaq = null
+    state.purpose = 'explore'
+    state.messages.push({ role: 'bot', text: 'Main menu — how can we help today?' })
+    state.options = MENU_OPTIONS
+    state.menuCollapsed = false
+    state.step = 'menu'
+    render()
+  }
+
+  function startMessage() {
+    state.messages.push({ role: 'bot', text: 'Sure — type your message below and our team will get back to you by email.' })
+    state.options = []
+    state.menuCollapsed = false
+    state.step = 'message'
+    render()
+  }
+
+  function paymentAnswer() {
+    bot('You can pay your bill and manage your Modern Storage® account online here:', [{ label: 'Pay my bill online', href: TEXT.payOnlineUrl }])
+    backToMenu()
+  }
+  function reserveAnswer(loc, fromAlias) {
+    var lead = fromAlias ? 'Modern Storage® ' + loc.shortName + ' is the closest fit for that area. ' : ''
+    bot(lead + 'Great. You can view available units, sizes, and pricing for ' + loc.name + ' here:', [{ label: 'View available units', href: loc.url }])
+    backToMenu()
+  }
+  function contactAnswer(loc) {
+    bot(loc.name + '\nPhone: ' + TEXT.newCustomersPhone + '\nAddress: ' + loc.address, [{ label: 'View location page', href: loc.url }])
+    backToMenu()
+  }
+  function hoursAnswer(loc) {
+    bot(loc.name + ' office hours:\n' + locationHours(loc), [{ label: 'View location page', href: loc.url }])
+    backToMenu()
+  }
+  function faqAnswer(loc) {
+    var f = state.selectedFaq
+    var text = (f && f.locationAnswers && f.locationAnswers[loc.key]) || (f && f.answer) || ''
+    bot(loc.shortName + ': ' + text, f && f.links)
+    state.selectedFaq = null
+    backToMenu()
+  }
+  function resolveLocation(loc, fromAlias) {
+    if (state.purpose === 'explore') return reserveAnswer(loc, fromAlias)
+    if (state.purpose === 'contact') return contactAnswer(loc)
+    if (state.purpose === 'hours') return hoursAnswer(loc)
+    if (state.purpose === 'faq') return faqAnswer(loc)
+    if (state.purpose === 'page') {
+      bot('You can access your location page here:', [{ label: 'Open location page', href: loc.url }])
+      return backToMenu()
+    }
+    state.selectedLoc = loc
+    bot('Do you already know what size storage unit you need?')
+    setOptions(withHome(SIZE_OPTIONS))
+    state.step = 'decide-size'
+    render()
+  }
+  function handleLocationInput(text) {
+    var m = matchLocation(text)
+    if (m.type === 'location') return resolveLocation(m.loc, m.fromAlias)
+    if (m.type === 'ambiguous-lr') { bot('Modern Storage® has several Little Rock area locations. Which one would you like?'); setOptions(withHome(lrSubset())); return }
+    if (m.type === 'ambiguous-nwa') { bot('Modern Storage® has several Northwest Arkansas locations. Which one would you like?'); setOptions(withHome(nwaSubset())); return }
+    bot(TEXT.noLocationMatch); setOptions(withHome(allLocOptions()))
+  }
+  function tryAnswerFreeText(value) {
+    if (isGoodbye(value)) { bot(TEXT.goodbye); backToMenu(); return true }
+    if (isMessageRequest(value)) { startMessage(); return true }
+    if (isHoursQuestion(value)) { enterLocation('hours', TEXT.hoursPrompt); return true }
+    if (isPaymentQuestion(value)) { paymentAnswer(); return true }
+    var faq = matchFaq(value)
+    if (faq) {
+      if (faq.locationAnswers && Object.keys(faq.locationAnswers).length > 0) {
+        state.selectedFaq = faq
+        enterLocation('faq', 'Which Modern Storage® location are you asking about?')
+        return true
+      }
+      bot(faq.answer, faq.links); backToMenu(); return true
+    }
+    return false
+  }
+
+  function handle(value, label, isButton) {
+    user(label)
+    state.input = ''
+    state.menuCollapsed = false
+
+    if (isButton && value === '__home__') return goHome()
+    if (isButton && value === '__message__') return startMessage()
+
+    switch (state.step) {
+      case 'name': {
+        var nm = String(value || '').trim(); if (!nm) return
+        state.name = nm
+        bot(TEXT.askPhone); state.step = 'phone'; render(); return
+      }
+      case 'phone': {
+        var ten = normalizePhone(value)
+        if (!ten) { bot('Please enter a valid 10-digit phone number so our team can reach you.'); return }
+        state.phone = ten
+        try { fetch(API_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: state.name, phone: ten }), mode: 'cors' }).catch(function () {}) } catch (e) {}
+        bot(TEXT.menuIntro); state.options = MENU_OPTIONS; state.step = 'menu'; render(); return
+      }
+      case 'message': {
+        var msg = String(value || '').trim(); if (!msg) return
+        try { fetch(API_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: state.name, phone: state.phone, message: msg }), mode: 'cors' }).catch(function () {}) } catch (e) {}
+        bot('Thanks' + (state.name ? ', ' + state.name : '') + '! Your message has been sent to our team and we’ll follow up using the phone number you provided.')
+        return backToMenu()
+      }
+      case 'menu': {
+        if (isButton) {
+          if (value === 'decide') return enterLocation('decide', 'Great, I can help with that. Which Modern Storage® location are you interested in?')
+          if (value === 'explore') return enterLocation('explore', 'Absolutely. Which Modern Storage® location would you like to view?')
+          if (value === 'pay') return paymentAnswer()
+          if (value === 'contact') return enterLocation('contact', 'Which store or city do you need the phone number or address for?')
+          if (value === 'tenant') { bot('What do you need help with today?'); setOptions(withHome(TENANT_OPTIONS)); state.step = 'tenant-menu'; render(); return }
+        }
+        if (tryAnswerFreeText(value)) return
+        var m = matchLocation(value)
+        if (m.type === 'location') { state.purpose = 'contact'; state.step = 'location'; return contactAnswer(m.loc) }
+        bot(TEXT.fallback)
+        state.options = [MESSAGE_OPTION].concat(MENU_OPTIONS)
+        state.menuCollapsed = false; render(); return
+      }
+      case 'location': {
+        if (isButton) {
+          var loc = byKey(value)
+          if (loc) return resolveLocation(loc, false)
+        }
+        return handleLocationInput(value)
+      }
+      case 'decide-size': {
+        if (value === 'yes' && state.selectedLoc) return reserveAnswer(state.selectedLoc, false)
+        if (value === 'no') {
+          bot('No problem. You can use our AI Storage Size Finder or view our Size Guide to help choose the right unit.', [
+            { label: 'AI Storage Size Finder', href: TEXT.sizeFinderUrl },
+            { label: 'Size Guide', href: TEXT.sizeGuideUrl },
+          ])
+          return backToMenu()
+        }
+        if (value === 'bedrooms') { bot('How many bedrooms or rooms are you storing?'); setOptions(withHome(BEDROOM_OPTIONS)); state.step = 'decide-bedrooms'; render(); return }
+        return
+      }
+      case 'decide-bedrooms': {
+        var links = [{ label: 'Size Guide', href: TEXT.sizeGuideUrl }]
+        if (state.selectedLoc) links.unshift({ label: 'View ' + state.selectedLoc.shortName + ' units', href: state.selectedLoc.url })
+        bot('Thanks. Based on that, the next step is to view available units at your preferred location or use our Size Guide for a better estimate.', links)
+        return backToMenu()
+      }
+      case 'tenant-menu': {
+        if (value === 'payment') return paymentAnswer()
+        if (value === 'contact') return enterLocation('contact', 'Which Modern Storage® location do you need to contact?')
+        if (value === 'access') return enterLocation('contact', 'Access and gate details can vary by location and account. Please contact your Modern Storage® location directly so our team can help. Which location do you need?')
+        if (value === 'moveout') return enterLocation('contact', 'Move-out details may vary by location and rental agreement. Please contact your Modern Storage® location directly so our team can help. Which location do you need?')
+        if (isButton) return enterLocation('contact', TEXT.fallback + ' Which location do you need?')
+        if (tryAnswerFreeText(value)) return
+        return enterLocation('contact', TEXT.fallback + ' Which location do you need?')
+      }
+    }
+  }
+
+  // ────────────────────────────────────────────────────────────────────────
+  // RENDER
+  // ────────────────────────────────────────────────────────────────────────
+  function render() {
+    if (!rootEl) return
+    rootEl.innerHTML = ''
+    if (state.view === 'launcher') return renderLauncher()
+    if (state.view === 'prompt') return renderPrompt()
+    return renderPanel()
+  }
+
+  function renderLauncher() {
+    var btn = el('button', {
+      class: 'ms-chat-launcher',
+      type: 'button',
+      'aria-label': 'Open chat — can I help you?',
+      html: ICON_CHAT,
+      onclick: function () { if (state.messages.length) { state.view = 'chat'; render() } else { startChat() } },
+    })
+    rootEl.appendChild(btn)
+  }
+
+  function renderPrompt() {
+    var close = el('button', { class: 'ms-chat-prompt-close', type: 'button', 'aria-label': 'Dismiss chat prompt', html: ICON_X, onclick: function () { state.view = 'launcher'; render() } })
+    var promptText = el('span', { class: 'ms-chat-prompt-text' }, [TEXT.prompt])
+    var startBtn = el('button', { class: 'ms-chat-prompt-btn', type: 'button', onclick: startChat }, ['Start Chat'])
+    var col = el('div', { style: 'display:flex;flex-direction:column;align-items:flex-start' }, [promptText, startBtn])
+    var avatar = el('img', { class: 'ms-chat-prompt-avatar', src: AVATAR_URL, alt: '', 'aria-hidden': 'true' })
+    var bubble = el('div', { class: 'ms-chat-prompt' }, [close, col, avatar])
+    rootEl.appendChild(bubble)
+  }
+
+  function renderPanel() {
+    var panel = el('div', { class: 'ms-chat-panel', role: 'dialog', 'aria-label': 'Chat with Modern Storage' })
+
+    // Header
+    var headerAvatar = el('img', { class: 'ms-chat-header-avatar', src: AVATAR_URL, alt: '', 'aria-hidden': 'true' })
+    var headerInfo = el('div', { class: 'ms-chat-header-info' }, [
+      el('p', { class: 'ms-chat-header-name' }, [TEXT.agentName]),
+      el('p', { class: 'ms-chat-header-sub' }, ['Typically replies in a moment']),
+    ])
+    var headerKids = [headerAvatar, headerInfo]
+    if (state.step !== 'name' && state.step !== 'phone') {
+      var menuBtn = el('button', { class: 'ms-chat-menu-btn', type: 'button', 'aria-label': 'Back to main menu', onclick: goHome })
+      menuBtn.innerHTML = ICON_HOME + '<span>Menu</span>'
+      headerKids.push(menuBtn)
+    }
+    headerKids.push(el('button', { class: 'ms-chat-icon-btn', type: 'button', 'aria-label': 'Close chat', html: ICON_X, onclick: closeChat }))
+    panel.appendChild(el('div', { class: 'ms-chat-header' }, headerKids))
+
+    // Scroll area
+    var scroll = el('div', { class: 'ms-chat-scroll' })
+    var lastUserIdx = -1
+    for (var li = state.messages.length - 1; li >= 0; li--) { if (state.messages[li].role === 'user') { lastUserIdx = li; break } }
+
+    state.messages.forEach(function (m, i) {
+      var bubble = el('div', { class: 'ms-chat-bubble ' + m.role }, [m.text])
+      if (m.links && m.links.length) {
+        var linksWrap = el('div', { class: 'ms-chat-bubble-links' })
+        m.links.forEach(function (l) {
+          linksWrap.appendChild(el('a', { class: 'ms-chat-bubble-link', href: l.href, target: '_blank', rel: 'noopener noreferrer' }, [l.label + ' →']))
+        })
+        bubble.appendChild(linksWrap)
+      }
+      var row = el('div', { class: 'ms-chat-row ' + m.role }, [bubble])
+      if (i === lastUserIdx) row.setAttribute('data-last-user', '1')
+      scroll.appendChild(row)
+    })
+
+    if (state.options.length > 0) {
+      if (state.menuCollapsed) {
+        var toggle = el('button', { class: 'ms-chat-menu-toggle', type: 'button', onclick: function () { state.menuCollapsed = false; render() } })
+        toggle.innerHTML = ICON_MENU + '<span>Show menu options</span>'
+        scroll.appendChild(el('div', { style: 'padding-top:4px' }, [toggle]))
+      } else {
+        var optsWrap = el('div', { class: 'ms-chat-options' })
+        state.options.forEach(function (o) {
+          optsWrap.appendChild(el('button', { class: 'ms-chat-option', type: 'button', onclick: function () { handle(o.value, o.label, true) } }, [o.label]))
+        })
+        scroll.appendChild(optsWrap)
+      }
+    }
+
+    panel.appendChild(scroll)
+
+    // Quick actions
+    if (state.step !== 'name' && state.step !== 'phone') {
+      var quick = el('div', { class: 'ms-chat-quick' })
+      var callBtn = el('a', { class: 'ms-chat-quick-call', href: TEXT.newCustomersTel })
+      callBtn.innerHTML = ICON_PHONE + '<span>New Customers</span>'
+      var tenantBtn = el('a', { class: 'ms-chat-quick-tenant', href: TEXT.existingTenantsUrl, target: '_blank', rel: 'noopener noreferrer' }, ['Existing Tenants →'])
+      quick.appendChild(callBtn)
+      quick.appendChild(tenantBtn)
+      panel.appendChild(quick)
+    }
+
+    // Input form
+    var placeholder = state.step === 'name' ? 'Enter your name'
+      : state.step === 'phone' ? TEXT.phonePlaceholder
+        : state.step === 'message' ? 'Type your message…'
+          : 'Type or pick an option…'
+    var input = el('input', { class: 'ms-chat-input', type: state.step === 'phone' ? 'tel' : 'text', placeholder: placeholder, 'aria-label': placeholder, value: state.input })
+    input.addEventListener('input', function (e) { state.input = e.target.value })
+    var send = el('button', { class: 'ms-chat-send', type: 'submit', 'aria-label': 'Send', html: ICON_SEND })
+    var form = el('form', { class: 'ms-chat-form', onsubmit: function (e) { e.preventDefault(); var v = String(input.value || '').trim(); if (!v) return; handle(v, v, false) } }, [input, send])
+    panel.appendChild(form)
+
+    rootEl.appendChild(panel)
+
+    // Pin most recent user message near top so the answer beneath it stays in view.
+    setTimeout(function () {
+      var lastUser = scroll.querySelector('[data-last-user="1"]')
+      if (lastUser) {
+        var offset = lastUser.getBoundingClientRect().top - scroll.getBoundingClientRect().top
+        scroll.scrollTop += offset - 8
+      } else {
+        scroll.scrollTop = scroll.scrollHeight
+      }
+    }, 0)
+  }
+
+  // ────────────────────────────────────────────────────────────────────────
+  // BOOT
+  // ────────────────────────────────────────────────────────────────────────
+  function boot() {
+    // Inject styles once.
+    var style = document.createElement('style')
+    style.setAttribute('data-ms-chat', '1')
+    style.textContent = CSS
+    document.head.appendChild(style)
+
+    // Mount root.
+    rootEl = document.createElement('div')
+    rootEl.className = 'ms-chat'
+    document.body.appendChild(rootEl)
+    render()
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot)
+  } else {
+    boot()
+  }
+})()
