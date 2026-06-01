@@ -228,8 +228,18 @@ export default async function ContactPage() {
                             New Rentals
                           </a>
                         </p>
-                        <p className="text-xs text-gray-500 leading-relaxed pt-2">
-                          Existing customers, please contact your facility directly or use your tenant portal.
+                        <p className="text-xs leading-relaxed pt-2">
+                          <a
+                            href="https://www.modernstorage.com/self-storage"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-charcoal/70 hover:text-modern-red font-semibold transition-colors"
+                          >
+                            Existing customer? Manage your account
+                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                          </a>
                         </p>
                       </address>
                       <div className="mt-auto flex flex-wrap gap-2">
