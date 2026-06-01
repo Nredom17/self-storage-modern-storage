@@ -83,7 +83,29 @@ const withHome = (opts: Option[]): Option[] => [...opts, BACK_OPTION]
 // "Send us a message" — lets a visitor type a note that's emailed to the team.
 const MESSAGE_OPTION: Option = { label: '✉ Send us a message', value: '__message__' }
 
-export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
+export default function ChatWidget({ faqs: initialFaqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
+  // Live FAQ list. Seeded with whatever the server rendered with (could be
+  // stale by minutes due to Vercel ISR), then refreshed from /api/chat-faqs
+  // on mount so admin edits propagate within seconds without a redeploy.
+  const [faqs, setFaqs] = useState<ChatFaq[]>(initialFaqs)
+  useEffect(() => {
+    let aborted = false
+    fetch('/api/chat-faqs', { cache: 'no-store' })
+      .then((r) => r.json())
+      .then((data: { ok?: boolean; faqs?: ChatFaq[] }) => {
+        if (aborted) return
+        if (data && data.ok && Array.isArray(data.faqs) && data.faqs.length > 0) {
+          setFaqs(data.faqs)
+        }
+      })
+      .catch(() => {
+        /* Non-fatal — we keep the SSR-rendered initialFaqs. */
+      })
+    return () => {
+      aborted = true
+    }
+  }, [])
+
   const [view, setView] = useState<View>('prompt')
   const [step, setStep] = useState<Step>('name')
   const [purpose, setPurpose] = useState<Purpose>('explore')

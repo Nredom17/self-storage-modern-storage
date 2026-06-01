@@ -751,6 +751,21 @@
   // ────────────────────────────────────────────────────────────────────────
   // BOOT
   // ────────────────────────────────────────────────────────────────────────
+  function refreshFaqs() {
+    try {
+      fetch(API_BASE + '/api/chat-faqs', { mode: 'cors' })
+        .then(function (r) { return r.json() })
+        .then(function (data) {
+          if (data && data.ok && Array.isArray(data.faqs) && data.faqs.length > 0) {
+            // Replace baked-in CHAT_FAQS so the matcher sees the latest
+            // admin-approved Q&A — even if this widget bundle is months old.
+            CHAT_FAQS = data.faqs
+          }
+        })
+        .catch(function () { /* non-fatal, keep baked-in defaults */ })
+    } catch (e) { /* fetch unavailable */ }
+  }
+
   function boot() {
     // Inject styles once.
     var style = document.createElement('style')
@@ -763,6 +778,11 @@
     rootEl.className = 'ms-chat'
     document.body.appendChild(rootEl)
     render()
+
+    // Pull the latest admin-managed FAQ list from the live API — keeps
+    // every site loading the embed in sync with /admin/chatbot changes
+    // without anyone redeploying the widget bundle.
+    refreshFaqs()
   }
 
   if (document.readyState === 'loading') {
