@@ -245,6 +245,11 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
   // Try to answer a freely-typed question from the approved Q&A (hours, payment,
   // then keyword/FAQ match). Returns true if it handled the message. Used from
   // every step so a visitor can type a question at any point in the flow.
+  //
+  // When the message contains BOTH an intent AND a location ("what time does
+  // wlr close"), we resolve them together and answer directly without the
+  // "Which location?" follow-up. Only when the message has the intent alone
+  // do we drop into the location picker.
   function tryAnswerFreeText(value: string): boolean {
     // Polite-ending check FIRST — so a sign-off like "thanks" or "that's
     // all" gets the warm goodbye instead of the generic "I don't have an
@@ -262,7 +267,17 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
       startMessage()
       return true
     }
+    // Did the visitor name a specific store in the same message? If so we
+    // can answer immediately ("what time does wlr close?" → West Little
+    // Rock hours) instead of asking them to pick a location.
+    const locInMessage = matchLocation(value)
+    const namedLocation = locInMessage.type === 'location' ? locInMessage.loc : null
+
     if (isHoursQuestion(value)) {
+      if (namedLocation) {
+        hoursAnswer(namedLocation)
+        return true
+      }
       enterLocation('hours', CHATBOT_TEXT.hoursPrompt)
       return true
     }
@@ -272,7 +287,16 @@ export default function ChatWidget({ faqs = CHAT_FAQS }: { faqs?: ChatFaq[] }) {
     }
     const faq = matchFaq(value, faqs)
     if (faq) {
-      if (faq.locationAnswers && Object.keys(faq.locationAnswers).length > 0) {
+      const hasPerLocation = faq.locationAnswers && Object.keys(faq.locationAnswers).length > 0
+      if (hasPerLocation && namedLocation) {
+        // Per-location FAQ + location named in message → answer directly.
+        const perLocText =
+          (faq.locationAnswers && faq.locationAnswers[namedLocation.key]) || faq.answer
+        bot(`${namedLocation.shortName}: ${perLocText}`, faq.links)
+        backToMenu()
+        return true
+      }
+      if (hasPerLocation) {
         setSelectedFaq(faq)
         enterLocation('faq', 'Which Modern Storage® location are you asking about?')
         return true

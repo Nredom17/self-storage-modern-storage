@@ -32,12 +32,12 @@
   // DATA — locations, FAQs, copy. Mirrors lib/chatbot.ts.
   // ────────────────────────────────────────────────────────────────────────
   var CHAT_LOCATIONS = [
-    { key: 'west-little-rock', name: 'Modern Storage® West Little Rock', shortName: 'West Little Rock', phone: '(501) 812-6500', address: '601 Autumn Rd, Little Rock, AR 72211', url: 'https://www.modernstorage.com/self-storage-little-rock-ar-f5198', region: 'little-rock', aliases: ['west little rock', 'chenal', 'little rock west'] },
+    { key: 'west-little-rock', name: 'Modern Storage® West Little Rock', shortName: 'West Little Rock', phone: '(501) 812-6500', address: '601 Autumn Rd, Little Rock, AR 72211', url: 'https://www.modernstorage.com/self-storage-little-rock-ar-f5198', region: 'little-rock', aliases: ['west little rock', 'wlr', 'chenal', 'little rock west'] },
     { key: 'shackleford', name: 'Modern Storage® Shackleford', shortName: 'Shackleford', phone: '(501) 500-5467', address: '3400 South Shackleford Road, Little Rock, AR 72205', url: 'https://www.modernstorage.com/3400-south-shackleford-road-little-rock-ar-72205', region: 'little-rock', aliases: ['shackleford', 'little rock shackleford'] },
     { key: 'maumelle', name: 'Modern Storage® Maumelle Blvd', shortName: 'Maumelle Blvd', phone: '(501) 791-0080', address: '9100 Maumelle Blvd, North Little Rock, AR 72113', url: 'https://www.modernstorage.com/self-storage-maumelle-ar-f9458', region: 'little-rock', aliases: ['maumelle blvd', 'maumelle', 'north little rock maumelle'] },
     { key: 'riverdale', name: 'Modern Storage® Riverdale', shortName: 'Riverdale', phone: '(501) 632-7770', address: '2510 Cantrell Rd, Little Rock, AR 72202', url: 'https://www.modernstorage.com/2510-cantrell-rd-little-rock-ar-72202', region: 'little-rock', aliases: ['riverdale', 'cantrell', 'cammack village', 'camack village', 'the heights', 'heights', 'hillcrest', 'pulaski heights'] },
     { key: 'bryant', name: 'Modern Storage® Bryant', shortName: 'Bryant', phone: '(501) 302-5000', address: '300 Dell Dr, Bryant, AR 72022', url: 'https://www.modernstorage.com/self-storage-bryant-ar-f8249', region: 'other', aliases: ['bryant'] },
-    { key: 'north-little-rock', name: 'Modern Storage® North Little Rock', shortName: 'North Little Rock', phone: '(501) 441-5333', address: '3100 North Hills Blvd, North Little Rock, AR 72116', url: 'https://www.modernstorage.com/self-storage-north-little-rock-ar-f8184', region: 'little-rock', aliases: ['north little rock', 'north hills'] },
+    { key: 'north-little-rock', name: 'Modern Storage® North Little Rock', shortName: 'North Little Rock', phone: '(501) 441-5333', address: '3100 North Hills Blvd, North Little Rock, AR 72116', url: 'https://www.modernstorage.com/self-storage-north-little-rock-ar-f8184', region: 'little-rock', aliases: ['north little rock', 'nlr', 'north hills'] },
     { key: 'hot-springs', name: 'Modern Storage® Hot Springs', shortName: 'Hot Springs', phone: '(501) 302-1400', address: '1238 Higdon Ferry Rd, Hot Springs, AR 71913', url: 'https://www.modernstorage.com/self-storage-hot-springs-ar-f5404', region: 'other', aliases: ['hot springs'] },
     { key: 'springdale', name: 'Modern Storage® Springdale', shortName: 'Springdale', phone: '(479) 480-7600', address: '4555 W Sunset Ave, Springdale, AR 72762', url: 'https://www.modernstorage.com/self-storage-springdale-ar-f2741', region: 'nwa', aliases: ['springdale'] },
     { key: 'lowell', name: 'Modern Storage® Lowell', shortName: 'Lowell', phone: '(479) 485-2299', address: '1407 W Monroe Ave, Lowell, AR 72745', url: 'https://www.modernstorage.com/1407-w-monroe-ave-lowell-ar-72745', region: 'nwa', aliases: ['lowell'] },
@@ -470,11 +470,25 @@
   function tryAnswerFreeText(value) {
     if (isGoodbye(value)) { bot(TEXT.goodbye); backToMenu(); return true }
     if (isMessageRequest(value)) { startMessage(); return true }
-    if (isHoursQuestion(value)) { enterLocation('hours', TEXT.hoursPrompt); return true }
+    // Pre-detect a named location so "what time does wlr close" answers
+    // immediately with West Little Rock hours instead of re-asking.
+    var locInMessage = matchLocation(value)
+    var namedLocation = locInMessage.type === 'location' ? locInMessage.loc : null
+    if (isHoursQuestion(value)) {
+      if (namedLocation) { hoursAnswer(namedLocation); return true }
+      enterLocation('hours', TEXT.hoursPrompt); return true
+    }
     if (isPaymentQuestion(value)) { paymentAnswer(); return true }
     var faq = matchFaq(value)
     if (faq) {
-      if (faq.locationAnswers && Object.keys(faq.locationAnswers).length > 0) {
+      var hasPerLocation = faq.locationAnswers && Object.keys(faq.locationAnswers).length > 0
+      if (hasPerLocation && namedLocation) {
+        var perLocText = (faq.locationAnswers && faq.locationAnswers[namedLocation.key]) || faq.answer
+        bot(namedLocation.shortName + ': ' + perLocText, faq.links)
+        backToMenu()
+        return true
+      }
+      if (hasPerLocation) {
         state.selectedFaq = faq
         enterLocation('faq', 'Which Modern Storage® location are you asking about?')
         return true

@@ -36,7 +36,7 @@ export const CHAT_LOCATIONS: ChatLocation[] = [
     address: '601 Autumn Rd, Little Rock, AR 72211',
     url: 'https://www.modernstorage.com/self-storage-little-rock-ar-f5198',
     region: 'little-rock',
-    aliases: ['west little rock', 'chenal', 'little rock west'],
+    aliases: ['west little rock', 'wlr', 'chenal', 'little rock west'],
   },
   {
     key: 'shackleford',
@@ -95,7 +95,7 @@ export const CHAT_LOCATIONS: ChatLocation[] = [
     address: '3100 North Hills Blvd, North Little Rock, AR 72116',
     url: 'https://www.modernstorage.com/self-storage-north-little-rock-ar-f8184',
     region: 'little-rock',
-    aliases: ['north little rock', 'north hills'],
+    aliases: ['north little rock', 'nlr', 'north hills'],
   },
   {
     key: 'hot-springs',
