@@ -142,9 +142,10 @@ export const CHAT_LOCATIONS: ChatLocation[] = [
 export const CHATBOT_TEXT = {
   prompt: 'Can I help you?',
   agentName: 'Modern Storage® Help',
-  welcome: 'Welcome to Modern Storage®! I’m here to help with your storage needs.',
-  askName: 'First, what’s your name?',
-  askPhone: 'Thanks. What’s your phone number?',
+  welcome:
+    'Welcome to Modern Storage®! I’m here to help with your storage needs. Please type your question below, and I’ll help you get the answer.',
+  askName: 'First, What’s your name?',
+  askPhone: 'Thanks. Lastly, what is your phone number?',
   phonePlaceholder: 'Enter your phone number',
   menuIntro:
     'Great, thank you. How can we help today? You can type a question — like “What are your hours?” — or pick an option below.',
