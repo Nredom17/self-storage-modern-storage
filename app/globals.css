@@ -78,12 +78,13 @@
 }
 
 @media print {
-  /* Landscape Letter with tight margins — wider canvas means the 2-col
-   * grid has room to breathe and the whole printout stays on one page
-   * for the vast majority of checklists. */
+  /* Landscape Letter. Margin tightened to 0.25in per user feedback so the
+   * content has room to breathe vertically AND grow horizontally — the
+   * red section dividers now span the full printable width rather than
+   * looking off-center. */
   @page {
     size: Letter landscape;
-    margin: 0.3in;
+    margin: 0.25in;
   }
 
   /* Force print color rendering so the red brand accents survive cheap
@@ -118,14 +119,22 @@
   body.printing-checklist > *:not(.printable-checklist) {
     display: none !important;
   }
+  /* Print container: spans 100% of the printable area so the red dividers
+   * are perfectly centered, and uses flex column with auto top/bottom
+   * margin so a short checklist sits roughly centered on the page rather
+   * than clinging to the top. box-sizing: border-box keeps the small
+   * vertical padding from breaking the 100% width math. */
   body.printing-checklist .printable-checklist {
-    display: block !important;
+    display: flex !important;
+    flex-direction: column !important;
     position: static !important;
     width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
     height: auto !important;
     min-height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    margin: 0 auto !important;
+    padding: 0.15in 0 !important;
     background: white !important;
     color: black !important;
     font-family: 'DM Sans', sans-serif !important;
@@ -133,92 +142,101 @@
 
   /* ── PRINTABLE CHECKLIST CONTENT ────────────────────────────────────── */
 
+  /* Header: a touch more breathing room before the divider so the title
+   * doesn't kiss the top of the printable area. */
   .printable-checklist .pc-header {
-    margin: 0 0 8px 0 !important;
-    padding: 0 0 5px 0 !important;
-    border-bottom: 1.5px solid #F60001 !important;
+    margin: 0 0 14px 0 !important;
+    padding: 4px 0 10px 0 !important;
+    border-bottom: 2px solid #F60001 !important;
   }
   .printable-checklist .pc-brand {
     font-family: 'Bebas Neue', cursive !important;
-    font-size: 10px !important;
+    font-size: 11px !important;
     letter-spacing: 0.18em !important;
     color: #F60001 !important;
     margin: 0 !important;
   }
   .printable-checklist .pc-title {
     font-family: 'Bebas Neue', cursive !important;
-    font-size: 18px !important;
+    font-size: 22px !important;
     color: #1A1A1A !important;
-    margin: 1px 0 !important;
+    margin: 2px 0 !important;
     line-height: 1.1 !important;
   }
   .printable-checklist .pc-context {
-    font-size: 9px !important;
+    font-size: 10.5px !important;
     color: #555 !important;
-    margin-top: 1px !important;
+    margin-top: 2px !important;
   }
   .printable-checklist .pc-source {
-    font-size: 8px !important;
+    font-size: 9px !important;
     color: #999 !important;
-    margin-top: 1px !important;
+    margin-top: 2px !important;
   }
 
   /* Sections — no forced page breaks, only `break-inside: avoid` so a
    * single section stays together when possible. Natural document flow
-   * does the rest. */
+   * does the rest. Slightly larger margins and a heavier section title
+   * fill the page more evenly so the checklist doesn't end up clumped
+   * at the top with empty space at the bottom. */
   .printable-checklist .pc-section {
-    margin-bottom: 6px !important;
+    margin-bottom: 12px !important;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
   .printable-checklist .pc-section-title {
     font-family: 'Bebas Neue', cursive !important;
-    font-size: 12px !important;
-    letter-spacing: 0.08em !important;
+    font-size: 14px !important;
+    letter-spacing: 0.1em !important;
     color: #1A1A1A !important;
-    border-bottom: 1px solid #F60001 !important;
-    padding-bottom: 2px !important;
-    margin: 0 0 4px 0 !important;
+    border-bottom: 1.5px solid #F60001 !important;
+    padding-bottom: 4px !important;
+    margin: 0 0 7px 0 !important;
   }
 
-  /* Two-column grid. grid-auto-rows: min-content means rows shrink to
-   * their item height — no min-height forcing empty space. */
+  /* Two-column grid. `grid-auto-rows: 1fr` lets each grid row stretch to
+   * the height of its tallest item, AND because the .pc-item children
+   * are stretch-aligned by default, both items in a row end up the same
+   * height. Combined with `align-items: center` on each item (below),
+   * the checkbox in the short item lands at the same vertical position
+   * as the checkbox in the long item — which is the column-alignment
+   * fix the user called out in print preview. */
   .printable-checklist .pc-items {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
-    grid-auto-rows: min-content !important;
-    gap: 3px 12px !important;
+    grid-auto-rows: 1fr !important;
+    gap: 6px 14px !important;
   }
 
   .printable-checklist .pc-item {
     display: flex !important;
-    align-items: flex-start !important;
-    gap: 6px !important;
+    align-items: center !important; /* vertical-centers checkbox + text in each row */
+    gap: 8px !important;
     background: white !important;
     border: 1px solid #CCC !important;
     border-radius: 5px !important;
-    padding: 4px 7px !important;
+    padding: 7px 10px !important;
     min-height: 0 !important;
     font-family: 'DM Sans', sans-serif !important;
-    font-size: 10px !important;
-    line-height: 1.25 !important;
+    font-size: 11px !important;
+    line-height: 1.35 !important;
     color: #1A1A1A !important;
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
 
   .printable-checklist .pc-checkbox {
-    width: 12px !important;
-    height: 12px !important;
+    width: 14px !important;
+    height: 14px !important;
     flex-shrink: 0 !important;
     background: white !important;
     border: 1.5px solid #1A1A1A !important;
-    border-radius: 2.5px !important;
-    margin-top: 1px !important;
+    border-radius: 3px !important;
+    margin-top: 0 !important; /* removed — align-items: center handles vertical alignment now */
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    font-size: 9px !important;
+    font-size: 10px !important;
     color: white !important;
   }
   .printable-checklist .pc-checkbox--done {
@@ -227,8 +245,8 @@
 
   .printable-checklist .pc-text {
     color: #1A1A1A !important;
-    font-size: 10px !important;
-    line-height: 1.25 !important;
+    font-size: 11px !important;
+    line-height: 1.35 !important;
   }
   .printable-checklist .pc-text--done {
     color: #555 !important;
