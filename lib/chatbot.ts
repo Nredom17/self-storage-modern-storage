@@ -536,46 +536,108 @@ function normalizeMsg(text: string): string {
   return text.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim()
 }
 
-/**
- * Match a typed message to a single approved Q&A.
- *  1) Strong match — a keyword word/phrase appears verbatim (longest first).
- *  2) Looser match — score answers by how many distinctive keyword words appear
- *     anywhere in the message, and return the best-scoring approved answer.
- * It only ever returns an APPROVED answer (or null → the fallback line); it
- * never generates text, so it cannot invent an answer.
- */
-export function matchFaq(text: string, faqs: ChatFaq[] = CHAT_FAQS): ChatFaq | null {
-  const norm = normalizeMsg(text)
-  if (!norm) return null
-  const t = ' ' + norm + ' '
+// Helper — are all the tokens of `kwTokens` present in `inputTokens` in order,
+// possibly with other words between them? Lets a keyword "live in unit" match
+// an input "can i live in my unit" because the three keyword tokens appear in
+// order, just with "my" sitting between "in" and "unit".
+function keywordTokensInOrder(kwTokens: string[], inputTokens: string[]): boolean {
+  let ki = 0
+  for (const it of inputTokens) {
+    if (it === kwTokens[ki]) ki++
+    if (ki === kwTokens.length) return true
+  }
+  return false
+}
 
-  // 1) Verbatim keyword / phrase match, longest keyword first.
-  const pairs = faqs
-    .flatMap((f) => f.keywords.map((k) => ({ f, k: k.trim().toLowerCase() })))
-    .filter(({ k }) => k.length > 0)
-    .sort((a, b) => b.k.length - a.k.length)
-  for (const { f, k } of pairs) {
-    if (t.includes(' ' + k + ' ')) return f
+/**
+ * Score a single FAQ against a typed input by combining four signals:
+ *   1. VERBATIM phrase match — keyword appears as a contiguous phrase in the
+ *      input (highest weight; phrase length adds a small bonus so a 3-word
+ *      keyword outranks a 1-word keyword that also matches).
+ *   2. PHRASE-WITH-GAPS match — keyword tokens appear in order in the input,
+ *      possibly separated by other words ("live in unit" → "live in my unit").
+ *   3. QUESTION-TITLE overlap — distinctive (non-stopword, 3+ char) words
+ *      from the FAQ's own question that also appear in the input. Helps
+ *      "is there a trash on site" lock onto "...trash disposal on site?".
+ *   4. SINGLE-TOKEN overlap — distinctive keyword tokens that appear anywhere
+ *      in the input. The old fallback path, now part of the combined score.
+ *
+ * Stronger signals (1, 2) carry far more weight than weak overlap (3, 4).
+ * The threshold filters out junk matches that would otherwise return wrong
+ * answers for vague inputs.
+ */
+function scoreFaq(input: string, faq: ChatFaq): number {
+  const norm = normalizeMsg(input)
+  if (!norm) return 0
+  const padded = ' ' + norm + ' '
+  const inputTokensAll = norm.split(' ').filter(Boolean)
+  const inputDistinct = new Set(
+    inputTokensAll.filter((w) => w.length >= 3 && !MATCH_STOPWORDS.has(w)),
+  )
+
+  let score = 0
+
+  for (const rawKw of faq.keywords) {
+    const k = rawKw.trim().toLowerCase()
+    if (!k) continue
+    // 1. Verbatim phrase
+    if (padded.includes(' ' + k + ' ')) {
+      score += 12 + Math.min(k.length, 30) * 0.3
+      continue
+    }
+    const kwTokens = k.split(/\s+/).filter(Boolean)
+    // 2. Phrase with gaps (only meaningful for multi-token keywords)
+    if (kwTokens.length >= 2 && keywordTokensInOrder(kwTokens, inputTokensAll)) {
+      score += 8 + kwTokens.length
+      continue
+    }
+    // 4. Single-token overlap — only the distinctive tokens of the keyword.
+    for (const w of kwTokens) {
+      if (w.length >= 3 && !MATCH_STOPWORDS.has(w) && inputDistinct.has(w)) {
+        score += 1
+      }
+    }
   }
 
-  // 2) Distinctive single-word overlap fallback.
-  const msgWords = new Set(norm.split(' ').filter((w) => w.length >= 3 && !MATCH_STOPWORDS.has(w)))
-  if (msgWords.size === 0) return null
+  // 3. Question-title overlap. The FAQ author's question is itself a signal
+  // about what the FAQ answers — a customer's phrasing usually shares words
+  // with it ("is there a trash on site" ↔ "...trash disposal on site?").
+  const titleTokens = normalizeMsg(faq.question)
+    .split(' ')
+    .filter((w) => w.length >= 3 && !MATCH_STOPWORDS.has(w))
+  const titleSeen = new Set<string>()
+  for (const t of titleTokens) {
+    if (!titleSeen.has(t) && inputDistinct.has(t)) {
+      score += 1.5
+      titleSeen.add(t)
+    }
+  }
+
+  return score
+}
+
+/**
+ * Match a typed message to a single approved Q&A by scoring every FAQ and
+ * picking the highest-scoring one above the threshold. Only ever returns an
+ * APPROVED answer (or null → the fallback line); it never generates text,
+ * so it cannot invent an answer.
+ */
+export function matchFaq(text: string, faqs: ChatFaq[] = CHAT_FAQS): ChatFaq | null {
+  if (!normalizeMsg(text)) return null
   let best: ChatFaq | null = null
   let bestScore = 0
   for (const f of faqs) {
-    const matched = new Set<string>()
-    for (const kw of f.keywords) {
-      for (const w of kw.toLowerCase().split(/\s+/)) {
-        if (w.length >= 3 && !MATCH_STOPWORDS.has(w) && msgWords.has(w)) matched.add(w)
-      }
-    }
-    if (matched.size > bestScore) {
-      bestScore = matched.size
+    const s = scoreFaq(text, f)
+    if (s > bestScore) {
+      bestScore = s
       best = f
     }
   }
-  return bestScore >= 1 ? best : null
+  // Threshold = 3. One verbatim hit (12+) or one phrase-with-gaps (8+) is
+  // a comfortable answer. Two title-word overlaps (3.0) or three distinctive
+  // single-token hits (3) clear the bar but only when multiple signals align,
+  // which keeps weak guesses out.
+  return bestScore >= 3 ? best : null
 }
 
 export type LocationMatch =

@@ -134,39 +134,73 @@
     return false
   }
   var STOPWORDS = ['the', 'a', 'an', 'and', 'or', 'for', 'to', 'of', 'in', 'on', 'at', 'is', 'are', 'do', 'does', 'you', 'your', 'i', 'my', 'me', 'we', 'it', 'can', 'how', 'what', 'where', 'when', 'which', 'need', 'want', 'help', 'please', 'with', 'have', 'about', 'this', 'that', 'near', 'get', 'storage', 'store', 'stored', 'unit', 'units', 'modern', 'rent', 'rental']
+  // Sequence-match helper — does kwTokens appear in order within inputTokens,
+  // allowing other tokens between them? Lets "live in unit" match "live in
+  // my unit" because the three tokens appear in order.
+  function keywordTokensInOrder(kwTokens, inputTokens) {
+    var ki = 0
+    for (var i = 0; i < inputTokens.length; i++) {
+      if (inputTokens[i] === kwTokens[ki]) ki++
+      if (ki === kwTokens.length) return true
+    }
+    return false
+  }
+
+  // Score one FAQ against a typed input. See lib/chatbot.ts for the long
+  // rationale — same algorithm ported verbatim. Combines verbatim phrase
+  // matches, phrase-with-gaps, question-title overlap, and single-token
+  // overlap into a single score; matchFaq picks the highest above threshold.
+  function scoreFaq(input, faq) {
+    var norm = normalize(input)
+    if (!norm) return 0
+    var padded = ' ' + norm + ' '
+    var inputTokensAll = norm.split(' ').filter(function (w) { return w.length > 0 })
+    var distinct = {}
+    for (var d = 0; d < inputTokensAll.length; d++) {
+      var dw = inputTokensAll[d]
+      if (dw.length >= 3 && STOPWORDS.indexOf(dw) < 0) distinct[dw] = true
+    }
+    var score = 0
+    for (var ki = 0; ki < faq.keywords.length; ki++) {
+      var k = (faq.keywords[ki] || '').trim().toLowerCase()
+      if (!k) continue
+      if (padded.indexOf(' ' + k + ' ') >= 0) {
+        score += 12 + Math.min(k.length, 30) * 0.3
+        continue
+      }
+      var kwTokens = k.split(/\s+/).filter(function (w) { return w.length > 0 })
+      if (kwTokens.length >= 2 && keywordTokensInOrder(kwTokens, inputTokensAll)) {
+        score += 8 + kwTokens.length
+        continue
+      }
+      for (var kp = 0; kp < kwTokens.length; kp++) {
+        var w = kwTokens[kp]
+        if (w.length >= 3 && STOPWORDS.indexOf(w) < 0 && distinct[w]) score += 1
+      }
+    }
+    // Question-title overlap — distinctive words from the FAQ's question
+    // that also appear in the input.
+    var titleParts = normalize(faq.question || '').split(' ')
+    var titleSeen = {}
+    for (var t = 0; t < titleParts.length; t++) {
+      var tw = titleParts[t]
+      if (tw.length >= 3 && STOPWORDS.indexOf(tw) < 0 && distinct[tw] && !titleSeen[tw]) {
+        score += 1.5
+        titleSeen[tw] = true
+      }
+    }
+    return score
+  }
+
   function matchFaq(text) {
-    var norm = normalize(text)
-    if (!norm) return null
-    var t = ' ' + norm + ' '
-    var pairs = []
-    for (var i = 0; i < CHAT_FAQS.length; i++) {
-      var f = CHAT_FAQS[i]
-      for (var j = 0; j < f.keywords.length; j++) pairs.push({ f: f, k: f.keywords[j].toLowerCase() })
-    }
-    pairs.sort(function (a, b) { return b.k.length - a.k.length })
-    for (var p = 0; p < pairs.length; p++) {
-      if (t.indexOf(' ' + pairs[p].k + ' ') >= 0) return pairs[p].f
-    }
-    var words = {}
-    var parts = norm.split(' ')
-    for (var w = 0; w < parts.length; w++) if (parts[w].length >= 3 && STOPWORDS.indexOf(parts[w]) < 0) words[parts[w]] = true
-    if (Object.keys(words).length === 0) return null
+    if (!normalize(text)) return null
     var best = null
     var bestScore = 0
-    for (var fi = 0; fi < CHAT_FAQS.length; fi++) {
-      var faq = CHAT_FAQS[fi]
-      var matched = {}
-      for (var ki = 0; ki < faq.keywords.length; ki++) {
-        var kparts = faq.keywords[ki].toLowerCase().split(/\s+/)
-        for (var kp = 0; kp < kparts.length; kp++) {
-          var kw = kparts[kp]
-          if (kw.length >= 3 && STOPWORDS.indexOf(kw) < 0 && words[kw]) matched[kw] = true
-        }
-      }
-      var score = Object.keys(matched).length
-      if (score > bestScore) { bestScore = score; best = faq }
+    for (var i = 0; i < CHAT_FAQS.length; i++) {
+      var s = scoreFaq(text, CHAT_FAQS[i])
+      if (s > bestScore) { bestScore = s; best = CHAT_FAQS[i] }
     }
-    return bestScore >= 1 ? best : null
+    return bestScore >= 3 ? best : null
   }
   function matchLocation(text) {
     var t = ' ' + normalize(text) + ' '
