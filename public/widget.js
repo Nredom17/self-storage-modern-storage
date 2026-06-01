@@ -279,13 +279,12 @@
     + '.ms-chat-launcher{width:56px;height:56px;border-radius:9999px;background:#F60001;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:background .15s}'
     + '.ms-chat-launcher:hover{background:#C40001}'
     + '.ms-chat-launcher svg{width:24px;height:24px}'
-    /* Prompt bubble */
-    + '.ms-chat-prompt{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e5e7eb;border-radius:9999px;padding:8px 8px 8px 20px;box-shadow:0 8px 24px rgba(0,0,0,.2);position:relative}'
-    + '.ms-chat-prompt-close{position:absolute;top:-8px;left:-8px;width:24px;height:24px;border-radius:9999px;background:#fff;border:1px solid #e5e7eb;color:#6b7280;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,.05)}'
+    /* Prompt bubble — now a <button>, so we need text-align + cursor */
+    + '.ms-chat-prompt{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e5e7eb;border-radius:9999px;padding:8px 8px 8px 20px;box-shadow:0 8px 24px rgba(0,0,0,.2);position:relative;cursor:pointer;text-align:left;transition:box-shadow .15s}'
+    + '.ms-chat-prompt:hover{box-shadow:0 12px 30px rgba(0,0,0,.28)}'
+    + '.ms-chat-prompt-close{position:absolute;top:-8px;left:-8px;z-index:1;width:24px;height:24px;border-radius:9999px;background:#fff;border:1px solid #e5e7eb;color:#6b7280;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,.05);cursor:pointer}'
     + '.ms-chat-prompt-close svg{width:14px;height:14px}'
-    + '.ms-chat-prompt-text{font-size:12px;color:#6b7280;margin:0 0 6px}'
-    + '.ms-chat-prompt-btn{background:#F60001;color:#fff;font-weight:900;font-size:14px;padding:8px 16px;border-radius:9999px;transition:background .15s}'
-    + '.ms-chat-prompt-btn:hover{background:#C40001}'
+    + '.ms-chat-prompt-text{font-size:12px;color:#4b5563;margin:0 0 4px;line-height:1.2}'
     + '.ms-chat-prompt-avatar{width:48px;height:48px;border-radius:9999px;object-fit:cover;border:1px solid #f3f4f6;flex-shrink:0}'
     /* Panel */
     + '.ms-chat-panel{width:calc(100vw - 32px);max-width:384px;height:min(544px,76vh);background:#fff;border-radius:16px;box-shadow:0 16px 50px rgba(0,0,0,.3);border:1px solid #f3f4f6;display:flex;flex-direction:column;overflow:hidden}'
@@ -650,12 +649,31 @@
   }
 
   function renderPrompt() {
-    var close = el('button', { class: 'ms-chat-prompt-close', type: 'button', 'aria-label': 'Dismiss chat prompt', html: ICON_X, onclick: function () { state.view = 'launcher'; render() } })
+    // Whole pill is one button so a tap anywhere starts the chat. The X
+    // close-button is a sibling positioned absolutely; stopPropagation on
+    // its click prevents the parent button from firing.
+    var close = el('button', {
+      class: 'ms-chat-prompt-close',
+      type: 'button',
+      'aria-label': 'Dismiss chat prompt',
+      html: ICON_X,
+      onclick: function (e) { e.stopPropagation(); state.view = 'launcher'; render() },
+    })
     var promptText = el('span', { class: 'ms-chat-prompt-text' }, [TEXT.prompt])
-    var startBtn = el('button', { class: 'ms-chat-prompt-btn', type: 'button', onclick: startChat }, ['Start Chat'])
-    var col = el('div', { style: 'display:flex;flex-direction:column;align-items:flex-start' }, [promptText, startBtn])
+    // Inline backgroundColor on the "Start Chat" pill ensures it paints
+    // even if a host site's CSS clashes with the .ms-chat-prompt-btn rule.
+    var startPill = el('span', {
+      class: 'ms-chat-prompt-btn',
+      style: 'background:#F60001;color:#fff;font-weight:900;font-size:14px;padding:6px 14px;border-radius:9999px;display:inline-block;',
+    }, ['Start Chat →'])
+    var col = el('span', { style: 'display:flex;flex-direction:column;align-items:flex-start' }, [promptText, startPill])
     var avatar = el('img', { class: 'ms-chat-prompt-avatar', src: AVATAR_URL, alt: '', 'aria-hidden': 'true' })
-    var bubble = el('div', { class: 'ms-chat-prompt' }, [close, col, avatar])
+    var bubble = el('button', {
+      class: 'ms-chat-prompt',
+      type: 'button',
+      'aria-label': 'Start chat — ' + TEXT.prompt,
+      onclick: startChat,
+    }, [close, col, avatar])
     rootEl.appendChild(bubble)
   }
 

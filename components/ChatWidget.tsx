@@ -601,37 +601,48 @@ export default function ChatWidget({ faqs: initialFaqs = CHAT_FAQS }: { faqs?: C
   }
 
   // ── "Can I help you?" prompt bubble ──
+  // Whole bubble is now a single clickable button so a tap ANYWHERE on the
+  // pill starts the chat — works even if Tailwind variants on the inner
+  // pill don't paint correctly on first render. The X close-button is a
+  // sibling positioned absolutely so its click doesn't bubble into the
+  // parent button.
   if (view === 'prompt') {
     return (
       <div className="fixed bottom-24 right-4 lg:bottom-6 lg:right-6 z-50">
-        <div className="relative flex items-center gap-3 bg-white rounded-full pl-5 pr-2 py-2 shadow-[0_8px_24px_rgba(0,0,0,0.2)] border border-gray-100">
+        <div className="relative">
           <button
             type="button"
             onClick={() => setView('launcher')}
             aria-label="Dismiss chat prompt"
-            className="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-white border border-gray-200 text-gray-500 hover:text-charcoal shadow-sm flex items-center justify-center"
+            className="absolute -top-2 -left-2 z-10 w-6 h-6 rounded-full bg-white border border-gray-200 text-gray-500 hover:text-charcoal shadow-sm flex items-center justify-center"
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
-          <div className="flex flex-col items-start">
-            <span className="text-xs text-gray-500 leading-none mb-1.5">{CHATBOT_TEXT.prompt}</span>
-            <button
-              type="button"
-              onClick={startChat}
-              className="bg-modern-red hover:bg-modern-red-hover text-white text-sm font-black px-4 py-2 rounded-full transition-colors"
-            >
-              Start Chat
-            </button>
-          </div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={CHATBOT_TEXT.avatar}
-            alt=""
-            aria-hidden="true"
-            className="w-12 h-12 rounded-full object-cover border border-gray-100 shrink-0"
-          />
+          <button
+            type="button"
+            onClick={startChat}
+            aria-label="Start chat — Can I help you?"
+            className="group flex items-center gap-3 bg-white rounded-full pl-5 pr-2 py-2 shadow-[0_8px_24px_rgba(0,0,0,0.2)] border border-gray-100 hover:shadow-[0_12px_30px_rgba(0,0,0,0.28)] transition-shadow text-left"
+          >
+            <span className="flex flex-col items-start">
+              <span className="text-xs text-gray-600 leading-tight mb-1">{CHATBOT_TEXT.prompt}</span>
+              <span
+                className="inline-flex items-center gap-1 text-white text-sm font-black px-4 py-1.5 rounded-full"
+                style={{ backgroundColor: '#F60001' }}
+              >
+                Start Chat →
+              </span>
+            </span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={CHATBOT_TEXT.avatar}
+              alt=""
+              aria-hidden="true"
+              className="w-12 h-12 rounded-full object-cover border border-gray-100 shrink-0"
+            />
+          </button>
         </div>
       </div>
     )
