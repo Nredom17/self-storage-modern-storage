@@ -189,9 +189,22 @@ export default function LocationFinder({
                     </Link>
                   </h3>
                   <p className="text-sm text-gray-500 mb-1">{loc.streetAddress}</p>
-                  <p className="text-sm text-gray-500 mb-4">
+                  <p className="text-sm text-gray-500 mb-2">
                     {loc.city}, {loc.state} {loc.zip}
                   </p>
+                  {/* Tap-to-call: each card shows the facility's direct
+                      phone. The tel: href dials that store, not the
+                      central sales line. */}
+                  <a
+                    href={`tel:+1${loc.phone.replace(/\D/g, '')}`}
+                    aria-label={`Call ${loc.name} at ${loc.phone}`}
+                    className="inline-flex items-center gap-1.5 text-sm font-bold text-modern-red hover:text-modern-red-hover transition-colors mb-4"
+                  >
+                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
+                    </svg>
+                    {loc.phone}
+                  </a>
                   {/* Amenities as icon + text list. Per UX feedback,
                       previously pill-shaped chips read as buttons and
                       invited clicks. Bullet + icon layout signals

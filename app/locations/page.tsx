@@ -153,9 +153,21 @@ export default async function LocationsHubPage() {
                 <div className="p-6 flex flex-col flex-1">
                   <h3 className="font-black text-charcoal text-lg leading-tight mb-1">{loc.name}</h3>
                   <p className="text-sm text-gray-500 mb-1">{loc.streetAddress}</p>
-                  <p className="text-sm text-gray-500 mb-4">
+                  <p className="text-sm text-gray-500 mb-2">
                     {loc.city}, {loc.state} {loc.zip}
                   </p>
+                  {/* Tap-to-call: facility's direct phone number (not the
+                      central sales line). */}
+                  <a
+                    href={`tel:+1${loc.phone.replace(/\D/g, '')}`}
+                    aria-label={`Call ${loc.name} at ${loc.phone}`}
+                    className="inline-flex items-center gap-1.5 text-sm font-bold text-modern-red hover:text-modern-red-hover transition-colors mb-4 w-fit"
+                  >
+                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
+                    </svg>
+                    {loc.phone}
+                  </a>
                   <div className="flex flex-wrap gap-1.5 mb-5">
                     {loc.badges.map((badge) => (
                       <span
@@ -176,12 +188,13 @@ export default async function LocationsHubPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                       </svg>
                     </Link>
-                    {/* New Rentals = click-to-call; Existing Customers =
-                        all-locations directory (account access / tenant portal). */}
+                    {/* New Rentals = click-to-call DIRECT to this facility;
+                        Existing Customers = all-locations directory
+                        (account access / tenant portal). */}
                     <div className="grid grid-cols-2 gap-2">
                       <a
-                        href={`tel:${settings.phoneDisplay.replace(/[^\d+]/g, '')}`}
-                        aria-label={`Call for new rentals at ${loc.name} — ${settings.phoneDisplay}`}
+                        href={`tel:+1${loc.phone.replace(/\D/g, '')}`}
+                        aria-label={`Call ${loc.name} for new rentals — ${loc.phone}`}
                         className="inline-flex items-center justify-center gap-1.5 border border-gray-200 hover:border-modern-red text-charcoal hover:text-modern-red text-[11px] font-bold px-2 py-2 rounded-full transition-colors"
                       >
                         <svg className="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
