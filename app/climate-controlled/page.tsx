@@ -225,29 +225,27 @@ export default async function ClimateControlledPage() {
           </nav>
 
           {/* Two-column on desktop, single-column stack on mobile. The grid
-              is split into THREE blocks so the figure can sit between the
-              paragraph and the CTAs on mobile (where it stacks naturally)
-              while still occupying the right column across both rows on
-              desktop via explicit grid positions. */}
+              is split into FOUR blocks so the figure can sit between the
+              H1 and the paragraph on mobile (where it stacks naturally)
+              while still occupying the right column across all three rows
+              on desktop via explicit grid positions. */}
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            {/* Block 1 — badge + H1. On desktop: col 1, row 1. */}
             <div className="lg:col-start-1 lg:row-start-1">
               <span className="inline-flex items-center gap-2 bg-modern-red/20 border border-modern-red/40 text-modern-red text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-6">
                 <span className="w-1.5 h-1.5 rounded-full bg-modern-red animate-pulse" aria-hidden="true" />
                 Climate-Controlled Storage
               </span>
-              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
+              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight">
                 <span className="text-modern-red">Climate-Controlled</span> Storage Units Near You
               </h1>
-              <p className="text-gray-300 text-lg leading-relaxed mb-10 max-w-lg">
-                Indoor, temperature-controlled storage units near Little Rock, North Little Rock, Maumelle, Bentonville, Bryant, Springdale, Lowell, and Hot Springs. Built for furniture, mattresses, electronics, photos, instruments, wine, business inventory, and long-term storage of items that deserve real protection.
-              </p>
             </div>
 
-            {/* Awards banner + interior storage hallway image. On mobile
-                this stacks directly under the paragraph above. On desktop
-                it spans both rows of the right column (lg:col-start-2
-                lg:row-span-2). */}
-            <figure className="lg:col-start-2 lg:row-start-1 lg:row-span-2">
+            {/* Block 2 — awards banner + interior storage hallway image.
+                On mobile this stacks directly under the H1 above. On
+                desktop it spans all three rows of the right column
+                (lg:col-start-2 lg:row-span-3). */}
+            <figure className="lg:col-start-2 lg:row-start-1 lg:row-span-3">
               {/* Award trust banner — sits directly above the image as an
                   integrated header bar (not overlapping the photo). */}
               <div
@@ -310,9 +308,17 @@ export default async function ClimateControlledPage() {
               </figcaption>
             </figure>
 
-            {/* CTA pills + trust checklist. On desktop these stay in the
-                left column on row 2 (lg:col-start-1 lg:row-start-2). */}
+            {/* Block 3 — paragraph. Drops below the image on mobile and
+                back into the left column on row 2 on desktop. */}
             <div className="lg:col-start-1 lg:row-start-2">
+              <p className="text-gray-300 text-lg leading-relaxed mt-8 lg:mt-0 max-w-lg">
+                Indoor, temperature-controlled storage units near Little Rock, North Little Rock, Maumelle, Bentonville, Bryant, Springdale, Lowell, and Hot Springs. Built for furniture, mattresses, electronics, photos, instruments, wine, business inventory, and long-term storage of items that deserve real protection.
+              </p>
+            </div>
+
+            {/* Block 4 — CTA pills + trust checklist. On desktop these stay
+                in the left column on row 3 (lg:col-start-1 lg:row-start-3). */}
+            <div className="lg:col-start-1 lg:row-start-3 mt-2 lg:mt-0">
               {/* Row 1 — audience-split pills (transactional intent first).
                   New Rentals (red) dials the centralized line; Existing
                   Customers (white with red text) opens the modernstorage.com
