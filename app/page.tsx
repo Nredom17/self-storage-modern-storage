@@ -199,7 +199,7 @@ export default async function HomePage() {
               <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight mb-4 lg:mb-6">
                 Self Storage Units in <span className="text-modern-red">Arkansas</span>
               </h1>
-              <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-lg">
+              <p className="text-white text-base sm:text-lg leading-relaxed max-w-lg">
                 Find clean, convenient storage units across Arkansas, including climate-controlled storage, household storage, boat and RV parking, vehicle storage, and business storage.
               </p>
             </div>
@@ -251,7 +251,7 @@ export default async function HomePage() {
                   mobile, single row on desktop. Replaces a 5-item text
                   list with one 90-char award line that wrapped to 3
                   lines on mobile. */}
-              <ul className="grid grid-cols-2 sm:flex sm:flex-wrap gap-x-5 gap-y-3 text-xs sm:text-xs font-semibold text-gray-300">
+              <ul className="grid grid-cols-2 sm:flex sm:flex-wrap gap-x-5 gap-y-3 text-xs sm:text-xs font-semibold text-white">
                 {TRUST_SIGNALS.map(({ icon: Icon, text }) => (
                   <li key={text} className="flex items-center gap-2">
                     <Icon className="w-4 h-4 text-modern-red shrink-0" strokeWidth={2} aria-hidden="true" />
