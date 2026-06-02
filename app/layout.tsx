@@ -176,16 +176,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             }}
           />
         )}
-        {/* OpenAI Ads Pixel — initializes window.oaiq and fires a page_view
-            on every load. Conversion events (reservations, contact-form
-            submits, chat leads, etc.) can be added later by calling
-            window.oaiq('measure', '<event_name>', { ... }) from the
-            relevant client component. */}
+        {/* OpenAI Ads Pixel — verbatim setup code provided by the OpenAI Ads
+            dashboard. Loads the SDK from bzrcdn.openai.com and initializes
+            with the pixel ID. The SDK handles page_view tracking; future
+            conversion events can be added by calling
+            window.oaiq('event', '<event_name>', { ... }) from the relevant
+            client component. */}
         <Script
           id="oai-pixel"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
-            __html: `!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.push?q.push(arguments):q.queue.push(arguments)};w.oaiq=q;q.queue=[];var f=d.createElement(s);f.async=1;f.src=u;var t=d.getElementsByTagName(s)[0];t.parentNode.insertBefore(f,t)}(window,document,"script","https://q.oai.com/q.js");oaiq("config","${OAI_PIXEL_ID}");oaiq("measure","page_view");`,
+            __html: `!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"${OAI_PIXEL_ID}",debug:true});`,
           }}
         />
       </head>
