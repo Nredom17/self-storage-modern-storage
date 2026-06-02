@@ -224,8 +224,13 @@ export default async function ClimateControlledPage() {
             </ol>
           </nav>
 
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div>
+          {/* Two-column on desktop, single-column stack on mobile. The grid
+              is split into THREE blocks so the figure can sit between the
+              paragraph and the CTAs on mobile (where it stacks naturally)
+              while still occupying the right column across both rows on
+              desktop via explicit grid positions. */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            <div className="lg:col-start-1 lg:row-start-1">
               <span className="inline-flex items-center gap-2 bg-modern-red/20 border border-modern-red/40 text-modern-red text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-6">
                 <span className="w-1.5 h-1.5 rounded-full bg-modern-red animate-pulse" aria-hidden="true" />
                 Climate-Controlled Storage
@@ -236,6 +241,78 @@ export default async function ClimateControlledPage() {
               <p className="text-gray-300 text-lg leading-relaxed mb-10 max-w-lg">
                 Indoor, temperature-controlled storage units near Little Rock, North Little Rock, Maumelle, Bentonville, Bryant, Springdale, Lowell, and Hot Springs. Built for furniture, mattresses, electronics, photos, instruments, wine, business inventory, and long-term storage of items that deserve real protection.
               </p>
+            </div>
+
+            {/* Awards banner + interior storage hallway image. On mobile
+                this stacks directly under the paragraph above. On desktop
+                it spans both rows of the right column (lg:col-start-2
+                lg:row-span-2). */}
+            <figure className="lg:col-start-2 lg:row-start-1 lg:row-span-2">
+              {/* Award trust banner — sits directly above the image as an
+                  integrated header bar (not overlapping the photo). */}
+              <div
+                className="mb-4 flex items-center gap-4 sm:gap-6 rounded-2xl bg-charcoal/85 backdrop-blur-md ring-1 ring-white/10 shadow-[0_12px_40px_rgba(0,0,0,0.45)] px-5 py-4 sm:px-8 sm:py-5"
+                aria-label="2023, 2024, 2025 winner of the Best of the Best Self-Storage Awards by the Arkansas Democrat Gazette and Best of Northwest Arkansas"
+              >
+                <svg
+                  viewBox="0 0 96 96"
+                  className="w-12 h-12 sm:w-16 sm:h-16 shrink-0 text-modern-red"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <g>
+                    <ellipse cx="26" cy="64" rx="5" ry="2.3" transform="rotate(-52 26 64)" />
+                    <ellipse cx="22" cy="53" rx="5" ry="2.3" transform="rotate(-66 22 53)" />
+                    <ellipse cx="21" cy="42" rx="5" ry="2.3" transform="rotate(-80 21 42)" />
+                    <ellipse cx="24" cy="32" rx="5" ry="2.3" transform="rotate(-98 24 32)" />
+                    <ellipse cx="31" cy="25" rx="5" ry="2.3" transform="rotate(-114 31 25)" />
+                  </g>
+                  <g>
+                    <ellipse cx="70" cy="64" rx="5" ry="2.3" transform="rotate(52 70 64)" />
+                    <ellipse cx="74" cy="53" rx="5" ry="2.3" transform="rotate(66 74 53)" />
+                    <ellipse cx="75" cy="42" rx="5" ry="2.3" transform="rotate(80 75 42)" />
+                    <ellipse cx="72" cy="32" rx="5" ry="2.3" transform="rotate(98 72 32)" />
+                    <ellipse cx="65" cy="25" rx="5" ry="2.3" transform="rotate(114 65 25)" />
+                  </g>
+                  <path d="M31 67 Q22 50 26 29" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                  <path d="M65 67 Q74 50 70 29" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                  <path d="M40 30h16v4c0 9-4 13-8 13s-8-4-8-13z" />
+                  <path d="M40 32c-6 0-6 8-1 9.2" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+                  <path d="M56 32c6 0 6 8 1 9.2" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+                  <rect x="46" y="47" width="4" height="7" />
+                  <path d="M41 54h14v3H41z" />
+                  <path d="M38 57h20v3.5H38z" />
+                </svg>
+                <div className="min-w-0">
+                  <p className="text-[9px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-modern-red leading-tight">
+                    Best of the Best Self-Storage Awards
+                  </p>
+                  <p className="text-2xl sm:text-4xl font-black text-white leading-none tracking-tight my-1 sm:my-1.5 whitespace-nowrap">
+                    2023<span className="text-modern-red mx-1.5">•</span>2024<span className="text-modern-red mx-1.5">•</span>2025
+                  </p>
+                  <p className="text-[8px] sm:text-[10px] font-medium uppercase tracking-wide text-white/55 leading-snug">
+                    <span className="font-black text-white/85">Winner</span> · Arkansas Democrat Gazette &amp; Best of Northwest Arkansas
+                  </p>
+                </div>
+              </div>
+              <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-800 relative">
+                <Image
+                  src={HERO_IMAGE}
+                  alt={HERO_ALT}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="text-xs text-gray-500 mt-3 italic">
+                Indoor climate-controlled storage hallway at a Modern Storage® facility — temperature-controlled storage units near you.
+              </figcaption>
+            </figure>
+
+            {/* CTA pills + trust checklist. On desktop these stay in the
+                left column on row 2 (lg:col-start-1 lg:row-start-2). */}
+            <div className="lg:col-start-1 lg:row-start-2">
               {/* Row 1 — audience-split pills (transactional intent first).
                   New Rentals (red) dials the centralized line; Existing
                   Customers (white with red text) opens the modernstorage.com
@@ -296,84 +373,6 @@ export default async function ClimateControlledPage() {
                 ))}
               </ul>
             </div>
-
-            <figure>
-              {/* Award trust banner — sits directly above the image as an
-                  integrated header bar (not overlapping the photo). Matches
-                  the image's rounded corners and width, with equal spacing
-                  below (mb-4). Dark charcoal glass (backdrop-blur + hairline
-                  ring + soft shadow); red is an accent only and the award
-                  years are the focal point. Styling intent: high-end hotel /
-                  luxury-automotive trust signal, not a promotional banner. */}
-              <div
-                className="mb-4 flex items-center gap-4 sm:gap-6 rounded-2xl bg-charcoal/85 backdrop-blur-md ring-1 ring-white/10 shadow-[0_12px_40px_rgba(0,0,0,0.45)] px-5 py-4 sm:px-8 sm:py-5"
-                aria-label="2023, 2024, 2025 winner of the Best of the Best Self-Storage Awards by the Arkansas Democrat Gazette and Best of Northwest Arkansas"
-              >
-                {/* Laurel-wreath + trophy emblem (red accent) */}
-                <svg
-                  viewBox="0 0 96 96"
-                  className="w-12 h-12 sm:w-16 sm:h-16 shrink-0 text-modern-red"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  {/* laurel leaves — left branch */}
-                  <g>
-                    <ellipse cx="26" cy="64" rx="5" ry="2.3" transform="rotate(-52 26 64)" />
-                    <ellipse cx="22" cy="53" rx="5" ry="2.3" transform="rotate(-66 22 53)" />
-                    <ellipse cx="21" cy="42" rx="5" ry="2.3" transform="rotate(-80 21 42)" />
-                    <ellipse cx="24" cy="32" rx="5" ry="2.3" transform="rotate(-98 24 32)" />
-                    <ellipse cx="31" cy="25" rx="5" ry="2.3" transform="rotate(-114 31 25)" />
-                  </g>
-                  {/* laurel leaves — right branch (mirrored) */}
-                  <g>
-                    <ellipse cx="70" cy="64" rx="5" ry="2.3" transform="rotate(52 70 64)" />
-                    <ellipse cx="74" cy="53" rx="5" ry="2.3" transform="rotate(66 74 53)" />
-                    <ellipse cx="75" cy="42" rx="5" ry="2.3" transform="rotate(80 75 42)" />
-                    <ellipse cx="72" cy="32" rx="5" ry="2.3" transform="rotate(98 72 32)" />
-                    <ellipse cx="65" cy="25" rx="5" ry="2.3" transform="rotate(114 65 25)" />
-                  </g>
-                  {/* laurel stems */}
-                  <path d="M31 67 Q22 50 26 29" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                  <path d="M65 67 Q74 50 70 29" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                  {/* trophy cup */}
-                  <path d="M40 30h16v4c0 9-4 13-8 13s-8-4-8-13z" />
-                  {/* trophy handles */}
-                  <path d="M40 32c-6 0-6 8-1 9.2" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-                  <path d="M56 32c6 0 6 8 1 9.2" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-                  {/* trophy stem + base */}
-                  <rect x="46" y="47" width="4" height="7" />
-                  <path d="M41 54h14v3H41z" />
-                  <path d="M38 57h20v3.5H38z" />
-                </svg>
-
-                {/* Typographic block — years as focal point */}
-                <div className="min-w-0">
-                  <p className="text-[9px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-modern-red leading-tight">
-                    Best of the Best Self-Storage Awards
-                  </p>
-                  <p className="text-2xl sm:text-4xl font-black text-white leading-none tracking-tight my-1 sm:my-1.5 whitespace-nowrap">
-                    2023<span className="text-modern-red mx-1.5">•</span>2024<span className="text-modern-red mx-1.5">•</span>2025
-                  </p>
-                  <p className="text-[8px] sm:text-[10px] font-medium uppercase tracking-wide text-white/55 leading-snug">
-                    <span className="font-black text-white/85">Winner</span> · Arkansas Democrat Gazette &amp; Best of Northwest Arkansas
-                  </p>
-                </div>
-              </div>
-
-              <div className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-800 relative">
-                <Image
-                  src={HERO_IMAGE}
-                  alt={HERO_ALT}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              </div>
-              <figcaption className="text-xs text-gray-500 mt-3 italic">
-                Indoor climate-controlled storage hallway at a Modern Storage® facility — temperature-controlled storage units near you.
-              </figcaption>
-            </figure>
           </div>
         </div>
       </section>
