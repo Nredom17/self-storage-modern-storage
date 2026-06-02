@@ -8,6 +8,7 @@ import {
   STORAGE_TYPES,
   UNIT_SIZES,
 } from '@/lib/move-in-checklist'
+import { trackLead } from '@/lib/analytics'
 
 // Lead-gate persistence key — once a customer has submitted their info, we
 // don't ask again on this browser. They can clear localStorage to re-test.
@@ -255,6 +256,16 @@ function ChecklistLeadGate({
         unitSize: context.unitSize,
         hasPhone: Boolean(phone),
         hasFacility: Boolean(facility),
+      })
+      // Fire a Lead conversion to Reddit + OpenAI + GTM. The checklist
+      // lead has the richest payload of any capture point (name + email +
+      // phone + ZIP), so Reddit's advanced matching gets the strongest
+      // signal here.
+      trackLead({
+        source: 'move_in_checklist',
+        email,
+        phone,
+        name: firstName,
       })
       onSubmitted()
     } catch (err) {

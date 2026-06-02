@@ -25,6 +25,7 @@ import {
   type ChatLocation,
   type ChatFaq,
 } from '@/lib/chatbot'
+import { trackLead } from '@/lib/analytics'
 
 type LinkBtn = { label: string; href: string }
 type Msg = { role: 'bot' | 'user'; text: string; links?: LinkBtn[] }
@@ -458,6 +459,10 @@ export default function ChatWidget({ faqs: initialFaqs = CHAT_FAQS }: { faqs?: C
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name, phone: tenDigits }),
         }).catch(() => {})
+        // Fire conversion to Reddit + OpenAI + GTM. Only the phone is
+        // available at this stage; Reddit's advanced matching uses the
+        // raw phone number (their SDK hashes server-side).
+        trackLead({ source: 'chat_widget', phone: tenDigits, name })
         bot(CHATBOT_TEXT.menuIntro)
         setOptions(MENU_OPTIONS)
         setStep('menu')

@@ -27,6 +27,41 @@
   var API_BASE = 'https://self-storage.modernstorage.com'
   var API_ENDPOINT = API_BASE + '/api/chat-lead'
   var AVATAR_URL = API_BASE + '/images/chat-avatar.jpg'
+  var REDDIT_PIXEL_ID = 'a2_j41lj6z9iw28'
+
+  // Fan a Lead conversion out to Reddit, OpenAI, and GTM. Mirrors
+  // lib/analytics.ts on the React side so any site embedding widget.js
+  // gets the same attribution as visitors to self-storage.modernstorage.com.
+  // Wrapped in try/catch — analytics failures must never block the chat.
+  function trackLead(params) {
+    if (typeof window === 'undefined') return
+    var phone = params.phone ? String(params.phone).replace(/\D/g, '') : null
+    var email = params.email ? String(params.email).trim().toLowerCase() : null
+    try {
+      if (typeof window.rdt === 'function') {
+        var matchKeys = {}
+        if (email) matchKeys.email = email
+        if (phone) matchKeys.phoneNumber = phone
+        var keys = Object.keys(matchKeys)
+        if (keys.length > 0) window.rdt('init', REDDIT_PIXEL_ID, matchKeys)
+        window.rdt('track', 'Lead', { conversionId: params.source })
+      }
+    } catch (e) {}
+    try {
+      if (typeof window.oaiq === 'function') {
+        window.oaiq('event', 'lead', {
+          type: 'customer_action',
+          amount: params.value || 0,
+          currency: 'USD',
+          source: params.source,
+        })
+      }
+    } catch (e) {}
+    try {
+      window.dataLayer = window.dataLayer || []
+      window.dataLayer.push({ event: 'lead', lead_source: params.source })
+    } catch (e) {}
+  }
 
   // ────────────────────────────────────────────────────────────────────────
   // DATA — locations, FAQs, copy. Mirrors lib/chatbot.ts.
@@ -570,6 +605,10 @@
         if (!ten) { bot('Please enter a valid 10-digit phone number so our team can reach you.'); return }
         state.phone = ten
         try { fetch(API_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: state.name, phone: ten }), mode: 'cors' }).catch(function () {}) } catch (e) {}
+        // Fire conversion to Reddit + OpenAI + GTM. The widget runs on
+        // any site that includes widget.js, so the host site's pixels
+        // (if installed) all receive the event.
+        trackLead({ source: 'chat_widget', phone: ten, name: state.name })
         bot(TEXT.menuIntro); state.options = MENU_OPTIONS; state.step = 'menu'; render(); return
       }
       case 'message': {

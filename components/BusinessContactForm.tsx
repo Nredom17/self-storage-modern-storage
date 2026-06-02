@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { trackLead } from '@/lib/analytics'
 
 type FormState = {
   name: string
@@ -77,6 +78,16 @@ export default function BusinessContactForm({ inboxEmail }: { inboxEmail: string
       if (!res.ok || !data.ok) {
         throw new Error(data.error || 'Could not send your inquiry. Please try again.')
       }
+      // Fire a Lead conversion to Reddit + OpenAI + GTM. Reddit's pixel
+      // re-inits with the email/phone for advanced match-key attribution
+      // so this submission can be tied back to the Reddit ad campaign
+      // (if any) that drove the visitor.
+      trackLead({
+        source: 'contact_form',
+        email: form.email,
+        phone: form.phone,
+        name: form.name,
+      })
       setStatus('success')
     } catch (err) {
       setStatus('error')
