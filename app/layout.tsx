@@ -194,17 +194,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             __html: `!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"${OAI_PIXEL_ID}",debug:true});`,
           }}
         />
-        {/* Reddit Ads Pixel — standard setup snippet from the Reddit Ads
-            Manager. Loads the pixel from redditstatic.com, initializes with
-            the pixel ID, then fires a PageVisit event. Conversion events
-            (Lead, SignUp, Purchase, etc.) can be added later by calling
-            window.rdt('track', '<event_name>', { ... }) from the relevant
-            client component. */}
+        {/* Reddit Ads Pixel — VERBATIM setup snippet from the Reddit Ads
+            Manager. Includes the ?pixel_id=... query parameter on the SDK
+            URL (required by Reddit's loader to attribute the impression
+            to the correct ad account). Reddit explicitly says "DO NOT
+            MODIFY UNLESS TO REPLACE A USER IDENTIFIER" — so we keep it
+            as-is. Conversion events (Lead, SignUp, Purchase, etc.) can
+            be added later via window.rdt('track', '<event_name>', { ... }). */}
         <Script
           id="reddit-pixel"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
-            __html: `!function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js";t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);rdt("init","${REDDIT_PIXEL_ID}");rdt("track","PageVisit");`,
+            __html: `!function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js?pixel_id=${REDDIT_PIXEL_ID}",t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);rdt('init','${REDDIT_PIXEL_ID}');rdt('track', 'PageVisit');`,
           }}
         />
       </head>
