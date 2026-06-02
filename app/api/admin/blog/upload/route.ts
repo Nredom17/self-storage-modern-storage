@@ -19,7 +19,11 @@ export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 const BUCKET = 'storage-tips-images'
-const MAX_BYTES = 5 * 1024 * 1024 // 5 MB hard cap
+// Vercel's serverless function body limit is ~4.5 MB. Setting our cap at
+// 4 MB keeps us comfortably under that so the platform never intercepts
+// a too-large request with a plain-text "Request Entity Too Large"
+// response (which broke the editor's JSON.parse).
+const MAX_BYTES = 4 * 1024 * 1024 // 4 MB hard cap
 const ALLOWED_MIME = new Set([
   'image/jpeg',
   'image/png',
@@ -84,7 +88,7 @@ export async function POST(req: Request) {
   }
   if (file.size > MAX_BYTES) {
     return NextResponse.json(
-      { error: `File is ${(file.size / 1024 / 1024).toFixed(1)} MB — limit is 5 MB.` },
+      { error: `File is ${(file.size / 1024 / 1024).toFixed(1)} MB — limit is 4 MB.` },
       { status: 413 },
     )
   }

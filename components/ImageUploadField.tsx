@@ -35,12 +35,42 @@ export default function ImageUploadField({
 
   async function handleFile(file: File) {
     setError(null)
+    // Pre-check file size BEFORE we attempt the upload. The server route's
+    // hard cap is 4 MB (matches Vercel's serverless body limit), so anything
+    // larger never reaches our handler — Vercel intercepts with a plain-text
+    // 413 that breaks JSON.parse on the client. Catching it here gives the
+    // editor a clean human message instead.
+    const MAX_BYTES = 4 * 1024 * 1024
+    if (file.size > MAX_BYTES) {
+      setError(
+        `That image is ${(file.size / 1024 / 1024).toFixed(1)} MB — please compress it under 4 MB and try again.`,
+      )
+      if (inputRef.current) inputRef.current.value = ''
+      return
+    }
     setUploading(true)
     try {
       const form = new FormData()
       form.append('file', file)
       const r = await fetch('/api/admin/blog/upload', { method: 'POST', body: form })
-      const data = (await r.json()) as { url?: string; error?: string }
+      // Read the body as TEXT first so a non-JSON response (e.g. a Vercel
+      // platform-level error page) doesn't throw "Unexpected token". Then
+      // try to parse it as JSON — fall back to the raw text for the error
+      // message if parsing fails.
+      const raw = await r.text()
+      let data: { url?: string; error?: string } = {}
+      try {
+        data = raw ? (JSON.parse(raw) as typeof data) : {}
+      } catch {
+        // Body wasn't JSON. Show the platform message or status code.
+        const snippet = raw.replace(/\s+/g, ' ').trim().slice(0, 120)
+        setError(
+          r.status === 413
+            ? 'That image is too large. Please compress it under 4 MB and try again.'
+            : `Upload failed (${r.status})${snippet ? ` — ${snippet}` : ''}.`,
+        )
+        return
+      }
       if (!r.ok || !data.url) {
         setError(data.error ?? `Upload failed (${r.status}).`)
         return
