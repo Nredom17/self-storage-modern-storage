@@ -19,6 +19,11 @@ const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || ''
 // contact-form submissions, chat-lead captures.
 const OAI_PIXEL_ID = 'CNhvzAEAPk8Yu7UmJLfe6M'
 
+// Reddit Ads Pixel (rdt). Fires a PageVisit on every load and exposes
+// window.rdt for per-event conversion calls — e.g., Lead, SignUp,
+// Purchase. See https://business.reddithelp.com/ for the event list.
+const REDDIT_PIXEL_ID = 'a2_j41lj6z9iw28'
+
 // Re-render at most every 60s — picks up Supabase edits without a full code push.
 export const revalidate = 60
 
@@ -187,6 +192,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"${OAI_PIXEL_ID}",debug:true});`,
+          }}
+        />
+        {/* Reddit Ads Pixel — standard setup snippet from the Reddit Ads
+            Manager. Loads the pixel from redditstatic.com, initializes with
+            the pixel ID, then fires a PageVisit event. Conversion events
+            (Lead, SignUp, Purchase, etc.) can be added later by calling
+            window.rdt('track', '<event_name>', { ... }) from the relevant
+            client component. */}
+        <Script
+          id="reddit-pixel"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `!function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js";t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);rdt("init","${REDDIT_PIXEL_ID}");rdt("track","PageVisit");`,
           }}
         />
       </head>
