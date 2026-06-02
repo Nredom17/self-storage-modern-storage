@@ -106,6 +106,27 @@ export default function ChatWidget({ faqs: initialFaqs = CHAT_FAQS }: { faqs?: C
     }
   }, [])
 
+  // Tracks the visual viewport height so the open chat panel stays
+  // ABOVE the iOS / Android software keyboard. Without this, the
+  // keyboard covers the send button at the bottom of the panel and
+  // the user can't submit their phone number.
+  const [panelHeight, setPanelHeight] = useState<string>('min(34rem, 76vh)')
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.visualViewport) return
+    const vv = window.visualViewport
+    const onResize = () => {
+      const available = Math.max(280, vv.height - 96 - 16)
+      setPanelHeight(`${Math.min(544, available)}px`)
+    }
+    vv.addEventListener('resize', onResize)
+    vv.addEventListener('scroll', onResize)
+    onResize()
+    return () => {
+      vv.removeEventListener('resize', onResize)
+      vv.removeEventListener('scroll', onResize)
+    }
+  }, [])
+
   const [view, setView] = useState<View>('prompt')
   const [step, setStep] = useState<Step>('name')
   const [purpose, setPurpose] = useState<Purpose>('explore')
@@ -654,7 +675,7 @@ export default function ChatWidget({ faqs: initialFaqs = CHAT_FAQS }: { faqs?: C
       role="dialog"
       aria-label="Chat with Modern Storage"
       className="fixed bottom-24 right-4 lg:bottom-6 lg:right-6 z-50 w-[calc(100vw-2rem)] max-w-sm bg-white rounded-2xl shadow-[0_16px_50px_rgba(0,0,0,0.3)] border border-gray-100 flex flex-col overflow-hidden"
-      style={{ height: 'min(34rem, 76vh)' }}
+      style={{ height: panelHeight }}
     >
       <div className="flex items-center gap-3 bg-charcoal text-white px-4 py-3">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -777,21 +798,33 @@ export default function ChatWidget({ faqs: initialFaqs = CHAT_FAQS }: { faqs?: C
         </div>
       )}
 
+      {/* Input form. iOS notes:
+       *  • font-size:16px on the input prevents iOS Safari auto-zoom on
+       *    focus (which can push the send button off-screen).
+       *  • enterKeyHint hints the keyboard to label its return key —
+       *    "Next" after entering a name, "Send" elsewhere. (The numeric
+       *    pad on type="tel" doesn't honor this, but it's harmless.)
+       *  • Send button is 44x44 (iOS recommended tap target) and stays
+       *    visible above the keyboard. */}
       <form onSubmit={onSubmit} className="flex items-center gap-2 p-3 border-t border-gray-100 bg-white">
         <input
           type={step === 'phone' ? 'tel' : 'text'}
+          inputMode={step === 'phone' ? 'tel' : undefined}
+          enterKeyHint={step === 'name' ? 'next' : 'send'}
+          autoComplete={step === 'phone' ? 'tel' : step === 'name' ? 'given-name' : 'off'}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={placeholder}
           aria-label={placeholder}
-          className="flex-1 text-sm rounded-full border border-gray-300 px-4 py-2.5 focus:outline-none focus:border-modern-red"
+          style={{ fontSize: 16 }}
+          className="flex-1 min-w-0 rounded-full border border-gray-300 px-4 py-2.5 focus:outline-none focus:border-modern-red"
         />
         <button
           type="submit"
           aria-label="Send"
-          className="w-10 h-10 rounded-full bg-modern-red hover:bg-modern-red-hover text-white flex items-center justify-center transition-colors shrink-0"
+          className="w-11 h-11 rounded-full bg-modern-red hover:bg-modern-red-hover text-white flex items-center justify-center transition-colors shrink-0"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 12h14M13 6l6 6-6 6" />
           </svg>
         </button>

@@ -322,11 +322,15 @@
     + '.ms-chat-quick-tenant{background:#fff;color:#1A1A1A;border:1px solid #d1d5db}'
     + '.ms-chat-quick-tenant:hover{border-color:#F60001;color:#F60001}'
     + '.ms-chat-form{display:flex;align-items:center;gap:8px;padding:12px;border-top:1px solid #f3f4f6;background:#fff}'
-    + '.ms-chat-input{flex:1;font-size:14px;border:1px solid #d1d5db;border-radius:9999px;padding:10px 16px;outline:none;color:#1A1A1A}'
+    + '.ms-chat-input{flex:1;min-width:0;font-size:16px;border:1px solid #d1d5db;border-radius:9999px;padding:11px 16px;outline:none;color:#1A1A1A}'
     + '.ms-chat-input:focus{border-color:#F60001}'
-    + '.ms-chat-send{width:40px;height:40px;border-radius:9999px;background:#F60001;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .15s;flex-shrink:0}'
+    /* Send button — 44x44 hits the iOS recommended tap target and stays
+     * visible above keyboards. font-size:16px on input avoids the iOS
+     * auto-zoom-in-on-focus behavior that can push UI off-screen. */
+    + '.ms-chat-send{width:44px;height:44px;border-radius:9999px;background:#F60001;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .15s;flex-shrink:0}'
     + '.ms-chat-send:hover{background:#C40001}'
-    + '.ms-chat-send svg{width:16px;height:16px}'
+    + '.ms-chat-send:active{background:#a00001}'
+    + '.ms-chat-send svg{width:18px;height:18px}'
 
   // ────────────────────────────────────────────────────────────────────────
   // ICONS
@@ -741,18 +745,43 @@
       panel.appendChild(quick)
     }
 
-    // Input form
+    // Input form. On iOS, type="tel" opens the number pad which has NO
+    // return/send key, so the user is stuck unless the visual send button
+    // is unmistakable AND stays above the keyboard. We address both:
+    //  • enterKeyHint hints the keyboard to label its return key "send"
+    //    where applicable (does nothing on the number pad, harmless).
+    //  • The send button below is larger now (44x44) so it lands above
+    //    the standard iOS 44pt tap target threshold and stays visible.
+    //  • A visualViewport listener (further down in boot) shrinks the
+    //    panel max-height when the keyboard opens so the form never gets
+    //    clipped behind the keyboard.
     var placeholder = state.step === 'name' ? 'Enter your name'
       : state.step === 'phone' ? TEXT.phonePlaceholder
         : state.step === 'message' ? 'Type your message…'
           : 'Type or pick an option…'
-    var input = el('input', { class: 'ms-chat-input', type: state.step === 'phone' ? 'tel' : 'text', placeholder: placeholder, 'aria-label': placeholder, value: state.input })
+    var inputAttrs = {
+      class: 'ms-chat-input',
+      type: state.step === 'phone' ? 'tel' : 'text',
+      placeholder: placeholder,
+      'aria-label': placeholder,
+      value: state.input,
+      enterkeyhint: state.step === 'name' ? 'next' : 'send',
+      autocomplete: state.step === 'phone' ? 'tel' : (state.step === 'name' ? 'given-name' : 'off'),
+    }
+    if (state.step === 'phone') inputAttrs.inputmode = 'tel'
+    var input = el('input', inputAttrs)
     input.addEventListener('input', function (e) { state.input = e.target.value })
     var send = el('button', { class: 'ms-chat-send', type: 'submit', 'aria-label': 'Send', html: ICON_SEND })
     var form = el('form', { class: 'ms-chat-form', onsubmit: function (e) { e.preventDefault(); var v = String(input.value || '').trim(); if (!v) return; handle(v, v, false) } }, [input, send])
     panel.appendChild(form)
 
     rootEl.appendChild(panel)
+
+    // Right-size the panel against the visual viewport in case the iOS
+    // keyboard is already open when we render (the user re-focused the
+    // input). Without this, the panel uses its default height and the
+    // send button sits behind the keyboard.
+    applyViewportHeight()
 
     // Pin most recent user message near top so the answer beneath it stays in view.
     setTimeout(function () {
@@ -784,6 +813,23 @@
     } catch (e) { /* fetch unavailable */ }
   }
 
+  // Track the visual viewport so we can shrink the chat panel when the
+  // iOS keyboard opens. Without this, the keyboard covers the bottom of
+  // the panel — including the input row and the send button — leaving
+  // the user unable to submit. Resizing the panel to fit ABOVE the
+  // keyboard keeps the form visible and tappable.
+  function applyViewportHeight() {
+    if (!rootEl) return
+    var vv = window.visualViewport
+    if (!vv) return
+    var panel = rootEl.querySelector('.ms-chat-panel')
+    if (!panel) return
+    // Available height = visual viewport minus a small buffer for the
+    // bubble's bottom offset (96px on mobile per the CSS rule).
+    var maxH = Math.max(280, vv.height - 96 - 16)
+    panel.style.height = Math.min(544, maxH) + 'px'
+  }
+
   function boot() {
     // Inject styles once.
     var style = document.createElement('style')
@@ -796,6 +842,12 @@
     rootEl.className = 'ms-chat'
     document.body.appendChild(rootEl)
     render()
+
+    // visualViewport keyboard handling (iOS Safari, Android Chrome).
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', applyViewportHeight)
+      window.visualViewport.addEventListener('scroll', applyViewportHeight)
+    }
 
     // Pull the latest admin-managed FAQ list from the live API — keeps
     // every site loading the embed in sync with /admin/chatbot changes
