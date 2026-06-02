@@ -375,15 +375,22 @@ export default async function HomePage() {
                   <div className="text-gray-600 mt-0.5">
                     {loc.streetAddress}, {loc.city}, {loc.state} {loc.zip}
                   </div>
-                  <div className="text-xs text-gray-500 mt-0.5">
+                  {/* Phone shown as a black tap-to-call pill (matches the
+                      treatment on the homepage #locations cards) and dials
+                      the facility's DIRECT number, not the central sales
+                      line. Region label sits to the right of the pill. */}
+                  <div className="mt-2 flex items-center gap-2 flex-wrap">
                     <a
-                      href={settings.phoneHref}
-                      className="hover:text-modern-red transition-colors"
+                      href={`tel:+1${(loc.phone || settings.phoneDisplay).replace(/\D/g, '')}`}
+                      aria-label={`Call ${loc.name} at ${loc.phone || settings.phoneDisplay}`}
+                      className="inline-flex items-center gap-1.5 bg-charcoal hover:bg-black text-white text-xs font-bold px-3 py-1.5 rounded-full transition-colors"
                     >
+                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
+                      </svg>
                       {loc.phone || settings.phoneDisplay}
                     </a>
-                    <span className="mx-2" aria-hidden="true">·</span>
-                    <span>{loc.region}</span>
+                    <span className="text-xs text-gray-500">{loc.region}</span>
                   </div>
                 </li>
               ))}
