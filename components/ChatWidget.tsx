@@ -287,6 +287,35 @@ export default function ChatWidget({ faqs: initialFaqs = CHAT_FAQS }: { faqs?: C
     backToMenu()
   }
 
+  // Move-out walkthrough — answers the "how do I move out?" intent directly
+  // instead of bouncing the visitor to a location picker. Mirrors the admin
+  // FAQs for the same question + the 10-day notice + the no-refund policy.
+  function moveoutAnswer() {
+    bot(
+      'To move out of your Modern Storage® unit:\n\n' +
+        '• Give your location 10 days’ written move-out notice\n' +
+        '• Remove all belongings from the unit\n' +
+        '• Clean the unit and remove your lock\n' +
+        '• Our team finalizes the move-out in our system and emails you a confirmation\n\n' +
+        'Rent is non-refundable and not prorated for early move-outs, so plan your final date accordingly. If you need to confirm details with your specific facility, type the location name below or send us a message.',
+    )
+    backToMenu()
+  }
+
+  // Gate / access walkthrough — same pattern. Explains posted access hours
+  // and the typical reasons a gate code stops working (past-due balance,
+  // bad code), then offers the location follow-up.
+  function accessAnswer() {
+    bot(
+      'Modern Storage® gate access is open 6:00 AM – 10:00 PM at all locations. If your gate code isn’t working:\n\n' +
+        '• Make sure your account is current — past-due balances can restrict access\n' +
+        '• If your account is current and the code still isn’t accepted, contact your specific location during office hours\n\n' +
+        'You can pay your bill below, or type the location name to get its phone number and address.',
+      [{ label: 'Pay my bill online', href: CHATBOT_TEXT.payOnlineUrl }],
+    )
+    backToMenu()
+  }
+
   // Try to answer a freely-typed question from the approved Q&A (hours, payment,
   // then keyword/FAQ match). Returns true if it handled the message. Used from
   // every step so a visitor can type a question at any point in the flow.
@@ -563,16 +592,12 @@ export default function ChatWidget({ faqs: initialFaqs = CHAT_FAQS }: { faqs?: C
         if (value === 'payment') return paymentAnswer()
         if (value === 'contact')
           return enterLocation('contact', 'Which Modern Storage® location do you need to contact?')
-        if (value === 'access')
-          return enterLocation(
-            'contact',
-            'Access and gate details can vary by location and account. Please contact your Modern Storage® location directly so our team can help. Which location do you need?',
-          )
-        if (value === 'moveout')
-          return enterLocation(
-            'contact',
-            'Move-out details may vary by location and rental agreement. Please contact your Modern Storage® location directly so our team can help. Which location do you need?',
-          )
+        // Access + move-out used to send the visitor straight into the
+        // "which location?" picker, which felt like the bot was dodging
+        // the question. We now explain the process up front and only
+        // offer the location lookup as a follow-up.
+        if (value === 'access') return accessAnswer()
+        if (value === 'moveout') return moveoutAnswer()
         // "Other tenant support" button → straight to the contact fallback.
         if (isButton) {
           return enterLocation('contact', `${CHATBOT_TEXT.fallback} Which location do you need?`)

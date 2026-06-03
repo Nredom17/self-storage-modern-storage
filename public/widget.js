@@ -508,6 +508,33 @@
     bot('You can pay your bill and manage your Modern Storage® account online here:', [{ label: 'Pay my bill online', href: TEXT.payOnlineUrl }])
     backToMenu()
   }
+  // Move-out walkthrough — answers the question instead of bouncing the
+  // visitor to a location picker. Mirrors the admin FAQs for move-out
+  // process + 10-day notice + no-refund policy.
+  function moveoutAnswer() {
+    bot(
+      'To move out of your Modern Storage® unit:\n\n' +
+      '• Give your location 10 days’ written move-out notice\n' +
+      '• Remove all belongings from the unit\n' +
+      '• Clean the unit and remove your lock\n' +
+      '• Our team finalizes the move-out in our system and emails you a confirmation\n\n' +
+      'Rent is non-refundable and not prorated for early move-outs, so plan your final date accordingly. If you need to confirm details with your specific facility, type the location name below or send us a message.'
+    )
+    backToMenu()
+  }
+  // Gate / access walkthrough — explains posted access hours and the
+  // typical reasons a gate code stops working before offering the
+  // location follow-up.
+  function accessAnswer() {
+    bot(
+      'Modern Storage® gate access is open 6:00 AM – 10:00 PM at all locations. If your gate code isn’t working:\n\n' +
+      '• Make sure your account is current — past-due balances can restrict access\n' +
+      '• If your account is current and the code still isn’t accepted, contact your specific location during office hours\n\n' +
+      'You can pay your bill below, or type the location name to get its phone number and address.',
+      [{ label: 'Pay my bill online', href: TEXT.payOnlineUrl }]
+    )
+    backToMenu()
+  }
   function reserveAnswer(loc, fromAlias) {
     var lead = fromAlias ? 'Modern Storage® ' + loc.shortName + ' is the closest fit for that area. ' : ''
     bot(lead + 'Great. You can view available units, sizes, and pricing for ' + loc.name + ' here:', [{ label: 'View available units', href: loc.url }])
@@ -660,8 +687,10 @@
       case 'tenant-menu': {
         if (value === 'payment') return paymentAnswer()
         if (value === 'contact') return enterLocation('contact', 'Which Modern Storage® location do you need to contact?')
-        if (value === 'access') return enterLocation('contact', 'Access and gate details can vary by location and account. Please contact your Modern Storage® location directly so our team can help. Which location do you need?')
-        if (value === 'moveout') return enterLocation('contact', 'Move-out details may vary by location and rental agreement. Please contact your Modern Storage® location directly so our team can help. Which location do you need?')
+        // Access + move-out now explain the process inline rather than
+        // sending the visitor straight into a location picker.
+        if (value === 'access') return accessAnswer()
+        if (value === 'moveout') return moveoutAnswer()
         if (isButton) return enterLocation('contact', TEXT.fallback + ' Which location do you need?')
         if (tryAnswerFreeText(value)) return
         return enterLocation('contact', TEXT.fallback + ' Which location do you need?')
