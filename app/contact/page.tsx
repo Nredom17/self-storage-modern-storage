@@ -94,6 +94,27 @@ export default async function ContactPage() {
       <section className="bg-white py-16 border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Existing Customers — surfaced FIRST so tenants don't
+                reflexively tap the prominent red phone card and end up
+                dialing new-rentals sales when they actually need to
+                manage their account. Opens the modernstorage.com tenant
+                / self-storage portal. */}
+            <a
+              href="https://www.modernstorage.com/self-storage"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Existing Customers — manage your account at modernstorage.com"
+              className="bg-charcoal hover:bg-gray-800 rounded-2xl p-8 border border-charcoal transition-all text-center flex flex-col items-center justify-center min-h-[180px] shadow-md"
+            >
+              <div className="w-14 h-14 rounded-full bg-white text-modern-red mb-4 flex items-center justify-center shadow-sm">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.949.684V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 5z" />
+                </svg>
+              </div>
+              <p className="text-xl font-black text-white">Existing Customers</p>
+              <p className="text-xs font-semibold text-white/70 mt-1">Manage your account →</p>
+            </a>
+
             {/* New Rentals — solid red card. Click-to-call the centralized
                 line. Phone number lives in aria-label only — the card
                 itself dials when tapped. */}
@@ -109,24 +130,6 @@ export default async function ContactPage() {
               </div>
               <p className="text-xl font-black text-white">New Rentals</p>
               <p className="text-xs font-semibold text-white/80 mt-1">Tap to call</p>
-            </a>
-
-            {/* Existing Customers — solid charcoal card. Opens the
-                modernstorage.com tenant / self-storage portal. */}
-            <a
-              href="https://www.modernstorage.com/self-storage"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Existing Customers — manage your account at modernstorage.com"
-              className="bg-charcoal hover:bg-gray-800 rounded-2xl p-8 border border-charcoal transition-all text-center flex flex-col items-center justify-center min-h-[180px] shadow-md"
-            >
-              <div className="w-14 h-14 rounded-full bg-white text-modern-red mb-4 flex items-center justify-center shadow-sm">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.949.684V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 5z" />
-                </svg>
-              </div>
-              <p className="text-xl font-black text-white">Existing Customers</p>
-              <p className="text-xs font-semibold text-white/70 mt-1">Manage your account →</p>
             </a>
 
             {/* Send a message — scrolls to the inquiry form below */}
