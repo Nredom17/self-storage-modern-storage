@@ -186,7 +186,7 @@ export default function Footer({
 
           {/* Storage Options */}
           <div className="md:col-span-2">
-            <h2 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-5">Storage Options</h2>
+            <h2 className="text-xs font-black uppercase tracking-widest text-white mb-5">Storage Options</h2>
             <nav className="flex flex-col gap-3">
               {STORAGE_OPTIONS.map(({ label, href }) => (
                 <Link
@@ -202,7 +202,7 @@ export default function Footer({
 
           {/* Locations — each links directly to the facility's reservation page */}
           <div className="md:col-span-2">
-            <h2 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-5">Locations</h2>
+            <h2 className="text-xs font-black uppercase tracking-widest text-white mb-5">Locations</h2>
             <nav className="flex flex-col gap-3">
               {LOCATIONS.map(({ label, href }) => (
                 <a
@@ -219,7 +219,7 @@ export default function Footer({
 
           {/* Resources */}
           <div className="md:col-span-2">
-            <h2 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-5">Resources</h2>
+            <h2 className="text-xs font-black uppercase tracking-widest text-white mb-5">Resources</h2>
             <nav className="flex flex-col gap-3">
               {RESOURCES.map(({ label, href }) => (
                 <Link
@@ -235,7 +235,7 @@ export default function Footer({
 
           {/* Contact */}
           <div className="md:col-span-2">
-            <h2 className="text-xs font-black uppercase tracking-widest text-gray-500 mb-5">Contact</h2>
+            <h2 className="text-xs font-black uppercase tracking-widest text-white mb-5">Contact</h2>
             <nav className="flex flex-col gap-3">
               {/* Phone digits hidden from visible label per design pass.
                   The tel: number + full digits live in href + aria-label
