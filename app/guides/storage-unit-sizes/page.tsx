@@ -805,7 +805,7 @@ export default async function StorageUnitSizesGuidePage() {
               href={settings.phoneHref}
               className="bg-white/15 text-white font-bold px-8 py-3.5 rounded-full hover:bg-white/25 transition-colors text-sm border border-white/40 inline-flex items-center gap-2"
             >
-              Call for New Rentals
+              Call to Rent a Unit
             </a>
           </div>
         </div>

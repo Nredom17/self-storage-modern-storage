@@ -101,8 +101,8 @@ export default function StickyMobileCTA({
       }`}
       style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
     >
-      {/* Audience-split bar — Existing Customers (white) sends tenants
-          to the modernstorage.com account portal; New Rentals (red)
+      {/* Audience-split bar — Tenant Support (white) sends tenants
+          to the modernstorage.com account portal; Rent a Unit (red)
           sends prospects to the locations finder. Each button shows a
           two-line label: bold action + a small subtext explaining what
           lives behind the tap, so visitors don't have to guess. */}
@@ -111,20 +111,20 @@ export default function StickyMobileCTA({
           href="https://www.modernstorage.com/self-storage"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Existing Customers — payments, gate access, account help"
+          aria-label="Tenant Support — payments, gate access, account help"
           className="flex flex-col items-center justify-center gap-0.5 bg-white hover:bg-gray-100 active:bg-gray-200 text-charcoal font-bold py-2.5 px-2 rounded-2xl transition-colors text-center"
         >
-          <span className="text-sm font-black leading-none">Existing Customers</span>
+          <span className="text-sm font-black leading-none">Tenant Support</span>
           <span className="text-[10px] font-medium text-charcoal/65 leading-tight mt-0.5">
             Payments · Gate Access · Account Help
           </span>
         </a>
         <Link
           href="/#locations"
-          aria-label="New Rentals — pricing, availability, reservations"
+          aria-label="Rent a Unit — pricing, availability, reservations"
           className="flex flex-col items-center justify-center gap-0.5 bg-modern-red hover:bg-modern-red-hover active:bg-modern-red-hover text-white font-bold py-2.5 px-2 rounded-2xl transition-colors text-center"
         >
-          <span className="text-sm font-black leading-none">New Rentals</span>
+          <span className="text-sm font-black leading-none">Rent a Unit</span>
           <span className="text-[10px] font-medium text-white/85 leading-tight mt-0.5">
             Pricing · Availability · Reservations
           </span>

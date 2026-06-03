@@ -496,7 +496,7 @@ export default async function StorageSecurityGuidePage() {
               href={settings.phoneHref}
               className="bg-charcoal text-white font-black px-8 py-3.5 rounded-full hover:bg-gray-800 transition-colors text-sm shadow-md"
             >
-              Call for New Rentals
+              Call to Rent a Unit
             </a>
           </div>
         </div>

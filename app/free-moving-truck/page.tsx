@@ -161,7 +161,7 @@ export default async function FreeMovingTruckPage() {
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
                   </svg>
-                  Call for New Rentals
+                  Call to Rent a Unit
                 </a>
               </div>
 
@@ -224,7 +224,7 @@ export default async function FreeMovingTruckPage() {
                 href={PHONE_NUMBER_HREF}
                 className="bg-charcoal text-white font-black px-6 py-3 rounded-full hover:bg-gray-800 transition-colors text-sm shadow-md inline-flex items-center gap-2 whitespace-nowrap"
               >
-                Call for New Rentals
+                Call to Rent a Unit
               </a>
             </div>
           </div>
@@ -405,7 +405,7 @@ export default async function FreeMovingTruckPage() {
               href={PHONE_NUMBER_HREF}
               className="inline-flex items-center gap-2 bg-charcoal hover:bg-gray-800 text-white font-bold px-6 py-3 rounded-full transition-colors text-sm"
             >
-              Call for New Rentals
+              Call to Rent a Unit
             </a>
           </div>
         </div>

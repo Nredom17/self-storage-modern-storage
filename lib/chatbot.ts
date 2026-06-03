@@ -154,8 +154,8 @@ export const CHATBOT_TEXT = {
   // Polite ending — shown when the visitor signs off ("thanks", "bye",
   // "that's all", etc.). Keeps the door open without burying the visitor in
   // a fallback dead-end menu. Phone number intentionally OMITTED — the
-  // persistent "Call for New Rentals" pill below the conversation already
-  // carries the number, and the New Rentals / Existing Customers pills give
+  // persistent "Call to Rent a Unit" pill below the conversation already
+  // carries the number, and the Rent a Unit / Tenant Support pills give
   // them the right paths for either audience.
   goodbye:
     'You’re welcome! Thanks for chatting with Modern Storage®. If you think of anything else, our team is just a tap away — or reserve online from any location page. Have a great day!',
