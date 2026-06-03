@@ -278,56 +278,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── STORAGE OPTIONS ──────────────────────────────────── */}
-      <section id="storage-options" className="bg-gray-50 py-12 lg:py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-3xl mb-12">
-            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Storage Options</p>
-            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
-              Choose the Right Storage Option
-            </h2>
-            <p className="text-gray-600 text-lg leading-relaxed">
-              From climate-controlled household storage to boat, RV, and business storage — find the option built for what you need to store.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {THEME_PAGES.map((opt) => (
-              <Link
-                key={opt.slug}
-                href={opt.href}
-                className="group bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-modern-red hover:shadow-xl transition-all flex flex-col"
-              >
-                <div className="relative aspect-[16/9] bg-gray-100 overflow-hidden">
-                  <Image
-                    src={opt.image}
-                    alt={opt.alt}
-                    fill
-                    loading="lazy"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-8 flex flex-col flex-1">
-                  <h3 className="text-2xl font-black text-charcoal group-hover:text-modern-red transition-colors mb-3 tracking-tight">
-                    {opt.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed mb-6 flex-1">{opt.description}</p>
-                  <span className="inline-flex items-center gap-2 text-modern-red text-sm font-black">
-                    {opt.cta}
-                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── LOCATIONS ────────────────────────────────────────── */}
-      <section id="locations" className="bg-white py-12 lg:py-20 border-y border-gray-200">
+      <section id="locations" className="bg-gray-50 py-12 lg:py-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-3xl mb-10">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Locations</p>
@@ -395,6 +347,54 @@ export default async function HomePage() {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ── STORAGE OPTIONS ──────────────────────────────────── */}
+      <section id="storage-options" className="bg-white py-12 lg:py-20 border-y border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-12">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Storage Options</p>
+            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+              Choose the Right Storage Option
+            </h2>
+            <p className="text-gray-600 text-lg leading-relaxed">
+              From climate-controlled household storage to boat, RV, and business storage — find the option built for what you need to store.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {THEME_PAGES.map((opt) => (
+              <Link
+                key={opt.slug}
+                href={opt.href}
+                className="group bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-modern-red hover:shadow-xl transition-all flex flex-col"
+              >
+                <div className="relative aspect-[16/9] bg-gray-100 overflow-hidden">
+                  <Image
+                    src={opt.image}
+                    alt={opt.alt}
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-8 flex flex-col flex-1">
+                  <h3 className="text-2xl font-black text-charcoal group-hover:text-modern-red transition-colors mb-3 tracking-tight">
+                    {opt.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed mb-6 flex-1">{opt.description}</p>
+                  <span className="inline-flex items-center gap-2 text-modern-red text-sm font-black">
+                    {opt.cta}
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
