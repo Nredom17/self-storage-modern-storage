@@ -165,7 +165,19 @@ export default async function LocationPage({ params }: Props) {
 
               {/* NAP block — address only; phone actions live in the call
                   buttons below. (Schema still carries the telephone for SEO.) */}
-              <address className="not-italic text-sm text-gray-300 mb-8 space-y-1">
+              <a
+                    href="https://www.modernstorage.com/self-storage"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Existing Customers — manage your account at modernstorage.com"
+                    className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-charcoal font-bold px-6 py-3 rounded-full transition-colors text-sm shadow-md"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.949.684V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 5z" />
+                    </svg>
+                    Existing Customers
+                  </a>
+                  <address className="not-italic text-sm text-gray-300 mb-8 space-y-1">
                 <p className="font-bold text-white">{loc.streetAddress}</p>
                 <p>
                   {loc.city}, {loc.state} {loc.zip}
@@ -213,18 +225,6 @@ export default async function LocationPage({ params }: Props) {
                       <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
                     </svg>
                     New Rentals
-                  </a>
-                  <a
-                    href="https://www.modernstorage.com/self-storage"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Existing Customers — manage your account at modernstorage.com"
-                    className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-charcoal font-bold px-6 py-3 rounded-full transition-colors text-sm shadow-md"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.949.684V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 5z" />
-                    </svg>
-                    Existing Customers
                   </a>
                 </div>
               </div>

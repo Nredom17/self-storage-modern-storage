@@ -128,7 +128,19 @@ const FAQS = [
   {
     q: 'Do you offer student storage near the University of Arkansas?',
     a: `Yes. Modern Storage® Springdale and Modern Storage® Lowell are the closest facilities to the University of Arkansas in Fayetteville — roughly 10–20 minutes away via I‑49. Both offer month-to-month rentals, so students can store over summer break, during a study-abroad term, or between leases without a long-term contract. Climate-controlled and drive-up units are available depending on the location.`,
-    aHtml: `Yes. <a href="/locations/springdale">Modern Storage® Springdale</a> and <a href="/locations/lowell">Modern Storage® Lowell</a> are the closest facilities to the University of Arkansas in Fayetteville — roughly 10–20 minutes away via I‑49. Both offer month-to-month rentals, so students can store over summer break, during a study-abroad term, or between leases without a long-term contract. Climate-controlled and drive-up units are available depending on the location. See <a href="/storage-near-fayetteville">storage near Fayetteville</a> for details.`,
+    aHtml: `Yes. <a
+                href="https://www.modernstorage.com/self-storage"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Existing Customers — manage your account at modernstorage.com"
+                className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-modern-red font-bold px-6 py-3 rounded-full transition-colors text-sm shadow-md"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.949.684V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 5z" />
+                </svg>
+                Existing Customers
+              </a>
+              <a href="/locations/springdale">Modern Storage® Springdale</a> and <a href="/locations/lowell">Modern Storage® Lowell</a> are the closest facilities to the University of Arkansas in Fayetteville — roughly 10–20 minutes away via I‑49. Both offer month-to-month rentals, so students can store over summer break, during a study-abroad term, or between leases without a long-term contract. Climate-controlled and drive-up units are available depending on the location. See <a href="/storage-near-fayetteville">storage near Fayetteville</a> for details.`,
   },
   {
     q: 'What size storage unit do students usually need?',
@@ -331,18 +343,6 @@ export default async function StudentStoragePage() {
                   <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
                 </svg>
                 New Rentals
-              </a>
-              <a
-                href="https://www.modernstorage.com/self-storage"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Existing Customers — manage your account at modernstorage.com"
-                className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-modern-red font-bold px-6 py-3 rounded-full transition-colors text-sm shadow-md"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.949.684V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 5z" />
-                </svg>
-                Existing Customers
               </a>
             </div>
           </div>
