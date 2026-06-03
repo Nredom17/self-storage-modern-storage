@@ -19,11 +19,15 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { Phone, MapPin } from 'lucide-react'
 
+// Props kept on the signature so the layout.tsx call site (which passes
+// phoneDisplay / phoneHref) doesn't need to change. They're unused in
+// the audience-split design — the white button goes to the tenant
+// portal and the red button goes to the locations page — but a future
+// variant may bring the phone CTA back, so we keep the props plumbed.
 export default function StickyMobileCTA({
-  phoneDisplay,
-  phoneHref,
+  phoneDisplay: _phoneDisplay,
+  phoneHref: _phoneHref,
 }: {
   phoneDisplay: string
   phoneHref: string
@@ -97,22 +101,33 @@ export default function StickyMobileCTA({
       }`}
       style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
     >
+      {/* Audience-split bar — Existing Customers (white) sends tenants
+          to the modernstorage.com account portal; New Rentals (red)
+          sends prospects to the locations finder. Each button shows a
+          two-line label: bold action + a small subtext explaining what
+          lives behind the tap, so visitors don't have to guess. */}
       <div className="grid grid-cols-2 gap-2 px-3 pt-3">
         <a
-          href={phoneHref}
-          aria-label={`Call for New Rentals at ${phoneDisplay}`}
-          className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 active:bg-white/30 text-white font-bold py-3.5 rounded-full border border-white/20 transition-colors text-sm"
+          href="https://www.modernstorage.com/self-storage"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Existing Customers — payments, gate access, account help"
+          className="flex flex-col items-center justify-center gap-0.5 bg-white hover:bg-gray-100 active:bg-gray-200 text-charcoal font-bold py-2.5 px-2 rounded-2xl transition-colors text-center"
         >
-          <Phone className="w-4 h-4" strokeWidth={2.5} aria-hidden="true" />
-          Call
+          <span className="text-sm font-black leading-none">Existing Customers</span>
+          <span className="text-[10px] font-medium text-charcoal/65 leading-tight mt-0.5">
+            Payments · Gate Access · Account Help
+          </span>
         </a>
         <Link
-          href="/locations"
-          aria-label="Find a Modern Storage® unit near you"
-          className="inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover active:bg-modern-red-hover text-white font-black py-3.5 rounded-full transition-colors text-sm"
+          href="/#locations"
+          aria-label="New Rentals — pricing, availability, reservations"
+          className="flex flex-col items-center justify-center gap-0.5 bg-modern-red hover:bg-modern-red-hover active:bg-modern-red-hover text-white font-bold py-2.5 px-2 rounded-2xl transition-colors text-center"
         >
-          <MapPin className="w-4 h-4" strokeWidth={2.5} aria-hidden="true" />
-          Find a Unit
+          <span className="text-sm font-black leading-none">New Rentals</span>
+          <span className="text-[10px] font-medium text-white/85 leading-tight mt-0.5">
+            Pricing · Availability · Reservations
+          </span>
         </Link>
       </div>
     </div>
