@@ -17,6 +17,54 @@ function anchorFor(block: Extract<BlogBlock, { type: 'heading' }>): string {
   return block.anchor ?? slugify(block.text)
 }
 
+// Auto-link bare http(s) URLs inside a paragraph string. Editors paste
+// links into plain-text paragraphs (e.g. "Listen on Spotify:
+// https://open.spotify.com/..."); without this transform, the URL
+// renders as gray text and the visitor can't click it. We deliberately
+// keep this simple — no Markdown, no rich text — just turn anything
+// matching http(s)://… into an anchor tag. Trailing punctuation that
+// commonly follows a URL in prose (.,;:!?) is stripped from the
+// captured link so the link target stays clean.
+const URL_RE = /https?:\/\/[^\s<>"']+/g
+function renderTextWithLinks(text: string): React.ReactNode {
+  if (!text || !URL_RE.test(text)) return text
+  // RegExp keeps state across .test/.exec calls on a /g regex — reset.
+  URL_RE.lastIndex = 0
+  const parts: React.ReactNode[] = []
+  let lastIndex = 0
+  let match: RegExpExecArray | null
+  let key = 0
+  while ((match = URL_RE.exec(text)) !== null) {
+    const before = text.slice(lastIndex, match.index)
+    if (before) parts.push(before)
+    // Strip a single trailing punctuation char from the URL itself and
+    // append it back as plain text. Keeps "[…here](https://x.com/p).
+    // " from including the period in the link.
+    let url = match[0]
+    let trailing = ''
+    if (/[.,;:!?)]$/.test(url)) {
+      trailing = url.slice(-1)
+      url = url.slice(0, -1)
+    }
+    parts.push(
+      <a
+        key={`lnk-${key++}`}
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-modern-red font-semibold hover:text-modern-red-hover underline underline-offset-2"
+      >
+        {url}
+      </a>,
+    )
+    if (trailing) parts.push(trailing)
+    lastIndex = match.index + match[0].length
+  }
+  const tail = text.slice(lastIndex)
+  if (tail) parts.push(tail)
+  return parts
+}
+
 export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
   return (
     <>
@@ -51,7 +99,12 @@ export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
           case 'paragraph':
             return (
               <p key={i} className="text-gray-700 leading-relaxed mb-5">
-                {block.text}
+                {/* Auto-linkify URLs so a paragraph like "Listen here:
+                 * https://open.spotify.com/..." renders the URL as a
+                 * clickable link rather than bare text. Editors writing
+                 * in the plain-text paragraph block shouldn't have to
+                 * use a separate CTA block just to make a URL clickable. */}
+                {renderTextWithLinks(block.text)}
               </p>
             )
 

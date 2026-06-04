@@ -201,89 +201,128 @@ function normalizeBody(raw: unknown[]): BlogBlock[] {
     const type = typeof b.type === 'string' ? b.type : ''
     const arr = (v: unknown): unknown[] => (Array.isArray(v) ? v : [])
     const str = (v: unknown, fallback = ''): string => (typeof v === 'string' ? v : fallback)
+    // Each branch is responsible for *also* dropping its own block when
+    // every meaningful field is empty — an empty paragraph would render
+    // as a blank line, an empty FAQ block as gray accordion lines, an
+    // empty CTA as an orphan chevron pill, etc. The renderer trusts
+    // whatever survives this filter, so the filter has to be honest.
     switch (type) {
-      case 'heading':
+      case 'heading': {
+        const text = str(b.text).trim()
+        if (!text) break
         out.push({
           type: 'heading',
           level: b.level === 3 ? 3 : 2,
-          text: str(b.text),
+          text,
           anchor: typeof b.anchor === 'string' ? b.anchor : undefined,
         } as BlogBlock)
         break
-      case 'paragraph':
-        out.push({ type: 'paragraph', text: str(b.text) } as BlogBlock)
+      }
+      case 'paragraph': {
+        const text = str(b.text).trim()
+        if (!text) break
+        out.push({ type: 'paragraph', text } as BlogBlock)
         break
-      case 'list':
-        out.push({
-          type: 'list',
-          ordered: Boolean(b.ordered),
-          items: arr(b.items).map((it) => str(it)),
-        } as BlogBlock)
+      }
+      case 'list': {
+        const items = arr(b.items).map((it) => str(it).trim()).filter(Boolean)
+        if (items.length === 0) break
+        out.push({ type: 'list', ordered: Boolean(b.ordered), items } as BlogBlock)
         break
-      case 'quote':
+      }
+      case 'quote': {
+        const text = str(b.text).trim()
+        if (!text) break
         out.push({
           type: 'quote',
-          text: str(b.text),
+          text,
           attribution: typeof b.attribution === 'string' ? b.attribution : undefined,
         } as BlogBlock)
         break
-      case 'callout':
+      }
+      case 'callout': {
+        const text = str(b.text).trim()
+        const title = typeof b.title === 'string' ? b.title.trim() : ''
+        if (!text && !title) break
         out.push({
           type: 'callout',
           variant: b.variant === 'warning' || b.variant === 'success' ? b.variant : 'info',
-          title: typeof b.title === 'string' ? b.title : undefined,
-          text: str(b.text),
+          title: title || undefined,
+          text,
         } as BlogBlock)
         break
-      case 'image':
+      }
+      case 'image': {
+        const src = str(b.src).trim()
+        if (!src) break
         out.push({
           type: 'image',
-          src: str(b.src),
+          src,
           alt: str(b.alt),
           caption: typeof b.caption === 'string' ? b.caption : undefined,
         } as BlogBlock)
         break
-      case 'cta':
+      }
+      case 'cta': {
+        // CTAs need BOTH a label and an href — without either, the block
+        // renders as an orphan chevron pill that the visitor can't act on.
+        const label = str(b.label).trim()
+        const href = str(b.href).trim()
+        if (!label || !href) break
         out.push({
           type: 'cta',
-          label: str(b.label),
-          href: str(b.href),
+          label,
+          href,
           variant: b.variant === 'secondary' ? 'secondary' : 'primary',
         } as BlogBlock)
         break
-      case 'comparison':
+      }
+      case 'comparison': {
+        const rows = arr(b.rows)
+          .map((r) => {
+            if (!r || typeof r !== 'object') return null
+            const row = r as Record<string, unknown>
+            return { left: str(row.left).trim(), right: str(row.right).trim() }
+          })
+          .filter((r): r is { left: string; right: string } =>
+            r !== null && (r.left.length > 0 || r.right.length > 0),
+          )
+        if (rows.length === 0) break
         out.push({
           type: 'comparison',
           leftHeader: typeof b.leftHeader === 'string' ? b.leftHeader : undefined,
           rightHeader: typeof b.rightHeader === 'string' ? b.rightHeader : undefined,
-          rows: arr(b.rows)
-            .map((r) => {
-              if (!r || typeof r !== 'object') return null
-              const row = r as Record<string, unknown>
-              return { left: str(row.left), right: str(row.right) }
-            })
-            .filter((r): r is { left: string; right: string } => r !== null),
+          rows,
         } as BlogBlock)
         break
-      case 'faq':
-        out.push({
-          type: 'faq',
-          items: arr(b.items)
-            .map((q) => {
-              if (!q || typeof q !== 'object') return null
-              const item = q as Record<string, unknown>
-              return { q: str(item.q), a: str(item.a) }
-            })
-            .filter((q): q is { q: string; a: string } => q !== null),
-        } as BlogBlock)
+      }
+      case 'faq': {
+        // Drop any FAQ item missing either q OR a — both fields are
+        // required to render an accordion row, and rendering an empty
+        // row produces the gray-divider visual junk we just shipped.
+        const items = arr(b.items)
+          .map((q) => {
+            if (!q || typeof q !== 'object') return null
+            const item = q as Record<string, unknown>
+            return { q: str(item.q).trim(), a: str(item.a).trim() }
+          })
+          .filter((q): q is { q: string; a: string } =>
+            q !== null && q.q.length > 0 && q.a.length > 0,
+          )
+        if (items.length === 0) break
+        out.push({ type: 'faq', items } as BlogBlock)
         break
-      case 'takeaways':
+      }
+      case 'takeaways': {
+        const items = arr(b.items).map((it) => str(it).trim()).filter(Boolean)
+        if (items.length === 0) break
         out.push({
           type: 'takeaways',
           title: typeof b.title === 'string' ? b.title : undefined,
-          items: arr(b.items).map((it) => str(it)),
+          items,
         } as BlogBlock)
         break
+      }
       case 'toc':
         out.push({
           type: 'toc',
