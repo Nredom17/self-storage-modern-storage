@@ -392,21 +392,11 @@ function dropOrphanSectionHeadings(blocks: BlogBlock[]): BlogBlock[] {
       }
     }
 
-    // (2) Empty-section check — does this heading have ANY non-heading
-    // block before the next same-or-higher-level heading? If not, the
-    // section is empty and the heading should be dropped. We scan
-    // until we hit the next sibling heading (or end of body); any
-    // non-heading block in between counts as "real content."
-    let hasContent = false
-    for (let j = i + 1; j < blocks.length; j++) {
-      const next = blocks[j]
-      if (next.type === 'heading' && next.level <= b.level) break
-      if (next.type !== 'heading') {
-        hasContent = true
-        break
-      }
-    }
-    if (!hasContent) orphanIndexes.add(i)
+    // (2) Empty-section auto-drop was REMOVED on user feedback. Hiding
+    // a heading whose paragraphs are empty made the post look cleaner
+    // but also hid the structural cue the writer needs to know they
+    // still owe content under it. Keep the heading visible so the
+    // missing content is obvious — write it in /admin/blog.
   }
   if (orphanIndexes.size === 0) return blocks
   return blocks.filter((_, i) => !orphanIndexes.has(i))
