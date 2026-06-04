@@ -58,13 +58,13 @@ export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
           case 'list':
             return block.ordered ? (
               <ol key={i} className="list-decimal pl-6 space-y-2 mb-6 text-gray-700 leading-relaxed">
-                {block.items.map((item, j) => (
+                {(block.items ?? []).map((item, j) => (
                   <li key={j}>{item}</li>
                 ))}
               </ol>
             ) : (
               <ul key={i} className="space-y-2 mb-6">
-                {block.items.map((item, j) => (
+                {(block.items ?? []).map((item, j) => (
                   <li key={j} className="flex gap-2.5 text-gray-700 leading-relaxed">
                     <svg className="w-4 h-4 text-modern-red shrink-0 mt-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
@@ -216,7 +216,7 @@ export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
                         </p>
                       )}
                       <ul className="space-y-2 text-sm text-gray-700 leading-relaxed">
-                        {block.rows.map((r, j) => (
+                        {(block.rows ?? []).map((r, j) => (
                           <li key={j}>{side === 'left' ? r.left : r.right}</li>
                         ))}
                       </ul>
@@ -229,7 +229,7 @@ export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
           case 'faq':
             return (
               <div key={i} className="my-8">
-                <FaqAccordion items={block.items} />
+                <FaqAccordion items={block.items ?? []} />
               </div>
             )
 
@@ -246,7 +246,7 @@ export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
             // box or the placeholder text. An item counts as "real" if
             // it has any non-whitespace content AND doesn't start with
             // the literal "Replace this" seed string.
-            const realItems = block.items.filter(
+            const realItems = (block.items ?? []).filter(
               (it) => it.trim().length > 0 && !/^replace this/i.test(it.trim()),
             )
             if (realItems.length === 0) return null

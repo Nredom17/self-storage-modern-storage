@@ -90,15 +90,21 @@ export default async function StorageTipPage({ params }: Props) {
     }
   }
 
-  // FAQPage — only emit when the post body has a faq block (so we don't
-  // claim FAQ rich results on posts that don't qualify).
+  // FAQPage — only emit when the post body has a faq block with actual
+  // questions. Without the Array.isArray + length guard, a stored faq
+  // block missing its `items` field (e.g. an empty placeholder a writer
+  // dropped in) crashes the static prerender at build time.
   const faqBlock = post.body.find((b) => b.type === 'faq')
+  const faqItems =
+    faqBlock && faqBlock.type === 'faq' && Array.isArray(faqBlock.items)
+      ? faqBlock.items
+      : []
   const faqSchema =
-    faqBlock && faqBlock.type === 'faq'
+    faqItems.length > 0
       ? {
           '@context': 'https://schema.org',
           '@type': 'FAQPage',
-          mainEntity: faqBlock.items.map((q) => ({
+          mainEntity: faqItems.map((q) => ({
             '@type': 'Question',
             name: q.q,
             acceptedAnswer: { '@type': 'Answer', text: q.a },
