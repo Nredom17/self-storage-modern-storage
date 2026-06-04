@@ -338,20 +338,21 @@ function normalizeBody(raw: unknown[]): BlogBlock[] {
   return dropOrphanSectionHeadings(out)
 }
 
-// Editors write the section heading ("Frequently Asked Questions") as a
-// separate heading block right before the FAQ block. If every FAQ item
-// got dropped above (empty q/a fields), the heading is left dangling
-// with nothing under it — visually it reads as a broken / unfinished
-// section. Detect that pattern and drop the orphan heading.
+// Two-stage cleanup that runs after the per-block normalizer above:
 //
-// Same treatment for a few other common "section labels" that pair
-// with a specific block type. List is intentionally conservative —
-// we only auto-clean labels we're confident about, never generic
-// section headings the writer chose.
+//   (1) SECTION-LABEL ORPHANS — specific heading text patterns that
+//       only make sense when paired with a particular block type
+//       ("Frequently Asked Questions" needs a faq block, "Key Takeaways"
+//       needs a takeaways block, etc.). When the body has the heading
+//       but the matching block was filtered out, drop the heading.
+//
+//   (2) EMPTY-SECTION HEADINGS — ANY heading whose entire section is
+//       empty after normalization. If the writer added a heading but
+//       the paragraphs under it stored as empty strings (and got
+//       filtered out by normalizeBody), the heading would otherwise
+//       render alone with no body content underneath — a wall of
+//       section labels with no text between them. Drop those too.
 function dropOrphanSectionHeadings(blocks: BlogBlock[]): BlogBlock[] {
-  // (heading text regex → predicate that returns true when a following
-  // block satisfies the heading's "promise" — e.g. "FAQ" needs a faq
-  // block, "Key Takeaways" needs a takeaways block)
   const ORPHAN_PATTERNS: { match: RegExp; satisfiedBy: (b: BlogBlock) => boolean }[] = [
     {
       match: /^(frequently asked questions|faqs?)$/i,
@@ -371,23 +372,41 @@ function dropOrphanSectionHeadings(blocks: BlogBlock[]): BlogBlock[] {
     const b = blocks[i]
     if (b.type !== 'heading') continue
     const text = b.text.trim()
+
+    // (1) Section-label orphan check — heading text matches a known
+    // label and the satisfying block type is missing in the same section.
     const pattern = ORPHAN_PATTERNS.find((p) => p.match.test(text))
-    if (!pattern) continue
-    // Look ahead — does any later block satisfy this heading? We allow
-    // intervening prose / lists between the heading and the matching
-    // block (e.g. "Frequently Asked Questions" + an intro paragraph +
-    // the FAQ block). Stop scanning at the next heading of the same
-    // or higher level — anything past that is a different section.
-    let satisfied = false
+    if (pattern) {
+      let satisfied = false
+      for (let j = i + 1; j < blocks.length; j++) {
+        const next = blocks[j]
+        if (next.type === 'heading' && next.level <= b.level) break
+        if (pattern.satisfiedBy(next)) {
+          satisfied = true
+          break
+        }
+      }
+      if (!satisfied) {
+        orphanIndexes.add(i)
+        continue
+      }
+    }
+
+    // (2) Empty-section check — does this heading have ANY non-heading
+    // block before the next same-or-higher-level heading? If not, the
+    // section is empty and the heading should be dropped. We scan
+    // until we hit the next sibling heading (or end of body); any
+    // non-heading block in between counts as "real content."
+    let hasContent = false
     for (let j = i + 1; j < blocks.length; j++) {
       const next = blocks[j]
       if (next.type === 'heading' && next.level <= b.level) break
-      if (pattern.satisfiedBy(next)) {
-        satisfied = true
+      if (next.type !== 'heading') {
+        hasContent = true
         break
       }
     }
-    if (!satisfied) orphanIndexes.add(i)
+    if (!hasContent) orphanIndexes.add(i)
   }
   if (orphanIndexes.size === 0) return blocks
   return blocks.filter((_, i) => !orphanIndexes.has(i))
