@@ -77,9 +77,29 @@ export async function GET() {
       )
     }
 
-    const faqs: ChatFaq[] = (data as DbChatFaq[]).map(mapDbChatFaq)
+    // Merge code-side CHAT_FAQS into the Supabase set. The admin's
+    // entries take priority — code-side entries are only added when
+    // they don't duplicate an existing question (case-insensitive,
+    // whitespace-collapsed match). This lets us ship targeted FAQs
+    // (e.g. "How long can I rent for?") without overwriting anything
+    // the admin manages, while still surfacing them through the same
+    // single endpoint the widget reads from.
+    const supabaseFaqs: ChatFaq[] = (data as DbChatFaq[]).map(mapDbChatFaq)
+    const normalize = (s: string) => s.toLowerCase().replace(/\s+/g, ' ').trim()
+    const seen = new Set(supabaseFaqs.map((f) => normalize(f.question)))
+    const merged: ChatFaq[] = [
+      ...supabaseFaqs,
+      ...CHAT_FAQS.filter((f) => !seen.has(normalize(f.question))),
+    ]
     return NextResponse.json(
-      { ok: true, source: 'supabase', count: faqs.length, faqs },
+      {
+        ok: true,
+        source: 'supabase+static',
+        count: merged.length,
+        supabaseCount: supabaseFaqs.length,
+        staticAdded: merged.length - supabaseFaqs.length,
+        faqs: merged,
+      },
       { headers: CORS_HEADERS },
     )
   } catch (err) {

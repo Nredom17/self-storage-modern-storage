@@ -294,6 +294,31 @@ export const CHAT_FAQS: ChatFaq[] = [
       { label: 'Boat, RV & vehicle storage', href: 'https://self-storage.modernstorage.com/rv-boat-vehicle' },
     ],
   },
+  // "How long can I rent for?" — customers ask this in many phrasings
+  // that didn't hit the admin's existing "Are storage rentals month-to-
+  // month?" FAQ (whose keywords were month/lease/contract/commitment).
+  // Comprehensive keyword set so any natural phrasing matches.
+  {
+    question: 'How long can I rent a storage unit?',
+    keywords: [
+      'how long',
+      'how long can i rent',
+      'how long can i',
+      'rent for',
+      'rental period',
+      'rental length',
+      'length of rental',
+      'duration',
+      'minimum rental',
+      'minimum stay',
+      'how short',
+      'shortest rental',
+      'longest rental',
+      'maximum rental',
+    ],
+    answer:
+      'Modern Storage® rentals are month-to-month with no long-term lease commitment. You can rent for as little as one month, and there is no maximum — many customers stay for years. Written notice is required before move-out, and tenants are responsible for cleaning out the unit and removing their lock at the end of occupancy.',
+  },
   // Common safety / legal question. Plain "no" answer with the why — keeps
   // us in compliance with state/local fire code and the rental agreement.
   {
