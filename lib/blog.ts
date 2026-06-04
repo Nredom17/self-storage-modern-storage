@@ -187,6 +187,118 @@ type DbBlogPost = {
   word_count: number | null
 }
 
+// Deep-normalize the body array so every block has the fields the
+// renderer expects, with safe defaults for anything missing. This
+// is the load-bearing safety net behind the static prerender — any
+// unexpected null / undefined / wrong-type field at runtime would
+// otherwise crash the build. New block types can be added to the
+// switch as needed.
+function normalizeBody(raw: unknown[]): BlogBlock[] {
+  const out: BlogBlock[] = []
+  for (const item of raw) {
+    if (!item || typeof item !== 'object') continue
+    const b = item as Record<string, unknown>
+    const type = typeof b.type === 'string' ? b.type : ''
+    const arr = (v: unknown): unknown[] => (Array.isArray(v) ? v : [])
+    const str = (v: unknown, fallback = ''): string => (typeof v === 'string' ? v : fallback)
+    switch (type) {
+      case 'heading':
+        out.push({
+          type: 'heading',
+          level: b.level === 3 ? 3 : 2,
+          text: str(b.text),
+          anchor: typeof b.anchor === 'string' ? b.anchor : undefined,
+        } as BlogBlock)
+        break
+      case 'paragraph':
+        out.push({ type: 'paragraph', text: str(b.text) } as BlogBlock)
+        break
+      case 'list':
+        out.push({
+          type: 'list',
+          ordered: Boolean(b.ordered),
+          items: arr(b.items).map((it) => str(it)),
+        } as BlogBlock)
+        break
+      case 'quote':
+        out.push({
+          type: 'quote',
+          text: str(b.text),
+          attribution: typeof b.attribution === 'string' ? b.attribution : undefined,
+        } as BlogBlock)
+        break
+      case 'callout':
+        out.push({
+          type: 'callout',
+          variant: b.variant === 'warning' || b.variant === 'success' ? b.variant : 'info',
+          title: typeof b.title === 'string' ? b.title : undefined,
+          text: str(b.text),
+        } as BlogBlock)
+        break
+      case 'image':
+        out.push({
+          type: 'image',
+          src: str(b.src),
+          alt: str(b.alt),
+          caption: typeof b.caption === 'string' ? b.caption : undefined,
+        } as BlogBlock)
+        break
+      case 'cta':
+        out.push({
+          type: 'cta',
+          label: str(b.label),
+          href: str(b.href),
+          variant: b.variant === 'secondary' ? 'secondary' : 'primary',
+        } as BlogBlock)
+        break
+      case 'comparison':
+        out.push({
+          type: 'comparison',
+          leftHeader: typeof b.leftHeader === 'string' ? b.leftHeader : undefined,
+          rightHeader: typeof b.rightHeader === 'string' ? b.rightHeader : undefined,
+          rows: arr(b.rows)
+            .map((r) => {
+              if (!r || typeof r !== 'object') return null
+              const row = r as Record<string, unknown>
+              return { left: str(row.left), right: str(row.right) }
+            })
+            .filter((r): r is { left: string; right: string } => r !== null),
+        } as BlogBlock)
+        break
+      case 'faq':
+        out.push({
+          type: 'faq',
+          items: arr(b.items)
+            .map((q) => {
+              if (!q || typeof q !== 'object') return null
+              const item = q as Record<string, unknown>
+              return { q: str(item.q), a: str(item.a) }
+            })
+            .filter((q): q is { q: string; a: string } => q !== null),
+        } as BlogBlock)
+        break
+      case 'takeaways':
+        out.push({
+          type: 'takeaways',
+          title: typeof b.title === 'string' ? b.title : undefined,
+          items: arr(b.items).map((it) => str(it)),
+        } as BlogBlock)
+        break
+      case 'toc':
+        out.push({
+          type: 'toc',
+          title: typeof b.title === 'string' ? b.title : undefined,
+        } as BlogBlock)
+        break
+      default:
+        // Unknown block type — skip silently so the renderer can't fall
+        // into a render branch that doesn't exist.
+        break
+    }
+  }
+  return out
+}
+
 function mapDb(row: DbBlogPost): BlogPost {
   return {
     id: row.id,
@@ -195,7 +307,7 @@ function mapDb(row: DbBlogPost): BlogPost {
     publishedAt: row.published_at,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
-    title: row.title,
+    title: row.title ?? '',
     h1: row.h1,
     metaDescription: row.meta_description,
     canonicalUrl: row.canonical_url,
@@ -218,7 +330,7 @@ function mapDb(row: DbBlogPost): BlogPost {
     twitterImage: row.twitter_image,
     intro: row.intro,
     quickAnswer: row.quick_answer,
-    body: Array.isArray(row.body) ? row.body : [],
+    body: Array.isArray(row.body) ? normalizeBody(row.body) : [],
     ctaLabel: row.cta_label,
     ctaUrl: row.cta_url,
     relatedServiceUrl: row.related_service_url,
