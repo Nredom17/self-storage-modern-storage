@@ -2,22 +2,26 @@
 //
 // PUBLIC KILL-SWITCH
 // ────────────────────────────────────────────────────────────────────────
-// The customer-facing pages at /blog and /blog/[slug] are gated by the
-// STORAGE_TIPS_PUBLIC env var. Default is OFF so a brand-new deploy never
-// surfaces the section before the team is ready. To turn it on:
+// The customer-facing pages at /blog and /blog/[slug] are PUBLIC by default
+// now — the section has launched and posts are live as soon as they're
+// flipped to "Published" in /admin/blog.
 //
-//   In Vercel → Project Settings → Environment Variables, add:
-//     STORAGE_TIPS_PUBLIC = true        (any of: true / 1 / on / yes)
+// To temporarily TAKE THE BLOG PRIVATE again (rare, e.g. during a big
+// rewrite or if everything needs to come down for legal review), set:
 //
-//   Then redeploy or wait for the next ISR revalidation (60s).
+//   In Vercel → Project Settings → Environment Variables:
+//     STORAGE_TIPS_PUBLIC = false       (any of: false / 0 / off / no)
+//
+//   Then redeploy. The /blog index and every /blog/[slug] page will 404
+//   for the public while admin keeps full access.
 //
 // The admin pages at /admin/blog and /admin/blog/[id] are ALWAYS
-// accessible (behind the HTTP Basic Auth middleware). That's the whole
-// point: write and stage posts privately, then flip the env var when
-// ready to launch.
+// accessible (behind the HTTP Basic Auth middleware) regardless of the
+// public flag — so you can still write and stage posts privately.
 export function isStorageTipsPublic(): boolean {
   const v = (process.env.STORAGE_TIPS_PUBLIC ?? '').trim().toLowerCase()
-  return v === 'true' || v === '1' || v === 'on' || v === 'yes'
+  // Public by default. Only an explicit "off" value disables.
+  return v !== 'false' && v !== '0' && v !== 'off' && v !== 'no'
 }
 
 // Public-facing brand name for the section. The URL path stays /blog
