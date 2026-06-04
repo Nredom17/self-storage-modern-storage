@@ -292,8 +292,16 @@ export default function BlogAdminEditor({ id }: { id: string }) {
               by hand. Each Q/A pair becomes one accordion row on the
               published post AND one Question entry in the FAQPage
               JSON-LD (so Google / Bing / AI Overview can lift the
-              answers cleanly — the "AEO" use case). */}
-          <FaqBlockEditor bodyJson={bodyJson} onChange={setBodyJson} />
+              answers cleanly — the "AEO" use case). Also has an AI
+              "Suggest FAQs from body" button that reads the post
+              title/intro/body and proposes Q&A pairs. */}
+          <FaqBlockEditor
+            bodyJson={bodyJson}
+            onChange={setBodyJson}
+            title={row.title}
+            intro={row.intro ?? ''}
+            quickAnswer={row.quick_answer ?? ''}
+          />
 
           <div>
             <label className="block text-xs font-black uppercase tracking-widest text-gray-600 mb-1.5">
@@ -445,10 +453,53 @@ type FaqItem = { q: string; a: string }
 function FaqBlockEditor({
   bodyJson,
   onChange,
+  title,
+  intro,
+  quickAnswer,
 }: {
   bodyJson: string
   onChange: (next: string) => void
+  title: string
+  intro: string
+  quickAnswer: string
 }) {
+  // AI suggestion state — collected suggestions returned by
+  // /api/admin/blog/suggest-faqs, plus error / loading status.
+  const [suggesting, setSuggesting] = useState(false)
+  const [suggestions, setSuggestions] = useState<FaqItem[] | null>(null)
+  const [suggestError, setSuggestError] = useState<string | null>(null)
+
+  async function fetchSuggestions() {
+    setSuggesting(true)
+    setSuggestError(null)
+    try {
+      let parsedBody: unknown = []
+      try {
+        parsedBody = JSON.parse(bodyJson)
+      } catch {
+        /* leave as [] — endpoint will use title/intro/quickAnswer only */
+      }
+      const r = await fetch('/api/admin/blog/suggest-faqs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, intro, quickAnswer, body: parsedBody }),
+      })
+      const data = (await r.json()) as {
+        ok?: boolean
+        items?: FaqItem[]
+        error?: string
+      }
+      if (!r.ok || !data.ok || !Array.isArray(data.items)) {
+        setSuggestError(data.error ?? `Suggestion failed (${r.status}).`)
+        return
+      }
+      setSuggestions(data.items)
+    } catch (e) {
+      setSuggestError(e instanceof Error ? e.message : 'Suggestion request failed.')
+    } finally {
+      setSuggesting(false)
+    }
+  }
   // Parse current body JSON → find faq block → extract items. Failures
   // (invalid JSON, missing block, malformed items) all collapse to an
   // empty list so the editor never throws on bad data.
@@ -512,8 +563,8 @@ function FaqBlockEditor({
 
   return (
     <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
-      <div className="flex items-center justify-between mb-3">
-        <div>
+      <div className="flex items-start justify-between gap-3 mb-3 flex-wrap">
+        <div className="min-w-0">
           <p className="text-xs font-black uppercase tracking-widest text-amber-800">
             FAQ section (AEO)
           </p>
@@ -524,14 +575,87 @@ function FaqBlockEditor({
             must be filled in for a row to publish.
           </p>
         </div>
-        <button
-          type="button"
-          onClick={addItem}
-          className="text-xs font-bold bg-amber-700 hover:bg-amber-800 text-white px-3 py-2 rounded-full shrink-0"
-        >
-          + Add FAQ
-        </button>
+        <div className="flex gap-2 shrink-0">
+          <button
+            type="button"
+            onClick={fetchSuggestions}
+            disabled={suggesting}
+            className="text-xs font-bold bg-white hover:bg-amber-100 border border-amber-700 text-amber-800 px-3 py-2 rounded-full disabled:opacity-50 disabled:cursor-wait inline-flex items-center gap-1.5"
+            title="Read the post body and propose 5–6 FAQ Q&A pairs you can accept or skip"
+          >
+            {suggesting ? (
+              <>
+                <span className="inline-block w-3 h-3 rounded-full border-2 border-amber-700 border-t-transparent animate-spin" aria-hidden="true" />
+                Thinking…
+              </>
+            ) : (
+              <>✨ Suggest FAQs from body</>
+            )}
+          </button>
+          <button
+            type="button"
+            onClick={addItem}
+            className="text-xs font-bold bg-amber-700 hover:bg-amber-800 text-white px-3 py-2 rounded-full"
+          >
+            + Add FAQ
+          </button>
+        </div>
       </div>
+
+      {/* AI suggestion error message */}
+      {suggestError && (
+        <div className="mb-3 bg-red-50 border border-red-200 rounded-lg px-3 py-2 text-xs text-red-800 leading-relaxed">
+          <strong>Couldn&apos;t get suggestions:</strong> {suggestError}
+        </div>
+      )}
+
+      {/* AI suggestion panel — each suggestion gets an Add / Skip button */}
+      {suggestions && suggestions.length > 0 && (
+        <div className="mb-3 bg-white border border-amber-300 rounded-lg p-3 space-y-2">
+          <div className="flex items-center justify-between mb-1">
+            <p className="text-[10px] font-black uppercase tracking-widest text-amber-700">
+              ✨ AI suggestions — review and accept any you like
+            </p>
+            <button
+              type="button"
+              onClick={() => setSuggestions(null)}
+              className="text-xs font-bold text-gray-500 hover:text-gray-700"
+            >
+              Dismiss all
+            </button>
+          </div>
+          {suggestions.map((s, si) => (
+            <div
+              key={si}
+              className="border border-gray-200 rounded-lg p-2 bg-gray-50"
+            >
+              <p className="text-sm font-bold text-charcoal leading-tight">{s.q}</p>
+              <p className="text-xs text-gray-700 leading-relaxed mt-1">{s.a}</p>
+              <div className="flex gap-2 mt-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    writeItems([...items, s])
+                    setSuggestions(suggestions.filter((_, i) => i !== si))
+                  }}
+                  className="text-[11px] font-bold bg-amber-700 hover:bg-amber-800 text-white px-3 py-1 rounded-full"
+                >
+                  + Add to FAQ
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setSuggestions(suggestions.filter((_, i) => i !== si))
+                  }
+                  className="text-[11px] font-bold text-gray-500 hover:text-gray-700"
+                >
+                  Skip
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       {items.length === 0 ? (
         <p className="text-xs text-gray-500 italic py-3">
