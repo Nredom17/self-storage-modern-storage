@@ -335,7 +335,62 @@ function normalizeBody(raw: unknown[]): BlogBlock[] {
         break
     }
   }
-  return out
+  return dropOrphanSectionHeadings(out)
+}
+
+// Editors write the section heading ("Frequently Asked Questions") as a
+// separate heading block right before the FAQ block. If every FAQ item
+// got dropped above (empty q/a fields), the heading is left dangling
+// with nothing under it — visually it reads as a broken / unfinished
+// section. Detect that pattern and drop the orphan heading.
+//
+// Same treatment for a few other common "section labels" that pair
+// with a specific block type. List is intentionally conservative —
+// we only auto-clean labels we're confident about, never generic
+// section headings the writer chose.
+function dropOrphanSectionHeadings(blocks: BlogBlock[]): BlogBlock[] {
+  // (heading text regex → predicate that returns true when a following
+  // block satisfies the heading's "promise" — e.g. "FAQ" needs a faq
+  // block, "Key Takeaways" needs a takeaways block)
+  const ORPHAN_PATTERNS: { match: RegExp; satisfiedBy: (b: BlogBlock) => boolean }[] = [
+    {
+      match: /^(frequently asked questions|faqs?)$/i,
+      satisfiedBy: (b) => b.type === 'faq',
+    },
+    {
+      match: /^(key takeaways|takeaways)$/i,
+      satisfiedBy: (b) => b.type === 'takeaways',
+    },
+    {
+      match: /^(table of contents|contents)$/i,
+      satisfiedBy: (b) => b.type === 'toc',
+    },
+  ]
+  const orphanIndexes = new Set<number>()
+  for (let i = 0; i < blocks.length; i++) {
+    const b = blocks[i]
+    if (b.type !== 'heading') continue
+    const text = b.text.trim()
+    const pattern = ORPHAN_PATTERNS.find((p) => p.match.test(text))
+    if (!pattern) continue
+    // Look ahead — does any later block satisfy this heading? We allow
+    // intervening prose / lists between the heading and the matching
+    // block (e.g. "Frequently Asked Questions" + an intro paragraph +
+    // the FAQ block). Stop scanning at the next heading of the same
+    // or higher level — anything past that is a different section.
+    let satisfied = false
+    for (let j = i + 1; j < blocks.length; j++) {
+      const next = blocks[j]
+      if (next.type === 'heading' && next.level <= b.level) break
+      if (pattern.satisfiedBy(next)) {
+        satisfied = true
+        break
+      }
+    }
+    if (!satisfied) orphanIndexes.add(i)
+  }
+  if (orphanIndexes.size === 0) return blocks
+  return blocks.filter((_, i) => !orphanIndexes.has(i))
 }
 
 function mapDb(row: DbBlogPost): BlogPost {
