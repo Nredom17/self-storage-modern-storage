@@ -8,6 +8,20 @@ const nextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 30,
+    // Supabase storage holds every image uploaded via the /admin/blog
+    // editor. Without this allowlist, <Image src="https://...supabase
+    // .co/storage/v1/object/public/storage-tips-images/...">  routes
+    // through /_next/image and returns 400 ("hostname not configured"),
+    // which renders as a gray placeholder on the page. Pattern is
+    // scoped to the public/ object path so we never proxy private
+    // buckets accidentally.
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'jdkyslbaxpfokrxztxhm.supabase.co',
+        pathname: '/storage/v1/object/public/**',
+      },
+    ],
   },
   async redirects() {
     return [
