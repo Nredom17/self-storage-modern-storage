@@ -286,6 +286,25 @@ export const CHAT_FAQS: ChatFaq[] = [
       'You can view available units and reserve online for any Modern Storage® location. Tell me which location you’re interested in and I’ll send you the right link.',
   },
   {
+    question: 'How long can I rent for? / Is it month-to-month?',
+    keywords: [
+      'how long',
+      'rent for',
+      'lease',
+      'contract',
+      'term',
+      'minimum',
+      'commitment',
+      'long term',
+      'short term',
+      'month to month',
+      'month-to-month',
+      'monthly',
+    ],
+    answer:
+      'Modern Storage® rentals are month-to-month, so there’s no long-term lease or contract. Rent for as long as you need — whether that’s one month or several years — and close out the unit when you’re done. Written notice may be required before move-out, and tenants are responsible for cleaning out the unit and removing their lock at the end of occupancy.',
+  },
+  {
     question: 'Do you offer boat, RV, or vehicle storage?',
     keywords: ['boat', 'rv', 'camper', 'vehicle', 'car storage', 'trailer', 'motorhome'],
     answer:
