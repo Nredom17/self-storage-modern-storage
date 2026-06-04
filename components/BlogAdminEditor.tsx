@@ -286,6 +286,15 @@ export default function BlogAdminEditor({ id }: { id: string }) {
         <Section title="Content">
           <Textarea label="Intro paragraph (lead, sets up the article)" value={row.intro ?? ''} onChange={(v) => update('intro', v)} rows={4} />
           <Textarea label="Quick-answer block (answer-first paragraph for PAA / AI Overview)" value={row.quick_answer ?? ''} onChange={(v) => update('quick_answer', v)} rows={4} />
+
+          {/* Fillable FAQ editor — adds/updates the single FAQ block
+              in the body JSON without the editor having to touch JSON
+              by hand. Each Q/A pair becomes one accordion row on the
+              published post AND one Question entry in the FAQPage
+              JSON-LD (so Google / Bing / AI Overview can lift the
+              answers cleanly — the "AEO" use case). */}
+          <FaqBlockEditor bodyJson={bodyJson} onChange={setBodyJson} />
+
           <div>
             <label className="block text-xs font-black uppercase tracking-widest text-gray-600 mb-1.5">
               Body (JSON array of blocks)
@@ -416,6 +425,173 @@ function BodyImageUploader({ onUploaded }: { onUploaded: (url: string) => void }
           }
         }}
       />
+    </div>
+  )
+}
+
+// ─── FAQ block editor ─────────────────────────────────────────────────
+// Fillable UI for the body's `{type:'faq', items:[{q,a},...]}` block.
+// Reads the FIRST faq block out of the body JSON on each render,
+// presents one question+answer pair per row, and on every change
+// rewrites the body JSON with the new FAQ block in place (or appends
+// one if none exists yet).
+//
+// Why this exists: the editor's plain JSON textarea is power-user
+// friendly but newer authors don't know the shape. AEO content
+// strategies need every blog post to ship with a structured FAQ
+// (visible accordion + FAQPage JSON-LD for search), so the FAQ
+// editor needs to be obvious, not buried in JSON.
+type FaqItem = { q: string; a: string }
+function FaqBlockEditor({
+  bodyJson,
+  onChange,
+}: {
+  bodyJson: string
+  onChange: (next: string) => void
+}) {
+  // Parse current body JSON → find faq block → extract items. Failures
+  // (invalid JSON, missing block, malformed items) all collapse to an
+  // empty list so the editor never throws on bad data.
+  function currentFaqItems(): FaqItem[] {
+    try {
+      const arr = JSON.parse(bodyJson)
+      if (!Array.isArray(arr)) return []
+      const faq = arr.find((b) => b && typeof b === 'object' && b.type === 'faq')
+      if (!faq || !Array.isArray(faq.items)) return []
+      return faq.items
+        .filter((it: unknown) => it && typeof it === 'object')
+        .map((it: unknown) => {
+          const item = it as { q?: unknown; a?: unknown }
+          return {
+            q: typeof item.q === 'string' ? item.q : '',
+            a: typeof item.a === 'string' ? item.a : '',
+          }
+        })
+    } catch {
+      return []
+    }
+  }
+
+  // Write a new items array back into the body JSON. Replaces the
+  // existing faq block if there is one; otherwise appends a new one
+  // at the END (so it lives below the prose, where readers expect it).
+  function writeItems(items: FaqItem[]) {
+    let arr: unknown[]
+    try {
+      const parsed = JSON.parse(bodyJson)
+      arr = Array.isArray(parsed) ? parsed : []
+    } catch {
+      arr = []
+    }
+    const faqIndex = arr.findIndex(
+      (b) => b && typeof b === 'object' && (b as { type?: string }).type === 'faq',
+    )
+    const newFaq = { type: 'faq', items }
+    if (faqIndex >= 0) {
+      arr[faqIndex] = newFaq
+    } else if (items.length > 0) {
+      arr.push(newFaq)
+    }
+    onChange(JSON.stringify(arr, null, 2))
+  }
+
+  const items = currentFaqItems()
+  const updateItem = (i: number, patch: Partial<FaqItem>) => {
+    const next = items.map((it, idx) => (idx === i ? { ...it, ...patch } : it))
+    writeItems(next)
+  }
+  const addItem = () => writeItems([...items, { q: '', a: '' }])
+  const removeItem = (i: number) => writeItems(items.filter((_, idx) => idx !== i))
+  const moveItem = (i: number, dir: -1 | 1) => {
+    const j = i + dir
+    if (j < 0 || j >= items.length) return
+    const next = items.slice()
+    ;[next[i], next[j]] = [next[j], next[i]]
+    writeItems(next)
+  }
+
+  return (
+    <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+      <div className="flex items-center justify-between mb-3">
+        <div>
+          <p className="text-xs font-black uppercase tracking-widest text-amber-800">
+            FAQ section (AEO)
+          </p>
+          <p className="text-xs text-gray-600 mt-1 leading-relaxed">
+            One Q&A per row. Renders as an accordion on the post AND as
+            FAQPage JSON-LD so Google / Bing / AI Overview can lift the
+            answers. Empty rows are dropped automatically — both fields
+            must be filled in for a row to publish.
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={addItem}
+          className="text-xs font-bold bg-amber-700 hover:bg-amber-800 text-white px-3 py-2 rounded-full shrink-0"
+        >
+          + Add FAQ
+        </button>
+      </div>
+
+      {items.length === 0 ? (
+        <p className="text-xs text-gray-500 italic py-3">
+          No FAQs yet. Click <strong>+ Add FAQ</strong> to add your first question.
+        </p>
+      ) : (
+        <ul className="space-y-3">
+          {items.map((it, i) => (
+            <li key={i} className="bg-white border border-amber-200 rounded-lg p-3">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-black uppercase tracking-widest text-amber-700">
+                  Q{i + 1}
+                </span>
+                <div className="flex gap-1">
+                  <button
+                    type="button"
+                    onClick={() => moveItem(i, -1)}
+                    disabled={i === 0}
+                    aria-label="Move up"
+                    className="text-xs text-gray-600 hover:text-charcoal disabled:opacity-30 px-2 py-1"
+                  >
+                    ↑
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => moveItem(i, 1)}
+                    disabled={i === items.length - 1}
+                    aria-label="Move down"
+                    className="text-xs text-gray-600 hover:text-charcoal disabled:opacity-30 px-2 py-1"
+                  >
+                    ↓
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => removeItem(i)}
+                    aria-label="Remove this FAQ"
+                    className="text-xs font-bold text-red-700 hover:text-red-900 px-2 py-1"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+              <input
+                type="text"
+                value={it.q}
+                onChange={(e) => updateItem(i, { q: e.target.value })}
+                placeholder="Question (e.g. How long can I rent for?)"
+                className="w-full mb-2 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-modern-red"
+              />
+              <textarea
+                value={it.a}
+                onChange={(e) => updateItem(i, { a: e.target.value })}
+                placeholder="Answer (factual, 2–4 sentences works best for AEO)"
+                rows={3}
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm leading-relaxed focus:outline-none focus:border-modern-red"
+              />
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }
