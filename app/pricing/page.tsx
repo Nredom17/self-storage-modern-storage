@@ -114,7 +114,7 @@ const FEE_BREAKDOWN: FeeRow[] = [
     fee: 'Move-out costs',
     who: 'No fee',
     detail:
-      'No early-termination fee. No move-out fee. Give written notice, clean out your unit, remove your lock, and you\'re done. The unit is rented month-to-month, every month is its own choice.',
+      'No early-termination fee. No move-out fee. No cleaning fee for normal use. Give written notice, clean out your unit, remove your lock, and you\'re done — see the full move-out guide for the step-by-step process and the narrow situations that can result in a charge.',
   },
 ]
 

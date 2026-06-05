@@ -76,6 +76,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: SITE_URL + '/move-out-guide',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
       url: SITE_URL + '/contact',
       lastModified: now,
       changeFrequency: 'monthly' as const,
