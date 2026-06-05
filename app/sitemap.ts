@@ -88,6 +88,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: SITE_URL + '/self-storage-vs-garage',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
       url: SITE_URL + '/contact',
       lastModified: now,
       changeFrequency: 'monthly' as const,
