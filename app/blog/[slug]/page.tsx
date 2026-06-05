@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import Image from 'next/image'
 import { SITE_URL } from '@/lib/site'
 import { getPostBySlug, getPublishedSlugs, isStorageTipsPublic, STORAGE_TIPS_BRAND } from '@/lib/blog'
 import BlogBlocks from '@/components/BlogBlocks'
@@ -192,19 +191,21 @@ export default async function StorageTipPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Hero image */}
+      {/* Hero image — renders at its NATURAL aspect ratio (no forced
+          16:9 container) so marketing graphics with overlay text show
+          in full. Width is capped by the article column (max-w-4xl),
+          height is whatever the image's intrinsic ratio dictates. */}
       {post.heroImage && (
         <section className="bg-white">
           <div className="max-w-4xl mx-auto px-6 pt-8 lg:pt-10">
             <figure>
-              <div className="rounded-2xl overflow-hidden shadow-xl aspect-[16/9] bg-gray-100 relative">
-                <Image
+              <div className="rounded-2xl overflow-hidden shadow-xl bg-gray-100">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src={post.heroImage}
                   alt={post.heroAlt ?? post.h1}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 800px"
-                  className="object-cover"
+                  loading="eager"
+                  className="block w-full h-auto"
                 />
               </div>
               {post.heroCaption && (

@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import FaqAccordion from '@/components/FaqAccordion'
 import { slugify, type BlogBlock } from '@/lib/blog'
 
@@ -194,16 +193,18 @@ export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
           }
 
           case 'image':
+            // Render at NATURAL aspect ratio — no forced 16:9 container
+            // that crops marketing graphics with overlay text. Width is
+            // capped by the article column, height is intrinsic.
             return (
               <figure key={i} className="my-8">
-                <div className="rounded-2xl overflow-hidden shadow-lg aspect-[16/9] bg-gray-100 relative">
-                  <Image
+                <div className="rounded-2xl overflow-hidden shadow-lg bg-gray-100">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                     src={block.src}
                     alt={block.alt}
-                    fill
                     loading="lazy"
-                    sizes="(max-width: 1024px) 100vw, 800px"
-                    className="object-cover"
+                    className="block w-full h-auto"
                   />
                 </div>
                 {block.caption && (
