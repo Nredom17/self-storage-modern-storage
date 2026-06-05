@@ -108,21 +108,20 @@ export default async function LocationsHubPage() {
         </div>
       </section>
 
-      {/* ── LOCATION FINDER ──────────────────────────────────── */}
-      <section id="locations" className="bg-gray-50 pb-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <LocationFinder locations={locations} />
-        </div>
-      </section>
-
       {/* ── BROWSE BY REGION — compact accordion ─────────────────
-          Replaces the previous full card grid (which duplicated the
-          LocationFinder above). Uses native <details> for zero-JS,
+          REORDERED 2026-06-05 (Alexandra's direction): the stores
+          list now appears BEFORE the LocationFinder map so visitors
+          arriving from the footer "Tenant Support" link land on a
+          scannable list of facilities first — not a map they have
+          to interpret. Map stays on the page below for visual /
+          spatial browsers.
+
+          Compact accordion using native <details> for zero-JS,
           accessible, mobile-friendly expand/collapse. Each region
           opens to a lean list of facilities — name, address, direct
           phone (tap-to-call), and a link to the bespoke city page so
           SEO equity to /locations/[slug] is preserved. */}
-      <section className="bg-white py-16 lg:py-20 border-y border-gray-200">
+      <section id="locations" className="bg-white py-16 lg:py-20 border-y border-gray-200">
         <div className="max-w-5xl mx-auto px-6">
           <div className="max-w-3xl mb-8 lg:mb-10">
             <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
@@ -223,6 +222,28 @@ export default async function LocationsHubPage() {
         </div>
       </section>
 
+      {/* ── LOCATION FINDER (MAP) ────────────────────────────────
+          Moved below the stores list 2026-06-05 per Alexandra's
+          direction. Visual / spatial browsers still get the map;
+          tenants who just need to find their facility see the
+          scannable list of stores first. */}
+      <section id="map" className="bg-gray-50 py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl mb-8">
+            <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+              Map view
+            </p>
+            <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-4">
+              See Modern Storage® Locations on the Map
+            </h2>
+            <p className="text-gray-600 text-lg leading-relaxed">
+              Pan around Arkansas to see every Modern Storage® facility, filter by storage type, and click any pin for the address, phone, and reservation link.
+            </p>
+          </div>
+          <LocationFinder locations={locations} />
+        </div>
+      </section>
+
       {/* ── FINAL CTA ────────────────────────────────────── */}
       <section className="bg-modern-red py-20">
         <div className="max-w-4xl mx-auto px-6 text-center">
@@ -234,7 +255,7 @@ export default async function LocationsHubPage() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
-              href="#locations"
+              href="#map"
               className="bg-white text-modern-red font-black px-8 py-3.5 rounded-full hover:bg-red-50 transition-colors text-sm shadow-md inline-flex items-center gap-2"
             >
               Browse the Map
