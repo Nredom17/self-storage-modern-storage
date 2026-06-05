@@ -82,6 +82,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: SITE_URL + '/climate-controlled-vs-standard',
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
       url: SITE_URL + '/contact',
       lastModified: now,
       changeFrequency: 'monthly' as const,
