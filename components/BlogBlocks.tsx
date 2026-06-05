@@ -288,18 +288,17 @@ export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
             )
 
           case 'takeaways': {
-            // Key Takeaways box — blue gradient card with a thick blue
-            // left accent, designed to sit at the top of policy / how-to
-            // posts so the visitor gets the bottom line before the body.
-            // Matches the design-pass screenshot exactly.
+            // Key Takeaways box — Modern Storage brand palette (light
+            // red tint + thick modern-red left accent, matching the
+            // Quick Answer aside in [slug]/page.tsx). Sits near the top
+            // of a post and gives readers the bottom line before the
+            // body. Originally a blue gradient; rebranded sitewide.
             //
             // Defensive skip: new posts are pre-seeded with placeholder
             // bullets like "Replace this with…". If an editor hits
             // publish without filling them in (or deletes every bullet),
             // we silently drop the card rather than shipping an empty
-            // box or the placeholder text. An item counts as "real" if
-            // it has any non-whitespace content AND doesn't start with
-            // the literal "Replace this" seed string.
+            // box or the placeholder text.
             const realItems = (block.items ?? []).filter(
               (it) => it.trim().length > 0 && !/^replace this/i.test(it.trim()),
             )
@@ -308,16 +307,16 @@ export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
             return (
               <aside
                 key={i}
-                className="my-8 bg-gradient-to-br from-sky-50 to-blue-100 border-l-4 border-blue-600 rounded-r-2xl px-6 py-5"
+                className="my-8 bg-modern-red/5 border-l-4 border-modern-red rounded-r-xl px-6 py-5"
               >
-                <h3 className="font-black text-blue-700 text-lg mb-3">{title}</h3>
+                <h3 className="font-black text-modern-red text-lg mb-3 tracking-tight">{title}</h3>
                 <ul className="space-y-2.5">
                   {realItems.map((item, j) => (
                     <li
                       key={j}
                       className="flex gap-2.5 text-gray-700 leading-relaxed text-sm sm:text-base"
                     >
-                      <span className="text-gray-700 mt-1.5 shrink-0" aria-hidden="true">•</span>
+                      <span className="text-modern-red mt-1.5 shrink-0 font-black" aria-hidden="true">•</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -327,11 +326,12 @@ export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
           }
 
           case 'toc': {
-            // Table of Contents — purple/fuchsia gradient card with a
-            // thick violet left accent. Auto-built from every heading
-            // block in the body array (level-2 only — keeps the TOC
-            // scannable on long posts; sub-headings get rendered in the
-            // body but don't clutter the jump list).
+            // Table of Contents — Modern Storage brand palette (light
+            // charcoal tint + thick charcoal left accent + red link
+            // arrows). Functional / navigational feel that visually
+            // separates it from the red-themed Quick Answer / Key
+            // Takeaways callouts above. Auto-built from every level-2
+            // heading in the body so the jump list stays scannable.
             const headings = blocks.flatMap((b) =>
               b.type === 'heading' && b.level === 2
                 ? [{ text: b.text, anchor: anchorFor(b) }]
@@ -342,17 +342,17 @@ export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
             return (
               <aside
                 key={i}
-                className="my-8 bg-gradient-to-br from-violet-50 to-fuchsia-100 border-l-4 border-violet-600 rounded-r-2xl px-6 py-5"
+                className="my-8 bg-charcoal/[0.04] border-l-4 border-charcoal rounded-r-xl px-6 py-5"
               >
-                <h3 className="font-black text-violet-700 text-lg mb-3">{title}</h3>
+                <h3 className="font-black text-charcoal text-lg mb-3 tracking-tight">{title}</h3>
                 <ul className="space-y-2.5">
                   {headings.map((h, j) => (
                     <li key={j}>
                       <a
                         href={`#${h.anchor}`}
-                        className="text-violet-700 hover:text-violet-900 font-bold transition-colors inline-flex items-start gap-2 text-sm sm:text-base leading-relaxed"
+                        className="text-charcoal hover:text-modern-red font-bold transition-colors inline-flex items-start gap-2 text-sm sm:text-base leading-relaxed"
                       >
-                        <span aria-hidden="true">→</span>
+                        <span className="text-modern-red shrink-0" aria-hidden="true">→</span>
                         <span>{h.text}</span>
                       </a>
                     </li>
