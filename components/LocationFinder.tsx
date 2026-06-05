@@ -7,16 +7,144 @@ import Link from 'next/link'
 import { LOCATION_FILTERS } from '@/lib/site'
 import type { Location } from '@/lib/data'
 import { getBadgeIcon } from '@/lib/badge-icons'
+import { buildDirectionsUrl } from '@/lib/geo'
 
-// Leaflet uses DOM globals; load only on the client.
+// Leaflet uses DOM globals; load only on the client. Skeleton height
+// matches the map's resolved height (260/300/360 mobile/tablet/desktop)
+// so the layout doesn't shift when the map hydrates.
 const MapClient = dynamic(() => import('./MapClient'), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-[300px] sm:h-[360px] lg:h-[420px] rounded-2xl bg-gray-100 animate-pulse flex items-center justify-center">
+    <div className="w-full h-[260px] sm:h-[300px] lg:h-[360px] rounded-2xl bg-gray-100 animate-pulse flex items-center justify-center">
       <p className="text-sm font-semibold text-gray-400 uppercase tracking-widest">Loading map…</p>
     </div>
   ),
 })
+
+// Side panel shown next to the map — empty state when no pin is
+// selected, full facility detail when one is. Replaces the Leaflet
+// popup (removed 2026-06-05 per Alexandra's direction).
+function SelectedFacilityPanel({
+  loc,
+  onClear,
+  highlightBadge,
+}: {
+  loc: Location | null
+  onClear: () => void
+  highlightBadge?: string
+}) {
+  if (!loc) {
+    return (
+      <div className="h-full min-h-[260px] sm:min-h-[300px] lg:min-h-[360px] rounded-2xl bg-gray-50 border border-gray-200 border-dashed flex flex-col items-center justify-center text-center px-6 py-8">
+        <div className="w-12 h-12 rounded-full bg-modern-red/10 text-modern-red flex items-center justify-center mb-4">
+          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+          </svg>
+        </div>
+        <p className="text-sm font-bold text-charcoal mb-1">Pick a facility</p>
+        <p className="text-xs text-gray-500 leading-relaxed max-w-[200px]">
+          Click a pin on the map or a region above to see address, phone, amenities, and reservation details.
+        </p>
+      </div>
+    )
+  }
+
+  const directionsUrl = buildDirectionsUrl(loc)
+
+  return (
+    <article
+      aria-label={`${loc.name} details`}
+      className="h-full min-h-[260px] sm:min-h-[300px] lg:min-h-[360px] rounded-2xl bg-white border-2 border-modern-red shadow-md flex flex-col p-5 lg:p-6"
+    >
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <p className="text-[10px] font-black uppercase tracking-widest text-modern-red">
+          {loc.city}, {loc.state}
+        </p>
+        <button
+          type="button"
+          onClick={onClear}
+          aria-label="Close facility details"
+          className="shrink-0 w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 text-charcoal flex items-center justify-center transition-colors"
+        >
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <h3 className="font-black text-charcoal text-lg leading-tight mb-3">
+        <Link href={`/locations/${loc.slug}`} className="hover:text-modern-red transition-colors">
+          {loc.name}
+        </Link>
+      </h3>
+
+      <address className="not-italic text-sm text-gray-600 leading-relaxed mb-3 space-y-0.5">
+        <p>{loc.streetAddress}</p>
+        <p>
+          {loc.city}, {loc.state} {loc.zip}
+        </p>
+      </address>
+
+      <a
+        href={`tel:+1${loc.phone.replace(/\D/g, '')}`}
+        aria-label={`Call ${loc.name} at ${loc.phone}`}
+        className="inline-flex items-center gap-2 bg-charcoal hover:bg-black text-white text-sm font-bold px-4 py-2 rounded-full transition-colors mb-4 w-fit"
+      >
+        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
+        </svg>
+        {loc.phone}
+      </a>
+
+      {loc.badges.length > 0 && (
+        <ul className="flex flex-wrap items-center gap-2 mb-4" aria-label={`Amenities at ${loc.name}`}>
+          {loc.badges.map((badge) => {
+            const isHighlighted = highlightBadge && badge === highlightBadge
+            const Icon = getBadgeIcon(badge)
+            return (
+              <li key={badge}>
+                <span
+                  title={badge}
+                  aria-label={badge}
+                  role="img"
+                  className={`flex items-center justify-center w-9 h-9 rounded-full transition-colors ${
+                    isHighlighted
+                      ? 'bg-modern-red text-white'
+                      : 'bg-modern-red/10 text-modern-red'
+                  }`}
+                >
+                  <Icon className="w-5 h-5" strokeWidth={2} aria-hidden="true" />
+                </span>
+              </li>
+            )
+          })}
+        </ul>
+      )}
+
+      <div className="mt-auto flex flex-col gap-2">
+        <a
+          href={loc.reservationUrl}
+          aria-label={`See available units at ${loc.name}`}
+          className="inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors"
+        >
+          See Available Units
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+        <a
+          href={directionsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Get directions to ${loc.name}`}
+          className="inline-flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-charcoal text-sm font-bold px-5 py-2.5 rounded-full transition-colors"
+        >
+          Get Directions →
+        </a>
+      </div>
+    </article>
+  )
+}
 
 export default function LocationFinder({
   locations,
@@ -113,18 +241,31 @@ export default function LocationFinder({
         </div>
       </div>
 
-      {/* Map */}
+      {/* Map + selected-facility side panel.
+          Two-column grid on lg+ (map ~60%, panel ~40%); stacks on
+          mobile so the panel sits under the map. The Leaflet on-map
+          popup was removed 2026-06-05 — facility details now render
+          in the side panel, which gives them plenty of room and
+          stops them from fighting the map for space. */}
       <div
-        className="relative rounded-2xl overflow-hidden border border-gray-200 mb-10"
+        className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-6 mb-10"
         role="region"
         aria-label="Interactive map of Modern Storage® locations in Arkansas"
       >
-        <MapClient
-          locations={filtered}
-          selectedSlug={selectedSlug}
-          onPinClick={(slug) => setSelectedSlug(slug)}
-          onPopupClose={() => setSelectedSlug(null)}
-        />
+        <div className="lg:col-span-3 relative rounded-2xl overflow-hidden border border-gray-200">
+          <MapClient
+            locations={filtered}
+            selectedSlug={selectedSlug}
+            onPinClick={(slug) => setSelectedSlug(slug)}
+          />
+        </div>
+        <div className="lg:col-span-2">
+          <SelectedFacilityPanel
+            loc={filtered.find((l) => l.slug === selectedSlug) ?? null}
+            onClear={() => setSelectedSlug(null)}
+            highlightBadge={highlightBadge}
+          />
+        </div>
       </div>
 
       {/* Location cards */}
