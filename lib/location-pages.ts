@@ -456,57 +456,15 @@ const HOT_SPRINGS: LocationPageContent = {
       q: 'Is Modern Storage® Hot Springs convenient for Lake Hamilton residents?',
       a: 'Yes. Modern Storage® Hot Springs is on Higdon Ferry Road, with quick access to the Lake Hamilton shoreline communities — Lakeside, Pearcy, and the south-shore neighborhoods. It\'s a popular climate-controlled storage option for lake-area homeowners storing seasonal furniture, electronics, and household overflow.',
     },
-    // ── Boat Storage Near Lake Hamilton vs Keeping a Boat at Home ────
+    // ── Honest boat/RV redirect ──────────────────────────────────────
+    // CORRECTED 2026-06-05 — Modern Storage® Hot Springs does NOT
+    // offer boat or RV storage. The previous 12 boat/RV FAQ items
+    // here implied it does and were removed. Replaced with one
+    // honest entry that points Lake Hamilton / Lake Ouachita boat
+    // owners at the closest Modern Storage® boat/RV facilities.
     {
-      q: 'Is boat storage better than keeping a boat at home near Lake Hamilton?',
-      a: `Boat storage can help free up driveway space and provide dedicated protection when the boat is not in use.`,
-    },
-    {
-      q: 'Why do Lake Hamilton boat owners use storage?',
-      a: `Many homeowners have limited parking space or HOA restrictions.`,
-    },
-    {
-      q: 'Can boat storage extend the life of my boat?',
-      a: `Proper storage can help reduce exposure to weather and environmental wear.`,
-    },
-    // ── Indoor Boat Storage vs Outdoor Boat Storage Near Beaver Lake ─
-    {
-      q: 'What are the benefits of indoor boat storage near Beaver Lake?',
-      a: `Indoor storage offers greater protection from sun, weather, and debris.`,
-    },
-    {
-      q: 'Is outdoor boat storage more affordable?',
-      a: `Outdoor storage is often less expensive and works well for many boat owners.`,
-    },
-    {
-      q: 'Which option is best for long-term boat storage?',
-      a: `Indoor storage generally provides the highest level of protection for long-term storage.`,
-    },
-    // ── Boat Storage Near Lake Ouachita ──────────────────────────────
-    {
-      q: 'Why use boat storage near Lake Ouachita?',
-      a: `Convenient storage can help reduce towing time and simplify lake access.`,
-    },
-    {
-      q: 'Can I store fishing gear with my boat?',
-      a: `Many boat owners store gear, life jackets, and related equipment together.`,
-    },
-    {
-      q: 'How does storage help during the off-season for Lake Ouachita boats?',
-      a: `Storage provides a dedicated location when boating activity slows down.`,
-    },
-    // ── RV Storage for Lake Travelers ────────────────────────────────
-    {
-      q: 'Why do RV owners use storage near Hot Springs?',
-      a: `Storage provides a convenient place to keep RVs between trips while freeing up space at home.`,
-    },
-    {
-      q: 'Can RV storage help protect my vehicle?',
-      a: `Covered and enclosed storage options can help reduce exposure to weather.`,
-    },
-    {
-      q: 'Should I store my RV year-round?',
-      a: `Many owners use RV storage throughout the year to simplify parking and maintenance.`,
+      q: 'Does Modern Storage® Hot Springs offer boat or RV storage?',
+      a: 'No — Modern Storage® Hot Springs does not offer boat or RV parking. The Higdon Ferry Road facility specializes in climate-controlled and drive-up household storage for the Hot Springs, Lake Hamilton, and Hot Springs Village markets. For boat or RV storage, the closest Modern Storage® facility that offers it is Modern Storage® Bryant (about 50 minutes northeast via I-30), followed by Modern Storage® Maumelle Blvd. Lake Hamilton and Lake Ouachita boat owners typically use Bryant for outdoor boat, RV, and trailer parking.',
     },
   ],
 }

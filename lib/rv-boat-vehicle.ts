@@ -1,12 +1,21 @@
 // Featured locations are rendered in this exact order on /rv-boat-vehicle.
 // Slugs must match entries in lib/site.ts LOCATIONS (and the Supabase mirror).
+// Featured boat/RV facilities, rendered in this exact order on
+// /rv-boat-vehicle. Slugs must match entries in lib/site.ts LOCATIONS.
+//
+// Hot Springs was previously included here but was removed
+// 2026-06-05 per Alexandra's direction: Modern Storage® Hot Springs
+// does NOT offer boat or RV storage. Lake Hamilton / Lake Ouachita
+// area customers needing boat/RV parking are routed to Bryant
+// (closest, ~50 min via I-30) or Maumelle Blvd (~75 min). Hot
+// Springs still serves the area for household and climate-
+// controlled storage — see /locations/hot-springs.
 export const BOAT_RV_FEATURED_SLUGS = [
   'lowell',
   'shackleford',
   'bentonville',
   'springdale',
   'maumelle',
-  'hot-springs',
 ] as const
 
 // Per-location 50–100 word copy used on the featured-location cards.
@@ -76,18 +85,9 @@ export const BOAT_RV_LOCATION_COPY: Record<
     caption:
       'Modern Storage® Maumelle Blvd aerial view — Boat/RV storage close to Lake Maumelle.',
   },
-  'hot-springs': {
-    tagline: 'Lake Ouachita · weekend boating base',
-    body:
-      'Modern Storage® Hot Springs sits on the doorstep of Lake Ouachita — Arkansas’s largest lake — and is the natural home base for boats, ski rigs, and travel trailers that spend weekends on the water. Customers in the Hot Springs area, plus weekenders coming down from Little Rock, store boats on trailers, pontoons, and travel trailers for nearby campgrounds. Drive-up household storage is on the same site if you want to consolidate into one rental.',
-    bestFor: [
-      'Boats and ski rigs headed to Lake Ouachita',
-      'Pontoons and travel trailers for nearby campgrounds',
-      'Weekenders driving down from Little Rock',
-    ],
-    caption:
-      'Modern Storage® Hot Springs facility exterior — boat and RV storage close to Lake Ouachita.',
-  },
+  // Hot Springs entry removed 2026-06-05 — Modern Storage® Hot
+  // Springs does not offer boat or RV storage. Lake Hamilton /
+  // Lake Ouachita boat owners are routed to Bryant or Maumelle Blvd.
 }
 
 export const VEHICLE_TYPE_CARDS = [
@@ -163,9 +163,12 @@ export const BOAT_RV_SIZING = [
   },
 ] as const
 
+// Modern Storage® Hot Springs is NOT in this list — it doesn't offer
+// boat/RV storage. Lake Ouachita / Lake Hamilton boat owners use
+// Bryant (closest boat/RV facility, ~50 min) or Maumelle Blvd.
 export const LAKE_WEEKEND_LOCATIONS = [
   { name: 'Modern Storage® Maumelle Blvd', detail: 'closest to Lake Maumelle for same-day launches' },
-  { name: 'Modern Storage® Hot Springs', detail: 'doorstep of Lake Ouachita' },
+  { name: 'Modern Storage® Bryant', detail: 'closest boat/RV facility to Hot Springs lakes via I-30' },
   { name: 'Modern Storage® Lowell', detail: 'short run to Beaver Lake from NWA' },
   { name: 'Modern Storage® Bentonville', detail: 'Beaver Lake plus Ozarks recreation' },
 ] as const
@@ -188,7 +191,7 @@ export const BY_THE_NUMBERS = [
   { stat: '10,000+', label: 'Storage units across the state' },
   { stat: '3×', label: 'Best of the Best Self-Storage Awards winner (2023, 2024, 2025)' },
   { stat: 'Climate', label: 'Controlled options across most Modern Storage® facilities' },
-  { stat: 'Central & NWA', label: 'Boat, RV, and vehicle storage from Hot Springs to Bentonville' },
+  { stat: 'Central & NWA', label: 'Boat, RV, and vehicle storage from Bryant to Bentonville' },
 ] as const
 
 export const BOAT_RV_FAQS = [
@@ -236,7 +239,11 @@ export const BOAT_RV_FAQS = [
   },
   {
     q: 'Which Modern Storage® locations offer boat and RV storage?',
-    a: `Boat, RV, and vehicle storage is available at Modern Storage® locations across central Arkansas (Shackleford, Maumelle Blvd, Bryant), Northwest Arkansas (Lowell, Bentonville, Springdale), and Hot Springs. Indoor RV storage is available at Modern Storage® Shackleford in Little Rock. Availability, space sizes, and covered options vary by location — use the location finder above or call 501-910-0096 to confirm what is currently available near you.`,
+    // CORRECTED 2026-06-05 — Modern Storage® Hot Springs does NOT
+    // offer boat or RV storage. Lake Hamilton / Lake Ouachita
+    // boat owners use Bryant (closest, ~50 min via I-30) or
+    // Maumelle Blvd.
+    a: `Boat, RV, and vehicle storage is available at Modern Storage® locations across central Arkansas (Shackleford, Maumelle Blvd, Bryant) and Northwest Arkansas (Lowell, Bentonville, Springdale). Indoor RV storage is available at Modern Storage® Shackleford in Little Rock. Modern Storage® Hot Springs does not offer boat or RV storage — Hot Springs lake-area boat owners use Modern Storage® Bryant (the closest boat/RV facility, about 50 minutes via I-30) or Modern Storage® Maumelle Blvd. Availability, space sizes, and covered options vary by location — use the location finder above or call 501-910-0096 to confirm what is currently available near you.`,
   },
   {
     q: 'Can I access my boat or RV on weekends?',
