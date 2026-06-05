@@ -240,7 +240,10 @@ export const BOAT_RV_FAQS = [
   },
   {
     q: 'Can I access my boat or RV on weekends?',
-    a: `Yes. Most Modern Storage® facilities offer 7-day gated access with personal access codes. Specific access hours vary by location — some facilities offer extended hours or 24-hour access. Confirm access hours for your specific facility when you reserve, especially if you plan early Saturday morning launches or late Sunday returns from the lake.`,
+    // REWRITTEN 2026-06-05 — Modern Storage® does NOT offer 24-hour
+    // or extended access at any facility. Uniform 6 AM – 10 PM
+    // gated access 7 days a week.
+    a: `Yes. Modern Storage® offers 7-day gated tenant access from 6:00 AM to 10:00 PM at every Arkansas location, including weekends. Personal entry code per tenant, logged on every entry and exit. Plan early Saturday lake launches and late Sunday returns inside the 6:00 AM to 10:00 PM gate window — Modern Storage® does not offer 24-hour access at any facility.`,
   },
   {
     q: 'How do I reserve boat or RV storage?',

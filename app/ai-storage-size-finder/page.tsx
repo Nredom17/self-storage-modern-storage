@@ -82,7 +82,7 @@ const FINDER_FAQS = [
   },
   {
     q: 'Can I use this tool for business inventory?',
-    a: `Yes. Choose Business Inventory in step one, then pick a density that matches how packed your stock is. The Modern Storage® AI Storage Size Finder will recommend a unit size based on a typical inventory load, and Modern Storage® Riverdale plus other locations offer mini-warehouse business storage with loading dock access, electricity in select units, and 24/7 access at participating sites.`,
+    a: `Yes. Choose Business Inventory in step one, then pick a density that matches how packed your stock is. The Modern Storage® AI Storage Size Finder will recommend a unit size based on a typical inventory load, and Modern Storage® Riverdale plus other locations offer mini-warehouse business storage with loading dock access, electricity in select units, and 7-day gated tenant access from 6:00 AM to 10:00 PM.`,
   },
 ] as const
 

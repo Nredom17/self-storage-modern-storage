@@ -102,7 +102,10 @@ function defaultFaqs(slug: Slug): { q: string; a: string }[] {
     },
     {
       q: `What are the gate access hours at ${loc.name}?`,
-      a: `${loc.name} offers gated tenant access 7 days a week from 6:00 AM to 10:00 PM. Every tenant gets a personal entry code at move-in that is logged on every entry and exit, and the office is staffed during business hours for new rentals, tours, and tenant questions. If 24-hour access is critical to your situation (early-morning lake runs, business deliveries, contractor pickups), call ${loc.phone} before you reserve to confirm any extended-access options available at this facility.`,
+      // REWRITTEN 2026-06-05 — Modern Storage® does NOT offer
+      // 24-hour or extended access at any facility. Uniform 6:00 AM
+      // – 10:00 PM gated access, no exceptions.
+      a: `${loc.name} offers gated tenant access 7 days a week from 6:00 AM to 10:00 PM. Every tenant gets a personal entry code at move-in that is logged on every entry and exit. The office is staffed during business hours for new rentals, tours, and in-person tenant questions. Modern Storage® does not offer 24-hour access at this or any Arkansas location — the gate closes at 10:00 PM every night.`,
     },
     {
       q: `How secure is ${loc.name}?`,
@@ -178,7 +181,7 @@ const SHACKLEFORD: LocationPageContent = {
     },
     {
       q: 'What are the gate access hours at Modern Storage® Shackleford?',
-      a: 'Modern Storage® Shackleford offers gated tenant access 7 days a week from 6:00 AM to 10:00 PM. Every tenant gets a personal entry code at move-in that is logged on every entry and exit, and the office is staffed during business hours for new rentals, tours, and tenant questions. If 24-hour access is critical to your situation (indoor RV pickup, business deliveries, contractor schedules), call 501-910-0096 before you reserve to confirm any extended-access options available at this facility.',
+      a: 'Modern Storage® Shackleford offers gated tenant access 7 days a week from 6:00 AM to 10:00 PM. Every tenant gets a personal entry code at move-in that is logged on every entry and exit. The office is staffed during business hours for new rentals, tours, and in-person tenant questions. Modern Storage® does not offer 24-hour access at this or any Arkansas location — the gate closes at 10:00 PM every night.',
     },
     {
       q: 'How secure is Modern Storage® Shackleford?',

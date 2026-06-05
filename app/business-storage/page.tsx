@@ -27,12 +27,12 @@ export const metadata: Metadata = {
     absolute: 'Business Storage & Mini-Warehouse Space in Arkansas | Modern Storage®',
   },
   description:
-    'Business storage and mini-warehouse space at Modern Storage® across Arkansas, led by Modern Storage® Riverdale. Loading docks, package acceptance, electricity in select units, and 24/7 access where available — for e-commerce, contractors, restoration, staging, movers, and document archives.',
+    'Business storage and mini-warehouse space at Modern Storage® across Arkansas, led by Modern Storage® Riverdale. Loading docks, package acceptance, electricity in select units, and 7-day gated access (6 AM – 10 PM) — for e-commerce, contractors, restoration, staging, movers, and document archives.',
   alternates: { canonical: SITE_URL + PAGE_PATH },
   openGraph: {
     title: 'Business Storage & Mini-Warehouse Space in Arkansas | Modern Storage®',
     description:
-      'Mini-warehouse and business storage at Modern Storage® in Arkansas — loading docks, package acceptance, electricity in select units, and 24/7 access where available.',
+      'Mini-warehouse and business storage at Modern Storage® in Arkansas — loading docks, package acceptance, electricity in select units, and 7-day gated access (6 AM – 10 PM).',
     url: SITE_URL + PAGE_PATH,
     siteName: 'Modern Storage®',
     type: 'website',
@@ -52,7 +52,7 @@ const TRUST_BULLETS = [
   'Package & freight acceptance at participating locations',
   'Climate-controlled options available',
   'Electricity in select units',
-  'Extended & 24/7 access at select locations',
+  '7-day gated access (6 AM – 10 PM) at every facility',
 ]
 
 function buildJsonLd(phoneDisplay: string) {
@@ -63,7 +63,7 @@ function buildJsonLd(phoneDisplay: string) {
     serviceType: 'Business Storage and Mini-Warehouse Space',
     name: 'Business Storage & Mini-Warehouse Space in Arkansas',
     description:
-      'Mini-warehouse and business storage units at Modern Storage® across Arkansas, led by Modern Storage® Riverdale. Loading docks, package and freight acceptance, electricity in select units, and 24/7 access where available — for e-commerce sellers, contractors, restoration and disaster-response crews, stagers, moving companies, and document archive customers.',
+      'Mini-warehouse and business storage units at Modern Storage® across Arkansas, led by Modern Storage® Riverdale. Loading docks, package and freight acceptance, electricity in select units, and 7-day gated access (6 AM – 10 PM) — for e-commerce sellers, contractors, restoration and disaster-response crews, stagers, moving companies, and document archive customers.',
     url: SITE_URL + PAGE_PATH,
     image: SITE_URL + HERO_IMAGE,
     areaServed: { '@type': 'State', name: 'Arkansas' },
@@ -622,7 +622,7 @@ export default async function BusinessStoragePage() {
               Business Storage &amp; Mini-Warehouse FAQ
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed mt-4 max-w-2xl mx-auto">
-              Common questions about Modern Storage® mini-warehouse space — loading docks, package acceptance, electricity, 24/7 access, climate control, and partner programs for businesses across Arkansas.
+              Common questions about Modern Storage® mini-warehouse space — loading docks, package acceptance, electricity, access hours, climate control, and partner programs for businesses across Arkansas.
             </p>
           </div>
           <FaqAccordion items={BUSINESS_FAQS} columns={2} />
@@ -641,7 +641,7 @@ export default async function BusinessStoragePage() {
                 Submit a quick business inquiry and the Modern Storage® team will respond with the right mini-warehouse at the right Arkansas location.
               </p>
               <p className="text-red-100/80 text-xs italic mb-8 lg:mb-0">
-                Feature availability — loading docks, electricity, 24/7 access, package receiving — varies by location.
+                Feature availability — loading docks, electricity, package receiving — varies by location. Gate access is uniform: 7-day gated, 6 AM – 10 PM.
               </p>
             </div>
             <div className="lg:col-span-5 flex flex-col gap-3">
