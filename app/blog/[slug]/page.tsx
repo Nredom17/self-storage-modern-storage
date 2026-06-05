@@ -136,10 +136,14 @@ export default async function StorageTipPage({ params }: Props) {
         />
       ))}
 
-      {/* Header / breadcrumb + meta */}
+      {/* Header / breadcrumb + meta. Top padding bumped so the H1 has
+          breathing room from the sticky nav above — long multi-line
+          titles like "Storage for Business Equipment: A Complete
+          Guide for Growing Companies" were getting their first line
+          hidden when the nav overlapped the hero section. */}
       <section className="bg-charcoal text-white">
         <div className="h-1 w-full bg-modern-red" />
-        <div className="max-w-4xl mx-auto px-6 py-12 lg:py-16">
+        <div className="max-w-4xl mx-auto px-6 pt-16 pb-12 lg:pt-24 lg:pb-16">
           <nav aria-label="Breadcrumb" className="mb-6 text-xs font-semibold text-gray-500">
             <ol className="flex items-center gap-2 flex-wrap">
               <li><Link href="/" className="hover:text-modern-red transition-colors">Self Storage</Link></li>
@@ -154,7 +158,7 @@ export default async function StorageTipPage({ params }: Props) {
               {post.category}
             </p>
           )}
-          <h1 className="text-3xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.1] tracking-tight mb-5">
+          <h1 className="text-3xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.15] tracking-tight mb-5">
             {post.h1}
           </h1>
           <div className="flex items-center gap-3 text-xs text-gray-400 font-semibold flex-wrap">
