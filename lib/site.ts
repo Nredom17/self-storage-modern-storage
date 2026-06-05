@@ -115,7 +115,10 @@ export const NAV_TREE: readonly NavTreeItem[] = [
         href: 'https://podcast.modernstorage.com',
         external: true,
       },
-      { label: 'Blogs', href: 'https://www.modernstorage.com/blog', external: true },
+      // Internal link to the Storage Tips blog on this subdomain. Older
+      // posts still live on modernstorage.com/blog and are reachable via
+      // the "Older Blogs" tile pinned at the end of the /blog grid.
+      { label: 'Blogs', href: '/blog' },
       { label: 'Video Library', href: 'https://www.youtube.com/@modernstorage', external: true },
       { label: 'Free Moving Checklist', href: '/move-in-checklist' },
       { label: 'Storage Guides', href: '/guides' },

@@ -146,12 +146,10 @@ export default async function StorageTipsIndexPage() {
               <p className="text-sm text-white/85 mt-3 leading-relaxed">
                 Browse the full Modern Storage® archive
               </p>
-              <span className="inline-flex items-center gap-1.5 text-xs font-bold text-white mt-5 bg-white/15 hover:bg-white/25 px-4 py-2 rounded-full transition-colors">
-                Visit modernstorage.com
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </span>
+              {/* The "Visit modernstorage.com" pill was removed per user
+                  feedback — the entire tile is already one big tap target
+                  linking to the archive, so the secondary pill was
+                  duplicate CTA noise. */}
             </a>
           </div>
 
