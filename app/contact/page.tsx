@@ -215,23 +215,30 @@ export default async function ContactPage() {
                           {loc.city}, {loc.state} {loc.zip}
                         </p>
                         {/* Tenant Support + Rent a Unit as equally-
-                            sized pills, Existing FIRST so tenants don't
-                            reflexively dial the Rent a Unit line for
-                            account help. Mirrors the swap on the hero
-                            cards at the top of this page. */}
+                            sized pills, Tenant Support FIRST so tenants
+                            don't reflexively dial Rent a Unit for
+                            account help. Both buttons now dial the
+                            facility's direct line (loc.phone) — same
+                            numbers shown on modernstorage.com/self-storage.
+                            On a per-location card it doesn't matter
+                            which audience the visitor identifies as;
+                            the right place to reach is THIS facility
+                            either way. Labels still differentiate
+                            audiences so the visitor self-routes. */}
                         <span className="flex flex-col gap-2 pt-2">
                           <a
-                            href="https://www.modernstorage.com/self-storage"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Existing customer — manage your account at modernstorage.com"
+                            href={`tel:${loc.phone.replace(/[^\d+]/g, '')}`}
+                            aria-label={`Tenant Support at ${loc.name} — call ${loc.phone}`}
                             className="inline-flex items-center justify-center gap-2 bg-charcoal hover:bg-black text-white font-bold px-4 py-2 rounded-full transition-colors text-xs shadow-sm"
                           >
-                            Tenant Support →
+                            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
+                            </svg>
+                            Tenant Support
                           </a>
                           <a
                             href={`tel:${loc.phone.replace(/[^\d+]/g, '')}`}
-                            aria-label={`Call ${loc.name} new rentals at ${loc.phone}`}
+                            aria-label={`Rent a Unit at ${loc.name} — call ${loc.phone}`}
                             className="inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-bold px-4 py-2 rounded-full transition-colors text-xs shadow-sm"
                           >
                             <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
