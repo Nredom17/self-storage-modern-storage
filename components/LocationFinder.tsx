@@ -316,12 +316,14 @@ export default function LocationFinder({
                 </button>
                 <div className="p-6 flex flex-col flex-1">
                   {/* Facility name links to its local content page
-                      (/locations/[slug]) — bespoke local copy, facility
-                      FAQs, amenities, and its own Reserve CTA. Gives the
-                      content pages internal link equity and lets shoppers
-                      read local detail before converting. The red button
-                      below still goes straight to live reservations. */}
-                  <h3 className="font-black text-charcoal text-lg leading-tight mb-2">
+                      (/locations/[slug]) — bespoke local copy,
+                      facility FAQs, the same Reserve CTA. Removed
+                      the secondary "Location details" link below
+                      the button (2026-06-05) because the title is
+                      already a link to the same page — it was
+                      duplicate. The red button still goes straight
+                      to live reservations. */}
+                  <h3 className="font-black text-charcoal text-lg leading-tight mb-3">
                     <Link
                       href={`/locations/${loc.slug}`}
                       className="hover:text-modern-red transition-colors"
@@ -329,81 +331,88 @@ export default function LocationFinder({
                       {loc.name}
                     </Link>
                   </h3>
-                  <p className="text-sm text-gray-500 mb-1">{loc.streetAddress}</p>
-                  <p className="text-sm text-gray-500 mb-2">
-                    {loc.city}, {loc.state} {loc.zip}
-                  </p>
-                  {/* Tap-to-call: each card shows the facility's direct
-                      phone. The tel: href dials that store, not the
-                      central sales line. */}
-                  <a
-                    href={`tel:+1${loc.phone.replace(/\D/g, '')}`}
-                    aria-label={`Call ${loc.name} at ${loc.phone}`}
-                    className="inline-flex items-center gap-2 bg-charcoal hover:bg-black text-white text-sm font-bold px-4 py-2 rounded-full transition-colors mb-4 w-fit"
-                  >
-                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
-                    </svg>
-                    {loc.phone}
-                  </a>
-                  {/* Amenities — icons only, spread horizontally. Per
-                      Alexandra's direction (2026-06-05): text labels
-                      were stacking the card vertically and added
-                      visual noise; icons-only reads at a glance and
-                      the title tooltip / aria-label still surfaces
-                      the badge name for hover and screen readers.
-                      Highlighted badge (when filtering by a specific
-                      amenity) gets a charcoal background pill so the
-                      filtered amenity stands out from the others. */}
-                  <ul
-                    className="flex flex-wrap items-center gap-3 mb-5"
-                    aria-label={`Amenities at ${loc.name}`}
-                  >
-                    {loc.badges.map((badge) => {
-                      const isHighlighted = highlightBadge && badge === highlightBadge
-                      const Icon = getBadgeIcon(badge)
-                      return (
-                        <li key={badge}>
-                          <span
-                            title={badge}
-                            aria-label={badge}
-                            role="img"
-                            className={`flex items-center justify-center w-9 h-9 rounded-full transition-colors ${
-                              isHighlighted
-                                ? 'bg-modern-red text-white'
-                                : 'bg-modern-red/10 text-modern-red'
-                            }`}
-                          >
-                            <Icon className="w-5 h-5" strokeWidth={2} aria-hidden="true" />
-                          </span>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                  {/* Dual CTA: primary reserves directly (fastest path
-                      to convert); secondary opens the local content page
-                      for shoppers who want details first. */}
-                  <div className="mt-auto flex flex-col gap-2">
+
+                  {/* Address + phone block (left) and amenity icon
+                      column (right). Restructured 2026-06-05 per
+                      Alexandra's direction — amenities used to take
+                      their own full-width row below the phone,
+                      pushing the Reserve button down the card. The
+                      empty space to the right of the address/phone
+                      now holds the amenity icons in a tight 2-col
+                      grid, so the Reserve button sits much closer
+                      to the title and the card is shorter overall. */}
+                  <div className="flex items-start justify-between gap-3 mb-4">
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm text-gray-500 mb-1">{loc.streetAddress}</p>
+                      <p className="text-sm text-gray-500 mb-2">
+                        {loc.city}, {loc.state} {loc.zip}
+                      </p>
+                      {/* Tap-to-call: each card shows the facility's
+                          direct phone. The tel: href dials that
+                          store, not the central sales line. */}
+                      <a
+                        href={`tel:+1${loc.phone.replace(/\D/g, '')}`}
+                        aria-label={`Call ${loc.name} at ${loc.phone}`}
+                        className="inline-flex items-center gap-2 bg-charcoal hover:bg-black text-white text-sm font-bold px-4 py-2 rounded-full transition-colors w-fit"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.05-.24c1.16.39 2.41.6 3.71.6a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.21 2.55.6 3.71a1 1 0 01-.25 1.05l-2.23 2.03z" />
+                        </svg>
+                        {loc.phone}
+                      </a>
+                    </div>
+
+                    {/* Amenity icon column — 2-wide grid sized to fit
+                        2-6 badges cleanly without pushing the Reserve
+                        button. Hover tooltip + aria-label still
+                        surface the badge name for screen readers and
+                        mouse-hover discovery. Highlighted badge
+                        (filter match) gets the solid red background. */}
+                    {loc.badges.length > 0 && (
+                      <ul
+                        className="grid grid-cols-2 gap-1.5 shrink-0"
+                        aria-label={`Amenities at ${loc.name}`}
+                      >
+                        {loc.badges.map((badge) => {
+                          const isHighlighted = highlightBadge && badge === highlightBadge
+                          const Icon = getBadgeIcon(badge)
+                          return (
+                            <li key={badge}>
+                              <span
+                                title={badge}
+                                aria-label={badge}
+                                role="img"
+                                className={`flex items-center justify-center w-8 h-8 rounded-full transition-colors ${
+                                  isHighlighted
+                                    ? 'bg-modern-red text-white'
+                                    : 'bg-modern-red/10 text-modern-red'
+                                }`}
+                              >
+                                <Icon className="w-4 h-4" strokeWidth={2} aria-hidden="true" />
+                              </span>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    )}
+                  </div>
+
+                  {/* Primary CTA — reserves directly. Secondary
+                      "Location details" link was removed
+                      (2026-06-05) — the card title above is already
+                      a link to the same /locations/[slug] page, so
+                      it was duplicate noise. */}
+                  <div className="mt-auto">
                     <a
                       href={loc.reservationUrl}
                       aria-label={`See available units at ${loc.name}`}
-                      className="inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors"
+                      className="inline-flex items-center justify-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors w-full"
                     >
                       See Available Units
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                       </svg>
                     </a>
-                    <Link
-                      href={`/locations/${loc.slug}`}
-                      aria-label={`View location details for ${loc.name}`}
-                      className="inline-flex items-center justify-center gap-1.5 text-sm font-bold text-charcoal/70 hover:text-modern-red transition-colors"
-                    >
-                      Location details
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
                   </div>
                 </div>
               </article>
