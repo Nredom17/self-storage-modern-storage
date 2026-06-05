@@ -89,6 +89,25 @@ function defaultFaqs(slug: Slug): { q: string; a: string }[] {
       q: `Can I reserve a storage unit online at ${loc.name}?`,
       a: `Yes. Click "See Available Units" on this page to go to the live reservation page for ${loc.name}. You can choose your unit size, review pricing, and complete the reservation in a few minutes.`,
     },
+    // ── Phase 2 SEO/AEO additions ──────────────────────────────────
+    // Three baseline Q&As added across every location (via this
+    // helper) so each /locations/[slug] page picks up local price
+    // range + gate-access + security disclosure for AEO extraction.
+    // Numbers mirror /pricing and the gate-access stance already
+    // rendered on the page template (6 AM – 10 PM) so the per-
+    // location FAQ never disagrees with what's printed on the page.
+    {
+      q: `How much does storage cost at ${loc.name}?`,
+      a: `Storage at ${loc.name} typically ranges from around $25-$45 per month for a 5x5 drive-up unit up to $300+ per month for a 10x30 climate-controlled unit. A 10x10 storage unit (one-bedroom apartment) typically runs $80-$140 drive-up or $110-$180 climate-controlled at this facility. Exact pricing depends on unit size, climate-controlled vs drive-up, current availability, and any active move-in promotion. Live rates for ${loc.name} appear on the reservation page when you click "See Available Units" above.`,
+    },
+    {
+      q: `What are the gate access hours at ${loc.name}?`,
+      a: `${loc.name} offers gated tenant access 7 days a week from 6:00 AM to 10:00 PM. Every tenant gets a personal entry code at move-in that is logged on every entry and exit, and the office is staffed during business hours for new rentals, tours, and tenant questions. If 24-hour access is critical to your situation (early-morning lake runs, business deliveries, contractor pickups), call ${loc.phone} before you reserve to confirm any extended-access options available at this facility.`,
+    },
+    {
+      q: `How secure is ${loc.name}?`,
+      a: `${loc.name} is secured with gated property access using personal keypad codes per tenant, video surveillance on the gate and drive aisles, perimeter fencing, exterior lighting, on-site management during business hours, and individually locked unit doors. Tenants secure their unit with their own disc lock — a disc lock is recommended over a standard padlock because it resists bolt cutters and weather. Tenant insurance or a tenant protection plan is required at move-in to cover stored belongings.`,
+    },
   ]
 }
 
@@ -150,6 +169,20 @@ const SHACKLEFORD: LocationPageContent = {
     {
       q: 'What neighborhoods does Modern Storage® Shackleford serve?',
       a: 'Modern Storage® Shackleford primarily serves west Little Rock — Shackleford Crossings, Pleasant Valley, Park Avenue, Walnut Valley, and the Markham / Kanis / Cantrell corridors of ZIP 72205. The location is also convenient for customers coming from Chenal Parkway, downtown Little Rock via I-630, and Hot Springs via I-430.',
+    },
+    // ── Phase 2 SEO/AEO additions (mirrors defaultFaqs additions on
+    // the other 9 locations) ─────────────────────────────────────
+    {
+      q: 'How much does storage cost at Modern Storage® Shackleford?',
+      a: 'Storage at Modern Storage® Shackleford typically ranges from around $25-$45 per month for a 5x5 drive-up unit up to $300+ per month for a 10x30 climate-controlled unit. A 10x10 storage unit (one-bedroom apartment) typically runs $80-$140 drive-up or $110-$180 climate-controlled at this facility. Exact pricing depends on unit size, climate-controlled vs drive-up, current availability, and any active move-in promotion. Live rates for Modern Storage® Shackleford appear on the reservation page when you click "See Available Units" above.',
+    },
+    {
+      q: 'What are the gate access hours at Modern Storage® Shackleford?',
+      a: 'Modern Storage® Shackleford offers gated tenant access 7 days a week from 6:00 AM to 10:00 PM. Every tenant gets a personal entry code at move-in that is logged on every entry and exit, and the office is staffed during business hours for new rentals, tours, and tenant questions. If 24-hour access is critical to your situation (indoor RV pickup, business deliveries, contractor schedules), call 501-910-0096 before you reserve to confirm any extended-access options available at this facility.',
+    },
+    {
+      q: 'How secure is Modern Storage® Shackleford?',
+      a: 'Modern Storage® Shackleford is secured with gated property access using personal keypad codes per tenant, video surveillance on the gate and drive aisles, perimeter fencing, exterior lighting, on-site management during business hours, and individually locked unit doors. Tenants secure their unit with their own disc lock — a disc lock is recommended over a standard padlock because it resists bolt cutters and weather. Tenant insurance or a tenant protection plan is required at move-in to cover stored belongings.',
     },
   ],
 }
