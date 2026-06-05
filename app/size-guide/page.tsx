@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { SITE_URL } from '@/lib/site'
 import { getSiteSettings } from '@/lib/data'
 import { SIZE_GUIDE_UNITS, SIZE_GUIDE_FAQS } from '@/lib/size-guide'
@@ -163,6 +164,77 @@ export default async function SizeGuidePage() {
                 ))}
               </tbody>
             </table>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SIZE GALLERY ─────────────────────────────────────
+          Compact thumbnail grid showing what each unit size
+          actually looks like inside. Reuses the same climate-
+          controlled unit photos from /climate-controlled so the
+          interior shots match across pages. Hovering / focusing a
+          tile lifts the size label and reveals the room equivalent;
+          clicking jumps to that size's detailed card below (each
+          card already has id="size-{slug}"). Added 2026-06-05 per
+          Alexandra's direction — she pointed out the comparison
+          table is informative but visitors want to SEE the size
+          before they commit. */}
+      <section className="bg-white py-16 lg:py-20 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8">
+            <div className="max-w-2xl">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+                See it before you reserve
+              </p>
+              <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-3">
+                Tour Every Modern Storage® Unit Size
+              </h2>
+              <p className="text-gray-600 leading-relaxed">
+                Real interior photos of every Modern Storage® unit size from 5×5 to 10×30. Tap any size to jump to its detailed breakdown.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+            {SIZE_GUIDE_UNITS.map((u) => (
+              <a
+                key={u.sizeSlug}
+                href={'#size-' + u.sizeSlug}
+                aria-label={`Jump to ${u.size} storage unit details — ${u.roomEquivalent}`}
+                className="group relative aspect-square rounded-2xl overflow-hidden border border-gray-200 hover:border-modern-red focus:outline-none focus-visible:ring-2 focus-visible:ring-modern-red focus-visible:ring-offset-2 transition-all shadow-sm hover:shadow-xl"
+              >
+                <Image
+                  src={`/images/modern-storage-${u.sizeSlug}-climate-controlled-unit.png`}
+                  alt={`Modern Storage® ${u.size} climate-controlled unit interior — ${u.roomEquivalent}`}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105 group-focus-visible:scale-105"
+                />
+                {/* Solid dark gradient overlay so the size label
+                    stays readable over any photo. */}
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/30 to-transparent" />
+                {/* Size label — always visible, prominent. */}
+                <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4">
+                  <p className="font-bebas text-3xl sm:text-4xl lg:text-5xl text-white leading-none mb-1 tracking-wide">
+                    {u.size}
+                  </p>
+                  {/* Room equivalent — fades in on hover/focus.
+                      Stays visible on touch devices via the focus
+                      styles so mobile users see it after tap. */}
+                  <p className="text-[10px] sm:text-xs font-bold text-white/90 leading-tight uppercase tracking-wider opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 translate-y-1 group-hover:translate-y-0 group-focus-visible:translate-y-0 transition-all duration-300">
+                    {u.roomEquivalent}
+                  </p>
+                </div>
+                {/* Subtle "view" hint icon — top-right, fades in on
+                    hover. Signals the tile is clickable. */}
+                <div className="absolute top-2 right-2 w-7 h-7 rounded-full bg-modern-red text-white flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity">
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>
