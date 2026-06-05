@@ -86,7 +86,7 @@ export default function MapClient({
       center={center}
       zoom={7}
       scrollWheelZoom={false}
-      className="w-full h-[420px] sm:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden z-0"
+      className="w-full h-[300px] sm:h-[360px] lg:h-[420px] rounded-2xl overflow-hidden z-0"
       attributionControl
     >
       <TileLayer
@@ -113,22 +113,33 @@ export default function MapClient({
             keyboard={true}
             alt={`${loc.name} in ${loc.city}, ${loc.state}`}
           >
-            <Popup minWidth={240} maxWidth={280} closeButton={true} autoPan={true}>
+            {/* Popup widened 2026-06-05 per Alexandra's direction —
+                was {minWidth: 240, maxWidth: 280} which read as a
+                skinny-tall column (name wrapping to 2 lines, badges
+                stacking vertically, button text wrapping). Now sized
+                to read more square: title stays on one line, badges
+                flow horizontally, action buttons render full-width
+                without text wrapping. */}
+            <Popup minWidth={300} maxWidth={320} closeButton={true} autoPan={true}>
               <div className="font-sans">
                 <p className="text-[10px] font-black uppercase tracking-widest text-modern-red mb-1">
                   {loc.city}, {loc.state}
                 </p>
-                <h3 className="font-black text-charcoal text-base leading-tight mb-2">{loc.name}</h3>
-                <p className="text-xs text-gray-700 mb-0.5">{loc.streetAddress}</p>
+                <h3 className="font-black text-charcoal text-base leading-tight mb-2 whitespace-nowrap overflow-hidden text-ellipsis">
+                  {loc.name}
+                </h3>
+                <p className="text-xs text-gray-700 mb-0.5">
+                  {loc.streetAddress}
+                </p>
                 <p className="text-xs text-gray-700 mb-2">
                   {loc.city}, {loc.state} {loc.zip}
                 </p>
                 <p className="text-xs text-gray-700 mb-3">{loc.phone}</p>
-                <div className="flex flex-wrap gap-1 mb-3">
+                <div className="flex flex-wrap gap-1.5 mb-3">
                   {loc.badges.slice(0, 3).map((b) => (
                     <span
                       key={b}
-                      className="text-[9px] font-bold uppercase tracking-wide bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full"
+                      className="text-[9px] font-bold uppercase tracking-wide bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full whitespace-nowrap"
                     >
                       {b}
                     </span>
@@ -138,7 +149,7 @@ export default function MapClient({
                   <a
                     href={loc.reservationUrl}
                     aria-label={`See available units at ${loc.name}`}
-                    className="block w-full text-center bg-modern-red hover:bg-modern-red-hover text-white text-xs font-bold px-4 py-2 rounded-full transition-colors no-underline"
+                    className="block w-full text-center bg-modern-red hover:bg-modern-red-hover text-white text-xs font-bold px-4 py-2 rounded-full transition-colors no-underline whitespace-nowrap"
                   >
                     See Available Units
                   </a>
@@ -147,7 +158,7 @@ export default function MapClient({
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Get directions to ${loc.name}`}
-                    className="block w-full text-center bg-gray-100 hover:bg-gray-200 text-charcoal text-xs font-bold px-4 py-2 rounded-full transition-colors no-underline"
+                    className="block w-full text-center bg-gray-100 hover:bg-gray-200 text-charcoal text-xs font-bold px-4 py-2 rounded-full transition-colors no-underline whitespace-nowrap"
                   >
                     Get Directions →
                   </a>

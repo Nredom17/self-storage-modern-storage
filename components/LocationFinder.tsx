@@ -12,7 +12,7 @@ import { getBadgeIcon } from '@/lib/badge-icons'
 const MapClient = dynamic(() => import('./MapClient'), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-[420px] sm:h-[500px] lg:h-[600px] rounded-2xl bg-gray-100 animate-pulse flex items-center justify-center">
+    <div className="w-full h-[300px] sm:h-[360px] lg:h-[420px] rounded-2xl bg-gray-100 animate-pulse flex items-center justify-center">
       <p className="text-sm font-semibold text-gray-400 uppercase tracking-widest">Loading map…</p>
     </div>
   ),
@@ -205,31 +205,36 @@ export default function LocationFinder({
                     </svg>
                     {loc.phone}
                   </a>
-                  {/* Amenities as icon + text list. Per UX feedback,
-                      previously pill-shaped chips read as buttons and
-                      invited clicks. Bullet + icon layout signals
-                      "facility offers this" without false affordance.
+                  {/* Amenities — icons only, spread horizontally. Per
+                      Alexandra's direction (2026-06-05): text labels
+                      were stacking the card vertically and added
+                      visual noise; icons-only reads at a glance and
+                      the title tooltip / aria-label still surfaces
+                      the badge name for hover and screen readers.
                       Highlighted badge (when filtering by a specific
-                      amenity) gets a stronger color + bold text. */}
-                  <ul className="space-y-1.5 mb-5" aria-label={`Amenities at ${loc.name}`}>
+                      amenity) gets a charcoal background pill so the
+                      filtered amenity stands out from the others. */}
+                  <ul
+                    className="flex flex-wrap items-center gap-3 mb-5"
+                    aria-label={`Amenities at ${loc.name}`}
+                  >
                     {loc.badges.map((badge) => {
                       const isHighlighted = highlightBadge && badge === highlightBadge
                       const Icon = getBadgeIcon(badge)
                       return (
-                        <li
-                          key={badge}
-                          className={`flex items-center gap-2 text-xs font-semibold ${
-                            isHighlighted ? 'text-modern-red' : 'text-charcoal/80'
-                          }`}
-                        >
-                          <Icon
-                            className={`w-4 h-4 shrink-0 ${
-                              isHighlighted ? 'text-modern-red' : 'text-modern-red/80'
+                        <li key={badge}>
+                          <span
+                            title={badge}
+                            aria-label={badge}
+                            role="img"
+                            className={`flex items-center justify-center w-9 h-9 rounded-full transition-colors ${
+                              isHighlighted
+                                ? 'bg-modern-red text-white'
+                                : 'bg-modern-red/10 text-modern-red'
                             }`}
-                            strokeWidth={2}
-                            aria-hidden="true"
-                          />
-                          <span>{badge}</span>
+                          >
+                            <Icon className="w-5 h-5" strokeWidth={2} aria-hidden="true" />
+                          </span>
                         </li>
                       )
                     })}
