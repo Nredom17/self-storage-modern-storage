@@ -610,8 +610,14 @@ export const FAQS = [
   },
   {
     q: 'Do I need to bring my own lock for a storage unit?',
-    a: `Yes — most Modern Storage® rentals require you to bring your own lock, and disc locks or padlocks are also available for purchase at the facility office at move-in. A disc lock is recommended over a standard padlock because it has a shrouded shackle that resists bolt cutters and weather. Choose a lock with a hardened steel shackle and weather-resistant body. Only you keep the key — facility staff do not hold customer lock keys.`,
-    aHtml: `Yes — most Modern Storage® rentals require you to bring your own lock, and disc locks or padlocks are also available for purchase at the facility office at move-in. A disc lock is recommended over a standard padlock because it has a shrouded shackle that resists bolt cutters and weather. Choose a lock with a hardened steel shackle and weather-resistant body. Only you keep the key — facility staff do not hold customer lock keys.`,
+    // Rewritten 2026-06-05 per Alexandra's direction — moves the
+    // lock conversation from "bring your own disc lock" to the
+    // smart-lock-first positioning that matches the chatbot FAQ
+    // added the same day. Modern Storage® approved lock at the
+    // facility office for standard units; smart-lock option at
+    // facilities that offer it.
+    a: `It depends on the store. At Modern Storage®, tenants using a standard unit lock will need to purchase an approved lock at the facility office during move-in. Some facilities also offer smart locks, which take the hassle out of keys completely. With a smart lock, your phone becomes your lock. You can unlock your unit with a simple tap, share your key to a family member, avoid lost keys, and manage access digitally. A standard lock gets the job done. A smart lock makes the whole storage experience easier.`,
+    aHtml: `<p>It depends on the store. At Modern Storage®, tenants using a standard unit lock will need to purchase an approved lock at the facility office during move-in.</p><p>Some facilities also offer smart locks, which take the hassle out of keys completely. With a smart lock, your phone becomes your lock. You can unlock your unit with a simple tap, share your key to a family member, avoid lost keys, and manage access digitally.</p><p>A standard lock gets the job done. A <strong>smart lock</strong> makes the whole storage experience easier.</p>`,
   },
   {
     q: 'Can I store a car in a storage unit?',
