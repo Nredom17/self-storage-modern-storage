@@ -460,12 +460,15 @@ export const FAQS = [
     aHtml: `Yes — Modern Storage® offers <a href="/climate-controlled">climate-controlled storage units</a> at select Arkansas locations. Climate-controlled units help reduce exposure to extreme temperature changes and seasonal humidity fluctuations compared to standard drive-up storage. These units are commonly used for furniture, electronics, documents, clothing, antiques, instruments, and <a href="/business-storage">business inventory</a>. Availability and building features vary by location.`,
   },
   {
-    q: 'Is climate-controlled storage worth it in Arkansas?',
-    // Rewritten answer-first: leads with a definitive "Yes — for X items"
-    // so the PAA box can quote a clean recommendation instead of the
-    // previous hedging "popular option" framing.
-    a: `Yes — climate-controlled storage is worth it in Arkansas for furniture, electronics, documents, photos, instruments, antiques, leather goods, and business inventory. Arkansas summers regularly exceed 95°F with high humidity, and standard drive-up units track outdoor temperatures, which can warp wood, crack leather, fade fabric, and encourage mildew during long-term storage. Climate-controlled units stay at a steady indoor temperature year-round. For tools, outdoor equipment, plastic bins, and items that tolerate temperature changes, a standard drive-up storage unit is usually sufficient and costs less.`,
-    aHtml: `Yes — <a href="/climate-controlled">climate-controlled storage</a> is worth it in Arkansas for furniture, electronics, documents, photos, instruments, antiques, leather goods, and business inventory. Arkansas summers regularly exceed 95°F with high humidity, and standard drive-up units track outdoor temperatures, which can warp wood, crack leather, fade fabric, and encourage mildew during long-term storage. Climate-controlled units stay at a steady indoor temperature year-round. For tools, outdoor equipment, plastic bins, and items that tolerate temperature changes, a standard drive-up storage unit is usually sufficient and costs less.`,
+    q: 'Is climate-controlled storage worth it?',
+    // Reworded 2026-06-05 — removed "in Arkansas" from the question
+    // and the body per Alexandra's direction. The answer reads
+    // universally instead of as a regional caveat. Summers across
+    // the Modern Storage® footprint hit 95°F+ with high humidity,
+    // and that's what the answer leads with — no longer the
+    // explicit Arkansas mention.
+    a: `Yes — climate-controlled storage is worth it for furniture, electronics, documents, photos, instruments, antiques, leather goods, and business inventory. Hot, humid summers that regularly exceed 95°F warp wood, crack leather, fade fabric, and encourage mildew during long-term storage, and standard drive-up units track outdoor temperatures. Climate-controlled units stay at a steady indoor temperature year-round. For tools, outdoor equipment, plastic bins, and items that tolerate temperature changes, a standard drive-up storage unit is usually sufficient and costs less.`,
+    aHtml: `Yes — <a href="/climate-controlled">climate-controlled storage</a> is worth it for furniture, electronics, documents, photos, instruments, antiques, leather goods, and business inventory. Hot, humid summers that regularly exceed 95°F warp wood, crack leather, fade fabric, and encourage mildew during long-term storage, and standard drive-up units track outdoor temperatures. Climate-controlled units stay at a steady indoor temperature year-round. For tools, outdoor equipment, plastic bins, and items that tolerate temperature changes, a standard drive-up storage unit is usually sufficient and costs less.`,
   },
   {
     q: 'Which locations offer boat and RV storage?',
