@@ -31,7 +31,7 @@ The draft also includes a section called "SUGGESTED INTERNAL LINKS" — those ar
 | # | File | Topic | Status |
 | --- | --- | --- | --- |
 | 1 | `01-self-storage-pricing-arkansas.md` | Self Storage Pricing in Arkansas — full fee breakdown | **Drafted** |
-| 2 | `02-how-to-choose-storage-unit-size.md` | How to Choose a Storage Unit Size — decision framework | _Pending_ |
+| 2 | `02-how-to-choose-storage-unit-size.md` | How to Choose a Storage Unit Size — decision framework | **Drafted** |
 | 3 | `03-climate-controlled-storage-arkansas-humidity.md` | How Climate-Controlled Storage Works in Arkansas Humidity | _Pending_ |
 | 4 | `04-storage-vs-garage-arkansas.md` | Self Storage vs Your Arkansas Garage | _Pending_ |
 | 5 | `05-business-storage-arkansas.md` | Business Storage in Arkansas — e-commerce, contractors, records | _Pending_ |
