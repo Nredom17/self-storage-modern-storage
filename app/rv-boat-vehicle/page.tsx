@@ -342,7 +342,7 @@ export default async function BoatRvStoragePage() {
                 <li>You are storing long-term during the off-season</li>
                 <li>You own a classic car, collector vehicle, vintage boat, or specialty RV</li>
                 <li>You want to reduce exposure to UV rays, seasonal weather, and temperature extremes</li>
-                <li>You prefer the highest level of physical coverage available</li>
+                <li>You want the greatest level of enclosure available for your vehicle</li>
               </ul>
             </div>
           </div>
@@ -373,11 +373,17 @@ export default async function BoatRvStoragePage() {
                 a: 'Covered storage can help reduce direct sun exposure and provide additional protection from rain, hail, and other weather conditions during longer storage periods.',
               },
               {
+                // AEO tweak 2026-06-08 per Alexandra — leads with
+                // the qualifier ("For long off-season storage,")
+                // before the answer, so AI Overviews can extract
+                // the cause→effect framing cleanly.
                 q: 'What is the best boat storage option for winter?',
-                a: 'Many Arkansas boat owners prefer covered or indoor storage during the off-season to reduce exposure to winter weather and extended periods of inactivity.',
+                a: 'For long off-season storage, many Arkansas boat owners prefer covered or indoor storage because it reduces exposure to winter weather and extended periods of inactivity.',
               },
               {
-                q: 'Should I choose indoor vehicle storage?',
+                // SEO tweak 2026-06-08 per Alexandra — "worth it"
+                // is searched far more than "should I choose".
+                q: 'When is indoor vehicle storage worth it?',
                 a: 'Indoor storage is often preferred for collector vehicles, classic cars, specialty vehicles, and owners planning extended storage periods.',
               },
             ].map((f) => (
@@ -397,24 +403,39 @@ export default async function BoatRvStoragePage() {
             ))}
           </div>
 
-          {/* CTA closer — Arkansas-lakes prompt with the same lake-
-              area cross-link as before. */}
+          {/* Conversion CTA closer — REWRITTEN 2026-06-08 per
+              Alexandra's "One Conversion Improvement" note. Primary
+              CTA now points at /locations (transactional intent:
+              "view available units") instead of the regional lake
+              page. The lake-area page is still reachable via the
+              hero SEO copy section and Lake Weekend Locations block
+              further down, so we're not losing the link — just
+              swapping the primary post-FAQ button to the higher-
+              intent destination. */}
           <div className="bg-charcoal text-white rounded-2xl p-6 lg:p-7">
             <h3 className="text-xl font-black text-white tracking-tight mb-2">
-              Looking for RV, boat, or vehicle storage near Arkansas lakes?
+              Find RV, Boat &amp; Vehicle Storage Near You
             </h3>
             <p className="text-gray-300 leading-relaxed mb-4">
-              Explore outdoor, covered, and enclosed storage options at Modern Storage® locations throughout Arkansas. Find the storage solution that fits your vehicle, budget, and storage timeline.
+              Whether you need outdoor parking, covered storage, or enclosed indoor storage, Modern Storage® offers storage solutions for RVs, boats, trailers, and vehicles throughout Arkansas.
             </p>
-            <Link
-              href="/storage-near-beaver-lake"
-              className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-bold px-5 py-2.5 rounded-full transition-colors text-sm"
-            >
-              See boat &amp; RV storage near Arkansas lakes
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/locations"
+                className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-bold px-5 py-2.5 rounded-full transition-colors text-sm"
+              >
+                View Available RV &amp; Boat Storage Units
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link
+                href="/storage-near-beaver-lake"
+                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-5 py-2.5 rounded-full transition-colors border border-white/20 text-sm"
+              >
+                Near Arkansas lakes →
+              </Link>
+            </div>
           </div>
         </div>
       </section>
