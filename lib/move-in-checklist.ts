@@ -30,7 +30,7 @@ export const CHECKLIST_DATA: Record<string, ChecklistMap> = {
   household: {
     'Before Move-In': [
       'Reserve your unit online or by phone',
-      'Purchase a disc lock or cylinder lock (we recommend both)',
+      'Plan to purchase an approved lock at the facility office at move-in (or ask about smart locks if available)',
       "Get boxes in multiple sizes — don't underestimate small boxes",
       'Stock up on packing tape, bubble wrap, and furniture pads',
       'Label every box on the top and at least one side',
@@ -83,7 +83,7 @@ export const CHECKLIST_DATA: Record<string, ChecklistMap> = {
       'Post a laminated unit map on the inside of the door',
     ],
     'Security & Access': [
-      'Use a high-security disc lock — do not use a standard padlock',
+      'Use an approved high-security lock purchased at the facility office (ask about smart-lock options where available)',
       "Add your facility gate code to your team's shared password manager",
       "Know your facility's access hours before scheduling pickups",
       'Do not share your access code beyond essential staff',
@@ -180,9 +180,13 @@ export const WHAT_TO_BRING = [
       'A printed or on-screen copy of your reservation makes the office walk-through faster — especially for evening or weekend move-ins.',
   },
   {
-    title: 'Your own disc lock',
+    // Rewritten 2026-06-05 — matches the new lock messaging on
+    // /faq and the chatbot. Modern Storage® has tenants purchase
+    // an approved lock at the office at move-in; some facilities
+    // also offer smart locks for phone-based access.
+    title: 'A lock for your unit',
     body:
-      'Modern Storage® recommends a disc lock or cylinder lock over a standard padlock. Most facilities sell them on-site if you forget.',
+      'Modern Storage® has tenants purchase an approved lock at the facility office during move-in. Some locations also offer smart locks — your phone becomes the key, no physical lock to carry or lose.',
   },
   {
     title: 'Phone fully charged',
@@ -237,11 +241,11 @@ export const COMMON_MISTAKES = [
 export const CHECKLIST_FAQS = [
   {
     q: 'How do I prepare for move-in day at Modern Storage®?',
-    a: `Use the Modern Storage® Move-In Checklist above to generate a personalized list. The short version: reserve your unit ahead of time, buy a disc lock, pack with the right box sizes for what you are storing, label every box on the side and the top, take photos of valuable items for insurance, and bring a government-issued ID and your reservation confirmation on move-in day. Walk the unit before loading and install your lock as soon as your first items are inside.`,
+    a: `Use the Modern Storage® Move-In Checklist above to generate a personalized list. The short version: reserve your unit ahead of time, plan to purchase an approved lock at the facility office on move-in day (or ask about smart locks if your location offers them), pack with the right box sizes for what you are storing, label every box on the side and the top, take photos of valuable items for insurance, and bring a government-issued ID and your reservation confirmation on move-in day. Walk the unit before loading and install your lock as soon as your first items are inside.`,
   },
   {
     q: 'What do I need to bring to my Modern Storage® move-in appointment?',
-    a: `Bring a government-issued ID, your reservation confirmation, your own disc lock (most facilities sell them on-site if you forget), and a fully charged phone for photos and saving your gate code. If you are moving a full home or apartment, furniture pads and moving blankets prevent damage between the truck and the unit.`,
+    a: `Bring a government-issued ID, your reservation confirmation, payment for the move-in admin fee plus your first month's rent, and a fully charged phone for photos and saving your gate code. You'll purchase an approved lock at the facility office during move-in (or ask about smart locks if your location offers them — no physical lock to carry). If you are moving a full home or apartment, furniture pads and moving blankets prevent damage between the truck and the unit.`,
   },
   {
     q: 'Should I label my boxes for storage?',
