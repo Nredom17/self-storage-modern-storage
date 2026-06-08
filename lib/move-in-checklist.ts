@@ -240,12 +240,18 @@ export const COMMON_MISTAKES = [
 
 export const CHECKLIST_FAQS = [
   {
+    // Two FAQs intentionally split — "How do I prepare" covers
+    // the days BEFORE move-in (reserve, pack, label, photo,
+    // confirm insurance, schedule helpers). "What do I need to
+    // bring" covers only the physical items to bring with you ON
+    // the day. The two used to overlap on ID / confirmation /
+    // lock; rewritten 2026-06-05 to remove duplication.
     q: 'How do I prepare for move-in day at Modern Storage®?',
-    a: `Use the Modern Storage® Move-In Checklist above to generate a personalized list. The short version: reserve your unit ahead of time, plan to purchase an approved lock at the facility office on move-in day (or ask about smart locks if your location offers them), pack with the right box sizes for what you are storing, label every box on the side and the top, take photos of valuable items for insurance, and bring a government-issued ID and your reservation confirmation on move-in day. Walk the unit before loading and install your lock as soon as your first items are inside.`,
+    a: `Preparation happens in the days before move-in. The short version: reserve your unit using the AI Storage Size Finder or the size guide so you're not paying for too much space (or stuck cramming into too little); get boxes in multiple sizes plus packing tape, bubble wrap, and furniture pads; pack heaviest items in small boxes and lightest in large ones, filling every box completely so they don't collapse when stacked; label every box on the top and at least one side; take photos of valuable items and electronics serial numbers for insurance; confirm your homeowners or renters policy extends to off-premises storage (and if not, plan to enroll in the facility's tenant protection plan at move-in); schedule any helpers or movers; and reserve the free moving truck at participating Modern Storage® locations if you'll need one. The interactive checklist on this page builds a tailored prep list based on what you're storing and when.`,
   },
   {
     q: 'What do I need to bring to my Modern Storage® move-in appointment?',
-    a: `Bring a government-issued ID, your reservation confirmation, payment for the move-in admin fee plus your first month's rent, and a fully charged phone for photos and saving your gate code. You'll purchase an approved lock at the facility office during move-in (or ask about smart locks if your location offers them — no physical lock to carry). If you are moving a full home or apartment, furniture pads and moving blankets prevent damage between the truck and the unit.`,
+    a: `On move-in day, bring: a government-issued ID, your reservation confirmation (printed or on your phone), payment for the one-time admin fee plus your first month's rent, and a fully charged phone for photos and saving your gate code. You will purchase an approved lock at the facility office during move-in — or, at locations that offer smart locks, your phone becomes the key with no physical lock to carry. A standard lock gets the job done; a smart lock makes the whole storage experience easier. If you're moving a full home or apartment, also bring furniture pads or moving blankets to prevent damage between the truck and the unit.`,
   },
   {
     q: 'Should I label my boxes for storage?',
