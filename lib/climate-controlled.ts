@@ -547,9 +547,25 @@ export const CLIMATE_FAQS = [
     aHtml: `<p>Climate-controlled buildings use heating and cooling systems to help provide a more consistent indoor environment than standard outdoor storage units.</p><p>Building systems and climate-control features may vary by location. Customers with questions about a specific facility's climate-control setup should <a href="/locations">contact that location directly</a>.</p><p>As stated in the rental agreement, temperature and humidity levels cannot be guaranteed and may be affected by factors such as weather conditions, utility interruptions, or equipment issues.</p>`,
   },
   {
+    // Rewritten 2026-06-08 verbatim from Alexandra's copy. Cleaner
+    // intro ("Every Modern Storage® location offers..."), then a
+    // sentence listing all locations with each city linked to its
+    // /locations/[slug] page (per her "Link all" note). Closes
+    // with the location-finder reservation prompt.
     q: 'Which Modern Storage® locations offer climate-controlled storage?',
-    a: `Every Modern Storage® location offers climate-controlled storage — all 10 facilities, including Little Rock (Shackleford and Riverdale), West Little Rock, North Little Rock (North Hills Blvd and Maumelle Blvd), Bentonville, Bryant, Hot Springs, Springdale, and Lowell. Use the location finder on this page to reserve online at the nearest facility.`,
-    aHtml: `Every Modern Storage® location offers climate-controlled storage — all 10 facilities, including Little Rock (<a href="/locations/shackleford">Shackleford</a> and <a href="/locations/riverdale">Riverdale</a>), <a href="/locations/west-little-rock">West Little Rock</a>, North Little Rock (<a href="/locations/north-little-rock">North Hills Blvd</a> and <a href="/locations/maumelle">Maumelle Blvd</a>), <a href="/locations/bentonville">Bentonville</a>, <a href="/locations/bryant">Bryant</a>, <a href="/locations/hot-springs">Hot Springs</a>, <a href="/locations/springdale">Springdale</a>, and <a href="/locations/lowell">Lowell</a>. Use the location finder on this page to reserve online at the nearest facility.`,
+    a: `Every Modern Storage® location offers climate-controlled storage. Climate-controlled units are available at all Modern Storage® facilities, including Little Rock, West Little Rock, North Little Rock, Bentonville, Bryant, Hot Springs, Maumelle, Springdale, Lowell, and Riverdale. Use the location finder on this page to reserve online at the nearest Modern Storage® facility.`,
+    aHtml: `<p>Every Modern Storage® location offers climate-controlled storage.</p><p>Climate-controlled units are available at all Modern Storage® facilities, including <a href="/locations/shackleford">Little Rock</a>, <a href="/locations/west-little-rock">West Little Rock</a>, <a href="/locations/north-little-rock">North Little Rock</a>, <a href="/locations/bentonville">Bentonville</a>, <a href="/locations/bryant">Bryant</a>, <a href="/locations/hot-springs">Hot Springs</a>, <a href="/locations/maumelle">Maumelle</a>, <a href="/locations/springdale">Springdale</a>, <a href="/locations/lowell">Lowell</a>, and <a href="/locations/riverdale">Riverdale</a>.</p><p>Use the location finder on this page to reserve online at the nearest Modern Storage® facility.</p>`,
+  },
+  {
+    // Re-added 2026-06-08 verbatim from Alexandra's copy. This FAQ
+    // was removed in commit 40be2bf when "How much more does
+    // climate-controlled storage cost?" replaced its territory,
+    // but Alexandra wants both — the "cost" version handles the
+    // pricing question, this version handles the broader "is the
+    // premium worth it?" decision.
+    q: 'Are climate-controlled storage units more expensive than drive-up?',
+    a: `Yes. Climate-controlled storage units typically cost more than standard drive-up storage because they are located inside enclosed, conditioned buildings. Many customers choose climate-controlled storage when storing furniture, electronics, documents, photos, collectibles, musical instruments, clothing, or business inventory that may be sensitive to temperature fluctuations and humidity exposure. Whether the additional cost is worth it depends on what you're storing, how long you plan to store it, and how difficult the items would be to replace. Modern Storage® offers both climate-controlled and drive-up storage options, with pricing and availability varying by location.`,
+    aHtml: `<p>Yes. Climate-controlled storage units typically cost more than standard drive-up storage because they are located inside enclosed, conditioned buildings.</p><p>Many customers choose climate-controlled storage when storing furniture, electronics, documents, photos, collectibles, musical instruments, clothing, or business inventory that may be sensitive to temperature fluctuations and humidity exposure.</p><p>Whether the additional cost is worth it depends on what you're storing, how long you plan to store it, and how difficult the items would be to replace.</p><p>Modern Storage® offers both climate-controlled and drive-up storage options, with pricing and availability varying by location.</p>`,
   },
   {
     q: 'How do I find climate-controlled storage near me?',
