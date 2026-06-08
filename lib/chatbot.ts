@@ -341,6 +341,35 @@ export const CHAT_FAQS: ChatFaq[] = [
     answer:
       'No. Modern Storage® units are for storage only — they cannot be used as a residence, for sleeping, or for any kind of overnight occupancy. State and local fire codes, building regulations, and your rental agreement all prohibit anyone from living in a storage unit, for safety reasons. If you’re between homes and need short-term housing options, our team can still help you store your belongings while you arrange other accommodations.',
   },
+  // Smart lock FAQ — added 2026-06-05 per Alexandra's direction.
+  // Customers ask about smart locks specifically when they see the
+  // option at move-in or in marketing materials. Keywords cover the
+  // most common phrasings: "smart lock", "what's a smart lock",
+  // "phone lock", "keyless", "NFC", etc.
+  {
+    question: "What's a smart lock?",
+    keywords: [
+      'smart lock',
+      'smart locks',
+      'smartlock',
+      'phone lock',
+      'phone unlock',
+      'keyless',
+      'keyless lock',
+      'keyless entry',
+      'nfc',
+      'nfc tap',
+      'tap to unlock',
+      'digital lock',
+      'app lock',
+      'unlock with phone',
+      'open with phone',
+      'no key',
+      'no physical key',
+    ],
+    answer:
+      'A smart lock is a keyless lock that lets tenants access their storage unit with their phone instead of a physical key. You can manage your storage experience right from your smartphone — pay rent, unlock your unit using NFC tap, share temporary access by text, and view your lock activity digitally.',
+  },
 ]
 
 const HOURS_KEYWORDS = [
