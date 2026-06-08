@@ -302,53 +302,120 @@ export default async function BoatRvStoragePage() {
         </div>
       </section>
 
-      {/* Quick-answer summary — decision engine. Short direct answer,
-          three "Choose X if" decision blocks, Arkansas context, and
-          one soft internal link. Optimized for AI extraction and
-          for visitors making a real format decision. */}
+      {/* Quick-answer summary — REWRITTEN 2026-06-08 from Alexandra's
+          expanded copy. Same decision-engine structure (3 "Choose X
+          if" blocks) but each block now has 4 bullets, plus a new
+          "Why Storage Type Matters in Arkansas" section, a 4-FAQ
+          mini-block, and the lake-CTA at the bottom. */}
       <section className="bg-modern-red/5 border-b border-gray-200 py-12">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Quick answer</p>
           <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-4">
-            What kind of RV, boat, or vehicle storage should I choose in Arkansas?
+            What Kind of RV, Boat, or Vehicle Storage Should I Choose in Arkansas?
           </h2>
           <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            The right format depends on <strong>how long you&apos;re storing the rig</strong> and <strong>how exposed it is to weather</strong>. Outdoor is the budget pick for active boat or RV season; covered adds weather protection; enclosed or indoor is the safer choice for long-term or weather-sensitive rigs.
+            The best RV, boat, or vehicle storage option in Arkansas depends on how often you use it, how much protection you want from weather exposure, and your budget. Outdoor parking is typically the most affordable option, covered parking adds protection from direct sun and weather, and enclosed indoor storage is often preferred for long-term storage.
           </p>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
             <div className="bg-white rounded-xl p-5 border border-gray-200">
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Choose outdoor parking if:</p>
               <ul className="text-sm text-gray-700 space-y-1.5 list-disc list-outside ml-4">
-                <li>You&apos;re using the rig regularly (lake season, weekly trips)</li>
-                <li>Storage is short- to mid-term</li>
-                <li>Budget is the deciding factor</li>
+                <li>You use your RV, boat, or vehicle regularly</li>
+                <li>Storage is short-term or seasonal</li>
+                <li>Budget is the primary consideration</li>
+                <li>You want convenient access for frequent trips</li>
               </ul>
             </div>
             <div className="bg-white rounded-xl p-5 border border-gray-200">
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Choose covered parking if:</p>
               <ul className="text-sm text-gray-700 space-y-1.5 list-disc list-outside ml-4">
-                <li>You want protection from sun fade and summer hail</li>
-                <li>Storage spans a full season</li>
-                <li>The rig has upholstery, electronics, or finishes that degrade in UV</li>
+                <li>You want additional protection from direct sunlight and weather exposure</li>
+                <li>Your storage period will last an entire season or longer</li>
+                <li>Your RV, boat, or vehicle has upholstery, electronics, decals, or finishes that may benefit from reduced sun exposure</li>
+                <li>You want a balance between affordability and added protection</li>
               </ul>
             </div>
             <div className="bg-white rounded-xl p-5 border border-gray-200">
-              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Choose enclosed / indoor if:</p>
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Choose enclosed / indoor storage if:</p>
               <ul className="text-sm text-gray-700 space-y-1.5 list-disc list-outside ml-4">
-                <li>You&apos;re storing long-term (off-season or longer)</li>
-                <li>The rig is a classic car, vintage boat, or PWC</li>
-                <li>You want to limit UV, freeze, and storm exposure</li>
+                <li>You are storing long-term during the off-season</li>
+                <li>You own a classic car, collector vehicle, vintage boat, or specialty RV</li>
+                <li>You want to reduce exposure to UV rays, seasonal weather, and temperature extremes</li>
+                <li>You prefer the highest level of physical coverage available</li>
               </ul>
             </div>
           </div>
 
-          <p className="text-gray-700 leading-relaxed mb-4">
-            <strong>In Arkansas:</strong> summer heat and humidity, plus seasonal storms and freeze cycles, drive most off-season damage to upholstery, electronics, and finishes — which is why many lake-area customers pair outdoor parking through boating season with covered or indoor storage in the off-months.
+          {/* Why Storage Type Matters in Arkansas — explains the
+              regional reason behind the format decision above. */}
+          <h3 className="text-xl font-black text-charcoal tracking-tight mb-3">
+            Why Storage Type Matters in Arkansas
+          </h3>
+          <p className="text-gray-700 leading-relaxed mb-8">
+            Arkansas weather can include intense summer sun, humidity, heavy rain, hail, seasonal storms, and occasional winter freezes. Many RV and boat owners use outdoor parking during active boating or camping seasons and transition to covered or indoor storage during extended periods of non-use.
           </p>
-          <p>
-            <Link href="/storage-near-beaver-lake" className="text-modern-red font-bold hover:underline">→ See boat &amp; RV storage near Arkansas lakes</Link>
-          </p>
+
+          {/* Frequently Asked Questions — 4 mini-FAQs inside the
+              quick-answer block, native <details>/<summary> for
+              zero-JS expand/collapse. */}
+          <h3 className="text-xl font-black text-charcoal tracking-tight mb-4">
+            Frequently Asked Questions
+          </h3>
+          <div className="bg-white rounded-2xl border border-gray-200 divide-y divide-gray-200 mb-8">
+            {[
+              {
+                q: 'Which type of RV storage is the most affordable?',
+                a: 'Outdoor RV storage is typically the lowest-cost option and works well for owners who use their RV frequently throughout the year.',
+              },
+              {
+                q: 'Is covered RV storage worth it in Arkansas?',
+                a: 'Covered storage can help reduce direct sun exposure and provide additional protection from rain, hail, and other weather conditions during longer storage periods.',
+              },
+              {
+                q: 'What is the best boat storage option for winter?',
+                a: 'Many Arkansas boat owners prefer covered or indoor storage during the off-season to reduce exposure to winter weather and extended periods of inactivity.',
+              },
+              {
+                q: 'Should I choose indoor vehicle storage?',
+                a: 'Indoor storage is often preferred for collector vehicles, classic cars, specialty vehicles, and owners planning extended storage periods.',
+              },
+            ].map((f) => (
+              <details key={f.q} className="group p-5">
+                <summary className="flex items-center justify-between gap-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                  <span className="font-bold text-charcoal text-base leading-tight group-hover:text-modern-red group-open:text-modern-red transition-colors">
+                    {f.q}
+                  </span>
+                  <span className="shrink-0 w-6 h-6 rounded-full bg-gray-100 text-charcoal group-hover:bg-modern-red group-hover:text-white group-open:bg-modern-red group-open:text-white group-open:rotate-45 flex items-center justify-center transition-all">
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
+                    </svg>
+                  </span>
+                </summary>
+                <p className="text-sm text-gray-700 leading-relaxed mt-3">{f.a}</p>
+              </details>
+            ))}
+          </div>
+
+          {/* CTA closer — Arkansas-lakes prompt with the same lake-
+              area cross-link as before. */}
+          <div className="bg-charcoal text-white rounded-2xl p-6 lg:p-7">
+            <h3 className="text-xl font-black text-white tracking-tight mb-2">
+              Looking for RV, boat, or vehicle storage near Arkansas lakes?
+            </h3>
+            <p className="text-gray-300 leading-relaxed mb-4">
+              Explore outdoor, covered, and enclosed storage options at Modern Storage® locations throughout Arkansas. Find the storage solution that fits your vehicle, budget, and storage timeline.
+            </p>
+            <Link
+              href="/storage-near-beaver-lake"
+              className="inline-flex items-center gap-2 bg-modern-red hover:bg-modern-red-hover text-white font-bold px-5 py-2.5 rounded-full transition-colors text-sm"
+            >
+              See boat &amp; RV storage near Arkansas lakes
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
 
