@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { SITE_URL } from '@/lib/site'
 import { getSiteSettings } from '@/lib/data'
 import FaqAccordion from '@/components/FaqAccordion'
@@ -14,6 +15,14 @@ export const revalidate = 60
 
 const PAGE_PATH = '/move-in-checklist'
 
+// Hero photo — Modern Storage® team member walking a new customer
+// through the move-in process with a clipboard. Added 2026-06-05
+// when Alexandra dropped it into public/images. Lives on the hero
+// alongside the title; also serves as OpenGraph / Twitter card.
+const HERO_IMAGE = '/images/Modern_Storage_Moving_Checklist.jpg'
+const HERO_ALT =
+  'Modern Storage® team member walking a new customer through the storage move-in checklist with a clipboard'
+
 export const metadata: Metadata = {
   title: { absolute: 'Move-In Checklist | Modern Storage® Self Storage' },
   description:
@@ -26,11 +35,13 @@ export const metadata: Metadata = {
     url: SITE_URL + PAGE_PATH,
     siteName: 'Modern Storage®',
     type: 'website',
+    images: [{ url: HERO_IMAGE, width: 1600, height: 1067, alt: HERO_ALT }],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'Move-In Checklist | Modern Storage®',
     description: 'Personalized storage unit move-in checklist from Modern Storage®.',
+    images: [HERO_IMAGE],
   },
 }
 
@@ -121,7 +132,10 @@ export default async function MoveInChecklistPage() {
         />
       ))}
 
-      {/* ── HERO ─────────────────────────────────────────────── */}
+      {/* ── HERO ─────────────────────────────────────────────────
+          Two-column layout 2026-06-05: title and intro on the left,
+          team-with-clipboard photo on the right. Previously the
+          right side of the hero was empty black space. */}
       <section className="bg-charcoal text-white">
         <div className="h-1 w-full bg-modern-red" />
         <div className="max-w-7xl mx-auto px-6 py-14 lg:py-20">
@@ -137,20 +151,34 @@ export default async function MoveInChecklistPage() {
             </ol>
           </nav>
 
-          <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 bg-modern-red/20 border border-modern-red/40 text-modern-red text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-modern-red animate-pulse" aria-hidden="true" />
-              Free move-in tool
-            </span>
-            <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
-              Storage Move-In Checklist
-            </h1>
-            <p className="text-2xl lg:text-3xl font-bold text-gray-200 mb-8 leading-tight">
-              Built for your unit size, your storage type, and your move-in date.
-            </p>
-            <p className="text-gray-400 text-lg leading-relaxed max-w-2xl">
-              Most storage move-ins fail in the same spots — wrong boxes, no center aisle, plastic-wrapped furniture in Arkansas humidity. This personalized checklist walks you through every step so move-in day takes one trip, your stuff stays protected, and future-you can actually find what you stored.
-            </p>
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div>
+              <span className="inline-flex items-center gap-2 bg-modern-red/20 border border-modern-red/40 text-modern-red text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-modern-red animate-pulse" aria-hidden="true" />
+                Free move-in tool
+              </span>
+              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
+                Storage Move-In Checklist
+              </h1>
+              <p className="text-2xl lg:text-3xl font-bold text-gray-200 mb-8 leading-tight">
+                Built for your unit size, your storage type, and your move-in date.
+              </p>
+              <p className="text-gray-400 text-lg leading-relaxed">
+                Most storage move-ins fail in the same spots — wrong boxes, no center aisle, plastic-wrapped furniture in Arkansas humidity. This personalized checklist walks you through every step so move-in day takes one trip, your stuff stays protected, and future-you can actually find what you stored.
+              </p>
+            </div>
+            <figure className="lg:order-last">
+              <div className="relative aspect-[4/3] lg:aspect-[5/4] rounded-2xl overflow-hidden shadow-2xl bg-gray-800">
+                <Image
+                  src={HERO_IMAGE}
+                  alt={HERO_ALT}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+            </figure>
           </div>
         </div>
       </section>
