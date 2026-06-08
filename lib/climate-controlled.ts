@@ -568,13 +568,25 @@ export const CLIMATE_FAQS = [
     aHtml: `<p>Yes. Climate-controlled storage units typically cost more than standard drive-up storage because they are located inside enclosed, conditioned buildings.</p><p>Many customers choose climate-controlled storage when storing furniture, electronics, documents, photos, collectibles, musical instruments, clothing, or business inventory that may be sensitive to temperature fluctuations and humidity exposure.</p><p>Whether the additional cost is worth it depends on what you're storing, how long you plan to store it, and how difficult the items would be to replace.</p><p>Modern Storage® offers both climate-controlled and drive-up storage options, with pricing and availability varying by location.</p>`,
   },
   {
+    // Rewritten 2026-06-08 verbatim from Alexandra's copy. Cleaner
+    // intro, full 10-city list with linked cities, closes with the
+    // location-finder prompt. Brings this FAQ in line with the
+    // "Which Modern Storage® locations offer climate-controlled"
+    // FAQ above — same complete city coverage, no longer omitting
+    // Maumelle, Riverdale, or West Little Rock.
     q: 'How do I find climate-controlled storage near me?',
-    a: `Use the location finder on this page to filter for climate-controlled-only Modern Storage® locations. The map shows every facility with indoor climate-controlled storage available, and the address and reserve-online link for each. Customers searching for climate-controlled storage near me will find a Modern Storage® location in most central and Northwest regions — Little Rock, Bentonville, Bryant, Hot Springs, Springdale, Lowell, and North Little Rock.`,
-    aHtml: `Use the location finder on this page to filter for climate-controlled-only Modern Storage® locations. The map shows every facility with indoor climate-controlled storage available, and the address and reserve-online link for each. Customers searching for climate-controlled storage near me will find a Modern Storage® location in most central and Northwest regions — <a href="/locations/west-little-rock">Little Rock</a>, <a href="/locations/bentonville">Bentonville</a>, <a href="/locations/bryant">Bryant</a>, <a href="/locations/hot-springs">Hot Springs</a>, <a href="/locations/springdale">Springdale</a>, <a href="/locations/lowell">Lowell</a>, and <a href="/locations/north-little-rock">North Little Rock</a>.`,
+    a: `Finding climate-controlled storage near you is easy with Modern Storage®. Every Modern Storage® location offers climate-controlled storage, so you can search by city, browse nearby locations, compare available unit sizes, and reserve online. Modern Storage® serves customers throughout Central Arkansas and Northwest Arkansas, including Little Rock, North Little Rock, Bentonville, Bryant, Hot Springs, Maumelle, Springdale, Lowell, Riverdale, and West Little Rock. Use the location finder to view available units, pricing, and facility details at the location nearest you.`,
+    aHtml: `<p>Finding climate-controlled storage near you is easy with Modern Storage®.</p><p>Every Modern Storage® location offers climate-controlled storage, so you can search by city, browse nearby locations, compare available unit sizes, and reserve online.</p><p>Modern Storage® serves customers throughout Central Arkansas and Northwest Arkansas, including <a href="/locations/shackleford">Little Rock</a>, <a href="/locations/north-little-rock">North Little Rock</a>, <a href="/locations/bentonville">Bentonville</a>, <a href="/locations/bryant">Bryant</a>, <a href="/locations/hot-springs">Hot Springs</a>, <a href="/locations/maumelle">Maumelle</a>, <a href="/locations/springdale">Springdale</a>, <a href="/locations/lowell">Lowell</a>, <a href="/locations/riverdale">Riverdale</a>, and <a href="/locations/west-little-rock">West Little Rock</a>.</p><p>Use the location finder to view available units, pricing, and facility details at the location nearest you.</p>`,
   },
   {
+    // Rewritten 2026-06-08 verbatim from Alexandra's copy. Slightly
+    // softer framing — drops the "under five minutes" claim in
+    // favor of "your phone, tablet, or computer" + adds the
+    // availability-varies-by-location qualifier as its own
+    // paragraph.
     q: 'Can I reserve a climate-controlled unit online?',
-    a: `Yes — climate-controlled units at Modern Storage® can be reserved online in under five minutes. Pick the nearest location, choose your unit size, and complete the reservation from your phone, tablet, or laptop. Online reservations make it easy to compare indoor climate-controlled availability at multiple Modern Storage® facilities before visiting.`,
+    a: `Yes. Climate-controlled storage units can be reserved online at Modern Storage®. Choose your preferred location, select an available unit size, and complete your reservation from your phone, tablet, or computer. Online reservations allow you to compare unit options, pricing, and availability before visiting the facility. Unit availability varies by location and unit size.`,
+    aHtml: `<p>Yes. Climate-controlled storage units can be reserved online at Modern Storage®.</p><p>Choose your preferred location, select an available unit size, and complete your reservation from your phone, tablet, or computer. Online reservations allow you to compare unit options, pricing, and availability before visiting the facility.</p><p>Unit availability varies by location and unit size.</p>`,
   },
   {
     q: 'What size climate-controlled storage unit do I need?',
