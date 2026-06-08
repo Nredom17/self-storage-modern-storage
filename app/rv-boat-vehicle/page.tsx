@@ -221,7 +221,10 @@ export default async function BoatRvStoragePage() {
               <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
                 Boat, RV &amp; Vehicle Storage in <span className="text-modern-red">Arkansas</span>
               </h1>
-              <p className="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg">
+              {/* Switched from text-gray-400 to text-white 2026-06-08
+                  per Alexandra — gray-400 read as too dim on the
+                  charcoal hero background. White reads cleanly. */}
+              <p className="text-white text-lg leading-relaxed mb-10 max-w-lg">
                 Park boats, RVs, travel trailers, motorcycles, and vehicles at Modern Storage® locations across Arkansas — including outdoor, covered, and select indoor options near Beaver Lake, Lake Maumelle, Lake Ouachita, and Greers Ferry.
               </p>
               {/* Row 1 — audience-split pills (transactional intent first).
