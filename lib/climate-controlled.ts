@@ -589,8 +589,13 @@ export const CLIMATE_FAQS = [
     aHtml: `<p>Yes. Climate-controlled storage units can be reserved online at Modern Storage®.</p><p>Choose your preferred location, select an available unit size, and complete your reservation from your phone, tablet, or computer. Online reservations allow you to compare unit options, pricing, and availability before visiting the facility.</p><p>Unit availability varies by location and unit size.</p>`,
   },
   {
+    // Rewritten 2026-06-08 verbatim from Alexandra's copy. Each size
+    // gets its own paragraph for scannability; the larger sizes are
+    // grouped under one paragraph since they share a "multi-room /
+    // whole-home" use case.
     q: 'What size climate-controlled storage unit do I need?',
-    a: `The right climate-controlled storage unit size depends on what you're storing. A 5x5 climate-controlled unit (25 sq ft) holds boxes, documents, photos, and small valuables. A 5x10 fits a single room of furniture or college storage. A 10x10 fits a one-bedroom apartment, while 10x15, 10x20, and 10x30 sizes are sized for two-bedroom, three-bedroom, and whole-home moves respectively. Use the size guide on this page or try the AI Storage Size Finder for a personalized recommendation.`,
+    a: `The right climate-controlled storage unit size depends on what you're storing, how many rooms you're clearing out, and whether you need extra space to access items later. A 5x5 climate-controlled unit is often used for boxes, documents, photos, small furniture, and valuables. A 5x10 unit can fit the contents of a small bedroom or studio apartment. A 10x10 unit is commonly used for a one-bedroom apartment. Larger sizes, such as 10x15, 10x20, and 10x30, are often used for multi-room moves, business inventory, furniture, or whole-home storage. Use the size guide or AI Storage Size Finder to compare options before reserving.`,
+    aHtml: `<p>The right climate-controlled storage unit size depends on what you're storing, how many rooms you're clearing out, and whether you need extra space to access items later.</p><p>A <strong>5x5 climate-controlled unit</strong> is often used for boxes, documents, photos, small furniture, and valuables.</p><p>A <strong>5x10 unit</strong> can fit the contents of a small bedroom or studio apartment.</p><p>A <strong>10x10 unit</strong> is commonly used for a one-bedroom apartment.</p><p>Larger sizes, such as <strong>10x15, 10x20, and 10x30</strong>, are often used for multi-room moves, business inventory, furniture, or whole-home storage.</p><p>Use the <a href="/size-guide">size guide</a> or <a href="/ai-storage-size-finder">AI Storage Size Finder</a> to compare options before reserving.</p>`,
   },
   // ── Comparison-style entries (climate vs other storage formats) ─────
   // Skipped: "Heated Storage vs Climate-Controlled" — covered above by
@@ -599,8 +604,15 @@ export const CLIMATE_FAQS = [
   // antiques entry. Skipped: "Is Climate-Controlled Storage Necessary in
   // Arkansas?" — covered by the existing "Is it worth it in Arkansas?"
   {
-    q: 'Climate-Controlled vs Standard Storage — what is the difference?',
-    a: `Climate-controlled storage maintains a more consistent environment than standard storage units. Standard units are excellent for many household items, but climate-controlled storage is often preferred for temperature-sensitive belongings.`,
+    // Rewritten 2026-06-08 verbatim from Alexandra's copy. Was a
+    // generic 2-sentence answer; now opens the comparison-tail
+    // properly with intro paragraphs explaining each format + two
+    // decision lists (climate-controlled for / drive-up for). Note
+    // the question casing changed: "vs Standard Storage:" → "vs
+    // standard storage:" matches her copy exactly.
+    q: 'Climate-controlled vs standard storage: what is the difference?',
+    a: `Climate-controlled storage is located inside an enclosed building with heating and cooling systems that help provide a more stable indoor environment than standard outdoor storage. Standard storage, often called drive-up storage, is usually accessed from the outside and is often a convenient choice for items that are not sensitive to temperature fluctuations or humidity exposure. Choose climate-controlled storage for furniture, electronics, documents and photos, clothing, collectibles, musical instruments, and long-term storage. Choose standard drive-up storage for lawn equipment, outdoor furniture, tools, plastic bins, short-term moving storage, and items already stored comfortably in a garage.`,
+    aHtml: `<p>Climate-controlled storage is located inside an enclosed building with heating and cooling systems that help provide a more stable indoor environment than standard outdoor storage.</p><p>Standard storage, often called drive-up storage, is usually accessed from the outside and is often a convenient choice for items that are not sensitive to temperature fluctuations or humidity exposure.</p><p><strong>Choose climate-controlled storage for:</strong></p><ul><li>Furniture</li><li>Electronics</li><li>Documents and photos</li><li>Clothing</li><li>Collectibles</li><li>Musical instruments</li><li>Long-term storage</li></ul><p><strong>Choose standard drive-up storage for:</strong></p><ul><li>Lawn equipment</li><li>Outdoor furniture</li><li>Tools</li><li>Plastic bins</li><li>Short-term moving storage</li><li>Items already stored comfortably in a garage</li></ul>`,
   },
   {
     q: 'Indoor Storage vs Outdoor Storage — what is the difference?',
