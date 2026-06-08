@@ -275,6 +275,6 @@ export const CHECKLIST_FAQS = [
   },
   {
     q: 'How do I store seasonal items so they last?',
-    a: `Clean and fully dry every item before packing — even small moisture starts mold in Arkansas humidity. Use hard-sided plastic bins instead of cardboard for fragile items, color-code by season or holiday, and label bins on the top and all four sides. Add cedar blocks or lavender sachets to repel insects. Place items you will need first (Halloween before Christmas) near the front.`,
+    a: `Clean and fully dry every item before packing — even small moisture starts mold in storage. Use hard-sided plastic bins instead of cardboard for fragile items, color-code by season or holiday, and label bins on the top and all four sides. Add cedar blocks or lavender sachets to repel insects. Place items you will need first (Halloween before Christmas) near the front.`,
   },
 ] as const

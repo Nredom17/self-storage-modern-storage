@@ -183,35 +183,53 @@ export default async function MoveInChecklistPage() {
         </div>
       </section>
 
-      {/* ── TOOL ─────────────────────────────────────────────── */}
-      <section id="tool" className="bg-gray-50 py-16">
+      {/* ── TOOL + HOW IT WORKS ──────────────────────────────────
+          Merged 2026-06-05 per Alexandra's note: the MoveInChecklist
+          component is fairly narrow, and sitting it alone inside
+          max-w-7xl left huge whitespace bands on either side. The
+          "How It Works" explainer used to live in the next section
+          full-width; now they share a 2-column grid on lg+ so the
+          space fills naturally. On mobile the tool stays on top
+          (primary action) and the explainer stacks below. */}
+      <section id="tool" className="bg-gray-50 py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <MoveInChecklist />
-        </div>
-      </section>
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12 items-start">
+            {/* Left column on desktop — How It Works explainer.
+                Renders BELOW the tool on mobile via order-2. */}
+            <div className="lg:col-span-2 order-2 lg:order-1 lg:sticky lg:top-24">
+              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+                How it works
+              </p>
+              <h2 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mb-4">
+                How the Move-In Checklist Works
+              </h2>
+              <p className="text-gray-700 leading-relaxed mb-6">
+                Pick what you&apos;re storing, your unit size, and your move-in date. The Modern Storage® Move-In Checklist generates a personalized step-by-step list covering preparation, packing, climate protection, and move-in day — with a progress meter you can use as a working document right up to the day you load.
+              </p>
+              <ol className="space-y-4">
+                {[
+                  { n: '1', t: 'Pick storage type', b: 'Household, business inventory, vehicle, seasonal, or renovation — each generates a different checklist.' },
+                  { n: '2', t: 'Pick unit size', b: 'Six sizes from 5x5 closet to 10x30 extra large. Not sure? The AI Storage Size Finder is one click away.' },
+                  { n: '3', t: 'Get your list', b: 'Check off items as you complete them. The progress meter keeps you organized through the whole move.' },
+                ].map((s) => (
+                  <li key={s.n} className="bg-white rounded-2xl p-5 border border-gray-200 flex gap-4">
+                    <div className="font-bebas text-4xl text-modern-red leading-none shrink-0 w-10">{s.n}</div>
+                    <div>
+                      <h3 className="font-black text-charcoal text-base mb-1 leading-tight">{s.t}</h3>
+                      <p className="text-sm text-gray-600 leading-relaxed">{s.b}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
 
-      {/* ── HOW IT WORKS ─────────────────────────────────────── */}
-      <section className="bg-white py-20 border-y border-gray-200">
-        <div className="max-w-4xl mx-auto px-6">
-          <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">How it works</p>
-          <h2 className="text-3xl lg:text-4xl font-black text-charcoal tracking-tight mb-5">
-            How the Move-In Checklist Works
-          </h2>
-          <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            The Modern Storage® Move-In Checklist generates a personalized step-by-step guide based on three quick inputs — what you are storing, the size of your Modern Storage® unit, and your move-in date. The list covers preparation, packing, climate protection, and move-in day, with a progress meter you can use as a working document right up to the day you load.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {[
-              { n: '1', t: 'Pick storage type', b: 'Household, business inventory, vehicle, seasonal items, or home renovation — each generates a different checklist.' },
-              { n: '2', t: 'Pick unit size', b: 'Eight sizes from 5x5 closet to 10x30 extra large. Not sure? The AI Storage Size Finder is one click away.' },
-              { n: '3', t: 'Get your list', b: 'Check off items as you complete them. The progress meter and section headers keep you organized through the whole move.' },
-            ].map((s) => (
-              <div key={s.n} className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
-                <div className="font-bebas text-5xl text-modern-red leading-none mb-3">{s.n}</div>
-                <h3 className="font-black text-charcoal text-lg mb-2 leading-tight">{s.t}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{s.b}</p>
-              </div>
-            ))}
+            {/* Right column on desktop — the interactive tool.
+                Renders FIRST on mobile (order-1) so the primary
+                action is the first thing visitors see after the
+                hero. */}
+            <div className="lg:col-span-3 order-1 lg:order-2">
+              <MoveInChecklist />
+            </div>
           </div>
         </div>
       </section>
