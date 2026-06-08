@@ -391,8 +391,14 @@ export const CLIMATE_FAQS = [
     // units more expensive than drive-up?" entry further down in
     // the array, which read as a flat one-liner.
     q: 'How much more does climate-controlled storage cost?',
-    a: `Climate-controlled units typically cost more than standard drive-up units, but many renters find the added protection worthwhile when storing valuable or sentimental items. If replacing the item would cost significantly more than the monthly upgrade, climate-controlled storage is usually the safer choice.`,
-    aHtml: `<p>Climate-controlled units typically cost more than standard drive-up units, but many renters find the added protection worthwhile when storing valuable or sentimental items.</p><p>If replacing the item would cost significantly more than the monthly upgrade, climate-controlled storage is usually the safer choice.</p>`,
+    // Rewritten 2026-06-08 verbatim from Alexandra's copy. Longer
+    // 3-paragraph version — opens with the why (enclosed,
+    // conditioned buildings), then the item categories renters
+    // commonly choose climate-controlled for, then the
+    // "depends on what / how long / how difficult to replace"
+    // decision framing.
+    a: `Climate-controlled storage units typically cost more than standard drive-up storage because they are located inside enclosed, conditioned buildings. Many renters find the additional cost worthwhile when storing furniture, electronics, documents, photos, collectibles, musical instruments, clothing, or other belongings that may be sensitive to temperature fluctuations or humidity exposure. Whether the additional cost is worthwhile depends on what you're storing, how long you plan to store it, and how difficult the items would be to replace.`,
+    aHtml: `<p>Climate-controlled storage units typically cost more than standard drive-up storage because they are located inside enclosed, conditioned buildings.</p><p>Many renters find the additional cost worthwhile when storing furniture, electronics, documents, photos, collectibles, musical instruments, clothing, or other belongings that may be sensitive to temperature fluctuations or humidity exposure.</p><p>Whether the additional cost is worthwhile depends on what you're storing, how long you plan to store it, and how difficult the items would be to replace.</p>`,
   },
   {
     // Rewritten 2026-06-05 verbatim from Alexandra's copy. The
