@@ -476,7 +476,7 @@ export const FAQS = [
     aHtml: `Modern Storage® offers <a href="/rv-boat-vehicle">boat storage, RV storage, trailer parking, motorcycle storage, and vehicle parking storage</a> at select Arkansas locations. Outdoor parking, covered parking, and oversized parking spaces are available depending on the facility. Customers searching for boat storage near Beaver Lake, RV storage near Lake Maumelle, or trailer storage near Greers Ferry can compare availability at Modern Storage® Maumelle Blvd in North Little Rock, Modern Storage® Bentonville, Modern Storage® West Little Rock, Modern Storage® Lowell, and Modern Storage® Shackleford.`,
   },
   {
-    q: 'Can I store a boat year-round in Arkansas?',
+    q: 'Can I store a boat year-round?',
     a: `Yes — Modern Storage® offers year-round boat storage in Arkansas. Boat owners near Beaver Lake, Lake Maumelle, Lake Ouachita, and Greers Ferry use Modern Storage® for off-season boat storage, trailer storage, and storage between weekends on the water. Year-round boat storage protects the hull, upholstery, and electronics from sun damage, freeze cycles, and winter weather. Available formats include outdoor parking storage, covered boat parking, and indoor storage for smaller boats and personal watercraft, depending on the location.`,
     aHtml: `Yes — Modern Storage® offers year-round <a href="/rv-boat-vehicle">boat storage in Arkansas</a>. Boat owners near Beaver Lake, Lake Maumelle, Lake Ouachita, and Greers Ferry use Modern Storage® for off-season boat storage, trailer storage, and storage between weekends on the water. Year-round boat storage protects the hull, upholstery, and electronics from sun damage, freeze cycles, and winter weather. Available formats include outdoor parking storage, covered boat parking, and indoor storage for smaller boats and personal watercraft, depending on the location.`,
   },
@@ -486,7 +486,7 @@ export const FAQS = [
     aHtml: `A 10x10 storage unit (100 square feet) holds the contents of a typical one-bedroom apartment: a queen mattress and frame, a dresser, a sofa, a coffee table, a TV, a small dining set, plus 15-20 boxes of personal items. Most customers also fit a few lamps, a bookshelf, and seasonal items. A 10x10 is a popular self-storage unit size for college storage, apartment storage near downtown, storage during a move, and short-term overflow. If you are storing the contents of a two-bedroom home, look at a 10x15 or 10x20 instead — see the full <a href="/size-guide">storage unit size guide</a>.`,
   },
   {
-    q: 'How much does self-storage cost in Arkansas?',
+    q: 'How much does self-storage cost?',
     // Rewritten answer-first: leads with concrete price range so PAA
     // can pull a real number snippet instead of the equivocating
     // "depends on..." opening. Avoids fabricated specifics — the range
@@ -653,7 +653,7 @@ export const HOME_FAQS = [
     aHtml: `Yes — <a href="/climate-controlled">climate-controlled units</a> are available at select Arkansas locations to help protect furniture, electronics, documents, and other temperature-sensitive items. Learn what climate-controlled storage covers, or <a href="/#locations">choose your location</a> to check current availability and reserve online.`,
   },
   {
-    q: 'How much does self-storage cost in Arkansas?',
+    q: 'How much does self-storage cost?',
     // Rewritten answer-first: leads with concrete price range so PAA
     // can quote a real number instead of the previous "depends on..."
     // dodge.

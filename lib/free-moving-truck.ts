@@ -35,7 +35,10 @@ export const HOW_IT_WORKS = [
   {
     n: '3',
     t: 'Pick Up & Move',
-    b: 'Bring your driver’s license and proof of insurance, load up, and drive straight to your unit. Return the truck the same day with a full tank.',
+    // Tightened 2026-06-05 — must specify "valid" driver's license
+    // and that the insurance must cover the truck (not generic
+    // proof of car insurance). Avoids day-of surprises at pickup.
+    b: 'Bring your valid driver’s license and proof of insurance that covers the truck, load up, and drive straight to your unit. Return the truck the same day with a full tank.',
   },
 ] as const
 
