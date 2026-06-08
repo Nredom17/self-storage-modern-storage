@@ -368,7 +368,10 @@ export default async function ClimateControlledPage() {
                 </Link>
               </div>
 
-              <ul className="flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-gray-400">
+              {/* Trust bullets — switched to text-white 2026-06-05
+                  per Alexandra. gray-400 read as illegible on the
+                  charcoal hero background; white reads cleanly. */}
+              <ul className="flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-white">
                 {TRUST_BULLETS.map((t) => (
                   <li key={t} className="flex items-center gap-1.5">
                     <svg className="w-3.5 h-3.5 text-modern-red shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
