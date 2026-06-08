@@ -16,12 +16,14 @@ export const revalidate = 60
 const PAGE_PATH = '/move-in-checklist'
 
 // Hero photo — Modern Storage® team member walking a new customer
-// through the move-in process with a clipboard. Added 2026-06-05
-// when Alexandra dropped it into public/images. Lives on the hero
+// through the move-in process with a clipboard, customer smiling.
+// Swapped 2026-06-05 to a brighter follow-up shot from the same
+// session (the first photo had the customer looking down at the
+// clipboard; this one catches her smiling). Lives on the hero
 // alongside the title; also serves as OpenGraph / Twitter card.
-const HERO_IMAGE = '/images/Modern_Storage_Moving_Checklist.jpg'
+const HERO_IMAGE = '/images/Modern_Storage_Movein_Checklist.png'
 const HERO_ALT =
-  'Modern Storage® team member walking a new customer through the storage move-in checklist with a clipboard'
+  'Modern Storage® team member walking a smiling new customer through the storage move-in checklist on a clipboard'
 
 export const metadata: Metadata = {
   title: { absolute: 'Move-In Checklist | Modern Storage® Self Storage' },
@@ -35,7 +37,7 @@ export const metadata: Metadata = {
     url: SITE_URL + PAGE_PATH,
     siteName: 'Modern Storage®',
     type: 'website',
-    images: [{ url: HERO_IMAGE, width: 1600, height: 1067, alt: HERO_ALT }],
+    images: [{ url: HERO_IMAGE, width: 1500, height: 1000, alt: HERO_ALT }],
   },
   twitter: {
     card: 'summary_large_image',
