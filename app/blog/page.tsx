@@ -144,7 +144,7 @@ export default async function StorageTipsIndexPage() {
                 Older Blogs
               </p>
               <p className="text-sm text-white/85 mt-3 leading-relaxed">
-                Browse the full Modern Storage® archive
+                Browse the Modern Storage® archive
               </p>
               {/* The "Visit modernstorage.com" pill was removed per user
                   feedback — the entire tile is already one big tap target
