@@ -634,12 +634,18 @@ export default async function HomePage() {
               </svg>
               Call to Rent a Unit
             </a>
+            {/* Tenant Support — switched from translucent-white-on-red
+                to solid gray 2026-06-08 per Alexandra. The previous
+                bg-white/15 + white border read as red-on-red against
+                the modern-red section background, which was hard to
+                see. Solid gray reads cleanly as a third tier
+                alongside the white and charcoal siblings. */}
             <a
               href="https://www.modernstorage.com/self-storage"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Existing customers — see all Modern Storage® locations"
-              className="bg-white/15 text-white font-bold px-8 py-3.5 rounded-full hover:bg-white/25 transition-colors text-sm border border-white/40 inline-flex items-center gap-2"
+              className="bg-gray-200 text-charcoal font-bold px-8 py-3.5 rounded-full hover:bg-gray-100 transition-colors text-sm shadow-md inline-flex items-center gap-2"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.949.684V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 5z" />
