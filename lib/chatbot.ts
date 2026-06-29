@@ -289,7 +289,7 @@ export const CHAT_FAQS: ChatFaq[] = [
     question: 'How do I rent or reserve a unit?',
     keywords: ['reserve', 'reservation', 'rent online', 'book', 'sign up', 'how do i rent'],
     answer:
-      `You can view available units and reserve online for any Modern Storage® location. Tell me which location you're interested in and I`ll send you the right link.',
+      `You can view available units and reserve online for any Modern Storage® location. Tell me which location you're interested in and I'll send you the right link.`,
   },
   {
     question: 'Do you offer boat, RV, or vehicle storage?',
