@@ -264,7 +264,7 @@ export const CHAT_FAQS: ChatFaq[] = [
       'cooled',
     ],
     answer:
-      'Many Modern Storage® locations offer climate-controlled units, though availability and sizes vary by facility. You can learn more about climate-controlled storage below, or tell me which location you're interested in.',
+      `Many Modern Storage® locations offer climate-controlled units, though availability and sizes vary by facility. You can learn more about climate-controlled storage below, or tell me which location you're interested in.`,
     links: [
       { label: 'Climate-controlled storage', href: 'https://self-storage.modernstorage.com/climate-controlled' },
     ],
@@ -289,13 +289,13 @@ export const CHAT_FAQS: ChatFaq[] = [
     question: 'How do I rent or reserve a unit?',
     keywords: ['reserve', 'reservation', 'rent online', 'book', 'sign up', 'how do i rent'],
     answer:
-      'You can view available units and reserve online for any Modern Storage® location. Tell me which location you're interested in and I'll send you the right link.',
+      `You can view available units and reserve online for any Modern Storage® location. Tell me which location you're interested in and I`ll send you the right link.',
   },
   {
     question: 'Do you offer boat, RV, or vehicle storage?',
     keywords: ['boat', 'rv', 'camper', 'vehicle', 'car storage', 'trailer', 'motorhome'],
     answer:
-      'Select Modern Storage® locations offer boat, RV, and vehicle storage. Availability varies by facility — let me know which area you're in and I can point you to the right location.',
+      `Select Modern Storage® locations offer boat, RV, and vehicle storage. Availability varies by facility — let me know which area you're in and I can point you to the right location.`,
     links: [
       { label: 'Boat, RV & vehicle storage', href: 'https://self-storage.modernstorage.com/rv-boat-vehicle' },
     ],
@@ -345,7 +345,7 @@ export const CHAT_FAQS: ChatFaq[] = [
       'move into',
     ],
     answer:
-      'No. Modern Storage® units are for storage only — they cannot be used as a residence, for sleeping, or for any kind of overnight occupancy. State and local fire codes, building regulations, and your rental agreement all prohibit anyone from living in a storage unit, for safety reasons. If you're between homes and need short-term housing options, our team can still help you store your belongings while you arrange other accommodations.',
+      `No. Modern Storage® units are for storage only — they cannot be used as a residence, for sleeping, or for any kind of overnight occupancy. State and local fire codes, building regulations, and your rental agreement all prohibit anyone from living in a storage unit, for safety reasons. If you're between homes and need short-term housing options, our team can still help you store your belongings while you arrange other accommodations.`,
   },
   // Smart lock FAQ — added 2026-06-05 per Alexandra's direction.
   // Customers ask about smart locks specifically when they see the
