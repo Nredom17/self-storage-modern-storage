@@ -143,14 +143,14 @@ export const CHATBOT_TEXT = {
   prompt: 'Can I help you?',
   agentName: 'Modern Storage® Help',
   welcome:
-    'Welcome to Modern Storage®! I’m here to help with your storage needs. Please type your question below, and I’ll help you get the answer.',
-  askName: 'First, What’s your name?',
+    'Welcome to Modern Storage®! I'm here to help with your storage needs. Please type your question below, and I'll help you get the answer.',
+  askName: 'First, What's your name?',
   askPhone: 'Thanks. Lastly, what is your phone number?',
   phonePlaceholder: 'Enter your phone number',
   menuIntro:
-    'Great, thank you. How can we help today? You can type a question — like “What are your hours?” — or pick an option below.',
+    'Great, thank you. How can we help today? You can type a question — like "What are your hours?" — or pick an option below.',
   fallback:
-    ‘Sure — type your message below and our team will get back to you by email.’,
+    'Sure — type your message below and our team will get back to you by email.',
   // Polite ending — shown when the visitor signs off ("thanks", "bye",
   // "that's all", etc.). Keeps the door open without burying the visitor in
   // a fallback dead-end menu. Phone number intentionally OMITTED — the
@@ -158,9 +158,9 @@ export const CHATBOT_TEXT = {
   // carries the number, and the Rent a Unit / Tenant Support pills give
   // them the right paths for either audience.
   goodbye:
-    'You’re welcome! Thanks for chatting with Modern Storage®. If you think of anything else, our team is just a tap away — or reserve online from any location page. Have a great day!',
+    'You're welcome! Thanks for chatting with Modern Storage®. If you think of anything else, our team is just a tap away — or reserve online from any location page. Have a great day!',
   noLocationMatch:
-    'I’m not sure which location you mean. Please choose one of these Modern Storage® locations:',
+    'I'm not sure which location you mean. Please choose one of these Modern Storage® locations:',
   // Shown when a visitor asks about hours — we ask which store first, then show
   // that store's hours, so we never have to recite the per-store exceptions.
   hoursPrompt: 'Which Modern Storage® location are you interested in?',
@@ -264,7 +264,7 @@ export const CHAT_FAQS: ChatFaq[] = [
       'cooled',
     ],
     answer:
-      'Many Modern Storage® locations offer climate-controlled units, though availability and sizes vary by facility. You can learn more about climate-controlled storage below, or tell me which location you’re interested in.',
+      'Many Modern Storage® locations offer climate-controlled units, though availability and sizes vary by facility. You can learn more about climate-controlled storage below, or tell me which location you're interested in.',
     links: [
       { label: 'Climate-controlled storage', href: 'https://self-storage.modernstorage.com/climate-controlled' },
     ],
@@ -289,13 +289,13 @@ export const CHAT_FAQS: ChatFaq[] = [
     question: 'How do I rent or reserve a unit?',
     keywords: ['reserve', 'reservation', 'rent online', 'book', 'sign up', 'how do i rent'],
     answer:
-      'You can view available units and reserve online for any Modern Storage® location. Tell me which location you’re interested in and I’ll send you the right link.',
+      'You can view available units and reserve online for any Modern Storage® location. Tell me which location you're interested in and I'll send you the right link.',
   },
   {
     question: 'Do you offer boat, RV, or vehicle storage?',
     keywords: ['boat', 'rv', 'camper', 'vehicle', 'car storage', 'trailer', 'motorhome'],
     answer:
-      'Select Modern Storage® locations offer boat, RV, and vehicle storage. Availability varies by facility — let me know which area you’re in and I can point you to the right location.',
+      'Select Modern Storage® locations offer boat, RV, and vehicle storage. Availability varies by facility — let me know which area you're in and I can point you to the right location.',
     links: [
       { label: 'Boat, RV & vehicle storage', href: 'https://self-storage.modernstorage.com/rv-boat-vehicle' },
     ],
@@ -345,7 +345,7 @@ export const CHAT_FAQS: ChatFaq[] = [
       'move into',
     ],
     answer:
-      'No. Modern Storage® units are for storage only — they cannot be used as a residence, for sleeping, or for any kind of overnight occupancy. State and local fire codes, building regulations, and your rental agreement all prohibit anyone from living in a storage unit, for safety reasons. If you’re between homes and need short-term housing options, our team can still help you store your belongings while you arrange other accommodations.',
+      'No. Modern Storage® units are for storage only — they cannot be used as a residence, for sleeping, or for any kind of overnight occupancy. State and local fire codes, building regulations, and your rental agreement all prohibit anyone from living in a storage unit, for safety reasons. If you're between homes and need short-term housing options, our team can still help you store your belongings while you arrange other accommodations.',
   },
   // Smart lock FAQ — added 2026-06-05 per Alexandra's direction.
   // Customers ask about smart locks specifically when they see the
