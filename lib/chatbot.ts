@@ -353,8 +353,11 @@ export const CHAT_FAQS: ChatFaq[] = [
   // most common phrasings: "smart lock", "what's a smart lock",
   // "phone lock", "keyless", "NFC", etc.
   {
-    question: "What's a smart lock?",
+    question: "What's a Modern Smart Unit / smart lock?",
     keywords: [
+      'smart unit',
+      'smart units',
+      'modern smart unit',
       'smart lock',
       'smart locks',
       'smartlock',
@@ -374,7 +377,31 @@ export const CHAT_FAQS: ChatFaq[] = [
       'no physical key',
     ],
     answer:
-      'A smart lock is a keyless lock that lets tenants access their storage unit with their phone instead of a physical key. You can manage your storage experience right from your smartphone — pay rent, unlock your unit using NFC tap, share temporary access by text, and view your lock activity digitally.',
+      'A Modern Smart Unit is a storage unit equipped with a smart lock instead of a traditional lock and key. Using the Modern Storage app, you can:\n\n• Unlock your unit with your smartphone using NFC tap\n• Pay your rent from the app\n• Share temporary access with family members, employees, or friends\n• View your lock activity and manage access digitally\n• Never worry about carrying or losing a physical key\n\nWould you like to see if Smart Units are available at your preferred Modern Storage location?',
+  },
+  {
+    question: 'What is a standard unit / unit without a smart lock?',
+    keywords: [
+      'standard unit',
+      'standard units',
+      'regular unit',
+      'regular units',
+      'traditional unit',
+      'non-smart unit',
+      'without smart lock',
+      'without a smart lock',
+      'no smart lock',
+      'regular key',
+      'traditional key',
+      'physical key',
+      'lock and key',
+      'normal unit',
+      'normal storage',
+      'units without',
+      'ones without',
+    ],
+    answer:
+      'A standard storage unit provides the same secure storage space but uses a traditional lock and key instead of a smart lock — you\'ll unlock your unit manually each time you visit.\n\nBoth options are secure and offer the same great storage experience. The main difference is convenience: Modern Smart Units offer keyless entry and digital access management, while standard units use a traditional lock and key.',
   },
 ]
 
