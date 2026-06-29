@@ -270,6 +270,12 @@ export const CHAT_FAQS: ChatFaq[] = [
     ],
   },
   {
+    question: 'What size is my unit / what is my unit number?',
+    keywords: ['my unit', 'unit #', 'unit number', 'my size', 'what size is my', 'what size is unit', 'size of my unit', 'my storage unit size'],
+    answer:
+      'For account-specific information like your unit size or number, you\'ll need to log in to your Modern Storage® account or contact your store directly — they\'ll be happy to help!',
+  },
+  {
     question: 'What size storage unit do I need?',
     keywords: ['size', 'sizes', 'how big', 'how large', 'dimensions', 'what size', 'square feet'],
     answer:
