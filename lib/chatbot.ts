@@ -143,14 +143,14 @@ export const CHATBOT_TEXT = {
   prompt: 'Can I help you?',
   agentName: 'Modern Storage® Help',
   welcome:
-    `Welcome to Modern Storage®! I'm here to help with your storage needs. Please type your question below, and I'll help you get the answer.`,
-  askName: `First, What's your name?`,
+    'Welcome to Modern Storage®! I’m here to help with your storage needs. Please type your question below, and I’ll help you get the answer.',
+  askName: 'First, What’s your name?',
   askPhone: 'Thanks. Lastly, what is your phone number?',
   phonePlaceholder: 'Enter your phone number',
   menuIntro:
-    'Great, thank you. How can we help today? You can type a question — like "What are your hours?" — or pick an option below.',
+    'Great, thank you. How can we help today? You can type a question — like “What are your hours?” — or pick an option below.',
   fallback:
-    'Sure — type your message below and our team will get back to you by email.',
+    `Sure — type your message below and our team will get back to you by email.`,
   // Polite ending — shown when the visitor signs off ("thanks", "bye",
   // "that's all", etc.). Keeps the door open without burying the visitor in
   // a fallback dead-end menu. Phone number intentionally OMITTED — the
@@ -158,9 +158,9 @@ export const CHATBOT_TEXT = {
   // carries the number, and the Rent a Unit / Tenant Support pills give
   // them the right paths for either audience.
   goodbye:
-    `You're welcome! Thanks for chatting with Modern Storage®. If you think of anything else, our team is just a tap away — or reserve online from any location page. Have a great day!`,
+    'You’re welcome! Thanks for chatting with Modern Storage®. If you think of anything else, our team is just a tap away — or reserve online from any location page. Have a great day!',
   noLocationMatch:
-    `I'm not sure which location you mean. Please choose one of these Modern Storage® locations:`,
+    'I’m not sure which location you mean. Please choose one of these Modern Storage® locations:',
   // Shown when a visitor asks about hours — we ask which store first, then show
   // that store's hours, so we never have to recite the per-store exceptions.
   hoursPrompt: 'Which Modern Storage® location are you interested in?',
@@ -264,16 +264,10 @@ export const CHAT_FAQS: ChatFaq[] = [
       'cooled',
     ],
     answer:
-      `Many Modern Storage® locations offer climate-controlled units, though availability and sizes vary by facility. You can learn more about climate-controlled storage below, or tell me which location you're interested in.`,
+      'Many Modern Storage® locations offer climate-controlled units, though availability and sizes vary by facility. You can learn more about climate-controlled storage below, or tell me which location you’re interested in.',
     links: [
       { label: 'Climate-controlled storage', href: 'https://self-storage.modernstorage.com/climate-controlled' },
     ],
-  },
-  {
-    question: 'What size is my unit / what is my unit number?',
-    keywords: ['my unit', 'unit #', 'unit number', 'my size', 'what size is my', 'what size is unit', 'size of my unit', 'my storage unit size'],
-    answer:
-      'For account-specific information like your unit size or number, you\'ll need to log in to your Modern Storage® account or contact your store directly — they\'ll be happy to help!',
   },
   {
     question: 'What size storage unit do I need?',
@@ -289,13 +283,13 @@ export const CHAT_FAQS: ChatFaq[] = [
     question: 'How do I rent or reserve a unit?',
     keywords: ['reserve', 'reservation', 'rent online', 'book', 'sign up', 'how do i rent'],
     answer:
-      `You can view available units and reserve online for any Modern Storage® location. Tell me which location you're interested in and I'll send you the right link.`,
+      'You can view available units and reserve online for any Modern Storage® location. Tell me which location you’re interested in and I’ll send you the right link.',
   },
   {
     question: 'Do you offer boat, RV, or vehicle storage?',
     keywords: ['boat', 'rv', 'camper', 'vehicle', 'car storage', 'trailer', 'motorhome'],
     answer:
-      `Select Modern Storage® locations offer boat, RV, and vehicle storage. Availability varies by facility — let me know which area you're in and I can point you to the right location.`,
+      'Select Modern Storage® locations offer boat, RV, and vehicle storage. Availability varies by facility — let me know which area you’re in and I can point you to the right location.',
     links: [
       { label: 'Boat, RV & vehicle storage', href: 'https://self-storage.modernstorage.com/rv-boat-vehicle' },
     ],
@@ -345,7 +339,7 @@ export const CHAT_FAQS: ChatFaq[] = [
       'move into',
     ],
     answer:
-      `No. Modern Storage® units are for storage only — they cannot be used as a residence, for sleeping, or for any kind of overnight occupancy. State and local fire codes, building regulations, and your rental agreement all prohibit anyone from living in a storage unit, for safety reasons. If you're between homes and need short-term housing options, our team can still help you store your belongings while you arrange other accommodations.`,
+      'No. Modern Storage® units are for storage only — they cannot be used as a residence, for sleeping, or for any kind of overnight occupancy. State and local fire codes, building regulations, and your rental agreement all prohibit anyone from living in a storage unit, for safety reasons. If you’re between homes and need short-term housing options, our team can still help you store your belongings while you arrange other accommodations.',
   },
   // Smart lock FAQ — added 2026-06-05 per Alexandra's direction.
   // Customers ask about smart locks specifically when they see the
@@ -353,11 +347,8 @@ export const CHAT_FAQS: ChatFaq[] = [
   // most common phrasings: "smart lock", "what's a smart lock",
   // "phone lock", "keyless", "NFC", etc.
   {
-    question: "What's a Modern Smart Unit / smart lock?",
+    question: "What's a smart lock?",
     keywords: [
-      'smart unit',
-      'smart units',
-      'modern smart unit',
       'smart lock',
       'smart locks',
       'smartlock',
@@ -377,175 +368,125 @@ export const CHAT_FAQS: ChatFaq[] = [
       'no physical key',
     ],
     answer:
-      'A Modern Smart Unit is a storage unit equipped with a smart lock instead of a traditional lock and key. Using the Modern Storage app, you can:\n\n• Unlock your unit with your smartphone using NFC tap\n• Pay your rent from the app\n• Share temporary access with family members, employees, or friends\n• View your lock activity and manage access digitally\n• Never worry about carrying or losing a physical key\n\nWould you like to see if Smart Units are available at your preferred Modern Storage location?',
+      'A smart lock is a keyless lock that lets tenants access their storage unit with their phone instead of a physical key. You can manage your storage experience right from your smartphone — pay rent, unlock your unit using NFC tap, share temporary access by text, and view your lock activity digitally.',
   },
   {
-    question: 'How much is the late fee? What happens if I pay late?',
+    question: `What is a Modern Smart Unit / smart lock?`,
     keywords: [
-      'late fee',
-      'late fees',
-      'late charge',
-      'late charges',
-      'late payment',
-      'overdue',
-      'past due',
-      'how much is late',
-      'after 5 days',
-      'after the 5th',
-      'if i pay late',
-      'when is rent due',
-      'due date',
-      'penalty',
-      'lien',
-      'auction',
-      'gate access',
-      'restricted access',
-      'account unpaid',
-      'behind on rent',
-      'missed payment',
+      'smart unit', 'smart units', 'modern smart unit', 'smart lock', 'smart locks',
+      'smartlock', 'phone lock', 'phone unlock', 'keyless', 'keyless lock',
+      'keyless entry', 'nfc', 'nfc tap', 'tap to unlock', 'digital lock',
+      'app lock', 'unlock with phone', 'open with phone', 'no key', 'no physical key',
     ],
     answer:
-      'Rent is due on or before the 1st of each month.\n\nIf your rent has not been paid:\n\n• On the 5th: A $5 late fee is added.\n• On the 10th: An additional $10 late fee is added.\n• On the 15th: An additional $15 late fee is added.\n\nThe maximum late fees are $30 per month. If your account remains unpaid, additional actions such as restricted gate access and, if the balance continues to go unpaid, the lien and auction process may apply according to your Rental Agreement.\n\nIf you need help bringing your account current or have questions about your balance, please contact your local Modern Storage location.',
+      `A Modern Smart Unit is a storage unit equipped with a smart lock instead of a traditional lock and key. Using the Modern Storage app, you can:\n\n` +
+      `• Unlock your unit with your smartphone using NFC tap\n` +
+      `• Pay your rent from the app\n` +
+      `• Share temporary access with family members, employees, or friends\n` +
+      `• View your lock activity and manage access digitally\n` +
+      `• Never worry about carrying or losing a physical key\n\n` +
+      `Would you like to see if Smart Units are available at your preferred Modern Storage location?`,
   },
   {
-    question: 'Can I choose my exact storage unit?',
+    question: `What is a standard unit / unit without a smart lock?`,
     keywords: [
-      'choose my unit',
-      'pick my unit',
-      'select my unit',
-      'choose a specific unit',
-      'pick a specific unit',
-      'specific unit',
-      'exact unit',
-      'which unit',
-      'choose which unit',
-      'pick which unit',
-      'unit location',
-      'near elevator',
-      'near loading',
-      'closest to',
-      'can i pick',
-      'can i choose',
+      'standard unit', 'standard units', 'regular unit', 'regular units',
+      'traditional unit', 'non-smart unit', 'without smart lock', 'without a smart lock',
+      'no smart lock', 'regular key', 'traditional key', 'physical key',
+      'lock and key', 'normal unit', 'normal storage', 'units without', 'ones without',
     ],
     answer:
-      'Yes. If multiple units that meet your needs are available, you can often choose the one you prefer. Our team can help you find a unit that\'s closest to an elevator, loading dock, hallway, or other convenient location, depending on availability.',
+      `A standard storage unit provides the same secure storage space but uses a traditional lock and key instead of a smart lock — you'll unlock your unit manually each time you visit.\n\n` +
+      `Both options are secure and offer the same great storage experience. The main difference is convenience: Modern Smart Units offer keyless entry and digital access management, while standard units use a traditional lock and key.`,
   },
   {
-    question: 'Can I reserve a unit without moving in today?',
+    question: `Can I see or view a unit before renting?`,
     keywords: [
-      'reserve a unit',
-      'reservation',
-      'reserve before',
-      'hold a unit',
-      'book a unit',
-      'reserve without moving',
-      'reserve in advance',
-      'reserve ahead',
-      'future move in',
-      'move in later',
-      'not moving in today',
-      'moving in next',
-      'reserve for later',
-      'hold my spot',
+      'view a unit', 'see a unit', 'tour a unit', 'look at a unit',
+      'visit before renting', 'see before i rent', 'view before renting',
+      'tour before renting', 'can i see', 'can i view', 'can i tour',
+      'able to view', 'able to see', 'show me a unit', 'look before i rent',
+      'before i sign', 'before signing',
     ],
     answer:
-      'Yes. Depending on availability, you may be able to reserve a unit before your move-in date. Contact your preferred Modern Storage location for current availability and reservation options.',
+      `Absolutely. We encourage prospective tenants to see a unit before renting whenever possible.\n\n` +
+      `During office hours, a member of our team can show you available unit sizes, explain the differences between standard and climate-controlled storage, and help you choose the best option for your needs.\n\n` +
+      `If the exact unit you're interested in isn't available to tour, we can usually show you a similar unit so you know what to expect.\n\n` +
+      `Would you like help finding the right unit size or scheduling a visit? Send us a message with which facility you'd like to visit and our team will get back to you by email.`,
   },
   {
-    question: 'Can someone help me decide what size I need?',
+    question: `Can I choose my exact storage unit?`,
     keywords: [
-      'help me decide',
-      'help me choose',
-      'what size do i need',
-      'recommend a size',
-      'which size',
-      'not sure what size',
-      'help choosing size',
-      'what size should i get',
-      'how do i know what size',
-      'size recommendation',
-      'suggest a size',
-      'right size for me',
+      'choose my unit', 'pick my unit', 'select my unit', 'choose a specific unit',
+      'pick a specific unit', 'specific unit', 'exact unit', 'which unit',
+      'choose which unit', 'pick which unit', 'unit location', 'near elevator',
+      'near loading', 'closest to', 'can i pick', 'can i choose',
     ],
     answer:
-      'Absolutely. Our team can recommend the right size based on what you\'re storing. You can also use our online Size Guide and AI Size Finder for personalized recommendations.',
+      `Yes. If multiple units that meet your needs are available, you can often choose the one you prefer. Our team can help you find a unit that's closest to an elevator, loading dock, hallway, or other convenient location, depending on availability.`,
+  },
+  {
+    question: `Can I reserve a unit without moving in today?`,
+    keywords: [
+      'reserve a unit', 'reservation', 'reserve before', 'hold a unit', 'book a unit',
+      'reserve without moving', 'reserve in advance', 'reserve ahead',
+      'future move in', 'move in later', 'not moving in today',
+      'moving in next', 'reserve for later', 'hold my spot',
+    ],
+    answer:
+      `Yes. Depending on availability, you may be able to reserve a unit before your move-in date. Contact your preferred Modern Storage location for current availability and reservation options.`,
+  },
+  {
+    question: `Can someone help me decide what size I need?`,
+    keywords: [
+      'help me decide', 'help me choose', 'what size do i need', 'recommend a size',
+      'which size', 'not sure what size', 'help choosing size',
+      'what size should i get', 'how do i know what size', 'size recommendation',
+      'suggest a size', 'right size for me',
+    ],
+    answer:
+      `Absolutely. Our team can recommend the right size based on what you're storing. You can also use our online Size Guide and AI Size Finder for personalized recommendations.`,
     links: [
       { label: 'AI Storage Size Finder', href: CHATBOT_TEXT.sizeFinderUrl },
       { label: 'Size Guide', href: CHATBOT_TEXT.sizeGuideUrl },
     ],
   },
   {
-    question: 'Can I switch to a different size unit later?',
+    question: `Can I switch to a different size unit later?`,
     keywords: [
-      'switch unit',
-      'change unit',
-      'transfer unit',
-      'upgrade unit',
-      'downgrade unit',
-      'move to bigger',
-      'move to smaller',
-      'different size later',
-      'change size',
-      'switch size',
-      'larger unit',
-      'smaller unit',
-      'transfer to another',
-      'can i upgrade',
-      'can i downgrade',
-      'can i switch',
-      'can i change',
-      'needs change',
+      'switch unit', 'change unit', 'transfer unit', 'upgrade unit', 'downgrade unit',
+      'move to bigger', 'move to smaller', 'different size later', 'change size',
+      'switch size', 'larger unit', 'smaller unit', 'transfer to another',
+      'can i upgrade', 'can i downgrade', 'can i switch', 'can i change', 'needs change',
     ],
     answer:
-      'Yes. If your storage needs change and another unit is available, our team can help you transfer to a larger or smaller unit.',
+      `Yes. If your storage needs change and another unit is available, our team can help you transfer to a larger or smaller unit.`,
   },
   {
-    question: 'Can I see or view a unit before renting?',
+    question: `What is my unit size / what size is my unit?`,
     keywords: [
-      'view a unit',
-      'see a unit',
-      'tour a unit',
-      'look at a unit',
-      'visit before renting',
-      'see before i rent',
-      'view before renting',
-      'tour before renting',
-      'can i see',
-      'can i view',
-      'can i tour',
-      'able to view',
-      'able to see',
-      'show me a unit',
-      'look before i rent',
-      'before i sign',
-      'before signing',
+      'my unit', 'unit #', 'unit number', 'my size', 'what size is my',
+      'what size is unit', 'size of my unit', 'my storage unit size',
     ],
     answer:
-      'Absolutely. We encourage prospective tenants to see a unit before renting whenever possible.\n\nDuring office hours, a member of our team can show you available unit sizes, explain the differences between standard and climate-controlled storage, and help you choose the best option for your needs.\n\nIf the exact unit you\'re interested in isn\'t available to tour, we can usually show you a similar unit so you know what to expect.\n\nYou can also view photos of many of our storage unit sizes on our website as a great visual reference before you visit.\n\nWould you like help finding the right unit size or scheduling a visit? If so, send us a message with which facility you\'d like to visit and our team will get back to you by email.',
+      `For account-specific information like your unit size or number, you'll need to log in to your Modern Storage account or contact your store directly — they'll be happy to help!`,
   },
   {
-    question: 'What is a standard unit / unit without a smart lock?',
+    question: `How much is the late fee? What happens if I pay late?`,
     keywords: [
-      'standard unit',
-      'standard units',
-      'regular unit',
-      'regular units',
-      'traditional unit',
-      'non-smart unit',
-      'without smart lock',
-      'without a smart lock',
-      'no smart lock',
-      'regular key',
-      'traditional key',
-      'physical key',
-      'lock and key',
-      'normal unit',
-      'normal storage',
-      'units without',
-      'ones without',
+      'late fee', 'late fees', 'late charge', 'late charges', 'late payment',
+      'overdue', 'past due', 'how much is late', 'after 5 days', 'after the 5th',
+      'if i pay late', 'when is rent due', 'due date', 'penalty', 'lien', 'auction',
+      'gate access', 'restricted access', 'account unpaid', 'behind on rent', 'missed payment',
     ],
     answer:
-      'A standard storage unit provides the same secure storage space but uses a traditional lock and key instead of a smart lock — you\'ll unlock your unit manually each time you visit.\n\nBoth options are secure and offer the same great storage experience. The main difference is convenience: Modern Smart Units offer keyless entry and digital access management, while standard units use a traditional lock and key.',
+      `Rent is due on or before the 1st of each month.\n\n` +
+      `If your rent has not been paid:\n` +
+      `• On the 5th: A $5 late fee is added.\n` +
+      `• On the 10th: An additional $10 late fee is added.\n` +
+      `• On the 15th: An additional $15 late fee is added.\n\n` +
+      `The maximum late fees are $30 per month. If your account remains unpaid, additional actions such as restricted gate access and, if the balance continues to go unpaid, the lien and auction process may apply according to your Rental Agreement.\n\n` +
+      `If you need help bringing your account current or have questions about your balance, please contact your local Modern Storage location.`,
   },
 ]
 
