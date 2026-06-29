@@ -143,8 +143,8 @@ export const CHATBOT_TEXT = {
   prompt: 'Can I help you?',
   agentName: 'Modern Storage® Help',
   welcome:
-    'Welcome to Modern Storage®! I'm here to help with your storage needs. Please type your question below, and I'll help you get the answer.',
-  askName: 'First, What's your name?',
+    `Welcome to Modern Storage®! I'm here to help with your storage needs. Please type your question below, and I'll help you get the answer.`,
+  askName: `First, What's your name?`,
   askPhone: 'Thanks. Lastly, what is your phone number?',
   phonePlaceholder: 'Enter your phone number',
   menuIntro:
@@ -158,9 +158,9 @@ export const CHATBOT_TEXT = {
   // carries the number, and the Rent a Unit / Tenant Support pills give
   // them the right paths for either audience.
   goodbye:
-    'You're welcome! Thanks for chatting with Modern Storage®. If you think of anything else, our team is just a tap away — or reserve online from any location page. Have a great day!',
+    `You're welcome! Thanks for chatting with Modern Storage®. If you think of anything else, our team is just a tap away — or reserve online from any location page. Have a great day!`,
   noLocationMatch:
-    'I'm not sure which location you mean. Please choose one of these Modern Storage® locations:',
+    `I'm not sure which location you mean. Please choose one of these Modern Storage® locations:`,
   // Shown when a visitor asks about hours — we ask which store first, then show
   // that store's hours, so we never have to recite the per-store exceptions.
   hoursPrompt: 'Which Modern Storage® location are you interested in?',
