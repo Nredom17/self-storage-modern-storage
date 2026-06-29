@@ -380,6 +380,30 @@ export const CHAT_FAQS: ChatFaq[] = [
       'A Modern Smart Unit is a storage unit equipped with a smart lock instead of a traditional lock and key. Using the Modern Storage app, you can:\n\n• Unlock your unit with your smartphone using NFC tap\n• Pay your rent from the app\n• Share temporary access with family members, employees, or friends\n• View your lock activity and manage access digitally\n• Never worry about carrying or losing a physical key\n\nWould you like to see if Smart Units are available at your preferred Modern Storage location?',
   },
   {
+    question: 'Can I see or view a unit before renting?',
+    keywords: [
+      'view a unit',
+      'see a unit',
+      'tour a unit',
+      'look at a unit',
+      'visit before renting',
+      'see before i rent',
+      'view before renting',
+      'tour before renting',
+      'can i see',
+      'can i view',
+      'can i tour',
+      'able to view',
+      'able to see',
+      'show me a unit',
+      'look before i rent',
+      'before i sign',
+      'before signing',
+    ],
+    answer:
+      'Absolutely. We encourage prospective tenants to see a unit before renting whenever possible.\n\nDuring office hours, a member of our team can show you available unit sizes, explain the differences between standard and climate-controlled storage, and help you choose the best option for your needs.\n\nIf the exact unit you\'re interested in isn\'t available to tour, we can usually show you a similar unit so you know what to expect.\n\nYou can also view photos of many of our storage unit sizes on our website as a great visual reference before you visit.\n\nWould you like help finding the right unit size or scheduling a visit? If so, send us a message with which facility you\'d like to visit and our team will get back to you by email.',
+  },
+  {
     question: 'What is a standard unit / unit without a smart lock?',
     keywords: [
       'standard unit',
