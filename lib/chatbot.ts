@@ -150,7 +150,7 @@ export const CHATBOT_TEXT = {
   menuIntro:
     'Great, thank you. How can we help today? You can type a question — like “What are your hours?” — or pick an option below.',
   fallback:
-    'I don’t have an answer for that one. For more information, please contact your Modern Storage® office directly and our team will be glad to help — or pick an option below.',
+    ‘Sure — type your message below and our team will get back to you by email.’,
   // Polite ending — shown when the visitor signs off ("thanks", "bye",
   // "that's all", etc.). Keeps the door open without burying the visitor in
   // a fallback dead-end menu. Phone number intentionally OMITTED — the
