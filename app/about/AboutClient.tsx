@@ -132,12 +132,12 @@ function StatCard({ icon, value, label, sub }: { icon: string; value: string; la
 
 // ── Timeline ─────────────────────────────────────────────────────────────────
 const TIMELINE = [
-  { year: '2009', title: 'Founded in Arkansas', body: `Modern Storage® opens its first location with a simple goal — build the storage facility we'd actually want to use.` },
-  { year: '2014', title: 'Expanding Across Central Arkansas', body: `Growing demand leads to new locations across Little Rock, North Little Rock, and surrounding communities.` },
-  { year: '2018', title: 'Northwest Arkansas Launch', body: `Modern Storage® enters the NWA market with premium climate-controlled facilities in Bentonville, Lowell, and Springdale.` },
-  { year: '2021', title: 'Smart Locks & Modern Technology', body: `We become one of the first Arkansas storage companies to roll out app-controlled smart locks, contactless rentals, and digital access.` },
+  { year: '2017', title: 'Founded in North Little Rock', body: `Modern Storage® is established in North Little Rock, Arkansas — built to deliver a secure, convenient, and customer-focused storage experience.` },
+  { year: '2019', title: 'Growing Across Arkansas', body: `Expanding throughout Central Arkansas with new locations offering climate-controlled storage, drive-up units, vehicle storage, and online rental tools.` },
+  { year: '2021', title: 'Northwest Arkansas Launch', body: `Modern Storage® enters the NWA market with premium facilities in Bentonville, Lowell, and Springdale — bringing the same high standard to Northwest Arkansas.` },
+  { year: '2022', title: 'Smart Locks & Modern Technology', body: `One of the first Arkansas storage companies to deploy app-controlled smart locks, contactless rentals, and digital access — making renting simple from start to finish.` },
   { year: '2024', title: '10 Locations & Top 50 Nationally', body: `Modern Storage® reaches 10 Arkansas locations and earns a spot on Inside Self Storage's Top 50 management companies in the U.S.` },
-  { year: 'Today', title: 'The Future of Storage', body: `Serving 100,000+ customers with a team that treats every unit like it's their own. Arkansas built. Arkansas proud.` },
+  { year: 'Today', title: 'Raising the Standard', body: `Every property operates under consistent standards for cleanliness, security, customer service, and operational excellence — locally managed by experienced professionals.` },
 ]
 
 const AWARDS = [
@@ -227,19 +227,22 @@ export default function AboutClient({ social }: { social: Social }) {
       <section className="bg-white py-16">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Our Story</p>
-          <h2 className="text-3xl font-black text-charcoal mb-6">Built in Arkansas. Built for Arkansas.</h2>
+          <h2 className="text-3xl font-black text-charcoal mb-6">About Modern Storage&#174;</h2>
           <div className="text-gray-600 leading-relaxed space-y-4 text-base">
             <p>
-              Modern Storage&#174; was founded in 2009 with a straightforward premise: self storage in Arkansas should be better. Not just bigger units or lower prices &#8212; better in every way. Cleaner facilities. Smarter technology. Real people answering the phone.
+              Modern Storage&#174; is an Arkansas-based storage company founded in 2017 and headquartered in North Little Rock, Arkansas. We provide professionally managed storage facilities designed to deliver a secure, convenient, and customer-focused experience for homeowners, renters, businesses, and organizations across the state.
             </p>
             <p>
-              We started with one location and a stubborn belief that the storage industry was overdue for a serious upgrade. Fifteen years later, we operate 10 locations across Arkansas, manage more than 10,000 units, and serve over 100,000 customers &#8212; all while staying 100% locally owned and operated.
+              Today, Modern Storage&#174; operates a growing network of storage facilities throughout Arkansas, offering climate-controlled storage, drive-up units, vehicle storage, business storage, and modern online rental tools that make renting and managing a storage unit simple from start to finish.
             </p>
             <p>
-              Along the way, we became one of the first Arkansas storage companies to deploy app-controlled smart locks and contactless rentals. We launched Modern Storage Unpacked, a podcast that ranked in the national top 10. We wrote a book. We earned Best Self Storage honors three years running in both Northwest and Central Arkansas.
+              Our commitment extends beyond operating exceptional storage facilities. Modern Storage&#174; has grown into a trusted resource for customers, property owners, developers, and investors by providing educational content about self-storage, commercial real estate, construction, and property management. Through our blog, videos, online tools, and the Modern Storage&#174; Unpacked podcast, we share industry knowledge that helps people make informed decisions.
             </p>
             <p>
-              None of it happened because we followed what everyone else was doing. It happened because we kept asking a simple question: what would actually make this better for the customer?
+              As an independently owned and operated Arkansas company, we focus on long-term investment in our facilities, technology, employees, and the communities we serve. Every property operates under consistent standards for cleanliness, security, customer service, and operational excellence while remaining locally managed by experienced professionals.
+            </p>
+            <p>
+              Whether you&#39;re looking for a storage unit, researching the industry, exploring development opportunities, or simply learning more about Modern Storage&#174;, we&#39;re committed to providing the knowledge, service, and reliability you can count on.
             </p>
           </div>
         </div>
