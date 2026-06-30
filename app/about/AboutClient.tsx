@@ -281,7 +281,7 @@ export default function AboutClient({ social }: { social: Social }) {
           <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Community</p>
           <h2 className="text-3xl font-black text-charcoal mb-4">Arkansas Proud</h2>
           <p className="text-gray-600 text-base leading-relaxed mb-8 max-w-2xl">
-            We&#39;re not a REIT. We&#39;re not a national chain managed from out of state. Every dollar earned stays in Arkansas, every decision is made by people who live here, and every facility is held to a standard we&#39;d be proud to show our neighbors.
+            We&#39;re not a REIT. We&#39;re not a faceless national chain. Every decision is made by people who know this industry, and every facility is held to a standard we&#39;d be proud to show our neighbors.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
