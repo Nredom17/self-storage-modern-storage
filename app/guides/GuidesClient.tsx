@@ -220,27 +220,26 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
       </section>
 
       {/* EEAT footer */}
-      <section className="bg-charcoal text-white py-8">
+      <section className="bg-charcoal text-white py-6">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Expert Reviewed</p>
-              <p className="font-black text-white text-lg mb-1">Reviewed by the Modern Storage® Team</p>
-              <p className="text-gray-400 text-sm">Serving Arkansas Since 2009 · Last Updated June 2026</p>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { v: '15+', l: 'Years Operating' },
-                { v: '10', l: 'AR Locations' },
-                { v: '100k+', l: 'Customers Served' },
-                { v: '30+', l: 'Expert Guides' },
-              ].map((s) => (
-                <div key={s.l} className="text-center">
-                  <p className="text-xl font-black text-modern-red">{s.v}</p>
-                  <p className="text-xs text-gray-400">{s.l}</p>
+          <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">Expert Reviewed</p>
+          <p className="font-black text-white text-base mb-0.5">Reviewed by the Modern Storage® Team</p>
+          <p className="text-gray-400 text-sm mb-5">Serving Arkansas Since 2009 · Last Updated June 2026</p>
+          <div className="border-t border-white/10 pt-5 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0">
+            {[
+              { v: '15+', l: 'Years Operating' },
+              { v: '10', l: 'Arkansas Locations' },
+              { v: '100k+', l: 'Customers Served' },
+              { v: '30+', l: 'Expert Resources' },
+            ].map((s, i) => (
+              <div key={s.l} className="flex items-center gap-0">
+                <div className="text-center px-6 first:pl-0 last:pr-0">
+                  <p className="text-2xl font-black text-modern-red leading-none">{s.v}</p>
+                  <p className="text-xs text-gray-400 mt-1">{s.l}</p>
                 </div>
-              ))}
-            </div>
+                {i < 3 && <div className="hidden sm:block h-8 w-px bg-white/20" />}
+              </div>
+            ))}
           </div>
         </div>
       </section>
