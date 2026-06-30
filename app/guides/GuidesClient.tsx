@@ -1,6 +1,7 @@
 "use client"
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Guide, FAQ } from './data'
 
 const TOPICS = [
@@ -47,26 +48,42 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
   return (
     <main>
       {/* Hero */}
-      <section className="bg-charcoal text-white py-10">
+      <section className="bg-charcoal text-white py-10 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:gap-16">
-            <div className="flex-1">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:gap-10">
+
+            {/* Left: text */}
+            <div className="flex-1 min-w-0">
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Modern Storage® Resource Center</p>
               <h1 className="text-3xl lg:text-4xl font-black tracking-tight leading-tight mb-4">
                 Arkansas Self Storage <span className="text-modern-red">Resource Center</span>
               </h1>
-              <p className="text-gray-300 text-base leading-relaxed max-w-xl">
+              <p className="text-gray-300 text-base leading-relaxed max-w-md mb-6">
                 Everything you need to find the right unit, protect your belongings from Arkansas humidity, move smarter, and store your business inventory — all in one place.
               </p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-3">
+                {STATS.map((s) => (
+                  <div key={s.label} className="bg-white/10 rounded-xl p-3 text-center">
+                    <p className="text-xl font-black text-modern-red">{s.value}</p>
+                    <p className="text-xs text-gray-300 font-bold leading-tight">{s.label}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="grid grid-cols-2 gap-4 mt-8 lg:mt-0 lg:min-w-64">
-              {STATS.map((s) => (
-                <div key={s.label} className="bg-white/10 rounded-xl p-4 text-center">
-                  <p className="text-2xl font-black text-modern-red">{s.value}</p>
-                  <p className="text-xs text-gray-300 font-bold">{s.label}</p>
-                </div>
-              ))}
+
+            {/* Right: team photo */}
+            <div className="relative mt-8 lg:mt-0 lg:w-[480px] lg:flex-shrink-0 rounded-2xl overflow-hidden" style={{ height: '300px' }}>
+              <Image
+                src="/images/modern-storage-team-consultation.jpg"
+                alt="Modern Storage team helping a customer choose the right storage unit"
+                fill
+                className="object-cover object-top"
+                priority
+                sizes="(max-width: 1024px) 100vw, 480px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-l from-transparent to-charcoal/30" />
             </div>
+
           </div>
         </div>
       </section>
@@ -99,17 +116,14 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
         </div>
       </div>
 
-      {/* Pillar intro + topic grid + featured guides — ONE unified section, ONE container */}
+      {/* Pillar intro + topic grid + featured guides */}
       <section className="bg-white py-10 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6">
-
-          {/* Intro text */}
           <h2 className="text-2xl font-black text-charcoal mb-2">Your Complete Guide to Self Storage in Arkansas</h2>
           <p className="text-gray-600 leading-relaxed mb-6 max-w-3xl">
             Choosing a storage unit involves more than picking a size. Arkansas&#39;s climate, your specific situation — moving, downsizing, running a business, storing a boat — and the features of each facility all matter. This resource center brings together everything Modern Storage® has learned from 15+ years serving Arkansas customers across 10 locations.
           </p>
 
-          {/* Topic boxes — 4-col, same width as everything else */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
             {TOPIC_LINKS.map((t) => (
               <Link key={t.href} href={t.href}
@@ -121,7 +135,6 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
             ))}
           </div>
 
-          {/* Featured Guides — same container, no gap, 4-col */}
           <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">Start Here</p>
           <h2 className="text-xl font-black text-charcoal mb-4">Featured Guides</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -135,7 +148,6 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
               </Link>
             ))}
           </div>
-
         </div>
       </section>
 
@@ -152,7 +164,7 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {filtered.map((g) => (
                 <Link key={g.href} href={g.href}
-                  className="group bg-white hover:bg-white rounded-xl p-5 border border-gray-200 hover:border-modern-red hover:shadow-md transition-all flex flex-col">
+                  className="group bg-white rounded-xl p-5 border border-gray-200 hover:border-modern-red hover:shadow-md transition-all flex flex-col">
                   <span className="text-2xl mb-2">{g.icon}</span>
                   <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">{g.cluster}</p>
                   <h2 className="text-sm font-black text-charcoal group-hover:text-modern-red leading-tight mb-2 transition-colors">{g.title}</h2>
@@ -168,7 +180,7 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
         </div>
       </section>
 
-      {/* FAQ — 3-column grid, taller cards */}
+      {/* FAQ — 3-column grid */}
       <section className="bg-white py-10 border-y border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">Quick Answers</p>
