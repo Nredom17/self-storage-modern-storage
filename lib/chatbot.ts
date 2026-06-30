@@ -488,6 +488,20 @@ export const CHAT_FAQS: ChatFaq[] = [
       `The maximum late fees are $30 per month. If your account remains unpaid, additional actions such as restricted gate access and, if the balance continues to go unpaid, the lien and auction process may apply according to your Rental Agreement.\n\n` +
       `If you need help bringing your account current or have questions about your balance, please contact your local Modern Storage location.`,
   },
+  {
+    question: `Can I get a replacement key or an extra key?`,
+    keywords: [
+      'replacement key', 'extra key', 'additional key', 'copy of key', 'lost key',
+      'lost my key', 'locked out', 'lock out', 'cant get in', 'cant open my unit',
+      'forgot my key', 'spare key', 'duplicate key', 'lock cut', 'lock cutting',
+      'cut my lock', 'new lock', 'replace lock',
+    ],
+    answer:
+      `Modern Storage does not keep copies of keys for standard storage unit locks.\n\n` +
+      `If you've lost your key or are locked out of your unit, our team can remove your lock after verifying your identity. A lock cut fee will apply, and you'll need to purchase and install a new lock before leaving to keep your belongings secure. The Rental Agreement also provides for a $75 administrative lock-cutting fee in applicable situations.\n\n` +
+      `If you have a Modern Smart Unit, you won't need a physical key — you can unlock your unit using the Modern Storage app on your smartphone and manage access digitally.\n\n` +
+      `If you're locked out, let us know which Modern Storage location you're using and we'll be happy to explain the next steps.`,
+  },
 ]
 
 const HOURS_KEYWORDS = [
