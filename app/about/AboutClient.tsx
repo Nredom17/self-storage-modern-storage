@@ -166,7 +166,7 @@ export default function AboutClient({ social }: { social: Social }) {
             <div className="flex-1 min-w-0">
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-4">About Modern Storage&#174;</p>
               <h1 className="text-4xl lg:text-5xl font-black tracking-tight leading-tight mb-5">
-                Arkansas&#39;s Modern<br /><span className="text-modern-red">Self Storage Company</span>
+                Arkansas&#39;s Modern<br /><span className="text-modern-red">Storage Company</span>
               </h1>
               <p className="text-gray-300 text-lg leading-relaxed max-w-lg mb-8">
                 We&#39;re building a better self-storage experience through technology, customer service, and award-winning facilities across Arkansas.
