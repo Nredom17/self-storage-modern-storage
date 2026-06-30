@@ -6,12 +6,12 @@ import AboutClient from './AboutClient'
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: { absolute: 'About Modern Storage® | Arkansas Self Storage Company' },
+  title: { absolute: 'About Modern Storage® | Arkansas Storage Company' },
   description:
-    'Modern Storage® is Arkansas\u2019s award-winning self storage company — 10 locations, 10,000+ units, Top 50 nationally, 3x Best Self Storage. Locally owned since 2009.',
+    'Modern Storage® is Arkansas\u2019s award-winning storage company — 10 locations, 10,000+ units, Top 50 nationally, 3x Best Self Storage. Locally owned since 2009.',
   alternates: { canonical: SITE_URL + '/about' },
   openGraph: {
-    title: 'About Modern Storage® | Arkansas Self Storage Company',
+    title: 'About Modern Storage® | Arkansas Storage Company',
     description: 'Award-winning Arkansas self storage since 2009. 10 locations, smart technology, and a team that actually cares.',
     url: SITE_URL + '/about',
     siteName: 'Modern Storage\u00ae',
