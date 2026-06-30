@@ -1,12 +1,7 @@
 "use client"
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-
-type Guide = {
-  href: string; cluster: string; icon: string; title: string
-  description: string; readTime: string; featured: boolean
-}
-type FAQ = { q: string; a: string; href: string | null }
+import { Guide, FAQ } from './data'
 
 const TOPICS = [
   { label: 'All', filter: 'All' },
@@ -40,7 +35,7 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
 
   return (
     <main>
-      {/* Hero — tight */}
+      {/* Hero */}
       <section className="bg-charcoal text-white py-10">
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row lg:items-center lg:gap-16">
@@ -53,7 +48,6 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
                 Everything you need to find the right unit, protect your belongings from Arkansas humidity, move smarter, and store your business inventory — all in one place.
               </p>
             </div>
-            {/* Stats */}
             <div className="grid grid-cols-2 gap-4 mt-8 lg:mt-0 lg:min-w-64">
               {STATS.map((s) => (
                 <div key={s.label} className="bg-white/10 rounded-xl p-4 text-center">
@@ -66,7 +60,7 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
         </div>
       </section>
 
-      {/* Search + filters — sticky */}
+      {/* Search + filters */}
       <div className="sticky top-0 z-20 bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-3 flex flex-col sm:flex-row gap-3 items-center">
           <input
@@ -170,18 +164,20 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
         </div>
       </section>
 
-      {/* FAQ 2-col */}
+      {/* FAQ — 3-column grid, taller cards */}
       <section className="bg-gray-50 py-10 border-y border-gray-200">
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">Quick Answers</p>
           <h2 className="text-xl font-black text-charcoal mb-5">Frequently Asked Questions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {faqs.map((faq) => (
-              <div key={faq.q} className="bg-white rounded-xl p-5 border border-gray-200">
-                <h3 className="text-sm font-black text-charcoal mb-2">{faq.q}</h3>
-                <p className="text-xs text-gray-600 leading-relaxed mb-2">{faq.a}</p>
-                {faq.href && (
-                  <Link href={faq.href} className="text-xs font-bold text-modern-red hover:underline">Full guide →</Link>
+              <div key={faq.q} className="bg-white rounded-xl p-6 border border-gray-200 flex flex-col">
+                <h3 className="text-sm font-black text-charcoal mb-3 leading-snug">{faq.q}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed flex-1 mb-4">{faq.a}</p>
+                {faq.href ? (
+                  <Link href={faq.href} className="text-xs font-bold text-modern-red hover:underline mt-auto">Full guide →</Link>
+                ) : (
+                  <span className="text-xs text-gray-400 mt-auto">Updated June 2026</span>
                 )}
               </div>
             ))}
@@ -189,7 +185,7 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
         </div>
       </section>
 
-      {/* Quick links — tight */}
+      {/* Quick links */}
       <section className="bg-white py-8">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-lg font-black text-charcoal mb-4">Jump to a Topic</h2>
