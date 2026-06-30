@@ -131,14 +131,6 @@ function StatCard({ icon, value, label, sub }: { icon: string; value: string; la
 }
 
 // ── Timeline ─────────────────────────────────────────────────────────────────
-const TIMELINE = [
-  { year: '2017', title: 'Founded in North Little Rock', body: `Modern Storage® is established in North Little Rock, Arkansas — built to deliver a secure, convenient, and customer-focused storage experience.` },
-  { year: '2019', title: 'Growing Across Arkansas', body: `Expanding throughout Central Arkansas with new locations offering climate-controlled storage, drive-up units, vehicle storage, and online rental tools.` },
-  { year: '2021', title: 'Northwest Arkansas Launch', body: `Modern Storage® enters the NWA market with premium facilities in Bentonville, Lowell, and Springdale — bringing the same high standard to Northwest Arkansas.` },
-  { year: '2022', title: 'Smart Locks & Modern Technology', body: `One of the first Arkansas storage companies to deploy app-controlled smart locks, contactless rentals, and digital access — making renting simple from start to finish.` },
-  { year: '2024', title: '10 Locations & Top 50 Nationally', body: `Modern Storage® reaches 10 Arkansas locations and earns a spot on Inside Self Storage's Top 50 management companies in the U.S.` },
-  { year: 'Today', title: 'Raising the Standard', body: `Every property operates under consistent standards for cleanliness, security, customer service, and operational excellence — locally managed by experienced professionals.` },
-]
 
 const AWARDS = [
   { icon: '🏆', title: 'Best Self Storage', sub: 'Best of NW Arkansas', years: '2023 · 2024 · 2025', color: 'border-yellow-400' },
@@ -244,29 +236,6 @@ export default function AboutClient({ social }: { social: Social }) {
             <p>
               Whether you&#39;re looking for a storage unit, researching the industry, exploring development opportunities, or simply learning more about Modern Storage&#174;, we&#39;re committed to providing the knowledge, service, and reliability you can count on.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Timeline */}
-      <section className="bg-gray-50 py-16 border-y border-gray-200">
-        <div className="max-w-4xl mx-auto px-6">
-          <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Our Journey</p>
-          <h2 className="text-3xl font-black text-charcoal mb-10">Modern Storage&#174; Timeline</h2>
-          <div className="relative">
-            <div className="absolute left-4 top-0 bottom-0 w-px bg-gray-200" />
-            <div className="space-y-10">
-              {TIMELINE.map((item, i) => (
-                <div key={item.year} className="relative pl-12">
-                  <div className="absolute left-0 w-8 h-8 rounded-full bg-modern-red flex items-center justify-center text-white text-xs font-black z-10">
-                    {i + 1}
-                  </div>
-                  <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">{item.year}</p>
-                  <h3 className="text-base font-black text-charcoal mb-1">{item.title}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{item.body}</p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
