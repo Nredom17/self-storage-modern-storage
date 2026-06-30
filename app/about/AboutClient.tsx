@@ -136,7 +136,7 @@ const WHY = [
   {
     icon: '📱',
     title: 'Smart Technology',
-    body: `Online rentals, app-enabled smart locks at select locations, digital account management, and modern customer tools designed to simplify storage.`
+    body: `Online rentals, app-enabled smart locks at select locations, digital account management, and digital customer tools designed to simplify storage.`
   },
   {
     icon: '🔒',
@@ -160,8 +160,8 @@ const WHY = [
   },
   {
     icon: '✨',
-    title: 'Modern Facilities',
-    body: `Clean, professionally maintained facilities with climate-controlled options, wide hallways, modern lighting, and convenient access designed for today's storage needs.`
+    title: 'Premium Facilities',
+    body: `Clean, professionally maintained facilities with climate-controlled options, wide hallways, quality lighting, and convenient access designed around how people actually use storage.`
   },
 ]
 
