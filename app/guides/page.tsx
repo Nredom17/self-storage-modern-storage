@@ -192,32 +192,28 @@ export default async function GuidesHubPage() {
 
       <section className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-6">
-          {Object.entries(clusters).map(([cluster, guides]) => (
-            <div key={cluster} className="mb-16 last:mb-0">
-              <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-4">
-                {cluster}
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {guides.map((g) => (
-                  <Link
-                    key={g.href}
-                    href={g.href}
-                    className="group bg-gray-50 hover:bg-white rounded-2xl p-6 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all flex flex-col"
-                  >
-                    <h2 className="text-lg font-black text-charcoal leading-tight mb-3 group-hover:text-modern-red transition-colors">
-                      {g.title}
-                    </h2>
-                    <p className="text-sm text-gray-600 leading-relaxed flex-1 mb-4">
-                      {g.description}
-                    </p>
-                    <span className="inline-flex items-center gap-1 text-xs font-bold text-modern-red">
-                      Read guide →
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {GUIDES.map((g) => (
+              <Link
+                key={g.href}
+                href={g.href}
+                className="group bg-gray-50 hover:bg-white rounded-2xl p-6 border border-gray-200 hover:border-modern-red hover:shadow-lg transition-all flex flex-col"
+              >
+                <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">
+                  {g.cluster}
+                </p>
+                <h2 className="text-lg font-black text-charcoal leading-tight mb-3 group-hover:text-modern-red transition-colors">
+                  {g.title}
+                </h2>
+                <p className="text-sm text-gray-600 leading-relaxed flex-1 mb-4">
+                  {g.description}
+                </p>
+                <span className="inline-flex items-center gap-1 text-xs font-bold text-modern-red">
+                  Read guide →
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
