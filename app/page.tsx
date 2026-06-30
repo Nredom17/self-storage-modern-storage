@@ -126,13 +126,6 @@ const WHY_ICONS = [
   </svg>,
 ]
 
-const TRUST_BAR = [
-  { label: '★★★★★ Google Reviews' },
-  { label: 'Best of the Best 2023–2025' },
-  { label: 'Arkansas Owned' },
-  { label: '10 Locations' },
-  { label: 'Top 50 Nationally' },
-]
 
 const BUSINESS_TYPES = [
   { icon: '📦', label: 'E-Commerce & Retail' },
@@ -241,9 +234,18 @@ export default async function HomePage() {
               <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.05] tracking-tight mb-4 lg:mb-6">
                 Self Storage in <span className="text-modern-red">Arkansas</span>
               </h1>
-              <p className="text-gray-300 text-lg sm:text-xl leading-relaxed max-w-xl">
+              <p className="text-gray-300 text-lg sm:text-xl leading-relaxed max-w-xl mb-5">
                 Clean, secure storage units across Arkansas. Climate-controlled, drive-up, vehicle, and business storage available. Reserve online in minutes.
               </p>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                <span className="flex items-center gap-1.5 text-sm text-gray-400">
+                  <span className="text-yellow-400 tracking-tight">★★★★★</span> Google Reviews
+                </span>
+                <span className="text-white/20" aria-hidden="true">·</span>
+                <span className="text-sm text-gray-400">Arkansas Owned</span>
+                <span className="text-white/20" aria-hidden="true">·</span>
+                <span className="text-sm text-gray-400">Award-Winning</span>
+              </div>
             </div>
 
             {/* Hero image */}
@@ -291,23 +293,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── TRUST BAR ────────────────────────────────────────── */}
-      <div className="bg-charcoal border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            {TRUST_BAR.map((item, i) => (
-              <div key={item.label} className="flex items-center gap-6">
-                <span className="text-xs font-black uppercase tracking-widest text-white/70 whitespace-nowrap">
-                  {item.label}
-                </span>
-                {i < TRUST_BAR.length - 1 && (
-                  <span className="text-white/20 text-lg hidden sm:inline" aria-hidden="true">|</span>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* ── STORAGE SOLUTIONS ─────────────────────────────────── */}
       <section id="storage-options" className="bg-white py-12 lg:py-20 border-y border-gray-200">
