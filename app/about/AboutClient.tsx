@@ -10,7 +10,72 @@ type Social = {
   updated_at: string | null
 }
 
-function useCountUp(target: string, duration = 1800) {
+// ── Outline SVG icons ────────────────────────────────────────────────────────
+const Icons: Record<string, JSX.Element> = {
+  calendar: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+    </svg>
+  ),
+  pin: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>
+    </svg>
+  ),
+  people: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+    </svg>
+  ),
+  key: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <circle cx="7.5" cy="15.5" r="5.5"/><path d="M21 2l-9.6 9.6"/><path d="M15.5 7.5l3 3L22 7l-3-3"/>
+    </svg>
+  ),
+  grid: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+    </svg>
+  ),
+  star: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </svg>
+  ),
+  trophy: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <path d="M6 9H4a2 2 0 0 1-2-2V5h4"/><path d="M18 9h2a2 2 0 0 0 2-2V5h-4"/><path d="M6 5h12v7a6 6 0 0 1-12 0V5z"/><path d="M12 18v4"/><path d="M8 22h8"/>
+    </svg>
+  ),
+  mic: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>
+    </svg>
+  ),
+  book: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+    </svg>
+  ),
+  play: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>
+    </svg>
+  ),
+  chat: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+  ),
+  music: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+    </svg>
+  ),
+}
+
+// ── Animated counter ─────────────────────────────────────────────────────────
+function useCountUp(target: string, duration = 2000) {
   const [display, setDisplay] = useState('0')
   const ref = useRef<HTMLSpanElement>(null)
   const started = useRef(false)
@@ -18,33 +83,29 @@ function useCountUp(target: string, duration = 1800) {
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting || started.current) return
-        started.current = true
-        const match = target.match(/([\d,.]+)([MK]?)/)
-        if (!match) { setDisplay(target); return }
-        const raw = parseFloat(match[1].replace(/,/g, ''))
-        const suffix = match[2]
-        const rest = target.replace(match[0], '')
-        const end = raw
-        const start = performance.now()
-        const tick = (now: number) => {
-          const progress = Math.min((now - start) / duration, 1)
-          const eased = 1 - Math.pow(1 - progress, 3)
-          const cur = end * eased
-          let formatted: string
-          if (suffix === 'M') formatted = cur.toFixed(1) + 'M'
-          else if (suffix === 'K') formatted = Math.floor(cur) + 'K'
-          else formatted = Math.floor(cur).toLocaleString()
-          setDisplay(formatted + rest)
-          if (progress < 1) requestAnimationFrame(tick)
-          else setDisplay(target)
-        }
-        requestAnimationFrame(tick)
-      },
-      { threshold: 0.3 }
-    )
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting || started.current) return
+      started.current = true
+      const match = target.match(/([\d,.]+)([MK]?)/)
+      if (!match) { setDisplay(target); return }
+      const raw = parseFloat(match[1].replace(/,/g, ''))
+      const suffix = match[2]
+      const rest = target.replace(match[0], '')
+      const startTime = performance.now()
+      const tick = (now: number) => {
+        const t = Math.min((now - startTime) / duration, 1)
+        const eased = 1 - Math.pow(1 - t, 3)
+        const cur = raw * eased
+        let fmt: string
+        if (suffix === 'M') fmt = cur.toFixed(1) + 'M'
+        else if (suffix === 'K') fmt = Math.floor(cur) + 'K'
+        else fmt = Math.floor(cur).toLocaleString()
+        setDisplay(fmt + rest)
+        if (t < 1) requestAnimationFrame(tick)
+        else setDisplay(target)
+      }
+      requestAnimationFrame(tick)
+    }, { threshold: 0.3 })
     observer.observe(el)
     return () => observer.disconnect()
   }, [target, duration])
@@ -52,27 +113,31 @@ function useCountUp(target: string, duration = 1800) {
   return { ref, display }
 }
 
+// ── Stat card — dark glass style ─────────────────────────────────────────────
 function StatCard({ icon, value, label, sub }: { icon: string; value: string; label: string; sub?: string }) {
   const { ref, display } = useCountUp(value)
   return (
-    <div className="group flex flex-col items-center text-center p-6 rounded-2xl hover:bg-gray-50 transition-all cursor-default">
-      <span className="text-2xl mb-3">{icon}</span>
-      <span ref={ref} className="text-3xl lg:text-4xl font-black text-modern-red leading-none tabular-nums">
+    <div className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all min-h-36">
+      <span className="text-white/40 group-hover:text-white/60 transition-colors mb-3">
+        {Icons[icon]}
+      </span>
+      <span ref={ref} className="text-3xl font-black text-modern-red leading-none tabular-nums mb-2">
         {display}
       </span>
-      <p className="text-xs font-black uppercase tracking-widest text-charcoal mt-2">{label}</p>
-      {sub && <p className="text-xs text-gray-400 mt-0.5">{sub}</p>}
+      <p className="text-xs font-bold uppercase tracking-widest text-white leading-tight">{label}</p>
+      {sub && <p className="text-xs text-white/40 mt-1">{sub}</p>}
     </div>
   )
 }
 
+// ── Timeline ─────────────────────────────────────────────────────────────────
 const TIMELINE = [
-  { year: '2009', title: 'Founded in Arkansas', body: `Modern Storage® opens its first location with a simple goal — build the storage facility we’d actually want to use.` },
+  { year: '2009', title: 'Founded in Arkansas', body: `Modern Storage® opens its first location with a simple goal — build the storage facility we'd actually want to use.` },
   { year: '2014', title: 'Expanding Across Central Arkansas', body: `Growing demand leads to new locations across Little Rock, North Little Rock, and surrounding communities.` },
   { year: '2018', title: 'Northwest Arkansas Launch', body: `Modern Storage® enters the NWA market with premium climate-controlled facilities in Bentonville, Lowell, and Springdale.` },
   { year: '2021', title: 'Smart Locks & Modern Technology', body: `We become one of the first Arkansas storage companies to roll out app-controlled smart locks, contactless rentals, and digital access.` },
-  { year: '2024', title: '10 Locations & Top 50 Nationally', body: `Modern Storage® reaches 10 Arkansas locations and earns a spot on Inside Self Storage’s Top 50 management companies in the U.S.` },
-  { year: 'Today', title: 'The Future of Storage', body: `Serving 100,000+ customers with a team that treats every unit like it’s their own. Arkansas built. Arkansas proud.` },
+  { year: '2024', title: '10 Locations & Top 50 Nationally', body: `Modern Storage® reaches 10 Arkansas locations and earns a spot on Inside Self Storage's Top 50 management companies in the U.S.` },
+  { year: 'Today', title: 'The Future of Storage', body: `Serving 100,000+ customers with a team that treats every unit like it's their own. Arkansas built. Arkansas proud.` },
 ]
 
 const AWARDS = [
@@ -130,34 +195,28 @@ export default function AboutClient({ social }: { social: Social }) {
         </div>
       </section>
 
-      {/* Stats Row 1 */}
-      <section className="bg-white py-12 border-b border-gray-100">
+      {/* Stats — dark premium section */}
+      <section className="bg-[#111] py-16">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 divide-x divide-gray-100">
-            <StatCard icon="📅" value="15+" label="Years Operating" />
-            <StatCard icon="📍" value="10" label="Arkansas Locations" />
-            <StatCard icon="👥" value="100K+" label="Customers Served" />
-            <StatCard icon="🗝️" value="10,000+" label="Units Under Management" />
-            <StatCard icon="📐" value="1.6M+" label="Sq Ft Managed" />
-            <StatCard icon="🌟" value="Top 50" label="Nationally Ranked" sub="Inside Self Storage" />
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Row 2 */}
-      <section className="bg-gray-50 py-10 border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 divide-x divide-gray-200">
-            <StatCard icon="🏆" value="3×" label="Best Self Storage" sub="NW Arkansas" />
-            <StatCard icon="🏆" value="3×" label="Best Self Storage" sub="Central Arkansas" />
-            <StatCard icon="🎙️" value="Top 10" label="Self Storage Podcast" sub="Feedspot" />
-            <StatCard icon="📚" value="30+" label="Expert Resources" sub="Resource Center" />
-            <StatCard icon="▶️" value={social.youtube_subscribers} label="YouTube Subscribers" />
-            <StatCard icon="👍" value={social.facebook_followers} label="Facebook Followers" />
-            <StatCard icon="🎵" value={social.tiktok_likes} label="TikTok Likes" />
+          <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">By the Numbers</p>
+          <h2 className="text-2xl font-black text-white mb-8">Modern Storage&#174; at a Glance</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <StatCard icon="calendar" value="15+" label="Years Operating" />
+            <StatCard icon="pin" value="10" label="Arkansas Locations" />
+            <StatCard icon="people" value="100K+" label="Customers Served" />
+            <StatCard icon="key" value="10,000+" label="Units Under Management" />
+            <StatCard icon="grid" value="1.6M+" label="Sq Ft Managed" />
+            <StatCard icon="star" value="Top 50" label="Nationally Ranked" sub="Inside Self Storage" />
+            <StatCard icon="trophy" value="3×" label="Best Self Storage" sub="NW Arkansas" />
+            <StatCard icon="trophy" value="3×" label="Best Self Storage" sub="Central Arkansas" />
+            <StatCard icon="mic" value="Top 10" label="Self Storage Podcast" sub="Feedspot" />
+            <StatCard icon="book" value="30+" label="Expert Resources" sub="Resource Center" />
+            <StatCard icon="play" value={social.youtube_subscribers} label="YouTube Subscribers" />
+            <StatCard icon="chat" value={social.facebook_followers} label="Facebook Followers" />
+            <StatCard icon="music" value={social.tiktok_likes} label="TikTok Likes" />
           </div>
           {social.updated_at && (
-            <p className="text-center text-xs text-gray-400 mt-4">
+            <p className="text-center text-xs text-white/30 mt-6">
               Social stats updated {new Date(social.updated_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
             </p>
           )}
