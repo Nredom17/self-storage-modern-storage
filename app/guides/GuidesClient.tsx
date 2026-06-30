@@ -51,8 +51,6 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
       <section className="bg-charcoal text-white py-10 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row lg:items-center lg:gap-10">
-
-            {/* Left: text */}
             <div className="flex-1 min-w-0">
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Modern Storage® Resource Center</p>
               <h1 className="text-3xl lg:text-4xl font-black tracking-tight leading-tight mb-4">
@@ -70,8 +68,6 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
                 ))}
               </div>
             </div>
-
-            {/* Right: team photo */}
             <div className="relative mt-8 lg:mt-0 lg:w-[480px] lg:flex-shrink-0 rounded-2xl overflow-hidden" style={{ height: '300px' }}>
               <Image
                 src="/images/modern-storage-team-consultation.jpg"
@@ -83,7 +79,6 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
               />
               <div className="absolute inset-0 bg-gradient-to-l from-transparent to-charcoal/30" />
             </div>
-
           </div>
         </div>
       </section>
@@ -142,7 +137,7 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
               <Link key={g.href} href={g.href}
                 className="group bg-gray-50 rounded-xl p-5 border-2 border-modern-red hover:bg-modern-red transition-all flex flex-col">
                 <span className="text-3xl mb-3">{g.icon}</span>
-                <p className="text-xs font-black uppercase tracking-widest text-modern-red group-hover:text-white mb-1 transition-colors">⭐ {g.cluster}</p>
+                <p className="text-xs font-black uppercase tracking-widest text-modern-red group-hover:text-white mb-2 transition-colors">{g.cluster}</p>
                 <h3 className="text-sm font-black text-charcoal group-hover:text-white leading-tight mb-auto transition-colors">{g.title}</h3>
                 <span className="mt-3 text-xs font-bold text-modern-red group-hover:text-white transition-colors">{g.readTime} →</span>
               </Link>
