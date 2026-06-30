@@ -20,6 +20,17 @@ const STATS = [
   { value: '30+', label: 'Expert Guides' },
 ]
 
+const TOPIC_LINKS = [
+  { icon: '📦', label: 'Storage Unit Sizes', href: '/guides/storage-unit-sizes' },
+  { icon: '❄️', label: 'Climate-Controlled', href: '/climate-controlled-arkansas-humidity' },
+  { icon: '🏢', label: 'Business Storage', href: '/business-storage-bentonville' },
+  { icon: '🚚', label: 'Moving Storage', href: '/guides/moving-storage' },
+  { icon: '⛵', label: 'RV & Boat Storage', href: '/storage-near-beaver-lake' },
+  { icon: '🔒', label: 'Security Guide', href: '/guides/storage-security' },
+  { icon: '🏠', label: 'Apartment Storage', href: '/guides/apartment-storage' },
+  { icon: '🔧', label: 'Contractor Storage', href: '/contractor-storage-little-rock' },
+]
+
 export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: FAQ[] }) {
   const [search, setSearch] = useState('')
   const [activeFilter, setActiveFilter] = useState('All')
@@ -37,7 +48,7 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
     <main>
       {/* Hero */}
       <section className="bg-charcoal text-white py-10">
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row lg:items-center lg:gap-16">
             <div className="flex-1">
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-3">Modern Storage® Resource Center</p>
@@ -88,43 +99,35 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
         </div>
       </div>
 
-      {/* Pillar intro */}
+      {/* Pillar intro + topic grid + featured guides — ONE unified section, ONE container */}
       <section className="bg-white py-10 border-b border-gray-100">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-2xl font-black text-charcoal mb-4">Your Complete Guide to Self Storage in Arkansas</h2>
-          <p className="text-gray-600 leading-relaxed mb-6">
+        <div className="max-w-7xl mx-auto px-6">
+
+          {/* Intro text */}
+          <h2 className="text-2xl font-black text-charcoal mb-2">Your Complete Guide to Self Storage in Arkansas</h2>
+          <p className="text-gray-600 leading-relaxed mb-6 max-w-3xl">
             Choosing a storage unit involves more than picking a size. Arkansas&#39;s climate, your specific situation — moving, downsizing, running a business, storing a boat — and the features of each facility all matter. This resource center brings together everything Modern Storage® has learned from 15+ years serving Arkansas customers across 10 locations.
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { icon: '📦', label: 'Storage Unit Sizes', href: '/guides/storage-unit-sizes' },
-              { icon: '❄️', label: 'Climate-Controlled', href: '/climate-controlled-arkansas-humidity' },
-              { icon: '🏢', label: 'Business Storage', href: '/business-storage-bentonville' },
-              { icon: '🚚', label: 'Moving Storage', href: '/guides/moving-storage' },
-              { icon: '⛵', label: 'RV & Boat Storage', href: '/storage-near-beaver-lake' },
-              { icon: '🔒', label: 'Security Guide', href: '/guides/storage-security' },
-              { icon: '🏠', label: 'Apartment Storage', href: '/guides/apartment-storage' },
-              { icon: '🔧', label: 'Contractor Storage', href: '/contractor-storage-little-rock' },
-            ].map((t) => (
+
+          {/* Topic boxes — 4-col, same width as everything else */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+            {TOPIC_LINKS.map((t) => (
               <Link key={t.href} href={t.href}
-                className="flex flex-col items-center gap-2 p-4 bg-gray-50 hover:bg-modern-red hover:text-white rounded-xl border border-gray-200 hover:border-modern-red transition-all text-center group">
+                className="flex flex-col items-center justify-center gap-2 bg-gray-50 hover:bg-modern-red hover:text-white rounded-xl border border-gray-200 hover:border-modern-red transition-all text-center group"
+                style={{ minHeight: '92px', padding: '20px 12px' }}>
                 <span className="text-2xl">{t.icon}</span>
-                <span className="text-xs font-black text-charcoal group-hover:text-white transition-colors">{t.label}</span>
+                <span className="text-xs font-black text-charcoal group-hover:text-white transition-colors leading-tight">{t.label}</span>
               </Link>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Featured guides */}
-      <section className="bg-gray-50 py-10 border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6">
+          {/* Featured Guides — same container, no gap, 4-col */}
           <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">Start Here</p>
-          <h2 className="text-xl font-black text-charcoal mb-5">Featured Guides</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <h2 className="text-xl font-black text-charcoal mb-4">Featured Guides</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {guides.filter((g) => g.featured).map((g) => (
               <Link key={g.href} href={g.href}
-                className="group bg-white rounded-xl p-5 border-2 border-modern-red hover:bg-modern-red transition-all flex flex-col">
+                className="group bg-gray-50 rounded-xl p-5 border-2 border-modern-red hover:bg-modern-red transition-all flex flex-col">
                 <span className="text-3xl mb-3">{g.icon}</span>
                 <p className="text-xs font-black uppercase tracking-widest text-modern-red group-hover:text-white mb-1 transition-colors">⭐ {g.cluster}</p>
                 <h3 className="text-sm font-black text-charcoal group-hover:text-white leading-tight mb-auto transition-colors">{g.title}</h3>
@@ -132,11 +135,12 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
               </Link>
             ))}
           </div>
+
         </div>
       </section>
 
       {/* All guides */}
-      <section className="bg-white py-10">
+      <section className="bg-gray-50 py-10">
         <div className="max-w-7xl mx-auto px-6">
           <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">All Resources</p>
           <h2 className="text-xl font-black text-charcoal mb-5">
@@ -145,10 +149,10 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
           {filtered.length === 0 ? (
             <p className="text-gray-500 text-sm py-8">No guides match your search. Try a different keyword or filter.</p>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {filtered.map((g) => (
                 <Link key={g.href} href={g.href}
-                  className="group bg-gray-50 hover:bg-white rounded-xl p-5 border border-gray-200 hover:border-modern-red hover:shadow-md transition-all flex flex-col">
+                  className="group bg-white hover:bg-white rounded-xl p-5 border border-gray-200 hover:border-modern-red hover:shadow-md transition-all flex flex-col">
                   <span className="text-2xl mb-2">{g.icon}</span>
                   <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">{g.cluster}</p>
                   <h2 className="text-sm font-black text-charcoal group-hover:text-modern-red leading-tight mb-2 transition-colors">{g.title}</h2>
@@ -165,13 +169,13 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
       </section>
 
       {/* FAQ — 3-column grid, taller cards */}
-      <section className="bg-gray-50 py-10 border-y border-gray-200">
+      <section className="bg-white py-10 border-y border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-1">Quick Answers</p>
           <h2 className="text-xl font-black text-charcoal mb-5">Frequently Asked Questions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {faqs.map((faq) => (
-              <div key={faq.q} className="bg-white rounded-xl p-6 border border-gray-200 flex flex-col">
+              <div key={faq.q} className="bg-gray-50 rounded-xl p-6 border border-gray-200 flex flex-col">
                 <h3 className="text-sm font-black text-charcoal mb-3 leading-snug">{faq.q}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed flex-1 mb-4">{faq.a}</p>
                 {faq.href ? (
@@ -186,8 +190,8 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
       </section>
 
       {/* Quick links */}
-      <section className="bg-white py-8">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section className="bg-gray-50 py-8">
+        <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-lg font-black text-charcoal mb-4">Jump to a Topic</h2>
           <div className="flex flex-wrap justify-center gap-2">
             {[
@@ -200,7 +204,7 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
               { label: 'Find a Location', href: '/locations' },
             ].map((l) => (
               <Link key={l.href} href={l.href}
-                className="bg-gray-50 hover:bg-modern-red hover:text-white text-charcoal text-xs font-bold px-4 py-2 rounded-full transition-colors border border-gray-200">
+                className="bg-white hover:bg-modern-red hover:text-white text-charcoal text-xs font-bold px-4 py-2 rounded-full transition-colors border border-gray-200">
                 {l.label}
               </Link>
             ))}
@@ -210,7 +214,7 @@ export default function GuidesClient({ guides, faqs }: { guides: Guide[]; faqs: 
 
       {/* EEAT footer */}
       <section className="bg-charcoal text-white py-8">
-        <div className="max-w-4xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
               <p className="text-xs font-black uppercase tracking-widest text-modern-red mb-2">Expert Reviewed</p>
