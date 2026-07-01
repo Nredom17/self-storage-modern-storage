@@ -45,6 +45,9 @@ type PostRow = {
   cta_label: string | null
   cta_url: string | null
   related_service_url: string | null
+  original_publication_name: string | null
+  original_publication_url: string | null
+  original_publication_date: string | null
 }
 
 function csv(arr: string[] | null | undefined): string {
@@ -118,6 +121,9 @@ export default function BlogAdminEditor({ id }: { id: string }) {
       reviewer: row.reviewer || null,
       last_reviewed_at: row.last_reviewed_at || null,
       disclaimer: row.disclaimer || null,
+      original_publication_name: row.original_publication_name || null,
+      original_publication_url: row.original_publication_url || null,
+      original_publication_date: row.original_publication_date || null,
       hero_image: row.hero_image || null,
       hero_alt: row.hero_alt || null,
       hero_caption: row.hero_caption || null,
@@ -261,6 +267,15 @@ export default function BlogAdminEditor({ id }: { id: string }) {
           <Textarea label="Brand / legal disclaimer (optional)" value={row.disclaimer ?? ''} onChange={(v) => update('disclaimer', v)} rows={3} />
         </Section>
 
+        <Section title="Original publication (syndicated / cross-posted)">
+          <Field label="Publication name" value={row.original_publication_name ?? ''} onChange={(v) => update('original_publication_name', v || null)} placeholder="e.g. Inside Self Storage" />
+          <Field label="Publication URL" value={row.original_publication_url ?? ''} onChange={(v) => update('original_publication_url', v || null)} placeholder="https://…" />
+          <Field label="Original publication date (YYYY-MM-DD)" value={row.original_publication_date ?? ''} onChange={(v) => update('original_publication_date', v || null)} placeholder="2024-03-15" />
+          <p style={{ fontSize: 11, color: '#888', marginTop: 4 }}>
+            When filled in, the article page will show: &ldquo;Originally published by [name] · Read the original article →&rdquo;
+          </p>
+        </Section>
+
         <Section title="Hero & social images">
           <ImageUploadField
             label="Hero image"
@@ -377,7 +392,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   )
 }
 
-function Field({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
+function Field({ label, value, onChange, placeholder }: { label: string; value: string; onChange: (v: string) => void; placeholder?: string }) {
   return (
     <div>
       <label className="block text-xs font-black uppercase tracking-widest text-gray-600 mb-1.5">{label}</label>
@@ -385,6 +400,7 @@ function Field({ label, value, onChange }: { label: string; value: string; onCha
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
         className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-modern-red"
       />
     </div>
