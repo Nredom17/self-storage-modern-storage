@@ -170,6 +170,9 @@ function applyAutoFields(
       relatedServiceUrl: null,
       readingMinutes: null,
       wordCount: null,
+      originalPublicationName: null,
+      originalPublicationUrl: null,
+      originalPublicationDate: null,
     }
     const wc = countWords(dummy)
     if (needsWC) patch.word_count = wc
