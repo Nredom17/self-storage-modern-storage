@@ -370,17 +370,17 @@ export default function AIStorageSizeFinder() {
               Where are you moving from?
             </div>
             <div style={{ fontSize: 13, color: '#888', marginBottom: 18 }}>Pick what fits best.</div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10 }}>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'nowrap', overflowX: 'auto' }}>
               {LIVING_SITUATIONS.map((opt) => {
                 const active = situation === opt.id
                 return (
                   <button
                     key={opt.id}
                     onClick={() => selectSituation(opt.id)}
-                    style={{ background: active ? '#1A1A1A' : '#fff', border: active ? '2px solid #F60001' : '2px solid #E8E8E8', borderRadius: 16, padding: '18px 12px', cursor: 'pointer', textAlign: 'left', transition: 'all 0.18s', fontFamily: "'DM Sans', sans-serif" }}
+                    style={{ flex: '1 0 0', minWidth: 0, background: active ? '#1A1A1A' : '#fff', border: active ? '2px solid #F60001' : '2px solid #E8E8E8', borderRadius: 12, padding: '12px 6px', cursor: 'pointer', textAlign: 'center', transition: 'all 0.18s', fontFamily: "'DM Sans', sans-serif" }}
                   >
-                    <div style={{ fontSize: 26, marginBottom: 6 }}>{opt.icon}</div>
-                    <div style={{ fontSize: 15, fontWeight: 700, color: active ? '#fff' : '#1A1A1A', lineHeight: 1.2 }}>{opt.label}</div>
+                    <div style={{ fontSize: 22, marginBottom: 4 }}>{opt.icon}</div>
+                    <div style={{ fontSize: 11, fontWeight: 700, color: active ? '#fff' : '#1A1A1A', lineHeight: 1.2 }}>{opt.label}</div>
                   </button>
                 )
               })}
