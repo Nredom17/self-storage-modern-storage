@@ -146,6 +146,11 @@ export type BlogPost = {
   // Reading metadata
   readingMinutes: number | null
   wordCount: number | null
+
+  // Original publication (for syndicated / cross-posted content)
+  originalPublicationName: string | null
+  originalPublicationUrl: string | null
+  originalPublicationDate: string | null
 }
 
 // Row shape from Supabase — snake_case to BlogPost camelCase mapper.
@@ -185,6 +190,9 @@ type DbBlogPost = {
   related_service_url: string | null
   reading_minutes: number | null
   word_count: number | null
+  original_publication_name: string | null
+  original_publication_url: string | null
+  original_publication_date: string | null
 }
 
 // Deep-normalize the body array so every block has the fields the
@@ -439,6 +447,9 @@ function mapDb(row: DbBlogPost): BlogPost {
     relatedServiceUrl: row.related_service_url,
     readingMinutes: row.reading_minutes,
     wordCount: row.word_count,
+    originalPublicationName: row.original_publication_name ?? null,
+    originalPublicationUrl: row.original_publication_url ?? null,
+    originalPublicationDate: row.original_publication_date ?? null,
   }
 }
 
