@@ -103,6 +103,9 @@ const WRITE_COLUMNS = [
   'related_service_url',
   'reading_minutes',
   'word_count',
+  'original_publication_name',
+  'original_publication_url',
+  'original_publication_date',
 ] as const
 
 function pickWriteable(input: Record<string, unknown>): Record<string, unknown> {
