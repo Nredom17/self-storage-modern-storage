@@ -16,8 +16,11 @@ export function buildLocationSchema(loc: Location, phoneDisplay: string) {
     '@type': 'SelfStorage',
     '@id': SITE_URL + '/#location-' + loc.slug,
     name: loc.name,
-    url: SITE_URL + '/',
-    telephone: phoneDisplay,
+    // Each location links to its own page, not the homepage.
+    // This was previously pointing to SITE_URL + '/' for all locations,
+    // which broke rich-result eligibility for individual facilities.
+    url: SITE_URL + '/locations/' + loc.slug,
+    telephone: loc.phone || phoneDisplay,
     priceRange: '$$',
     areaServed: { '@type': 'State', name: 'Arkansas' },
     address: {
@@ -33,6 +36,30 @@ export function buildLocationSchema(loc: Location, phoneDisplay: string) {
       latitude: loc.lat,
       longitude: loc.lon,
     },
+    // openingHoursSpecification is required for Local Business rich results.
+    // VERIFY these hours against actual facility hours before publishing.
+    // If hours vary by location, add an `hours` field to the Location type
+    // and Supabase db_locations table, then replace this static block.
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '09:00',
+        closes: '18:00',
+      },
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Saturday'],
+        opens: '09:00',
+        closes: '17:00',
+      },
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Sunday'],
+        opens: '00:00',
+        closes: '00:00',
+      },
+    ],
   }
 
   if (loc.image) {
