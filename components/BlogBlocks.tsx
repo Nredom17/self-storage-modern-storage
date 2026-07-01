@@ -16,47 +16,54 @@ function anchorFor(block: Extract<BlogBlock, { type: 'heading' }>): string {
   return block.anchor ?? slugify(block.text)
 }
 
-// Auto-link bare http(s) URLs inside a paragraph string. Editors paste
-// links into plain-text paragraphs (e.g. "Listen on Spotify:
-// https://open.spotify.com/..."); without this transform, the URL
-// renders as gray text and the visitor can't click it. We deliberately
-// keep this simple — no Markdown, no rich text — just turn anything
-// matching http(s)://… into an anchor tag. Trailing punctuation that
-// commonly follows a URL in prose (.,;:!?) is stripped from the
-// captured link so the link target stays clean.
-const URL_RE = /https?:\/\/[^\s<>"']+/g
+// Matches [link text](https://url) OR bare https?:// URLs.
+// Markdown links are checked first so the URL inside doesn't get
+// double-matched by the bare-URL branch.
+const LINK_RE = /\[([^\]]+)\]\((https?:\/\/[^)]+)\)|https?:\/\/[^\s<>"']+/g
 function renderTextWithLinks(text: string): React.ReactNode {
-  if (!text || !URL_RE.test(text)) return text
-  // RegExp keeps state across .test/.exec calls on a /g regex — reset.
-  URL_RE.lastIndex = 0
+  if (!text || !LINK_RE.test(text)) return text
+  LINK_RE.lastIndex = 0
   const parts: React.ReactNode[] = []
   let lastIndex = 0
   let match: RegExpExecArray | null
   let key = 0
-  while ((match = URL_RE.exec(text)) !== null) {
+  while ((match = LINK_RE.exec(text)) !== null) {
     const before = text.slice(lastIndex, match.index)
     if (before) parts.push(before)
-    // Strip a single trailing punctuation char from the URL itself and
-    // append it back as plain text. Keeps "[…here](https://x.com/p).
-    // " from including the period in the link.
-    let url = match[0]
-    let trailing = ''
-    if (/[.,;:!?)]$/.test(url)) {
-      trailing = url.slice(-1)
-      url = url.slice(0, -1)
+    if (match[1] && match[2]) {
+      // Markdown-style [label](url)
+      parts.push(
+        <a
+          key={`lnk-${key++}`}
+          href={match[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-modern-red font-semibold hover:underline underline underline-offset-2"
+        >
+          {match[1]}
+        </a>,
+      )
+    } else {
+      // Bare URL — strip trailing punctuation so "https://x.com)." doesn't include the period
+      let url = match[0]
+      let trailing = ''
+      if (/[.,;:!?)]$/.test(url)) {
+        trailing = url.slice(-1)
+        url = url.slice(0, -1)
+      }
+      parts.push(
+        <a
+          key={`lnk-${key++}`}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-modern-red font-semibold hover:underline underline underline-offset-2"
+        >
+          {url}
+        </a>,
+      )
+      if (trailing) parts.push(trailing)
     }
-    parts.push(
-      <a
-        key={`lnk-${key++}`}
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-modern-red font-semibold hover:text-modern-red-hover underline underline-offset-2"
-      >
-        {url}
-      </a>,
-    )
-    if (trailing) parts.push(trailing)
     lastIndex = match.index + match[0].length
   }
   const tail = text.slice(lastIndex)
