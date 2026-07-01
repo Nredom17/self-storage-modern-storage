@@ -241,6 +241,34 @@ export default async function StorageTipPage({ params }: Props) {
           {/* Block-by-block body */}
           <BlogBlocks blocks={post.body} />
 
+          {/* Original publication attribution */}
+          {post.originalPublicationName && (
+            <div className="flex items-center gap-3 text-xs text-gray-500 mt-10 pt-6 border-t border-gray-200">
+              <span>Originally published by <strong className="text-gray-700">{post.originalPublicationName}</strong></span>
+              {post.originalPublicationDate && (
+                <>
+                  <span aria-hidden="true">·</span>
+                  <time dateTime={post.originalPublicationDate}>
+                    {new Date(post.originalPublicationDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                  </time>
+                </>
+              )}
+              {post.originalPublicationUrl && (
+                <>
+                  <span aria-hidden="true">·</span>
+                  <a
+                    href={post.originalPublicationUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-modern-red hover:underline"
+                  >
+                    Read the original article →
+                  </a>
+                </>
+              )}
+            </div>
+          )}
+
           {/* Disclaimer */}
           {post.disclaimer && (
             <p className="text-xs text-gray-500 italic mt-10 pt-6 border-t border-gray-200 leading-relaxed">
