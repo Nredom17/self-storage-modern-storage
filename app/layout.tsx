@@ -78,6 +78,22 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
+    site: '@modernstorage',
+  },
+  // max-snippet: -1 allows Google and AI engines (Perplexity, ChatGPT,
+  // Gemini, Claude) to extract unlimited text for snippets and AI
+  // Overviews. Without this, snippets are capped to ~160 chars.
+  // max-image-preview: large enables full-size image previews in SERPs.
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
 }
 
@@ -98,6 +114,15 @@ function buildWebsiteSchema() {
     url: SITE_URL + '/',
     publisher: { '@id': SITE_URL + '/#organization' },
     inLanguage: 'en-US',
+    // SearchAction enables Google Sitelink Search Box in SERPs
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: SITE_URL + '/guides?q={search_term_string}',
+      },
+      'query-input': 'required name=search_term_string',
+    },
   }
 }
 
@@ -125,6 +150,26 @@ function buildOrganizationSchema(phoneDisplay: string) {
     telephone: phoneDisplay,
     description:
       'Modern Storage® operates 10 self-storage facilities across Arkansas with climate-controlled, household, business, boat, RV, and vehicle storage. Three-time winner (2023, 2024, 2025) of the Best of the Best Self-Storage Awards — Arkansas Democrat Gazette and Best of Northwest Arkansas.',
+    foundingDate: '2017',
+    foundingLocation: {
+      '@type': 'Place',
+      name: 'North Little Rock, Arkansas',
+    },
+    // HQ address for Knowledge Panel and ChatGPT/Perplexity entity extraction
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'North Little Rock',
+      addressRegion: 'AR',
+      addressCountry: 'US',
+    },
+    // contactPoint lets AI engines extract the right number for "call Modern Storage"
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+1-501-910-0096',
+      contactType: 'customer service',
+      areaServed: 'AR',
+      availableLanguage: 'English',
+    },
     areaServed: { '@type': 'State', name: 'Arkansas' },
     sameAs: [
       'https://www.modernstorage.com',
