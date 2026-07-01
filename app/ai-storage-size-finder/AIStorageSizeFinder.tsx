@@ -370,7 +370,7 @@ export default function AIStorageSizeFinder() {
               Where are you moving from?
             </div>
             <div style={{ fontSize: 13, color: '#888', marginBottom: 18 }}>Pick what fits best.</div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 10 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10 }}>
               {LIVING_SITUATIONS.map((opt) => {
                 const active = situation === opt.id
                 return (
