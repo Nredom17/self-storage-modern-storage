@@ -89,7 +89,7 @@ export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
                 id={id}
                 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mt-12 mb-5 scroll-mt-24 border-l-4 border-modern-red pl-4"
               >
-                {block.text}
+                {renderTextWithLinks(block.text)}
               </h2>
             ) : (
               <h3
@@ -97,7 +97,7 @@ export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
                 id={id}
                 className="text-xl lg:text-2xl font-black text-charcoal tracking-tight mt-8 mb-3 scroll-mt-24"
               >
-                {block.text}
+                {renderTextWithLinks(block.text)}
               </h3>
             )
           }
