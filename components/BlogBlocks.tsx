@@ -20,7 +20,8 @@ function anchorFor(block: Extract<BlogBlock, { type: 'heading' }>): string {
 // Markdown links are checked first so the URL inside doesn't get
 // double-matched by the bare-URL branch.
 const LINK_RE = /\[([^\]]+)\]\((https?:\/\/[^)]+)\)|https?:\/\/[^\s<>"']+/g
-function renderTextWithLinks(text: string): React.ReactNode {
+function renderTextWithLinks(text: string, linkClassName?: string): React.ReactNode {
+  const cls = linkClassName ?? 'text-modern-red font-semibold hover:underline underline underline-offset-2'
   if (!text || !LINK_RE.test(text)) return text
   LINK_RE.lastIndex = 0
   const parts: React.ReactNode[] = []
@@ -38,7 +39,7 @@ function renderTextWithLinks(text: string): React.ReactNode {
           href={match[2]}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-modern-red font-semibold hover:underline underline underline-offset-2"
+          className={cls}
         >
           {match[1]}
         </a>,
@@ -57,7 +58,7 @@ function renderTextWithLinks(text: string): React.ReactNode {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-modern-red font-semibold hover:underline underline underline-offset-2"
+          className={cls}
         >
           {url}
         </a>,
@@ -89,7 +90,7 @@ export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
                 id={id}
                 className="text-2xl lg:text-3xl font-black text-charcoal tracking-tight mt-12 mb-5 scroll-mt-24 border-l-4 border-modern-red pl-4"
               >
-                {renderTextWithLinks(block.text)}
+                {renderTextWithLinks(block.text, 'hover:underline')}
               </h2>
             ) : (
               <h3
@@ -97,7 +98,7 @@ export default function BlogBlocks({ blocks }: { blocks: BlogBlock[] }) {
                 id={id}
                 className="text-xl lg:text-2xl font-black text-charcoal tracking-tight mt-8 mb-3 scroll-mt-24"
               >
-                {renderTextWithLinks(block.text)}
+                {renderTextWithLinks(block.text, 'hover:underline')}
               </h3>
             )
           }
